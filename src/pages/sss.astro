@@ -1,0 +1,226 @@
+---
+// /sss: tüm sorular gruplara göre; üstte grup kısayolları, sonda iletişim kutusu.
+// Veri: src/data/sss.ts (tek kaynak). FAQPage JSON-LD tüm soruları kapsar.
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import SssAkordeon from '../components/SssAkordeon.astro';
+import { firma } from '../data/site';
+import { grubunSorulari, sorular, sssGruplari, sssSemasi } from '../data/sss';
+import { jsonLd } from '../lib/projeler';
+
+const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) }));
+---
+
+<Layout
+  title="Ahşap Ev ve Bungalov: Sıkça Sorulan Sorular | 2K AHŞAP"
+  description="Ahşap ev ve bungalov fiyatı, ruhsat, yapım süresi, deprem dayanımı, bakım ve garanti hakkında merak edilenler. Sorunuz burada yoksa bize hemen ulaşabilirsiniz."
+>
+  <script type="application/ld+json" set:html={jsonLd(sssSemasi(sorular))} />
+
+  <section class="sss-sayfa-ust" aria-labelledby="sss-sayfa-baslik">
+    <div class="kap">
+      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Sıkça Sorulan Sorular' }]} />
+      <h1 id="sss-sayfa-baslik">Sıkça Sorulan Sorular</h1>
+      <p class="giris">
+        Ahşap yapı yaptırmadan önce en çok merak edilen fiyat, süre, ruhsat, malzeme ve kurulum
+        sorularını yanıtladık. Projenize özel konuları teklif aşamasında birlikte netleştiriyoruz.
+      </p>
+      <nav class="grup-kisayollari" aria-label="Soru grupları">
+        <ul>
+          {
+            gruplar.map((g) => (
+              <li>
+                <a href={`#${g.id}`} class="grup-link">
+                  {g.ad}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <div class="sss-gruplar">
+    {
+      gruplar.map((g) => (
+        <section class="sss-grup" id={g.id} aria-labelledby={`${g.id}-baslik`}>
+          <div class="kap sss-grup-ic">
+            <h2 id={`${g.id}-baslik`} data-ortaya>
+              {g.ad}
+            </h2>
+            <SssAkordeon sorular={g.sorular} />
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <section class="sss-son" aria-labelledby="sss-son-baslik">
+    <div class="kap">
+      <div class="sss-kutu" data-ortaya>
+        <div>
+          <h2 id="sss-son-baslik">Sorunuz burada yok mu?</h2>
+          <p>
+            Projenizle ilgili her soruyu yanıtlamaktan memnuniyet duyarız. Bize WhatsApp'tan yazın
+            ya da teklif formunu doldurun; size en kısa sürede dönelim.
+          </p>
+        </div>
+        <div class="sss-kutu-dugmeler">
+          <a href={firma.whatsapp} class="dugme" target="_blank" rel="noopener noreferrer">
+            WhatsApp'tan Yazın
+          </a>
+          <a href="/iletisim" class="dugme">Teklif Al</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .sss-sayfa-ust {
+    padding-block: var(--bosluk-2) var(--bosluk-5);
+    background: var(--color-zemin-ara);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .sss-sayfa-ust h1 {
+    margin-top: var(--bosluk-1);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .giris {
+    max-width: var(--olcu-metin);
+    margin: var(--bosluk-3) 0 0;
+    font-size: var(--text-giris);
+  }
+
+  /* Grup kısayolları: kategori linkleriyle aynı pill (marka-stili §9) */
+  .grup-kisayollari {
+    margin-top: var(--bosluk-4);
+  }
+
+  .grup-kisayollari ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bosluk-1);
+  }
+
+  .grup-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-tam);
+    color: var(--color-metin);
+    font-size: var(--text-kucuk);
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .grup-link::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--cizgi) * -1);
+    border: var(--cizgi) solid var(--color-ahsap);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--gecis);
+  }
+
+  .grup-link:is(:hover, :focus-visible) {
+    color: var(--color-krem);
+  }
+
+  .grup-link:is(:hover, :focus-visible)::before {
+    opacity: 1;
+  }
+
+  .sss-gruplar {
+    padding-top: var(--bosluk-6);
+  }
+
+  .sss-grup + .sss-grup {
+    margin-top: var(--bosluk-6);
+  }
+
+  .sss-grup h2 {
+    margin-bottom: var(--bosluk-3);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .sss-son {
+    padding-block: var(--bolum-dar);
+  }
+
+  /* İletişim kutusu: kart yüzeyi, ince çizgi, 16px köşe */
+  .sss-kutu {
+    display: grid;
+    gap: var(--bosluk-4);
+    padding: var(--bosluk-4) var(--bosluk-3);
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-kart);
+    background: var(--color-yuzey);
+  }
+
+  .sss-kutu h2 {
+    font-size: var(--text-h2);
+  }
+
+  .sss-kutu p {
+    max-width: 52ch;
+    margin: var(--bosluk-2) 0 0;
+  }
+
+  .sss-kutu-dugmeler {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .sss-sayfa-ust {
+      padding-block: var(--bosluk-3) var(--bosluk-6);
+    }
+
+    .sss-gruplar {
+      padding-top: var(--bosluk-7);
+    }
+
+    .sss-grup + .sss-grup {
+      margin-top: var(--bosluk-7);
+    }
+
+    .sss-kutu {
+      padding: var(--bosluk-5);
+    }
+  }
+
+  /* ≥ 1024px: grup başlığı solda, sorular sağda; kutuda metin solda, butonlar sağda */
+  @media (min-width: 1024px) {
+    .sss-grup-ic {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      align-items: start;
+      gap: var(--bosluk-6);
+    }
+
+    .sss-grup h2 {
+      margin-bottom: 0;
+      padding-top: var(--bosluk-2);
+    }
+
+    .sss-kutu {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--bosluk-5);
+      padding: var(--bosluk-6);
+    }
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+// SSS akordeonu: native <details>/<summary> (klavye ve ekran okuyucu desteği tarayıcıdan gelir).
+// Açılırken cevap yalnızca opacity ve transform ile belirir; yükseklik animasyonu yok (marka-stili §6).
+import { ikon } from '../data/ikonlar';
+import type { Soru } from '../data/sss';
+
+interface Props {
+  sorular: Soru[];
+}
+
+const { sorular } = Astro.props;
+---
+
+<ul class="sss-liste">
+  {
+    sorular.map((s) => (
+      <li data-ortaya>
+        <details class="sss">
+          <summary>
+            <span class="sss-soru">{s.soru}</span>
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.asagi} />
+          </summary>
+          <div class="sss-cevap">
+            <p>{s.cevap}</p>
+          </div>
+        </details>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .sss-liste {
+    display: grid;
+    gap: 12px;
+  }
+
+  .sss {
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-kart);
+    background: var(--color-yuzey);
+  }
+
+  .sss[open] {
+    border-color: var(--color-ahsap);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bosluk-2);
+    min-height: 64px;
+    padding: var(--bosluk-2) 20px;
+    border-radius: inherit;
+    color: var(--color-baslik);
+    font-family: var(--font-baslik);
+    font-size: var(--text-govde);
+    font-weight: 600;
+    line-height: 1.4;
+    list-style: none;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .sss-soru {
+    min-width: 0;
+  }
+
+  summary .ikon {
+    color: var(--color-ahsap-acik);
+    transition: transform var(--sure) var(--ease-out);
+  }
+
+  summary:hover .ikon {
+    color: var(--color-krem);
+  }
+
+  .sss[open] summary .ikon {
+    transform: rotate(180deg);
+  }
+
+  .sss-cevap {
+    padding: 0 20px 20px;
+  }
+
+  .sss[open] .sss-cevap {
+    animation: sss-ac var(--sure-ortaya) var(--ease-ortaya);
+  }
+
+  .sss-cevap p {
+    max-width: var(--olcu-metin);
+    margin: 0;
+  }
+
+  @keyframes sss-ac {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    summary {
+      padding-inline: var(--bosluk-3);
+      font-size: var(--text-giris);
+    }
+
+    .sss-cevap {
+      padding: 0 var(--bosluk-3) var(--bosluk-3);
+    }
+  }
+</style>

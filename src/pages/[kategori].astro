@@ -1,11 +1,14 @@
 ---
 // Kategori sayfaları (/bungalov, /villa, ...): o kategorideki proje kartları.
 // Henüz projesi olmayan kategori "Yakında" gösterir ve noindex kalır.
+// Sayfa sonunda kategoriye uygun 3–4 soru (src/data/sss.ts).
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import ProjeKarti from '../components/ProjeKarti.astro';
 import Yakinda from '../components/Yakinda.astro';
+import SssBolumu from '../components/SssBolumu.astro';
 import { kategoriler } from '../data/site';
+import { kategoriSorulari } from '../data/sss';
 import { gorsel } from '../lib/gorsel';
 import { fotoYolu, kapakFotosu, kategoriProjeleri, kategoriVitrini } from '../lib/projeler';
 
@@ -53,6 +56,12 @@ const ogGorsel = vitrin ? (await gorsel(fotoYolu(vitrin, kapakFotosu(vitrin).dos
       />
     )
   }
+
+  <SssBolumu
+    sorular={kategoriSorulari(kategori.slug)}
+    baslik={`${kategori.ad} Hakkında Sıkça Sorulan Sorular`}
+    ustCizgi
+  />
 </Layout>
 
 <style>

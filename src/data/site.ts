@@ -24,6 +24,7 @@ export const menu = [
   { ad: 'Ana Sayfa', href: '/' },
   { ad: 'Projeler', href: '/projeler' },
   { ad: 'Hakkımızda', href: '/hakkimizda' },
+  { ad: 'SSS', href: '/sss' },
   { ad: 'İletişim', href: '/iletisim' },
 ];
 

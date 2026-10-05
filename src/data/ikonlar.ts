@@ -5,6 +5,7 @@ export const ikon = {
   ok: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   geri: '<path d="m15 18-6-6 6-6"/>',
   ileri: '<path d="m9 18 6-6-6-6"/>',
+  asagi: '<path d="m6 9 6 6 6-6"/>',
   buyut:
     '<path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/>',
   konum: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',

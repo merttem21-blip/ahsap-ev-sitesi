@@ -1,0 +1,106 @@
+---
+// Seçili sorular + "Tüm sorular" linki (ana sayfa ve kategori sayfaları).
+// Sayfada görünen sorular için FAQPage JSON-LD de buradan yazılır; sayfa başına bir kez kullanılır.
+import SssAkordeon from './SssAkordeon.astro';
+import { ikon } from '../data/ikonlar';
+import { sssSemasi, type Soru } from '../data/sss';
+import { jsonLd } from '../lib/projeler';
+
+interface Props {
+  sorular: Soru[];
+  baslik?: string;
+  aciklama?: string;
+  ustCizgi?: boolean; // önceki bölümle aynı zemindeyse ayırıcı çizgi
+}
+
+const {
+  sorular,
+  baslik = 'Sıkça Sorulan Sorular',
+  aciklama = 'Ahşap yapı yaptırmadan önce en çok merak edilenleri yanıtladık. Projenize özel sorularınız için bize dilediğiniz zaman yazabilirsiniz.',
+  ustCizgi = false,
+} = Astro.props;
+---
+
+{
+  sorular.length > 0 && (
+    <section class:list={['sss-bolum', { 'sss-bolum-cizgi': ustCizgi }]} aria-labelledby="sss-baslik">
+      <script type="application/ld+json" set:html={jsonLd(sssSemasi(sorular))} />
+      <div class="kap sss-ic">
+        <header class="sss-ust" data-ortaya>
+          <h2 id="sss-baslik">{baslik}</h2>
+          <p>{aciklama}</p>
+        </header>
+
+        <div class="sss-govde">
+          <SssAkordeon sorular={sorular} />
+          <a href="/sss" class="tum-sorular" data-ortaya>
+            Tüm sorular
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .sss-bolum {
+    padding-block: var(--bolum);
+    background: var(--color-zemin);
+  }
+
+  .sss-bolum-cizgi {
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .sss-ust {
+    margin-bottom: var(--bosluk-5);
+  }
+
+  .sss-ust h2 {
+    font-size: var(--text-h2);
+  }
+
+  .sss-ust > p {
+    max-width: 48ch;
+    margin: var(--bosluk-2) 0 0;
+  }
+
+  .tum-sorular {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bosluk-1);
+    min-height: 44px;
+    margin-top: var(--bosluk-3);
+    color: var(--color-krem);
+    font-size: var(--text-dugme);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .tum-sorular .ikon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-ahsap-acik);
+    transition: transform var(--gecis);
+  }
+
+  .tum-sorular:is(:hover, :focus-visible) .ikon {
+    transform: translateX(4px);
+  }
+
+  /* ≥ 1024px: başlık solda, sorular sağda */
+  @media (min-width: 1024px) {
+    .sss-ic {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      align-items: start;
+      gap: var(--bosluk-6);
+    }
+
+    .sss-ust {
+      margin-bottom: 0;
+    }
+  }
+</style>

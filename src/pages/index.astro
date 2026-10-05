@@ -5,9 +5,11 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Surecimiz from '../components/Surecimiz.astro';
 import NedenAhsap from '../components/NedenAhsap.astro';
+import SssBolumu from '../components/SssBolumu.astro';
 import { ikon } from '../data/ikonlar';
 import { kategoriler } from '../data/site';
 import { gorsel } from '../lib/gorsel';
+import { anaSayfaSorulari } from '../data/sss';
 
 const baslik = 'Özel Tasarım Ahşap Ev, Bungalov ve Villa | 2K AHŞAP';
 const aciklama =
@@ -151,6 +153,7 @@ const digerKategoriler = kategoriler.filter((k) => !urunler.some((u) => u.slug =
 
   <Surecimiz />
   <NedenAhsap />
+  <SssBolumu sorular={anaSayfaSorulari} />
 </Layout>
 
 <style>
