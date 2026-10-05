@@ -18,25 +18,41 @@ function ortayaCikma() {
   if (azHareket || !('IntersectionObserver' in window) || ogeler.length === 0) return;
 
   const adim = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gecikme-adim')) || 80;
+  const goster = (oge: HTMLElement, sira: number) => {
+    oge.style.setProperty('--gecikme', `${sira * adim}ms`);
+    oge.classList.remove('ortaya-gizli');
+    oge.addEventListener('transitionend', () => oge.style.removeProperty('--gecikme'), { once: true });
+  };
+
+  // Yatay kaydırmalı [data-ortaya-grup] (ör. mobildeki kart şeridi) tek parça izlenir: ekran dışında
+  // kalan kartlar kendi başına hiç görünür olmayacağı için grup ekrana girince hepsi sırayla belirir.
+  // Kaydırmalı değilse (ızgara) öğeler tek tek izlenir.
+  const gruplar = new Map<HTMLElement, HTMLElement[]>();
+  for (const grup of document.querySelectorAll<HTMLElement>('[data-ortaya-grup]')) {
+    const tasma = getComputedStyle(grup).overflowX;
+    if (tasma === 'auto' || tasma === 'scroll') gruplar.set(grup, [...grup.querySelectorAll<HTMLElement>('[data-ortaya]')]);
+  }
+
   const gozlemci = new IntersectionObserver(
     (girdiler) => {
       // Aynı anda giren öğeler (ör. bir kart satırı) sırayla belirir
-      const girenler = girdiler.filter((g) => g.isIntersecting).map((g) => g.target as HTMLElement);
-      girenler.forEach((oge, i) => {
-        oge.style.setProperty('--gecikme', `${i * adim}ms`);
-        oge.classList.remove('ortaya-gizli');
-        gozlemci.unobserve(oge);
-        oge.addEventListener('transitionend', () => oge.style.removeProperty('--gecikme'), { once: true });
-      });
+      let sira = 0;
+      for (const g of girdiler) {
+        if (!g.isIntersecting) continue;
+        const hedef = g.target as HTMLElement;
+        gozlemci.unobserve(hedef);
+        for (const oge of gruplar.get(hedef) ?? [hedef]) goster(oge, sira++);
+      }
     },
     { rootMargin: '0px 0px -8% 0px' }
   );
 
   const ekranAlti = window.innerHeight;
-  for (const oge of ogeler) {
-    if (oge.getBoundingClientRect().top < ekranAlti) continue; // ilk ekranda görünüyor: olduğu gibi kalır
-    oge.classList.add('ortaya-gizli');
-    gozlemci.observe(oge);
+  const gruptakiler = new Set([...gruplar.values()].flat());
+  for (const hedef of [...gruplar.keys(), ...ogeler.filter((o) => !gruptakiler.has(o))]) {
+    if (hedef.getBoundingClientRect().top < ekranAlti) continue; // ilk ekranda görünüyor: olduğu gibi kalır
+    for (const oge of gruplar.get(hedef) ?? [hedef]) oge.classList.add('ortaya-gizli');
+    gozlemci.observe(hedef);
   }
 }
 

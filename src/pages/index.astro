@@ -4,15 +4,12 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import { ikon } from '../data/ikonlar';
+import { kategoriler } from '../data/site';
 import { gorsel } from '../lib/gorsel';
 
 const baslik = 'Özel Tasarım Ahşap Ev, Bungalov ve Villa | 2K AHŞAP';
 const aciklama =
   "2015'ten beri 300+ projeyle özel tasarım ahşap ev, bungalov, villa ve tiny house üretiyoruz. Projelerimizi inceleyin, hemen teklif alın.";
-
-// Görseller public/images altında -600 / -1000 / -1600 genişliklerinde hazır.
-const srcset = (yol: string) =>
-  [600, 1000, 1600].map((g) => `${yol}-${g}.webp ${g}w`).join(', ');
 
 // Hero fotoğrafları scripts/hero-gorseli.mjs ile üretilir. Birden fazla eklenirse slayt olur.
 // odak: masaüstünde ev sağdaki fotoğraf alanında kalır; odakMobil: dikey ekranda verandaya ortalanır.
@@ -26,52 +23,45 @@ const heroSlaytlari = [
 ];
 const ogGorsel = (await gorsel(heroSlaytlari[0].yol)).buyuk;
 
-// Panoramik (20:9) görseller 4:3 karta kırpıldığı için daha geniş kaynak ister.
-const boyutNormal = '(min-width: 1280px) 300px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw';
-const boyutPanoramik = '(min-width: 1280px) 500px, (min-width: 1024px) 42vw, (min-width: 640px) 84vw, 167vw';
+// Ürün kartları: 4:5 vitrin fotoğrafları scripts/vitrin-gorseli.mjs ile aynı ışık ve renkte üretilir.
+// Kartın genişliği: ≥ 1280px'te 4 sütun (286px), 640–1279px'te 2 sütun; mobilde ekranın ~%78'i (yatay şerit).
+const kartBoyutu =
+  '(min-width: 1280px) 286px, (min-width: 1024px) calc((100vw - 88px) / 2), (min-width: 768px) calc((100vw - 72px) / 2), (min-width: 640px) calc((100vw - 56px) / 2), 78vw';
 
-const kategoriler = [
+const urunler = [
   {
-    ad: 'Ahşap Ev',
-    href: '/ahsap-ev',
-    yol: '/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-01',
-    genislik: 1600,
-    yukseklik: 1200,
-    boyut: boyutNormal,
+    slug: 'ahsap-ev',
     alt: 'Gri çatılı verandalı ahşap ev – taş kaideli köşe veranda',
     aciklama: 'Ailenizin ihtiyaçlarına göre tasarlanan, uzun ömürlü ve sıcak yaşam alanları.',
   },
   {
-    ad: 'Bungalov',
-    href: '/bungalov',
-    yol: '/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-01',
-    genislik: 1600,
-    yukseklik: 1200,
-    boyut: boyutNormal,
-    alt: 'Shingle çatılı, ön verandalı ahşap bungalov ve arkasında dağ manzarası',
+    slug: 'bungalov',
+    alt: 'Geniş verandalı asma katlı bungalov – cam üçgen cephe ve ön veranda',
     aciklama: 'Bahçeniz, tatil eviniz veya turizm tesisiniz için doğayla uyumlu bungalovlar.',
   },
   {
-    ad: 'Villa',
-    href: '/villa',
-    yol: '/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-01',
-    genislik: 1600,
-    yukseklik: 720,
-    boyut: boyutPanoramik,
-    alt: 'Taş kaideli, çevresi verandalı ahşap villa ve bahçe yolu',
+    slug: 'villa',
+    alt: 'Geniş verandalı ahşap villa – köşeden uzun kavisli saçak ve veranda',
     aciklama: 'Geniş verandalı, ferah planlı; modern mimariyle doğal ahşabı buluşturan villalar.',
   },
   {
-    ad: 'Tiny House',
-    href: '/tiny-house',
-    yol: '/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-01',
-    genislik: 1600,
-    yukseklik: 720,
-    boyut: boyutPanoramik,
-    alt: 'Yuvarlak pencereli, geniş ahşap terasa sahip tiny house',
+    slug: 'tiny-house',
+    alt: 'Lombar pencereli modern tiny house – çevresi teraslı yan cephe',
     aciklama: 'Az alanda konforlu yaşam: kompakt, işlevsel ve size özel tasarım.',
   },
 ];
+
+const kartlar = await Promise.all(
+  urunler.map(async (u, i) => ({
+    ...u,
+    ad: kategoriler.find((k) => k.slug === u.slug)!.ad,
+    no: String(i + 1).padStart(2, '0'),
+    g: await gorsel(`/images/vitrin/${u.slug}-vitrin`),
+  }))
+);
+
+// Kartı olmayan kategoriler kartların altında pill link olarak listelenir
+const digerKategoriler = kategoriler.filter((k) => !urunler.some((u) => u.slug === k.slug));
 ---
 
 <Layout title={baslik} description={aciklama} image={ogGorsel} seffafHeader>
@@ -87,164 +77,426 @@ const kategoriler = [
     </div>
   </Hero>
 
-  <section id="kategoriler" class="kategoriler" aria-labelledby="kategoriler-baslik">
+  <section id="kategoriler" class="urunler" aria-labelledby="kategoriler-baslik">
     <div class="kap">
-      <header class="bolum-baslik" data-ortaya>
-        <p class="bolum-etiket">Ürünlerimiz</p>
-        <h2 id="kategoriler-baslik">Size Özel Ahşap Yapılar</h2>
-        <p>
-          Her yapıyı ihtiyaçlarınıza ve arazinize göre özel olarak tasarlayıp üretiyoruz.
-        </p>
+      <header class="urunler-baslik" data-ortaya>
+        <div>
+          <p class="etiket">Ürünlerimiz</p>
+          <h2 id="kategoriler-baslik">Size Özel Ahşap Yapılar</h2>
+        </div>
+        <p>Her yapıyı ihtiyaçlarınıza ve arazinize göre özel olarak tasarlayıp üretiyoruz.</p>
       </header>
+    </div>
 
-      <ul class="kart-izgara">
-        {
-          kategoriler.map((k) => (
-            <li data-ortaya>
-              <a href={k.href} class="kart">
-                <div class="kart-gorsel">
+    <div class="urunler-govde">
+      <div class="kap">
+        <ul class="urun-izgara" data-ortaya-grup>
+          {
+            kartlar.map((k) => (
+              <li data-ortaya>
+                <a href={`/${k.slug}`} class="urun">
                   <img
-                    src={`${k.yol}-600.webp`}
-                    srcset={srcset(k.yol)}
-                    sizes={k.boyut}
-                    width={k.genislik}
-                    height={k.yukseklik}
+                    class="urun-gorsel"
+                    src={k.g.src}
+                    srcset={k.g.srcset}
+                    sizes={kartBoyutu}
+                    width={k.g.width}
+                    height={k.g.height}
                     alt={k.alt}
                     loading="lazy"
                     decoding="async"
                   />
-                </div>
-                <div class="kart-govde">
-                  <h3>{k.ad}</h3>
-                  <p>{k.aciklama}</p>
-                  <span class="kart-link">
-                    Modelleri inceleyin
-                    <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
+                  <span class="urun-no" aria-hidden="true">
+                    {k.no}
                   </span>
-                </div>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+                  <div class="urun-metin">
+                    <h3>{k.ad}</h3>
+                    <p>{k.aciklama}</p>
+                    <span class="urun-eylem">
+                      Modelleri inceleyin
+                      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
+                    </span>
+                  </div>
+                  <span class="urun-cerceve" aria-hidden="true" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="urunler-alt" data-ortaya>
+          <nav aria-label="Diğer kategoriler">
+            <ul class="kategori-linkleri">
+              {
+                digerKategoriler.map((k) => (
+                  <li>
+                    <a href={`/${k.slug}`} class="kategori-link">
+                      {k.ad}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+          <a href="/projeler" class="tum-projeler">
+            Tüm projeler
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  /* Kategoriler */
-  .kategoriler {
-    padding-block: 64px;
+  /* Ürünlerimiz: hero'dan geçiş.
+     Hero'nun altı gece zemine erir; bölüm başlığı ve kartların üst kısmı (--bindirme) bu zeminde kalır,
+     kartların gerisi antrasit banda oturur. Kartlar iki tonun sınırına biner (masaüstünde 80px). */
+  .urunler {
+    --bindirme: 48px;
+    padding-top: var(--bosluk-5);
     background: var(--color-zemin);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
   }
 
-  .bolum-baslik {
-    max-width: 640px;
-    margin-bottom: 40px;
+  .urunler-baslik {
+    margin-bottom: var(--bosluk-4);
   }
 
-  .bolum-etiket {
-    margin: 0 0 8px;
-    color: var(--color-ahsap-acik);
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  .urunler-baslik .etiket {
+    margin-bottom: 12px;
   }
 
-  .bolum-baslik h2 {
-    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-    font-weight: 600;
+  .urunler-baslik h2 {
+    font-size: var(--text-h2);
   }
 
-  .bolum-baslik p:last-child {
-    margin: 16px 0 0;
+  .urunler-baslik > p {
+    max-width: 48ch;
+    margin: var(--bosluk-2) 0 0;
   }
 
-  .kart-izgara {
-    display: grid;
-    gap: 24px;
+  .urunler-govde {
+    position: relative;
+    isolation: isolate;
+    padding-bottom: var(--bolum);
   }
 
-  .kart {
+  .urunler-govde::before {
+    content: '';
+    position: absolute;
+    inset: var(--bindirme) 0 0;
+    z-index: -1;
+    border-top: var(--cizgi) solid var(--color-cizgi);
+    background: var(--color-zemin-ara);
+  }
+
+  /* Mobil: yatay kaydırmalı şerit. Şerit ekran kenarına kadar uzar, kartlar .kap hizasında durur;
+     sonraki kartın kenarı görünür kalır (kaydırılabildiği anlaşılır). */
+  .urun-izgara {
+    display: flex;
+    gap: var(--bosluk-2);
+    margin-inline: calc(var(--bosluk-2) * -1);
+    padding: 6px var(--bosluk-2); /* odak halkası ve kenarlar kırpılmasın */
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--bosluk-2);
+    scrollbar-width: none;
+  }
+
+  .urun-izgara::-webkit-scrollbar {
+    display: none;
+  }
+
+  .urun-izgara > li {
+    flex: 0 0 min(78%, 340px);
+    scroll-snap-align: start;
+  }
+
+  /* Kart: görsel tüm kartı kaplar, metin alttaki karartmanın üzerinde.
+     Katmanlar: görsel → üst karartma → numara ve metin → çerçeve. Hover yalnızca transform ve opacity. */
+  .urun {
+    --ic: 20px; /* kart iç boşluğu */
+    --ust: 72px; /* metin bloğunun üstündeki karartma geçişi */
+    position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    justify-content: flex-end;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
-    border: var(--cizgi) solid var(--color-cizgi);
+    isolation: isolate;
     border-radius: var(--radius-kart);
     background: var(--color-yuzey);
+    color: var(--color-krem);
     text-decoration: none;
+    transform: translateZ(0); /* Safari: büyüyen görsel de yuvarlak köşeye kırpılır */
+    transition: transform var(--sure-kart) var(--ease-out);
   }
 
-  .kart-gorsel {
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    background: var(--color-yuzey);
-  }
-
-  .kart-gorsel img {
+  .urun-gorsel {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 300ms ease-out;
+    transition: transform var(--sure-kart) var(--ease-out);
   }
 
-  .kart:hover .kart-gorsel img {
-    transform: scale(1.03);
+  /* Üst kenar: numaranın okunması için hafif gece karartması */
+  .urun::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: -1;
+    height: 35%;
+    background: linear-gradient(180deg, var(--color-karartma-orta), transparent);
+    pointer-events: none;
   }
 
-  .kart-govde {
+  /* Çerçeve: dinlenmede krem %8; hover'da ahşap çerçeveli katman belirir (opacity) */
+  .urun::after,
+  .urun-cerceve {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border: var(--cizgi) solid var(--color-cizgi-ince);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .urun-cerceve {
+    border-color: var(--color-ahsap);
+    opacity: 0;
+    transition: opacity var(--sure-kart) var(--ease-out);
+  }
+
+  /* Dekoratif sıra numarası (ekran okuyucudan gizli) */
+  .urun-no {
+    position: absolute;
+    top: var(--ic);
+    left: var(--ic);
+    color: var(--color-ahsap-acik);
+    font-size: var(--text-etiket);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--aralik-etiket);
+    line-height: 1;
+  }
+
+  .urun-metin {
+    position: relative;
+    z-index: 0;
+    padding: var(--ust) var(--ic) var(--ic);
+  }
+
+  /* Metnin altındaki karartma metin bloğuna bağlıdır, metin uzasa da altında kalır:
+     başlığın üstünde %70, açıklama ve eylemde %90 gece (fotoğrafın en açık pikselinde bile krem ≥ 4.5:1) */
+  .urun-metin::before,
+  .urun-metin::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .urun-metin::before {
+    z-index: -2;
+    background: linear-gradient(
+      0deg,
+      var(--color-karartma-yogun) 0,
+      var(--color-karartma-yogun) 55%,
+      var(--color-karartma) calc(100% - var(--ust)),
+      transparent 100%
+    );
+  }
+
+  /* Hover'da alttan gelen sıcak iç ışık (gölge değil; yalnızca opacity) */
+  .urun-metin::after {
+    z-index: -1;
+    background: radial-gradient(120% 70% at 50% 100%, var(--color-ahsap-isik), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--sure-kart) var(--ease-out);
+  }
+
+  .urun-metin h3 {
+    font-size: var(--text-h3);
+  }
+
+  .urun-metin p {
+    margin: var(--bosluk-1) 0 0;
+    color: var(--color-krem);
+    font-size: var(--text-kucuk);
+    line-height: 1.55;
+    opacity: 0.85;
+    transition: opacity var(--sure-kart) var(--ease-out);
+  }
+
+  /* Eylem satırı; üstündeki ince ahşap çizgi kartın alt kısmını taşır */
+  .urun-eylem {
     display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 24px;
-  }
-
-  .kart h3 {
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    align-items: center;
+    gap: var(--bosluk-1);
+    margin-top: var(--bosluk-2);
+    padding-top: 14px;
+    border-top: var(--cizgi) solid var(--color-ahsap);
+    font-size: var(--text-kucuk);
     font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
-  .kart p {
-    flex: 1;
-    margin: 8px 0 20px;
+  .urun-eylem .ikon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-ahsap-acik);
+    transition: transform var(--sure-kart) var(--ease-out);
   }
 
-  .kart-link {
+  .urun:is(:hover, :focus-visible) {
+    transform: translate3d(0, -6px, 0);
+  }
+
+  .urun:is(:hover, :focus-visible) .urun-gorsel {
+    transform: scale(1.06);
+  }
+
+  .urun:is(:hover, :focus-visible) .urun-cerceve,
+  .urun:is(:hover, :focus-visible) .urun-metin::after,
+  .urun:is(:hover, :focus-visible) .urun-metin p {
+    opacity: 1;
+  }
+
+  .urun:is(:hover, :focus-visible) .urun-eylem .ikon {
+    transform: translateX(6px);
+  }
+
+  /* Kartların altı: diğer kategoriler (pill) ve tüm projeler linki */
+  .urunler-alt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--bosluk-3) var(--bosluk-4);
+    margin-top: var(--bosluk-5);
+  }
+
+  .kategori-linkleri {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bosluk-1);
+  }
+
+  .kategori-link {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    color: var(--color-ahsap-acik);
-    font-weight: 600;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-tam);
+    color: var(--color-metin);
+    font-size: var(--text-kucuk);
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
   }
 
-  .kart-link .ikon {
+  .kategori-link::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--cizgi) * -1);
+    border: var(--cizgi) solid var(--color-ahsap);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--gecis);
+  }
+
+  .kategori-link:is(:hover, :focus-visible) {
+    color: var(--color-krem);
+  }
+
+  .kategori-link:is(:hover, :focus-visible)::before {
+    opacity: 1;
+  }
+
+  .tum-projeler {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bosluk-1);
+    min-height: 44px;
+    color: var(--color-krem);
+    font-size: var(--text-dugme);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .tum-projeler .ikon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-ahsap-acik);
     transition: transform var(--gecis);
   }
 
-  .kart:hover .kart-link .ikon {
+  .tum-projeler:is(:hover, :focus-visible) .ikon {
     transform: translateX(4px);
   }
 
-  /* ≥ 640px */
+  /* ≥ 640px: 2 × 2 ızgara (1024px'te 4 sütun kartı ~220px'e düşürür, metin fotoğrafı örter; iPad yatay da buradadır) */
   @media (min-width: 640px) {
-    .kart-izgara {
-      grid-template-columns: repeat(2, 1fr);
+    .urunler {
+      --bindirme: 64px;
+    }
+
+    .urun-izgara {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--bosluk-3);
+      margin-inline: 0;
+      padding: 0;
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+
+    .tum-projeler {
+      margin-left: auto;
     }
   }
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .kategoriler {
-      padding-block: 96px;
+    .urun {
+      --ic: 24px;
+      --ust: 80px;
     }
   }
 
-  /* ≥ 1024px */
+  /* ≥ 1024px: başlık solda, açıklama sağda */
   @media (min-width: 1024px) {
-    .kart-izgara {
-      grid-template-columns: repeat(4, 1fr);
+    .urunler {
+      --bindirme: 80px;
+    }
+
+    .urunler-baslik {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+      align-items: end;
+      gap: var(--bosluk-5);
+      margin-bottom: var(--bosluk-5);
+    }
+
+    .urunler-baslik > p {
+      margin: 0;
+    }
+  }
+
+  /* ≥ 1280px: 4 kart yan yana (286px) */
+  @media (min-width: 1280px) {
+    .urun-izgara {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 </style>
