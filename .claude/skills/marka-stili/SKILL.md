@@ -111,7 +111,8 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 | `2k-ahsap-ikon.svg` | Favicon kaynağı (bkz. **Favicon**) | Yazısız "2K" ev simgesi |
 
 > **Format: SVG.** Sitede logo olarak SVG kullanılır.
-> ⚠️ SVG dosyaları henüz `public/logo/`'da yok; şimdilik yalnızca aynı adlı `.png` dosyaları var. SVG'ler eklenene kadar PNG'lerin küçültülmüş sürümü geçici olarak kullanılır (bkz. **Performans**). schema.org `logo` alanında açık zemin logosunun PNG sürümü kalır.
+> ✅ `2k-ahsap-logo-koyu-zemin.svg` mevcut (içindeki "2" krem; koyu zeminde okunur) ve header ile footer'da plakasız kullanılır.
+> ⚠️ `2k-ahsap-logo-acik-zemin.svg` ve `2k-ahsap-ikon.svg` henüz yok; eklenene kadar PNG'lerin küçültülmüş sürümü geçici olarak kullanılır (bkz. **Performans**). schema.org `logo` alanında açık zemin logosunun PNG sürümü kalır.
 
 **Zemin kuralı**
 - Koyu zemin logosu yalnızca antrasit zeminde veya karartılmış fotoğrafın üzerinde kullanılır. Açık zemin logosu yalnızca krem, beyaz veya `--color-zemin` üzerinde kullanılır. Ters kullanım yasak: krem yazı açık zeminde kaybolur.

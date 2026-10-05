@@ -1,8 +1,6 @@
 ---
-// Site üst bölümü: logo, ana menü, mobilde hamburger menü.
-// Header zemini koyudur (antrasit veya karartılmış hero). Koyu zemin logosundaki koyu gri "2"
-// bu boyutta zeminde kayboluyor; bu yüzden logo açık zemin (--color-zemin) bir plaka üzerinde,
-// açık zemin sürümüyle gösterilir. Logo dosyası değiştirilmez (marka-stili §4).
+// Site üst bölümü: logo, ana menü; mobilde tam ekran menü paneli.
+// Header zemini koyudur (antrasit veya karartılmış hero); koyu zemin SVG logosu kullanılır (marka-stili §4).
 import { kategoriler, menu } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
@@ -26,9 +24,9 @@ const aktifMi = (href: string) =>
   <div class="kap ust-ic">
     <a href="/" class="logo" aria-label="2K AHŞAP ana sayfa">
       <img
-        src="/logo/2k-ahsap-logo-acik-zemin-320.webp"
-        width="320"
-        height="308"
+        src="/logo/2k-ahsap-logo-koyu-zemin.svg"
+        width="560"
+        height="500"
         alt="2K AHŞAP"
         loading="eager"
       />
@@ -58,7 +56,7 @@ const aktifMi = (href: string) =>
           ))
         }
       </ul>
-      <a href="/iletisim" class="dugme dugme-birincil">Teklif Al</a>
+      <a href="/iletisim" class="dugme dugme-birincil menu-cta">Teklif Al</a>
     </nav>
   </div>
 </header>
@@ -68,12 +66,15 @@ const aktifMi = (href: string) =>
   const dugme = document.querySelector<HTMLButtonElement>('[data-menu-dugme]');
   const etiket = document.querySelector<HTMLElement>('[data-menu-etiket]');
   const menu = document.getElementById('ana-menu');
+  const masaustu = window.matchMedia('(min-width: 1024px)');
 
   const acikMi = () => dugme?.getAttribute('aria-expanded') === 'true';
 
   const ayarla = (acik: boolean) => {
     dugme?.setAttribute('aria-expanded', String(acik));
     menu?.classList.toggle('acik', acik);
+    // Panel açıkken arkadaki sayfa kaymaz
+    document.documentElement.classList.toggle('menu-acik', acik);
     if (etiket) etiket.textContent = acik ? 'Menüyü kapat' : 'Menüyü aç';
   };
 
@@ -95,14 +96,19 @@ const aktifMi = (href: string) =>
   document.addEventListener('click', (e) => {
     if (acikMi() && !ust?.contains(e.target as Node)) ayarla(false);
   });
+
+  // Masaüstü genişliğine geçilirse panel kapanır (menü satır içinde gösterilir)
+  masaustu.addEventListener('change', (e) => {
+    if (e.matches && acikMi()) ayarla(false);
+  });
 </script>
 
 <style>
   .ust {
     position: relative;
-    z-index: 20;
+    z-index: var(--z-header);
     background: var(--color-antrasit);
-    color: var(--color-beyaz);
+    color: var(--color-krem);
   }
 
   /* Ana sayfada hero fotoğrafının üzerinde */
@@ -120,20 +126,26 @@ const aktifMi = (href: string) =>
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-block: 8px;
+    gap: var(--bosluk-3);
+    padding-block: var(--bosluk-2);
   }
 
-  /* Logo plakası: iç boşluk logo yüksekliğinin %25'i (marka-stili §4) */
+  /* Logo ve menü düğmesi açık panelin üzerinde kalır */
+  .logo,
+  .menu-dugme {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Çevresinde logo yüksekliğinin en az %25'i kadar boşluk (marka-stili §4) */
   .logo {
     display: block;
-    padding: 12px;
-    border-radius: var(--radius);
-    background: var(--color-zemin);
+    flex-shrink: 0;
   }
 
   .logo img {
-    height: 48px;
     width: auto;
+    height: 56px;
   }
 
   .menu-dugme {
@@ -142,8 +154,8 @@ const aktifMi = (href: string) =>
     justify-content: center;
     width: 48px;
     height: 48px;
+    margin-right: -12px;
     border: 0;
-    border-radius: var(--radius);
     background: transparent;
     color: inherit;
     cursor: pointer;
@@ -163,60 +175,87 @@ const aktifMi = (href: string) =>
     display: block;
   }
 
+  /* Mobil: tam ekran panel */
   .menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    padding: 8px 16px 24px;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--bosluk-5);
+    padding: 120px var(--bosluk-2) var(--bosluk-5);
+    overflow-y: auto;
     background: var(--color-antrasit);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--golge-panel);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity var(--gecis),
+      transform var(--gecis),
+      visibility var(--sure-kisa);
   }
 
   .menu.acik {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .menu ul {
+    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
   }
 
   .menu a:not(.dugme) {
     display: flex;
     align-items: center;
-    min-height: 48px;
-    font-weight: 500;
+    min-height: 72px;
+    border-bottom: var(--cizgi) solid var(--color-cizgi-koyu);
+    font-family: var(--font-baslik);
+    font-size: var(--text-h2);
+    font-weight: 600;
+    letter-spacing: var(--aralik-baslik);
+    line-height: var(--satir-baslik);
     text-decoration: none;
-    border-bottom: 1px solid rgba(235, 220, 198, 0.15);
+    transition: color var(--gecis);
   }
 
   .menu a:not(.dugme):hover {
-    color: var(--color-krem);
+    color: var(--color-beyaz);
   }
 
-  /* Aktif sayfa */
+  /* Aktif sayfa: ince ahşap çizgi (dekoratif) */
   .menu a[aria-current='page'] {
-    color: var(--color-krem);
+    color: var(--color-beyaz);
     text-decoration: underline;
     text-decoration-color: var(--color-ahsap);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 8px;
+    text-decoration-thickness: var(--cizgi);
+    text-underline-offset: 10px;
   }
 
-  .menu .dugme {
+  .menu-cta {
     width: 100%;
-    margin-top: 16px;
   }
 
-  /* ≥ 1024px */
+  :global(html.menu-acik) {
+    overflow: hidden;
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .menu {
+      padding-inline: var(--bosluk-3);
+    }
+  }
+
+  /* ≥ 1024px: menü satır içinde, kenara yaslı */
   @media (min-width: 1024px) {
     .ust-ic {
-      padding-block: 12px;
-    }
-
-    .logo {
-      padding: 16px;
+      padding-block: 18px;
     }
 
     .logo img {
-      height: 64px;
+      height: 72px;
     }
 
     .menu-dugme {
@@ -224,28 +263,46 @@ const aktifMi = (href: string) =>
     }
 
     .menu {
-      display: flex;
       position: static;
+      flex-direction: row;
       align-items: center;
-      gap: 32px;
+      gap: var(--bosluk-5);
       padding: 0;
+      overflow: visible;
       background: none;
       box-shadow: none;
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
 
     .menu ul {
       display: flex;
-      gap: 32px;
+      gap: var(--bosluk-4);
+      border-top: 0;
     }
 
     .menu a:not(.dugme) {
       min-height: 44px;
       border-bottom: 0;
+      font-family: var(--font-metin);
+      font-size: var(--text-kucuk);
+      font-weight: 500;
+      letter-spacing: var(--aralik-etiket);
+      line-height: 1.2;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .menu .dugme {
+    .menu a[aria-current='page'] {
+      text-underline-offset: 8px;
+    }
+
+    .menu-cta {
       width: auto;
-      margin-top: 0;
+      min-height: 44px;
+      padding: 10px 22px;
     }
   }
 </style>

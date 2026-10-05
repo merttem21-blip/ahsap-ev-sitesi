@@ -1,5 +1,5 @@
 ---
-// Site alt bölümü: logo, linkler, iletişim bilgileri, telif
+// Site alt bölümü: logo ve tanım + öne çıkan iletişim bilgileri, altında linkler ve telif.
 import { firma, menu, kategoriler } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
@@ -7,82 +7,78 @@ const yil = new Date().getFullYear();
 ---
 
 <footer class="alt">
-  <div class="kap alt-izgara">
-    <div class="alt-marka">
-      <a href="/" class="alt-logo" aria-label="2K AHŞAP ana sayfa">
-        <img
-          src="/logo/2k-ahsap-logo-koyu-zemin-320.webp"
-          width="320"
-          height="308"
-          alt="2K AHŞAP"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-      <p>
-        2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp üretiyoruz;
-        modern mimariyi doğal malzemeyle harmanlıyoruz.
-      </p>
-      <ul class="sosyal">
-        <li>
-          <a href={firma.instagram} aria-label="Instagram" rel="noopener noreferrer" target="_blank">
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.instagram} />
-          </a>
-        </li>
-        <li>
-          <a href={firma.facebook} aria-label="Facebook" rel="noopener noreferrer" target="_blank">
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.facebook} />
-          </a>
-        </li>
-        <li>
-          <a href={firma.linkedin} aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.linkedin} />
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <nav class="alt-blok" aria-label="Hızlı linkler">
-      <h2>Kurumsal</h2>
-      <ul>
-        {menu.map((m) => <li><a href={m.href}>{m.ad}</a></li>)}
-      </ul>
-    </nav>
-
-    <nav class="alt-blok" aria-label="Kategoriler">
-      <h2>Kategoriler</h2>
-      <ul>
-        {kategoriler.map((k) => <li><a href={`/${k.slug}`}>{k.ad}</a></li>)}
-        <li><a href="/projeler">Tüm projeler</a></li>
-      </ul>
-    </nav>
-
-    <div class="alt-blok">
-      <h2>İletişim</h2>
-      <address>
-        <ul class="iletisim">
+  <div class="kap">
+    <div class="alt-bas">
+      <div class="alt-marka">
+        <a href="/" class="alt-logo" aria-label="2K AHŞAP ana sayfa">
+          <img
+            src="/logo/2k-ahsap-logo-koyu-zemin.svg"
+            width="560"
+            height="500"
+            alt="2K AHŞAP"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <p>
+          2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp üretiyoruz;
+          modern mimariyi doğal malzemeyle harmanlıyoruz.
+        </p>
+        <ul class="sosyal">
           <li>
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
-            <a href={firma.harita} rel="noopener noreferrer" target="_blank">{firma.adres}</a>
+            <a href={firma.instagram} aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.instagram} />
+            </a>
           </li>
           <li>
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.telefon} />
-            <a href={firma.telefonLink}>{firma.telefonGorunen}</a>
+            <a href={firma.facebook} aria-label="Facebook" rel="noopener noreferrer" target="_blank">
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.facebook} />
+            </a>
           </li>
           <li>
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.mesaj} />
-            <a href={firma.whatsapp} rel="noopener noreferrer" target="_blank">WhatsApp ile yazın</a>
-          </li>
-          <li>
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.eposta} />
-            <a href={`mailto:${firma.eposta}`}>{firma.eposta}</a>
+            <a href={firma.linkedin} aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.linkedin} />
+            </a>
           </li>
         </ul>
-      </address>
-    </div>
-  </div>
+      </div>
 
-  <div class="kap">
+      <div class="alt-iletisim">
+        <h2 class="etiket alt-baslik">İletişim</h2>
+        <address>
+          <a href={firma.telefonLink} class="alt-telefon">{firma.telefonGorunen}</a>
+          <a href={`mailto:${firma.eposta}`} class="alt-eposta">{firma.eposta}</a>
+          <ul class="alt-diger">
+            <li>
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
+              <a href={firma.harita} rel="noopener noreferrer" target="_blank">{firma.adres}</a>
+            </li>
+            <li>
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.mesaj} />
+              <a href={firma.whatsapp} rel="noopener noreferrer" target="_blank">WhatsApp ile yazın</a>
+            </li>
+          </ul>
+        </address>
+      </div>
+    </div>
+
+    <div class="alt-linkler">
+      <nav aria-label="Hızlı linkler">
+        <h2 class="etiket alt-baslik">Kurumsal</h2>
+        <ul>
+          {menu.map((m) => <li><a href={m.href}>{m.ad}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav aria-label="Kategoriler">
+        <h2 class="etiket alt-baslik">Kategoriler</h2>
+        <ul class="alt-kategoriler">
+          {kategoriler.map((k) => <li><a href={`/${k.slug}`}>{k.ad}</a></li>)}
+          <li><a href="/projeler">Tüm projeler</a></li>
+        </ul>
+      </nav>
+    </div>
+
     <div class="alt-telif">
       <p>© {yil} 2K AHŞAP. Tüm hakları saklıdır.</p>
     </div>
@@ -91,7 +87,7 @@ const yil = new Date().getFullYear();
 
 <style>
   .alt {
-    padding-top: 64px;
+    padding-top: var(--bolum);
     background: var(--color-antrasit);
     color: var(--color-krem);
   }
@@ -100,62 +96,48 @@ const yil = new Date().getFullYear();
     outline-color: var(--color-krem);
   }
 
-  .alt-izgara {
-    display: grid;
-    gap: 40px;
-  }
-
-  .alt-logo img {
-    width: 140px;
-    height: auto;
-  }
-
-  .alt-marka p {
-    max-width: 36ch;
-    margin: 20px 0;
-  }
-
-  .alt h2 {
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--color-ahsap);
-    display: inline-block;
-    color: var(--color-beyaz);
-    font-size: 1.125rem;
-    font-weight: 600;
-  }
-
-  .alt-blok ul li + li {
-    margin-top: 8px;
-  }
-
   .alt a {
     text-decoration: none;
+    transition: color var(--gecis);
   }
 
   .alt a:hover {
     color: var(--color-beyaz);
     text-decoration: underline;
+    text-decoration-thickness: var(--cizgi);
+    text-underline-offset: 4px;
   }
 
-  .alt address {
-    font-style: normal;
+  .alt-baslik {
+    margin-bottom: var(--bosluk-3);
+    color: var(--color-krem-soluk);
   }
 
-  .iletisim li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
+  /* Üst bant: marka + iletişim */
+  .alt-bas {
+    display: grid;
+    gap: var(--bosluk-6);
+    padding-bottom: var(--bosluk-6);
   }
 
-  .iletisim .ikon {
-    margin-top: 3px;
-    color: var(--color-ahsap);
+  .alt-logo {
+    display: inline-block;
+  }
+
+  .alt-logo img {
+    width: 160px;
+    height: auto;
+  }
+
+  .alt-marka p {
+    max-width: 40ch;
+    margin: var(--bosluk-3) 0;
+    color: var(--color-krem-soluk);
   }
 
   .sosyal {
     display: flex;
-    gap: 8px;
+    gap: var(--bosluk-1);
   }
 
   .sosyal a {
@@ -164,9 +146,9 @@ const yil = new Date().getFullYear();
     justify-content: center;
     width: 44px;
     height: 44px;
-    border: 1.5px solid rgba(235, 220, 198, 0.3);
+    border: var(--cizgi) solid var(--color-cizgi-koyu);
     border-radius: var(--radius);
-    color: var(--color-ahsap);
+    color: var(--color-krem);
     transition:
       border-color var(--gecis),
       color var(--gecis);
@@ -174,39 +156,121 @@ const yil = new Date().getFullYear();
 
   .sosyal a:hover {
     border-color: var(--color-ahsap);
-    color: var(--color-krem);
+    color: var(--color-beyaz);
+  }
+
+  .alt address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-style: normal;
+  }
+
+  .alt-telefon {
+    font-family: var(--font-baslik);
+    font-size: var(--text-h2);
+    font-weight: 600;
+    letter-spacing: var(--aralik-baslik);
+    line-height: var(--satir-baslik);
+    white-space: nowrap;
+  }
+
+  .alt-eposta {
+    margin-top: var(--bosluk-1);
+    font-size: var(--text-giris);
+    overflow-wrap: anywhere;
+  }
+
+  .alt-diger {
+    margin-top: var(--bosluk-4);
+    padding-top: var(--bosluk-3);
+    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
+    color: var(--color-krem-soluk);
+  }
+
+  .alt-diger li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .alt-diger li + li {
+    margin-top: 12px;
+  }
+
+  .alt-diger .ikon {
+    margin-top: 3px;
+    color: var(--color-ahsap);
+  }
+
+  /* Link listeleri */
+  .alt-linkler {
+    display: grid;
+    gap: var(--bosluk-5);
+    padding-block: var(--bosluk-6);
+    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
+  }
+
+  .alt-linkler li + li {
+    margin-top: 4px;
+  }
+
+  .alt-linkler a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  .alt-kategoriler {
+    columns: 2;
+    column-gap: var(--bosluk-3);
+  }
+
+  .alt-kategoriler li {
+    break-inside: avoid;
   }
 
   /* Mobilde alt boşluk, yüzen WhatsApp butonunun telif metnini örtmemesi için */
   .alt-telif {
-    margin-top: 48px;
-    padding-block: 24px 96px;
-    border-top: 1px solid rgba(235, 220, 198, 0.15);
-    font-size: 0.875rem;
+    padding-block: var(--bosluk-3) var(--bosluk-7);
+    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
+    color: var(--color-krem-soluk);
+    font-size: var(--text-kucuk);
   }
 
   .alt-telif p {
     margin: 0;
   }
 
-  /* ≥ 640px */
-  @media (min-width: 640px) {
-    .alt-izgara {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   /* ≥ 768px */
   @media (min-width: 768px) {
+    .alt-linkler {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
+
+    .alt-kategoriler {
+      columns: 3;
+    }
+
     .alt-telif {
-      padding-bottom: 24px;
+      padding-bottom: var(--bosluk-3);
     }
   }
 
   /* ≥ 1024px */
   @media (min-width: 1024px) {
-    .alt-izgara {
-      grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    .alt-bas {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: end;
+      padding-bottom: var(--bosluk-7);
+    }
+
+    .alt-logo img {
+      width: 180px;
+    }
+
+    .alt-iletisim {
+      justify-self: end;
     }
   }
 </style>
