@@ -1,0 +1,489 @@
+---
+// Ana sayfa hero'su: sağa yaslı proje fotoğrafı (birden fazlaysa yavaş çapraz geçişli slayt),
+// solda zemine eriyen karartma ve metin, altta ikon şeridi. Metin (h1, açıklama, butonlar) slot'tan gelir.
+//
+// Hareket (marka-stili §6): her fotoğrafta çok yavaş yakınlaşma; birden fazla fotoğrafta 7 sn'de bir
+// 1.5 sn çapraz geçiş ve altta ilerleme çizgisi. Ok/nokta yok. İlk fotoğraf hemen (LCP), diğerleri
+// sayfa yüklendikten sonra yüklenir. prefers-reduced-motion açıkken slayt dönmez, yakınlaşma olmaz.
+// Parallax için .hero-sahne'ye data-parallax verilir (src/scripts/hareket.ts).
+import { gorsel } from '../lib/gorsel';
+import { ikon } from '../data/ikonlar';
+
+interface Slayt {
+  /** Uzantısız ve boyut eksiz yol, ör. "/images/hero/kiremit-catili-ahsap-ev-hero" */
+  yol: string;
+  alt: string;
+  /** object-position: masaüstünde fotoğraf sağdaki alana, mobilde tam ekrana kırpılır */
+  odak?: string;
+  odakMobil?: string;
+}
+
+interface Props {
+  slaytlar: Slayt[];
+}
+
+const { slaytlar } = Astro.props;
+
+const hazir = await Promise.all(
+  slaytlar.map(async (s) => {
+    const g = await gorsel(s.yol);
+    // Masaüstünde fotoğraf alanı ~%58 genişliktedir; dar/dikey ekranda yüksekliğe göre kırpılır,
+    // bu yüzden gereken genişlik görüntü oranı × yükseklik kadardır.
+    const oran = g.width / g.height;
+    const sizes = `(min-width: 1024px) 58vw, (max-aspect-ratio: ${g.width}/${g.height}) ${Math.ceil(oran * 100)}vh, 100vw`;
+    return {
+      ...s,
+      src: g.src,
+      srcset: g.srcset,
+      sizes,
+      width: g.width,
+      height: g.height,
+      odak: s.odak ?? '50% 50%',
+      odakMobil: s.odakMobil ?? s.odak ?? '50% 50%',
+    };
+  })
+);
+
+const [ilk, ...digerleri] = hazir;
+const SLAYT_SURESI = 7000;
+
+const serit = [
+  { ad: 'Doğal Malzeme', ikon: ikon.yaprak },
+  { ad: 'Modern Tasarım', ikon: ikon.ev },
+  { ad: 'Güvenilir Uygulama', ikon: ikon.kalkan },
+];
+---
+
+<section
+  class="hero"
+  aria-labelledby="hero-baslik"
+  data-hero
+  data-slaytlar={digerleri.length ? JSON.stringify(digerleri) : undefined}
+  style={`--slayt-suresi: ${SLAYT_SURESI}ms`}
+>
+  <div class="hero-sahne" data-parallax>
+    <div class="hero-slayt aktif" data-slayt style={`--odak: ${ilk.odak}; --odak-mobil: ${ilk.odakMobil}`}>
+      <img
+        src={ilk.src}
+        srcset={ilk.srcset}
+        sizes={ilk.sizes}
+        width={ilk.width}
+        height={ilk.height}
+        alt={ilk.alt}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+  <div class="hero-karartma" aria-hidden="true"></div>
+
+  <div class="kap hero-ic">
+    <div class="hero-metin">
+      <slot />
+    </div>
+
+    <ul class="hero-serit">
+      {
+        serit.map((s) => (
+          <li>
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={s.ikon} />
+            <span class="etiket">{s.ad}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    {digerleri.length > 0 && <div class="hero-ilerleme" aria-hidden="true" data-ilerleme />}
+  </div>
+</section>
+
+<script>
+  // Çapraz geçişli slayt: yalnızca birden fazla fotoğraf varsa ve hareket azaltılmamışsa çalışır.
+  type Slayt = { src: string; srcset: string; sizes: string; width: number; height: number; alt: string; odak: string; odakMobil: string };
+
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const veri = hero?.dataset.slaytlar;
+  const azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (hero && veri && !azHareket) {
+    const sahne = hero.querySelector<HTMLElement>('.hero-sahne')!;
+    const ilerleme = hero.querySelector<HTMLElement>('[data-ilerleme]');
+    const sure = parseFloat(getComputedStyle(hero).getPropertyValue('--slayt-suresi')) || 7000;
+    const capraz = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sure-capraz')) * 1000 || 1500;
+
+    const baslat = () => {
+      // Diğer fotoğraflar LCP'den sonra, tarayıcı boştayken eklenir
+      for (const s of JSON.parse(veri) as Slayt[]) {
+        const slayt = document.createElement('div');
+        slayt.className = 'hero-slayt';
+        slayt.dataset.slayt = '';
+        slayt.setAttribute('aria-hidden', 'true');
+        slayt.style.setProperty('--odak', s.odak);
+        slayt.style.setProperty('--odak-mobil', s.odakMobil);
+        const img = new Image(s.width, s.height);
+        img.decoding = 'async';
+        img.sizes = s.sizes;
+        img.srcset = s.srcset;
+        img.src = s.src;
+        img.alt = s.alt;
+        slayt.append(img);
+        sahne.append(slayt);
+      }
+
+      const slaytlar = [...sahne.querySelectorAll<HTMLElement>('[data-slayt]')];
+      let sira = 0;
+      let zamanlayici = 0;
+      let gorunur = true;
+
+      const ilerlemeyiBaslat = () => {
+        if (!ilerleme) return;
+        ilerleme.classList.remove('oynuyor');
+        void ilerleme.offsetWidth; // animasyonu baştan başlatmak için yeniden hesaplat
+        ilerleme.classList.add('oynuyor');
+      };
+
+      const ilerlet = () => {
+        const sonraki = (sira + 1) % slaytlar.length;
+        const img = slaytlar[sonraki].querySelector('img')!;
+        // Sıradaki fotoğraf henüz yüklenmediyse geçiş ertelenir (yarım yüklenmiş fotoğraf gösterilmez)
+        if (!img.complete || img.naturalWidth === 0) {
+          zamanlayici = window.setTimeout(ilerlet, 500);
+          return;
+        }
+        const onceki = slaytlar[sira];
+        onceki.classList.replace('aktif', 'onceki');
+        onceki.setAttribute('aria-hidden', 'true');
+        slaytlar[sonraki].classList.add('aktif');
+        slaytlar[sonraki].removeAttribute('aria-hidden');
+        window.setTimeout(() => onceki.classList.remove('onceki'), capraz);
+        sira = sonraki;
+        ilerlemeyiBaslat();
+        zamanlayici = window.setTimeout(ilerlet, sure);
+      };
+
+      const oynat = () => {
+        window.clearTimeout(zamanlayici);
+        if (!gorunur || document.hidden) return;
+        ilerlemeyiBaslat();
+        zamanlayici = window.setTimeout(ilerlet, sure);
+      };
+
+      // Hero ekranda değilse veya sekme gizliyse slayt durur
+      new IntersectionObserver(([g]) => {
+        gorunur = g.isIntersecting;
+        oynat();
+      }).observe(hero);
+      document.addEventListener('visibilitychange', oynat);
+    };
+
+    const bosta = (f: () => void) =>
+      'requestIdleCallback' in window ? window.requestIdleCallback(f, { timeout: 2000 }) : window.setTimeout(f, 200);
+    if (document.readyState === 'complete') bosta(baslat);
+    else window.addEventListener('load', () => bosta(baslat), { once: true });
+  }
+</script>
+
+<style>
+  .hero {
+    --h-ust: 122px; /* ana sayfa header'ı: 90px logo + 2 × 16px (Header.astro) */
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: var(--h-ust);
+    overflow: hidden;
+    isolation: isolate; /* slayt katmanları hero'nun dışındaki katmanlarla karışmaz */
+    background: var(--color-zemin);
+    color: var(--color-krem);
+  }
+
+  /* Fotoğraf alanı: mobilde tam ekran, masaüstünde sağda. Parallax bu katmana uygulanır. */
+  .hero-sahne {
+    position: absolute;
+    inset: 0;
+    z-index: 0; /* aktif slaydın z-index'i bu katmanda kalır; karartma ve metin üstte */
+  }
+
+  /* Slaytlar JS ile sonradan da eklendiği için (kapsam niteliği taşımazlar) :global ile seçilir */
+  .hero-sahne :global(.hero-slayt) {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity var(--sure-capraz) ease-in-out;
+  }
+
+  .hero-sahne :global(.hero-slayt.aktif),
+  .hero-sahne :global(.hero-slayt.onceki) {
+    opacity: 1;
+  }
+
+  /* Gelen slayt gidenin üstünde açılır */
+  .hero-sahne :global(.hero-slayt.aktif) {
+    z-index: 1;
+  }
+
+  .hero-sahne :global(.hero-slayt img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--odak-mobil);
+    transform-origin: var(--odak-mobil);
+  }
+
+  /* Mobilde fotoğraf üstte görünür; karartma metin bloğuna bağlıdır (.hero-ic::before) */
+  .hero-karartma {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30, 30, 30, 0.25) 0%, rgba(30, 30, 30, 0) 22%);
+    pointer-events: none;
+  }
+
+  .hero-ic {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--bosluk-5);
+    padding-top: 34svh;
+    padding-bottom: var(--bosluk-5);
+  }
+
+  /* Metin bloğunun 96px üstünden başlar: metnin altında her yükseklikte ≥ %70 karartma,
+     en altta sayfa zemini (bir sonraki bölüm aynı renkten başlar). */
+  .hero-ic::before {
+    content: '';
+    position: absolute;
+    inset: calc(34svh - 96px) 0 0;
+    background: linear-gradient(
+      180deg,
+      rgba(30, 30, 30, 0) 0,
+      var(--color-karartma) 96px,
+      rgba(30, 30, 30, 0.9) 45%,
+      var(--color-zemin) 75%
+    );
+    pointer-events: none;
+  }
+
+  .hero-metin,
+  .hero-serit {
+    position: relative;
+  }
+
+  .hero-metin {
+    max-width: 36rem;
+  }
+
+  .hero-metin :global(h1) {
+    font-size: clamp(2.25rem, 3.8vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .hero-metin :global(p) {
+    max-width: 48ch;
+    margin: var(--bosluk-3) 0 var(--bosluk-4);
+    color: var(--color-krem);
+    font-size: var(--text-giris);
+  }
+
+  .hero-metin :global(.hero-dugmeler) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* İkon şeridi: ince dikey çizgilerle ayrılmış üç sütun */
+  .hero-serit {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .hero-serit li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: var(--bosluk-3) 12px 0;
+  }
+
+  .hero-serit li:first-child {
+    padding-left: 0;
+  }
+
+  .hero-serit li + li {
+    border-left: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .hero-serit .ikon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-ahsap);
+    stroke-width: 1.25;
+  }
+
+  .hero-serit .etiket {
+    color: var(--color-krem);
+  }
+
+  /* İlerleme çizgisi: yalnızca birden fazla fotoğraf varsa; slayt süresince soldan sağa dolar */
+  .hero-ilerleme {
+    position: absolute;
+    inset: auto var(--bosluk-2) 0;
+    height: 1px;
+    background: var(--color-cizgi);
+    overflow: hidden;
+  }
+
+  .hero-ilerleme::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-ahsap);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  /* Giriş ve yakınlaşma yalnızca hareket azaltılmamışsa; JS gerekmez, animasyon bitince içerik görünür */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-sahne :global(.hero-slayt.aktif img) {
+      animation: hero-yakinlas var(--sure-kenburns) linear forwards;
+    }
+
+    /* Birden fazla fotoğrafta yakınlaşma bir slayt + geçiş süresine sığar */
+    .hero[data-slaytlar] .hero-sahne :global(.hero-slayt.aktif img) {
+      animation-duration: calc(var(--slayt-suresi) + var(--sure-capraz));
+    }
+
+    /* Giden slayt geçiş boyunca yakınlaşmaya devam eder (aynı animasyon adı: yeniden başlamaz) */
+    .hero-sahne :global(.hero-slayt.onceki img) {
+      animation: hero-yakinlas calc(var(--slayt-suresi) + var(--sure-capraz)) linear forwards;
+    }
+
+    .hero-ilerleme.oynuyor::after {
+      animation: hero-ilerle var(--slayt-suresi) linear forwards;
+    }
+
+    .hero-metin :global(h1),
+    .hero-metin :global(p),
+    .hero-metin :global(.hero-dugmeler),
+    .hero-serit li {
+      animation: hero-ortaya var(--sure-ortaya) var(--ease-ortaya) both;
+    }
+
+    .hero-metin :global(h1) {
+      animation-delay: 150ms;
+    }
+
+    .hero-metin :global(p) {
+      animation-delay: 300ms;
+    }
+
+    .hero-metin :global(.hero-dugmeler) {
+      animation-delay: 450ms;
+    }
+
+    .hero-serit li:nth-child(1) {
+      animation-delay: 600ms;
+    }
+
+    .hero-serit li:nth-child(2) {
+      animation-delay: 680ms;
+    }
+
+    .hero-serit li:nth-child(3) {
+      animation-delay: 760ms;
+    }
+  }
+
+  @keyframes hero-yakinlas {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes hero-ilerle {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes hero-ortaya {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+
+  /* ≥ 640px: şerit öğeleri ikon + etiket yan yana */
+  @media (min-width: 640px) {
+    .hero-serit li {
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      padding-inline: var(--bosluk-3);
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .hero-ilerleme {
+      inset-inline: var(--bosluk-3);
+    }
+  }
+
+  /* ≥ 1024px: fotoğraf sağda, metin solda dikeyde ortalı; karartma soldan sağa açılır */
+  @media (min-width: 1024px) {
+    /* Fotoğraf metin sütununun bittiği yerden başlar (en az %42); başlık evin üstüne binmez.
+       Metin sütunu: .kap sol kenarı + en fazla 32rem; ardından 48px boşluk. */
+    .hero {
+      --h-ust: 188px; /* 140px logo + 2 × 24px */
+      --foto-sol: max(42%, calc(50% - 640px + var(--bosluk-4) + 32rem + var(--bosluk-5)));
+    }
+
+    .hero-sahne {
+      left: var(--foto-sol);
+    }
+
+    .hero-sahne :global(.hero-slayt img) {
+      object-position: var(--odak);
+      transform-origin: var(--odak);
+    }
+
+    .hero-karartma {
+      background:
+        /* Alt %25 zemine erir; ikon şeridinin durduğu en alt bantta karartma ≥ %80 */
+        linear-gradient(180deg, rgba(30, 30, 30, 0) 75%, rgba(30, 30, 30, 0.82) 88%, var(--color-zemin) 100%),
+        linear-gradient(
+          90deg,
+          var(--color-zemin) 0%,
+          var(--color-zemin) var(--foto-sol),
+          rgba(30, 30, 30, 0.6) calc(var(--foto-sol) + 8%),
+          rgba(30, 30, 30, 0.15) calc(var(--foto-sol) + 22%),
+          rgba(30, 30, 30, 0) calc(var(--foto-sol) + 34%)
+        );
+    }
+
+    .hero-ic {
+      justify-content: space-between;
+      padding-top: 0;
+    }
+
+    .hero-ic::before {
+      content: none;
+    }
+
+    .hero-metin {
+      margin-block: auto;
+      max-width: min(32rem, calc(42vw - 80px));
+    }
+
+    .hero-ilerleme {
+      inset-inline: var(--bosluk-4);
+    }
+  }
+</style>

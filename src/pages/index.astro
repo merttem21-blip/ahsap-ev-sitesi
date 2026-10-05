@@ -2,7 +2,9 @@
 // 2K AHŞAP — Ana sayfa
 // Kurallar: .claude/skills/marka-stili ve .claude/skills/seo-kurallar
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
 import { ikon } from '../data/ikonlar';
+import { gorsel } from '../lib/gorsel';
 
 const baslik = 'Özel Tasarım Ahşap Ev, Bungalov ve Villa | 2K AHŞAP';
 const aciklama =
@@ -12,10 +14,17 @@ const aciklama =
 const srcset = (yol: string) =>
   [600, 1000, 1600].map((g) => `${yol}-${g}.webp ${g}w`).join(', ');
 
-const hero = {
-  yol: '/images/a-frame/a-frame-bungalov/a-frame-bungalov-01',
-  alt: 'Gece aydınlatılmış bahçede ahşap A-frame bungalov',
-};
+// Hero fotoğrafları scripts/hero-gorseli.mjs ile üretilir. Birden fazla eklenirse slayt olur.
+// odak: masaüstünde ev sağdaki fotoğraf alanında kalır; odakMobil: dikey ekranda verandaya ortalanır.
+const heroSlaytlari = [
+  {
+    yol: '/images/hero/kiremit-catili-ahsap-ev-hero',
+    alt: 'Spiral şimşirli bahçesi ve taş basamaklı yoluyla verandalı, kiremit çatılı ahşap ev',
+    odak: '30% 60%',
+    odakMobil: '58% 50%',
+  },
+];
+const ogGorsel = (await gorsel(heroSlaytlari[0].yol)).buyuk;
 
 // Panoramik (20:9) görseller 4:3 karta kırpıldığı için daha geniş kaynak ister.
 const boyutNormal = '(min-width: 1280px) 300px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw';
@@ -25,11 +34,11 @@ const kategoriler = [
   {
     ad: 'Ahşap Ev',
     href: '/ahsap-ev',
-    yol: '/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-01',
+    yol: '/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-01',
     genislik: 1600,
     yukseklik: 1200,
     boyut: boyutNormal,
-    alt: 'Kiremit çatılı ahşap ev, verandası ve taş döşeli bahçe yolu',
+    alt: 'Gri çatılı verandalı ahşap ev – taş kaideli köşe veranda',
     aciklama: 'Ailenizin ihtiyaçlarına göre tasarlanan, uzun ömürlü ve sıcak yaşam alanları.',
   },
   {
@@ -65,37 +74,22 @@ const kategoriler = [
 ];
 ---
 
-<Layout title={baslik} description={aciklama} image={`${hero.yol}-1600.webp`} seffafHeader>
-  <section class="hero" aria-labelledby="hero-baslik">
-    <img
-      class="hero-gorsel"
-      src={`${hero.yol}-1600.webp`}
-      srcset={srcset(hero.yol)}
-      sizes="100vw"
-      width="1600"
-      height="1200"
-      alt={hero.alt}
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="hero-karartma" aria-hidden="true"></div>
-
-    <div class="kap hero-ic">
-      <h1 id="hero-baslik">Doğayla Uyumlu, Size Özel Ahşap Evler</h1>
-      <p class="hero-metin">
-        Bungalovdan villaya, tiny house'tan çardağa; modern mimariyi doğal ahşapla buluşturan
-        yapıları sizin için tasarlıyor ve üretiyoruz.
-      </p>
-      <div class="hero-dugmeler">
-        <a href="/iletisim" class="dugme dugme-birincil">Teklif Al</a>
-        <a href="#kategoriler" class="dugme dugme-ikincil">Projeleri İncele</a>
-      </div>
+<Layout title={baslik} description={aciklama} image={ogGorsel} seffafHeader>
+  <Hero slaytlar={heroSlaytlari}>
+    <h1 id="hero-baslik">Doğayla Uyumlu, Size Özel Ahşap Evler</h1>
+    <p>
+      Bungalovdan villaya, tiny house'tan çardağa; modern mimariyi doğal ahşapla buluşturan
+      yapıları sizin için tasarlıyor ve üretiyoruz.
+    </p>
+    <div class="hero-dugmeler">
+      <a href="/iletisim" class="dugme">Teklif Al</a>
+      <a href="#kategoriler" class="dugme">Projeleri İncele</a>
     </div>
-  </section>
+  </Hero>
 
   <section id="kategoriler" class="kategoriler" aria-labelledby="kategoriler-baslik">
     <div class="kap">
-      <header class="bolum-baslik">
+      <header class="bolum-baslik" data-ortaya>
         <p class="bolum-etiket">Ürünlerimiz</p>
         <h2 id="kategoriler-baslik">Size Özel Ahşap Yapılar</h2>
         <p>
@@ -106,7 +100,7 @@ const kategoriler = [
       <ul class="kart-izgara">
         {
           kategoriler.map((k) => (
-            <li>
+            <li data-ortaya>
               <a href={k.href} class="kart">
                 <div class="kart-gorsel">
                   <img
@@ -138,61 +132,6 @@ const kategoriler = [
 </Layout>
 
 <style>
-  /* Hero */
-  .hero {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    min-height: 85vh;
-    min-height: 85svh;
-    padding-block: 120px 56px;
-    background: var(--color-antrasit);
-    color: var(--color-beyaz);
-    overflow: hidden;
-  }
-
-  .hero :focus-visible {
-    outline-color: var(--color-krem);
-  }
-
-  .hero-gorsel {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 75%;
-  }
-
-  .hero-karartma {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(46, 46, 46, 0.55) 0%, rgba(46, 46, 46, 0.35) 40%, rgba(46, 46, 46, 0.8) 100%);
-  }
-
-  .hero-ic {
-    position: relative;
-  }
-
-  .hero h1 {
-    max-width: 16ch;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-  }
-
-  .hero-metin {
-    max-width: 56ch;
-    margin: 20px 0 32px;
-    font-size: 1.0625rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .hero-dugmeler {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
   /* Kategoriler */
   .kategoriler {
     padding-block: 64px;
@@ -297,10 +236,6 @@ const kategoriler = [
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .hero-metin {
-      font-size: 1.125rem;
-    }
-
     .kategoriler {
       padding-block: 96px;
     }
@@ -308,15 +243,6 @@ const kategoriler = [
 
   /* ≥ 1024px */
   @media (min-width: 1024px) {
-    .hero {
-      align-items: center;
-      padding-block: 140px 80px;
-    }
-
-    .hero-karartma {
-      background: linear-gradient(90deg, rgba(46, 46, 46, 0.8) 0%, rgba(46, 46, 46, 0.45) 55%, rgba(46, 46, 46, 0.15) 100%);
-    }
-
     .kart-izgara {
       grid-template-columns: repeat(4, 1fr);
     }

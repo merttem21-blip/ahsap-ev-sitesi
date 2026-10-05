@@ -38,7 +38,7 @@ const ogGorsel = vitrin ? (await gorsel(fotoYolu(vitrin, kapakFotosu(vitrin).dos
           <div class="kap">
             <ul class="proje-izgara">
               {projeler.map((p, i) => (
-                <li>
+                <li data-ortaya>
                   <ProjeKarti proje={p} oncelikli={i === 0} />
                 </li>
               ))}

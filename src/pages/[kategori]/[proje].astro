@@ -102,7 +102,7 @@ const zayifIcerik = !aciklamaVar && sartname.length === 0;
       )
     }
 
-    <aside class="teklif" aria-labelledby="teklif-baslik">
+    <aside class="teklif" aria-labelledby="teklif-baslik" data-ortaya>
       <h2 id="teklif-baslik">Benzer bir yapı mı istiyorsunuz?</h2>
       <p>
         Bu projeyi ihtiyaçlarınıza ve arazinize göre yeniden tasarlayabiliriz. Proje adıyla birlikte
@@ -122,10 +122,10 @@ const zayifIcerik = !aciklamaVar && sartname.length === 0;
     digerProjeler.length > 0 && (
       <section class="diger" aria-labelledby="diger-baslik">
         <div class="kap">
-          <h2 id="diger-baslik">{kategori.ad} kategorisinden diğer projeler</h2>
+          <h2 id="diger-baslik" data-ortaya>{kategori.ad} kategorisinden diğer projeler</h2>
           <ul class="diger-izgara">
             {digerProjeler.map((p) => (
-              <li>
+              <li data-ortaya>
                 <ProjeKarti proje={p} baslikSeviyesi="h3" />
               </li>
             ))}
