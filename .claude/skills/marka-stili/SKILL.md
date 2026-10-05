@@ -150,7 +150,7 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 
 **Kullanım**
 - Logo ana sayfaya link verir: `<a href="/" aria-label="2K AHŞAP ana sayfa">`, görselde `alt="2K AHŞAP"`. Logo H1 değildir.
-- Boyut (yükseklik): ana sayfada hero üzerinde belirgin büyük — mobilde ~72px, masaüstünde ~100px. Diğer sayfalarda mobilde 48–56px, masaüstünde 64–72px. Footer'da 140–180px genişlik. Logo dikey yapıda olduğu için alt slogan ("DOĞALLIK • MİMARLIK • TASARIM") küçük boyutta okunmaz. Yatay (simge ve yazı yan yana) bir sürüm gelirse header'da o kullanılır.
+- Boyut (yükseklik): ana sayfada hero üzerinde belirgin büyük — mobilde 90px, masaüstünde 130–150px (140px). Diğer sayfalarda mobilde 64px, masaüstünde 72px. Sayfa kaydırılınca header sabit kalır ve logo 64px'e küçülür (bkz. §6). Footer'da 140–180px genişlik. Logo dikey yapıda olduğu için alt slogan ("DOĞALLIK • MİMARLIK • TASARIM") küçük boyutta okunmaz. Yatay (simge ve yazı yan yana) bir sürüm gelirse header'da o kullanılır.
 - Etrafında, logo yüksekliğinin en az %25'i kadar boş alan bırakılır.
 - Gölge, filtre, kontur, animasyon eklenmez; CSS ile renk değiştirilmez; esnetilmez (`width`/`height` orantılı, `object-fit: contain`). Sayfa geçişlerinde logo ve header yerinde sabit kalır (bkz. §6).
 
@@ -190,13 +190,16 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 | Hareket | Kural | Süre |
 |---|---|---|
 | Sayfa geçişi | Astro View Transitions (Astro 4: `astro:transitions` içindeki `<ViewTransitions />`) ile yumuşak geçiş. Header ve logo `transition:persist` ile yerinde sabit kalır. | Tarayıcı varsayılanı (~300ms) |
-| Kaydırınca ortaya çıkma | Bölümler ve kartlar ekrana girerken `opacity: 0 → 1` ve `translateY(24px) → 0`. IntersectionObserver ile, **tek seferlik**. Kartlarda kademeli gecikme (~80ms aralık, en fazla ~400ms). | 400–600ms (`--sure-giris`) |
-| Hero | Fotoğrafta çok yavaş yakınlaşma (Ken Burns, `scale(1) → scale(1.06)`, tek yön). Başlık, metin ve butonlar sırayla belirir. | 15–20 sn (`--sure-kenburns`); metin 500–600ms |
+| Kaydırınca ortaya çıkma | Bölümler ve kartlar ekrana girerken `opacity: 0 → 1` ve `translateY(24px) → 0`, `--ease-ortaya` (`cubic-bezier(0.2, 0.7, 0.2, 1)`). IntersectionObserver ile, **tek seferlik** (`data-ortaya`, `src/scripts/hareket.ts`). Kartlarda 80ms kademeli gecikme. Sayfa açıldığında zaten görünen öğeler gizlenmez. Zıplama, büyüme, döndürme yok. | 700ms (`--sure-ortaya`) |
+| Hero | Fotoğrafta çok yavaş yakınlaşma (`scale(1) → scale(1.06)`, tek yön). Birden fazla fotoğraf varsa 7 sn'de bir çapraz geçişli slayt ve altta ince ilerleme çizgisi; ok veya nokta yok. İlk fotoğraf hemen, diğerleri sayfa yüklendikten sonra yüklenir. Başlık, metin, butonlar ve ikon şeridi sırayla belirir. | Tek fotoğrafta 18 sn; slaytta 7 sn + 1.5 sn geçiş; metin 700ms |
+| Parallax | Yalnızca hero fotoğrafında, kaydırma hızının %30'u (`data-parallax`, yalnızca transform). Yalnızca Lenis açıkken çalışır. | — |
+| Yumuşak kaydırma | Lenis; yalnızca fare/trackpad'li cihazlarda (`hover: hover` ve `pointer: fine`). Mobilde ve `prefers-reduced-motion` açıkken kapalı. | Lenis varsayılanı |
+| Header küçülmesi | Kaydırınca header sabit kalır; yalnızca transform ile küçülür (logo 64px), zemin %95 opak antrasite döner (`--color-ust-kucuk`), altında ince çizgi. `backdrop-filter` kullanılmaz (kaydırmada takılma yapar). | 300ms (`--sure`) |
 | Proje kartı hover | Görsel `scale(1.04)`, üstündeki karartma azalır (`opacity`), alt çizgi soldan sağa uzar (`scaleX(0 → 1)`, `transform-origin: left`). | 300–500ms |
 | Menü linki | Alt çizgi soldan sağa uzar (`scaleX`). | 200–300ms |
 | Buton hover | Çerçeve ahşaba döner (ahşap çerçeveli katmanın `opacity`'si), ok 4px sağa kayar. | 200–300ms |
 
-- Eğri: `--ease-out` (`cubic-bezier(0.22, 1, 0.36, 1)`).
+- Eğri: kısa etkileşimlerde `--ease-out` (`cubic-bezier(0.22, 1, 0.36, 1)`), ortaya çıkmada `--ease-ortaya`.
 - **JS kapalıyken içerik görünür:** başlangıçtaki gizli durum yalnızca JS'nin eklediği bir sınıf altında uygulanır (ör. `html.hareket .ortaya-cik { opacity: 0 }`); JS yoksa sınıf eklenmez, içerik doğrudan görünür.
 - **`prefers-reduced-motion: reduce`:** tüm hareket kapanır ve içerik doğrudan görünür. Gizli başlangıç durumu da uygulanmaz (yalnızca süreyi kısaltmak yetmez). Ken Burns ve sayfa geçişi animasyonu çalışmaz.
   ```css
@@ -209,7 +212,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
     }
   }
   ```
-- **Yok:** otomatik dönen slider/karusel, parallax, sürekli dönen veya zıplayan öğeler, scroll-jacking, aynı anda birden çok dikkat çeken hareket, her kaydırmada tekrarlanan animasyon.
+- **Yok:** hero dışında otomatik dönen slider/karusel, hero fotoğrafı dışında parallax, sürekli dönen veya zıplayan öğeler, scroll-jacking, aynı anda birden çok dikkat çeken hareket, her kaydırmada tekrarlanan animasyon.
 
 ## 7. Yapma ❌
 
@@ -225,11 +228,13 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 ## 8. Olmalı ✅
 
 ### Hero section
-- Ana sayfada tam ekran (`100svh`), akşam/gece çekilmiş, içi ışıklı gerçek proje fotoğrafı; metin sola yaslı, ortalanmaz.
+- Ana sayfada tam ekran (`100svh`) gerçek proje fotoğrafı: tercihen akşam/gece çekilmiş ve içi ışıklı; yoksa sıcak renk düzeltmesi yapılmış, kadrajı temiz (kablo, klima, çit, dağınıklık yok) bir fotoğraf. Metin sola yaslı, ortalanmaz.
 - **Karartma:** soldan sağa açılan gece gradyanı — metnin durduğu sol tarafta en koyu (etkin opaklık ≥ %70), sağa doğru azalır ve fotoğrafın ışıklı kısmı görünür kalır. Mobilde metin genişliği kapladığı için karartma metin bölgesinde en az %70 kalır.
 - Tek `<h1>`: net değer önerisi. Altında 1–2 cümlelik açıklama ve güven unsuru ("2015'ten beri · 300+ proje").
 - Butonlar: pill çerçeveli "Teklif Al" ve "Projeleri İncele" (bkz. §9). Yeşil veya dolu buton yok.
-- Altında, ince dikey çizgilerle ayrılmış **3 ikonlu bilgi şeridi**: ahşap çizgi ikon + büyük harfli kısa etiket. Etiketler yalnızca sitede/CLAUDE.md'de bulunan gerçek bilgilerden oluşur; uydurma iddia yazılmaz.
+- Fotoğraf masaüstünde metin sütununun bittiği yerden başlar (en az %42) ve sola doğru zemine erir; başlık evin üstüne binmez. Hero'nun alt %25'i sayfa zeminine erir, sonraki bölüm aynı zemin renginden başlar.
+- Altında, ince dikey çizgilerle ayrılmış **3 ikonlu bilgi şeridi**: "Doğal Malzeme" (yaprak), "Modern Tasarım" (ev), "Güvenilir Uygulama" (kalkan). Ahşap çizgi ikon + büyük harfli etiket; rakam kullanılmaz.
+- Hero fotoğrafları `scripts/hero-gorseli.mjs` ile üretilir (kadraj, sıcak renk düzeltmesi, netlik; kaynak dosyaya dokunulmaz).
 - Hero görseli LCP öğesidir: `loading="eager"`, `fetchpriority="high"`, WebP/AVIF, `srcset` ile boyutlandırılmış. Lazy-load yapılmaz.
 - Alt sayfalarda (kategori, proje, hakkımızda) daha kısa bir başlık bandı (~40svh) kullanılır; zemini ara bölüm tonudur.
 
@@ -289,7 +294,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - [ ] Metin kontrastları AA'yı geçiyor (küçük metinde saf ahşap veya yeşil yok)
 - [ ] Stok veya temsili görsel yok
 - [ ] Butonlar pill, çerçeveli, içi boş; yeşil buton yok
-- [ ] Hareketler yalnızca `transform`/`opacity`; `prefers-reduced-motion` ve JS kapalıyken içerik görünür; otomatik slider yok
+- [ ] Hareketler yalnızca `transform`/`opacity`; `prefers-reduced-motion` ve JS kapalıyken içerik görünür; slayt yalnızca hero'da
 - [ ] Hero: gerçek gece/akşam fotoğrafı, tek H1, metin bölgesinde ≥ %70 karartma
 - [ ] Footer: iletişim, sosyal medya, telif; bilgiler CLAUDE.md ile aynı
 - [ ] 320px'te yatay kaydırma yok, dokunma hedefleri ≥44px
