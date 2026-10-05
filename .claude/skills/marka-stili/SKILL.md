@@ -177,7 +177,11 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 
 - Sadece 2K AHŞAP'ın gerçek proje fotoğrafları (`public/images/<kategori>/`). Görsel işleme ve optimizasyon için `gorsel-yonetimi` skill'ine bak.
 - **Sıcak ışık:** Koyu temayla en iyi uyumu akşam/gece çekilmiş, içi ışıklı proje fotoğrafları verir; hero ve büyük görsellerde bunlar önceliklidir. Ahşap dokusu fotoğraflardan gelir; CSS veya görselle doku taklit edilmez.
-- **Köşe:** butonlar tam yuvarlak (pill, `--radius-tam`); kartlar ve görseller 4px (`--radius`); yuvarlak öğeler (WhatsApp butonu) tam yuvarlak.
+- **Köşe:** yumuşak ama abartısız; değerler yalnızca token olarak kullanılır (`src/styles/global.css`), sayfada sabit px yazılmaz.
+  - Kart ve kutu (proje/kategori kartı, teklif kutusu): **16px** (`--radius-kart`). Karta yaslı görsel ayrıca yuvarlatılmaz; kartın köşesine kırpılır (`overflow: hidden`).
+  - Tek başına duran görsel (galeri kapağı, küçük görseller, ışık kutusu): **12px** (`--radius-gorsel`).
+  - Buton, kategori linki, rozet ve küçük ikon butonları: tam yuvarlak (pill, `--radius-tam`). Yuvarlak öğeler (WhatsApp butonu) tam yuvarlak.
+  - Tam genişlikteki hero fotoğrafı ve sayfa bölümleri köşesizdir.
 - **Gölge:** kullanılmaz. Yüzeyler arası ayrım ince çizgiyle (`1px solid var(--color-cizgi)`) ve zemin tonu farkıyla verilir. İstisna: yüzen WhatsApp butonu.
 - **Çizgiler:** 1px. Krem çizgi (`--color-cizgi`) yapıyı, ahşap çizgi (`--color-ahsap`) vurguyu taşır (ayraç, hover, ikon şeridi bölücüsü).
 - **İkonlar:** tek set, çizgi (outline) stili, 1.5px kalınlık (Lucide). Dekoratif ikonlar ahşap, işlevsel ikonlar (menü, kapat) krem. Emoji ikon olarak kullanılmaz.
@@ -278,7 +282,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 |---|---|
 | Buton | Tam yuvarlak (pill), içi boş, 1px krem çerçeve, krem metin, sağında → ok ikonu; en az 48px yükseklik. Hover/odak: çerçeve ahşaba döner, ok 4px sağa kayar. Dolu, yeşil veya gölgeli buton yok. |
 | Metin linki | `--color-metin` veya krem, altı çizili; hover `--color-ahsap-acik` |
-| Kart | `--color-yuzey` zemin, 1px `--color-cizgi` kenar, 4px köşe, gölge yok. Görsel üstte; altında büyük harfli etiket (`--color-ahsap-acik`) · krem başlık · doluysa bilgi satırı. Görsel oranı ızgaradaki yerine göre değişebilir. Hover: bkz. §6. |
+| Kart | `--color-yuzey` zemin, 1px `--color-cizgi` kenar, 16px köşe (`--radius-kart`), gölge yok. Görsel üstte; altında büyük harfli etiket (`--color-ahsap-acik`) · krem başlık · doluysa bilgi satırı. Görsel oranı ızgaradaki yerine göre değişebilir. Hover: bkz. §6. |
 | Menü linki | `--color-metin`; hover ve aktifte krem. Aktifte 2px yeşil alt çizgi; hover'da 1px ahşap alt çizgi soldan sağa uzar |
 | Ayraç | 1px `--color-cizgi`; vurgu gereken yerde 1px `--color-ahsap` |
 | Bilgi şeridi | 3 sütun, aralarında 1px dikey ayraç; ahşap çizgi ikon + büyük harfli etiket |
