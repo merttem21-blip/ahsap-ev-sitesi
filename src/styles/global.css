@@ -1,6 +1,8 @@
-/* 2K AHŞAP — site geneli stiller. Kurallar: .claude/skills/marka-stili */
+/* 2K AHŞAP — site geneli token'lar ve temel stiller. Kurallar: .claude/skills/marka-stili
+   Tüm renk, yazı, boşluk ve hareket değerleri burada tanımlanır; sayfalar yalnızca token kullanır. */
 
 :root {
+  /* Marka paleti */
   --color-antrasit: #2e2e2e;
   --color-ahsap: #a67c52;
   --color-ahsap-koyu: #7a5a3a;
@@ -13,13 +15,70 @@
   --color-whatsapp: #25d366;
   --color-whatsapp-koyu: #1da851;
 
+  /* Paletten türetilen tonlar */
+  --color-metin-ikincil: #5b5a58; /* antrasit %78 + zemin; zeminde 6.4:1, kremde 5.1:1 */
+  --color-krem-soluk: #bcb1a0; /* krem %75 + antrasit; antrasit zeminde 6.4:1 */
+  --color-cizgi: rgba(46, 46, 46, 0.14); /* açık zeminde ince ayraç (dekoratif) */
+  --color-cizgi-koyu: rgba(235, 220, 198, 0.18); /* koyu zeminde ince ayraç (dekoratif) */
+  --color-karartma: rgba(46, 46, 46, 0.7); /* fotoğraf üstü metin: beyaz pikselde bile ≥ 4.5:1 */
+  --color-karartma-hafif: rgba(46, 46, 46, 0.3);
+
+  /* Yazı */
   --font-baslik: 'Poppins', system-ui, sans-serif;
   --font-metin: 'Inter', system-ui, sans-serif;
 
-  --radius: 8px;
-  --radius-buyuk: 12px;
-  --golge: 0 4px 20px rgba(46, 46, 46, 0.08);
-  --gecis: 250ms ease-out;
+  --text-h1: clamp(2.5rem, 7vw, 5.5rem);
+  --text-h2: clamp(1.75rem, 4vw, 3rem);
+  --text-h3: clamp(1.25rem, 2.5vw, 1.5rem);
+  --text-giris: 1.125rem;
+  --text-govde: 1rem;
+  --text-dugme: 0.9375rem;
+  --text-kucuk: 0.875rem;
+  --text-etiket: 0.75rem;
+
+  --satir-baslik: 1.1;
+  --satir-govde: 1.7;
+  --aralik-baslik: -0.02em;
+  --aralik-etiket: 0.14em;
+  --olcu-metin: 65ch;
+
+  /* Boşluk: 8px tabanlı ölçek */
+  --bosluk-1: 8px;
+  --bosluk-2: 16px;
+  --bosluk-3: 24px;
+  --bosluk-4: 32px;
+  --bosluk-5: 48px;
+  --bosluk-6: 64px;
+  --bosluk-7: 96px;
+  --bosluk-8: 128px;
+  --bosluk-9: 160px;
+
+  /* Bölüm boşlukları: ritim için üç ayrı ölçü */
+  --bolum-dar: clamp(64px, 8vw, 96px);
+  --bolum: clamp(80px, 10vw, 128px);
+  --bolum-genis: clamp(96px, 12vw, 160px);
+
+  /* Biçim */
+  --radius: 4px;
+  --cizgi: 1px;
+  --golge-panel: 0 16px 40px rgba(46, 46, 46, 0.2); /* yalnızca açılır menü paneli */
+  --golge-yuzen: 0 6px 20px rgba(46, 46, 46, 0.25); /* yalnızca yüzen WhatsApp butonu */
+
+  /* Hareket: yalnızca opacity ve transform */
+  --sure-kisa: 200ms;
+  --sure: 300ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --gecis: var(--sure-kisa) var(--ease-out);
+
+  /* Katman sırası */
+  --z-header: 20;
+  --z-menu: 25;
+  --z-yuzen: 30;
+  --z-atla: 100;
+
+  /* Geçiş dönemi: eski sayfalar kendi adımlarında yenilenene kadar kalır, sonra silinir */
+  --radius-buyuk: var(--radius);
+  --golge: none;
 }
 
 *,
@@ -29,25 +88,36 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  background: var(--color-beyaz);
+  overflow-x: clip;
+  background: var(--color-zemin);
   color: var(--color-antrasit);
   font-family: var(--font-metin);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: var(--text-govde);
+  line-height: var(--satir-govde);
   -webkit-font-smoothing: antialiased;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--font-baslik);
-  line-height: 1.2;
   margin: 0;
+  font-family: var(--font-baslik);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--satir-baslik);
+  letter-spacing: var(--aralik-baslik);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 img {
@@ -66,6 +136,11 @@ ul {
   padding: 0;
 }
 
+::selection {
+  background: var(--color-krem);
+  color: var(--color-antrasit);
+}
+
 :focus-visible {
   outline: 2px solid var(--color-yesil);
   outline-offset: 2px;
@@ -82,24 +157,24 @@ ul {
 
 .atla {
   position: absolute;
-  left: 16px;
+  left: var(--bosluk-2);
   top: -100px;
-  z-index: 100;
-  padding: 12px 16px;
+  z-index: var(--z-atla);
+  padding: 12px var(--bosluk-2);
   background: var(--color-beyaz);
   border-radius: var(--radius);
   font-weight: 600;
 }
 
 .atla:focus {
-  top: 16px;
+  top: var(--bosluk-2);
 }
 
 .kap {
   width: 100%;
   max-width: 1280px;
   margin-inline: auto;
-  padding-inline: 16px;
+  padding-inline: var(--bosluk-2);
 }
 
 .ikon {
@@ -108,9 +183,21 @@ ul {
   flex-shrink: 0;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.75;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* Büyük harfli küçük etiket: kart kategorisi, konum, bölüm etiketi, bilgi şeridi.
+   Renk bağlama göre verilir; ahşap rengi kullanılmaz (küçük metin). */
+.etiket {
+  margin: 0;
+  font-family: var(--font-metin);
+  font-size: var(--text-etiket);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: var(--aralik-etiket);
+  text-transform: uppercase;
 }
 
 /* Butonlar */
@@ -118,11 +205,17 @@ ul {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   min-height: 48px;
-  padding: 12px 24px;
+  padding: 12px 28px;
+  border: var(--cizgi) solid transparent;
   border-radius: var(--radius);
+  font-size: var(--text-dugme);
   font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
   text-decoration: none;
+  white-space: nowrap;
   transition:
     background-color var(--gecis),
     color var(--gecis),
@@ -138,9 +231,9 @@ ul {
   background: var(--color-yesil-koyu);
 }
 
-/* Koyu zeminde (hero) kullanılır */
+/* Koyu zeminde (hero, antrasit bölümler) */
 .dugme-ikincil {
-  border: 1.5px solid var(--color-krem);
+  border-color: var(--color-krem);
   color: var(--color-krem);
 }
 
@@ -149,17 +242,28 @@ ul {
   color: var(--color-antrasit);
 }
 
+/* Açık zeminde (zemin, krem, beyaz bölümler) */
+.dugme-ikincil-acik {
+  border-color: var(--color-antrasit);
+  color: var(--color-antrasit);
+}
+
+.dugme-ikincil-acik:hover {
+  background: var(--color-antrasit);
+  color: var(--color-zemin);
+}
+
 /* ≥ 768px */
 @media (min-width: 768px) {
   .kap {
-    padding-inline: 24px;
+    padding-inline: var(--bosluk-3);
   }
 }
 
 /* ≥ 1024px */
 @media (min-width: 1024px) {
   .kap {
-    padding-inline: 32px;
+    padding-inline: var(--bosluk-4);
   }
 }
 
