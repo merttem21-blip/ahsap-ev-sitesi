@@ -1,10 +1,17 @@
 ---
-// Yüzen WhatsApp butonu — ikon simple-icons paketinden (resmi WhatsApp logosu)
+// Yüzen WhatsApp butonu — ikon simple-icons paketinden (resmi WhatsApp logosu).
+// Mesaj bulunulan sayfaya göre hazır gelir (Layout'tan).
 import { siWhatsapp } from 'simple-icons';
-import { firma } from '../data/site';
+import { whatsappLinki } from '../data/site';
+
+interface Props {
+  mesaj?: string;
+}
+
+const { mesaj } = Astro.props;
 ---
 
-<a class="whatsapp" href={firma.whatsapp} rel="noopener noreferrer" target="_blank" aria-label="WhatsApp ile iletişime geçin">
+<a class="whatsapp" href={whatsappLinki(mesaj)} rel="noopener noreferrer" target="_blank" aria-label="WhatsApp ile iletişime geçin">
   <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
 </a>
 
@@ -23,7 +30,9 @@ import { firma } from '../data/site';
     background: var(--color-whatsapp);
     color: var(--color-beyaz);
     box-shadow: var(--golge-yuzen);
-    transition: background-color var(--gecis);
+    transition:
+      background-color var(--gecis),
+      scale var(--gecis);
   }
 
   .whatsapp:hover {

@@ -251,13 +251,12 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - Mobilde hamburger menü; açılan panel koyu zeminlidir.
 
 ### Footer (her sayfada)
-- Antrasit zemin, krem başlıklar, `--color-metin` metin, ahşap ikon vurguları; plakasız koyu zemin SVG logosu.
-- İçerik:
-  - Logo (`2k-ahsap-logo-koyu-zemin.svg`) + kısa şirket tanımı
-  - Hızlı linkler: Kategoriler, Hakkımızda, Referanslar, İletişim
-  - İletişim: adres (`<address>`), telefon (`tel:+905322504077`), e-posta (`mailto:info@2kahsap.com`), WhatsApp (`https://wa.me/905322504077`)
-  - Sosyal medya: Instagram, Facebook, LinkedIn (ikon + `aria-label`)
-  - Telif: "© {yıl} 2K AHŞAP. Tüm hakları saklıdır." (yıl dinamik)
+- Antrasit zemin, krem başlıklar, `--color-metin` metin, ahşap ikon vurguları; plakasız koyu zemin SVG logosu. Sade ve alçak tutulur.
+- İçerik (yukarıdan aşağı):
+  - İnce CTA bandı: "Projenizi birlikte konuşalım" + "Teklif Al" (dolu krem pill, `.dugme-dolu`) + "WhatsApp'tan Hemen Danışın" (çerçeveli pill, WhatsApp ikonlu)
+  - 4 sütun (≥ 1024px; 640px'te 2 × 2, mobilde sıkı tek sütun): küçük logo (96px) + kısa tanım + sosyal ikonlar | Kurumsal (menü, SSS dahil) | Kategoriler (2 sütun) | İletişim: telefon (`tel:`, normal boyut), e-posta (`mailto:`), adres (Google Haritalar), WhatsApp
+  - Alt şerit: "© {yıl} 2K AHŞAP" (yıl dinamik) | KVKK Aydınlatma Metni · Gizlilik Politikası · Çerez Politikası
+- WhatsApp linkleri bulunulan sayfaya göre hazır mesajla açılır (`whatsappLinki()`, Layout'un `whatsappMesaj` prop'u).
 - Telefon numarası büyük başlık olarak gösterilmez; diğer iletişim bilgileriyle aynı ölçektedir.
 - İletişim bilgileri CLAUDE.md'deki şirket bilgileriyle birebir aynı olmalı (ad-adres-telefon tutarlılığı SEO için önemlidir).
 
@@ -281,7 +280,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 
 | Bileşen | Stil |
 |---|---|
-| Buton | Tam yuvarlak (pill), içi boş, 1px krem çerçeve, krem metin, sağında → ok ikonu; en az 48px yükseklik. Hover/odak: çerçeve ahşaba döner, ok 4px sağa kayar. Dolu, yeşil veya gölgeli buton yok. |
+| Buton | Tam yuvarlak (pill), içi boş, 1px krem çerçeve, krem metin, sağında → ok ikonu; en az 48px yükseklik. Hover/odak: çerçeve ahşaba döner, ok 4px sağa kayar; basınca `scale: 0.98`. Dolu, yeşil veya gölgeli buton yok. Tek istisna: footer CTA bandındaki "Teklif Al" dolu krem pill (`.dugme-dolu`). |
 | Metin linki | `--color-metin` veya krem, altı çizili; hover `--color-ahsap-acik` |
 | Kart | `--color-yuzey` zemin, 1px `--color-cizgi` kenar, 16px köşe (`--radius-kart`), gölge yok. Görsel üstte; altında büyük harfli etiket (`--color-ahsap-acik`) · krem başlık · doluysa bilgi satırı. Görsel oranı ızgaradaki yerine göre değişebilir. Hover: bkz. §6. |
 | Menü linki | `--color-metin`; hover ve aktifte krem. Aktifte 2px yeşil alt çizgi; hover'da 1px ahşap alt çizgi soldan sağa uzar |

@@ -1,0 +1,188 @@
+---
+// Yasal sayfalar (/kvkk, /gizlilik, /cerez-politikasi) için ortak iskelet: başlık bandı + okunur metin sütunu.
+// Taslak metinlerde bilinmeyen firma bilgileri <span class="onay">[ONAY: …]</span> ile işaretlidir.
+import Layout from './Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { yasalSayfalar } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  baslik: string; // sayfanın tek H1'i
+}
+
+const { title, description, baslik } = Astro.props;
+const yol = Astro.url.pathname.replace(/\/$/, '');
+const digerleri = yasalSayfalar.filter((y) => y.href !== yol);
+---
+
+<Layout title={title} description={description}>
+  <section class="yasal-ust" aria-labelledby="yasal-baslik">
+    <div class="kap">
+      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: baslik }]} />
+      <h1 id="yasal-baslik">{baslik}</h1>
+      <p class="yasal-tarih">Son güncelleme: <span class="onay">[ONAY: yürürlük tarihi]</span></p>
+    </div>
+  </section>
+
+  <div class="kap yasal-govde">
+    <article class="yasal-metin">
+      <slot />
+    </article>
+
+    <nav class="yasal-diger" aria-label="Diğer yasal metinler">
+      <ul>
+        {
+          digerleri.map((y) => (
+            <li>
+              <a href={y.href}>{y.ad}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</Layout>
+
+<style>
+  .yasal-ust {
+    padding-block: var(--bosluk-2) var(--bosluk-5);
+    background: var(--color-zemin-ara);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .yasal-ust h1 {
+    margin-top: var(--bosluk-1);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .yasal-tarih {
+    margin: var(--bosluk-2) 0 0;
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+  }
+
+  .yasal-govde {
+    padding-block: var(--bosluk-6) var(--bolum-dar);
+  }
+
+  /* Okunur metin sütunu; slot içeriği sayfadan geldiği için :global ile biçimlenir */
+  .yasal-metin {
+    max-width: 72ch;
+  }
+
+  .yasal-metin :global(h2) {
+    margin: var(--bosluk-5) 0 var(--bosluk-2);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  }
+
+  .yasal-metin :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .yasal-metin :global(p) {
+    margin: 0 0 var(--bosluk-2);
+  }
+
+  .yasal-metin :global(ul) {
+    margin: 0 0 var(--bosluk-2);
+    padding-left: 1.25em;
+    list-style: disc;
+  }
+
+  .yasal-metin :global(li + li) {
+    margin-top: var(--bosluk-1);
+  }
+
+  .yasal-metin :global(li::marker) {
+    color: var(--color-ahsap);
+  }
+
+  .yasal-metin :global(strong) {
+    color: var(--color-krem);
+    font-weight: 600;
+  }
+
+  .yasal-metin :global(a) {
+    color: var(--color-krem);
+    text-underline-offset: 4px;
+    overflow-wrap: anywhere;
+  }
+
+  .yasal-metin :global(a:hover) {
+    color: var(--color-ahsap-acik);
+  }
+
+  /* Veri sorumlusu bilgileri: etiket / değer satırları */
+  .yasal-metin :global(dl) {
+    display: grid;
+    margin: 0 0 var(--bosluk-2);
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .yasal-metin :global(dl > div) {
+    display: grid;
+    gap: 2px var(--bosluk-3);
+    padding-block: 12px;
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .yasal-metin :global(dt) {
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+  }
+
+  .yasal-metin :global(dd) {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Bilinmeyen firma bilgisi: kolay bulunsun diye vurgulu */
+  :global(.onay) {
+    color: var(--color-ahsap-acik);
+    font-weight: 600;
+  }
+
+  .yasal-diger {
+    margin-top: var(--bosluk-6);
+    padding-top: var(--bosluk-3);
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .yasal-diger ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--bosluk-4);
+  }
+
+  .yasal-diger a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-metin);
+    text-underline-offset: 4px;
+  }
+
+  .yasal-diger a:hover {
+    color: var(--color-ahsap-acik);
+  }
+
+  /* ≥ 640px: veri sorumlusu satırları iki sütun */
+  @media (min-width: 640px) {
+    .yasal-metin :global(dl > div) {
+      grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .yasal-ust {
+      padding-block: var(--bosluk-3) var(--bosluk-6);
+    }
+
+    .yasal-govde {
+      padding-top: var(--bosluk-7);
+    }
+  }
+</style>

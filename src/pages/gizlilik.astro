@@ -1,0 +1,80 @@
+---
+// Gizlilik politikası. TASLAK: [ONAY] alanları firma tarafından doldurulmalı.
+import YasalLayout from '../layouts/YasalLayout.astro';
+import { firma } from '../data/site';
+---
+
+<YasalLayout
+  title="Gizlilik Politikası: Verileriniz Nasıl Korunur | 2K AHŞAP"
+  description="2K AHŞAP web sitesini ziyaret ettiğinizde ve bizimle iletişime geçtiğinizde hangi bilgilerin toplandığını, nasıl kullanıldığını ve nasıl korunduğunu öğrenin."
+  baslik="Gizlilik Politikası"
+>
+  <p>
+    Bu politika, 2kahsap.com sitesini ziyaret ettiğinizde ve bizimle iletişime geçtiğinizde
+    bilgilerinizin nasıl ele alındığını açıklar. Kişisel verilerinizin işlenmesine ilişkin ayrıntılar
+    ve haklarınız için <a href="/kvkk">KVKK Aydınlatma Metni</a>'ni inceleyebilirsiniz.
+  </p>
+
+  <h2>1. Topladığımız Bilgiler</h2>
+  <ul>
+    <li>
+      <strong>Sizin paylaştıklarınız:</strong> Siteyi gezmek için herhangi bir bilgi vermeniz
+      gerekmez. Bize telefon, e-posta, WhatsApp veya iletişim formu ile ulaştığınızda adınız,
+      iletişim bilgileriniz ve projenizle ilgili paylaştığınız bilgiler bize ulaşır.
+    </li>
+    <li>
+      <strong>Teknik kayıtlar:</strong> Sitemizi barındıran hizmet sağlayıcı, güvenlik ve hizmetin
+      sürekliliği için IP adresi, tarayıcı türü ve ziyaret zamanı gibi sunucu kayıtlarını tutar.
+    </li>
+  </ul>
+
+  <h2>2. Bilgileri Nasıl Kullanırız?</h2>
+  <p>
+    Paylaştığınız bilgileri yalnızca taleplerinizi yanıtlamak, teklif hazırlamak, projenizi yürütmek
+    ve yasal yükümlülüklerimizi yerine getirmek için kullanırız. Bilgilerinizi satmaz, kiralamaz ve
+    reklam amacıyla üçüncü kişilerle paylaşmayız.
+  </p>
+
+  <h2>3. Üçüncü Taraf Hizmetler</h2>
+  <ul>
+    <li><strong>Vercel:</strong> Sitemiz Vercel Inc. altyapısında barındırılır.</li>
+    <li>
+      <strong>Google Fonts:</strong> Sitedeki yazı tipleri Google sunucularından yüklenir; bu sırada
+      tarayıcınız IP adresinizi Google'a iletir. Google Fonts çerez kullanmaz.
+    </li>
+    <li>
+      <strong>Dış bağlantılar:</strong> WhatsApp, Google Haritalar, Instagram, Facebook ve LinkedIn
+      bağlantılarına tıkladığınızda ilgili hizmetin kendi gizlilik politikası geçerli olur.
+    </li>
+  </ul>
+
+  <h2>4. Çerezler</h2>
+  <p>
+    Sitemiz reklam, analitik veya takip çerezi kullanmaz. Ayrıntılar için
+    <a href="/cerez-politikasi">Çerez Politikası</a>'nı inceleyebilirsiniz.
+  </p>
+
+  <h2>5. Güvenlik</h2>
+  <p>
+    Sitemize bağlantı HTTPS ile şifrelenir. Bize ilettiğiniz bilgilere yalnızca işi gereği erişmesi
+    gereken kişiler ulaşır ve bilgilerinizi korumak için makul teknik ve idari önlemleri alırız.
+  </p>
+
+  <h2>6. Çocukların Gizliliği</h2>
+  <p>
+    Sitemiz 18 yaşından küçüklere yönelik değildir ve bilerek çocuklardan kişisel veri toplamayız.
+  </p>
+
+  <h2>7. Değişiklikler</h2>
+  <p>
+    Bu politikayı zaman zaman güncelleyebiliriz. Güncel sürüm her zaman bu sayfada yayımlanır; son
+    güncelleme tarihi sayfanın başında yer alır.
+  </p>
+
+  <h2>8. İletişim</h2>
+  <p>
+    Gizlilikle ilgili sorularınız için <a href={`mailto:${firma.eposta}`}>{firma.eposta}</a>
+    adresine yazabilir, <a href={firma.telefonLink}>{firma.telefonGorunen}</a> numarasından bize
+    ulaşabilir veya {firma.adres} adresine yazılı olarak başvurabilirsiniz.
+  </p>
+</YasalLayout>

@@ -1,16 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Yakinda from '../components/Yakinda.astro';
-// Geçici sayfa: iletişim formu hazır olunca noindex kaldırılacak
+import { whatsappLinki } from '../data/site';
+// Geçici sayfa: iletişim formu hazır olunca noindex kaldırılacak.
+// Form gelince KVKK onay kutusu /kvkk'ya bağlanır.
+const whatsappMesaj = 'Merhaba, ahşap yapı projem için teklif almak istiyorum.';
 ---
 
 <Layout
   title="İletişim ve Teklif Al: Ahşap Ev Projeleri | 2K AHŞAP"
   description="Ahşap ev, bungalov veya villa projeniz için 2K AHŞAP'a telefon, WhatsApp ya da e-posta ile ulaşın. Pendik/İstanbul'dayız; hemen teklif alın."
   noindex
+  whatsappMesaj={whatsappMesaj}
 >
   <Yakinda
     baslik="İletişim"
     metin="İletişim formumuzu hazırlıyoruz. Şimdilik teklif ve sorularınız için bize telefon, WhatsApp veya e-posta ile ulaşabilirsiniz."
+    whatsapp={whatsappLinki(whatsappMesaj)}
   />
 </Layout>

@@ -7,7 +7,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import ProjeKarti from '../components/ProjeKarti.astro';
 import Yakinda from '../components/Yakinda.astro';
 import SssBolumu from '../components/SssBolumu.astro';
-import { kategoriler } from '../data/site';
+import { kategoriler, whatsappLinki } from '../data/site';
 import { kategoriSorulari } from '../data/sss';
 import { gorsel } from '../lib/gorsel';
 import { fotoYolu, kapakFotosu, kategoriProjeleri, kategoriVitrini } from '../lib/projeler';
@@ -20,10 +20,17 @@ const { kategori } = Astro.props;
 const projeler = await kategoriProjeleri(kategori.slug);
 const ilk = projeler[0];
 const vitrin = ilk && kategoriVitrini(kategori, projeler);
+const whatsappMesaj = `Merhaba, ${kategori.ad} projeleriniz hakkında bilgi almak istiyorum.`;
 const ogGorsel = vitrin ? (await gorsel(fotoYolu(vitrin, kapakFotosu(vitrin).dosya))).buyuk : undefined;
 ---
 
-<Layout title={kategori.title} description={kategori.description} image={ogGorsel} noindex={!ilk}>
+<Layout
+  title={kategori.title}
+  description={kategori.description}
+  image={ogGorsel}
+  noindex={!ilk}
+  whatsappMesaj={whatsappMesaj}
+>
   {
     ilk ? (
       <>
@@ -53,6 +60,7 @@ const ogGorsel = vitrin ? (await gorsel(fotoYolu(vitrin, kapakFotosu(vitrin).dos
       <Yakinda
         baslik={`${kategori.ad} Projelerimiz`}
         metin="Bu kategorideki projelerimizin fotoğraflarını yakında bu sayfada yayınlayacağız. Bu sırada projeniz için bizi arayabilir veya WhatsApp'tan yazabilirsiniz."
+        whatsapp={whatsappLinki(whatsappMesaj)}
       />
     )
   }

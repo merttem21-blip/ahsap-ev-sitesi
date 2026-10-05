@@ -6,7 +6,7 @@ import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Galeri from '../../components/Galeri.astro';
 import ProjeKarti from '../../components/ProjeKarti.astro';
-import { firma, siteAdresi } from '../../data/site';
+import { firma, siteAdresi, whatsappLinki } from '../../data/site';
 import { gorsel } from '../../lib/gorsel';
 import {
   fotoYolu,
@@ -37,9 +37,9 @@ const kapak = await gorsel(fotoYolu(proje, kapakFotosu(proje).dosya));
 
 const site = Astro.site ?? new URL(siteAdresi);
 const sayfaAdresi = new URL(projeYolu(proje), site).href;
-const whatsappTeklif = `${firma.whatsapp}?text=${encodeURIComponent(
-  `Merhaba, sitenizdeki "${proje.data.baslik}" projesi için teklif almak istiyorum: ${sayfaAdresi}`
-)}`;
+// Sayfadaki teklif butonu, footer ve yüzen buton aynı hazır mesajı kullanır
+const whatsappMesaj = `Merhaba, sitenizdeki "${proje.data.baslik}" projesi için teklif almak istiyorum: ${sayfaAdresi}`;
+const whatsappTeklif = whatsappLinki(whatsappMesaj);
 
 // Yalnızca fotoğraftan oluşan sayfa "zayıf içerik" sayılır (seo-kurallar §13);
 // açıklama veya teknik şartname eklenince sayfa otomatik olarak indekslenir.
@@ -51,6 +51,7 @@ const zayifIcerik = !aciklamaVar && sartname.length === 0;
   description={projeMetaAciklamasi(proje)}
   image={kapak.buyuk}
   noindex={zayifIcerik}
+  whatsappMesaj={whatsappMesaj}
 >
   <section class="proje-ust" aria-labelledby="proje-baslik">
     <div class="kap">

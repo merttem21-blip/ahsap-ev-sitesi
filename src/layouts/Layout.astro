@@ -15,9 +15,18 @@ interface Props {
   noindex?: boolean;
   /** Header hero fotoğrafının üzerinde şeffaf durur; yoksa antrasit zeminli olur. */
   seffafHeader?: boolean;
+  /** Footer ve yüzen butondaki WhatsApp linkinin hazır mesajı (sayfaya göre). */
+  whatsappMesaj?: string;
 }
 
-const { title, description, image = varsayilanGorsel, noindex = false, seffafHeader = false } = Astro.props;
+const {
+  title,
+  description,
+  image = varsayilanGorsel,
+  noindex = false,
+  seffafHeader = false,
+  whatsappMesaj,
+} = Astro.props;
 const site = Astro.site ?? new URL(siteAdresi);
 
 const isletmeSemasi = {
@@ -77,8 +86,8 @@ const isletmeSemasi = {
       <slot />
     </main>
 
-    <Footer />
-    <WhatsAppButton />
+    <Footer whatsappMesaj={whatsappMesaj} />
+    <WhatsAppButton mesaj={whatsappMesaj} />
 
     <script>
       import '../scripts/hareket';

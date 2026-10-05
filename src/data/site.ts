@@ -20,6 +20,20 @@ export const firma = {
   linkedin: 'https://www.linkedin.com/in/kadir-avc%C4%B1-a069b1440/',
 };
 
+// WhatsApp linki hazır mesajla açılır; mesaj bulunulan sayfaya göre değişir (Layout'un whatsappMesaj prop'u).
+export const varsayilanWhatsappMesaji =
+  'Merhaba, 2K AHŞAP web sitenizden yazıyorum. Ahşap yapı projem hakkında bilgi almak istiyorum.';
+
+export const whatsappLinki = (mesaj = varsayilanWhatsappMesaji) =>
+  `${firma.whatsapp}?text=${encodeURIComponent(mesaj)}`;
+
+// Footer alt şeridi ve yasal sayfalar
+export const yasalSayfalar = [
+  { ad: 'KVKK Aydınlatma Metni', href: '/kvkk' },
+  { ad: 'Gizlilik Politikası', href: '/gizlilik' },
+  { ad: 'Çerez Politikası', href: '/cerez-politikasi' },
+];
+
 export const menu = [
   { ad: 'Ana Sayfa', href: '/' },
   { ad: 'Projeler', href: '/projeler' },

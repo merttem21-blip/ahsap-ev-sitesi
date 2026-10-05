@@ -1,0 +1,68 @@
+---
+// Çerez politikası. Sitede analitik veya üçüncü taraf çerez yok; bu yüzden çerez onay bildirimi gösterilmez.
+// Analitik/pazarlama aracı eklenirse bu metin güncellenmeli ve açık rıza bildirimi eklenmelidir.
+import YasalLayout from '../layouts/YasalLayout.astro';
+import { firma } from '../data/site';
+---
+
+<YasalLayout
+  title="Çerez Politikası: Sitemizde Kullanılan Çerezler | 2K AHŞAP"
+  description="2K AHŞAP web sitesi reklam, analitik veya takip çerezi kullanmaz. Çerezlerin ne olduğunu, sitemizdeki durumu ve tarayıcınızdan nasıl yönetebileceğinizi öğrenin."
+  baslik="Çerez Politikası"
+>
+  <p>
+    Bu politika, 2kahsap.com sitesinde çerez ve benzeri teknolojilerin kullanımını açıklar. Kişisel
+    verilerinizle ilgili ayrıntılar için <a href="/kvkk">KVKK Aydınlatma Metni</a>'ni ve
+    <a href="/gizlilik">Gizlilik Politikası</a>'nı inceleyebilirsiniz.
+  </p>
+
+  <h2>1. Çerez Nedir?</h2>
+  <p>
+    Çerezler, ziyaret ettiğiniz siteler tarafından tarayıcınıza kaydedilen küçük metin dosyalarıdır.
+    Oturum bilgisini hatırlamak, ziyaret istatistiği tutmak veya reklam göstermek gibi amaçlarla
+    kullanılabilirler.
+  </p>
+
+  <h2>2. Sitemizde Kullanılan Çerezler</h2>
+  <ul>
+    <li><strong>Zorunlu çerezler:</strong> Kullanılmaz.</li>
+    <li><strong>Analitik ve performans çerezleri:</strong> Kullanılmaz.</li>
+    <li><strong>Reklam ve pazarlama çerezleri:</strong> Kullanılmaz.</li>
+  </ul>
+  <p>
+    Sitemiz kendi çerezini bırakmaz ve ziyaretinizi izleyen bir araç kullanmaz. Bu nedenle çerez
+    onay bildirimi gösterilmez.
+  </p>
+
+  <h2>3. Üçüncü Taraf İçerik ve Bağlantılar</h2>
+  <ul>
+    <li>
+      <strong>Google Fonts:</strong> Yazı tipleri Google sunucularından yüklenir. Google Fonts çerez
+      bırakmaz; ancak bu sırada tarayıcınız IP adresinizi Google'a iletir.
+    </li>
+    <li>
+      <strong>Dış bağlantılar:</strong> WhatsApp, Google Haritalar veya sosyal medya
+      bağlantılarına tıklayarak bu sitelere geçtiğinizde, ilgili sitelerin kendi çerezleri ve
+      politikaları geçerli olur.
+    </li>
+  </ul>
+
+  <h2>4. Çerezleri Nasıl Yönetebilirsiniz?</h2>
+  <p>
+    Tarayıcınızın ayarlarından çerezleri görebilir, silebilir veya engelleyebilirsiniz. Chrome,
+    Safari, Firefox ve Edge gibi tarayıcılarda bu seçenekler genellikle "Gizlilik ve güvenlik"
+    bölümünde bulunur.
+  </p>
+
+  <h2>5. Değişiklikler</h2>
+  <p>
+    İleride analitik veya benzeri çerezler kullanmaya başlarsak bu politikayı güncelleriz ve gereken
+    durumlarda çerezler yerleştirilmeden önce açık rızanızı alırız.
+  </p>
+
+  <h2>6. İletişim</h2>
+  <p>
+    Sorularınız için <a href={`mailto:${firma.eposta}`}>{firma.eposta}</a> adresine
+    yazabilirsiniz.
+  </p>
+</YasalLayout>

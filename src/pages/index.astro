@@ -77,7 +77,7 @@ const digerKategoriler = kategoriler.filter((k) => !urunler.some((u) => u.slug =
     </p>
     <div class="hero-dugmeler">
       <a href="/iletisim" class="dugme">Teklif Al</a>
-      <a href="#kategoriler" class="dugme">Projeleri İncele</a>
+      <a href="/projeler" class="dugme">Projeleri İncele</a>
     </div>
   </Hero>
 
@@ -240,7 +240,9 @@ const digerKategoriler = kategoriler.filter((k) => !urunler.some((u) => u.slug =
     color: var(--color-krem);
     text-decoration: none;
     transform: translateZ(0); /* Safari: büyüyen görsel de yuvarlak köşeye kırpılır */
-    transition: transform var(--sure-kart) var(--ease-out);
+    transition:
+      transform var(--sure-kart) var(--ease-out),
+      scale var(--gecis);
   }
 
   .urun-gorsel {

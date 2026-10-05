@@ -95,10 +95,6 @@
   --z-yuzen: 30;
   --z-menu: 40; /* açık mobil menü paneli yüzen WhatsApp butonunu da örter */
   --z-atla: 100;
-
-  /* Geçiş dönemi: footer ve galeri kendi adımlarında yenilenene kadar kalır, sonra silinir */
-  --color-krem-soluk: var(--color-metin);
-  --color-cizgi-koyu: var(--color-cizgi);
 }
 
 *,
@@ -281,12 +277,55 @@ ul {
   transform: translateX(4px);
 }
 
+/* Dolu krem pill: yalnızca footer CTA bandındaki "Teklif Al" (kullanıcı kararı; marka-stili §9 istisnası).
+   Hover/odakta aynı ahşap çerçeve katmanı ve ok hareketi. Gece metin krem üstünde 12.4:1. */
+.dugme-dolu {
+  background: var(--color-krem);
+  color: var(--color-gece);
+}
+
 /* ≥ 640px */
 @media (min-width: 640px) {
   .dugme {
     padding-inline: 32px 28px;
     white-space: nowrap;
   }
+}
+
+/* Etkileşim durumları (site geneli): hover'da çizgi/katman, odakta krem halka (:focus-visible),
+   basınca %98'e küçülme. Küçülme bağımsız `scale` özelliğiyle yapılır; öğenin kendi transform'u
+   (kartın kalkması, ok, ortalama) bozulmaz. Kendi transition'ı olan bileşenler `scale`'i ayrıca ekler. */
+:is(
+    .dugme,
+    .kategori-link,
+    .grup-link,
+    .tum-projeler,
+    .tum-sorular,
+    .kart-link,
+    .galeri-kapak,
+    .galeri-kucukler a,
+    .menu-dugme,
+    .sosyal-link
+  ) {
+  transition: scale var(--gecis);
+}
+
+:is(
+    .dugme,
+    .kategori-link,
+    .grup-link,
+    .tum-projeler,
+    .tum-sorular,
+    .kart-link,
+    .galeri-kapak,
+    .galeri-kucukler a,
+    .menu-dugme,
+    .sosyal-link,
+    .urun,
+    .ik-dugme,
+    .whatsapp
+  ):active {
+  scale: 0.98;
 }
 
 /* Kaydırınca ortaya çıkma (src/scripts/hareket.ts). Gizleme sınıfını yalnızca JS ekler:

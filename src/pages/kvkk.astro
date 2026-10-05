@@ -1,0 +1,160 @@
+---
+// KVKK aydınlatma metni (6698 sayılı Kanun md. 10). TASLAK: [ONAY] alanları firma tarafından doldurulmalı
+// ve metin yayından önce bir hukukçuya kontrol ettirilmelidir.
+import YasalLayout from '../layouts/YasalLayout.astro';
+import { firma } from '../data/site';
+---
+
+<YasalLayout
+  title="KVKK Aydınlatma Metni ve Kişisel Veriler | 2K AHŞAP"
+  description="2K AHŞAP olarak kişisel verilerinizi hangi amaçlarla ve hukuki sebeplerle işlediğimizi, kimlere aktarabileceğimizi ve KVKK kapsamındaki haklarınızı öğrenin."
+  baslik="KVKK Aydınlatma Metni"
+>
+  <p>
+    6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") 10. maddesi uyarınca, veri sorumlusu
+    sıfatıyla <span class="onay">[ONAY: ticari unvan]</span> ("2K AHŞAP") olarak kişisel verilerinizi
+    hangi amaçlarla ve hangi hukuki sebeplere dayanarak işlediğimizi, kimlere aktarabileceğimizi ve
+    sahip olduğunuz hakları aşağıda açıklıyoruz.
+  </p>
+
+  <h2>1. Veri Sorumlusu</h2>
+  <dl>
+    <div>
+      <dt>Ticari unvan</dt>
+      <dd><span class="onay">[ONAY: ticari unvan]</span></dd>
+    </div>
+    <div>
+      <dt>Adres</dt>
+      <dd>{firma.adres}</dd>
+    </div>
+    <div>
+      <dt>Telefon</dt>
+      <dd><a href={firma.telefonLink}>{firma.telefonGorunen}</a></dd>
+    </div>
+    <div>
+      <dt>KVKK başvuruları için e-posta</dt>
+      <dd><span class="onay">[ONAY: veri sorumlusu e-posta adresi]</span></dd>
+    </div>
+    <div>
+      <dt>KEP adresi</dt>
+      <dd><span class="onay">[ONAY: KEP adresi, varsa]</span></dd>
+    </div>
+    <div>
+      <dt>MERSİS numarası</dt>
+      <dd><span class="onay">[ONAY: MERSİS numarası]</span></dd>
+    </div>
+    <div>
+      <dt>Vergi dairesi ve numarası</dt>
+      <dd><span class="onay">[ONAY: vergi dairesi / vergi numarası]</span></dd>
+    </div>
+    <div>
+      <dt>VERBİS kaydı</dt>
+      <dd><span class="onay">[ONAY: VERBİS kayıt durumu veya muafiyet bilgisi]</span></dd>
+    </div>
+  </dl>
+
+  <h2>2. İşlenen Kişisel Veriler</h2>
+  <ul>
+    <li><strong>Kimlik:</strong> ad, soyad.</li>
+    <li><strong>İletişim:</strong> telefon numarası, e-posta adresi, adres veya il/ilçe bilgisi.</li>
+    <li>
+      <strong>Talep ve proje bilgileri:</strong> istediğiniz yapının türü ve ölçüleri, arazinin konumu,
+      mesaj içeriği, paylaştığınız fotoğraf ve çizimler.
+    </li>
+    <li>
+      <strong>Müşteri işlem ve finans:</strong> teklif, sözleşme, fatura, ödeme ve teslim kayıtları
+      (müşterimiz olmanız hâlinde).
+    </li>
+    <li>
+      <strong>İşlem güvenliği:</strong> siteye erişim sırasında barındırma hizmeti sağlayıcısının
+      tuttuğu IP adresi, tarayıcı bilgisi ve erişim kayıtları.
+    </li>
+  </ul>
+
+  <h2>3. Kişisel Verilerin İşlenme Amaçları</h2>
+  <ul>
+    <li>Bilgi ve teklif taleplerinizi yanıtlamak, sizinle iletişim kurmak,</li>
+    <li>Keşif, tasarım, teklif, sözleşme, üretim, nakliye, kurulum ve teslim süreçlerini yürütmek,</li>
+    <li>Satış sonrası destek taleplerinizi karşılamak,</li>
+    <li>Fatura, muhasebe ve vergi mevzuatından doğan yükümlülükleri yerine getirmek,</li>
+    <li>Web sitesinin ve bilgi sistemlerinin güvenliğini sağlamak,</li>
+    <li>
+      Açık rızanız olması hâlinde bilgilendirme ve tanıtım iletileri göndermek
+      <span class="onay">[ONAY: ticari elektronik ileti gönderilecek mi?]</span>.
+    </li>
+  </ul>
+
+  <h2>4. Toplama Yöntemi ve Hukuki Sebepler</h2>
+  <p>
+    Kişisel verileriniz; web sitemiz, e-posta, telefon, WhatsApp ve yüz yüze görüşmeler ile sözleşme
+    belgeleri aracılığıyla, kısmen otomatik (site erişim kayıtları) ve otomatik olmayan yollarla
+    toplanır. Verileriniz KVKK'nın 5. maddesinde sayılan aşağıdaki hukuki sebeplere dayanılarak
+    işlenir:
+  </p>
+  <ul>
+    <li>Bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması (md. 5/2-c),</li>
+    <li>Veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi (md. 5/2-ç),</li>
+    <li>Bir hakkın tesisi, kullanılması veya korunması (md. 5/2-e),</li>
+    <li>
+      İlgili kişinin temel hak ve özgürlüklerine zarar vermemek kaydıyla veri sorumlusunun meşru
+      menfaati (md. 5/2-f),
+    </li>
+    <li>Bu sebeplerin bulunmadığı işlemler için açık rızanız (md. 5/1).</li>
+  </ul>
+
+  <h2>5. Kişisel Verilerin Aktarılması</h2>
+  <p>Kişisel verileriniz, yukarıdaki amaçlarla sınırlı olarak şu alıcılara aktarılabilir:</p>
+  <ul>
+    <li>
+      Nakliye, kurulum, muhasebe ve mali müşavirlik gibi hizmet aldığımız iş ortaklarına, yalnızca
+      hizmetin gerektirdiği ölçüde <span class="onay">[ONAY: iş ortağı türleri]</span>,
+    </li>
+    <li>Kanunen yetkili kamu kurum ve kuruluşlarına, talep edilmesi hâlinde,</li>
+    <li>
+      Web sitemizin barındırma hizmetini sağlayan Vercel Inc.'e ve WhatsApp üzerinden yazmanız
+      hâlinde mesajlaşma altyapısını sağlayan WhatsApp/Meta'ya. Bu hizmet sağlayıcıların sunucuları
+      yurt dışında bulunabilir; yurt dışına aktarım KVKK'nın 9. maddesindeki şartlara uygun olarak
+      yapılır <span class="onay">[ONAY: yurt dışı aktarım dayanağı, ör. standart sözleşme ve Kurul'a bildirim]</span>.
+    </li>
+  </ul>
+
+  <h2>6. Saklama Süresi</h2>
+  <p>
+    Kişisel verileriniz, işlendikleri amaç için gereken süre ve ilgili mevzuatta öngörülen süreler
+    boyunca saklanır. Bu süreler sona erdiğinde verileriniz silinir, yok edilir veya anonim hâle
+    getirilir <span class="onay">[ONAY: kişisel veri saklama ve imha politikası]</span>.
+  </p>
+
+  <h2>7. KVKK 11. Madde Kapsamındaki Haklarınız</h2>
+  <p>Veri sorumlusuna başvurarak;</p>
+  <ul>
+    <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme,</li>
+    <li>Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme,</li>
+    <li>İşlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme,</li>
+    <li>Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme,</li>
+    <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme,</li>
+    <li>KVKK'nın 7. maddesindeki şartlar çerçevesinde silinmesini veya yok edilmesini isteme,</li>
+    <li>
+      Düzeltme, silme veya yok etme işlemlerinin, verilerin aktarıldığı üçüncü kişilere
+      bildirilmesini isteme,
+    </li>
+    <li>
+      İşlenen verilerin münhasıran otomatik sistemlerle analiz edilmesi suretiyle aleyhinize bir
+      sonucun ortaya çıkmasına itiraz etme,
+    </li>
+    <li>
+      Kanuna aykırı işleme sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme
+    </li>
+  </ul>
+  <p>haklarına sahipsiniz.</p>
+
+  <h2>8. Başvuru Yöntemi</h2>
+  <p>
+    Taleplerinizi, Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ'e uygun olarak,
+    kimliğinizi tespit edici bilgilerle birlikte yazılı olarak yukarıdaki adresimize, KEP adresimize
+    veya <span class="onay">[ONAY: veri sorumlusu e-posta adresi]</span> adresine iletebilirsiniz.
+    Başvurunuz, talebin niteliğine göre en kısa sürede ve Kanun'da öngörülen en geç otuz gün içinde
+    ücretsiz olarak sonuçlandırılır. İşlemin ayrıca bir maliyet gerektirmesi hâlinde Kişisel Verileri
+    Koruma Kurulu'nca belirlenen tarifedeki ücret alınabilir.
+  </p>
+</YasalLayout>

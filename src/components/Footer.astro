@@ -1,14 +1,42 @@
 ---
-// Site alt bölümü: logo ve tanım + öne çıkan iletişim bilgileri, altında linkler ve telif.
-import { firma, menu, kategoriler } from '../data/site';
+// Site alt bölümü: üstte ince CTA bandı; 4 sütun (marka · kurumsal · kategoriler · iletişim);
+// en altta telif ve yasal linkler. Mobilde sıkı tek sütun. WhatsApp mesajı sayfaya göre gelir (Layout).
+import { siWhatsapp } from 'simple-icons';
+import { firma, kategoriler, menu, whatsappLinki, yasalSayfalar } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
+interface Props {
+  whatsappMesaj?: string;
+}
+
+const { whatsappMesaj } = Astro.props;
+const whatsapp = whatsappLinki(whatsappMesaj);
+const kurumsal = menu.filter((m) => m.href !== '/');
 const yil = new Date().getFullYear();
+
+const sosyal = [
+  { ad: 'Instagram', href: firma.instagram, ikon: ikon.instagram },
+  { ad: 'Facebook', href: firma.facebook, ikon: ikon.facebook },
+  { ad: 'LinkedIn', href: firma.linkedin, ikon: ikon.linkedin },
+];
 ---
 
 <footer class="alt">
+  <div class="alt-cta">
+    <div class="kap alt-cta-ic">
+      <p class="alt-cta-baslik">Projenizi birlikte konuşalım</p>
+      <div class="alt-cta-dugmeler">
+        <a href="/iletisim" class="dugme dugme-dolu">Teklif Al</a>
+        <a href={whatsapp} class="dugme" target="_blank" rel="noopener noreferrer">
+          <svg class="wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+          WhatsApp'tan Hemen Danışın
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="kap">
-    <div class="alt-bas">
+    <div class="alt-izgara">
       <div class="alt-marka">
         <a href="/" class="alt-logo" aria-label="2K AHŞAP ana sayfa">
           <img
@@ -20,104 +48,136 @@ const yil = new Date().getFullYear();
             decoding="async"
           />
         </a>
-        <p>
-          2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp üretiyoruz;
-          modern mimariyi doğal malzemeyle harmanlıyoruz.
-        </p>
+        <p>2015'ten beri ahşap ev ve yapıları size özel tasarlayıp üretiyoruz.</p>
         <ul class="sosyal">
-          <li>
-            <a href={firma.instagram} aria-label="Instagram" rel="noopener noreferrer" target="_blank">
-              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.instagram} />
-            </a>
-          </li>
-          <li>
-            <a href={firma.facebook} aria-label="Facebook" rel="noopener noreferrer" target="_blank">
-              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.facebook} />
-            </a>
-          </li>
-          <li>
-            <a href={firma.linkedin} aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
-              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.linkedin} />
-            </a>
-          </li>
+          {
+            sosyal.map((s) => (
+              <li>
+                <a href={s.href} class="sosyal-link" aria-label={s.ad} target="_blank" rel="noopener noreferrer">
+                  <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={s.ikon} />
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
-      <div class="alt-iletisim">
+      <nav aria-labelledby="alt-kurumsal">
+        <h2 id="alt-kurumsal" class="etiket alt-baslik">Kurumsal</h2>
+        <ul class="alt-liste alt-iki-sutun alt-kurumsal">
+          {
+            kurumsal.map((m) => (
+              <li>
+                <a href={m.href}>{m.ad}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="alt-kategoriler">
+        <h2 id="alt-kategoriler" class="etiket alt-baslik">Kategoriler</h2>
+        <ul class="alt-liste alt-iki-sutun">
+          {
+            kategoriler.map((k) => (
+              <li>
+                <a href={`/${k.slug}`}>{k.ad}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div>
         <h2 class="etiket alt-baslik">İletişim</h2>
         <address>
-          <a href={firma.telefonLink} class="alt-telefon">{firma.telefonGorunen}</a>
-          <a href={`mailto:${firma.eposta}`} class="alt-eposta">{firma.eposta}</a>
-          <ul class="alt-diger">
+          <ul class="alt-liste alt-iletisim">
+            <li>
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.telefon} />
+              <a href={firma.telefonLink}>{firma.telefonGorunen}</a>
+            </li>
+            <li>
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.eposta} />
+              <a href={`mailto:${firma.eposta}`}>{firma.eposta}</a>
+            </li>
             <li>
               <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
-              <a href={firma.harita} rel="noopener noreferrer" target="_blank">{firma.adres}</a>
+              <a href={firma.harita} target="_blank" rel="noopener noreferrer">{firma.adres}</a>
             </li>
             <li>
               <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.mesaj} />
-              <a href={firma.whatsapp} rel="noopener noreferrer" target="_blank">WhatsApp ile yazın</a>
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp ile yazın</a>
             </li>
           </ul>
         </address>
       </div>
     </div>
 
-    <div class="alt-linkler">
-      <nav aria-label="Hızlı linkler">
-        <h2 class="etiket alt-baslik">Kurumsal</h2>
-        <ul>
-          {menu.map((m) => <li><a href={m.href}>{m.ad}</a></li>)}
+    <div class="alt-serit">
+      <p>© {yil} 2K AHŞAP</p>
+      <nav aria-label="Yasal bilgiler">
+        <ul class="alt-yasal">
+          {
+            yasalSayfalar.map((y) => (
+              <li>
+                <a href={y.href}>{y.ad}</a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
-
-      <nav aria-label="Kategoriler">
-        <h2 class="etiket alt-baslik">Kategoriler</h2>
-        <ul class="alt-kategoriler">
-          {kategoriler.map((k) => <li><a href={`/${k.slug}`}>{k.ad}</a></li>)}
-          <li><a href="/projeler">Tüm projeler</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="alt-telif">
-      <p>© {yil} 2K AHŞAP. Tüm hakları saklıdır.</p>
     </div>
   </div>
 </footer>
 
 <style>
   .alt {
-    padding-top: var(--bolum);
-    background: var(--color-antrasit);
-    color: var(--color-krem);
+    background: var(--color-zemin-ara);
+    color: var(--color-metin);
   }
 
-  .alt :focus-visible {
-    outline-color: var(--color-krem);
+  /* CTA bandı */
+  .alt-cta {
+    padding-block: var(--bosluk-4);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
   }
 
-  .alt a {
-    text-decoration: none;
-    transition: color var(--gecis);
+  .alt-cta-ic {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bosluk-3);
   }
 
-  .alt a:hover {
-    color: var(--color-beyaz);
-    text-decoration: underline;
-    text-decoration-thickness: var(--cizgi);
-    text-underline-offset: 4px;
+  .alt-cta-baslik {
+    margin: 0;
+    color: var(--color-baslik);
+    font-family: var(--font-baslik);
+    font-size: var(--text-h3);
+    font-weight: 600;
+    letter-spacing: var(--aralik-baslik);
+    line-height: var(--satir-baslik);
   }
 
-  .alt-baslik {
-    margin-bottom: var(--bosluk-3);
-    color: var(--color-krem-soluk);
+  .alt-cta-dugmeler {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
-  /* Üst bant: marka + iletişim */
-  .alt-bas {
+  .wa-ikon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+
+  /* 4 sütun; mobilde sıkı tek sütun */
+  .alt-izgara {
     display: grid;
-    gap: var(--bosluk-6);
-    padding-bottom: var(--bosluk-6);
+    gap: var(--bosluk-4);
+    padding-block: var(--bosluk-5);
   }
 
   .alt-logo {
@@ -125,14 +185,15 @@ const yil = new Date().getFullYear();
   }
 
   .alt-logo img {
-    width: 160px;
+    width: 96px;
     height: auto;
   }
 
   .alt-marka p {
-    max-width: 40ch;
-    margin: var(--bosluk-3) 0;
-    color: var(--color-krem-soluk);
+    max-width: 32ch;
+    margin: var(--bosluk-2) 0;
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
   }
 
   .sosyal {
@@ -140,137 +201,153 @@ const yil = new Date().getFullYear();
     gap: var(--bosluk-1);
   }
 
-  .sosyal a {
+  /* Sosyal ikon: ince çerçeveli daire; hover/odakta ahşap çerçeve katmanı belirir */
+  .sosyal-link {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 44px;
     height: 44px;
-    border: var(--cizgi) solid var(--color-cizgi-koyu);
+    border: var(--cizgi) solid var(--color-cizgi);
     border-radius: var(--radius-tam);
     color: var(--color-krem);
-    transition:
-      border-color var(--gecis),
-      color var(--gecis);
   }
 
-  .sosyal a:hover {
-    border-color: var(--color-ahsap);
-    color: var(--color-beyaz);
+  .sosyal-link::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--cizgi) * -1);
+    border: var(--cizgi) solid var(--color-ahsap);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--gecis);
   }
 
-  .alt address {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-style: normal;
+  .sosyal-link:is(:hover, :focus-visible)::before {
+    opacity: 1;
   }
 
-  .alt-telefon {
-    font-family: var(--font-baslik);
-    font-size: var(--text-h2);
-    font-weight: 600;
-    letter-spacing: var(--aralik-baslik);
-    line-height: var(--satir-baslik);
-    white-space: nowrap;
+  .alt-baslik {
+    margin-bottom: var(--bosluk-1);
+    color: var(--color-metin-soluk);
   }
 
-  .alt-eposta {
-    margin-top: var(--bosluk-1);
-    font-size: var(--text-giris);
-    overflow-wrap: anywhere;
-  }
-
-  .alt-diger {
-    margin-top: var(--bosluk-4);
-    padding-top: var(--bosluk-3);
-    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
-    color: var(--color-krem-soluk);
-  }
-
-  .alt-diger li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .alt-diger li + li {
-    margin-top: 12px;
-  }
-
-  .alt-diger .ikon {
-    margin-top: 3px;
-    color: var(--color-ahsap);
-  }
-
-  /* Link listeleri */
-  .alt-linkler {
-    display: grid;
-    gap: var(--bosluk-5);
-    padding-block: var(--bosluk-6);
-    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
-  }
-
-  .alt-linkler li + li {
-    margin-top: 4px;
-  }
-
-  .alt-linkler a {
+  /* Link listeleri: dokunma hedefi 44px, aralarında ek boşluk yok */
+  .alt-liste a {
     display: inline-flex;
     align-items: center;
-    min-height: 40px;
+    min-height: 44px;
+    color: var(--color-metin);
+    font-size: var(--text-kucuk);
+    text-decoration: none;
+    text-underline-offset: 4px;
   }
 
-  .alt-kategoriler {
-    columns: 2;
+  .alt-liste a:is(:hover, :focus-visible) {
+    color: var(--color-krem);
+    text-decoration: underline;
+    text-decoration-color: var(--color-ahsap);
+  }
+
+  .alt-iki-sutun {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: var(--bosluk-3);
   }
 
-  .alt-kategoriler li {
-    break-inside: avoid;
+  .alt-iletisim li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  /* Mobilde alt boşluk, yüzen WhatsApp butonunun telif metnini örtmemesi için */
-  .alt-telif {
-    padding-block: var(--bosluk-3) var(--bosluk-7);
-    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
-    color: var(--color-krem-soluk);
+  .alt-iletisim .ikon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-ahsap);
+  }
+
+  .alt-iletisim a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .alt address {
+    font-style: normal;
+  }
+
+  /* Alt şerit: telif ve yasal linkler. Mobilde alt boşluk yüzen WhatsApp butonu içindir. */
+  .alt-serit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 var(--bosluk-3);
+    padding-block: var(--bosluk-2) var(--bosluk-7);
+    border-top: var(--cizgi) solid var(--color-cizgi);
+    color: var(--color-metin-soluk);
     font-size: var(--text-kucuk);
   }
 
-  .alt-telif p {
+  .alt-serit p {
     margin: 0;
+  }
+
+  .alt-yasal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .alt-yasal li + li::before {
+    content: '·';
+    content: '·' / '';
+    margin-inline: var(--bosluk-1);
+  }
+
+  .alt-yasal a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-metin-soluk);
+    text-decoration: none;
+    text-underline-offset: 4px;
+  }
+
+  .alt-yasal a:is(:hover, :focus-visible) {
+    color: var(--color-krem);
+    text-decoration: underline;
+    text-decoration-color: var(--color-ahsap);
+  }
+
+  /* ≥ 640px: 2 × 2 */
+  @media (min-width: 640px) {
+    .alt-izgara {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--bosluk-4) var(--bosluk-5);
+    }
   }
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .alt-linkler {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    }
-
-    .alt-kategoriler {
-      columns: 3;
-    }
-
-    .alt-telif {
-      padding-bottom: var(--bosluk-3);
+    .alt-serit {
+      padding-bottom: var(--bosluk-2);
     }
   }
 
-  /* ≥ 1024px */
+  /* ≥ 1024px: 4 sütun yan yana */
   @media (min-width: 1024px) {
-    .alt-bas {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      align-items: end;
-      padding-bottom: var(--bosluk-7);
+    .alt-izgara {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 1.3fr) minmax(0, 1.3fr);
+      gap: var(--bosluk-5);
+      padding-block: var(--bosluk-6);
     }
 
-    .alt-logo img {
-      width: 180px;
-    }
-
-    .alt-iletisim {
-      justify-self: end;
+    /* Kurumsal kısa liste: masaüstünde tek sütun; kategoriler 2 sütun kalır */
+    .alt-kurumsal {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

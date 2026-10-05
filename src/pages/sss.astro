@@ -4,16 +4,18 @@
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import SssAkordeon from '../components/SssAkordeon.astro';
-import { firma } from '../data/site';
+import { whatsappLinki } from '../data/site';
 import { grubunSorulari, sorular, sssGruplari, sssSemasi } from '../data/sss';
 import { jsonLd } from '../lib/projeler';
 
+const whatsappMesaj = 'Merhaba, sıkça sorulan sorularda cevabını bulamadığım bir sorum var.';
 const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) }));
 ---
 
 <Layout
   title="Ahşap Ev ve Bungalov: Sıkça Sorulan Sorular | 2K AHŞAP"
   description="Ahşap ev ve bungalov fiyatı, ruhsat, yapım süresi, deprem dayanımı, bakım ve garanti hakkında merak edilenler. Sorunuz burada yoksa bize hemen ulaşabilirsiniz."
+  whatsappMesaj={whatsappMesaj}
 >
   <script type="application/ld+json" set:html={jsonLd(sssSemasi(sorular))} />
 
@@ -67,7 +69,7 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
           </p>
         </div>
         <div class="sss-kutu-dugmeler">
-          <a href={firma.whatsapp} class="dugme" target="_blank" rel="noopener noreferrer">
+          <a href={whatsappLinki(whatsappMesaj)} class="dugme" target="_blank" rel="noopener noreferrer">
             WhatsApp'tan Yazın
           </a>
           <a href="/iletisim" class="dugme">Teklif Al</a>

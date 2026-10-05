@@ -1,13 +1,14 @@
 ---
 // Henüz hazırlanmamış sayfalar için geçici içerik. Sayfa hazır olunca kaldırılır.
-import { firma } from '../data/site';
+import { firma, whatsappLinki } from '../data/site';
 
 interface Props {
   baslik: string; // sayfanın tek H1'i
   metin: string;
+  whatsapp?: string; // sayfaya göre hazır mesajlı WhatsApp linki
 }
 
-const { baslik, metin } = Astro.props;
+const { baslik, metin, whatsapp = whatsappLinki() } = Astro.props;
 ---
 
 <section class="yakinda" aria-labelledby="yakinda-baslik">
@@ -17,6 +18,7 @@ const { baslik, metin } = Astro.props;
     <p class="yakinda-metin">{metin}</p>
     <div class="yakinda-eylemler">
       <a href={firma.telefonLink} class="dugme dugme-birincil">Bizi arayın: {firma.telefonGorunen}</a>
+      <a href={whatsapp} class="yakinda-link" target="_blank" rel="noopener noreferrer">WhatsApp'tan yazın</a>
       <a href={`mailto:${firma.eposta}`} class="yakinda-link">{firma.eposta}</a>
     </div>
   </div>
