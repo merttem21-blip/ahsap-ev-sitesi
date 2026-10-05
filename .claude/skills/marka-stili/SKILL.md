@@ -141,8 +141,8 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 | `2k-ahsap-ikon.svg` | Favicon kaynağı (bkz. **Favicon**) | Yazısız "2K" ev simgesi |
 
 > **Format: SVG.** Sitede logo olarak SVG kullanılır.
-> ✅ `2k-ahsap-logo-koyu-zemin.svg` mevcut (içindeki "2" krem; koyu zeminde okunur) ve header ile footer'da plakasız kullanılır.
-> ⚠️ `2k-ahsap-logo-acik-zemin.svg` ve `2k-ahsap-ikon.svg` henüz yok; eklenene kadar PNG'lerin küçültülmüş sürümü geçici olarak kullanılır (bkz. **Performans**). schema.org `logo` alanında açık zemin logosunun PNG sürümü kalır.
+> ✅ Üç SVG de mevcut. `2k-ahsap-logo-koyu-zemin.svg` (içindeki "2" krem) header ve footer'da plakasız kullanılır; `favicon.svg` ikon SVG'sinden üretildi.
+> Aynı adlı `.png` dosyaları (~0.9 MB, 2240px) yalnızca kaynak olarak durur; sayfada kullanılmaz. İstisna: schema.org `logo` alanı açık zemin logosunun PNG'sini kullanır (Google logoyu beyaz zeminde ve raster olarak gösterir; bkz. `seo-kurallar`).
 
 **Zemin kuralı**
 - Site koyu olduğu için sayfalarda yalnızca koyu zemin logosu kullanılır; gece, antrasit veya karartılmış fotoğraf üzerinde durur. Açık zemin logosu site içinde kullanılmaz.
@@ -156,22 +156,21 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 
 **Performans**
 - SVG logo doğrudan kullanılır: `<img src="/logo/2k-ahsap-logo-koyu-zemin.svg" width="…" height="…" alt="2K AHŞAP">`. SVG'nin içinde base64 olarak gömülü büyük bir PNG olmadığı kontrol edilir; öyle bir dosya gerçek vektör değildir ve ağırdır.
-- Geçici PNG'ler ~0.9 MB ve 2240px genişlikte; sayfaya **olduğu gibi konmaz** (`public/` içindeki dosyalar Astro tarafından optimize edilmez). Görüntülenme boyutunun 2 katına küçültülmüş WebP sürümleri kullanılır.
+- PNG logolar sayfaya konmaz (`public/` içindeki dosyalar Astro tarafından optimize edilmez).
 - Header logosu `loading="eager"` ile yüklenir; layout kaymasını önlemek için `width` ve `height` belirtilir.
 
-**Favicon** — dosyalar `public/` kökündedir ve ikondan üretilir. İkon kare olmadığı için (1696×1376) kare tuvale ortalanır.
+**Favicon** — dosyalar `public/` kökündedir ve ikondan üretilir. İkon kare olmadığı için (424×344) kare tuvale ortalanır.
 
 | Dosya | Özellik | Durum |
 |---|---|---|
 | `favicon.ico` | 16, 32, 48px katmanlı, şeffaf zemin | ✅ Var (PNG ikondan üretildi) |
 | `apple-touch-icon.png` | 180×180, krem (`#EBDCC6`) zemin, ~%10 iç boşluk (iOS şeffaf alanı siyah gösterir) | ✅ Var |
-| `favicon.svg` | Vektör, kare `viewBox` | ⏳ `2k-ahsap-ikon.svg` gelince üretilecek |
+| `favicon.svg` | Vektör, kare `viewBox="90 -40 424 424"`; gri "2" ve ahşap "K" açık ve koyu sekme zemininde okunur | ✅ Var (`2k-ahsap-ikon.svg`'den üretildi) |
 
 ```html
 <link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<!-- favicon.svg eklenince açılacak: -->
-<!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
 ```
 
 ## 5. Görsel Dil

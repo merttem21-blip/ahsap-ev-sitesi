@@ -83,7 +83,7 @@ Bir sayfada **yalnızca bir** görsel `fetchpriority="high"` taşır.
 ## 5. `public/` klasörü
 
 - `public/` içindeki dosyalar Astro tarafından **optimize edilmez**, olduğu gibi yayınlanır. Büyük PNG/JPG oraya konup doğrudan kullanılmaz.
-- Logo gibi tekil görseller için görüntülenme boyutunun ~2 katı genişlikte WebP üretilir (örnek: `public/logo/*-320.webp`).
+- Logolar SVG olarak doğrudan kullanılır (`public/logo/*.svg`). SVG'si olmayan tekil raster görseller için görüntülenme boyutunun ~2 katı genişlikte WebP üretilir.
 - Varsayılan Open Graph görseli `src/data/site.ts` → `varsayilanGorsel`. Proje ve kategori sayfaları kendi kapak fotoğrafının 1600px sürümünü kullanır.
 
 ## 6. Denetim

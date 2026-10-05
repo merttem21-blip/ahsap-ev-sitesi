@@ -40,11 +40,10 @@
 
 ## Logo Dosyaları
 Konum: `public/logo/`. Format: **SVG**. Ayrıntılı kullanım kuralları marka-stili skill'inde.
-- **Header ve footer:** `2k-ahsap-logo-koyu-zemin.svg` (header ve footer zemini koyu/antrasit)
-- **Açık zeminli alanlar:** `2k-ahsap-logo-acik-zemin.svg`
+- **Site geneli (header, footer, tüm koyu alanlar):** `2k-ahsap-logo-koyu-zemin.svg` — site baştan sona koyu temadır
+- **Açık zeminli alanlar (site dışı: baskı, belge):** `2k-ahsap-logo-acik-zemin.svg`
 - **Favicon:** `public/` kökünde `favicon.ico`, `apple-touch-icon.png`, `favicon.svg` (kaynak: `2k-ahsap-ikon.svg`)
-- ✅ `2k-ahsap-logo-koyu-zemin.svg` eklendi; header ve footer'da kullanılıyor.
-- ⚠️ `2k-ahsap-logo-acik-zemin.svg` ve `2k-ahsap-ikon.svg` henüz yok; gelene kadar aynı adlı `.png` dosyaları geçici olarak kullanılır. `favicon.svg`, SVG ikon gelince üretilecek.
+- ✅ Üç SVG de `public/logo/` içinde. `favicon.svg`, ikon SVG'sinden kare tuvale ortalanarak üretildi.
 
 ## Teknik Bilgiler
 - **Framework:** Astro (hızlı, SEO-friendly, statik site)
