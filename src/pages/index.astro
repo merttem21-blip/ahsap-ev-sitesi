@@ -3,6 +3,8 @@
 // Kurallar: .claude/skills/marka-stili ve .claude/skills/seo-kurallar
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import Surecimiz from '../components/Surecimiz.astro';
+import NedenAhsap from '../components/NedenAhsap.astro';
 import { ikon } from '../data/ikonlar';
 import { kategoriler } from '../data/site';
 import { gorsel } from '../lib/gorsel';
@@ -146,6 +148,9 @@ const digerKategoriler = kategoriler.filter((k) => !urunler.some((u) => u.slug =
       </div>
     </div>
   </section>
+
+  <Surecimiz />
+  <NedenAhsap />
 </Layout>
 
 <style>

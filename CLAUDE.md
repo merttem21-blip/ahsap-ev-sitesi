@@ -65,6 +65,12 @@ Konum: `public/logo/`. Format: **SVG**. Ayrıntılı kullanım kuralları marka-
 8. **Admin Paneli (/admin)** → Proje, referans, şartname ekle/düzenle/sil
 
 
+## Metin Kuralı
+- Süre, fiyat, m² maliyeti, garanti süresi, sertifika, proje sayısı gibi kesin rakam ve taahhüt yazılmaz. Yerine "projeye göre değişir, teklifte netleştirilir" gibi doğru ve güvenli ifadeler kullanılır.
+- Ahşabın genel faydaları genel bilgi olarak yazılabilir.
+- Metinler sade, güven veren, premium tonda Türkçe olur.
+- Bu kural, marka-stili'ndeki "300+ proje" gibi rakam örneklerinden önce gelir; yeni metinlere proje sayısı yazılmaz.
+
 ## Yapma
 - ❌ Stok fotoğraf kullan; sadece müşteri projeleri
 - ❌ Aşırı animasyon; basit ve profesyonel

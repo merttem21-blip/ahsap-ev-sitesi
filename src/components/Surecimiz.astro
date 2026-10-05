@@ -1,0 +1,219 @@
+---
+// Sürecimiz: ilk görüşmeden teslime 6 adım. Ana sayfada ve Hakkımızda'da kullanılır.
+// Mobilde dikey, ≥ 1024px'te yatay zaman çizelgesi; adımları ince ahşap çizgi bağlar.
+// Metinde süre, fiyat, garanti gibi kesin rakam ve taahhüt yazılmaz (CLAUDE.md metin kuralı).
+const adimlar = [
+  {
+    baslik: 'İlk Görüşme',
+    metin: 'Hayalinizdeki yapıyı, kullanım amacını ve beklentilerinizi dinliyoruz. Size uygun seçenekleri birlikte konuşuyoruz.',
+  },
+  {
+    baslik: 'Keşif ve İhtiyaç Analizi',
+    metin: 'Arazinizi ve ihtiyaçlarınızı birlikte değerlendiriyoruz. Konum, zemin, ölçü ve kullanım detaylarını netleştiriyoruz.',
+  },
+  {
+    baslik: 'Tasarım ve Teklif',
+    metin: 'Yapınızı size özel tasarlıyor, malzeme ve detayları birlikte seçiyoruz. Süre ve maliyet projeye göre teklifte netleşir.',
+  },
+  {
+    baslik: 'Üretim',
+    metin: 'Onayınızın ardından yapınızın parçaları atölyemizde özenle hazırlanır. Üretimin hangi aşamada olduğunu sizinle paylaşıyoruz.',
+  },
+  {
+    baslik: 'Nakliye ve Kurulum',
+    metin: 'Hazırlanan parçalar arazinize taşınır ve ekibimizce yerinde kurulur. Kurulum planı arazinize göre önceden belirlenir.',
+  },
+  {
+    baslik: 'Teslim ve Destek',
+    metin: 'Yapınızı birlikte son kez kontrol edip size teslim ediyoruz. Teslimden sonra da sorularınızda yanınızdayız.',
+  },
+];
+---
+
+<section class="surec" aria-labelledby="surec-baslik">
+  <div class="kap">
+    <header class="surec-ust" data-ortaya>
+      <div>
+        <p class="etiket">Sürecimiz</p>
+        <h2 id="surec-baslik">Fikirden Teslime, Adım Adım</h2>
+      </div>
+      <p>
+        İlk görüşmeden teslime kadar her adımı sizinle birlikte planlıyoruz. Süre ve maliyet
+        projeye göre değişir, teklifte netleştirilir.
+      </p>
+    </header>
+
+    <ol class="surec-adimlar">
+      {
+        adimlar.map((a, i) => (
+          <li class="surec-adim" data-ortaya>
+            <span class="surec-no" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="surec-metin">
+              <h3>{a.baslik}</h3>
+              <p>{a.metin}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="surec-alt" data-ortaya>
+      <a href="/iletisim" class="dugme">Teklif Al</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .surec {
+    padding-block: var(--bolum);
+    background: var(--color-zemin);
+  }
+
+  .surec-ust {
+    margin-bottom: var(--bosluk-5);
+  }
+
+  .surec-ust .etiket {
+    margin-bottom: 12px;
+  }
+
+  .surec-ust h2 {
+    font-size: var(--text-h2);
+  }
+
+  .surec-ust > p {
+    max-width: 48ch;
+    margin: var(--bosluk-2) 0 0;
+  }
+
+  /* Mobil: dikey zaman çizelgesi. Numara halkası solda, metin sağda. */
+  .surec-adimlar {
+    --no: 48px; /* numara halkasının çapı */
+    --ara: var(--bosluk-4); /* adımlar arası */
+    --pay: var(--bosluk-1); /* bağlantı çizgisiyle halka arasındaki boşluk */
+    display: grid;
+    gap: var(--ara);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .surec-adim {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--no) minmax(0, 1fr);
+    column-gap: var(--bosluk-3);
+  }
+
+  /* Bağlantı çizgisi: bu halkadan bir sonrakine uzanan ince ahşap çizgi.
+     Adım belirirken çizgi de halkadan çıkar gibi uzar (yalnızca transform). */
+  .surec-adim:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--no) + var(--pay));
+    bottom: calc(var(--ara) * -1 + var(--pay));
+    left: calc(var(--no) / 2);
+    width: var(--cizgi);
+    background: var(--color-ahsap);
+    transform-origin: top;
+    transition: transform var(--sure-ortaya) var(--ease-ortaya);
+    transition-delay: calc(var(--gecikme, 0ms) + 250ms);
+  }
+
+  .surec-adim.ortaya-gizli::after {
+    transform: scaleY(0);
+  }
+
+  /* Dekoratif sıra numarası; sıra bilgisini <ol> zaten taşır */
+  .surec-no {
+    display: grid;
+    place-items: center;
+    width: var(--no);
+    height: var(--no);
+    border: var(--cizgi) solid var(--color-ahsap);
+    border-radius: var(--radius-tam);
+    color: var(--color-ahsap-acik);
+    font-size: var(--text-kucuk);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  /* Başlığın ilk satırı halkanın ortasına hizalanır */
+  .surec-metin {
+    padding-top: 12px;
+  }
+
+  .surec-metin h3 {
+    font-size: var(--text-h3);
+  }
+
+  .surec-metin p {
+    max-width: 60ch;
+    margin: var(--bosluk-1) 0 0;
+  }
+
+  .surec-alt {
+    margin-top: var(--bosluk-5);
+  }
+
+  /* ≥ 1024px: yatay zaman çizelgesi (6 sütun); başlık solda, açıklama sağda */
+  @media (min-width: 1024px) {
+    .surec-ust {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+      align-items: end;
+      gap: var(--bosluk-5);
+      margin-bottom: var(--bosluk-6);
+    }
+
+    .surec-ust > p {
+      margin: 0;
+    }
+
+    .surec-adimlar {
+      --ara: var(--bosluk-3);
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .surec-adim {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: var(--bosluk-3);
+      align-content: start;
+    }
+
+    .surec-adim:not(:last-child)::after {
+      top: calc(var(--no) / 2);
+      bottom: auto;
+      left: calc(var(--no) + var(--pay));
+      right: calc(var(--ara) * -1 + var(--pay));
+      width: auto;
+      height: var(--cizgi);
+      transform-origin: left;
+    }
+
+    .surec-adim.ortaya-gizli::after {
+      transform: scaleX(0);
+    }
+
+    .surec-metin {
+      padding-top: 0;
+    }
+
+    .surec-metin h3 {
+      font-size: var(--text-giris);
+    }
+
+    .surec-metin p {
+      font-size: var(--text-kucuk);
+      line-height: 1.6;
+    }
+
+    .surec-alt {
+      margin-top: var(--bosluk-6);
+    }
+  }
+</style>

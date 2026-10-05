@@ -1,0 +1,154 @@
+---
+// Neden Ahşap: ahşabın genel faydaları, 6 maddelik ikonlu ızgara (ana sayfa).
+// Mobilde tek sütun, ≥ 640px'te 2 × 3, ≥ 1024px'te 3 × 2.
+// Metinler genel bilgidir; kesin rakam ve taahhüt yazılmaz (CLAUDE.md metin kuralı).
+import { ikon } from '../data/ikonlar';
+
+const maddeler = [
+  {
+    ikon: ikon.termometre,
+    baslik: 'Doğal Yalıtım',
+    metin: 'Ahşabın hücre yapısı ısıyı yavaş iletir. Doğru yalıtımla birleştiğinde kışın sıcak, yazın serin bir iç mekân sağlar.',
+  },
+  {
+    ikon: ikon.ruzgar,
+    baslik: 'Sağlıklı Yaşam Alanı',
+    metin: 'Ahşap, iç mekândaki nemi dengelemeye yardımcı olur. Doğal dokusu ve sıcak görünümüyle huzurlu bir ortam oluşturur.',
+  },
+  {
+    ikon: ikon.zamanlayici,
+    baslik: 'Hızlı Kurulum',
+    metin: 'Parçalar atölyede hazırlandığı için yerinde kurulum genellikle kısa sürer. Kesin süre projeye göre değişir, teklifte netleştirilir.',
+  },
+  {
+    ikon: ikon.agac,
+    baslik: 'Sürdürülebilirlik',
+    metin: 'Ahşap yenilenebilir bir malzemedir ve büyürken karbon depolar. Üretimi birçok yapı malzemesine göre daha az enerji gerektirir.',
+  },
+  {
+    ikon: ikon.tuy,
+    baslik: 'Depreme Uygun Hafif Yapı',
+    metin: 'Ahşap, ağırlığına oranla dayanıklı ve hafif bir malzemedir. Hafif yapılar deprem anında daha az yüke maruz kalır.',
+  },
+  {
+    ikon: ikon.kalemCetvel,
+    baslik: 'Kişiye Özel Tasarım',
+    metin: 'Hazır kalıplar yerine her yapıyı arazinize ve ihtiyaçlarınıza göre tasarlıyoruz. Plan, ölçü ve detayları birlikte belirliyoruz.',
+  },
+];
+---
+
+<section class="neden" aria-labelledby="neden-baslik">
+  <div class="kap">
+    <header class="neden-ust" data-ortaya>
+      <h2 id="neden-baslik">Neden Ahşap?</h2>
+      <p>
+        Ahşap; doğru tasarım ve özenli işçilikle birleştiğinde konforlu, sağlıklı ve doğayla uyumlu
+        yaşam alanları sunar.
+      </p>
+    </header>
+
+    <ul class="neden-izgara">
+      {
+        maddeler.map((m) => (
+          <li class="neden-madde" data-ortaya>
+            <span class="neden-ikon" aria-hidden="true">
+              <svg class="ikon" viewBox="0 0 24 24" set:html={m.ikon} />
+            </span>
+            <h3>{m.baslik}</h3>
+            <p>{m.metin}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .neden {
+    padding-block: var(--bolum);
+    background: var(--color-zemin-ara);
+    border-block: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .neden-ust {
+    margin-bottom: var(--bosluk-5);
+  }
+
+  .neden-ust h2 {
+    font-size: var(--text-h2);
+  }
+
+  .neden-ust > p {
+    max-width: 48ch;
+    margin: var(--bosluk-2) 0 0;
+  }
+
+  .neden-izgara {
+    display: grid;
+    gap: var(--bosluk-2);
+  }
+
+  /* Kart: yüzey zemini, ince çizgi kenar, 16px köşe; gölge ve hover yok (tıklanabilir değil) */
+  .neden-madde {
+    padding: var(--bosluk-4) var(--bosluk-3);
+    background: var(--color-yuzey);
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-kart);
+  }
+
+  .neden-ikon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: var(--bosluk-3);
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-tam);
+    color: var(--color-ahsap);
+  }
+
+  .neden-ikon .ikon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .neden-madde h3 {
+    font-size: var(--text-h3);
+  }
+
+  .neden-madde p {
+    margin: var(--bosluk-1) 0 0;
+  }
+
+  /* ≥ 640px: 2 × 3 */
+  @media (min-width: 640px) {
+    .neden-izgara {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--bosluk-3);
+    }
+  }
+
+  /* ≥ 1024px: 3 × 2; başlık solda, açıklama sağda */
+  @media (min-width: 1024px) {
+    .neden-ust {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+      align-items: end;
+      gap: var(--bosluk-5);
+      margin-bottom: var(--bosluk-6);
+    }
+
+    .neden-ust > p {
+      margin: 0;
+    }
+
+    .neden-izgara {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .neden-madde {
+      padding: var(--bosluk-5) var(--bosluk-4);
+    }
+  }
+</style>

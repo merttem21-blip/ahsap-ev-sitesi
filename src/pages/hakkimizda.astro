@@ -1,16 +1,54 @@
 ---
+// Hakkımızda: firma tanıtımı ve çalışma süreci. Hikâye, vizyon, misyon ve ekip sonraki aşamalarda eklenecek.
 import Layout from '../layouts/Layout.astro';
-import Yakinda from '../components/Yakinda.astro';
-// Geçici sayfa: içerik hazır olunca noindex kaldırılacak
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Surecimiz from '../components/Surecimiz.astro';
 ---
 
 <Layout
   title="Hakkımızda: 2015'ten Beri Ahşap Yapı Üretimi | 2K AHŞAP"
-  description="2K AHŞAP, 2015'ten beri Türkiye'de özel tasarım ahşap ev ve yapılar üretiyor. Hikâyemizi, vizyonumuzu ve ekibimizi yakında bu sayfada anlatacağız."
-  noindex
+  description="2K AHŞAP, 2015'ten beri Türkiye'de özel tasarım ahşap ev ve yapılar üretiyor. Firmamızı ve ilk görüşmeden teslime kadar çalışma sürecimizi tanıyın."
 >
-  <Yakinda
-    baslik="Hakkımızda"
-    metin="2K AHŞAP'ın hikâyesini, vizyonunu ve ekibini anlatacağımız bu sayfayı hazırlıyoruz. Bu sırada sorularınız için bizi arayabilir veya WhatsApp'tan yazabilirsiniz."
-  />
+  <section class="hakkimizda-ust" aria-labelledby="hakkimizda-baslik">
+    <div class="kap">
+      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Hakkımızda' }]} />
+      <h1 id="hakkimizda-baslik">Hakkımızda</h1>
+      <p class="giris">
+        2K AHŞAP, 2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp
+        üretiyor. Pendik/İstanbul merkezli ekibimizle bungalovdan villaya, tiny house'tan çardağa,
+        otel ve bar yapılarından çocuk oyun parklarına kadar farklı ihtiyaçlara yapılar hazırlıyoruz.
+        Modern mimariyi doğal malzemeyle harmanlıyor, her projeyi arazinize ve beklentilerinize göre
+        sizinle birlikte şekillendiriyoruz.
+      </p>
+    </div>
+  </section>
+
+  <Surecimiz />
 </Layout>
+
+<style>
+  .hakkimizda-ust {
+    padding-block: var(--bosluk-2) var(--bosluk-6);
+    background: var(--color-zemin-ara);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .hakkimizda-ust h1 {
+    margin-top: var(--bosluk-1);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .giris {
+    max-width: var(--olcu-metin);
+    margin: var(--bosluk-3) 0 0;
+    font-size: var(--text-giris);
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .hakkimizda-ust {
+      padding-block: var(--bosluk-3) var(--bosluk-7);
+    }
+  }
+</style>
