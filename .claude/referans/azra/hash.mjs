@@ -1,7 +1,6 @@
 // Algısal benzerlik hash'leri: dHash (9x8 fark) + pHash (32x32 DCT → 8x8).
 // node hash.mjs <cikti.json> [--kirpim] <klasor|dosya>...   (proje kökünden çalıştırılır; sharp oradan gelir)
-// --kirpim: kırpılmış kopyaları da yakalamak için ortadan %85/%70 ve dört köşeden %80 kırpımların hash'lerini ekler (k[]).
-import fs from 'node:fs/promises';
+// --kirpim: kırpılmış kopyaları da yakalamak için ortadan %85/%70 ve dört köşeden %80 kırpımların hash'lerini ekler (k[]).import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 
@@ -34,8 +33,10 @@ const KIRPIMLAR = [
 async function kirp(dosya, [x, y, en, boy]) {
   const tampon = await sharp(dosya).rotate().toBuffer();
   const { width, height } = await sharp(tampon).metadata();
+  const left = Math.floor(x * width);
+  const top = Math.floor(y * height);
   return sharp(tampon)
-    .extract({ left: Math.round(x * width), top: Math.round(y * height), width: Math.round(en * width), height: Math.round(boy * height) })
+    .extract({ left, top, width: Math.min(Math.round(en * width), width - left), height: Math.min(Math.round(boy * height), height - top) })
     .toBuffer();
 }
 
