@@ -194,12 +194,13 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 | Hareket | Kural | Süre |
 |---|---|---|
 | Sayfa geçişi | Astro View Transitions (Astro 4: `astro:transitions` içindeki `<ViewTransitions />`) ile yumuşak geçiş. Header ve logo `transition:persist` ile yerinde sabit kalır. | Tarayıcı varsayılanı (~300ms) |
-| Kaydırınca ortaya çıkma | Bölümler ve kartlar ekrana girerken `opacity: 0 → 1` ve `translateY(24px) → 0`, `--ease-ortaya` (`cubic-bezier(0.2, 0.7, 0.2, 1)`). IntersectionObserver ile, **tek seferlik** (`data-ortaya`, `src/scripts/hareket.ts`). Kartlarda 80ms kademeli gecikme. Sayfa açıldığında zaten görünen öğeler gizlenmez. Zıplama, büyüme, döndürme yok. | 700ms (`--sure-ortaya`) |
+| Kaydırınca ortaya çıkma | Bölümler ve kartlar ekrana girerken `opacity: 0 → 1` ve `translateY(24px) → 0`, `--ease-ortaya` (`cubic-bezier(0.2, 0.7, 0.2, 1)`). IntersectionObserver ile, **tek seferlik** (`data-ortaya`, `src/scripts/hareket.ts`). Kartlarda 80ms kademeli gecikme. Yatay kaydırmalı şeritte kapsayıcıya `data-ortaya-grup` verilir: şerit ekrana girince ekran dışındaki kartlar dahil hepsi sırayla belirir. Sayfa açıldığında zaten görünen öğeler gizlenmez. Zıplama, büyüme, döndürme yok. | 700ms (`--sure-ortaya`) |
 | Hero | Fotoğrafta çok yavaş yakınlaşma (`scale(1) → scale(1.06)`, tek yön). Birden fazla fotoğraf varsa 7 sn'de bir çapraz geçişli slayt ve altta ince ilerleme çizgisi; ok veya nokta yok. İlk fotoğraf hemen, diğerleri sayfa yüklendikten sonra yüklenir. Başlık, metin, butonlar ve ikon şeridi sırayla belirir. | Tek fotoğrafta 18 sn; slaytta 7 sn + 1.5 sn geçiş; metin 700ms |
 | Parallax | Yalnızca hero fotoğrafında, kaydırma hızının %30'u (`data-parallax`, yalnızca transform). Yalnızca Lenis açıkken çalışır. | — |
 | Yumuşak kaydırma | Lenis; yalnızca fare/trackpad'li cihazlarda (`hover: hover` ve `pointer: fine`). Mobilde ve `prefers-reduced-motion` açıkken kapalı. | Lenis varsayılanı |
 | Header küçülmesi | Kaydırınca header sabit kalır; yalnızca transform ile küçülür (logo 64px), zemin %95 opak antrasite döner (`--color-ust-kucuk`), altında ince çizgi. `backdrop-filter` kullanılmaz (kaydırmada takılma yapar). | 300ms (`--sure`) |
 | Proje kartı hover | Görsel `scale(1.04)`, üstündeki karartma azalır (`opacity`), alt çizgi soldan sağa uzar (`scaleX(0 → 1)`, `transform-origin: left`). | 300–500ms |
+| Fotoğraflı kart hover (ana sayfa kategori kartı) | Kart 6px yukarı kalkar, ahşap çerçeveli katman ve alttan sıcak iç ışık belirir (`opacity`), görsel `scale(1.06)`, ok 6px sağa kayar, açıklama %85'ten tam opaklığa çıkar. Gölge yok. Odakta da aynısı. | 400ms (`--sure-kart`) |
 | Menü linki | Alt çizgi soldan sağa uzar (`scaleX`). | 200–300ms |
 | Buton hover | Çerçeve ahşaba döner (ahşap çerçeveli katmanın `opacity`'si), ok 4px sağa kayar. | 200–300ms |
 
@@ -224,7 +225,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - **Açık zeminli bölüm yapma.** Beyaz, krem veya açık gri zemin yok; açık renge dönen header yok.
 - **Dolu veya yeşil buton yapma.** Butonlar içi boş, krem çerçeveli pill'dir (bkz. §9).
 - **Aşırı animasyon kullanma** (bkz. §6).
-- Palet dışı renk ekleme (özellikle parlak mavi, mor, neon, yoğun gradyan). Tek izinli gradyan, fotoğraf üstündeki gece karartmasıdır.
+- Palet dışı renk ekleme (özellikle parlak mavi, mor, neon, yoğun gradyan). Tek izinli gradyan, fotoğraf üstündeki gece karartmasıdır; istisnası fotoğraflı kart hover'ında alttan gelen hafif ahşap iç ışıktır (`--color-ahsap-isik`, yalnızca hover/odakta).
 - Ahşap veya yeşil rengi küçük metin rengi olarak kullanma (kontrast yetersiz; ahşap tonu gerekiyorsa `--color-ahsap-acik`).
 - Gölge ile yüzey ayırma.
 - Poppins ve Inter dışında font ekleme.
@@ -236,7 +237,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - **Karartma:** soldan sağa açılan gece gradyanı — metnin durduğu sol tarafta en koyu (etkin opaklık ≥ %70), sağa doğru azalır ve fotoğrafın ışıklı kısmı görünür kalır. Mobilde metin genişliği kapladığı için karartma metin bölgesinde en az %70 kalır.
 - Tek `<h1>`: net değer önerisi. Altında 1–2 cümlelik açıklama ve güven unsuru ("2015'ten beri · 300+ proje").
 - Butonlar: pill çerçeveli "Teklif Al" ve "Projeleri İncele" (bkz. §9). Yeşil veya dolu buton yok.
-- Fotoğraf masaüstünde metin sütununun bittiği yerden başlar (en az %42) ve sola doğru zemine erir; başlık evin üstüne binmez. Hero'nun alt %25'i sayfa zeminine erir, sonraki bölüm aynı zemin renginden başlar.
+- Fotoğraf masaüstünde metin sütununun bittiği yerden başlar (en az %42) ve sola doğru zemine erir; başlık evin üstüne binmez. Hero'nun alt %25'i sayfa zeminine erir, sonraki bölüm aynı zemin renginden başlar. Ana sayfada sonraki bölümün (Ürünlerimiz) başlığı ve kartların üst kısmı bu gece zeminde kalır, kartların gerisi antrasit banda oturur; kartlar iki tonun sınırına biner (mobil 48px, tablet 64px, masaüstü 80px, `--bindirme`). Sınırda 1px `--color-cizgi` çizgisi vardır.
 - Altında, ince dikey çizgilerle ayrılmış **3 ikonlu bilgi şeridi**: "Doğal Malzeme" (yaprak), "Modern Tasarım" (ev), "Güvenilir Uygulama" (kalkan). Ahşap çizgi ikon + büyük harfli etiket; rakam kullanılmaz.
 - Hero fotoğrafları `scripts/hero-gorseli.mjs` ile üretilir (kadraj, sıcak renk düzeltmesi, netlik; kaynak dosyaya dokunulmaz).
 - Hero görseli LCP öğesidir: `loading="eager"`, `fetchpriority="high"`, WebP/AVIF, `srcset` ile boyutlandırılmış. Lazy-load yapılmaz.
@@ -284,6 +285,8 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 | Metin linki | `--color-metin` veya krem, altı çizili; hover `--color-ahsap-acik` |
 | Kart | `--color-yuzey` zemin, 1px `--color-cizgi` kenar, 16px köşe (`--radius-kart`), gölge yok. Görsel üstte; altında büyük harfli etiket (`--color-ahsap-acik`) · krem başlık · doluysa bilgi satırı. Görsel oranı ızgaradaki yerine göre değişebilir. Hover: bkz. §6. |
 | Menü linki | `--color-metin`; hover ve aktifte krem. Aktifte 2px yeşil alt çizgi; hover'da 1px ahşap alt çizgi soldan sağa uzar |
+| Fotoğraflı kart (ana sayfa kategori kartı) | Dikey 4:5, görsel tüm kartı kaplar; 16px köşe, 1px krem %8 çerçeve (`--color-cizgi-ince`), gölge yok. Sol üstte dekoratif `01`–`04` numarası (`--color-ahsap-acik`, büyük harf etiket ölçüsü, `aria-hidden`); altında hafif gece karartması (`--color-karartma-orta`). Metin alttaki karartmanın üzerinde: krem başlık, krem açıklama (%85 opak), ince ahşap çizgi, krem eylem ve ahşap ok. Karartma metin bloğuna bağlıdır: başlığın üstünde %70, açıklama ve eylemde %90 (`--color-karartma-yogun`). Vitrin fotoğrafları `scripts/vitrin-gorseli.mjs` ile aynı ışıkta üretilir (bkz. `gorsel-yonetimi`). Hover: bkz. §6. |
+| Kategori linki | Pill, 1px `--color-cizgi` çerçeve, `--color-metin` metin, en az 44px yükseklik. Hover/odak: ahşap çerçeveli katman belirir, metin krem. |
 | Ayraç | 1px `--color-cizgi`; vurgu gereken yerde 1px `--color-ahsap` |
 | Bilgi şeridi | 3 sütun, aralarında 1px dikey ayraç; ahşap çizgi ikon + büyük harfli etiket |
 | Odak halkası | `outline: 2px solid var(--color-krem)`, `outline-offset: 2px`. Asla kaldırılmaz. |

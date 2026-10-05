@@ -34,6 +34,7 @@ npm run build && npm run check:images            ← kırık görsel varsa çık
 | Dosya | `<proje-slug>-NN` (iki haneli sıra), uzantısız ve boyut eksiz yazılır | `kemerli-pod-bungalov-03` |
 
 - Kategori kökünde (`public/images/ahsap-ev/*.webp`) veya `site.ts`'de karşılığı olmayan bir klasörde (`public/images/diger/`) duran fotoğraflar **sitede görünmez**; bir projeye bağlanmayı bekliyordur. "Diğer" niteliğindeki yapılar `ozel-tasarim` kategorisine girer.
+- İki istisna, projelerden üretilen işlenmiş kopyalardır ve kaynak dosyaya dokunmaz: `public/images/hero/` (`scripts/hero-gorseli.mjs`) ve ana sayfa kategori kartlarının 4:5 vitrin fotoğrafları `public/images/vitrin/<kategori>-vitrin-*.webp` (`scripts/vitrin-gorseli.mjs`: ortak kadraj oranı, sıcak renk düzeltmesi, eşitlenmiş parlaklık; ev kadrajın üst yarısında kalır). Vitrin fotoğrafı değişecekse script'teki `kaynak` ve `kadraj` güncellenip yeniden çalıştırılır; önce `--onizleme` ile dört kart yan yana kontrol edilir.
 - Fotoğraf başka bir yola taşınırsa eski → yeni eşleşmesi `scripts/gorsel-tasima-kaydi.json`'a eklenir.
 
 ## 3. Projeye bağlama (frontmatter)
