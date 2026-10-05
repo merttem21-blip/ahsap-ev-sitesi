@@ -31,6 +31,7 @@ Bu kurallar sitedeki her sayfa ve bileşen için geçerlidir. Bir tasarım karar
 - `#FAF6F0` (`--color-zemin`) — açık krem, ana sayfa zemini (beyaz yerine)
 - `#1B5E20` (`--color-yesil-koyu`) — CTA hover/active durumu
 - `#7A5A3A` (`--color-ahsap-koyu`) — ahşap tonlu küçük metin veya link gerektiğinde
+- Saydam türevler (ince çizgi, fotoğraf karartması, koyu zemindeki ikincil metin) yalnızca bu paletten türetilir ve `src/styles/global.css` içinde token olarak tanımlanır. Sayfa ve bileşenlerde sabit hex/rgba yazılmaz; yeni bir ton gerekirse önce token eklenir.
 
 **Dağılım:** ~%60 açık zemin (zemin/krem/beyaz), ~%30 antrasit (metin, koyu bölümler), ~%10 ahşap + yeşil vurgu. Yeşil az kullanılmalı ki CTA'lar öne çıksın.
 
@@ -83,17 +84,21 @@ Astro layout `<head>` içinde yükle (alternatif: `@fontsource/poppins` + `@font
 
 | Öğe | Font | Boyut (mobil → masaüstü) | Ağırlık |
 |---|---|---|---|
-| H1 (hero) | Poppins | `clamp(2rem, 5vw, 3.5rem)` | 700 |
-| H2 | Poppins | `clamp(1.5rem, 3.5vw, 2.5rem)` | 600 |
+| H1 (hero) | Poppins | `clamp(2.5rem, 7vw, 5.5rem)`, harf aralığı -0.02em | 600 |
+| H2 | Poppins | `clamp(1.75rem, 4vw, 3rem)`, harf aralığı -0.015em | 600 |
 | H3 | Poppins | `clamp(1.25rem, 2.5vw, 1.5rem)` | 600 |
 | Gövde | Inter | `1rem`, satır yüksekliği 1.6–1.7 | 400 |
 | Küçük metin | Inter | `0.875rem` | 400 |
-| Buton | Inter | `1rem` | 600 |
+| Etiket (büyük harf) | Inter | `0.75rem`, harf aralığı 0.14em | 500 |
+| Buton | Inter | `0.9375rem`, harf aralığı 0.02em | 600 |
 
+- Lüks his süsten değil ölçekten gelir: başlıklar büyük ve sıkı, etiketler küçük ve geniş aralıklı, aralarında net boyut farkı.
 - Gövde metni 16px'in altına inmez; satır uzunluğu en fazla ~70 karakter (`max-width: 65ch`).
 - `<html lang="tr">` zorunlu — `text-transform: uppercase` kullanıldığında "i → İ" dönüşümü doğru çalışsın.
 - Türkçe karakterler (ç ğ ı İ ö ş ü) her başlık ve ağırlıkta kontrol edilir.
-- Tamamen büyük harf sadece kısa etiketlerde (logo, kategori rozeti), harf aralığı ~0.05em.
+- Başlıklar asla italik değildir.
+- Tamamen büyük harf yalnızca kısa etiketlerde (kart üstündeki kategori/konum, bölüm etiketi, bilgi şeridi), harf aralığı 0.14em. Etiket rengi antrasit, ahşap koyu veya koyu zeminde krem olur; ahşap rengi etikette kullanılmaz (küçük metin).
+- Bölüm etiketi (başlığın üstündeki küçük büyük harfli satır) sayfa başına en fazla 2 kez kullanılır ve başlığın hemen üstünde, aynı sütunda durur.
 
 ## 4. Logo
 
@@ -141,10 +146,10 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 ## 5. Görsel Dil
 
 - Sadece 2K AHŞAP'ın gerçek proje fotoğrafları (`public/images/<kategori>/`). Görsel işleme ve optimizasyon için `gorsel-yonetimi` skill'ine bak.
-- **Köşe:** butonlar ve küçük öğeler 8px, kartlar ve büyük görseller 12px.
-- **Gölge:** hafif ve yumuşak (`0 4px 20px rgba(46, 46, 46, 0.08)`); sert veya koyu gölge yok.
+- **Köşe:** butonlar, kartlar ve görseller 4px (`--radius`); yalnızca yuvarlak öğeler (WhatsApp butonu) tam yuvarlak.
+- **Gölge:** kullanılmaz. Yüzeyler arası ayrım ince çizgiyle (`1px solid var(--color-cizgi)`) ve zemin tonu farkıyla verilir. İstisna: yüzen WhatsApp butonu ve açılır menü paneli.
 - **İkonlar:** tek set, çizgi (outline) stili, 1.5–2px kalınlık (ör. Lucide). Emoji ikon olarak kullanılmaz.
-- **Boşluk:** 8px tabanlı ölçek (8, 16, 24, 32, 48, 64, 96). Bölümler arası mobilde 64px, masaüstünde 96px.
+- **Boşluk:** 8px tabanlı ölçek (8, 16, 24, 32, 48, 64, 96, 128, 160). Bölüm boşlukları her yerde aynı değildir; ritim için değişir: mobilde 64–96px, masaüstünde 96–160px.
 
 ## 6. Yapma ❌
 
@@ -170,8 +175,8 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 ## 7. Olmalı ✅
 
 ### Hero section
-- Tam genişlik, en güçlü gerçek proje fotoğrafı. Yükseklik mobilde ~75svh, masaüstünde ~85svh; alt bölümün başladığı görünsün.
-- Okunabilirlik için fotoğrafın üzerine antrasit karartma: `linear-gradient(rgba(46,46,46,.55), rgba(46,46,46,.25))`.
+- Ana sayfada tam ekran (`100svh`), en güçlü gerçek proje fotoğrafı; metin sola yaslı, ortalanmaz.
+- Fotoğraf üzerindeki metin her genişlikte WCAG AA sağlar: metnin altındaki bölgede antrasit katmanın etkin opaklığı en az %66 olur (fotoğrafın en açık pikselinde bile beyaz metin ≥ 4.5:1). Gradyan arka plan kullanılmaz; katman düz renktir.
 - Tek `<h1>`: net değer önerisi. Altında 1–2 cümlelik açıklama ve güven unsuru ("2015'ten beri · 300+ proje").
 - Birincil CTA: yeşil "Teklif Al". İkincil CTA: çerçeveli "Projeleri İncele".
 - Hero görseli LCP öğesidir: `loading="eager"`, `fetchpriority="high"`, WebP/AVIF, `srcset` ile boyutlandırılmış. Lazy-load yapılmaz.
@@ -207,10 +212,10 @@ Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeni
 
 | Bileşen | Stil |
 |---|---|
-| Birincil buton | Yeşil zemin, beyaz metin, 8px köşe; hover `--color-yesil-koyu` |
-| İkincil buton | Şeffaf zemin, 1.5px antrasit çerçeve ve metin; koyu zeminde krem çerçeve ve metin |
+| Birincil buton | Yeşil zemin, beyaz metin, 4px köşe; hover `--color-yesil-koyu` |
+| İkincil buton | Şeffaf zemin, 1px antrasit çerçeve ve metin; koyu zeminde krem çerçeve ve metin |
 | Metin linki | Antrasit, altı çizili; hover `--color-ahsap-koyu` |
-| Proje kartı | Beyaz veya krem zemin, 12px köşe, hafif gölge, üstte 4:3 görsel; hover'da görsel `scale(1.03)`, 300ms |
+| Proje kartı | Görsel öncelikli; çerçeve, zemin ve gölge yok. Görsel oranı ızgaradaki yerine göre değişir (eşit kutu ızgara yapılmaz). Altında: büyük harfli kategori etiketi · ince ayraç çizgisi · proje adı · doluysa konum. Hover'da görsel `scale(1.02)`, 300ms |
 | Odak halkası | Açık zeminde `outline: 2px solid var(--color-yesil)`, koyu zeminde `var(--color-krem)`; `outline-offset: 2px`. Asla kaldırılmaz. |
 
 ## 9. Teslim Öncesi Kontrol Listesi
