@@ -575,10 +575,10 @@
   },
   {
     "eski": "/images/bungalov/bungalov2-2",
-    "yeni": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-03",
-    "proje": "a-frame-bungalov",
-    "baslik": "A-Frame Bungalov",
-    "kategori": "a-frame"
+    "yeni": "/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-13",
+    "proje": "deniz-ustu-ahsap-otel-odalari",
+    "baslik": "Deniz Üstü Ahşap Otel Odaları",
+    "kategori": "otel-bar"
   },
   {
     "eski": "/images/bungalov/bungalov3",
@@ -589,10 +589,10 @@
   },
   {
     "eski": "/images/bungalov/bungalov3-2",
-    "yeni": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-05",
-    "proje": "a-frame-bungalov",
-    "baslik": "A-Frame Bungalov",
-    "kategori": "a-frame"
+    "yeni": "/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-14",
+    "proje": "deniz-ustu-ahsap-otel-odalari",
+    "baslik": "Deniz Üstü Ahşap Otel Odaları",
+    "kategori": "otel-bar"
   },
   {
     "eski": "/images/bungalov/bungalov4",
@@ -603,10 +603,10 @@
   },
   {
     "eski": "/images/bungalov/bungalov4-2",
-    "yeni": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-07",
-    "proje": "a-frame-bungalov",
-    "baslik": "A-Frame Bungalov",
-    "kategori": "a-frame"
+    "yeni": "/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-15",
+    "proje": "deniz-ustu-ahsap-otel-odalari",
+    "baslik": "Deniz Üstü Ahşap Otel Odaları",
+    "kategori": "otel-bar"
   },
   {
     "eski": "/images/bungalov/bungalov5",
@@ -1860,5 +1860,26 @@
     "proje": "bahce-deposu",
     "baslik": "Bahçe Deposu",
     "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-03",
+    "yeni": "/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-13",
+    "proje": "deniz-ustu-ahsap-otel-odalari",
+    "baslik": "Deniz Üstü Ahşap Otel Odaları",
+    "kategori": "otel-bar"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-05",
+    "yeni": "/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-14",
+    "proje": "deniz-ustu-ahsap-otel-odalari",
+    "baslik": "Deniz Üstü Ahşap Otel Odaları",
+    "kategori": "otel-bar"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-07",
+    "yeni": "/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-15",
+    "proje": "deniz-ustu-ahsap-otel-odalari",
+    "baslik": "Deniz Üstü Ahşap Otel Odaları",
+    "kategori": "otel-bar"
   }
 ]

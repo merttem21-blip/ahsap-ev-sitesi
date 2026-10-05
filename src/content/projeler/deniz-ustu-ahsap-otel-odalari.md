@@ -20,6 +20,12 @@ fotograflar:
     alt: "Deniz üstü ahşap otel odaları – cam kapı önünde teras"
   - dosya: deniz-ustu-ahsap-otel-odalari-06
     alt: "Deniz üstü ahşap otel odaları – tavan vantilatörlü yatak odası"
+  - dosya: deniz-ustu-ahsap-otel-odalari-13
+    alt: "Deniz üstü ahşap otel odaları – klimalı odada koltuklar ve çift kişilik yatak"
+  - dosya: deniz-ustu-ahsap-otel-odalari-14
+    alt: "Deniz üstü ahşap otel odaları – tül perdeli geniş pencere önünde yatak"
+  - dosya: deniz-ustu-ahsap-otel-odalari-15
+    alt: "Deniz üstü ahşap otel odaları – çizgili örtülü yatak ve TV ünitesi"
   - dosya: deniz-ustu-ahsap-otel-odalari-12
     alt: "Deniz üstü ahşap otel odaları – kapıdan deniz manzaralı oda"
   - dosya: deniz-ustu-ahsap-otel-odalari-04

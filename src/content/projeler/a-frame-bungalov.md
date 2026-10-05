@@ -6,12 +6,6 @@ kapak: a-frame-bungalov-01
 fotograflar:
   - dosya: a-frame-bungalov-01
     alt: "A-frame bungalov – gece ışıklandırılmış bahçe ve köy manzarası"
-  - dosya: a-frame-bungalov-03
-    alt: "A-frame bungalov – tavan vantilatörlü yatak odası"
-  - dosya: a-frame-bungalov-07
-    alt: "A-frame bungalov – çizgili örtülü çift kişilik yatak ve TV ünitesi"
-  - dosya: a-frame-bungalov-05
-    alt: "A-frame bungalov – tül perdeli geniş pencere ve yatak"
   - dosya: a-frame-bungalov-09
     alt: "A-frame bungalov – taş kaplı şömine ve oturma köşesi"
   - dosya: a-frame-bungalov-06
