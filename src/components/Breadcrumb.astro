@@ -47,22 +47,24 @@ const sema = {
   .konum li + li::before {
     content: '›';
     margin-inline: 8px;
-    color: var(--color-ahsap-koyu);
+    color: var(--color-metin-soluk);
   }
 
   .konum a {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    color: var(--color-ahsap-koyu);
+    color: var(--color-metin);
     text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   .konum a:hover {
-    color: var(--color-antrasit);
+    color: var(--color-ahsap-acik);
   }
 
   .konum [aria-current='page'] {
+    color: var(--color-krem);
     font-weight: 500;
   }
 </style>

@@ -1,27 +1,32 @@
 /* 2K AHŞAP — site geneli token'lar ve temel stiller. Kurallar: .claude/skills/marka-stili
-   Tüm renk, yazı, boşluk ve hareket değerleri burada tanımlanır; sayfalar yalnızca token kullanır. */
+   Site baştan sona koyu temadır. Tüm renk, yazı, boşluk ve hareket değerleri burada tanımlanır;
+   sayfalar yalnızca token kullanır (önce rol token'ları, gerekirse marka paleti). */
 
 :root {
+  color-scheme: dark;
+
   /* Marka paleti */
+  --color-gece: #1e1e1e;
   --color-antrasit: #2e2e2e;
-  --color-ahsap: #a67c52;
-  --color-ahsap-koyu: #7a5a3a;
-  --color-yesil: #2e7d32;
-  --color-yesil-koyu: #1b5e20;
   --color-krem: #ebdcc6;
-  --color-zemin: #faf6f0;
+  --color-ahsap: #a67c52;
+  --color-yesil: #2e7d32;
   --color-beyaz: #ffffff;
   /* Yalnızca yüzen WhatsApp butonu (WhatsApp marka rengi) */
   --color-whatsapp: #25d366;
   --color-whatsapp-koyu: #1da851;
 
-  /* Paletten türetilen tonlar */
-  --color-metin-ikincil: #5b5a58; /* antrasit %78 + zemin; zeminde 6.4:1, kremde 5.1:1 */
-  --color-krem-soluk: #bcb1a0; /* krem %75 + antrasit; antrasit zeminde 6.4:1 */
-  --color-cizgi: rgba(46, 46, 46, 0.14); /* açık zeminde ince ayraç (dekoratif) */
-  --color-cizgi-koyu: rgba(235, 220, 198, 0.18); /* koyu zeminde ince ayraç (dekoratif) */
-  --color-karartma: rgba(46, 46, 46, 0.7); /* fotoğraf üstü metin: beyaz pikselde bile ≥ 4.5:1 */
-  --color-karartma-hafif: rgba(46, 46, 46, 0.3);
+  /* Koyu tema rolleri. Kontrast oranları en kötü zemine göre: antrasit üstündeki kart (≈ #363534) */
+  --color-zemin: var(--color-gece); /* sayfa zemini */
+  --color-zemin-ara: var(--color-antrasit); /* bölümler arası ton farkı */
+  --color-yuzey: rgba(235, 220, 198, 0.04); /* kart: gece üstünde ≈ #262625, antrasit üstünde ≈ #363534 */
+  --color-baslik: var(--color-krem); /* ≥ 9.1:1 */
+  --color-metin: #c2b6a4; /* krem %80 + gece; ≥ 6.1:1 */
+  --color-metin-soluk: #aea394; /* krem %70 + gece; ≥ 4.9:1 */
+  --color-ahsap-acik: #bb9975; /* ahşap %70 + krem; küçük etiket ve link, ≥ 4.6:1 */
+  --color-cizgi: rgba(235, 220, 198, 0.14); /* ince ayraç ve kart kenarı (dekoratif) */
+  --color-karartma: rgba(30, 30, 30, 0.7); /* fotoğraf üstü metin: beyaz pikselde bile krem ≥ 4.5:1 */
+  --color-karartma-hafif: rgba(30, 30, 30, 0.3);
 
   /* Yazı */
   --font-baslik: 'Poppins', system-ui, sans-serif;
@@ -59,14 +64,20 @@
   --bolum-genis: clamp(96px, 12vw, 160px);
 
   /* Biçim */
-  --radius: 4px;
+  --radius: 4px; /* kart ve görsel */
+  --radius-tam: 999px; /* buton (pill) ve yuvarlak öğeler */
   --cizgi: 1px;
-  --golge-panel: 0 16px 40px rgba(46, 46, 46, 0.2); /* yalnızca açılır menü paneli */
-  --golge-yuzen: 0 6px 20px rgba(46, 46, 46, 0.25); /* yalnızca yüzen WhatsApp butonu */
+  --golge-yuzen: 0 6px 20px rgba(30, 30, 30, 0.6); /* yalnızca yüzen WhatsApp butonu */
+
+  /* İkon: Lucide arrow-right, CSS maskesi olarak (buton oku) */
+  --ikon-ok: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
 
   /* Hareket: yalnızca opacity ve transform */
-  --sure-kisa: 200ms;
+  --sure-kisa: 200ms; /* hover, menü */
   --sure: 300ms;
+  --sure-giris: 500ms; /* kaydırınca ortaya çıkma */
+  --sure-kenburns: 18s; /* hero fotoğrafında yavaş yakınlaşma */
+  --gecikme-adim: 80ms; /* kartlarda kademeli gecikme */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --gecis: var(--sure-kisa) var(--ease-out);
 
@@ -76,9 +87,11 @@
   --z-yuzen: 30;
   --z-atla: 100;
 
-  /* Geçiş dönemi: eski sayfalar kendi adımlarında yenilenene kadar kalır, sonra silinir */
+  /* Geçiş dönemi: header, footer ve galeri kendi adımlarında yenilenene kadar kalır, sonra silinir */
+  --color-krem-soluk: var(--color-metin);
+  --color-cizgi-koyu: var(--color-cizgi);
   --radius-buyuk: var(--radius);
-  --golge: none;
+  --golge-panel: none;
 }
 
 *,
@@ -89,6 +102,7 @@
 
 html {
   overflow-x: clip;
+  background: var(--color-zemin);
   scroll-behavior: smooth;
 }
 
@@ -96,7 +110,7 @@ body {
   margin: 0;
   overflow-x: clip;
   background: var(--color-zemin);
-  color: var(--color-antrasit);
+  color: var(--color-metin);
   font-family: var(--font-metin);
   font-size: var(--text-govde);
   line-height: var(--satir-govde);
@@ -107,6 +121,7 @@ h1,
 h2,
 h3 {
   margin: 0;
+  color: var(--color-baslik);
   font-family: var(--font-baslik);
   font-style: normal;
   font-weight: 600;
@@ -138,11 +153,11 @@ ul {
 
 ::selection {
   background: var(--color-krem);
-  color: var(--color-antrasit);
+  color: var(--color-gece);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-yesil);
+  outline: 2px solid var(--color-krem);
   outline-offset: 2px;
 }
 
@@ -161,7 +176,8 @@ ul {
   top: -100px;
   z-index: var(--z-atla);
   padding: 12px var(--bosluk-2);
-  background: var(--color-beyaz);
+  background: var(--color-krem);
+  color: var(--color-gece);
   border-radius: var(--radius);
   font-weight: 600;
 }
@@ -189,9 +205,10 @@ ul {
 }
 
 /* Büyük harfli küçük etiket: kart kategorisi, konum, bölüm etiketi, bilgi şeridi.
-   Renk bağlama göre verilir; ahşap rengi kullanılmaz (küçük metin). */
+   Saf ahşap kullanılmaz (küçük metin); varsayılan ahşap açık tonudur. */
 .etiket {
   margin: 0;
+  color: var(--color-ahsap-acik);
   font-family: var(--font-metin);
   font-size: var(--text-etiket);
   font-weight: 500;
@@ -200,57 +217,68 @@ ul {
   text-transform: uppercase;
 }
 
-/* Butonlar */
+/* Buton: pill, içi boş, ince krem çerçeve, sağında ok.
+   Hover/odakta ahşap çerçeveli katman belirir ve ok kayar (yalnızca opacity ve transform).
+   Eski .dugme-birincil / .dugme-ikincil sınıfları stil taşımaz; sayfalar yenilenirken kaldırılır. */
 .dugme {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+  max-width: 100%;
   min-height: 48px;
-  padding: 12px 28px;
-  border: var(--cizgi) solid transparent;
-  border-radius: var(--radius);
+  padding: 12px 20px 12px 24px;
+  border: var(--cizgi) solid var(--color-krem);
+  border-radius: var(--radius-tam);
+  background: transparent;
+  color: var(--color-krem);
   font-size: var(--text-dugme);
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.2;
+  text-align: center;
   text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background-color var(--gecis),
-    color var(--gecis),
-    border-color var(--gecis);
 }
 
-.dugme-birincil {
-  background: var(--color-yesil);
-  color: var(--color-beyaz);
+.dugme::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--cizgi) * -1);
+  border: var(--cizgi) solid var(--color-ahsap);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--gecis);
 }
 
-.dugme-birincil:hover {
-  background: var(--color-yesil-koyu);
+.dugme::after {
+  content: '';
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background: currentColor;
+  -webkit-mask: var(--ikon-ok) center / contain no-repeat;
+  mask: var(--ikon-ok) center / contain no-repeat;
+  transition: transform var(--gecis);
 }
 
-/* Koyu zeminde (hero, antrasit bölümler) */
-.dugme-ikincil {
-  border-color: var(--color-krem);
-  color: var(--color-krem);
+.dugme:hover::before,
+.dugme:focus-visible::before {
+  opacity: 1;
 }
 
-.dugme-ikincil:hover {
-  background: var(--color-krem);
-  color: var(--color-antrasit);
+.dugme:hover::after,
+.dugme:focus-visible::after {
+  transform: translateX(4px);
 }
 
-/* Açık zeminde (zemin, krem, beyaz bölümler) */
-.dugme-ikincil-acik {
-  border-color: var(--color-antrasit);
-  color: var(--color-antrasit);
-}
-
-.dugme-ikincil-acik:hover {
-  background: var(--color-antrasit);
-  color: var(--color-zemin);
+/* ≥ 640px */
+@media (min-width: 640px) {
+  .dugme {
+    padding-inline: 32px 28px;
+    white-space: nowrap;
+  }
 }
 
 /* ≥ 768px */
