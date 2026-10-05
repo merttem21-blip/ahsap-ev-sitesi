@@ -1,0 +1,4682 @@
+{
+ "esik": 18,
+ "supheli": 26,
+ "eslesme": {
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-01-600.webp": [
+   {
+    "id": 1823,
+    "mesafe": 41
+   },
+   {
+    "id": 1062,
+    "mesafe": 42
+   },
+   {
+    "id": 276,
+    "mesafe": 42
+   }
+  ],
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-02-600.webp": [
+   {
+    "id": 1249,
+    "mesafe": 41
+   },
+   {
+    "id": 1713,
+    "mesafe": 42
+   },
+   {
+    "id": 1801,
+    "mesafe": 42
+   }
+  ],
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-04-600.webp": [
+   {
+    "id": 1353,
+    "mesafe": 39
+   },
+   {
+    "id": 1756,
+    "mesafe": 39
+   },
+   {
+    "id": 927,
+    "mesafe": 39
+   }
+  ],
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-06-600.webp": [
+   {
+    "id": 1037,
+    "mesafe": 38
+   },
+   {
+    "id": 1516,
+    "mesafe": 39
+   },
+   {
+    "id": 2177,
+    "mesafe": 40
+   }
+  ],
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-08-600.webp": [
+   {
+    "id": 1724,
+    "mesafe": 36
+   },
+   {
+    "id": 1503,
+    "mesafe": 40
+   },
+   {
+    "id": 279,
+    "mesafe": 43
+   }
+  ],
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-09-600.webp": [
+   {
+    "id": 1270,
+    "mesafe": 9
+   },
+   {
+    "id": 1159,
+    "mesafe": 39
+   },
+   {
+    "id": 1556,
+    "mesafe": 40
+   }
+  ],
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-10-600.webp": [
+   {
+    "id": 1294,
+    "mesafe": 7
+   },
+   {
+    "id": 1426,
+    "mesafe": 35
+   },
+   {
+    "id": 879,
+    "mesafe": 40
+   }
+  ],
+  "public/images/a-frame/a-frame-bungalov/a-frame-bungalov-11-600.webp": [
+   {
+    "id": 1271,
+    "mesafe": 4
+   },
+   {
+    "id": 1233,
+    "mesafe": 37
+   },
+   {
+    "id": 290,
+    "mesafe": 37
+   }
+  ],
+  "public/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-01-600.webp": [
+   {
+    "id": 1628,
+    "mesafe": 35
+   },
+   {
+    "id": 1598,
+    "mesafe": 38
+   },
+   {
+    "id": 1500,
+    "mesafe": 39
+   }
+  ],
+  "public/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-02-600.webp": [
+   {
+    "id": 1258,
+    "mesafe": 37
+   },
+   {
+    "id": 1596,
+    "mesafe": 39
+   },
+   {
+    "id": 1789,
+    "mesafe": 39
+   }
+  ],
+  "public/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-03-600.webp": [
+   {
+    "id": 1143,
+    "mesafe": 6
+   },
+   {
+    "id": 1556,
+    "mesafe": 37
+   },
+   {
+    "id": 1160,
+    "mesafe": 39
+   }
+  ],
+  "public/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-04-600.webp": [
+   {
+    "id": 1145,
+    "mesafe": 8
+   },
+   {
+    "id": 995,
+    "mesafe": 33
+   },
+   {
+    "id": 1619,
+    "mesafe": 36
+   }
+  ],
+  "public/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-05-600.webp": [
+   {
+    "id": 319,
+    "mesafe": 39
+   },
+   {
+    "id": 1846,
+    "mesafe": 40
+   },
+   {
+    "id": 1009,
+    "mesafe": 42
+   }
+  ],
+  "public/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-06-600.webp": [
+   {
+    "id": 1070,
+    "mesafe": 39
+   },
+   {
+    "id": 1043,
+    "mesafe": 41
+   },
+   {
+    "id": 1655,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/ahsab-ev-13-600.webp": [
+   {
+    "id": 1258,
+    "mesafe": 5
+   },
+   {
+    "id": 1235,
+    "mesafe": 40
+   },
+   {
+    "id": 990,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsab-ev-14-600.webp": [
+   {
+    "id": 1829,
+    "mesafe": 40
+   },
+   {
+    "id": 1178,
+    "mesafe": 41
+   },
+   {
+    "id": 1086,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/ahsab-ev-15-600.webp": [
+   {
+    "id": 267,
+    "mesafe": 36
+   },
+   {
+    "id": 1524,
+    "mesafe": 39
+   },
+   {
+    "id": 1145,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsab-ev-16-600.webp": [
+   {
+    "id": 1070,
+    "mesafe": 31
+   },
+   {
+    "id": 1579,
+    "mesafe": 41
+   },
+   {
+    "id": 328,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/ahsab-ev-17-600.webp": [
+   {
+    "id": 1035,
+    "mesafe": 36
+   },
+   {
+    "id": 1505,
+    "mesafe": 38
+   },
+   {
+    "id": 1157,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/ahsab-ev-18-600.webp": [
+   {
+    "id": 1601,
+    "mesafe": 40
+   },
+   {
+    "id": 1243,
+    "mesafe": 43
+   },
+   {
+    "id": 1811,
+    "mesafe": 43
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-cami-15-600.webp": [
+   {
+    "id": 312,
+    "mesafe": 37
+   },
+   {
+    "id": 1062,
+    "mesafe": 39
+   },
+   {
+    "id": 1343,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-10-600.webp": [
+   {
+    "id": 1036,
+    "mesafe": 40
+   },
+   {
+    "id": 1593,
+    "mesafe": 40
+   },
+   {
+    "id": 1727,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-11-600.webp": [
+   {
+    "id": 1474,
+    "mesafe": 39
+   },
+   {
+    "id": 1651,
+    "mesafe": 40
+   },
+   {
+    "id": 1059,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-12-600.webp": [
+   {
+    "id": 1101,
+    "mesafe": 7
+   },
+   {
+    "id": 1158,
+    "mesafe": 42
+   },
+   {
+    "id": 1524,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-13-600.webp": [
+   {
+    "id": 1118,
+    "mesafe": 34
+   },
+   {
+    "id": 260,
+    "mesafe": 37
+   },
+   {
+    "id": 1353,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-14-600.webp": [
+   {
+    "id": 1352,
+    "mesafe": 36
+   },
+   {
+    "id": 1265,
+    "mesafe": 39
+   },
+   {
+    "id": 1118,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-15-600.webp": [
+   {
+    "id": 950,
+    "mesafe": 8
+   },
+   {
+    "id": 1382,
+    "mesafe": 36
+   },
+   {
+    "id": 927,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-1-600.webp": [
+   {
+    "id": 1422,
+    "mesafe": 38
+   },
+   {
+    "id": 1526,
+    "mesafe": 40
+   },
+   {
+    "id": 1846,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-16-600.webp": [
+   {
+    "id": 951,
+    "mesafe": 37
+   },
+   {
+    "id": 1062,
+    "mesafe": 39
+   },
+   {
+    "id": 298,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-17-600.webp": [
+   {
+    "id": 1406,
+    "mesafe": 39
+   },
+   {
+    "id": 1041,
+    "mesafe": 40
+   },
+   {
+    "id": 1348,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-18-600.webp": [
+   {
+    "id": 947,
+    "mesafe": 37
+   },
+   {
+    "id": 333,
+    "mesafe": 40
+   },
+   {
+    "id": 1007,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-19-600.webp": [
+   {
+    "id": 1098,
+    "mesafe": 36
+   },
+   {
+    "id": 1428,
+    "mesafe": 40
+   },
+   {
+    "id": 276,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-2-600.webp": [
+   {
+    "id": 1844,
+    "mesafe": 37
+   },
+   {
+    "id": 1847,
+    "mesafe": 39
+   },
+   {
+    "id": 1581,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-27-600.webp": [
+   {
+    "id": 1528,
+    "mesafe": 40
+   },
+   {
+    "id": 1596,
+    "mesafe": 40
+   },
+   {
+    "id": 1669,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-3-600.webp": [
+   {
+    "id": 1637,
+    "mesafe": 35
+   },
+   {
+    "id": 1420,
+    "mesafe": 38
+   },
+   {
+    "id": 991,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-4-600.webp": [
+   {
+    "id": 1543,
+    "mesafe": 30
+   },
+   {
+    "id": 1705,
+    "mesafe": 31
+   },
+   {
+    "id": 994,
+    "mesafe": 32
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-5-600.webp": [
+   {
+    "id": 1105,
+    "mesafe": 38
+   },
+   {
+    "id": 1787,
+    "mesafe": 42
+   },
+   {
+    "id": 1350,
+    "mesafe": 43
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-6-600.webp": [
+   {
+    "id": 1180,
+    "mesafe": 36
+   },
+   {
+    "id": 1273,
+    "mesafe": 40
+   },
+   {
+    "id": 1293,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-7-600.webp": [
+   {
+    "id": 1180,
+    "mesafe": 35
+   },
+   {
+    "id": 1233,
+    "mesafe": 35
+   },
+   {
+    "id": 327,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-8-600.webp": [
+   {
+    "id": 952,
+    "mesafe": 3
+   },
+   {
+    "id": 1706,
+    "mesafe": 37
+   },
+   {
+    "id": 1005,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/ahsap-ev-9-600.webp": [
+   {
+    "id": 1502,
+    "mesafe": 36
+   },
+   {
+    "id": 1192,
+    "mesafe": 39
+   },
+   {
+    "id": 1058,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-01-600.webp": [
+   {
+    "id": 309,
+    "mesafe": 42
+   },
+   {
+    "id": 1036,
+    "mesafe": 43
+   },
+   {
+    "id": 1040,
+    "mesafe": 43
+   }
+  ],
+  "public/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-02-600.webp": [
+   {
+    "id": 1691,
+    "mesafe": 38
+   },
+   {
+    "id": 955,
+    "mesafe": 38
+   },
+   {
+    "id": 2180,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-03-600.webp": [
+   {
+    "id": 320,
+    "mesafe": 35
+   },
+   {
+    "id": 1692,
+    "mesafe": 39
+   },
+   {
+    "id": 1739,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-04-600.webp": [
+   {
+    "id": 1118,
+    "mesafe": 40
+   },
+   {
+    "id": 1262,
+    "mesafe": 40
+   },
+   {
+    "id": 1174,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-01-600.webp": [
+   {
+    "id": 1008,
+    "mesafe": 37
+   },
+   {
+    "id": 2174,
+    "mesafe": 38
+   },
+   {
+    "id": 1599,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-02-600.webp": [
+   {
+    "id": 1270,
+    "mesafe": 41
+   },
+   {
+    "id": 298,
+    "mesafe": 41
+   },
+   {
+    "id": 1038,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-03-600.webp": [
+   {
+    "id": 1401,
+    "mesafe": 37
+   },
+   {
+    "id": 303,
+    "mesafe": 37
+   },
+   {
+    "id": 1069,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-04-600.webp": [
+   {
+    "id": 322,
+    "mesafe": 41
+   },
+   {
+    "id": 1072,
+    "mesafe": 42
+   },
+   {
+    "id": 1196,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-01-600.webp": [
+   {
+    "id": 1146,
+    "mesafe": 38
+   },
+   {
+    "id": 1060,
+    "mesafe": 41
+   },
+   {
+    "id": 1070,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-02-600.webp": [
+   {
+    "id": 1592,
+    "mesafe": 38
+   },
+   {
+    "id": 260,
+    "mesafe": 41
+   },
+   {
+    "id": 1174,
+    "mesafe": 43
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-03-600.webp": [
+   {
+    "id": 1501,
+    "mesafe": 39
+   },
+   {
+    "id": 1612,
+    "mesafe": 41
+   },
+   {
+    "id": 2172,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-04-600.webp": [
+   {
+    "id": 1708,
+    "mesafe": 37
+   },
+   {
+    "id": 1061,
+    "mesafe": 39
+   },
+   {
+    "id": 1498,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-05-600.webp": [
+   {
+    "id": 1349,
+    "mesafe": 38
+   },
+   {
+    "id": 1581,
+    "mesafe": 39
+   },
+   {
+    "id": 929,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-06-600.webp": [
+   {
+    "id": 1764,
+    "mesafe": 37
+   },
+   {
+    "id": 1787,
+    "mesafe": 38
+   },
+   {
+    "id": 1725,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-07-600.webp": [
+   {
+    "id": 1348,
+    "mesafe": 36
+   },
+   {
+    "id": 1736,
+    "mesafe": 37
+   },
+   {
+    "id": 1172,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-08-600.webp": [
+   {
+    "id": 257,
+    "mesafe": 37
+   },
+   {
+    "id": 1529,
+    "mesafe": 39
+   },
+   {
+    "id": 1691,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-09-600.webp": [
+   {
+    "id": 1259,
+    "mesafe": 39
+   },
+   {
+    "id": 302,
+    "mesafe": 40
+   },
+   {
+    "id": 1252,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-10-600.webp": [
+   {
+    "id": 1277,
+    "mesafe": 40
+   },
+   {
+    "id": 1616,
+    "mesafe": 41
+   },
+   {
+    "id": 1667,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-11-600.webp": [
+   {
+    "id": 1040,
+    "mesafe": 36
+   },
+   {
+    "id": 879,
+    "mesafe": 40
+   },
+   {
+    "id": 1063,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-12-600.webp": [
+   {
+    "id": 1679,
+    "mesafe": 39
+   },
+   {
+    "id": 955,
+    "mesafe": 41
+   },
+   {
+    "id": 1008,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-13-600.webp": [
+   {
+    "id": 1057,
+    "mesafe": 35
+   },
+   {
+    "id": 1505,
+    "mesafe": 37
+   },
+   {
+    "id": 1291,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-14-600.webp": [
+   {
+    "id": 1118,
+    "mesafe": 39
+   },
+   {
+    "id": 1173,
+    "mesafe": 39
+   },
+   {
+    "id": 1353,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-15-600.webp": [
+   {
+    "id": 327,
+    "mesafe": 36
+   },
+   {
+    "id": 1814,
+    "mesafe": 37
+   },
+   {
+    "id": 322,
+    "mesafe": 37
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-16-600.webp": [
+   {
+    "id": 993,
+    "mesafe": 36
+   },
+   {
+    "id": 1569,
+    "mesafe": 39
+   },
+   {
+    "id": 1627,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-17-600.webp": [
+   {
+    "id": 1848,
+    "mesafe": 38
+   },
+   {
+    "id": 305,
+    "mesafe": 40
+   },
+   {
+    "id": 1210,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-18-600.webp": [
+   {
+    "id": 1709,
+    "mesafe": 38
+   },
+   {
+    "id": 991,
+    "mesafe": 39
+   },
+   {
+    "id": 1581,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-19-600.webp": [
+   {
+    "id": 1639,
+    "mesafe": 37
+   },
+   {
+    "id": 1281,
+    "mesafe": 39
+   },
+   {
+    "id": 1619,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-20-600.webp": [
+   {
+    "id": 1353,
+    "mesafe": 39
+   },
+   {
+    "id": 1625,
+    "mesafe": 39
+   },
+   {
+    "id": 1668,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-01-600.webp": [
+   {
+    "id": 1556,
+    "mesafe": 36
+   },
+   {
+    "id": 1694,
+    "mesafe": 38
+   },
+   {
+    "id": 1428,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-02-600.webp": [
+   {
+    "id": 1096,
+    "mesafe": 25
+   },
+   {
+    "id": 309,
+    "mesafe": 37
+   },
+   {
+    "id": 1668,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-03-600.webp": [
+   {
+    "id": 953,
+    "mesafe": 35
+   },
+   {
+    "id": 1232,
+    "mesafe": 38
+   },
+   {
+    "id": 1580,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-04-600.webp": [
+   {
+    "id": 291,
+    "mesafe": 37
+   },
+   {
+    "id": 1270,
+    "mesafe": 39
+   },
+   {
+    "id": 1528,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-05-600.webp": [
+   {
+    "id": 1289,
+    "mesafe": 38
+   },
+   {
+    "id": 676,
+    "mesafe": 38
+   },
+   {
+    "id": 1180,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-06-600.webp": [
+   {
+    "id": 260,
+    "mesafe": 38
+   },
+   {
+    "id": 1706,
+    "mesafe": 39
+   },
+   {
+    "id": 1619,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-07-600.webp": [
+   {
+    "id": 308,
+    "mesafe": 34
+   },
+   {
+    "id": 1790,
+    "mesafe": 37
+   },
+   {
+    "id": 1528,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-08-600.webp": [
+   {
+    "id": 1057,
+    "mesafe": 36
+   },
+   {
+    "id": 1598,
+    "mesafe": 38
+   },
+   {
+    "id": 1233,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-09-600.webp": [
+   {
+    "id": 1069,
+    "mesafe": 32
+   },
+   {
+    "id": 1178,
+    "mesafe": 38
+   },
+   {
+    "id": 1756,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-10-600.webp": [
+   {
+    "id": 1070,
+    "mesafe": 38
+   },
+   {
+    "id": 1356,
+    "mesafe": 39
+   },
+   {
+    "id": 1570,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-11-600.webp": [
+   {
+    "id": 1442,
+    "mesafe": 34
+   },
+   {
+    "id": 1764,
+    "mesafe": 35
+   },
+   {
+    "id": 995,
+    "mesafe": 37
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-12-600.webp": [
+   {
+    "id": 1217,
+    "mesafe": 26
+   },
+   {
+    "id": 1641,
+    "mesafe": 38
+   },
+   {
+    "id": 1210,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-13-600.webp": [
+   {
+    "id": 1099,
+    "mesafe": 11
+   },
+   {
+    "id": 1120,
+    "mesafe": 36
+   },
+   {
+    "id": 927,
+    "mesafe": 36
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-14-600.webp": [
+   {
+    "id": 1265,
+    "mesafe": 37
+   },
+   {
+    "id": 1544,
+    "mesafe": 39
+   },
+   {
+    "id": 1036,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-15-600.webp": [
+   {
+    "id": 1036,
+    "mesafe": 40
+   },
+   {
+    "id": 1265,
+    "mesafe": 40
+   },
+   {
+    "id": 1445,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-01-600.webp": [
+   {
+    "id": 994,
+    "mesafe": 37
+   },
+   {
+    "id": 309,
+    "mesafe": 38
+   },
+   {
+    "id": 992,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-02-600.webp": [
+   {
+    "id": 1175,
+    "mesafe": 37
+   },
+   {
+    "id": 1462,
+    "mesafe": 38
+   },
+   {
+    "id": 1505,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-03-600.webp": [
+   {
+    "id": 1174,
+    "mesafe": 2
+   },
+   {
+    "id": 1594,
+    "mesafe": 36
+   },
+   {
+    "id": 1440,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-04-600.webp": [
+   {
+    "id": 1665,
+    "mesafe": 38
+   },
+   {
+    "id": 1845,
+    "mesafe": 38
+   },
+   {
+    "id": 1266,
+    "mesafe": 39
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-05-600.webp": [
+   {
+    "id": 1004,
+    "mesafe": 36
+   },
+   {
+    "id": 1765,
+    "mesafe": 36
+   },
+   {
+    "id": 951,
+    "mesafe": 36
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-06-600.webp": [
+   {
+    "id": 1176,
+    "mesafe": 13
+   },
+   {
+    "id": 1078,
+    "mesafe": 40
+   },
+   {
+    "id": 1075,
+    "mesafe": 41
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-07-600.webp": [
+   {
+    "id": 1176,
+    "mesafe": 4
+   },
+   {
+    "id": 1146,
+    "mesafe": 40
+   },
+   {
+    "id": 1746,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-08-600.webp": [
+   {
+    "id": 1210,
+    "mesafe": 37
+   },
+   {
+    "id": 1570,
+    "mesafe": 39
+   },
+   {
+    "id": 1278,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-09-600.webp": [
+   {
+    "id": 1182,
+    "mesafe": 36
+   },
+   {
+    "id": 1526,
+    "mesafe": 37
+   },
+   {
+    "id": 1035,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-10-600.webp": [
+   {
+    "id": 1387,
+    "mesafe": 39
+   },
+   {
+    "id": 1441,
+    "mesafe": 41
+   },
+   {
+    "id": 1528,
+    "mesafe": 41
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-11-600.webp": [
+   {
+    "id": 1109,
+    "mesafe": 35
+   },
+   {
+    "id": 1121,
+    "mesafe": 40
+   },
+   {
+    "id": 1057,
+    "mesafe": 42
+   }
+  ],
+  "public/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-12-600.webp": [
+   {
+    "id": 1183,
+    "mesafe": 14
+   },
+   {
+    "id": 1256,
+    "mesafe": 37
+   },
+   {
+    "id": 971,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/bungalov1-600.webp": [
+   {
+    "id": 1617,
+    "mesafe": 40
+   },
+   {
+    "id": 1178,
+    "mesafe": 41
+   },
+   {
+    "id": 1192,
+    "mesafe": 41
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-01-600.webp": [
+   {
+    "id": 1002,
+    "mesafe": 22
+   },
+   {
+    "id": 299,
+    "mesafe": 35
+   },
+   {
+    "id": 1350,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-02-600.webp": [
+   {
+    "id": 1571,
+    "mesafe": 37
+   },
+   {
+    "id": 1612,
+    "mesafe": 38
+   },
+   {
+    "id": 1259,
+    "mesafe": 39
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-03-600.webp": [
+   {
+    "id": 1616,
+    "mesafe": 38
+   },
+   {
+    "id": 1670,
+    "mesafe": 38
+   },
+   {
+    "id": 1557,
+    "mesafe": 41
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-04-600.webp": [
+   {
+    "id": 290,
+    "mesafe": 39
+   },
+   {
+    "id": 953,
+    "mesafe": 41
+   },
+   {
+    "id": 1098,
+    "mesafe": 42
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-05-600.webp": [
+   {
+    "id": 1003,
+    "mesafe": 9
+   },
+   {
+    "id": 934,
+    "mesafe": 34
+   },
+   {
+    "id": 1159,
+    "mesafe": 39
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-06-600.webp": [
+   {
+    "id": 314,
+    "mesafe": 36
+   },
+   {
+    "id": 930,
+    "mesafe": 40
+   },
+   {
+    "id": 1293,
+    "mesafe": 42
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-07-600.webp": [
+   {
+    "id": 1008,
+    "mesafe": 2
+   },
+   {
+    "id": 1080,
+    "mesafe": 38
+   },
+   {
+    "id": 1571,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-08-600.webp": [
+   {
+    "id": 1263,
+    "mesafe": 38
+   },
+   {
+    "id": 1516,
+    "mesafe": 39
+   },
+   {
+    "id": 1038,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-09-600.webp": [
+   {
+    "id": 1004,
+    "mesafe": 39
+   },
+   {
+    "id": 1811,
+    "mesafe": 39
+   },
+   {
+    "id": 1387,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-10-600.webp": [
+   {
+    "id": 1668,
+    "mesafe": 37
+   },
+   {
+    "id": 1264,
+    "mesafe": 39
+   },
+   {
+    "id": 1628,
+    "mesafe": 43
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-11-600.webp": [
+   {
+    "id": 1154,
+    "mesafe": 40
+   },
+   {
+    "id": 1250,
+    "mesafe": 42
+   },
+   {
+    "id": 1746,
+    "mesafe": 42
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-12-600.webp": [
+   {
+    "id": 1095,
+    "mesafe": 36
+   },
+   {
+    "id": 299,
+    "mesafe": 37
+   },
+   {
+    "id": 1217,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-13-600.webp": [
+   {
+    "id": 1515,
+    "mesafe": 38
+   },
+   {
+    "id": 1517,
+    "mesafe": 40
+   },
+   {
+    "id": 1640,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-14-600.webp": [
+   {
+    "id": 1212,
+    "mesafe": 37
+   },
+   {
+    "id": 1009,
+    "mesafe": 38
+   },
+   {
+    "id": 1616,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-01-600.webp": [
+   {
+    "id": 1123,
+    "mesafe": 36
+   },
+   {
+    "id": 1041,
+    "mesafe": 37
+   },
+   {
+    "id": 257,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-02-600.webp": [
+   {
+    "id": 330,
+    "mesafe": 37
+   },
+   {
+    "id": 1592,
+    "mesafe": 38
+   },
+   {
+    "id": 1593,
+    "mesafe": 39
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-03-600.webp": [
+   {
+    "id": 1120,
+    "mesafe": 38
+   },
+   {
+    "id": 1288,
+    "mesafe": 38
+   },
+   {
+    "id": 330,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-04-600.webp": [
+   {
+    "id": 1807,
+    "mesafe": 38
+   },
+   {
+    "id": 1572,
+    "mesafe": 39
+   },
+   {
+    "id": 1265,
+    "mesafe": 41
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-05-600.webp": [
+   {
+    "id": 1545,
+    "mesafe": 34
+   },
+   {
+    "id": 1598,
+    "mesafe": 39
+   },
+   {
+    "id": 1765,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-06-600.webp": [
+   {
+    "id": 1160,
+    "mesafe": 39
+   },
+   {
+    "id": 311,
+    "mesafe": 39
+   },
+   {
+    "id": 1108,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-07-600.webp": [
+   {
+    "id": 1446,
+    "mesafe": 37
+   },
+   {
+    "id": 1696,
+    "mesafe": 41
+   },
+   {
+    "id": 304,
+    "mesafe": 42
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-08-600.webp": [
+   {
+    "id": 1121,
+    "mesafe": 33
+   },
+   {
+    "id": 1122,
+    "mesafe": 35
+   },
+   {
+    "id": 1385,
+    "mesafe": 38
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-09-600.webp": [
+   {
+    "id": 1119,
+    "mesafe": 34
+   },
+   {
+    "id": 1199,
+    "mesafe": 36
+   },
+   {
+    "id": 1505,
+    "mesafe": 40
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-10-600.webp": [
+   {
+    "id": 1058,
+    "mesafe": 38
+   },
+   {
+    "id": 1806,
+    "mesafe": 39
+   },
+   {
+    "id": 1848,
+    "mesafe": 39
+   }
+  ],
+  "public/images/bungalov/kemerli-pod-bungalov/kemerli-pod-bungalov-11-600.webp": [
+   {
+    "id": 1106,
+    "mesafe": 36
+   },
+   {
+    "id": 995,
+    "mesafe": 37
+   },
+   {
+    "id": 1198,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-01-600.webp": [
+   {
+    "id": 1620,
+    "mesafe": 36
+   },
+   {
+    "id": 1694,
+    "mesafe": 36
+   },
+   {
+    "id": 1811,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-02-600.webp": [
+   {
+    "id": 1642,
+    "mesafe": 39
+   },
+   {
+    "id": 330,
+    "mesafe": 39
+   },
+   {
+    "id": 1143,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-03-600.webp": [
+   {
+    "id": 1640,
+    "mesafe": 37
+   },
+   {
+    "id": 1620,
+    "mesafe": 38
+   },
+   {
+    "id": 1043,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-04-600.webp": [
+   {
+    "id": 1814,
+    "mesafe": 37
+   },
+   {
+    "id": 1265,
+    "mesafe": 40
+   },
+   {
+    "id": 931,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-05-600.webp": [
+   {
+    "id": 1723,
+    "mesafe": 34
+   },
+   {
+    "id": 1620,
+    "mesafe": 36
+   },
+   {
+    "id": 313,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-06-600.webp": [
+   {
+    "id": 1612,
+    "mesafe": 12
+   },
+   {
+    "id": 1532,
+    "mesafe": 34
+   },
+   {
+    "id": 1217,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-07-600.webp": [
+   {
+    "id": 1613,
+    "mesafe": 10
+   },
+   {
+    "id": 1444,
+    "mesafe": 41
+   },
+   {
+    "id": 1649,
+    "mesafe": 41
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-08-600.webp": [
+   {
+    "id": 1616,
+    "mesafe": 31
+   },
+   {
+    "id": 1642,
+    "mesafe": 36
+   },
+   {
+    "id": 1515,
+    "mesafe": 37
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-09-600.webp": [
+   {
+    "id": 1619,
+    "mesafe": 38
+   },
+   {
+    "id": 1257,
+    "mesafe": 39
+   },
+   {
+    "id": 1593,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-10-600.webp": [
+   {
+    "id": 1619,
+    "mesafe": 9
+   },
+   {
+    "id": 275,
+    "mesafe": 36
+   },
+   {
+    "id": 1807,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cardak/tas-duvarli-bahce-cardagi/tas-duvarli-bahce-cardagi-01-600.webp": [
+   {
+    "id": 1502,
+    "mesafe": 37
+   },
+   {
+    "id": 1400,
+    "mesafe": 40
+   },
+   {
+    "id": 1531,
+    "mesafe": 41
+   }
+  ],
+  "public/images/cardak/tas-duvarli-bahce-cardagi/tas-duvarli-bahce-cardagi-02-600.webp": [
+   {
+    "id": 1100,
+    "mesafe": 36
+   },
+   {
+    "id": 1250,
+    "mesafe": 38
+   },
+   {
+    "id": 1525,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cardak/tas-duvarli-bahce-cardagi/tas-duvarli-bahce-cardagi-03-600.webp": [
+   {
+    "id": 1399,
+    "mesafe": 38
+   },
+   {
+    "id": 1629,
+    "mesafe": 39
+   },
+   {
+    "id": 1153,
+    "mesafe": 41
+   }
+  ],
+  "public/images/cardak/tas-duvarli-bahce-cardagi/tas-duvarli-bahce-cardagi-04-600.webp": [
+   {
+    "id": 1249,
+    "mesafe": 37
+   },
+   {
+    "id": 1640,
+    "mesafe": 39
+   },
+   {
+    "id": 1147,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cardak/tas-duvarli-bahce-cardagi/tas-duvarli-bahce-cardagi-05-600.webp": [
+   {
+    "id": 1064,
+    "mesafe": 35
+   },
+   {
+    "id": 1468,
+    "mesafe": 39
+   },
+   {
+    "id": 1594,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-01-600.webp": [
+   {
+    "id": 1386,
+    "mesafe": 13
+   },
+   {
+    "id": 1498,
+    "mesafe": 38
+   },
+   {
+    "id": 1443,
+    "mesafe": 42
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-02-600.webp": [
+   {
+    "id": 1156,
+    "mesafe": 40
+   },
+   {
+    "id": 1759,
+    "mesafe": 41
+   },
+   {
+    "id": 1264,
+    "mesafe": 43
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-03-600.webp": [
+   {
+    "id": 1383,
+    "mesafe": 9
+   },
+   {
+    "id": 1266,
+    "mesafe": 39
+   },
+   {
+    "id": 1249,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-04-600.webp": [
+   {
+    "id": 1598,
+    "mesafe": 36
+   },
+   {
+    "id": 1756,
+    "mesafe": 36
+   },
+   {
+    "id": 1669,
+    "mesafe": 37
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-05-600.webp": [
+   {
+    "id": 1041,
+    "mesafe": 37
+   },
+   {
+    "id": 1079,
+    "mesafe": 38
+   },
+   {
+    "id": 1515,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-06-600.webp": [
+   {
+    "id": 1424,
+    "mesafe": 36
+   },
+   {
+    "id": 1426,
+    "mesafe": 36
+   },
+   {
+    "id": 1425,
+    "mesafe": 37
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-07-600.webp": [
+   {
+    "id": 1258,
+    "mesafe": 38
+   },
+   {
+    "id": 1385,
+    "mesafe": 38
+   },
+   {
+    "id": 1764,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-08-600.webp": [
+   {
+    "id": 1381,
+    "mesafe": 32
+   },
+   {
+    "id": 1666,
+    "mesafe": 37
+   },
+   {
+    "id": 1211,
+    "mesafe": 43
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-09-600.webp": [
+   {
+    "id": 1745,
+    "mesafe": 38
+   },
+   {
+    "id": 1593,
+    "mesafe": 41
+   },
+   {
+    "id": 977,
+    "mesafe": 41
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-10-600.webp": [
+   {
+    "id": 308,
+    "mesafe": 36
+   },
+   {
+    "id": 1714,
+    "mesafe": 39
+   },
+   {
+    "id": 1544,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-11-600.webp": [
+   {
+    "id": 1212,
+    "mesafe": 36
+   },
+   {
+    "id": 1276,
+    "mesafe": 36
+   },
+   {
+    "id": 1353,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-12-600.webp": [
+   {
+    "id": 1345,
+    "mesafe": 35
+   },
+   {
+    "id": 1516,
+    "mesafe": 36
+   },
+   {
+    "id": 1513,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-13-600.webp": [
+   {
+    "id": 1098,
+    "mesafe": 36
+   },
+   {
+    "id": 313,
+    "mesafe": 38
+   },
+   {
+    "id": 1423,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-14-600.webp": [
+   {
+    "id": 1274,
+    "mesafe": 38
+   },
+   {
+    "id": 957,
+    "mesafe": 40
+   },
+   {
+    "id": 965,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-15-600.webp": [
+   {
+    "id": 1597,
+    "mesafe": 38
+   },
+   {
+    "id": 255,
+    "mesafe": 38
+   },
+   {
+    "id": 1555,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-16-600.webp": [
+   {
+    "id": 1598,
+    "mesafe": 36
+   },
+   {
+    "id": 1108,
+    "mesafe": 39
+   },
+   {
+    "id": 1118,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-17-600.webp": [
+   {
+    "id": 1382,
+    "mesafe": 13
+   },
+   {
+    "id": 1444,
+    "mesafe": 35
+   },
+   {
+    "id": 935,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-18-600.webp": [
+   {
+    "id": 1638,
+    "mesafe": 37
+   },
+   {
+    "id": 1213,
+    "mesafe": 38
+   },
+   {
+    "id": 1216,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-19-600.webp": [
+   {
+    "id": 1251,
+    "mesafe": 38
+   },
+   {
+    "id": 1385,
+    "mesafe": 38
+   },
+   {
+    "id": 930,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-20-600.webp": [
+   {
+    "id": 1431,
+    "mesafe": 37
+   },
+   {
+    "id": 1598,
+    "mesafe": 37
+   },
+   {
+    "id": 1530,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-21-600.webp": [
+   {
+    "id": 1749,
+    "mesafe": 35
+   },
+   {
+    "id": 1234,
+    "mesafe": 38
+   },
+   {
+    "id": 1505,
+    "mesafe": 38
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-22-600.webp": [
+   {
+    "id": 1765,
+    "mesafe": 37
+   },
+   {
+    "id": 1420,
+    "mesafe": 39
+   },
+   {
+    "id": 1143,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-23-600.webp": [
+   {
+    "id": 1649,
+    "mesafe": 38
+   },
+   {
+    "id": 1189,
+    "mesafe": 39
+   },
+   {
+    "id": 1514,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-24-600.webp": [
+   {
+    "id": 1154,
+    "mesafe": 38
+   },
+   {
+    "id": 1515,
+    "mesafe": 39
+   },
+   {
+    "id": 316,
+    "mesafe": 41
+   }
+  ],
+  "public/images/cocuk-oyun-parki/kaydirakli-sato-oyun-evi/kaydirakli-sato-oyun-evi-25-600.webp": [
+   {
+    "id": 1639,
+    "mesafe": 39
+   },
+   {
+    "id": 1790,
+    "mesafe": 39
+   },
+   {
+    "id": 1766,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/lila-renkli-cocuk-oyun-evi/lila-renkli-cocuk-oyun-evi-01-600.webp": [
+   {
+    "id": 1382,
+    "mesafe": 39
+   },
+   {
+    "id": 1595,
+    "mesafe": 39
+   },
+   {
+    "id": 1653,
+    "mesafe": 42
+   }
+  ],
+  "public/images/cocuk-oyun-parki/lila-renkli-cocuk-oyun-evi/lila-renkli-cocuk-oyun-evi-02-600.webp": [
+   {
+    "id": 1095,
+    "mesafe": 41
+   },
+   {
+    "id": 1382,
+    "mesafe": 41
+   },
+   {
+    "id": 1440,
+    "mesafe": 42
+   }
+  ],
+  "public/images/cocuk-oyun-parki/lila-renkli-cocuk-oyun-evi/lila-renkli-cocuk-oyun-evi-03-600.webp": [
+   {
+    "id": 1153,
+    "mesafe": 35
+   },
+   {
+    "id": 1727,
+    "mesafe": 36
+   },
+   {
+    "id": 1779,
+    "mesafe": 39
+   }
+  ],
+  "public/images/cocuk-oyun-parki/lila-renkli-cocuk-oyun-evi/lila-renkli-cocuk-oyun-evi-04-600.webp": [
+   {
+    "id": 1424,
+    "mesafe": 34
+   },
+   {
+    "id": 1474,
+    "mesafe": 38
+   },
+   {
+    "id": 1343,
+    "mesafe": 40
+   }
+  ],
+  "public/images/cocuk-oyun-parki/lila-renkli-cocuk-oyun-evi/lila-renkli-cocuk-oyun-evi-05-600.webp": [
+   {
+    "id": 1502,
+    "mesafe": 39
+   },
+   {
+    "id": 1503,
+    "mesafe": 39
+   },
+   {
+    "id": 1385,
+    "mesafe": 41
+   }
+  ],
+  "public/images/diger/20211109_162213-600.webp": [
+   {
+    "id": 949,
+    "mesafe": 34
+   },
+   {
+    "id": 276,
+    "mesafe": 39
+   },
+   {
+    "id": 1294,
+    "mesafe": 40
+   }
+  ],
+  "public/images/diger/20240119_163243-600.webp": [
+   {
+    "id": 300,
+    "mesafe": 39
+   },
+   {
+    "id": 1749,
+    "mesafe": 41
+   },
+   {
+    "id": 1260,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/20240227_100802-600.webp": [
+   {
+    "id": 1099,
+    "mesafe": 40
+   },
+   {
+    "id": 1504,
+    "mesafe": 40
+   },
+   {
+    "id": 332,
+    "mesafe": 40
+   }
+  ],
+  "public/images/diger/20240227_100811-600.webp": [
+   {
+    "id": 330,
+    "mesafe": 40
+   },
+   {
+    "id": 1617,
+    "mesafe": 42
+   },
+   {
+    "id": 303,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/20240304_165600-600.webp": [
+   {
+    "id": 1007,
+    "mesafe": 5
+   },
+   {
+    "id": 1062,
+    "mesafe": 39
+   },
+   {
+    "id": 1008,
+    "mesafe": 40
+   }
+  ],
+  "public/images/diger/20240304_165827-600.webp": [
+   {
+    "id": 995,
+    "mesafe": 31
+   },
+   {
+    "id": 1705,
+    "mesafe": 36
+   },
+   {
+    "id": 1824,
+    "mesafe": 36
+   }
+  ],
+  "public/images/diger/20240304_165839-600.webp": [
+   {
+    "id": 971,
+    "mesafe": 34
+   },
+   {
+    "id": 1707,
+    "mesafe": 37
+   },
+   {
+    "id": 1256,
+    "mesafe": 39
+   }
+  ],
+  "public/images/diger/20240612_135534-600.webp": [
+   {
+    "id": 2176,
+    "mesafe": 8
+   },
+   {
+    "id": 1779,
+    "mesafe": 42
+   },
+   {
+    "id": 1232,
+    "mesafe": 43
+   }
+  ],
+  "public/images/diger/20260519_132614-600.webp": [
+   {
+    "id": 1616,
+    "mesafe": 37
+   },
+   {
+    "id": 1567,
+    "mesafe": 40
+   },
+   {
+    "id": 1620,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/bilet-gisesi-1-600.webp": [
+   {
+    "id": 1640,
+    "mesafe": 34
+   },
+   {
+    "id": 1846,
+    "mesafe": 34
+   },
+   {
+    "id": 1705,
+    "mesafe": 35
+   }
+  ],
+  "public/images/diger/bilet-gisesi-2-600.webp": [
+   {
+    "id": 1759,
+    "mesafe": 33
+   },
+   {
+    "id": 1257,
+    "mesafe": 38
+   },
+   {
+    "id": 275,
+    "mesafe": 38
+   }
+  ],
+  "public/images/diger/bilet-gisesi-3-600.webp": [
+   {
+    "id": 1277,
+    "mesafe": 37
+   },
+   {
+    "id": 299,
+    "mesafe": 38
+   },
+   {
+    "id": 1040,
+    "mesafe": 39
+   }
+  ],
+  "public/images/diger/dis-kapi-giydirme-600.webp": [
+   {
+    "id": 1526,
+    "mesafe": 36
+   },
+   {
+    "id": 1714,
+    "mesafe": 39
+   },
+   {
+    "id": 933,
+    "mesafe": 39
+   }
+  ],
+  "public/images/diger/img_20190712_001131_902-600.webp": [
+   {
+    "id": 1757,
+    "mesafe": 38
+   },
+   {
+    "id": 254,
+    "mesafe": 38
+   },
+   {
+    "id": 1004,
+    "mesafe": 40
+   }
+  ],
+  "public/images/diger/img_20190921_221602_034-600.webp": [
+   {
+    "id": 1068,
+    "mesafe": 40
+   },
+   {
+    "id": 1679,
+    "mesafe": 40
+   },
+   {
+    "id": 1383,
+    "mesafe": 41
+   }
+  ],
+  "public/images/diger/img-20180903-wa0013-600.webp": [
+   {
+    "id": 1182,
+    "mesafe": 37
+   },
+   {
+    "id": 1192,
+    "mesafe": 37
+   },
+   {
+    "id": 1532,
+    "mesafe": 38
+   }
+  ],
+  "public/images/diger/img-20210519-wa0021-600.webp": [
+   {
+    "id": 1778,
+    "mesafe": 8
+   },
+   {
+    "id": 1423,
+    "mesafe": 38
+   },
+   {
+    "id": 1233,
+    "mesafe": 41
+   }
+  ],
+  "public/images/diger/img-20210519-wa0023-600.webp": [
+   {
+    "id": 1779,
+    "mesafe": 9
+   },
+   {
+    "id": 1198,
+    "mesafe": 40
+   },
+   {
+    "id": 1262,
+    "mesafe": 40
+   }
+  ],
+  "public/images/diger/img-20210519-wa0029-600.webp": [
+   {
+    "id": 1058,
+    "mesafe": 42
+   },
+   {
+    "id": 1064,
+    "mesafe": 42
+   },
+   {
+    "id": 1758,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/img-20210519-wa0031-600.webp": [
+   {
+    "id": 1846,
+    "mesafe": 40
+   },
+   {
+    "id": 1054,
+    "mesafe": 41
+   },
+   {
+    "id": 1637,
+    "mesafe": 41
+   }
+  ],
+  "public/images/diger/img-20210519-wa0033-600.webp": [
+   {
+    "id": 881,
+    "mesafe": 8
+   },
+   {
+    "id": 1348,
+    "mesafe": 40
+   },
+   {
+    "id": 1192,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/img-20210519-wa0038-600.webp": [
+   {
+    "id": 1253,
+    "mesafe": 42
+   },
+   {
+    "id": 1502,
+    "mesafe": 42
+   },
+   {
+    "id": 1102,
+    "mesafe": 44
+   }
+  ],
+  "public/images/diger/img-20210519-wa0040-600.webp": [
+   {
+    "id": 879,
+    "mesafe": 6
+   },
+   {
+    "id": 1516,
+    "mesafe": 34
+   },
+   {
+    "id": 1444,
+    "mesafe": 36
+   }
+  ],
+  "public/images/diger/img-20210519-wa0041-600.webp": [
+   {
+    "id": 1806,
+    "mesafe": 13
+   },
+   {
+    "id": 883,
+    "mesafe": 13
+   },
+   {
+    "id": 1757,
+    "mesafe": 33
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-10-600.webp": [
+   {
+    "id": 1824,
+    "mesafe": 41
+   },
+   {
+    "id": 1076,
+    "mesafe": 42
+   },
+   {
+    "id": 1194,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-11-600.webp": [
+   {
+    "id": 1057,
+    "mesafe": 40
+   },
+   {
+    "id": 1591,
+    "mesafe": 41
+   },
+   {
+    "id": 994,
+    "mesafe": 41
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-1-600.webp": [
+   {
+    "id": 278,
+    "mesafe": 31
+   },
+   {
+    "id": 279,
+    "mesafe": 35
+   },
+   {
+    "id": 991,
+    "mesafe": 35
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-2-600.webp": [
+   {
+    "id": 1461,
+    "mesafe": 42
+   },
+   {
+    "id": 1789,
+    "mesafe": 42
+   },
+   {
+    "id": 1592,
+    "mesafe": 43
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-3-600.webp": [
+   {
+    "id": 1383,
+    "mesafe": 39
+   },
+   {
+    "id": 1594,
+    "mesafe": 39
+   },
+   {
+    "id": 1072,
+    "mesafe": 41
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-4-600.webp": [
+   {
+    "id": 1447,
+    "mesafe": 31
+   },
+   {
+    "id": 1252,
+    "mesafe": 36
+   },
+   {
+    "id": 1004,
+    "mesafe": 38
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-5-600.webp": [
+   {
+    "id": 291,
+    "mesafe": 37
+   },
+   {
+    "id": 1264,
+    "mesafe": 43
+   },
+   {
+    "id": 1287,
+    "mesafe": 43
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-6-600.webp": [
+   {
+    "id": 1440,
+    "mesafe": 41
+   },
+   {
+    "id": 1037,
+    "mesafe": 43
+   },
+   {
+    "id": 1039,
+    "mesafe": 43
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-7-600.webp": [
+   {
+    "id": 1068,
+    "mesafe": 39
+   },
+   {
+    "id": 1424,
+    "mesafe": 40
+   },
+   {
+    "id": 1085,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-8-600.webp": [
+   {
+    "id": 1036,
+    "mesafe": 40
+   },
+   {
+    "id": 948,
+    "mesafe": 40
+   },
+   {
+    "id": 1035,
+    "mesafe": 42
+   }
+  ],
+  "public/images/diger/tarihi-cami-restarasyonu-9-600.webp": [
+   {
+    "id": 1274,
+    "mesafe": 39
+   },
+   {
+    "id": 927,
+    "mesafe": 39
+   },
+   {
+    "id": 953,
+    "mesafe": 39
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-01-600.webp": [
+   {
+    "id": 1035,
+    "mesafe": 8
+   },
+   {
+    "id": 267,
+    "mesafe": 37
+   },
+   {
+    "id": 1010,
+    "mesafe": 39
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-02-600.webp": [
+   {
+    "id": 1779,
+    "mesafe": 38
+   },
+   {
+    "id": 291,
+    "mesafe": 40
+   },
+   {
+    "id": 1625,
+    "mesafe": 41
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-03-600.webp": [
+   {
+    "id": 1040,
+    "mesafe": 37
+   },
+   {
+    "id": 1619,
+    "mesafe": 40
+   },
+   {
+    "id": 316,
+    "mesafe": 40
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-04-600.webp": [
+   {
+    "id": 1736,
+    "mesafe": 35
+   },
+   {
+    "id": 1844,
+    "mesafe": 36
+   },
+   {
+    "id": 992,
+    "mesafe": 36
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-05-600.webp": [
+   {
+    "id": 1009,
+    "mesafe": 39
+   },
+   {
+    "id": 1423,
+    "mesafe": 39
+   },
+   {
+    "id": 1528,
+    "mesafe": 39
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-06-600.webp": [
+   {
+    "id": 262,
+    "mesafe": 37
+   },
+   {
+    "id": 1572,
+    "mesafe": 39
+   },
+   {
+    "id": 1121,
+    "mesafe": 41
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-07-600.webp": [
+   {
+    "id": 1172,
+    "mesafe": 36
+   },
+   {
+    "id": 1181,
+    "mesafe": 40
+   },
+   {
+    "id": 1420,
+    "mesafe": 40
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-08-600.webp": [
+   {
+    "id": 1040,
+    "mesafe": 39
+   },
+   {
+    "id": 1101,
+    "mesafe": 39
+   },
+   {
+    "id": 1071,
+    "mesafe": 40
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-09-600.webp": [
+   {
+    "id": 1679,
+    "mesafe": 35
+   },
+   {
+    "id": 1277,
+    "mesafe": 40
+   },
+   {
+    "id": 1713,
+    "mesafe": 41
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-10-600.webp": [
+   {
+    "id": 1787,
+    "mesafe": 34
+   },
+   {
+    "id": 1573,
+    "mesafe": 37
+   },
+   {
+    "id": 1461,
+    "mesafe": 38
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-11-600.webp": [
+   {
+    "id": 1062,
+    "mesafe": 40
+   },
+   {
+    "id": 1232,
+    "mesafe": 41
+   },
+   {
+    "id": 1514,
+    "mesafe": 42
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-12-600.webp": [
+   {
+    "id": 1180,
+    "mesafe": 37
+   },
+   {
+    "id": 1153,
+    "mesafe": 39
+   },
+   {
+    "id": 259,
+    "mesafe": 39
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-13-600.webp": [
+   {
+    "id": 1039,
+    "mesafe": 3
+   },
+   {
+    "id": 1753,
+    "mesafe": 39
+   },
+   {
+    "id": 1557,
+    "mesafe": 40
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-14-600.webp": [
+   {
+    "id": 1038,
+    "mesafe": 7
+   },
+   {
+    "id": 1036,
+    "mesafe": 33
+   },
+   {
+    "id": 1062,
+    "mesafe": 38
+   }
+  ],
+  "public/images/otel-bar/deniz-ustu-ahsap-otel-odalari/deniz-ustu-ahsap-otel-odalari-15-600.webp": [
+   {
+    "id": 1037,
+    "mesafe": 5
+   },
+   {
+    "id": 330,
+    "mesafe": 38
+   },
+   {
+    "id": 1529,
+    "mesafe": 40
+   }
+  ],
+  "public/images/otel-bar/hasir-catili-plaj-bari/hasir-catili-plaj-bari-01-600.webp": [
+   {
+    "id": 1217,
+    "mesafe": 33
+   },
+   {
+    "id": 1670,
+    "mesafe": 35
+   },
+   {
+    "id": 1263,
+    "mesafe": 38
+   }
+  ],
+  "public/images/otel-bar/hasir-catili-plaj-bari/hasir-catili-plaj-bari-02-600.webp": [
+   {
+    "id": 1008,
+    "mesafe": 37
+   },
+   {
+    "id": 1002,
+    "mesafe": 38
+   },
+   {
+    "id": 1055,
+    "mesafe": 38
+   }
+  ],
+  "public/images/otel-bar/hasir-catili-plaj-bari/hasir-catili-plaj-bari-03-600.webp": [
+   {
+    "id": 1670,
+    "mesafe": 34
+   },
+   {
+    "id": 1174,
+    "mesafe": 35
+   },
+   {
+    "id": 1100,
+    "mesafe": 38
+   }
+  ],
+  "public/images/otel-bar/hasir-catili-plaj-bari/hasir-catili-plaj-bari-04-600.webp": [
+   {
+    "id": 1619,
+    "mesafe": 39
+   },
+   {
+    "id": 1350,
+    "mesafe": 41
+   },
+   {
+    "id": 1712,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-kabin/ahsap-kabin-01-600.webp": [
+   {
+    "id": 1639,
+    "mesafe": 36
+   },
+   {
+    "id": 1289,
+    "mesafe": 40
+   },
+   {
+    "id": 257,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-kabin/ahsap-kabin-02-600.webp": [
+   {
+    "id": 1848,
+    "mesafe": 39
+   },
+   {
+    "id": 1212,
+    "mesafe": 40
+   },
+   {
+    "id": 1251,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-kabin/ahsap-kabin-03-600.webp": [
+   {
+    "id": 1517,
+    "mesafe": 36
+   },
+   {
+    "id": 1828,
+    "mesafe": 37
+   },
+   {
+    "id": 928,
+    "mesafe": 37
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-kabin/ahsap-kabin-04-600.webp": [
+   {
+    "id": 1182,
+    "mesafe": 39
+   },
+   {
+    "id": 955,
+    "mesafe": 39
+   },
+   {
+    "id": 1211,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-kabin/ahsap-kabin-05-600.webp": [
+   {
+    "id": 1259,
+    "mesafe": 39
+   },
+   {
+    "id": 1145,
+    "mesafe": 40
+   },
+   {
+    "id": 1828,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-01-600.webp": [
+   {
+    "id": 254,
+    "mesafe": 36
+   },
+   {
+    "id": 1447,
+    "mesafe": 37
+   },
+   {
+    "id": 1421,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-02-600.webp": [
+   {
+    "id": 327,
+    "mesafe": 40
+   },
+   {
+    "id": 1056,
+    "mesafe": 41
+   },
+   {
+    "id": 1555,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-03-600.webp": [
+   {
+    "id": 1382,
+    "mesafe": 34
+   },
+   {
+    "id": 1058,
+    "mesafe": 38
+   },
+   {
+    "id": 1758,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-04-600.webp": [
+   {
+    "id": 1099,
+    "mesafe": 38
+   },
+   {
+    "id": 1629,
+    "mesafe": 38
+   },
+   {
+    "id": 1179,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-05-600.webp": [
+   {
+    "id": 325,
+    "mesafe": 38
+   },
+   {
+    "id": 1062,
+    "mesafe": 41
+   },
+   {
+    "id": 1290,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-06-600.webp": [
+   {
+    "id": 1765,
+    "mesafe": 39
+   },
+   {
+    "id": 2178,
+    "mesafe": 40
+   },
+   {
+    "id": 260,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-07-600.webp": [
+   {
+    "id": 1788,
+    "mesafe": 39
+   },
+   {
+    "id": 1253,
+    "mesafe": 41
+   },
+   {
+    "id": 1655,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-08-600.webp": [
+   {
+    "id": 1439,
+    "mesafe": 38
+   },
+   {
+    "id": 275,
+    "mesafe": 40
+   },
+   {
+    "id": 323,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/ahsap-soyunma-kabinleri/ahsap-soyunma-kabinleri-09-600.webp": [
+   {
+    "id": 1692,
+    "mesafe": 33
+   },
+   {
+    "id": 1109,
+    "mesafe": 36
+   },
+   {
+    "id": 1349,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/bahce-deposu/bahce-deposu-01-600.webp": [
+   {
+    "id": 299,
+    "mesafe": 38
+   },
+   {
+    "id": 1441,
+    "mesafe": 39
+   },
+   {
+    "id": 1515,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/bahce-deposu/bahce-deposu-02-600.webp": [
+   {
+    "id": 1407,
+    "mesafe": 37
+   },
+   {
+    "id": 1754,
+    "mesafe": 38
+   },
+   {
+    "id": 1765,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/bahce-deposu/bahce-deposu-03-600.webp": [
+   {
+    "id": 1355,
+    "mesafe": 35
+   },
+   {
+    "id": 879,
+    "mesafe": 37
+   },
+   {
+    "id": 1431,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/bahce-deposu/bahce-deposu-04-600.webp": [
+   {
+    "id": 1427,
+    "mesafe": 36
+   },
+   {
+    "id": 1117,
+    "mesafe": 38
+   },
+   {
+    "id": 1120,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-01-600.webp": [
+   {
+    "id": 990,
+    "mesafe": 10
+   },
+   {
+    "id": 1705,
+    "mesafe": 37
+   },
+   {
+    "id": 1258,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-02-600.webp": [
+   {
+    "id": 993,
+    "mesafe": 9
+   },
+   {
+    "id": 1616,
+    "mesafe": 35
+   },
+   {
+    "id": 1787,
+    "mesafe": 35
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-03-600.webp": [
+   {
+    "id": 1461,
+    "mesafe": 33
+   },
+   {
+    "id": 1277,
+    "mesafe": 37
+   },
+   {
+    "id": 1259,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-04-600.webp": [
+   {
+    "id": 1256,
+    "mesafe": 35
+   },
+   {
+    "id": 279,
+    "mesafe": 37
+   },
+   {
+    "id": 1593,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-05-600.webp": [
+   {
+    "id": 1191,
+    "mesafe": 36
+   },
+   {
+    "id": 993,
+    "mesafe": 36
+   },
+   {
+    "id": 1530,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-06-600.webp": [
+   {
+    "id": 994,
+    "mesafe": 9
+   },
+   {
+    "id": 992,
+    "mesafe": 28
+   },
+   {
+    "id": 971,
+    "mesafe": 34
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-07-600.webp": [
+   {
+    "id": 1845,
+    "mesafe": 37
+   },
+   {
+    "id": 300,
+    "mesafe": 37
+   },
+   {
+    "id": 995,
+    "mesafe": 37
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-08-600.webp": [
+   {
+    "id": 995,
+    "mesafe": 8
+   },
+   {
+    "id": 279,
+    "mesafe": 35
+   },
+   {
+    "id": 1259,
+    "mesafe": 36
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-09-600.webp": [
+   {
+    "id": 1077,
+    "mesafe": 37
+   },
+   {
+    "id": 1145,
+    "mesafe": 37
+   },
+   {
+    "id": 995,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-10-600.webp": [
+   {
+    "id": 1709,
+    "mesafe": 37
+   },
+   {
+    "id": 1002,
+    "mesafe": 42
+   },
+   {
+    "id": 1145,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-11-600.webp": [
+   {
+    "id": 1420,
+    "mesafe": 39
+   },
+   {
+    "id": 1705,
+    "mesafe": 40
+   },
+   {
+    "id": 1123,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-12-600.webp": [
+   {
+    "id": 1214,
+    "mesafe": 38
+   },
+   {
+    "id": 1217,
+    "mesafe": 39
+   },
+   {
+    "id": 1044,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-13-600.webp": [
+   {
+    "id": 991,
+    "mesafe": 23
+   },
+   {
+    "id": 1181,
+    "mesafe": 36
+   },
+   {
+    "id": 1697,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/iskele-giris-kulubesi/iskele-giris-kulubesi-01-600.webp": [
+   {
+    "id": 1581,
+    "mesafe": 12
+   },
+   {
+    "id": 1040,
+    "mesafe": 42
+   },
+   {
+    "id": 1158,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ozel-tasarim/iskele-giris-kulubesi/iskele-giris-kulubesi-02-600.webp": [
+   {
+    "id": 1407,
+    "mesafe": 37
+   },
+   {
+    "id": 1180,
+    "mesafe": 41
+   },
+   {
+    "id": 995,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/iskele-giris-kulubesi/iskele-giris-kulubesi-03-600.webp": [
+   {
+    "id": 1579,
+    "mesafe": 11
+   },
+   {
+    "id": 1010,
+    "mesafe": 38
+   },
+   {
+    "id": 1670,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/iskele-giris-kulubesi/iskele-giris-kulubesi-04-600.webp": [
+   {
+    "id": 1580,
+    "mesafe": 16
+   },
+   {
+    "id": 1256,
+    "mesafe": 37
+   },
+   {
+    "id": 329,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/iskele-giris-kulubesi/iskele-giris-kulubesi-05-600.webp": [
+   {
+    "id": 1217,
+    "mesafe": 33
+   },
+   {
+    "id": 1620,
+    "mesafe": 39
+   },
+   {
+    "id": 1706,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/iskele-giris-kulubesi/iskele-giris-kulubesi-06-600.webp": [
+   {
+    "id": 1035,
+    "mesafe": 35
+   },
+   {
+    "id": 1096,
+    "mesafe": 37
+   },
+   {
+    "id": 1087,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-01-600.webp": [
+   {
+    "id": 1697,
+    "mesafe": 36
+   },
+   {
+    "id": 1736,
+    "mesafe": 38
+   },
+   {
+    "id": 1087,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-02-600.webp": [
+   {
+    "id": 1400,
+    "mesafe": 34
+   },
+   {
+    "id": 1693,
+    "mesafe": 38
+   },
+   {
+    "id": 257,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-03-600.webp": [
+   {
+    "id": 1759,
+    "mesafe": 37
+   },
+   {
+    "id": 1526,
+    "mesafe": 38
+   },
+   {
+    "id": 1153,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-04-600.webp": [
+   {
+    "id": 1696,
+    "mesafe": 39
+   },
+   {
+    "id": 1737,
+    "mesafe": 40
+   },
+   {
+    "id": 257,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-05-600.webp": [
+   {
+    "id": 1294,
+    "mesafe": 38
+   },
+   {
+    "id": 248,
+    "mesafe": 40
+   },
+   {
+    "id": 1119,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-06-600.webp": [
+   {
+    "id": 1697,
+    "mesafe": 35
+   },
+   {
+    "id": 1693,
+    "mesafe": 37
+   },
+   {
+    "id": 1257,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-07-600.webp": [
+   {
+    "id": 1765,
+    "mesafe": 36
+   },
+   {
+    "id": 1277,
+    "mesafe": 41
+   },
+   {
+    "id": 1737,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-08-600.webp": [
+   {
+    "id": 1042,
+    "mesafe": 34
+   },
+   {
+    "id": 1272,
+    "mesafe": 41
+   },
+   {
+    "id": 1693,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/marka-vitrini/marka-vitrini-09-600.webp": [
+   {
+    "id": 930,
+    "mesafe": 39
+   },
+   {
+    "id": 1642,
+    "mesafe": 40
+   },
+   {
+    "id": 1599,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-01-600.webp": [
+   {
+    "id": 1591,
+    "mesafe": 29
+   },
+   {
+    "id": 1271,
+    "mesafe": 38
+   },
+   {
+    "id": 1697,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-02-600.webp": [
+   {
+    "id": 1217,
+    "mesafe": 37
+   },
+   {
+    "id": 311,
+    "mesafe": 40
+   },
+   {
+    "id": 995,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-03-600.webp": [
+   {
+    "id": 1293,
+    "mesafe": 38
+   },
+   {
+    "id": 1714,
+    "mesafe": 39
+   },
+   {
+    "id": 1503,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-04-600.webp": [
+   {
+    "id": 1591,
+    "mesafe": 9
+   },
+   {
+    "id": 1697,
+    "mesafe": 36
+   },
+   {
+    "id": 1250,
+    "mesafe": 37
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-05-600.webp": [
+   {
+    "id": 1591,
+    "mesafe": 31
+   },
+   {
+    "id": 1705,
+    "mesafe": 33
+   },
+   {
+    "id": 1194,
+    "mesafe": 38
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-06-600.webp": [
+   {
+    "id": 1600,
+    "mesafe": 37
+   },
+   {
+    "id": 953,
+    "mesafe": 39
+   },
+   {
+    "id": 1045,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-07-600.webp": [
+   {
+    "id": 1591,
+    "mesafe": 24
+   },
+   {
+    "id": 318,
+    "mesafe": 36
+   },
+   {
+    "id": 1525,
+    "mesafe": 37
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-08-600.webp": [
+   {
+    "id": 1595,
+    "mesafe": 15
+   },
+   {
+    "id": 1263,
+    "mesafe": 40
+   },
+   {
+    "id": 1714,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-09-600.webp": [
+   {
+    "id": 1593,
+    "mesafe": 7
+   },
+   {
+    "id": 1595,
+    "mesafe": 33
+   },
+   {
+    "id": 260,
+    "mesafe": 33
+   }
+  ],
+  "public/images/ozel-tasarim/modern-bahce-odasi-ve-depo/modern-bahce-odasi-ve-depo-01-600.webp": [
+   {
+    "id": 2172,
+    "mesafe": 42
+   },
+   {
+    "id": 1617,
+    "mesafe": 43
+   },
+   {
+    "id": 1060,
+    "mesafe": 44
+   }
+  ],
+  "public/images/ozel-tasarim/modern-bahce-odasi-ve-depo/modern-bahce-odasi-ve-depo-02-600.webp": [
+   {
+    "id": 1082,
+    "mesafe": 41
+   },
+   {
+    "id": 1351,
+    "mesafe": 41
+   },
+   {
+    "id": 1558,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/modern-bahce-odasi-ve-depo/modern-bahce-odasi-ve-depo-03-600.webp": [
+   {
+    "id": 331,
+    "mesafe": 35
+   },
+   {
+    "id": 1694,
+    "mesafe": 41
+   },
+   {
+    "id": 1755,
+    "mesafe": 41
+   }
+  ],
+  "public/images/ozel-tasarim/modern-bahce-odasi-ve-depo/modern-bahce-odasi-ve-depo-04-600.webp": [
+   {
+    "id": 1055,
+    "mesafe": 40
+   },
+   {
+    "id": 1848,
+    "mesafe": 41
+   },
+   {
+    "id": 1044,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ozel-tasarim/modern-bahce-odasi-ve-depo/modern-bahce-odasi-ve-depo-05-600.webp": [
+   {
+    "id": 255,
+    "mesafe": 40
+   },
+   {
+    "id": 1348,
+    "mesafe": 41
+   },
+   {
+    "id": 1040,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ozel-tasarim/yol-kenari-satis-tezgahlari/yol-kenari-satis-tezgahlari-01-600.webp": [
+   {
+    "id": 319,
+    "mesafe": 39
+   },
+   {
+    "id": 1806,
+    "mesafe": 40
+   },
+   {
+    "id": 883,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/yol-kenari-satis-tezgahlari/yol-kenari-satis-tezgahlari-02-600.webp": [
+   {
+    "id": 1183,
+    "mesafe": 42
+   },
+   {
+    "id": 1288,
+    "mesafe": 42
+   },
+   {
+    "id": 1289,
+    "mesafe": 42
+   }
+  ],
+  "public/images/ozel-tasarim/yol-kenari-satis-tezgahlari/yol-kenari-satis-tezgahlari-03-600.webp": [
+   {
+    "id": 930,
+    "mesafe": 34
+   },
+   {
+    "id": 1072,
+    "mesafe": 37
+   },
+   {
+    "id": 1696,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/yol-kenari-satis-tezgahlari/yol-kenari-satis-tezgahlari-04-600.webp": [
+   {
+    "id": 1082,
+    "mesafe": 38
+   },
+   {
+    "id": 1106,
+    "mesafe": 38
+   },
+   {
+    "id": 1105,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/yol-kenari-satis-tezgahlari/yol-kenari-satis-tezgahlari-05-600.webp": [
+   {
+    "id": 1649,
+    "mesafe": 35
+   },
+   {
+    "id": 930,
+    "mesafe": 37
+   },
+   {
+    "id": 1705,
+    "mesafe": 39
+   }
+  ],
+  "public/images/ozel-tasarim/yol-kenari-satis-tezgahlari/yol-kenari-satis-tezgahlari-06-600.webp": [
+   {
+    "id": 1100,
+    "mesafe": 39
+   },
+   {
+    "id": 1543,
+    "mesafe": 39
+   },
+   {
+    "id": 1619,
+    "mesafe": 40
+   }
+  ],
+  "public/images/ozel-tasarim/yol-kenari-satis-tezgahlari/yol-kenari-satis-tezgahlari-07-600.webp": [
+   {
+    "id": 1105,
+    "mesafe": 39
+   },
+   {
+    "id": 1468,
+    "mesafe": 41
+   },
+   {
+    "id": 1098,
+    "mesafe": 42
+   }
+  ],
+  "public/images/tiny-house/guvenlik-kulubesi-2-600.webp": [
+   {
+    "id": 1848,
+    "mesafe": 8
+   },
+   {
+    "id": 994,
+    "mesafe": 37
+   },
+   {
+    "id": 971,
+    "mesafe": 38
+   }
+  ],
+  "public/images/tiny-house/guvenlik-kulubesi-3-600.webp": [
+   {
+    "id": 1844,
+    "mesafe": 4
+   },
+   {
+    "id": 1847,
+    "mesafe": 4
+   },
+   {
+    "id": 2177,
+    "mesafe": 36
+   }
+  ],
+  "public/images/tiny-house/guvenlik-kulubesi-4-600.webp": [
+   {
+    "id": 1846,
+    "mesafe": 12
+   },
+   {
+    "id": 1788,
+    "mesafe": 37
+   },
+   {
+    "id": 1425,
+    "mesafe": 38
+   }
+  ],
+  "public/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-01-600.webp": [
+   {
+    "id": 1557,
+    "mesafe": 38
+   },
+   {
+    "id": 278,
+    "mesafe": 39
+   },
+   {
+    "id": 1844,
+    "mesafe": 40
+   }
+  ],
+  "public/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-02-600.webp": [
+   {
+    "id": 1154,
+    "mesafe": 37
+   },
+   {
+    "id": 1276,
+    "mesafe": 37
+   },
+   {
+    "id": 1596,
+    "mesafe": 42
+   }
+  ],
+  "public/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-03-600.webp": [
+   {
+    "id": 1174,
+    "mesafe": 39
+   },
+   {
+    "id": 1427,
+    "mesafe": 39
+   },
+   {
+    "id": 2173,
+    "mesafe": 41
+   }
+  ],
+  "public/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-04-600.webp": [
+   {
+    "id": 1054,
+    "mesafe": 41
+   },
+   {
+    "id": 1650,
+    "mesafe": 41
+   },
+   {
+    "id": 1711,
+    "mesafe": 41
+   }
+  ],
+  "public/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-05-600.webp": [
+   {
+    "id": 1041,
+    "mesafe": 37
+   },
+   {
+    "id": 1192,
+    "mesafe": 39
+   },
+   {
+    "id": 1691,
+    "mesafe": 39
+   }
+  ],
+  "public/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-06-600.webp": [
+   {
+    "id": 1039,
+    "mesafe": 40
+   },
+   {
+    "id": 1572,
+    "mesafe": 40
+   },
+   {
+    "id": 1787,
+    "mesafe": 41
+   }
+  ],
+  "public/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-01-600.webp": [
+   {
+    "id": 1145,
+    "mesafe": 33
+   },
+   {
+    "id": 995,
+    "mesafe": 36
+   },
+   {
+    "id": 1570,
+    "mesafe": 37
+   }
+  ],
+  "public/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-02-600.webp": [
+   {
+    "id": 1004,
+    "mesafe": 40
+   },
+   {
+    "id": 1072,
+    "mesafe": 41
+   },
+   {
+    "id": 1146,
+    "mesafe": 41
+   }
+  ],
+  "public/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-03-600.webp": [
+   {
+    "id": 926,
+    "mesafe": 34
+   },
+   {
+    "id": 1695,
+    "mesafe": 39
+   },
+   {
+    "id": 1530,
+    "mesafe": 40
+   }
+  ],
+  "public/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-04-600.webp": [
+   {
+    "id": 1183,
+    "mesafe": 35
+   },
+   {
+    "id": 1807,
+    "mesafe": 35
+   },
+   {
+    "id": 1739,
+    "mesafe": 39
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-01-600.webp": [
+   {
+    "id": 1419,
+    "mesafe": 40
+   },
+   {
+    "id": 1424,
+    "mesafe": 40
+   },
+   {
+    "id": 1637,
+    "mesafe": 41
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-02-600.webp": [
+   {
+    "id": 2172,
+    "mesafe": 9
+   },
+   {
+    "id": 1192,
+    "mesafe": 37
+   },
+   {
+    "id": 1256,
+    "mesafe": 38
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-03-600.webp": [
+   {
+    "id": 2175,
+    "mesafe": 5
+   },
+   {
+    "id": 1748,
+    "mesafe": 31
+   },
+   {
+    "id": 1545,
+    "mesafe": 35
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-04-600.webp": [
+   {
+    "id": 2173,
+    "mesafe": 6
+   },
+   {
+    "id": 1754,
+    "mesafe": 38
+   },
+   {
+    "id": 1001,
+    "mesafe": 39
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-05-600.webp": [
+   {
+    "id": 2178,
+    "mesafe": 13
+   },
+   {
+    "id": 333,
+    "mesafe": 38
+   },
+   {
+    "id": 1426,
+    "mesafe": 39
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-06-600.webp": [
+   {
+    "id": 2174,
+    "mesafe": 6
+   },
+   {
+    "id": 1082,
+    "mesafe": 36
+   },
+   {
+    "id": 1252,
+    "mesafe": 39
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-07-600.webp": [
+   {
+    "id": 1183,
+    "mesafe": 37
+   },
+   {
+    "id": 1443,
+    "mesafe": 39
+   },
+   {
+    "id": 306,
+    "mesafe": 39
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-08-600.webp": [
+   {
+    "id": 1044,
+    "mesafe": 39
+   },
+   {
+    "id": 1707,
+    "mesafe": 39
+   },
+   {
+    "id": 1787,
+    "mesafe": 41
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-09-600.webp": [
+   {
+    "id": 2177,
+    "mesafe": 10
+   },
+   {
+    "id": 947,
+    "mesafe": 37
+   },
+   {
+    "id": 1757,
+    "mesafe": 39
+   }
+  ],
+  "public/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-10-600.webp": [
+   {
+    "id": 1706,
+    "mesafe": 37
+   },
+   {
+    "id": 1779,
+    "mesafe": 42
+   },
+   {
+    "id": 1180,
+    "mesafe": 43
+   }
+  ],
+  "public/images/tiny-house/tiny-house11-600.webp": [
+   {
+    "id": 278,
+    "mesafe": 37
+   },
+   {
+    "id": 1639,
+    "mesafe": 42
+   },
+   {
+    "id": 957,
+    "mesafe": 42
+   }
+  ],
+  "public/images/tiny-house/tiny-house-600.webp": [
+   {
+    "id": 1210,
+    "mesafe": 39
+   },
+   {
+    "id": 1211,
+    "mesafe": 39
+   },
+   {
+    "id": 2179,
+    "mesafe": 40
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-01-600.webp": [
+   {
+    "id": 308,
+    "mesafe": 33
+   },
+   {
+    "id": 1727,
+    "mesafe": 34
+   },
+   {
+    "id": 994,
+    "mesafe": 34
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-02-600.webp": [
+   {
+    "id": 1182,
+    "mesafe": 37
+   },
+   {
+    "id": 309,
+    "mesafe": 37
+   },
+   {
+    "id": 1086,
+    "mesafe": 40
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-03-600.webp": [
+   {
+    "id": 1044,
+    "mesafe": 31
+   },
+   {
+    "id": 995,
+    "mesafe": 34
+   },
+   {
+    "id": 290,
+    "mesafe": 38
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-04-600.webp": [
+   {
+    "id": 1154,
+    "mesafe": 39
+   },
+   {
+    "id": 1210,
+    "mesafe": 39
+   },
+   {
+    "id": 1144,
+    "mesafe": 41
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-05-600.webp": [
+   {
+    "id": 1736,
+    "mesafe": 34
+   },
+   {
+    "id": 1193,
+    "mesafe": 35
+   },
+   {
+    "id": 1199,
+    "mesafe": 35
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-06-600.webp": [
+   {
+    "id": 1442,
+    "mesafe": 40
+   },
+   {
+    "id": 269,
+    "mesafe": 40
+   },
+   {
+    "id": 1068,
+    "mesafe": 41
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-07-600.webp": [
+   {
+    "id": 1145,
+    "mesafe": 38
+   },
+   {
+    "id": 1727,
+    "mesafe": 41
+   },
+   {
+    "id": 300,
+    "mesafe": 41
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-08-600.webp": [
+   {
+    "id": 1212,
+    "mesafe": 34
+   },
+   {
+    "id": 1502,
+    "mesafe": 34
+   },
+   {
+    "id": 1530,
+    "mesafe": 35
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-09-600.webp": [
+   {
+    "id": 1682,
+    "mesafe": 39
+   },
+   {
+    "id": 1350,
+    "mesafe": 40
+   },
+   {
+    "id": 1683,
+    "mesafe": 40
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-10-600.webp": [
+   {
+    "id": 1616,
+    "mesafe": 35
+   },
+   {
+    "id": 1779,
+    "mesafe": 36
+   },
+   {
+    "id": 2178,
+    "mesafe": 38
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-11-600.webp": [
+   {
+    "id": 1764,
+    "mesafe": 35
+   },
+   {
+    "id": 278,
+    "mesafe": 35
+   },
+   {
+    "id": 1679,
+    "mesafe": 39
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-12-600.webp": [
+   {
+    "id": 267,
+    "mesafe": 37
+   },
+   {
+    "id": 990,
+    "mesafe": 40
+   },
+   {
+    "id": 1087,
+    "mesafe": 41
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-13-600.webp": [
+   {
+    "id": 1348,
+    "mesafe": 3
+   },
+   {
+    "id": 1789,
+    "mesafe": 37
+   },
+   {
+    "id": 1103,
+    "mesafe": 39
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-14-600.webp": [
+   {
+    "id": 875,
+    "mesafe": 39
+   },
+   {
+    "id": 1194,
+    "mesafe": 40
+   },
+   {
+    "id": 1180,
+    "mesafe": 41
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-15-600.webp": [
+   {
+    "id": 1353,
+    "mesafe": 28
+   },
+   {
+    "id": 1180,
+    "mesafe": 36
+   },
+   {
+    "id": 309,
+    "mesafe": 36
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-16-600.webp": [
+   {
+    "id": 1352,
+    "mesafe": 6
+   },
+   {
+    "id": 2173,
+    "mesafe": 37
+   },
+   {
+    "id": 1063,
+    "mesafe": 39
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-17-600.webp": [
+   {
+    "id": 1461,
+    "mesafe": 34
+   },
+   {
+    "id": 1505,
+    "mesafe": 39
+   },
+   {
+    "id": 1736,
+    "mesafe": 39
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-18-600.webp": [
+   {
+    "id": 1038,
+    "mesafe": 35
+   },
+   {
+    "id": 935,
+    "mesafe": 35
+   },
+   {
+    "id": 931,
+    "mesafe": 36
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-19-600.webp": [
+   {
+    "id": 993,
+    "mesafe": 30
+   },
+   {
+    "id": 1500,
+    "mesafe": 39
+   },
+   {
+    "id": 1652,
+    "mesafe": 39
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-20-600.webp": [
+   {
+    "id": 1709,
+    "mesafe": 38
+   },
+   {
+    "id": 1041,
+    "mesafe": 40
+   },
+   {
+    "id": 1616,
+    "mesafe": 40
+   }
+  ],
+  "public/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-21-600.webp": [
+   {
+    "id": 1353,
+    "mesafe": 8
+   },
+   {
+    "id": 1723,
+    "mesafe": 37
+   },
+   {
+    "id": 1199,
+    "mesafe": 38
+   }
+  ]
+ }
+}

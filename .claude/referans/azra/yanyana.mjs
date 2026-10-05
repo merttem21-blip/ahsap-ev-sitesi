@@ -1,12 +1,13 @@
 // Görselleri satır satır yan yana dizen kontrol sayfası üretir.
 //   node yanyana.mjs <cikti.jpg> "etiket::a.jpg,b.jpg" "c.jpg,d.webp" ...   (her argüman bir satır)
+//   YUKSEKLIK=<px> satır yüksekliği · ALTYAZI=1 her görselin altına dosya adını yazar
 import path from 'node:path';
 import { createRequire } from 'node:module';
 
 const require = createRequire(path.join(process.cwd(), 'package.json'));
 const sharp = require('sharp');
 
-const Y = 150;
+const Y = Number(process.env.YUKSEKLIK || 150);
 const ETIKET = 230;
 const [cikti, ...satirlar] = process.argv.slice(2);
 const kacis = (m) => m.replace(/[&<>]/g, (h) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[h]);
@@ -30,6 +31,12 @@ for (const [i, satir] of satirlar.entries()) {
     const tampon = await sharp(dosya).rotate().resize({ height: Y }).toBuffer();
     const { width } = await sharp(tampon).metadata();
     parcalar.push({ input: tampon, left: x, top });
+    if (process.env.ALTYAZI) {
+      // Dosya adını görselin altına yazar (ör. "ahsap-ev-12")
+      const ad = kacis(path.basename(dosya).replace(/(-\d+)?\.\w+$/, ''));
+      const svg = `<svg width="${width}" height="22" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#000" opacity="0.7"/><text x="4" y="16" font-family="Arial" font-size="14" fill="#fff">${ad}</text></svg>`;
+      parcalar.push({ input: Buffer.from(svg), left: x, top: top + Y - 22 });
+    }
     x += width + 6;
   }
   genislik = Math.max(genislik, x);

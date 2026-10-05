@@ -16,14 +16,14 @@ Sütunlar: **Eski foto** galerideki fotoğraf sayısı · **≥1200px** uzun ken
 | 6 | DATÇA AHŞAP BEACH CLUP | – | Kulübe | Hasır Çatılı Plaj Barı (`otel-bar`) | ✓ | 7 | 7 | 0 | 4 | aynı yapı, farklı çekimler |
 | 7 | DATÇA AHŞAP OFİS BUNGALOV 18m2 | 18 m² | Ahşap Evler, Bungalov | Siyah Cepheli Bahçe Ofisi (`tiny-house`) | ✓ | 10 | 10 | 7 | 10 | aynı fotoğraflar |
 | 8 | HEYBELİADA AHŞAP BİLET GİŞESİ | – | Kulübe | İskele Giriş Kulübesi (`ozel-tasarim`) | ✓ | 4 | 4 | 2 | 6 | aynı fotoğraflar |
-| 9 | KANDIRA OVAL AHŞAP BUNGALOV 40m2 | 40 m² | Ahşap Evler, Bungalov | Kemerli Pod Bungalov (`bungalov`) | ✓ | 7 | 7 | 0 | 11 | aynı çekimler, farklı kırpım |
-| 10 | KIBRIS MALDİV EVİ BUNGALOV | 45 m² | Ahşap Evler, Bungalov | Deniz Üstü Ahşap Otel Odaları (`otel-bar`) | ✓ | 11 | 9 | 4 | 12 | aynı yapı; 3 iç mekân fotoğrafı bizde A-Frame Bungalov içinde |
+| 9 | KANDIRA OVAL AHŞAP BUNGALOV 40m2 | 40 m² | Ahşap Evler, Bungalov | Kemerli Pod Bungalov (`bungalov`) | ✓ | 7 | 7 | 0 | 11 | aynı yapı, farklı çekimler |
+| 10 | KIBRIS MALDİV EVİ BUNGALOV | 45 m² | Ahşap Evler, Bungalov | Deniz Üstü Ahşap Otel Odaları (`otel-bar`) | ✓ | 11 | 9 | 4 | 15 | aynı yapı; A-Frame Bungalov içindeki 3 yatak odası fotoğrafı bu projeye taşındı (075e9db) |
 | 11 | KUŞ ADASI AHŞAP BUNGALOV | 15 m² | Ahşap Evler, Bungalov, Üçgen Ev, TinyHouse | Verandalı Küçük A-Frame (`a-frame`) | ✓ | 5 | 5 | 2 | 6 | aynı fotoğraflar |
 | 12 | SAKARYA AHŞAP BUNGALOV 30m2 | 38 m² | Ahşap Evler, Bungalov, Üçgen Ev | Asma Katlı Verandalı Bungalov (`bungalov`) | ✓ | 12 | 12 | 3 | 12 | aynı fotoğraflar |
 | 13 | YALOVA AHŞAP CAMİİ 180m2 | 180 m² | Ahşap Evler, Tarihi Eser | İki Katlı Ahşap Cami (`ozel-tasarim`) | ✓ | 6 | 4 | 4 | 13 | aynı fotoğraflar |
 | 14 | ÇANAKKALE AHŞAP EV 45m2 | 45 m² | Ahşap Evler, Bungalov, Üçgen Ev | Geniş Verandalı Asma Katlı Bungalov (`bungalov`) | ✓ | 9 | 7 | 3 | 14 | aynı fotoğraflar |
 | 15 | ÇOCUK OYUN EVİ İSTANBUL | – | Bungalov, Çocuk Oyun Evi | Kaydıraklı Şato Oyun Evi (`cocuk-oyun-parki`) | ✓ | 7 | 7 | 3 | 25 | aynı fotoğraflar |
-| 16 | AĞVA ÜÇGEN EV 50 m2 | 50 m² | Ahşap Evler, Bungalov, Üçgen Ev | A-Frame Bungalov (`a-frame`) | ? | 25 | 25 | 3 | 11 | 3 iç mekân bizde A-Frame Bungalov içinde; dış cephe farklı yapıya benziyor |
+| 16 | AĞVA ÜÇGEN EV 50 m2 | 50 m² | Ahşap Evler, Bungalov, Üçgen Ev | A-Frame Bungalov (`a-frame`) | ? | 25 | 25 | 3 | 8 | gece fotoğrafı bizim kapakla aynı çekim, 3 iç mekân birebir; güçlü kanıt, onay bekliyor |
 | 17 | BODRUM AHŞAP EV 80m2 | 80 m² | Ahşap Evler | Deniz Manzaralı Teraslı Ahşap Ev (`ahsap-ev`) | ? | 9 | 9 | 2 | 4 | benzer siyah kaideli teras ama renk farklı; 2 fotoğraf bizde sahipsiz (ahsap-ev-8, -15) |
 | 18 | FETHİYE AHŞAP EV 70m2 | 70 m² | Ahşap Evler, Bungalov | Kiremit Çatılı Ahşap Ev (`ahsap-ev`) | ? | 11 | 4 | 0 | 20 | aynı palmiye ve basamak taşları; birebir aynı fotoğraf yok |
 | 19 | ÇEŞME AHŞAP EV BUNGALOV 60m2 | 80 m² | Ahşap Evler, Bungalov, TinyHouse | Geniş Verandalı Ahşap Villa (`villa`) | ? | 11 | 9 | 3 | 21 | 3 iç mekân birebir bizde villa içinde; dış cepheler farklı yapı |
