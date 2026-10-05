@@ -19,3 +19,4 @@ ham-gorseller/
 # Eski siteden ham indirmeler (büyük; .claude/referans/azra/ içindeki betiklerle yeniden indirilebilir)
 .claude/referans/azra/sayfalar/
 .claude/referans/azra/kucuk/
+__pycache__/
