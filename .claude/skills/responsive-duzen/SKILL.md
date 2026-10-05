@@ -22,7 +22,7 @@ Renk, tipografi, animasyon ve bileşen görünümü `marka-stili`'ndedir; bu dos
 | ≥ 768px | `.kap` iç boşluğu 24px. Bölüm boşluğu 96px. Galeri kapağı 16:9. |
 | ≥ 1024px | Masaüstü menü. Kart ızgaraları 3–4 sütun, footer 4 sütun, proje sayfası içerik + yan kutu. `.kap` 32px. |
 | ≥ 1280px | İçerik 1280px'te durur ve ortalanır. |
-| 1280–1920px | Yalnızca zeminler (hero, krem bantlar, footer) tam genişlikte uzar; kartlar, satır uzunluğu ve yazı boyutu büyümez. |
+| 1280–1920px | Yalnızca zeminler (hero, ara zemin bantları, footer) tam genişlikte uzar; kartlar, satır uzunluğu ve yazı boyutu büyümez. |
 
 ## 3. Konteyner: `.kap`
 
