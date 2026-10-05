@@ -83,15 +83,14 @@
 
   /* Katman sırası */
   --z-header: 20;
-  --z-menu: 25;
   --z-yuzen: 30;
+  --z-menu: 40; /* açık mobil menü paneli yüzen WhatsApp butonunu da örter */
   --z-atla: 100;
 
-  /* Geçiş dönemi: header, footer ve galeri kendi adımlarında yenilenene kadar kalır, sonra silinir */
+  /* Geçiş dönemi: footer ve galeri kendi adımlarında yenilenene kadar kalır, sonra silinir */
   --color-krem-soluk: var(--color-metin);
   --color-cizgi-koyu: var(--color-cizgi);
   --radius-buyuk: var(--radius);
-  --golge-panel: none;
 }
 
 *,

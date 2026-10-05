@@ -1,11 +1,12 @@
 ---
-// Site üst bölümü: logo, ana menü; mobilde tam ekran menü paneli.
-// Header zemini koyudur (antrasit veya karartılmış hero); koyu zemin SVG logosu kullanılır (marka-stili §4).
+// Site üst bölümü: logo solda, ana menü sağda; mobilde tam ekran menü paneli.
+// Header her yerde koyudur; plakasız koyu zemin SVG logosu kullanılır (marka-stili §4, §8).
 import { kategoriler, menu } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
 interface Props {
-  /** Hero fotoğrafının üzerinde şeffaf durur (ana sayfa); diğer sayfalarda antrasit zemin. */
+  /** Ana sayfa: hero fotoğrafının üzerinde şeffaf durur ve logo büyük gösterilir.
+      Diğer sayfalarda antrasit zemin ve standart logo boyutu. */
   seffaf?: boolean;
 }
 
@@ -50,13 +51,13 @@ const aktifMi = (href: string) =>
           menu.map((m) => (
             <li>
               <a href={m.href} aria-current={aktifMi(m.href) ? 'page' : undefined}>
-                {m.ad}
+                <span>{m.ad}</span>
               </a>
             </li>
           ))
         }
       </ul>
-      <a href="/iletisim" class="dugme dugme-birincil menu-cta">Teklif Al</a>
+      <a href="/iletisim" class="dugme menu-cta">Teklif Al</a>
     </nav>
   </div>
 </header>
@@ -107,22 +108,31 @@ const aktifMi = (href: string) =>
   .ust {
     position: relative;
     z-index: var(--z-header);
-    background: var(--color-antrasit);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+    background: var(--color-zemin-ara);
     color: var(--color-krem);
   }
 
-  /* Ana sayfada hero fotoğrafının üzerinde */
+  /* Ana sayfa: hero fotoğrafının üzerinde şeffaf */
   .ust-seffaf {
     position: absolute;
     inset: 0 0 auto;
+    border-bottom-color: transparent;
     background: transparent;
   }
 
-  .ust :focus-visible {
-    outline-color: var(--color-krem);
+  /* Menü metninin altında fotoğraf ne kadar açık olursa olsun ≥ %70 karartma (marka-stili §2);
+     header'ın alt kenarına doğru şeffaflaşır. */
+  .ust-seffaf::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--color-karartma) 0%, var(--color-karartma) 55%, transparent 100%);
+    pointer-events: none;
   }
 
   .ust-ic {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -146,6 +156,10 @@ const aktifMi = (href: string) =>
   .logo img {
     width: auto;
     height: 56px;
+  }
+
+  .ust-seffaf .logo img {
+    height: 72px;
   }
 
   .menu-dugme {
@@ -175,7 +189,7 @@ const aktifMi = (href: string) =>
     display: block;
   }
 
-  /* Mobil: tam ekran panel */
+  /* Mobil: tam ekran koyu panel */
   .menu {
     position: fixed;
     inset: 0;
@@ -183,10 +197,9 @@ const aktifMi = (href: string) =>
     flex-direction: column;
     justify-content: space-between;
     gap: var(--bosluk-5);
-    padding: 120px var(--bosluk-2) var(--bosluk-5);
+    padding: 128px var(--bosluk-2) var(--bosluk-5);
     overflow-y: auto;
-    background: var(--color-antrasit);
-    box-shadow: var(--golge-panel);
+    background: var(--color-zemin);
     visibility: hidden;
     opacity: 0;
     transform: translateY(-8px);
@@ -203,34 +216,52 @@ const aktifMi = (href: string) =>
   }
 
   .menu ul {
-    border-top: var(--cizgi) solid var(--color-cizgi-koyu);
+    border-top: var(--cizgi) solid var(--color-cizgi);
   }
 
   .menu a:not(.dugme) {
     display: flex;
     align-items: center;
     min-height: 72px;
-    border-bottom: var(--cizgi) solid var(--color-cizgi-koyu);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+    color: var(--color-metin);
     font-family: var(--font-baslik);
     font-size: var(--text-h2);
     font-weight: 600;
     letter-spacing: var(--aralik-baslik);
     line-height: var(--satir-baslik);
     text-decoration: none;
-    transition: color var(--gecis);
   }
 
-  .menu a:not(.dugme):hover {
-    color: var(--color-beyaz);
-  }
-
-  /* Aktif sayfa: ince ahşap çizgi (dekoratif) */
+  .menu a:not(.dugme):hover,
   .menu a[aria-current='page'] {
-    color: var(--color-beyaz);
-    text-decoration: underline;
-    text-decoration-color: var(--color-ahsap);
-    text-decoration-thickness: var(--cizgi);
-    text-underline-offset: 10px;
+    color: var(--color-krem);
+  }
+
+  /* Alt çizgi: hover'da soldan sağa uzar (ahşap); aktif sayfada ince yeşil çizgi sabit durur */
+  .menu a span {
+    position: relative;
+  }
+
+  .menu a span::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -8px;
+    height: var(--cizgi);
+    background: var(--color-ahsap);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--sure) var(--ease-out);
+  }
+
+  .menu a:hover span::after {
+    transform: scaleX(1);
+  }
+
+  .menu a[aria-current='page'] span::after {
+    height: 2px;
+    background: var(--color-yesil);
+    transform: scaleX(1);
   }
 
   .menu-cta {
@@ -241,6 +272,10 @@ const aktifMi = (href: string) =>
     overflow: hidden;
   }
 
+  :global(html.menu-acik) .ust {
+    z-index: var(--z-menu);
+  }
+
   /* ≥ 768px */
   @media (min-width: 768px) {
     .menu {
@@ -248,14 +283,22 @@ const aktifMi = (href: string) =>
     }
   }
 
-  /* ≥ 1024px: menü satır içinde, kenara yaslı */
+  /* ≥ 1024px: menü satır içinde, sağa yaslı */
   @media (min-width: 1024px) {
     .ust-ic {
-      padding-block: 18px;
+      padding-block: 20px;
+    }
+
+    .ust-seffaf .ust-ic {
+      padding-block: var(--bosluk-3);
     }
 
     .logo img {
       height: 72px;
+    }
+
+    .ust-seffaf .logo img {
+      height: 100px;
     }
 
     .menu-dugme {
@@ -270,7 +313,6 @@ const aktifMi = (href: string) =>
       padding: 0;
       overflow: visible;
       background: none;
-      box-shadow: none;
       visibility: visible;
       opacity: 1;
       transform: none;
@@ -295,14 +337,15 @@ const aktifMi = (href: string) =>
       white-space: nowrap;
     }
 
-    .menu a[aria-current='page'] {
-      text-underline-offset: 8px;
+    /* Büyük harf aralığı son harften sonra da boşluk bırakır; çizgi metinle aynı yerde biter */
+    .menu a span::after {
+      inset: auto var(--aralik-etiket) -6px 0;
     }
 
     .menu-cta {
       width: auto;
       min-height: 44px;
-      padding: 10px 22px;
+      padding-block: 10px;
     }
   }
 </style>
