@@ -1,6 +1,8 @@
 ---
 // Site üst bölümü: logo solda, ana menü sağda; mobilde tam ekran menü paneli.
 // Header her yerde koyudur; plakasız koyu zemin SVG logosu kullanılır (marka-stili §4, §8).
+// Sayfa kaydırılınca üstte sabit kalır ve küçülür. Küçülme yalnızca transform/opacity ile yapılır:
+// header'ın kapladığı yer değişmez, layout kayması olmaz.
 import { kategoriler, menu } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
@@ -102,33 +104,96 @@ const aktifMi = (href: string) =>
   masaustu.addEventListener('change', (e) => {
     if (e.matches && acikMi()) ayarla(false);
   });
+
+  // Kaydırınca küçülme: kare başına en fazla bir kontrol (rAF), pasif dinleyici
+  const ESIK = 40;
+  let bekliyor = false;
+  const kucult = () => {
+    bekliyor = false;
+    ust?.classList.toggle('ust-kucuk', window.scrollY > ESIK);
+  };
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (bekliyor) return;
+      bekliyor = true;
+      requestAnimationFrame(kucult);
+    },
+    { passive: true }
+  );
+  kucult();
 </script>
 
 <style>
+  /* Ölçüler: --logo ve --pay üst durum, --logo-kucuk ve --pay-kucuk kaydırılmış durum.
+     --olcek = --logo-kucuk / --logo (CSS uzunluk bölmesi her tarayıcıda desteklenmediği için elle). */
   .ust {
-    position: relative;
+    --logo: 64px;
+    --pay: 12px;
+    --logo-kucuk: 64px;
+    --pay-kucuk: 12px;
+    --olcek: 1;
+    --h: calc(var(--logo) + 2 * var(--pay));
+    --h-kucuk: calc(var(--logo-kucuk) + 2 * var(--pay-kucuk));
+
+    position: sticky;
+    top: 0;
     z-index: var(--z-header);
-    border-bottom: var(--cizgi) solid var(--color-cizgi);
-    background: var(--color-zemin-ara);
     color: var(--color-krem);
+    transition: transform var(--sure) var(--ease-out);
   }
 
-  /* Ana sayfa: hero fotoğrafının üzerinde şeffaf */
+  /* Ana sayfa: hero fotoğrafının üzerinde şeffaf ve sabit; logo büyük */
   .ust-seffaf {
-    position: absolute;
+    --logo: 90px;
+    --pay: 16px;
+    --olcek: 0.7111; /* 64 / 90 */
+    position: fixed;
     inset: 0 0 auto;
-    border-bottom-color: transparent;
-    background: transparent;
+  }
+
+  /* Zemin katmanları: üst durum (::before) ve kaydırılmış durum (::after) opacity ile değişir */
+  .ust::before,
+  .ust::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity var(--sure) var(--ease-out);
+  }
+
+  .ust::before {
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+    background: var(--color-zemin-ara);
   }
 
   /* Menü metninin altında fotoğraf ne kadar açık olursa olsun ≥ %70 karartma (marka-stili §2);
      header'ın alt kenarına doğru şeffaflaşır. */
+  /* Kenarlık yok: şeffaf kenarlık alanında gradyan tekrarlanır ve 1px koyu çizgi çizer */
   .ust-seffaf::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    border-bottom: 0;
     background: linear-gradient(180deg, var(--color-karartma) 0%, var(--color-karartma) 55%, transparent 100%);
-    pointer-events: none;
+  }
+
+  .ust::after {
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+    background: var(--color-ust-kucuk);
+    opacity: 0;
+  }
+
+  /* Kaydırılmış durum: header yukarı kayar, yalnızca alttaki --h-kucuk kadarı görünür;
+     içerik bu dar şeridin ortasına iner, logo ölçeklenir. */
+  .ust-kucuk {
+    transform: translateY(calc(var(--h-kucuk) - var(--h)));
+  }
+
+  .ust-kucuk::before {
+    opacity: 0;
+  }
+
+  .ust-kucuk::after {
+    opacity: 1;
   }
 
   .ust-ic {
@@ -137,7 +202,12 @@ const aktifMi = (href: string) =>
     align-items: center;
     justify-content: space-between;
     gap: var(--bosluk-3);
-    padding-block: var(--bosluk-2);
+    padding-block: var(--pay);
+    transition: transform var(--sure) var(--ease-out);
+  }
+
+  .ust-kucuk .ust-ic {
+    transform: translateY(calc((var(--h) - var(--h-kucuk)) / 2));
   }
 
   /* Logo ve menü düğmesi açık panelin üzerinde kalır */
@@ -153,13 +223,31 @@ const aktifMi = (href: string) =>
     flex-shrink: 0;
   }
 
+  /* will-change: logo kendi katmanında bir kez boyanır; küçülürken yeniden boyanmaz
+     (SVG'deki döndürülmüş ahşap desenleri her yeniden boyamada çok pahalıdır) */
   .logo img {
     width: auto;
-    height: 56px;
+    height: var(--logo);
+    transform-origin: left center;
+    transition: transform var(--sure) var(--ease-out);
+    will-change: transform;
   }
 
-  .ust-seffaf .logo img {
-    height: 72px;
+  .ust-kucuk .logo img {
+    transform: scale(var(--olcek));
+  }
+
+  /* Açık mobil menü tam ekran sabit paneldir; dönüşümlü bir üst öğe onu header'a hapseder.
+     Panel açıkken header üst durumuna döner (panel her şeyi örttüğü için görünmez). */
+  :global(html.menu-acik) .ust,
+  :global(html.menu-acik) .ust-ic,
+  :global(html.menu-acik) .logo img {
+    transform: none;
+    transition: none;
+  }
+
+  :global(html.menu-acik) .ust {
+    z-index: var(--z-menu);
   }
 
   .menu-dugme {
@@ -197,7 +285,7 @@ const aktifMi = (href: string) =>
     flex-direction: column;
     justify-content: space-between;
     gap: var(--bosluk-5);
-    padding: 128px var(--bosluk-2) var(--bosluk-5);
+    padding: calc(var(--h) + var(--bosluk-2)) var(--bosluk-2) var(--bosluk-5);
     overflow-y: auto;
     background: var(--color-zemin);
     visibility: hidden;
@@ -272,10 +360,6 @@ const aktifMi = (href: string) =>
     overflow: hidden;
   }
 
-  :global(html.menu-acik) .ust {
-    z-index: var(--z-menu);
-  }
-
   /* ≥ 768px */
   @media (min-width: 768px) {
     .menu {
@@ -285,20 +369,28 @@ const aktifMi = (href: string) =>
 
   /* ≥ 1024px: menü satır içinde, sağa yaslı */
   @media (min-width: 1024px) {
+    .ust {
+      --logo: 72px;
+      --pay: 20px;
+      --olcek: 0.8889; /* 64 / 72 */
+    }
+
+    .ust-seffaf {
+      --logo: 140px;
+      --pay: 24px;
+      --olcek: 0.4571; /* 64 / 140 */
+    }
+
+    /* Küçülme katmanları baştan hazır: ilk kaydırmada katman oluşturma takılması olmaz.
+       Mobilde verilmez; dönüşüm ipucu sabit menü panelini header'a hapseder. */
+    .ust,
     .ust-ic {
-      padding-block: 20px;
+      will-change: transform;
     }
 
-    .ust-seffaf .ust-ic {
-      padding-block: var(--bosluk-3);
-    }
-
-    .logo img {
-      height: 72px;
-    }
-
-    .ust-seffaf .logo img {
-      height: 100px;
+    .ust::before,
+    .ust::after {
+      will-change: opacity;
     }
 
     .menu-dugme {

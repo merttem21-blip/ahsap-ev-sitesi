@@ -27,6 +27,7 @@
   --color-cizgi: rgba(235, 220, 198, 0.14); /* ince ayraç ve kart kenarı (dekoratif) */
   --color-karartma: rgba(30, 30, 30, 0.7); /* fotoğraf üstü metin: beyaz pikselde bile krem ≥ 4.5:1 */
   --color-karartma-hafif: rgba(30, 30, 30, 0.3);
+  --color-ust-kucuk: rgba(46, 46, 46, 0.95); /* kaydırınca header zemini: arkası beyaz olsa bile menü metni ≥ 5.8:1 */
 
   /* Yazı */
   --font-baslik: 'Poppins', system-ui, sans-serif;
@@ -74,11 +75,13 @@
 
   /* Hareket: yalnızca opacity ve transform */
   --sure-kisa: 200ms; /* hover, menü */
-  --sure: 300ms;
-  --sure-giris: 500ms; /* kaydırınca ortaya çıkma */
-  --sure-kenburns: 18s; /* hero fotoğrafında yavaş yakınlaşma */
+  --sure: 300ms; /* header küçülmesi */
+  --sure-ortaya: 700ms; /* kaydırınca ortaya çıkma ve hero metni */
+  --sure-capraz: 1.5s; /* hero slaytları arasında çapraz geçiş */
+  --sure-kenburns: 18s; /* tek fotoğraflı hero'da yavaş yakınlaşma */
   --gecikme-adim: 80ms; /* kartlarda kademeli gecikme */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-ortaya: cubic-bezier(0.2, 0.7, 0.2, 1);
   --gecis: var(--sure-kisa) var(--ease-out);
 
   /* Katman sırası */
@@ -103,6 +106,7 @@ html {
   overflow-x: clip;
   background: var(--color-zemin);
   scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* çapa hedefleri sabit header'ın altında kalmaz */
 }
 
 body {
@@ -278,6 +282,20 @@ ul {
     padding-inline: 32px 28px;
     white-space: nowrap;
   }
+}
+
+/* Kaydırınca ortaya çıkma (src/scripts/hareket.ts). Gizleme sınıfını yalnızca JS ekler:
+   JS yoksa veya hareket azaltılmışsa içerik doğrudan görünür. Zıplama, büyüme, döndürme yok. */
+[data-ortaya] {
+  transition:
+    opacity var(--sure-ortaya) var(--ease-ortaya),
+    transform var(--sure-ortaya) var(--ease-ortaya);
+  transition-delay: var(--gecikme, 0ms);
+}
+
+.ortaya-gizli {
+  opacity: 0;
+  transform: translateY(24px);
 }
 
 /* ≥ 768px */
