@@ -1,0 +1,212 @@
+---
+// Site alt bölümü: logo, linkler, iletişim bilgileri, telif
+import { firma, menu, kategoriler } from '../data/site';
+import { ikon } from '../data/ikonlar';
+
+const yil = new Date().getFullYear();
+---
+
+<footer class="alt">
+  <div class="kap alt-izgara">
+    <div class="alt-marka">
+      <a href="/" class="alt-logo" aria-label="2K AHŞAP ana sayfa">
+        <img
+          src="/logo/2k-ahsap-logo-koyu-zemin-320.webp"
+          width="320"
+          height="308"
+          alt="2K AHŞAP"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <p>
+        2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp üretiyoruz;
+        modern mimariyi doğal malzemeyle harmanlıyoruz.
+      </p>
+      <ul class="sosyal">
+        <li>
+          <a href={firma.instagram} aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.instagram} />
+          </a>
+        </li>
+        <li>
+          <a href={firma.facebook} aria-label="Facebook" rel="noopener noreferrer" target="_blank">
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.facebook} />
+          </a>
+        </li>
+        <li>
+          <a href={firma.linkedin} aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.linkedin} />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <nav class="alt-blok" aria-label="Hızlı linkler">
+      <h2>Kurumsal</h2>
+      <ul>
+        {menu.map((m) => <li><a href={m.href}>{m.ad}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav class="alt-blok" aria-label="Kategoriler">
+      <h2>Kategoriler</h2>
+      <ul>
+        {kategoriler.map((k) => <li><a href={`/${k.slug}`}>{k.ad}</a></li>)}
+        <li><a href="/projeler">Tüm projeler</a></li>
+      </ul>
+    </nav>
+
+    <div class="alt-blok">
+      <h2>İletişim</h2>
+      <address>
+        <ul class="iletisim">
+          <li>
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
+            <a href={firma.harita} rel="noopener noreferrer" target="_blank">{firma.adres}</a>
+          </li>
+          <li>
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.telefon} />
+            <a href={firma.telefonLink}>{firma.telefonGorunen}</a>
+          </li>
+          <li>
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.mesaj} />
+            <a href={firma.whatsapp} rel="noopener noreferrer" target="_blank">WhatsApp ile yazın</a>
+          </li>
+          <li>
+            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.eposta} />
+            <a href={`mailto:${firma.eposta}`}>{firma.eposta}</a>
+          </li>
+        </ul>
+      </address>
+    </div>
+  </div>
+
+  <div class="kap">
+    <div class="alt-telif">
+      <p>© {yil} 2K AHŞAP. Tüm hakları saklıdır.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .alt {
+    padding-top: 64px;
+    background: var(--color-antrasit);
+    color: var(--color-krem);
+  }
+
+  .alt :focus-visible {
+    outline-color: var(--color-krem);
+  }
+
+  .alt-izgara {
+    display: grid;
+    gap: 40px;
+  }
+
+  .alt-logo img {
+    width: 140px;
+    height: auto;
+  }
+
+  .alt-marka p {
+    max-width: 36ch;
+    margin: 20px 0;
+  }
+
+  .alt h2 {
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-ahsap);
+    display: inline-block;
+    color: var(--color-beyaz);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .alt-blok ul li + li {
+    margin-top: 8px;
+  }
+
+  .alt a {
+    text-decoration: none;
+  }
+
+  .alt a:hover {
+    color: var(--color-beyaz);
+    text-decoration: underline;
+  }
+
+  .alt address {
+    font-style: normal;
+  }
+
+  .iletisim li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .iletisim .ikon {
+    margin-top: 3px;
+    color: var(--color-ahsap);
+  }
+
+  .sosyal {
+    display: flex;
+    gap: 8px;
+  }
+
+  .sosyal a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid rgba(235, 220, 198, 0.3);
+    border-radius: var(--radius);
+    color: var(--color-ahsap);
+    transition:
+      border-color var(--gecis),
+      color var(--gecis);
+  }
+
+  .sosyal a:hover {
+    border-color: var(--color-ahsap);
+    color: var(--color-krem);
+  }
+
+  /* Mobilde alt boşluk, yüzen WhatsApp butonunun telif metnini örtmemesi için */
+  .alt-telif {
+    margin-top: 48px;
+    padding-block: 24px 96px;
+    border-top: 1px solid rgba(235, 220, 198, 0.15);
+    font-size: 0.875rem;
+  }
+
+  .alt-telif p {
+    margin: 0;
+  }
+
+  /* ≥ 640px */
+  @media (min-width: 640px) {
+    .alt-izgara {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .alt-telif {
+      padding-bottom: 24px;
+    }
+  }
+
+  /* ≥ 1024px */
+  @media (min-width: 1024px) {
+    .alt-izgara {
+      grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    }
+  }
+</style>

@@ -1,0 +1,29 @@
+{
+  "name": "ahsap-ev-sitesi-astro",
+  "version": "1.0.0",
+  "description": "2K AHŞAP Professional Architecture and Design Website",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "images": "node scripts/optimize-images.mjs",
+    "check:images": "node scripts/check-images.mjs"
+  },
+  "keywords": [
+    "astro",
+    "2k-ahsap",
+    "architecture",
+    "portfolio"
+  ],
+  "author": "2K AHŞAP",
+  "license": "MIT",
+  "dependencies": {
+    "astro": "^4.16.9",
+    "simple-icons": "^16.34.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}

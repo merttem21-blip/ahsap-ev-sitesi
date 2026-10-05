@@ -1,0 +1,251 @@
+---
+// Site üst bölümü: logo, ana menü, mobilde hamburger menü.
+// Header zemini koyudur (antrasit veya karartılmış hero). Koyu zemin logosundaki koyu gri "2"
+// bu boyutta zeminde kayboluyor; bu yüzden logo açık zemin (--color-zemin) bir plaka üzerinde,
+// açık zemin sürümüyle gösterilir. Logo dosyası değiştirilmez (marka-stili §4).
+import { kategoriler, menu } from '../data/site';
+import { ikon } from '../data/ikonlar';
+
+interface Props {
+  /** Hero fotoğrafının üzerinde şeffaf durur (ana sayfa); diğer sayfalarda antrasit zemin. */
+  seffaf?: boolean;
+}
+
+const { seffaf = false } = Astro.props;
+
+const yol = Astro.url.pathname.replace(/\/$/, '') || '/';
+// Kategori ve proje sayfaları (/bungalov, /bungalov/proje) "Projeler" menüsüne aittir
+const projeSayfasi = kategoriler.some((k) => yol === `/${k.slug}` || yol.startsWith(`/${k.slug}/`));
+const aktifMi = (href: string) =>
+  href === '/'
+    ? yol === '/'
+    : yol === href || yol.startsWith(`${href}/`) || (href === '/projeler' && projeSayfasi);
+---
+
+<header class:list={['ust', { 'ust-seffaf': seffaf }]} data-ust>
+  <div class="kap ust-ic">
+    <a href="/" class="logo" aria-label="2K AHŞAP ana sayfa">
+      <img
+        src="/logo/2k-ahsap-logo-acik-zemin-320.webp"
+        width="320"
+        height="308"
+        alt="2K AHŞAP"
+        loading="eager"
+      />
+    </a>
+
+    <button
+      class="menu-dugme"
+      type="button"
+      aria-expanded="false"
+      aria-controls="ana-menu"
+      data-menu-dugme
+    >
+      <span class="gizli" data-menu-etiket>Menüyü aç</span>
+      <svg class="ikon ikon-menu" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.menu} />
+      <svg class="ikon ikon-kapat" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.kapat} />
+    </button>
+
+    <nav id="ana-menu" class="menu" aria-label="Ana menü">
+      <ul>
+        {
+          menu.map((m) => (
+            <li>
+              <a href={m.href} aria-current={aktifMi(m.href) ? 'page' : undefined}>
+                {m.ad}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href="/iletisim" class="dugme dugme-birincil">Teklif Al</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const ust = document.querySelector<HTMLElement>('[data-ust]');
+  const dugme = document.querySelector<HTMLButtonElement>('[data-menu-dugme]');
+  const etiket = document.querySelector<HTMLElement>('[data-menu-etiket]');
+  const menu = document.getElementById('ana-menu');
+
+  const acikMi = () => dugme?.getAttribute('aria-expanded') === 'true';
+
+  const ayarla = (acik: boolean) => {
+    dugme?.setAttribute('aria-expanded', String(acik));
+    menu?.classList.toggle('acik', acik);
+    if (etiket) etiket.textContent = acik ? 'Menüyü kapat' : 'Menüyü aç';
+  };
+
+  dugme?.addEventListener('click', () => ayarla(!acikMi()));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && acikMi()) {
+      ayarla(false);
+      dugme?.focus();
+    }
+  });
+
+  // Tab ile menünün dışına çıkılınca veya dışarı tıklanınca kapanır
+  ust?.addEventListener('focusout', (e) => {
+    const hedef = e.relatedTarget as Node | null;
+    if (acikMi() && hedef && !ust.contains(hedef)) ayarla(false);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (acikMi() && !ust?.contains(e.target as Node)) ayarla(false);
+  });
+</script>
+
+<style>
+  .ust {
+    position: relative;
+    z-index: 20;
+    background: var(--color-antrasit);
+    color: var(--color-beyaz);
+  }
+
+  /* Ana sayfada hero fotoğrafının üzerinde */
+  .ust-seffaf {
+    position: absolute;
+    inset: 0 0 auto;
+    background: transparent;
+  }
+
+  .ust :focus-visible {
+    outline-color: var(--color-krem);
+  }
+
+  .ust-ic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 8px;
+  }
+
+  /* Logo plakası: iç boşluk logo yüksekliğinin %25'i (marka-stili §4) */
+  .logo {
+    display: block;
+    padding: 12px;
+    border-radius: var(--radius);
+    background: var(--color-zemin);
+  }
+
+  .logo img {
+    height: 48px;
+    width: auto;
+  }
+
+  .menu-dugme {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .menu-dugme .ikon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .menu-dugme .ikon-kapat,
+  .menu-dugme[aria-expanded='true'] .ikon-menu {
+    display: none;
+  }
+
+  .menu-dugme[aria-expanded='true'] .ikon-kapat {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 8px 16px 24px;
+    background: var(--color-antrasit);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .menu.acik {
+    display: block;
+  }
+
+  .menu a:not(.dugme) {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(235, 220, 198, 0.15);
+  }
+
+  .menu a:not(.dugme):hover {
+    color: var(--color-krem);
+  }
+
+  /* Aktif sayfa */
+  .menu a[aria-current='page'] {
+    color: var(--color-krem);
+    text-decoration: underline;
+    text-decoration-color: var(--color-ahsap);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+  }
+
+  .menu .dugme {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  /* ≥ 1024px */
+  @media (min-width: 1024px) {
+    .ust-ic {
+      padding-block: 12px;
+    }
+
+    .logo {
+      padding: 16px;
+    }
+
+    .logo img {
+      height: 64px;
+    }
+
+    .menu-dugme {
+      display: none;
+    }
+
+    .menu {
+      display: flex;
+      position: static;
+      align-items: center;
+      gap: 32px;
+      padding: 0;
+      background: none;
+      box-shadow: none;
+    }
+
+    .menu ul {
+      display: flex;
+      gap: 32px;
+    }
+
+    .menu a:not(.dugme) {
+      min-height: 44px;
+      border-bottom: 0;
+    }
+
+    .menu .dugme {
+      width: auto;
+      margin-top: 0;
+    }
+  }
+</style>

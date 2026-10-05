@@ -1,0 +1,299 @@
+---
+// Proje detay sayfası: /<kategori>/<proje-slug>
+import { getCollection } from 'astro:content';
+import { siWhatsapp } from 'simple-icons';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Galeri from '../../components/Galeri.astro';
+import ProjeKarti from '../../components/ProjeKarti.astro';
+import { firma, siteAdresi } from '../../data/site';
+import { gorsel } from '../../lib/gorsel';
+import {
+  fotoYolu,
+  kapakFotosu,
+  kategoriProjeleri,
+  projeKategorisi,
+  projeMetaAciklamasi,
+  projeMetaBasligi,
+  projeYolu,
+  sartnameSatirlari,
+} from '../../lib/projeler';
+
+export async function getStaticPaths() {
+  const projeler = await getCollection('projeler');
+  return projeler.map((proje) => ({
+    params: { kategori: proje.data.kategori, proje: proje.slug },
+    props: { proje },
+  }));
+}
+
+const { proje } = Astro.props;
+const kategori = projeKategorisi(proje);
+const { Content } = await proje.render();
+const aciklamaVar = proje.body.trim().length > 0;
+const sartname = sartnameSatirlari(proje);
+const digerProjeler = (await kategoriProjeleri(kategori.slug, proje.slug)).slice(0, 3);
+const kapak = await gorsel(fotoYolu(proje, kapakFotosu(proje).dosya));
+
+const site = Astro.site ?? new URL(siteAdresi);
+const sayfaAdresi = new URL(projeYolu(proje), site).href;
+const whatsappTeklif = `${firma.whatsapp}?text=${encodeURIComponent(
+  `Merhaba, sitenizdeki "${proje.data.baslik}" projesi için teklif almak istiyorum: ${sayfaAdresi}`
+)}`;
+
+// Yalnızca fotoğraftan oluşan sayfa "zayıf içerik" sayılır (seo-kurallar §13);
+// açıklama veya teknik şartname eklenince sayfa otomatik olarak indekslenir.
+const zayifIcerik = !aciklamaVar && sartname.length === 0;
+---
+
+<Layout
+  title={projeMetaBasligi(proje.data.baslik)}
+  description={projeMetaAciklamasi(proje)}
+  image={kapak.buyuk}
+  noindex={zayifIcerik}
+>
+  <section class="proje-ust" aria-labelledby="proje-baslik">
+    <div class="kap">
+      <Breadcrumb
+        ogeler={[
+          { ad: 'Ana Sayfa', href: '/' },
+          { ad: kategori.ad, href: `/${kategori.slug}` },
+          { ad: proje.data.baslik },
+        ]}
+      />
+      <h1 id="proje-baslik">{proje.data.baslik}</h1>
+    </div>
+  </section>
+
+  <section class="proje-galeri" aria-label="Fotoğraflar">
+    <div class="kap">
+      <Galeri proje={proje} />
+    </div>
+  </section>
+
+  <div class="kap proje-icerik">
+    {
+      (aciklamaVar || sartname.length > 0) && (
+        <div class="proje-bilgi">
+          {aciklamaVar && (
+            <section aria-labelledby="proje-hakkinda">
+              <h2 id="proje-hakkinda">Proje Hakkında</h2>
+              <div class="proje-metin">
+                <Content />
+              </div>
+            </section>
+          )}
+          {sartname.length > 0 && (
+            <section aria-labelledby="teknik-sartname">
+              <h2 id="teknik-sartname">Teknik Şartname</h2>
+              <table class="sartname">
+                <tbody>
+                  {sartname.map((s) => (
+                    <tr>
+                      <th scope="row">{s.etiket}</th>
+                      <td>{s.deger}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
+        </div>
+      )
+    }
+
+    <aside class="teklif" aria-labelledby="teklif-baslik">
+      <h2 id="teklif-baslik">Benzer bir yapı mı istiyorsunuz?</h2>
+      <p>
+        Bu projeyi ihtiyaçlarınıza ve arazinize göre yeniden tasarlayabiliriz. Proje adıyla birlikte
+        WhatsApp'tan yazın, sizinle iletişime geçelim.
+      </p>
+      <a href={whatsappTeklif} class="dugme dugme-birincil teklif-dugme" rel="noopener noreferrer" target="_blank">
+        <svg class="ikon wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+        Bu proje için teklif alın
+      </a>
+      <p class="teklif-tel">
+        veya arayın: <a href={firma.telefonLink}>{firma.telefonGorunen}</a>
+      </p>
+    </aside>
+  </div>
+
+  {
+    digerProjeler.length > 0 && (
+      <section class="diger" aria-labelledby="diger-baslik">
+        <div class="kap">
+          <h2 id="diger-baslik">{kategori.ad} kategorisinden diğer projeler</h2>
+          <ul class="diger-izgara">
+            {digerProjeler.map((p) => (
+              <li>
+                <ProjeKarti proje={p} baslikSeviyesi="h3" />
+              </li>
+            ))}
+          </ul>
+          <a href={`/${kategori.slug}`} class="diger-tumu">
+            Tüm {kategori.ad} projelerini inceleyin
+          </a>
+        </div>
+      </section>
+    )
+  }
+</Layout>
+
+<style>
+  .proje-ust {
+    padding-block: 16px 32px;
+    background: var(--color-krem);
+  }
+
+  .proje-ust h1 {
+    margin-top: 8px;
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .proje-galeri {
+    padding-top: 24px;
+  }
+
+  .proje-icerik {
+    display: grid;
+    gap: 40px;
+    padding-block: 40px 64px;
+  }
+
+  .proje-bilgi {
+    display: grid;
+    gap: 40px;
+  }
+
+  .proje-bilgi h2,
+  .teklif h2,
+  .diger h2 {
+    font-size: clamp(1.375rem, 3vw, 1.75rem);
+    font-weight: 600;
+  }
+
+  .proje-metin {
+    max-width: 65ch;
+    margin-top: 16px;
+  }
+
+  .sartname {
+    width: 100%;
+    margin-top: 16px;
+    border-collapse: collapse;
+  }
+
+  .sartname th,
+  .sartname td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-krem);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .sartname th {
+    width: 40%;
+    font-weight: 600;
+  }
+
+  .sartname tr:nth-child(odd) {
+    background: rgba(235, 220, 198, 0.35);
+  }
+
+  .teklif {
+    align-self: start;
+    padding: 24px;
+    border-radius: var(--radius-buyuk);
+    background: var(--color-krem);
+  }
+
+  .teklif p {
+    margin: 12px 0 20px;
+  }
+
+  .teklif-dugme {
+    gap: 10px;
+    width: 100%;
+  }
+
+  .wa-ikon {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  .teklif .teklif-tel {
+    margin: 16px 0 0;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .teklif-tel a {
+    color: var(--color-ahsap-koyu);
+    font-weight: 600;
+  }
+
+  .diger {
+    padding-block: 56px 64px;
+    background: var(--color-krem);
+  }
+
+  .diger-izgara {
+    display: grid;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .diger-tumu {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 24px;
+    color: var(--color-ahsap-koyu);
+    font-weight: 600;
+  }
+
+  @media (min-width: 640px) {
+    .diger-izgara {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .proje-ust {
+      padding-block: 24px 40px;
+    }
+
+    .proje-galeri {
+      padding-top: 32px;
+    }
+
+    .proje-icerik {
+      padding-block: 56px 96px;
+    }
+
+    .teklif {
+      padding: 32px;
+    }
+
+    .diger {
+      padding-block: 80px 96px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .proje-icerik {
+      grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    }
+
+    /* Bilgi yoksa teklif kutusu tek başına, okunur genişlikte */
+    .teklif:only-child {
+      grid-column: 1 / -1;
+      max-width: 640px;
+    }
+
+    .diger-izgara {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

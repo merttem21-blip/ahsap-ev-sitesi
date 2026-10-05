@@ -1,0 +1,40 @@
+---
+// Yüzen WhatsApp butonu — ikon simple-icons paketinden (resmi WhatsApp logosu)
+import { siWhatsapp } from 'simple-icons';
+import { firma } from '../data/site';
+---
+
+<a class="whatsapp" href={firma.whatsapp} rel="noopener noreferrer" target="_blank" aria-label="WhatsApp ile iletişime geçin">
+  <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+</a>
+
+<style>
+  .whatsapp {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-whatsapp);
+    color: var(--color-beyaz);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transition: background-color var(--gecis);
+  }
+
+  .whatsapp:hover {
+    background: var(--color-whatsapp-koyu);
+  }
+
+  /* simple-icons logosu dolgulu; genel .ikon çizgi stilini geçersiz kıl */
+  .whatsapp .ikon {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+    stroke: none;
+  }
+</style>

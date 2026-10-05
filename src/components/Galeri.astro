@@ -1,0 +1,371 @@
+---
+// Proje galerisi: büyük kapak + küçük resimler + tam ekran ışık kutusu (<dialog>).
+// JS yoksa her küçük resim büyük görsele bağlantı olarak çalışır.
+import { ikon } from '../data/ikonlar';
+import { gorsel } from '../lib/gorsel';
+import { fotoYolu, type Proje } from '../lib/projeler';
+
+interface Props {
+  proje: Proje;
+}
+
+const { proje } = Astro.props;
+const fotolar = await Promise.all(
+  proje.data.fotograflar.map(async (f) => ({ ...f, g: await gorsel(fotoYolu(proje, f.dosya)) }))
+);
+const kapakSirasi = fotolar.findIndex((f) => f.dosya === proje.data.kapak);
+const kapak = fotolar[kapakSirasi];
+---
+
+<div class="galeri" data-galeri>
+  <a href={kapak.g.buyuk} class="galeri-kapak" data-galeri-ac={kapakSirasi}>
+    <img
+      src={kapak.g.src}
+      srcset={kapak.g.srcset}
+      sizes="(min-width: 1280px) 1216px, (min-width: 1024px) calc(100vw - 64px), (min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"
+      width={kapak.g.width}
+      height={kapak.g.height}
+      alt={kapak.alt}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <span class="galeri-ipucu">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.buyut} />
+      {fotolar.length} fotoğrafı görüntüle
+    </span>
+  </a>
+
+  <ul class="galeri-kucukler">
+    {
+      fotolar.map((f, i) => (
+        <li>
+          <a href={f.g.buyuk} data-galeri-oge data-galeri-ac={i}>
+            <img
+              src={f.g.src}
+              srcset={f.g.srcset}
+              sizes="(min-width: 1024px) 200px, (min-width: 640px) 25vw, 33vw"
+              width={f.g.width}
+              height={f.g.height}
+              alt={f.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <dialog class="isik-kutusu" aria-label={`${proje.data.baslik} fotoğraf galerisi`} data-isik-kutusu>
+    <div class="ik-ust">
+      <p class="ik-sayac" data-ik-sayac aria-live="polite"></p>
+      <button type="button" class="ik-dugme" data-ik-kapat aria-label="Galeriyi kapat">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.kapat} />
+      </button>
+    </div>
+    <figure class="ik-sahne">
+      <img data-ik-gorsel alt="" sizes="100vw" decoding="async" />
+    </figure>
+    <p class="ik-aciklama" data-ik-aciklama></p>
+    <button type="button" class="ik-dugme ik-onceki" data-ik-onceki aria-label="Önceki fotoğraf">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.geri} />
+    </button>
+    <button type="button" class="ik-dugme ik-sonraki" data-ik-sonraki aria-label="Sonraki fotoğraf">
+      <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ileri} />
+    </button>
+  </dialog>
+</div>
+
+<script>
+  const kok = document.querySelector<HTMLElement>('[data-galeri]');
+  const kutu = kok?.querySelector<HTMLDialogElement>('[data-isik-kutusu]');
+
+  if (kok && kutu && typeof kutu.showModal === 'function') {
+    const ogeler = [...kok.querySelectorAll<HTMLAnchorElement>('[data-galeri-oge]')];
+    const resim = kutu.querySelector<HTMLImageElement>('[data-ik-gorsel]')!;
+    const sayac = kutu.querySelector<HTMLElement>('[data-ik-sayac]')!;
+    const aciklama = kutu.querySelector<HTMLElement>('[data-ik-aciklama]')!;
+    let aktif = 0;
+    let tetikleyen: HTMLElement | null = null;
+
+    const kaynak = (i: number) => ogeler[(i + ogeler.length) % ogeler.length].querySelector('img')!;
+
+    const goster = (i: number) => {
+      aktif = (i + ogeler.length) % ogeler.length;
+      const k = kaynak(aktif);
+      resim.srcset = k.srcset;
+      resim.src = ogeler[aktif].href;
+      // Küçük resim 4:3 kırpılı görünür; gerçek oran width/height niteliklerinde
+      resim.setAttribute('width', k.getAttribute('width')!);
+      resim.setAttribute('height', k.getAttribute('height')!);
+      resim.alt = k.alt;
+      // Kullanıcıya gösterilen metinler textContent ile yazılır (innerHTML kullanılmaz)
+      sayac.textContent = `${aktif + 1} / ${ogeler.length}`;
+      aciklama.textContent = k.alt;
+      // Komşu fotoğrafları önceden yükle
+      for (const j of [aktif + 1, aktif - 1]) {
+        const on = new Image();
+        on.sizes = '100vw';
+        on.srcset = kaynak(j).srcset;
+      }
+    };
+
+    const ac = (i: number, kaynakOge: HTMLElement) => {
+      tetikleyen = kaynakOge;
+      goster(i);
+      document.documentElement.classList.add('kaydirma-kilitli');
+      kutu.showModal();
+    };
+
+    kok.addEventListener('click', (e) => {
+      const hedef = (e.target as Element).closest<HTMLElement>('[data-galeri-ac]');
+      if (!hedef || kutu.contains(hedef)) return;
+      // Ctrl/Cmd/Shift ile tıklama: görseli yeni sekmede açma davranışı korunur
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      ac(Number(hedef.dataset.galeriAc), hedef);
+    });
+
+    kutu.querySelector('[data-ik-kapat]')!.addEventListener('click', () => kutu.close());
+    kutu.querySelector('[data-ik-onceki]')!.addEventListener('click', () => goster(aktif - 1));
+    kutu.querySelector('[data-ik-sonraki]')!.addEventListener('click', () => goster(aktif + 1));
+
+    // Esc tuşu <dialog>'un kendi davranışıyla kapatır
+    kutu.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goster(aktif + 1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goster(aktif - 1);
+      }
+    });
+
+    // Fotoğrafın dışındaki koyu alana tıklayınca kapanır
+    kutu.addEventListener('click', (e) => {
+      if (e.target === kutu || (e.target as Element).classList.contains('ik-sahne')) kutu.close();
+    });
+
+    kutu.addEventListener('close', () => {
+      document.documentElement.classList.remove('kaydirma-kilitli');
+      tetikleyen?.focus();
+    });
+
+    // Mobilde sağa/sola kaydırma
+    let x0: number | null = null;
+    let y0 = 0;
+    kutu.addEventListener(
+      'touchstart',
+      (e) => {
+        if (e.touches.length !== 1) return void (x0 = null);
+        x0 = e.touches[0].clientX;
+        y0 = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+    kutu.addEventListener(
+      'touchend',
+      (e) => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        const dy = e.changedTouches[0].clientY - y0;
+        x0 = null;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) goster(aktif + (dx < 0 ? 1 : -1));
+      },
+      { passive: true }
+    );
+  }
+</script>
+
+<style>
+  .galeri-kapak {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius-buyuk);
+    background: var(--color-krem);
+    aspect-ratio: 4 / 3;
+  }
+
+  .galeri-kapak img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .galeri-ipucu {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    background: rgba(46, 46, 46, 0.85);
+    color: var(--color-beyaz);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .galeri-kucukler {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .galeri-kucukler a {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--color-krem);
+    aspect-ratio: 4 / 3;
+  }
+
+  .galeri-kucukler img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity var(--gecis);
+  }
+
+  .galeri-kucukler a:hover img {
+    opacity: 0.85;
+  }
+
+  /* Işık kutusu */
+  :global(html.kaydirma-kilitli) {
+    overflow: hidden;
+  }
+
+  .isik-kutusu {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #1c1c1c;
+    color: var(--color-beyaz);
+  }
+
+  .isik-kutusu[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .isik-kutusu::backdrop {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .isik-kutusu :focus-visible {
+    outline-color: var(--color-krem);
+  }
+
+  .ik-ust {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 8px 16px;
+  }
+
+  .ik-sayac {
+    margin: 0;
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ik-sahne {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 0 8px;
+  }
+
+  .ik-sahne img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .ik-aciklama {
+    margin: 0;
+    padding: 12px 16px 16px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .ik-dugme {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(46, 46, 46, 0.75);
+    color: var(--color-beyaz);
+    cursor: pointer;
+    transition: background-color var(--gecis);
+  }
+
+  .ik-dugme:hover {
+    background: rgba(46, 46, 46, 1);
+  }
+
+  .ik-dugme .ikon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ik-onceki,
+  .ik-sonraki {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ik-onceki {
+    left: 8px;
+  }
+
+  .ik-sonraki {
+    right: 8px;
+  }
+
+  @media (min-width: 640px) {
+    .galeri-kucukler {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .galeri-kapak {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .galeri-kucukler {
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .ik-onceki {
+      left: 24px;
+    }
+
+    .ik-sonraki {
+      right: 24px;
+    }
+  }
+</style>

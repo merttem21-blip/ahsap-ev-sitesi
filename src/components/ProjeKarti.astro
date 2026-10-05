@@ -1,0 +1,25 @@
+---
+// Proje kartı: kapak fotoğrafı + başlık + "Detayları inceleyin"
+import Kart from './Kart.astro';
+import { gorsel } from '../lib/gorsel';
+import { fotoYolu, kapakFotosu, projeYolu, type Proje } from '../lib/projeler';
+
+interface Props {
+  proje: Proje;
+  baslikSeviyesi?: 'h2' | 'h3';
+  oncelikli?: boolean;
+}
+
+const { proje, baslikSeviyesi, oncelikli } = Astro.props;
+const kapak = kapakFotosu(proje);
+---
+
+<Kart
+  href={projeYolu(proje)}
+  baslik={proje.data.baslik}
+  gorsel={await gorsel(fotoYolu(proje, kapak.dosya))}
+  alt={kapak.alt}
+  eylem="Detayları inceleyin"
+  baslikSeviyesi={baslikSeviyesi}
+  oncelikli={oncelikli}
+/>

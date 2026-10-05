@@ -1,0 +1,68 @@
+---
+// Görünen breadcrumb + aynı içerikte BreadcrumbList şeması (seo-kurallar §9)
+import { siteAdresi } from '../data/site';
+import { jsonLd } from '../lib/projeler';
+
+interface Props {
+  ogeler: { ad: string; href?: string }[]; // son öğe bulunulan sayfadır (href verilmez)
+}
+
+const { ogeler } = Astro.props;
+const site = Astro.site ?? new URL(siteAdresi);
+
+const sema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: ogeler.map((o, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: o.ad,
+    ...(o.href ? { item: new URL(o.href, site).href } : {}),
+  })),
+};
+---
+
+<nav class="konum" aria-label="Konumunuz">
+  <ol>
+    {
+      ogeler.map((o) => (
+        <li>{o.href ? <a href={o.href}>{o.ad}</a> : <span aria-current="page">{o.ad}</span>}</li>
+      ))
+    }
+  </ol>
+</nav>
+<script is:inline type="application/ld+json" set:html={jsonLd(sema)} />
+
+<style>
+  .konum ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.875rem;
+  }
+
+  .konum li + li::before {
+    content: '›';
+    margin-inline: 8px;
+    color: var(--color-ahsap-koyu);
+  }
+
+  .konum a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-ahsap-koyu);
+    text-decoration: underline;
+  }
+
+  .konum a:hover {
+    color: var(--color-antrasit);
+  }
+
+  .konum [aria-current='page'] {
+    font-weight: 500;
+  }
+</style>

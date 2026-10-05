@@ -1,0 +1,48 @@
+---
+baslik: İki Katlı Ahşap Cami
+kategori: ozel-tasarim
+kapak: iki-katli-ahsap-cami-01
+# Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
+fotograflar:
+  - dosya: iki-katli-ahsap-cami-01
+    alt: "İki katlı ahşap cami – minare ve ahşap süslemeli giriş revakı"
+  - dosya: iki-katli-ahsap-cami-13
+    alt: "İki katlı ahşap cami – köşeden minare ve yan cephe"
+  - dosya: iki-katli-ahsap-cami-02
+    alt: "İki katlı ahşap cami – taş döşeli avludan revak"
+  - dosya: iki-katli-ahsap-cami-06
+    alt: "İki katlı ahşap cami – iki katlı revakın yandan görünümü"
+  - dosya: iki-katli-ahsap-cami-07
+    alt: "İki katlı ahşap cami – peyzaj alanından yan cephe"
+  - dosya: iki-katli-ahsap-cami-08
+    alt: "İki katlı ahşap cami – çam fidanları ve revaklı cephe"
+  - dosya: iki-katli-ahsap-cami-09
+    alt: "İki katlı ahşap cami – uzun yan cephe ve pencere sıraları"
+  - dosya: iki-katli-ahsap-cami-10
+    alt: "İki katlı ahşap cami – arka cephe ve üçgen alınlık"
+  - dosya: iki-katli-ahsap-cami-11
+    alt: "İki katlı ahşap cami – sivri tepelikli arka cephe"
+  - dosya: iki-katli-ahsap-cami-12
+    alt: "İki katlı ahşap cami – uzaktan arka cephe"
+  - dosya: iki-katli-ahsap-cami-03
+    alt: "İki katlı ahşap cami – avludaki dış merdivenli ek bina"
+  - dosya: iki-katli-ahsap-cami-04
+    alt: "İki katlı ahşap cami – ek binanın çift kollu merdiveni"
+  - dosya: iki-katli-ahsap-cami-05
+    alt: "İki katlı ahşap cami – ek binanın yan cephesi ve merdiven"
+
+# Teknik şartname — boş bırakılan alanlar sitede gösterilmez.
+# Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" · teslim_suresi: "45 gün"
+kapali_alan_m2:
+kat_sayisi:
+oda_sayisi:
+ahsap_turu:
+tasiyici_sistem:
+cati_kaplama:
+dis_cephe:
+yalitim:
+dograma:
+ic_kaplama:
+teslim_suresi:
+notlar:
+---

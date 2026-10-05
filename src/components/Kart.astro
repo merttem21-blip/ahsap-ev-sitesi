@@ -1,0 +1,120 @@
+---
+// Görselli bağlantı kartı: 4:3 kapak + başlık (+ bilgi satırı) + eylem metni.
+// Proje kartları ve /projeler sayfasındaki kategori kartları bunu kullanır.
+import { ikon } from '../data/ikonlar';
+import { kartSizes, type Gorsel } from '../lib/gorsel';
+
+interface Props {
+  href: string;
+  baslik: string;
+  gorsel: Gorsel;
+  alt: string;
+  eylem: string;
+  bilgi?: string;
+  baslikSeviyesi?: 'h2' | 'h3';
+  oncelikli?: boolean; // sayfanın ilk görünen kartı: lazy yüklenmez
+}
+
+const { href, baslik, gorsel: g, alt, eylem, bilgi, baslikSeviyesi = 'h2', oncelikli = false } = Astro.props;
+const Baslik = baslikSeviyesi;
+---
+
+<article class="kart">
+  <a href={href} class="kart-link">
+    <div class="kart-gorsel">
+      <img
+        src={g.src}
+        srcset={g.srcset}
+        sizes={kartSizes(g)}
+        width={g.width}
+        height={g.height}
+        alt={alt}
+        loading={oncelikli ? 'eager' : 'lazy'}
+        fetchpriority={oncelikli ? 'high' : undefined}
+        decoding="async"
+      />
+    </div>
+    <div class="kart-govde">
+      <div class="kart-metin">
+        <Baslik class="kart-baslik">{baslik}</Baslik>
+        {bilgi && <p class="kart-bilgi">{bilgi}</p>}
+      </div>
+      <span class="kart-eylem">
+        {eylem}
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
+      </span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .kart {
+    height: 100%;
+  }
+
+  .kart-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-buyuk);
+    background: var(--color-beyaz);
+    box-shadow: var(--golge);
+    text-decoration: none;
+  }
+
+  .kart-gorsel {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-krem);
+  }
+
+  .kart-gorsel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease-out;
+  }
+
+  .kart-link:hover .kart-gorsel img {
+    transform: scale(1.03);
+  }
+
+  .kart-govde {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 24px 24px;
+  }
+
+  .kart-metin {
+    flex: 1;
+  }
+
+  .kart-baslik {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    font-weight: 600;
+  }
+
+  .kart-bilgi {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+  }
+
+  .kart-eylem {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-ahsap-koyu);
+    font-weight: 600;
+  }
+
+  .kart-eylem .ikon {
+    transition: transform var(--gecis);
+  }
+
+  .kart-link:hover .kart-eylem .ikon {
+    transform: translateX(4px);
+  }
+</style>

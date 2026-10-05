@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Yakinda from '../components/Yakinda.astro';
+// Geçici sayfa: içerik hazır olunca noindex kaldırılacak
+---
+
+<Layout
+  title="Hakkımızda: 2015'ten Beri Ahşap Yapı Üretimi | 2K AHŞAP"
+  description="2K AHŞAP, 2015'ten beri Türkiye'de özel tasarım ahşap ev ve yapılar üretiyor. Hikâyemizi, vizyonumuzu ve ekibimizi yakında bu sayfada anlatacağız."
+  noindex
+>
+  <Yakinda
+    baslik="Hakkımızda"
+    metin="2K AHŞAP'ın hikâyesini, vizyonunu ve ekibini anlatacağımız bu sayfayı hazırlıyoruz. Bu sırada sorularınız için bizi arayabilir veya WhatsApp'tan yazabilirsiniz."
+  />
+</Layout>

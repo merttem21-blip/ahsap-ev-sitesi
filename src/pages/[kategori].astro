@@ -1,0 +1,105 @@
+---
+// Kategori sayfaları (/bungalov, /villa, ...): o kategorideki proje kartları.
+// Henüz projesi olmayan kategori "Yakında" gösterir ve noindex kalır.
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import ProjeKarti from '../components/ProjeKarti.astro';
+import Yakinda from '../components/Yakinda.astro';
+import { kategoriler } from '../data/site';
+import { gorsel } from '../lib/gorsel';
+import { fotoYolu, kapakFotosu, kategoriProjeleri, kategoriVitrini } from '../lib/projeler';
+
+export function getStaticPaths() {
+  return kategoriler.map((k) => ({ params: { kategori: k.slug }, props: { kategori: k } }));
+}
+
+const { kategori } = Astro.props;
+const projeler = await kategoriProjeleri(kategori.slug);
+const ilk = projeler[0];
+const vitrin = ilk && kategoriVitrini(kategori, projeler);
+const ogGorsel = vitrin ? (await gorsel(fotoYolu(vitrin, kapakFotosu(vitrin).dosya))).buyuk : undefined;
+---
+
+<Layout title={kategori.title} description={kategori.description} image={ogGorsel} noindex={!ilk}>
+  {
+    ilk ? (
+      <>
+        <section class="kategori-ust" aria-labelledby="kategori-baslik">
+          <div class="kap">
+            <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: kategori.ad }]} />
+            <h1 id="kategori-baslik">{kategori.h1}</h1>
+            <p>
+              {kategori.giris} Bir projeye tıklayarak tüm fotoğraflarını inceleyebilirsiniz.
+            </p>
+          </div>
+        </section>
+
+        <section class="kategori-projeler" aria-label={`${kategori.ad} projeleri`}>
+          <div class="kap">
+            <ul class="proje-izgara">
+              {projeler.map((p, i) => (
+                <li>
+                  <ProjeKarti proje={p} oncelikli={i === 0} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </>
+    ) : (
+      <Yakinda
+        baslik={`${kategori.ad} Projelerimiz`}
+        metin="Bu kategorideki projelerimizin fotoğraflarını yakında bu sayfada yayınlayacağız. Bu sırada projeniz için bizi arayabilir veya WhatsApp'tan yazabilirsiniz."
+      />
+    )
+  }
+</Layout>
+
+<style>
+  .kategori-ust {
+    padding-block: 16px 40px;
+    background: var(--color-krem);
+  }
+
+  .kategori-ust h1 {
+    margin-top: 8px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .kategori-ust p {
+    max-width: 65ch;
+    margin: 16px 0 0;
+  }
+
+  .kategori-projeler {
+    padding-block: 40px 64px;
+  }
+
+  .proje-izgara {
+    display: grid;
+    gap: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .proje-izgara {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .kategori-ust {
+      padding-block: 24px 56px;
+    }
+
+    .kategori-projeler {
+      padding-block: 56px 96px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .proje-izgara {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

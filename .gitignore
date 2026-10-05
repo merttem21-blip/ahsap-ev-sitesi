@@ -1,0 +1,17 @@
+# Bağımlılıklar
+node_modules/
+
+# Astro derleme çıktıları
+dist/
+.astro/
+
+# Ortam değişkenleri (gizli anahtarlar)
+.env
+.env.local
+
+# İşletim sistemi dosyaları
+.DS_Store
+Thumbs.db
+
+# İşlenmemiş ham görseller
+ham-gorseller/

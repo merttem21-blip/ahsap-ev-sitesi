@@ -1,0 +1,178 @@
+/* 2K AHŞAP — site geneli stiller. Kurallar: .claude/skills/marka-stili */
+
+:root {
+  --color-antrasit: #2e2e2e;
+  --color-ahsap: #a67c52;
+  --color-ahsap-koyu: #7a5a3a;
+  --color-yesil: #2e7d32;
+  --color-yesil-koyu: #1b5e20;
+  --color-krem: #ebdcc6;
+  --color-zemin: #faf6f0;
+  --color-beyaz: #ffffff;
+  /* Yalnızca yüzen WhatsApp butonu (WhatsApp marka rengi) */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-koyu: #1da851;
+
+  --font-baslik: 'Poppins', system-ui, sans-serif;
+  --font-metin: 'Inter', system-ui, sans-serif;
+
+  --radius: 8px;
+  --radius-buyuk: 12px;
+  --golge: 0 4px 20px rgba(46, 46, 46, 0.08);
+  --gecis: 250ms ease-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-beyaz);
+  color: var(--color-antrasit);
+  font-family: var(--font-metin);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-baslik);
+  line-height: 1.2;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-yesil);
+  outline-offset: 2px;
+}
+
+.gizli {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.atla {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--color-beyaz);
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.atla:focus {
+  top: 16px;
+}
+
+.kap {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.ikon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Butonlar */
+.dugme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color var(--gecis),
+    color var(--gecis),
+    border-color var(--gecis);
+}
+
+.dugme-birincil {
+  background: var(--color-yesil);
+  color: var(--color-beyaz);
+}
+
+.dugme-birincil:hover {
+  background: var(--color-yesil-koyu);
+}
+
+/* Koyu zeminde (hero) kullanılır */
+.dugme-ikincil {
+  border: 1.5px solid var(--color-krem);
+  color: var(--color-krem);
+}
+
+.dugme-ikincil:hover {
+  background: var(--color-krem);
+  color: var(--color-antrasit);
+}
+
+/* ≥ 768px */
+@media (min-width: 768px) {
+  .kap {
+    padding-inline: 24px;
+  }
+}
+
+/* ≥ 1024px */
+@media (min-width: 1024px) {
+  .kap {
+    padding-inline: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

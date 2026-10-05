@@ -1,0 +1,82 @@
+---
+// 2K AHŞAP — ortak sayfa iskeleti
+// Kurallar: .claude/skills/marka-stili ve .claude/skills/seo-kurallar
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { firma, siteAdresi, varsayilanGorsel } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  /** Header hero fotoğrafının üzerinde şeffaf durur; yoksa antrasit zeminli olur. */
+  seffafHeader?: boolean;
+}
+
+const { title, description, image = varsayilanGorsel, noindex = false, seffafHeader = false } = Astro.props;
+const site = Astro.site ?? new URL(siteAdresi);
+
+const isletmeSemasi = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  '@id': new URL('/#isletme', site).href,
+  name: '2K AHŞAP',
+  url: new URL('/', site).href,
+  logo: new URL('/logo/2k-ahsap-logo-acik-zemin.png', site).href,
+  image: new URL(varsayilanGorsel, site).href,
+  description: '2015’ten beri özel tasarım ahşap ev, bungalov, villa ve tiny house üreten firma.',
+  telephone: '+90 532 250 40 77',
+  email: firma.eposta,
+  foundingDate: '2015',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Kaynarca, Akdeniz Cd. No:4/A',
+    addressLocality: 'Pendik',
+    addressRegion: 'İstanbul',
+    postalCode: '34893',
+    addressCountry: 'TR',
+  },
+  areaServed: { '@type': 'Country', name: 'Türkiye' },
+  founder: { '@type': 'Person', name: 'Kadir Avcı', sameAs: firma.linkedin },
+  sameAs: [firma.instagram, firma.facebook],
+};
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SEO title={title} description={description} image={image} noindex={noindex} />
+    <meta name="theme-color" content="#2E2E2E" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(isletmeSemasi)} />
+  </head>
+
+  <body>
+    <a class="atla" href="#icerik">İçeriğe geç</a>
+
+    <Header seffaf={seffafHeader} />
+
+    <main id="icerik">
+      <slot />
+    </main>
+
+    <Footer />
+    <WhatsAppButton />
+  </body>
+</html>

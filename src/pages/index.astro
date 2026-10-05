@@ -1,0 +1,324 @@
+---
+// 2K AHŞAP — Ana sayfa
+// Kurallar: .claude/skills/marka-stili ve .claude/skills/seo-kurallar
+import Layout from '../layouts/Layout.astro';
+import { ikon } from '../data/ikonlar';
+
+const baslik = 'Özel Tasarım Ahşap Ev, Bungalov ve Villa | 2K AHŞAP';
+const aciklama =
+  "2015'ten beri 300+ projeyle özel tasarım ahşap ev, bungalov, villa ve tiny house üretiyoruz. Projelerimizi inceleyin, hemen teklif alın.";
+
+// Görseller public/images altında -600 / -1000 / -1600 genişliklerinde hazır.
+const srcset = (yol: string) =>
+  [600, 1000, 1600].map((g) => `${yol}-${g}.webp ${g}w`).join(', ');
+
+const hero = {
+  yol: '/images/a-frame/a-frame-bungalov/a-frame-bungalov-01',
+  alt: 'Gece aydınlatılmış bahçede ahşap A-frame bungalov',
+};
+
+// Panoramik (20:9) görseller 4:3 karta kırpıldığı için daha geniş kaynak ister.
+const boyutNormal = '(min-width: 1280px) 300px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw';
+const boyutPanoramik = '(min-width: 1280px) 500px, (min-width: 1024px) 42vw, (min-width: 640px) 84vw, 167vw';
+
+const kategoriler = [
+  {
+    ad: 'Ahşap Ev',
+    href: '/ahsap-ev',
+    yol: '/images/ahsap-ev/kiremit-catili-ahsap-ev/kiremit-catili-ahsap-ev-01',
+    genislik: 1600,
+    yukseklik: 1200,
+    boyut: boyutNormal,
+    alt: 'Kiremit çatılı ahşap ev, verandası ve taş döşeli bahçe yolu',
+    aciklama: 'Ailenizin ihtiyaçlarına göre tasarlanan, uzun ömürlü ve sıcak yaşam alanları.',
+  },
+  {
+    ad: 'Bungalov',
+    href: '/bungalov',
+    yol: '/images/bungalov/asma-katli-verandali-bungalov/asma-katli-verandali-bungalov-01',
+    genislik: 1600,
+    yukseklik: 1200,
+    boyut: boyutNormal,
+    alt: 'Shingle çatılı, ön verandalı ahşap bungalov ve arkasında dağ manzarası',
+    aciklama: 'Bahçeniz, tatil eviniz veya turizm tesisiniz için doğayla uyumlu bungalovlar.',
+  },
+  {
+    ad: 'Villa',
+    href: '/villa',
+    yol: '/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-01',
+    genislik: 1600,
+    yukseklik: 720,
+    boyut: boyutPanoramik,
+    alt: 'Taş kaideli, çevresi verandalı ahşap villa ve bahçe yolu',
+    aciklama: 'Geniş verandalı, ferah planlı; modern mimariyle doğal ahşabı buluşturan villalar.',
+  },
+  {
+    ad: 'Tiny House',
+    href: '/tiny-house',
+    yol: '/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-01',
+    genislik: 1600,
+    yukseklik: 720,
+    boyut: boyutPanoramik,
+    alt: 'Yuvarlak pencereli, geniş ahşap terasa sahip tiny house',
+    aciklama: 'Az alanda konforlu yaşam: kompakt, işlevsel ve size özel tasarım.',
+  },
+];
+---
+
+<Layout title={baslik} description={aciklama} image={`${hero.yol}-1600.webp`} seffafHeader>
+  <section class="hero" aria-labelledby="hero-baslik">
+    <img
+      class="hero-gorsel"
+      src={`${hero.yol}-1600.webp`}
+      srcset={srcset(hero.yol)}
+      sizes="100vw"
+      width="1600"
+      height="1200"
+      alt={hero.alt}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-karartma" aria-hidden="true"></div>
+
+    <div class="kap hero-ic">
+      <h1 id="hero-baslik">Doğayla Uyumlu, Size Özel Ahşap Evler</h1>
+      <p class="hero-metin">
+        Bungalovdan villaya, tiny house'tan çardağa; modern mimariyi doğal ahşapla buluşturan
+        yapıları sizin için tasarlıyor ve üretiyoruz.
+      </p>
+      <div class="hero-dugmeler">
+        <a href="/iletisim" class="dugme dugme-birincil">Teklif Al</a>
+        <a href="#kategoriler" class="dugme dugme-ikincil">Projeleri İncele</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kategoriler" class="kategoriler" aria-labelledby="kategoriler-baslik">
+    <div class="kap">
+      <header class="bolum-baslik">
+        <p class="bolum-etiket">Ürünlerimiz</p>
+        <h2 id="kategoriler-baslik">Size Özel Ahşap Yapılar</h2>
+        <p>
+          Her yapıyı ihtiyaçlarınıza ve arazinize göre özel olarak tasarlayıp üretiyoruz.
+        </p>
+      </header>
+
+      <ul class="kart-izgara">
+        {
+          kategoriler.map((k) => (
+            <li>
+              <a href={k.href} class="kart">
+                <div class="kart-gorsel">
+                  <img
+                    src={`${k.yol}-600.webp`}
+                    srcset={srcset(k.yol)}
+                    sizes={k.boyut}
+                    width={k.genislik}
+                    height={k.yukseklik}
+                    alt={k.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="kart-govde">
+                  <h3>{k.ad}</h3>
+                  <p>{k.aciklama}</p>
+                  <span class="kart-link">
+                    Modelleri inceleyin
+                    <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
+                  </span>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 85vh;
+    min-height: 85svh;
+    padding-block: 120px 56px;
+    background: var(--color-antrasit);
+    color: var(--color-beyaz);
+    overflow: hidden;
+  }
+
+  .hero :focus-visible {
+    outline-color: var(--color-krem);
+  }
+
+  .hero-gorsel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 75%;
+  }
+
+  .hero-karartma {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(46, 46, 46, 0.55) 0%, rgba(46, 46, 46, 0.35) 40%, rgba(46, 46, 46, 0.8) 100%);
+  }
+
+  .hero-ic {
+    position: relative;
+  }
+
+  .hero h1 {
+    max-width: 16ch;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+  }
+
+  .hero-metin {
+    max-width: 56ch;
+    margin: 20px 0 32px;
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-dugmeler {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Kategoriler */
+  .kategoriler {
+    padding-block: 64px;
+    background: var(--color-krem);
+  }
+
+  .bolum-baslik {
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  .bolum-etiket {
+    margin: 0 0 8px;
+    color: var(--color-ahsap-koyu);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .bolum-baslik h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+  }
+
+  .bolum-baslik p:last-child {
+    margin: 16px 0 0;
+  }
+
+  .kart-izgara {
+    display: grid;
+    gap: 24px;
+  }
+
+  .kart {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-buyuk);
+    background: var(--color-beyaz);
+    box-shadow: var(--golge);
+    text-decoration: none;
+  }
+
+  .kart-gorsel {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-krem);
+  }
+
+  .kart-gorsel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease-out;
+  }
+
+  .kart:hover .kart-gorsel img {
+    transform: scale(1.03);
+  }
+
+  .kart-govde {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .kart h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+  }
+
+  .kart p {
+    flex: 1;
+    margin: 8px 0 20px;
+  }
+
+  .kart-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-ahsap-koyu);
+    font-weight: 600;
+  }
+
+  .kart-link .ikon {
+    transition: transform var(--gecis);
+  }
+
+  .kart:hover .kart-link .ikon {
+    transform: translateX(4px);
+  }
+
+  /* ≥ 640px */
+  @media (min-width: 640px) {
+    .kart-izgara {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .hero-metin {
+      font-size: 1.125rem;
+    }
+
+    .kategoriler {
+      padding-block: 96px;
+    }
+  }
+
+  /* ≥ 1024px */
+  @media (min-width: 1024px) {
+    .hero {
+      align-items: center;
+      padding-block: 140px 80px;
+    }
+
+    .hero-karartma {
+      background: linear-gradient(90deg, rgba(46, 46, 46, 0.8) 0%, rgba(46, 46, 46, 0.45) 55%, rgba(46, 46, 46, 0.15) 100%);
+    }
+
+    .kart-izgara {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
