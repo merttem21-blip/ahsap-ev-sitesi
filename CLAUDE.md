@@ -37,6 +37,8 @@
 - **Görsel Yönetimi:** gorsel-yonetimi skill'ine bak
 - **Responsive Düzen:** responsive-duzen skill'ine bak
 - **Hallmark skill'i:** Bu projede marka-stili önceliklidir. Hallmark yalnızca açıkça çağrıldığında kullanılır (ör. `hallmark audit`). Renk, font, tema veya düzen kararında marka-stili ile çelişirse marka-stili geçerlidir. Bu projede Hallmark `tokens.css`, `.hallmark/` klasörü veya OKLCH renk tokenları oluşturmaz.
+- **UI/UX Pro Max skill'i (ui-ux-pro-max):** Sayfa, bileşen, form, gezinme, responsive, erişilebilirlik ve performans işlerinde açıkça çağrılmasını beklemeden, gerektiği yerde kullanılır. Yalnızca `ux`, `landing` ve `icons` alanlarından ve `--stack astro` rehberinden yararlanılır. Renk, font, stil, tema ve animasyon kararları marka-stili'nden gelir: skill'in `color`, `typography`, `google-fonts`, `style`, `product` ve `gsap` önerileri ile `--design-system` çıktısı uygulanmaz. Bu projede `--persist` kullanılmaz ve `design-system/` klasörü oluşturulmaz. Proje skill'lerinden biriyle (marka-stili, responsive-duzen, seo-kurallar, gorsel-yonetimi, guvenlik-kurallari) çelişirse proje skill'i geçerlidir.
+- **Skill kullanımı:** Her istekte konuya uyan skill'ler (yukarıdaki proje skill'leri ve ui-ux-pro-max) ayrıca söylenmesini beklemeden kullanılır. Hallmark bunun dışındadır; yalnızca açıkça çağrıldığında kullanılır.
 
 ## Logo Dosyaları
 Konum: `public/logo/`. Format: **SVG**. Ayrıntılı kullanım kuralları marka-stili skill'inde.
