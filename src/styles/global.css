@@ -65,8 +65,9 @@
   --bolum-genis: clamp(96px, 12vw, 160px);
 
   /* Biçim */
-  --radius: 4px; /* kart ve görsel */
-  --radius-tam: 999px; /* buton (pill) ve yuvarlak öğeler */
+  --radius-kart: 16px; /* kart ve kutu; karta yaslı görsel kartın köşesine kırpılır */
+  --radius-gorsel: 12px; /* tek başına duran görsel (galeri, ışık kutusu) */
+  --radius-tam: 999px; /* buton (pill), etiket ve yuvarlak öğeler */
   --cizgi: 1px;
   --golge-yuzen: 0 6px 20px rgba(30, 30, 30, 0.6); /* yalnızca yüzen WhatsApp butonu */
 
@@ -93,7 +94,6 @@
   /* Geçiş dönemi: footer ve galeri kendi adımlarında yenilenene kadar kalır, sonra silinir */
   --color-krem-soluk: var(--color-metin);
   --color-cizgi-koyu: var(--color-cizgi);
-  --radius-buyuk: var(--radius);
 }
 
 *,
@@ -181,7 +181,7 @@ ul {
   padding: 12px var(--bosluk-2);
   background: var(--color-krem);
   color: var(--color-gece);
-  border-radius: var(--radius);
+  border-radius: var(--radius-tam);
   font-weight: 600;
 }
 

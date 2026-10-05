@@ -182,7 +182,7 @@ const kapak = fotolar[kapakSirasi];
     position: relative;
     display: block;
     overflow: hidden;
-    border-radius: var(--radius-buyuk);
+    border-radius: var(--radius-gorsel);
     background: var(--color-yuzey);
     aspect-ratio: 4 / 3;
   }
@@ -201,7 +201,7 @@ const kapak = fotolar[kapakSirasi];
     align-items: center;
     gap: 8px;
     padding: 8px 14px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-tam);
     background: rgba(46, 46, 46, 0.85);
     color: var(--color-beyaz);
     font-size: 0.875rem;
@@ -218,7 +218,7 @@ const kapak = fotolar[kapakSirasi];
   .galeri-kucukler a {
     display: block;
     overflow: hidden;
-    border-radius: var(--radius);
+    border-radius: var(--radius-gorsel);
     background: var(--color-yuzey);
     aspect-ratio: 4 / 3;
   }
@@ -293,6 +293,7 @@ const kapak = fotolar[kapakSirasi];
     height: auto;
     max-height: 100%;
     object-fit: contain;
+    border-radius: var(--radius-gorsel);
   }
 
   .ik-aciklama {
