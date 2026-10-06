@@ -10,6 +10,10 @@ fotograflar:
     alt: "Taş kaideli verandalı ahşap ev – bahçe yolundan uzaktan görünüm"
   - dosya: tas-kaideli-verandali-ahsap-ev-15
     alt: "Taş kaideli verandalı ahşap ev – bahçe duvarı ve çevresiyle genel görünüm"
+  - dosya: tas-kaideli-verandali-ahsap-ev-16
+    alt: "Taş kaideli verandalı ahşap ev – taş duvar önünde kütük kaplamalı bahçe deposu"
+  - dosya: tas-kaideli-verandali-ahsap-ev-17
+    alt: "Taş kaideli verandalı ahşap ev – çift kanat kapılı bahçe deposu ve taş duvar"
   - dosya: tas-kaideli-verandali-ahsap-ev-02
     alt: "Taş kaideli verandalı ahşap ev – döner merdivenli, yüksek tavanlı salon"
   - dosya: tas-kaideli-verandali-ahsap-ev-03

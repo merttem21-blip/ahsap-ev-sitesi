@@ -22,10 +22,16 @@ fotograflar:
     alt: "Geniş verandalı ahşap villa – bahçenin köşesinden genel görünüm"
   - dosya: genis-verandali-ahsap-villa-20
     alt: "Geniş verandalı ahşap villa – uzaktan dikey kadraj"
+  - dosya: genis-verandali-ahsap-villa-22
+    alt: "Geniş verandalı ahşap villa – yerleşmiş bahçe ve beyaz taş yol ile ön cephe"
   - dosya: genis-verandali-ahsap-villa-05
     alt: "Geniş verandalı ahşap villa – saçak altı ve sürme cam kapılar"
   - dosya: genis-verandali-ahsap-villa-13
     alt: "Geniş verandalı ahşap villa – ahşap deck kaplı veranda"
+  - dosya: genis-verandali-ahsap-villa-23
+    alt: "Geniş verandalı ahşap villa – taş kaide üzerinde veranda korkuluğu ve merdiven"
+  - dosya: genis-verandali-ahsap-villa-24
+    alt: "Geniş verandalı ahşap villa – verandaya çıkan ahşap merdiven"
   - dosya: genis-verandali-ahsap-villa-15
     alt: "Geniş verandalı ahşap villa – ahşap tavanlı salon ve mutfak köşesi"
   - dosya: genis-verandali-ahsap-villa-21

@@ -1881,5 +1881,166 @@
     "proje": "deniz-ustu-ahsap-otel-odalari",
     "baslik": "Deniz Üstü Ahşap Otel Odaları",
     "kategori": "otel-bar"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsab-ev-13",
+    "yeni": "/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-22",
+    "proje": "genis-verandali-ahsap-villa",
+    "baslik": "Geniş Verandalı Ahşap Villa",
+    "kategori": "villa"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsab-ev-14",
+    "yeni": "/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-23",
+    "proje": "genis-verandali-ahsap-villa",
+    "baslik": "Geniş Verandalı Ahşap Villa",
+    "kategori": "villa"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsab-ev-15",
+    "yeni": "/images/villa/genis-verandali-ahsap-villa/genis-verandali-ahsap-villa-24",
+    "proje": "genis-verandali-ahsap-villa",
+    "baslik": "Geniş Verandalı Ahşap Villa",
+    "kategori": "villa"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsap-ev-19",
+    "yeni": "/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-16",
+    "proje": "tas-kaideli-verandali-ahsap-ev",
+    "baslik": "Taş Kaideli Verandalı Ahşap Ev",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsap-ev-18",
+    "yeni": "/images/ahsap-ev/tas-kaideli-verandali-ahsap-ev/tas-kaideli-verandali-ahsap-ev-17",
+    "proje": "tas-kaideli-verandali-ahsap-ev",
+    "baslik": "Taş Kaideli Verandalı Ahşap Ev",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsap-ev-2",
+    "yeni": "/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-05",
+    "proje": "deniz-manzarali-terasli-ahsap-ev",
+    "baslik": "Deniz Manzaralı Teraslı Ahşap Ev",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsap-ev-3",
+    "yeni": "/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-06",
+    "proje": "deniz-manzarali-terasli-ahsap-ev",
+    "baslik": "Deniz Manzaralı Teraslı Ahşap Ev",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsap-ev-5",
+    "yeni": "/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-07",
+    "proje": "deniz-manzarali-terasli-ahsap-ev",
+    "baslik": "Deniz Manzaralı Teraslı Ahşap Ev",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/ahsap-ev/ahsap-ev-1",
+    "yeni": "/images/ahsap-ev/deniz-manzarali-terasli-ahsap-ev/deniz-manzarali-terasli-ahsap-ev-08",
+    "proje": "deniz-manzarali-terasli-ahsap-ev",
+    "baslik": "Deniz Manzaralı Teraslı Ahşap Ev",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-1",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-14",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-2",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-15",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-3",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-16",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-4",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-17",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-5",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-18",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-6",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-19",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-7",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-20",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-8",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-21",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-9",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-22",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-10",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-23",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/tarihi-cami-restarasyonu-11",
+    "yeni": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-24",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ozel-tasarim"
+  },
+  {
+    "eski": "/images/diger/20240304_165827",
+    "yeni": "/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-15",
+    "proje": "genis-verandali-asma-katli-bungalov",
+    "baslik": "Geniş Verandalı Asma Katlı Bungalov",
+    "kategori": "bungalov"
+  },
+  {
+    "eski": "/images/diger/20240304_165839",
+    "yeni": "/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-16",
+    "proje": "genis-verandali-asma-katli-bungalov",
+    "baslik": "Geniş Verandalı Asma Katlı Bungalov",
+    "kategori": "bungalov"
+  },
+  {
+    "eski": "/images/diger/20240304_165600",
+    "yeni": "/images/bungalov/genis-verandali-asma-katli-bungalov/genis-verandali-asma-katli-bungalov-17",
+    "proje": "genis-verandali-asma-katli-bungalov",
+    "baslik": "Geniş Verandalı Asma Katlı Bungalov",
+    "kategori": "bungalov"
   }
 ]

@@ -30,6 +30,28 @@ fotograflar:
     alt: "İki katlı ahşap cami – ek binanın çift kollu merdiveni"
   - dosya: iki-katli-ahsap-cami-05
     alt: "İki katlı ahşap cami – ek binanın yan cephesi ve merdiven"
+  - dosya: iki-katli-ahsap-cami-15
+    alt: "İki katlı ahşap cami – turkuaz halılı harimin geniş açılı görünümü"
+  - dosya: iki-katli-ahsap-cami-16
+    alt: "İki katlı ahşap cami – ahşap tavan ve iki sıra pencereli yan duvar"
+  - dosya: iki-katli-ahsap-cami-17
+    alt: "İki katlı ahşap cami – avize, mihrap ve minber"
+  - dosya: iki-katli-ahsap-cami-18
+    alt: "İki katlı ahşap cami – ahşap minber ve halı saflar"
+  - dosya: iki-katli-ahsap-cami-19
+    alt: "İki katlı ahşap cami – kırma ahşap tavanlı harim ve mihrap duvarı"
+  - dosya: iki-katli-ahsap-cami-20
+    alt: "İki katlı ahşap cami – karşıdan mihrap ve avizeli harim"
+  - dosya: iki-katli-ahsap-cami-21
+    alt: "İki katlı ahşap cami – mahfil katı ve ahşap merdiven"
+  - dosya: iki-katli-ahsap-cami-22
+    alt: "İki katlı ahşap cami – mahfil korkuluğu, avize ve pencere sıraları"
+  - dosya: iki-katli-ahsap-cami-23
+    alt: "İki katlı ahşap cami – mahfilden harime yukarıdan bakış"
+  - dosya: iki-katli-ahsap-cami-24
+    alt: "İki katlı ahşap cami – oymalı panelli çift kanatlı ahşap kapı"
+  - dosya: iki-katli-ahsap-cami-14
+    alt: "İki katlı ahşap cami – yapım aşamasında minare ve mihrap çıkıntılı cephe"
 
 # Teknik şartname — boş bırakılan alanlar sitede gösterilmez.
 # Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" · teslim_suresi: "45 gün"

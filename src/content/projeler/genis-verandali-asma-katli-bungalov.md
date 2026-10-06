@@ -18,10 +18,16 @@ fotograflar:
     alt: "Geniş verandalı asma katlı bungalov – uzun yan cephe ve pencereler"
   - dosya: genis-verandali-asma-katli-bungalov-14
     alt: "Geniş verandalı asma katlı bungalov – yakından veranda korkulukları"
+  - dosya: genis-verandali-asma-katli-bungalov-15
+    alt: "Geniş verandalı asma katlı bungalov – küçük pencereli arka cephe"
+  - dosya: genis-verandali-asma-katli-bungalov-16
+    alt: "Geniş verandalı asma katlı bungalov – arka köşeden yan duvar ve koyu pencereler"
   - dosya: genis-verandali-asma-katli-bungalov-08
     alt: "Geniş verandalı asma katlı bungalov – asma kat ve merdivenli salon"
   - dosya: genis-verandali-asma-katli-bungalov-07
     alt: "Geniş verandalı asma katlı bungalov – yüksek tavanlı salon ve pencereler"
+  - dosya: genis-verandali-asma-katli-bungalov-17
+    alt: "Geniş verandalı asma katlı bungalov – asma kat korkuluğu ve gün ışığı alan salon"
   - dosya: genis-verandali-asma-katli-bungalov-09
     alt: "Geniş verandalı asma katlı bungalov – mutfak ve asma kat merdiveni"
   - dosya: genis-verandali-asma-katli-bungalov-10

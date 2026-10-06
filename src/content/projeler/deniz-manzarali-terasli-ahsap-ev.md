@@ -12,6 +12,14 @@ fotograflar:
     alt: "Deniz manzaralı teraslı ahşap ev – teras korkulukları ve giriş kapısı"
   - dosya: deniz-manzarali-terasli-ahsap-ev-04
     alt: "Deniz manzaralı teraslı ahşap ev – yan açıdan teras ve büyük pencereler"
+  - dosya: deniz-manzarali-terasli-ahsap-ev-05
+    alt: "Deniz manzaralı teraslı ahşap ev – antrasit boyalı cephe, teras ve dış merdiven"
+  - dosya: deniz-manzarali-terasli-ahsap-ev-06
+    alt: "Deniz manzaralı teraslı ahşap ev – köşe camlı teras ve antrasit cephe"
+  - dosya: deniz-manzarali-terasli-ahsap-ev-07
+    alt: "Deniz manzaralı teraslı ahşap ev – korkuluklu teras ve geniş pencereler"
+  - dosya: deniz-manzarali-terasli-ahsap-ev-08
+    alt: "Deniz manzaralı teraslı ahşap ev – saçaklı giriş kapısı ve boyalı merdiven"
 
 # Teknik şartname — boş bırakılan alanlar sitede gösterilmez.
 # Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" · teslim_suresi: "45 gün"
