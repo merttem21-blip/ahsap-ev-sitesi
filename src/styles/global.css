@@ -36,6 +36,9 @@
   --color-cizgi-girdi: rgba(235, 220, 198, 0.45);
   --color-yuzey-secili: rgba(235, 220, 198, 0.08); /* seçili seçenek kartı */
   --color-hata: var(--color-ahsap-acik); /* palette kırmızı yok: hata metni ikon + metinle ayrılır, ≥ 4.6:1 */
+  /* Mobil alt menü: düz antrasit bar, krem %12 çerçeve; aktif öğenin ikonunun arkasında krem %10 düz pill */
+  --color-cizgi-menu: rgba(235, 220, 198, 0.12);
+  --color-yuzey-aktif: rgba(235, 220, 198, 0.1);
 
   /* Yazı */
   --font-baslik: 'Poppins', system-ui, sans-serif;
@@ -77,6 +80,7 @@
   --radius-gorsel: 12px; /* tek başına duran görsel (galeri, ışık kutusu) */
   --radius-tam: 999px; /* buton (pill), etiket ve yuvarlak öğeler */
   --radius-girdi: 12px; /* form girdisi ve seçim kartı */
+  --radius-alt-menu: 22px; /* mobil alt menü barı */
   --cizgi: 1px;
   --golge-yuzen: 0 6px 20px rgba(30, 30, 30, 0.6); /* yalnızca yüzen WhatsApp butonu */
 
@@ -95,10 +99,17 @@
   --ease-ortaya: cubic-bezier(0.2, 0.7, 0.2, 1);
   --gecis: var(--sure-kisa) var(--ease-out);
 
+  /* Mobil alt menü (< 768px): ekranın altından ve kenarlardan 12px içeride havada durur.
+     --alt-menu-alan: sayfa içeriğinin barın altında kalmaması için bırakılan alt boşluk */
+  --alt-menu-h: 64px;
+  --alt-menu-pay: 12px;
+  --alt-menu-alan: calc(var(--alt-menu-h) + 2 * var(--alt-menu-pay) + env(safe-area-inset-bottom, 0px));
+
   /* Katman sırası */
   --z-header: 20;
   --z-yuzen: 30;
   --z-menu: 40; /* açık mobil menü paneli yüzen WhatsApp butonunu da örter */
+  --z-alt-menu: 45; /* mobil alt menü, açık menü panelinin üstünde kalır ("Menü" düğmesi paneli kapatır) */
   --z-atla: 100;
 }
 
@@ -113,6 +124,7 @@ html {
   background: var(--color-zemin);
   scroll-behavior: smooth;
   scroll-padding-top: 96px; /* çapa hedefleri sabit header'ın altında kalmaz */
+  scroll-padding-bottom: var(--alt-menu-alan); /* odaklanan öğe mobil alt menünün altında kalmaz */
 }
 
 body {
@@ -124,6 +136,8 @@ body {
   font-size: var(--text-govde);
   line-height: var(--satir-govde);
   -webkit-font-smoothing: antialiased;
+  /* < 768px: içerik mobil alt menünün altında kalmaz */
+  padding-bottom: var(--alt-menu-alan);
 }
 
 h1,
@@ -199,11 +213,12 @@ ul {
   top: var(--bosluk-2);
 }
 
+/* viewport-fit=cover: yatay telefonda içerik çentiğin altında kalmaz (env() yoksa 0) */
 .kap {
   width: 100%;
   max-width: 1280px;
   margin-inline: auto;
-  padding-inline: var(--bosluk-2);
+  padding-inline: max(var(--bosluk-2), env(safe-area-inset-left, 0px)) max(var(--bosluk-2), env(safe-area-inset-right, 0px));
 }
 
 .ikon {
@@ -352,17 +367,25 @@ ul {
   transform: translateY(24px);
 }
 
-/* ≥ 768px */
+/* ≥ 768px: mobil alt menü yok */
 @media (min-width: 768px) {
+  html {
+    scroll-padding-bottom: 0;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
   .kap {
-    padding-inline: var(--bosluk-3);
+    padding-inline: max(var(--bosluk-3), env(safe-area-inset-left, 0px)) max(var(--bosluk-3), env(safe-area-inset-right, 0px));
   }
 }
 
 /* ≥ 1024px */
 @media (min-width: 1024px) {
   .kap {
-    padding-inline: var(--bosluk-4);
+    padding-inline: max(var(--bosluk-4), env(safe-area-inset-left, 0px)) max(var(--bosluk-4), env(safe-area-inset-right, 0px));
   }
 }
 

@@ -2,6 +2,8 @@
 baslik: Asma Katlı Verandalı Bungalov
 kategori: bungalov
 kapak: asma-katli-verandali-bungalov-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: asma-katli-verandali-bungalov-01

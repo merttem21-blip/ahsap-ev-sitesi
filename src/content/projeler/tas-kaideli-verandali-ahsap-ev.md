@@ -2,6 +2,8 @@
 baslik: Taş Kaideli Verandalı Ahşap Ev
 kategori: ahsap-ev
 kapak: tas-kaideli-verandali-ahsap-ev-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: tas-kaideli-verandali-ahsap-ev-01

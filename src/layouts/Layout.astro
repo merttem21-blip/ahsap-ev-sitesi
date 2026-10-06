@@ -5,6 +5,7 @@ import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import AltMenu from '../components/AltMenu.astro';
 import { firma, siteAdresi, varsayilanGorsel } from '../data/site';
 import '../styles/global.css';
 
@@ -15,9 +16,9 @@ interface Props {
   noindex?: boolean;
   /** Header hero fotoğrafının üzerinde şeffaf durur; yoksa antrasit zeminli olur. */
   seffafHeader?: boolean;
-  /** Footer ve yüzen butondaki WhatsApp linkinin hazır mesajı (sayfaya göre). */
+  /** Footer, yüzen buton ve mobil alt menüdeki WhatsApp linkinin hazır mesajı (sayfaya göre). */
   whatsappMesaj?: string;
-  /** Header ve footer'daki "Teklif Al" linki; proje/kategori sayfalarında yapı tipini ön seçer. */
+  /** Header, footer ve mobil alt menüdeki "Teklif Al" linki; proje/kategori sayfalarında yapı tipini ön seçer. */
   teklifAdresi?: string;
 }
 
@@ -62,7 +63,7 @@ const isletmeSemasi = {
 <html lang="tr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <SEO title={title} description={description} image={image} noindex={noindex} />
     <meta name="theme-color" content="#1E1E1E" />
 
@@ -91,6 +92,7 @@ const isletmeSemasi = {
 
     <Footer whatsappMesaj={whatsappMesaj} teklifAdresi={teklifAdresi} />
     <WhatsAppButton mesaj={whatsappMesaj} />
+    <AltMenu teklifAdresi={teklifAdresi} whatsappMesaj={whatsappMesaj} />
 
     <script>
       import '../scripts/hareket';

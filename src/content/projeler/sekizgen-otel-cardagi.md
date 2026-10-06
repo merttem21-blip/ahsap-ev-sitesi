@@ -2,6 +2,8 @@
 baslik: Sekizgen Otel Çardağı
 kategori: cardak
 kapak: sekizgen-otel-cardagi-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: sekizgen-otel-cardagi-01

@@ -32,6 +32,7 @@
 
 ## Site Tasarım Kuralları
 - **Marka Stili:** marka-stili skill'ine bak
+- **Gradyan yok:** Dekoratif gradyan kullanılmaz; zeminler, butonlar ve kartlar düz renktir. Tek istisna: fotoğraf üzerindeki metin için gereken en sade karartma. Her yeni öğe mevcut koyu tema, token'lar, tipografi ve köşe yuvarlaklıklarıyla birebir uyumlu olur.
 - **SEO:** seo-kurallar skill'ine bak
 - **Güvenlik:** guvenlik-kurallari skill'ine bak
 - **Görsel Yönetimi:** gorsel-yonetimi skill'ine bak
@@ -59,6 +60,7 @@ Konum: `public/logo/`. Format: **SVG**. Ayrıntılı kullanım kuralları marka-
 2. **Kategoriler (/kategoriler)** → 8 kategori: Bungalov, Villa, Tiny House, A-Frame, Çardak, Otel-Bar, Çocuk Oyun Parkı, Diğer
 3. **Kategori Detayı (/kategori/:id)** → Filtren/seçilmiş kategori fotoğrafları galeri
 4. **Proje Detayı (/proje/:id)** → Büyük fotoğraf, teknik şartname tablosu, "Teklif Al" butonu
+   - **Galeri (/galeri)** → Tüm proje fotoğrafları; kategori filtresi (?kategori=), masonry ızgara, ışık kutusu (?foto=)
 5. **Hakkımızda (/hakkimizda)** → Şirket hikâyesi, vizyon, misyon, ekip
 6. **Referanslar (/referanslar)** → Müşteri yorumları ve projeler
 7. **İletişim (/iletisim)** → İletişim formu (ad, email, telefon, mesaj, kategori seçimi)

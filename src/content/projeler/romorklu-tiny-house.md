@@ -2,6 +2,8 @@
 baslik: Römorklu Tiny House
 kategori: tiny-house
 kapak: romorklu-tiny-house-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: romorklu-tiny-house-01

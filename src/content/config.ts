@@ -15,6 +15,8 @@ const projeler = defineCollection({
       baslik: z.string().min(3),
       kategori: z.enum(kategoriSluglari),
       kapak: z.string(),
+      // İl/ilçe; yalnızca müşteri izin verdiyse yazılır. Boşsa galeri ve alt metinlerde gösterilmez.
+      konum: z.string().trim().nullish(),
       fotograflar: z
         .array(
           z.object({

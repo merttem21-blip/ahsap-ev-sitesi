@@ -2,6 +2,8 @@
 baslik: Hasır Çatılı Plaj Barı
 kategori: otel-bar
 kapak: hasir-catili-plaj-bari-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: hasir-catili-plaj-bari-01

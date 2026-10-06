@@ -3,7 +3,7 @@
 // Header her yerde koyudur; plakasız koyu zemin SVG logosu kullanılır (marka-stili §4, §8).
 // Sayfa kaydırılınca üstte sabit kalır ve küçülür. Küçülme yalnızca transform/opacity ile yapılır:
 // header'ın kapladığı yer değişmez, layout kayması olmaz.
-import { kategoriler, menu } from '../data/site';
+import { menu, menuAktifMi } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
 interface Props {
@@ -17,12 +17,7 @@ interface Props {
 const { seffaf = false, teklifAdresi = '/teklif-al' } = Astro.props;
 
 const yol = Astro.url.pathname.replace(/\/$/, '') || '/';
-// Kategori ve proje sayfaları (/bungalov, /bungalov/proje) "Projeler" menüsüne aittir
-const projeSayfasi = kategoriler.some((k) => yol === `/${k.slug}` || yol.startsWith(`/${k.slug}/`));
-const aktifMi = (href: string) =>
-  href === '/'
-    ? yol === '/'
-    : yol === href || yol.startsWith(`${href}/`) || (href === '/projeler' && projeSayfasi);
+const aktifMi = (href: string) => menuAktifMi(yol, href);
 ---
 
 <header class:list={['ust', { 'ust-seffaf': seffaf }]} data-ust>
@@ -67,39 +62,53 @@ const aktifMi = (href: string) =>
 </header>
 
 <script>
+  // Menü paneli iki düğmeyle açılır: header'daki (768px ve üstü) ve mobil alt menüdeki "Menü" (AltMenu.astro).
+  // aria-expanded ikisinde de aynı tutulur.
   const ust = document.querySelector<HTMLElement>('[data-ust]');
-  const dugme = document.querySelector<HTMLButtonElement>('[data-menu-dugme]');
+  const dugmeler = [...document.querySelectorAll<HTMLButtonElement>('[data-menu-dugme]')];
   const etiket = document.querySelector<HTMLElement>('[data-menu-etiket]');
   const menu = document.getElementById('ana-menu');
   const masaustu = window.matchMedia('(min-width: 1024px)');
+  let acanDugme: HTMLButtonElement | null = null;
 
-  const acikMi = () => dugme?.getAttribute('aria-expanded') === 'true';
+  const acikMi = () => menu?.classList.contains('acik') ?? false;
+  // Header ve menü düğmeleri menünün parçası sayılır: aralarında gezinmek menüyü kapatmaz
+  const menudeMi = (dugum: Node | null) =>
+    !!dugum && (!!ust?.contains(dugum) || dugmeler.some((d) => d.contains(dugum)));
 
   const ayarla = (acik: boolean) => {
-    dugme?.setAttribute('aria-expanded', String(acik));
+    for (const d of dugmeler) d.setAttribute('aria-expanded', String(acik));
     menu?.classList.toggle('acik', acik);
     // Panel açıkken arkadaki sayfa kaymaz
     document.documentElement.classList.toggle('menu-acik', acik);
     if (etiket) etiket.textContent = acik ? 'Menüyü kapat' : 'Menüyü aç';
   };
 
-  dugme?.addEventListener('click', () => ayarla(!acikMi()));
+  for (const d of dugmeler) {
+    d.addEventListener('click', () => {
+      const acilacak = !acikMi();
+      acanDugme = d;
+      ayarla(acilacak);
+      // Alt menüden açılınca odak panele geçer (panel DOM'da düğmeden önce durur)
+      if (acilacak && !ust?.contains(d)) menu?.querySelector<HTMLElement>('a')?.focus();
+    });
+  }
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && acikMi()) {
       ayarla(false);
-      dugme?.focus();
+      acanDugme?.focus();
     }
   });
 
   // Tab ile menünün dışına çıkılınca veya dışarı tıklanınca kapanır
   ust?.addEventListener('focusout', (e) => {
     const hedef = e.relatedTarget as Node | null;
-    if (acikMi() && hedef && !ust.contains(hedef)) ayarla(false);
+    if (acikMi() && hedef && !menudeMi(hedef)) ayarla(false);
   });
 
   document.addEventListener('click', (e) => {
-    if (acikMi() && !ust?.contains(e.target as Node)) ayarla(false);
+    if (acikMi() && !menudeMi(e.target as Node)) ayarla(false);
   });
 
   // Masaüstü genişliğine geçilirse panel kapanır (menü satır içinde gösterilir)
@@ -252,8 +261,9 @@ const aktifMi = (href: string) =>
     z-index: var(--z-menu);
   }
 
+  /* < 768px: gizli; paneli mobil alt menüdeki "Menü" düğmesi açar (AltMenu.astro) */
   .menu-dugme {
-    display: inline-flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 48px;
@@ -279,6 +289,11 @@ const aktifMi = (href: string) =>
     display: block;
   }
 
+  /* Mobilde panelin altı yüzen alt menünün altında kalmaz */
+  .menu {
+    --alt-pay: calc(var(--alt-menu-alan) + var(--bosluk-2));
+  }
+
   /* Mobil: tam ekran koyu panel */
   .menu {
     position: fixed;
@@ -287,7 +302,7 @@ const aktifMi = (href: string) =>
     flex-direction: column;
     justify-content: space-between;
     gap: var(--bosluk-5);
-    padding: calc(var(--h) + var(--bosluk-2)) var(--bosluk-2) var(--bosluk-5);
+    padding: calc(var(--h) + var(--bosluk-2)) var(--bosluk-2) var(--alt-pay);
     overflow-y: auto;
     background: var(--color-zemin);
     visibility: hidden;
@@ -362,9 +377,14 @@ const aktifMi = (href: string) =>
     overflow: hidden;
   }
 
-  /* ≥ 768px */
+  /* ≥ 768px: alt menü yok; panel header'daki düğmeyle açılır */
   @media (min-width: 768px) {
+    .menu-dugme {
+      display: inline-flex;
+    }
+
     .menu {
+      --alt-pay: var(--bosluk-5);
       padding-inline: var(--bosluk-3);
     }
   }
@@ -413,9 +433,10 @@ const aktifMi = (href: string) =>
       transition: none;
     }
 
+    /* 1024–1279px'te aralık dar tutulur: altı link ve CTA logoyla birlikte tek satıra sığar */
     .menu ul {
       display: flex;
-      gap: var(--bosluk-4);
+      gap: var(--bosluk-3);
       border-top: 0;
     }
 
@@ -440,6 +461,13 @@ const aktifMi = (href: string) =>
       width: auto;
       min-height: 44px;
       padding-block: 10px;
+    }
+  }
+
+  /* ≥ 1280px */
+  @media (min-width: 1280px) {
+    .menu ul {
+      gap: var(--bosluk-4);
     }
   }
 </style>

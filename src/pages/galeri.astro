@@ -1,0 +1,1145 @@
+---
+// /galeri: sitedeki tüm proje fotoğrafları tek sayfada. Kaynak projelerin fotoğraf listeleridir;
+// hero ve vitrin görselleri bu fotoğrafların işlenmiş kopyası olduğu için ayrıca eklenmez.
+// - Kategori filtresi (?kategori=<slug>), oranı bozmayan masonry ızgara (2 / 3 / 4 sütun, kırpma yok)
+// - İlk 24 fotoğraf, gerisi kaydırdıkça; tam ekran ışık kutusu (?foto=<dosya>)
+// JS kapalıyken: filtre gizli, tüm fotoğraflar CSS sütunlarıyla görünür, her fotoğraf büyük görsele bağlantıdır.
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { kategoriler } from '../data/site';
+import { ikon } from '../data/ikonlar';
+import { gorsel } from '../lib/gorsel';
+import { fotoYolu, jsonLd, projeKategorisi, projeYolu } from '../lib/projeler';
+
+const projeler = await getCollection('projeler');
+const kategoriSirasi = new Map(kategoriler.map((k, i) => [k.slug, i]));
+
+const fotolar = (
+  await Promise.all(
+    projeler.flatMap((proje) => {
+      const kategori = projeKategorisi(proje);
+      const konum = proje.data.konum?.trim() || null;
+      return proje.data.fotograflar.map(async (f, i) => ({
+        id: f.dosya,
+        proje,
+        kategori,
+        konum,
+        kapakMi: f.dosya === proje.data.kapak,
+        sira: i,
+        g: await gorsel(fotoYolu(proje, f.dosya)),
+        alt: `${[proje.data.baslik, kategori.ad, konum].filter(Boolean).join(', ')} – ${i + 1}. görsel`,
+      }));
+    })
+  )
+)
+  // Önce her projenin kapak fotoğrafı (ilk ekranda farklı projeler), sonra proje proje diğerleri
+  .sort(
+    (a, b) =>
+      Number(b.kapakMi) - Number(a.kapakMi) ||
+      kategoriSirasi.get(a.kategori.slug)! - kategoriSirasi.get(b.kategori.slug)! ||
+      a.proje.data.baslik.localeCompare(b.proje.data.baslik, 'tr') ||
+      a.sira - b.sira
+  );
+
+// ?foto= değeri dosya adıdır; aynı ad iki projede olursa bağlantı belirsizleşir
+const yinelenen = fotolar.find((f, i) => fotolar.findIndex((g) => g.id === f.id) !== i);
+if (yinelenen) throw new Error(`[galeri] Aynı dosya adı iki kez kullanılmış: ${yinelenen.id}`);
+
+const filtreler = kategoriler
+  .map((k) => ({ slug: k.slug, ad: k.ad, sayi: fotolar.filter((f) => f.kategori.slug === k.slug).length }))
+  .filter((k) => k.sayi > 0);
+
+// Işık kutusunun alt bilgisi ve bağlantıları (proje başına bir kez)
+const projeBilgileri = Object.fromEntries(
+  projeler.map((p) => [
+    p.slug,
+    {
+      ad: p.data.baslik,
+      kategori: projeKategorisi(p).ad,
+      konum: p.data.konum?.trim() || null,
+      yol: projeYolu(p),
+      teklif: `/teklif-al?proje=${p.slug}`,
+    },
+  ])
+);
+
+// Görselin gerçek genişliği: .kap iç boşluğu ve sütun aralıkları düşülür (2 / 3 / 4 sütun)
+const sizes =
+  '(min-width: 1280px) 292px, (min-width: 1024px) calc((100vw - 112px) / 4), (min-width: 768px) calc((100vw - 72px) / 3), calc((100vw - 40px) / 2)';
+---
+
+<Layout
+  title="Ahşap Ev ve Yapı Fotoğrafları: Proje Galerisi | 2K AHŞAP"
+  description="Ahşap ev, bungalov, villa, tiny house, çardak ve oyun evi projelerimizin fotoğrafları tek galeride. Kategoriye göre süzün, beğendiğiniz yapı için teklif alın."
+  image={fotolar[0]?.g.buyuk}
+  whatsappMesaj="Merhaba, sitenizdeki fotoğraf galerisini inceledim. Ahşap yapı projem hakkında bilgi almak istiyorum."
+>
+  <section class="galeri-ust" aria-labelledby="galeri-baslik">
+    <div class="kap">
+      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Galeri' }]} />
+      <h1 id="galeri-baslik">Ahşap Yapı Fotoğraf Galerisi</h1>
+      <p>
+        Tasarlayıp ürettiğimiz ahşap ev, bungalov, villa ve diğer yapıların fotoğraflarını tek yerde inceleyin.
+        Bir fotoğrafı büyüterek projenin ayrıntılarına geçebilir, benzer bir yapı için teklif isteyebilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <!-- JS varsa filtre görünür ve ızgara JS ile dizilir; yerleşim kaymasını önlemek için ilk boyamadan önce -->
+  <script is:inline>
+    document.documentElement.classList.add('js-galeri');
+    // Galeri betiği çalışmazsa 4 sn sonra JS'siz görünüme dönülür (fotoğraflar gizli kalmaz)
+    setTimeout(function () {
+      if (!document.querySelector('.galeri-izgara.dizildi')) document.documentElement.classList.remove('js-galeri');
+    }, 4000);
+  </script>
+
+  <section class="galeri-bolum" aria-label="Fotoğraflar" data-galeri-sayfa>
+    <div class="kap">
+      <div class="galeri-filtre" role="group" aria-label="Kategoriye göre süz">
+        <button type="button" class="filtre" aria-pressed="true" data-filtre="">
+          Tümü <span class="filtre-sayi">{fotolar.length}</span>
+        </button>
+        {
+          filtreler.map((k) => (
+            <button type="button" class="filtre" aria-pressed="false" data-filtre={k.slug}>
+              {k.ad} <span class="filtre-sayi">{k.sayi}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      <ul class="galeri-izgara" data-galeri-liste>
+        {
+          fotolar.map((f, i) => (
+            <li class="g-oge" data-foto={f.id} data-proje={f.proje.slug} data-kategori={f.kategori.slug}>
+              <a href={f.g.buyuk} class="g-link">
+                <img
+                  src={f.g.src}
+                  srcset={f.g.srcset}
+                  sizes={sizes}
+                  width={f.g.width}
+                  height={f.g.height}
+                  alt={f.alt}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
+                  decoding="async"
+                />
+                <span class="g-bilgi" aria-hidden="true">
+                  <span class="g-ad">{f.proje.data.baslik}</span>
+                  <span class="g-meta">{[f.kategori.ad, f.konum].filter(Boolean).join(' · ')}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="galeri-bekci" data-galeri-bekci aria-hidden="true"></div>
+      <p class="galeri-durum" role="status" data-galeri-durum></p>
+    </div>
+  </section>
+
+  <dialog class="gk" aria-label="Fotoğraf görüntüleyici" data-gk>
+    <div class="gk-ust">
+      <p class="gk-sayac" data-gk-sayac aria-live="polite"></p>
+      <button type="button" class="gk-dugme" data-gk-kapat aria-label="Görüntüleyiciyi kapat" autofocus>
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.kapat} />
+      </button>
+    </div>
+
+    <div class="gk-sahne" data-gk-sahne>
+      <img class="gk-gorsel" data-gk-gorsel alt="" sizes="100vw" decoding="async" draggable="false" />
+      <button type="button" class="gk-dugme gk-onceki" data-gk-onceki aria-label="Önceki fotoğraf">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.geri} />
+      </button>
+      <button type="button" class="gk-dugme gk-sonraki" data-gk-sonraki aria-label="Sonraki fotoğraf">
+        <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ileri} />
+      </button>
+    </div>
+
+    <div class="gk-alt">
+      <p class="gk-bilgi" data-gk-bilgi></p>
+      <div class="gk-eylemler">
+        <a href="/projeler" class="dugme gk-eylem" data-gk-proje>
+          Projeyi incele<span class="gizli" data-gk-proje-ad></span>
+        </a>
+        <a href="/teklif-al" class="dugme gk-eylem gk-eylem-oksuz" data-gk-teklif>Benzer teklif al</a>
+      </div>
+    </div>
+
+    <ul class="gk-serit" aria-label="Küçük resimler" data-gk-serit></ul>
+  </dialog>
+
+  <script type="application/json" id="galeri-projeler" set:html={jsonLd(projeBilgileri)} />
+</Layout>
+
+<script>
+  type ProjeBilgi = { ad: string; kategori: string; konum: string | null; yol: string; teklif: string };
+
+  const SAYFA = 24; // ilk yüklemede ve her kaydırma adımında gösterilen fotoğraf sayısı
+  const azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const kok = document.querySelector<HTMLElement>('[data-galeri-sayfa]');
+  const kutu = document.querySelector<HTMLDialogElement>('[data-gk]');
+  if (kok && kutu) galeriKur(kok, kutu);
+
+  function galeriKur(kok: HTMLElement, kutu: HTMLDialogElement) {
+    // Betik geç yüklendiyse (satır içi yedek sınıfı kaldırdıysa) JS görünümüne yeniden geçilir
+    document.documentElement.classList.add('js-galeri');
+    const liste = kok.querySelector<HTMLUListElement>('[data-galeri-liste]')!;
+    const ogeler = [...liste.querySelectorAll<HTMLLIElement>('[data-foto]')];
+    const filtreDugmeleri = [...kok.querySelectorAll<HTMLButtonElement>('[data-filtre]')];
+    const durum = kok.querySelector<HTMLElement>('[data-galeri-durum]')!;
+    const bekci = kok.querySelector<HTMLElement>('[data-galeri-bekci]')!;
+    const projeler: Record<string, ProjeBilgi> = JSON.parse(
+      document.getElementById('galeri-projeler')!.textContent!
+    );
+
+    let filtre = '';
+    let gorunur = ogeler; // filtredeki tüm fotoğraflar (ışık kutusu bunlar arasında gezer)
+    let sinir = SAYFA; // ızgarada gösterilen fotoğraf sayısı
+    let sutunlar: number[] = [];
+    let dizilen = 0;
+
+    // --- Adres (URL) ---
+    const adresYaz = (degisen: Record<string, string | null>, ekle = false) => {
+      const url = new URL(location.href);
+      for (const [ad, deger] of Object.entries(degisen)) {
+        if (deger) url.searchParams.set(ad, deger);
+        else url.searchParams.delete(ad);
+      }
+      if (ekle) history.pushState({ galeriFoto: true }, '', url);
+      else history.replaceState(history.state, '', url);
+    };
+
+    // --- Filtre ve görünürlük ---
+    const filtrele = (slug: string) => {
+      filtre = slug;
+      gorunur = slug ? ogeler.filter((o) => o.dataset.kategori === slug) : ogeler;
+      sinir = SAYFA;
+      for (const d of filtreDugmeleri) d.setAttribute('aria-pressed', String(d.dataset.filtre === slug));
+    };
+
+    const gorunurlukYaz = () => {
+      const goster = new Set(gorunur.slice(0, sinir));
+      for (const o of ogeler) o.hidden = !goster.has(o);
+    };
+
+    const durumYaz = () => {
+      const n = Math.min(sinir, gorunur.length);
+      durum.textContent =
+        n < gorunur.length ? `Gösterilen: ${n} / ${gorunur.length} fotoğraf` : `${gorunur.length} fotoğrafın tamamı gösteriliyor`;
+    };
+
+    // --- Masonry: her fotoğraf en kısa sütuna; boylar width/height oranından gelir (yükleme beklenmez).
+    // Yalnızca transform ile konumlanır; DOM sırası (okuma ve sekme sırası) değişmez.
+    const diz = (bastan: boolean) => {
+      const stil = getComputedStyle(liste);
+      const sutun = parseInt(stil.getPropertyValue('--sutun'), 10) || 2;
+      const ara = parseFloat(stil.getPropertyValue('--ara')) || 0;
+      const genislik = (liste.clientWidth - ara * (sutun - 1)) / sutun;
+      if (bastan || sutunlar.length !== sutun) {
+        sutunlar = new Array(sutun).fill(0);
+        dizilen = 0;
+      }
+      const yeni = gorunur.slice(dizilen, Math.min(sinir, gorunur.length));
+      const boylar = yeni.map((o) => o.getBoundingClientRect().height); // tek okuma turu
+      yeni.forEach((o, i) => {
+        let s = 0;
+        for (let k = 1; k < sutun; k++) if (sutunlar[k] < sutunlar[s] - 1) s = k;
+        o.style.transform = `translate(${s * (genislik + ara)}px, ${sutunlar[s]}px)`;
+        sutunlar[s] += boylar[i] + ara;
+      });
+      dizilen += yeni.length;
+      liste.style.height = `${Math.max(0, Math.max(...sutunlar) - ara)}px`;
+    };
+
+    const yenidenDiz = () => {
+      gorunurlukYaz();
+      diz(true);
+      durumYaz();
+      bekciIzle();
+    };
+
+    // --- Kaydırdıkça yükleme ---
+    const gozlemci = new IntersectionObserver(
+      (girdiler) => {
+        if (!girdiler.some((g) => g.isIntersecting) || sinir >= gorunur.length) return;
+        sinir += SAYFA;
+        gorunurlukYaz();
+        diz(false);
+        durumYaz();
+        bekciIzle(); // bekçi hâlâ yakınsa bir sonraki adım da yüklenir
+      },
+      { rootMargin: '0px 0px 800px 0px' }
+    );
+    const bekciIzle = () => {
+      gozlemci.unobserve(bekci);
+      if (sinir < gorunur.length) gozlemci.observe(bekci);
+    };
+
+    for (const d of filtreDugmeleri) {
+      d.addEventListener('click', () => {
+        const slug = d.dataset.filtre ?? '';
+        if (slug === filtre) return;
+        filtrele(slug);
+        yenidenDiz();
+        adresYaz({ kategori: slug || null });
+      });
+    }
+
+    // Genişlik (sütun sayısı) veya yazı tipi değişince yeniden dizilir
+    let sonGenislik = 0;
+    let dizBekliyor = false;
+    new ResizeObserver(() => {
+      if (liste.clientWidth === sonGenislik || dizBekliyor) return;
+      dizBekliyor = true;
+      requestAnimationFrame(() => {
+        dizBekliyor = false;
+        sonGenislik = liste.clientWidth;
+        diz(true);
+      });
+    }).observe(liste);
+    document.fonts?.ready.then(() => diz(true));
+
+    // --- İlk durum: ?kategori= ve ?foto= ---
+    const parametre = new URLSearchParams(location.search);
+    const istenenKategori = parametre.get('kategori') ?? '';
+    filtrele(filtreDugmeleri.some((d) => d.dataset.filtre === istenenKategori) ? istenenKategori : '');
+    if (istenenKategori && !filtre) adresYaz({ kategori: null });
+    gorunurlukYaz();
+    liste.classList.add('dizildi');
+    sonGenislik = liste.clientWidth;
+    diz(true);
+    durumYaz();
+    bekciIzle();
+
+    isikKutusuKur();
+
+    // ================= Işık kutusu =================
+    function isikKutusuKur() {
+      if (typeof kutu.showModal !== 'function') return; // eski tarayıcı: bağlantılar büyük görseli açar
+
+      const sahne = kutu.querySelector<HTMLElement>('[data-gk-sahne]')!;
+      const resim = kutu.querySelector<HTMLImageElement>('[data-gk-gorsel]')!;
+      const sayac = kutu.querySelector<HTMLElement>('[data-gk-sayac]')!;
+      const bilgi = kutu.querySelector<HTMLElement>('[data-gk-bilgi]')!;
+      const projeLink = kutu.querySelector<HTMLAnchorElement>('[data-gk-proje]')!;
+      const projeAd = kutu.querySelector<HTMLElement>('[data-gk-proje-ad]')!;
+      const teklifLink = kutu.querySelector<HTMLAnchorElement>('[data-gk-teklif]')!;
+      const serit = kutu.querySelector<HTMLUListElement>('[data-gk-serit]')!;
+
+      let aktif = 0;
+      let tetikleyen: HTMLElement | null = null;
+      let gecmiseEklendi = false; // açılırken history'ye kayıt eklendiyse kapatınca geri gidilir
+      let geriIleKapandi = false;
+      let seritFiltresi: string | null = null;
+
+      const kaynakResim = (o: HTMLLIElement) => o.querySelector('img')!;
+
+      // Küçük resim şeridi: filtredeki tüm fotoğraflar, en küçük varyant (600px), tembel yükleme
+      const seritKur = () => {
+        if (seritFiltresi === filtre) return;
+        seritFiltresi = filtre;
+        serit.replaceChildren(
+          ...gorunur.map((o, i) => {
+            const k = kaynakResim(o);
+            const li = document.createElement('li');
+            const d = document.createElement('button');
+            d.type = 'button';
+            d.className = 'gk-kucuk';
+            d.dataset.i = String(i);
+            d.setAttribute('aria-label', k.alt);
+            const img = document.createElement('img');
+            img.alt = '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.width = 72;
+            img.height = 54;
+            img.src = k.srcset.split(',')[0].trim().split(' ')[0];
+            d.append(img);
+            li.append(d);
+            return li;
+          })
+        );
+      };
+
+      const seritGuncelle = () => {
+        serit.querySelector('[aria-current]')?.removeAttribute('aria-current');
+        const d = serit.children[aktif]?.firstElementChild as HTMLElement | undefined;
+        if (!d) return;
+        d.setAttribute('aria-current', 'true');
+        serit.scrollTo({
+          left: d.offsetLeft - (serit.clientWidth - d.offsetWidth) / 2,
+          behavior: azHareket || !kutu.open ? 'auto' : 'smooth',
+        });
+      };
+
+      // --- Yakınlaştırma: çift dokunma / çift tıklama, tekerlek, iki parmak; yakınken sürükleyerek gezinme ---
+      let olcek = 1;
+      let tx = 0;
+      let ty = 0;
+
+      const donusumYaz = () => {
+        resim.style.transform = olcek === 1 && tx === 0 && ty === 0 ? '' : `translate3d(${tx}px, ${ty}px, 0) scale(${olcek})`;
+        kutu.classList.toggle('gk-yakin', olcek > 1);
+      };
+
+      const sinirla = () => {
+        const sx = Math.max(0, (resim.offsetWidth * olcek - sahne.clientWidth) / 2);
+        const sy = Math.max(0, (resim.offsetHeight * olcek - sahne.clientHeight) / 2);
+        tx = Math.min(sx, Math.max(-sx, tx));
+        ty = Math.min(sy, Math.max(-sy, ty));
+      };
+
+      // (px, py) ekran noktası yerinde kalacak şekilde ölçeği değiştirir
+      const yakinlastir = (yeniOlcek: number, px: number, py: number) => {
+        const s = Math.min(4, Math.max(1, yeniOlcek));
+        const r = sahne.getBoundingClientRect();
+        const cx = px - (r.left + resim.offsetLeft + resim.offsetWidth / 2);
+        const cy = py - (r.top + resim.offsetTop + resim.offsetHeight / 2);
+        tx = cx - (s / olcek) * (cx - tx);
+        ty = cy - (s / olcek) * (cy - ty);
+        olcek = s < 1.02 ? 1 : s;
+        if (olcek === 1) tx = ty = 0;
+        sinirla();
+        donusumYaz();
+      };
+
+      const sifirla = () => {
+        olcek = 1;
+        tx = ty = 0;
+        donusumYaz();
+      };
+
+      const ciftDokunma = (px: number, py: number) => {
+        if (olcek > 1) sifirla();
+        else yakinlastir(2.5, px, py);
+      };
+
+      // --- Fotoğraf gösterme ---
+      const fotoGoster = (i: number, adresle = true) => {
+        const n = gorunur.length;
+        aktif = (i + n) % n;
+        const oge = gorunur[aktif];
+        const k = kaynakResim(oge);
+        sifirla();
+        resim.srcset = k.srcset;
+        resim.src = oge.querySelector('a')!.href;
+        // .width özelliği görüntülenen boyutu verir; gerçek oran niteliklerde
+        resim.setAttribute('width', k.getAttribute('width')!);
+        resim.setAttribute('height', k.getAttribute('height')!);
+        resim.alt = k.alt;
+        // Kullanıcıya gösterilen metinler textContent ile yazılır (innerHTML yok)
+        sayac.textContent = `${aktif + 1} / ${n}`;
+        const p = projeler[oge.dataset.proje!];
+        bilgi.textContent = [p.ad, p.kategori, p.konum].filter(Boolean).join(' · ');
+        projeLink.href = p.yol;
+        projeAd.textContent = `: ${p.ad}`;
+        teklifLink.href = p.teklif;
+        seritGuncelle();
+        // Önceki ve sonraki fotoğraf önceden yüklenir
+        for (const j of [aktif + 1, aktif - 1]) {
+          const on = new Image();
+          on.sizes = '100vw';
+          on.srcset = kaynakResim(gorunur[(j + n) % n]).srcset;
+        }
+        if (adresle) adresYaz({ foto: oge.dataset.foto! });
+      };
+
+      const ac = (i: number, kaynak: HTMLElement | null, gecmiseEkle: boolean) => {
+        tetikleyen = kaynak;
+        seritKur();
+        document.documentElement.classList.add('kaydirma-kilitli');
+        kutu.showModal();
+        fotoGoster(i, false);
+        // Galeriden açılınca yeni bir geçmiş kaydı eklenir: tarayıcının geri tuşu ışık kutusunu kapatır
+        if (gecmiseEkle) adresYaz({ foto: gorunur[aktif].dataset.foto! }, true);
+        gecmiseEklendi = gecmiseEkle;
+      };
+
+      liste.addEventListener('click', (e) => {
+        const link = (e.target as Element).closest<HTMLAnchorElement>('.g-link');
+        // Ctrl/Cmd/Shift ile tıklama: büyük görseli yeni sekmede açma davranışı korunur
+        if (!link || e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        ac(gorunur.indexOf(link.closest('li')!), link, true);
+      });
+
+      kutu.querySelector('[data-gk-kapat]')!.addEventListener('click', () => kutu.close());
+      kutu.querySelector('[data-gk-onceki]')!.addEventListener('click', () => fotoGoster(aktif - 1));
+      kutu.querySelector('[data-gk-sonraki]')!.addEventListener('click', () => fotoGoster(aktif + 1));
+      serit.addEventListener('click', (e) => {
+        const d = (e.target as Element).closest<HTMLElement>('[data-i]');
+        if (d) fotoGoster(Number(d.dataset.i));
+      });
+
+      // Esc <dialog>'un kendi davranışıyla kapatır
+      kutu.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          fotoGoster(aktif + 1);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          fotoGoster(aktif - 1);
+        }
+      });
+
+      kutu.addEventListener('close', () => {
+        document.documentElement.classList.remove('kaydirma-kilitli');
+        sifirla();
+        if (!geriIleKapandi) {
+          if (gecmiseEklendi) history.back(); // ?foto'lu kaydı geri al
+          else adresYaz({ foto: null });
+        }
+        gecmiseEklendi = geriIleKapandi = false;
+        tetikleyen?.focus();
+      });
+
+      // Tarayıcının geri tuşu ışık kutusunu kapatır
+      window.addEventListener('popstate', () => {
+        if (kutu.open && !new URLSearchParams(location.search).get('foto')) {
+          geriIleKapandi = true;
+          kutu.close();
+        }
+      });
+
+      // --- İşaretçi hareketleri (dokunma, kalem, fare) ---
+      const isaretciler = new Map<number, { x: number; y: number }>();
+      let baslangic: { x: number; y: number; tx: number; ty: number; tur: string } | null = null;
+      let tutam: { mesafe: number; olcek: number } | null = null;
+      let sonDokunma = { t: 0, x: 0, y: 0 };
+      let surukledi = false;
+      let basilan: EventTarget | null = null; // pointer capture tıklamanın hedefini sahneye çevirir
+
+      const mesafe = () => {
+        const [a, b] = [...isaretciler.values()];
+        return Math.hypot(a.x - b.x, a.y - b.y);
+      };
+
+      sahne.addEventListener('pointerdown', (e) => {
+        if ((e.target as Element).closest('button')) return;
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        basilan = e.target;
+        sahne.setPointerCapture(e.pointerId);
+        isaretciler.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        surukledi = false;
+        kutu.classList.add('gk-hareket');
+        if (isaretciler.size === 2) {
+          tutam = { mesafe: mesafe(), olcek };
+          baslangic = null;
+        } else if (isaretciler.size === 1) {
+          baslangic = { x: e.clientX, y: e.clientY, tx, ty, tur: e.pointerType };
+        }
+      });
+
+      sahne.addEventListener('pointermove', (e) => {
+        if (!isaretciler.has(e.pointerId)) return;
+        isaretciler.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (tutam && isaretciler.size === 2) {
+          const [a, b] = [...isaretciler.values()];
+          yakinlastir((tutam.olcek * mesafe()) / tutam.mesafe, (a.x + b.x) / 2, (a.y + b.y) / 2);
+          surukledi = true;
+          return;
+        }
+        if (!baslangic) return;
+        const dx = e.clientX - baslangic.x;
+        const dy = e.clientY - baslangic.y;
+        if (Math.abs(dx) > 6 || Math.abs(dy) > 6) surukledi = true;
+        if (olcek > 1) {
+          tx = baslangic.tx + dx;
+          ty = baslangic.ty + dy;
+          sinirla();
+          donusumYaz();
+        } else if (baslangic.tur !== 'mouse' && Math.abs(dx) > Math.abs(dy)) {
+          // Kaydırma parmağı izler; bırakınca eşiği geçtiyse fotoğraf değişir
+          resim.style.transform = `translate3d(${dx}px, 0, 0)`;
+        }
+      });
+
+      const birak = (e: PointerEvent) => {
+        if (!isaretciler.has(e.pointerId)) return;
+        isaretciler.delete(e.pointerId);
+        if (isaretciler.size > 0) {
+          // İki parmaktan biri kalktı: kalan parmakla gezinmeye devam
+          tutam = null;
+          const [kalan] = [...isaretciler.values()];
+          baslangic = { x: kalan.x, y: kalan.y, tx, ty, tur: e.pointerType };
+          return;
+        }
+        kutu.classList.remove('gk-hareket');
+        const b = baslangic;
+        baslangic = null;
+        tutam = null;
+        if (olcek <= 1) {
+          sifirla();
+          if (b && b.tur !== 'mouse' && e.type === 'pointerup') {
+            const dx = e.clientX - b.x;
+            const dy = e.clientY - b.y;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+              fotoGoster(aktif + (dx < 0 ? 1 : -1));
+              return;
+            }
+          }
+        }
+        // Çift dokunma (dokunmatik): 300 ms içinde aynı yere ikinci dokunuş
+        if (b && b.tur !== 'mouse' && !surukledi && e.type === 'pointerup') {
+          const simdi = performance.now();
+          if (simdi - sonDokunma.t < 300 && Math.hypot(e.clientX - sonDokunma.x, e.clientY - sonDokunma.y) < 30) {
+            sonDokunma.t = 0;
+            ciftDokunma(e.clientX, e.clientY);
+          } else {
+            sonDokunma = { t: simdi, x: e.clientX, y: e.clientY };
+          }
+        }
+      };
+      sahne.addEventListener('pointerup', birak);
+      sahne.addEventListener('pointercancel', birak);
+
+      // Fare: çift tıklama yakınlaştırır; fotoğrafın dışındaki boş alana tıklama kapatır
+      sahne.addEventListener('dblclick', (e) => {
+        if ((e.target as Element).closest('button')) return;
+        ciftDokunma(e.clientX, e.clientY);
+      });
+      sahne.addEventListener('click', (e) => {
+        if (basilan === sahne && !surukledi && (e as PointerEvent).pointerType === 'mouse') kutu.close();
+      });
+
+      sahne.addEventListener(
+        'wheel',
+        (e) => {
+          e.preventDefault();
+          yakinlastir(olcek * Math.exp(-e.deltaY * 0.0015), e.clientX, e.clientY);
+        },
+        { passive: false }
+      );
+
+      // Açık fotoğraf adreste: ?foto=<dosya> ile gelinirse ışık kutusu o fotoğrafta açılır
+      const istenenFoto = parametre.get('foto');
+      if (istenenFoto) {
+        let i = gorunur.findIndex((o) => o.dataset.foto === istenenFoto);
+        if (i === -1 && ogeler.some((o) => o.dataset.foto === istenenFoto)) {
+          // Fotoğraf seçili kategoride değilse "Tümü"ne geçilir
+          filtrele('');
+          yenidenDiz();
+          adresYaz({ kategori: null });
+          i = gorunur.findIndex((o) => o.dataset.foto === istenenFoto);
+        }
+        if (i === -1) adresYaz({ foto: null });
+        else ac(i, null, false);
+      }
+    }
+  }
+</script>
+
+<style>
+  .galeri-ust {
+    padding-block: 16px 40px;
+    background: var(--color-zemin-ara);
+  }
+
+  .galeri-ust h1 {
+    margin-top: 8px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .galeri-ust p {
+    max-width: var(--olcu-metin);
+    margin: 16px 0 0;
+  }
+
+  .galeri-bolum {
+    padding-block: var(--bosluk-3) var(--bosluk-6);
+  }
+
+  /* --- Filtre: JS yoksa gizli (tüm fotoğraflar görünür). Mobilde yatay kaydırılan tek satır. --- */
+  .galeri-filtre {
+    display: none;
+    gap: var(--bosluk-1);
+    margin: 0 calc(var(--bosluk-2) * -1) var(--bosluk-3);
+    padding: 2px var(--bosluk-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .galeri-filtre::-webkit-scrollbar {
+    display: none;
+  }
+
+  :global(html.js-galeri) .galeri-filtre {
+    display: flex;
+  }
+
+  .filtre {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--bosluk-1);
+    min-height: 44px;
+    padding: 0 var(--bosluk-2);
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-tam);
+    background: none;
+    color: var(--color-metin);
+    font: inherit;
+    font-size: var(--text-kucuk);
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: scale var(--gecis);
+  }
+
+  /* Hover/odak: ahşap çerçeveli katman belirir (yalnızca opacity) */
+  .filtre::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--cizgi) * -1);
+    border: var(--cizgi) solid var(--color-ahsap);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--gecis);
+  }
+
+  .filtre:is(:hover, :focus-visible)::before {
+    opacity: 1;
+  }
+
+  .filtre:active {
+    scale: 0.96;
+  }
+
+  .filtre[aria-pressed='true'] {
+    border-color: var(--color-krem);
+    background: var(--color-yuzey-secili);
+    color: var(--color-krem);
+  }
+
+  .filtre-sayi {
+    color: var(--color-metin-soluk);
+    font-size: var(--text-etiket);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .filtre[aria-pressed='true'] .filtre-sayi {
+    color: var(--color-krem);
+  }
+
+  /* --- Izgara: 2 / 3 / 4 sütun, kırpma yok. JS'siz: CSS sütunları. JS ile: masonry (transform). --- */
+  .galeri-izgara {
+    --sutun: 2;
+    --ara: 8px;
+    column-count: var(--sutun);
+    column-gap: var(--ara);
+  }
+
+  .g-oge {
+    margin-bottom: var(--ara);
+    break-inside: avoid;
+  }
+
+  :global(html.js-galeri) .galeri-izgara {
+    position: relative;
+    column-count: auto;
+  }
+
+  /* JS dizene kadar ızgara boş ve yer ayrılmış durur: fotoğraflar yanlış yerde görünüp kaymaz */
+  :global(html.js-galeri) .galeri-izgara:not(.dizildi) {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  :global(html.js-galeri) .galeri-izgara:not(.dizildi) .g-oge {
+    display: none;
+  }
+
+  :global(html.js-galeri) .galeri-izgara.dizildi .g-oge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc((100% - (var(--sutun) - 1) * var(--ara)) / var(--sutun));
+    margin: 0;
+  }
+
+  .g-link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius-gorsel);
+    background: var(--color-zemin-ara);
+    color: var(--color-krem);
+    text-decoration: none;
+    transition: scale var(--gecis);
+  }
+
+  .g-link:active {
+    scale: 0.98;
+  }
+
+  .g-link img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Dokunmatik ekran: fotoğrafın altında düz koyu şerit */
+  .g-bilgi {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px 10px;
+    background: var(--color-zemin-ara);
+  }
+
+  .g-ad {
+    color: var(--color-krem);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .g-meta {
+    color: var(--color-ahsap-acik);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Fare/trackpad: bilgi fotoğrafın üstünde, hover ve odakta belirir. Düz gece karartması (%70):
+     fotoğrafın en açık yerinde bile krem metin ≥ 4.5:1 (marka-stili §2). */
+  @media (hover: hover) and (pointer: fine) {
+    .g-link img {
+      transition: transform var(--sure-kart) var(--ease-out);
+    }
+
+    .g-link:is(:hover, :focus-visible) img {
+      transform: scale(1.03);
+    }
+
+    .g-bilgi {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 12px 14px;
+      background: var(--color-karartma);
+      opacity: 0;
+      transition: opacity var(--gecis);
+    }
+
+    .g-link:is(:hover, :focus-visible) .g-bilgi {
+      opacity: 1;
+    }
+
+    .g-ad {
+      font-size: var(--text-kucuk);
+    }
+
+    .g-meta {
+      color: var(--color-krem);
+    }
+  }
+
+  .galeri-bekci {
+    height: 1px;
+  }
+
+  .galeri-durum {
+    margin: var(--bosluk-3) 0 0;
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+    text-align: center;
+  }
+
+  .galeri-durum:empty {
+    display: none;
+  }
+
+  /* --- Işık kutusu: tam ekran, düz gece zemin; açıkken sayfa kaymaz ve mobil alt menü gizlenir --- */
+  :global(html.kaydirma-kilitli) {
+    overflow: hidden;
+  }
+
+  .gk {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0 0 env(safe-area-inset-bottom, 0px);
+    border: 0;
+    background: var(--color-zemin);
+    color: var(--color-metin);
+  }
+
+  .gk[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+  }
+
+  .gk::backdrop {
+    background: var(--color-zemin);
+  }
+
+  .gk-ust {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 8px 16px;
+  }
+
+  .gk-sayac {
+    margin: 0;
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .gk-dugme {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-tam);
+    background: var(--color-zemin-ara);
+    color: var(--color-krem);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: scale var(--gecis);
+  }
+
+  .gk-dugme:hover {
+    border-color: var(--color-ahsap);
+  }
+
+  .gk-dugme:active {
+    scale: 0.96;
+  }
+
+  .gk-dugme .ikon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .gk-sahne {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0 8px;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .gk-gorsel {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: var(--radius-gorsel);
+    cursor: zoom-in;
+    transition: transform var(--sure) var(--ease-out);
+    -webkit-user-drag: none;
+  }
+
+  .gk-yakin .gk-gorsel {
+    cursor: grab;
+  }
+
+  .gk-hareket .gk-gorsel {
+    transition: none;
+  }
+
+  .gk-yakin.gk-hareket .gk-gorsel {
+    cursor: grabbing;
+  }
+
+  .gk-onceki,
+  .gk-sonraki {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+  }
+
+  .gk-onceki {
+    left: 8px;
+  }
+
+  .gk-sonraki {
+    right: 8px;
+  }
+
+  /* Yakınlaştırılmışken oklar fotoğrafı örtmez */
+  .gk-yakin :is(.gk-onceki, .gk-sonraki) {
+    display: none;
+  }
+
+  .gk-alt {
+    display: grid;
+    gap: 12px;
+    padding: 12px 16px 8px;
+  }
+
+  .gk-bilgi {
+    margin: 0;
+    color: var(--color-krem);
+    font-size: var(--text-kucuk);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .gk-eylemler {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .gk-eylem {
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: var(--text-kucuk);
+  }
+
+  .gk-eylem-oksuz::after {
+    content: none;
+  }
+
+  .gk-serit {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    padding: 4px 16px 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .gk-serit::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gk-serit li {
+    flex-shrink: 0;
+  }
+
+  .gk-serit :global(.gk-kucuk) {
+    display: block;
+    width: 72px;
+    height: 54px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: var(--radius-gorsel);
+    background: var(--color-zemin-ara);
+    opacity: 0.55;
+    cursor: pointer;
+    transition: opacity var(--gecis);
+  }
+
+  .gk-serit :global(.gk-kucuk img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gk-serit :global(.gk-kucuk:hover),
+  .gk-serit :global(.gk-kucuk[aria-current]) {
+    opacity: 1;
+  }
+
+  .gk-serit :global(.gk-kucuk[aria-current]) {
+    outline: 2px solid var(--color-krem);
+    outline-offset: -2px;
+  }
+
+  .gk-serit :global(.gk-kucuk:focus-visible) {
+    opacity: 1;
+    outline-offset: -2px;
+  }
+
+  /* ≥ 640px */
+  @media (min-width: 640px) {
+    .gk-alt {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      padding-inline: 24px;
+    }
+
+    .gk-bilgi {
+      text-align: left;
+    }
+
+    .gk-eylemler {
+      grid-template-columns: auto auto;
+    }
+
+    .gk-eylem {
+      padding-inline: 20px;
+    }
+
+    .gk-serit {
+      padding-inline: 24px;
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .galeri-ust {
+      padding-block: 24px 56px;
+    }
+
+    .galeri-bolum {
+      padding-block: var(--bosluk-5) var(--bosluk-7);
+    }
+
+    .galeri-filtre {
+      flex-wrap: wrap;
+      margin-inline: 0;
+      padding-inline: 0;
+      overflow: visible;
+    }
+
+    .galeri-izgara {
+      --sutun: 3;
+      --ara: 12px;
+    }
+
+    .gk-onceki {
+      left: 16px;
+    }
+
+    .gk-sonraki {
+      right: 16px;
+    }
+  }
+
+  /* ≥ 1024px */
+  @media (min-width: 1024px) {
+    .galeri-izgara {
+      --sutun: 4;
+      --ara: 16px;
+    }
+
+    .gk-sahne {
+      padding-inline: 88px;
+    }
+
+    .gk-onceki {
+      left: 24px;
+    }
+
+    .gk-sonraki {
+      right: 24px;
+    }
+  }
+</style>

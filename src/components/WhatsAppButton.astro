@@ -1,6 +1,6 @@
 ---
 // Yüzen WhatsApp butonu — ikon simple-icons paketinden (resmi WhatsApp logosu).
-// Mesaj bulunulan sayfaya göre hazır gelir (Layout'tan).
+// Mesaj bulunulan sayfaya göre hazır gelir (Layout'tan). < 768px'te gizli: WhatsApp mobil alt menüdedir.
 import { siWhatsapp } from 'simple-icons';
 import { whatsappLinki } from '../data/site';
 
@@ -21,7 +21,7 @@ const { mesaj } = Astro.props;
     right: 16px;
     bottom: 16px;
     z-index: var(--z-yuzen);
-    display: inline-flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 56px;
@@ -37,6 +37,13 @@ const { mesaj } = Astro.props;
 
   .whatsapp:hover {
     background: var(--color-whatsapp-koyu);
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .whatsapp {
+      display: inline-flex;
+    }
   }
 
   /* simple-icons logosu dolgulu; genel .ikon çizgi stilini geçersiz kıl */

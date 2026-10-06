@@ -2,6 +2,8 @@
 baslik: Geniş Verandalı Asma Katlı Bungalov
 kategori: bungalov
 kapak: genis-verandali-asma-katli-bungalov-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: genis-verandali-asma-katli-bungalov-01

@@ -2,6 +2,8 @@
 baslik: Verandalı Küçük A-Frame
 kategori: a-frame
 kapak: verandali-kucuk-a-frame-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: verandali-kucuk-a-frame-01

@@ -279,14 +279,14 @@ const sosyal = [
     font-style: normal;
   }
 
-  /* Alt şerit: telif ve yasal linkler. Mobilde alt boşluk yüzen WhatsApp butonu içindir. */
+  /* Alt şerit: telif ve yasal linkler. Mobil alt menünün boşluğu body'de (global.css). */
   .alt-serit {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 0 var(--bosluk-3);
-    padding-block: var(--bosluk-2) var(--bosluk-7);
+    padding-block: var(--bosluk-2);
     border-top: var(--cizgi) solid var(--color-cizgi);
     color: var(--color-metin-soluk);
     font-size: var(--text-kucuk);
@@ -328,13 +328,6 @@ const sosyal = [
     .alt-izgara {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--bosluk-4) var(--bosluk-5);
-    }
-  }
-
-  /* ≥ 768px */
-  @media (min-width: 768px) {
-    .alt-serit {
-      padding-bottom: var(--bosluk-2);
     }
   }
 

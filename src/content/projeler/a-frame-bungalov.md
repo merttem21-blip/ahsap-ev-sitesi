@@ -2,6 +2,8 @@
 baslik: A-Frame Bungalov
 kategori: a-frame
 kapak: a-frame-bungalov-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: a-frame-bungalov-01

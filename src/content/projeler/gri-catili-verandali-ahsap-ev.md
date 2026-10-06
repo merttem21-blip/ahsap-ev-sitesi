@@ -2,6 +2,8 @@
 baslik: Gri Çatılı Verandalı Ahşap Ev
 kategori: ahsap-ev
 kapak: gri-catili-verandali-ahsap-ev-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: gri-catili-verandali-ahsap-ev-01

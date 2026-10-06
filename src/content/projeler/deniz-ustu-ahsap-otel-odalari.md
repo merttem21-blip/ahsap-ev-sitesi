@@ -2,6 +2,8 @@
 baslik: Deniz Üstü Ahşap Otel Odaları
 kategori: otel-bar
 kapak: deniz-ustu-ahsap-otel-odalari-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: deniz-ustu-ahsap-otel-odalari-01

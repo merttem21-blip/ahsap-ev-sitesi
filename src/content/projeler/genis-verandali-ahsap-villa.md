@@ -2,6 +2,8 @@
 baslik: Geniş Verandalı Ahşap Villa
 kategori: villa
 kapak: genis-verandali-ahsap-villa-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: genis-verandali-ahsap-villa-01

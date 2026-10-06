@@ -2,6 +2,8 @@
 baslik: Deniz Manzaralı Teraslı Ahşap Ev
 kategori: ahsap-ev
 kapak: deniz-manzarali-terasli-ahsap-ev-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: deniz-manzarali-terasli-ahsap-ev-01

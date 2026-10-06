@@ -2,6 +2,8 @@
 baslik: Lombar Pencereli Modern Tiny House
 kategori: tiny-house
 kapak: lombar-pencereli-modern-tiny-house-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: lombar-pencereli-modern-tiny-house-01

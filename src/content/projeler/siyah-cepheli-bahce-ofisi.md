@@ -2,6 +2,8 @@
 baslik: Siyah Cepheli Bahçe Ofisi
 kategori: tiny-house
 kapak: siyah-cepheli-bahce-ofisi-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: siyah-cepheli-bahce-ofisi-01

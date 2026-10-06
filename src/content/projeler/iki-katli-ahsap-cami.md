@@ -2,6 +2,8 @@
 baslik: İki Katlı Ahşap Cami
 kategori: ozel-tasarim
 kapak: iki-katli-ahsap-cami-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: iki-katli-ahsap-cami-01

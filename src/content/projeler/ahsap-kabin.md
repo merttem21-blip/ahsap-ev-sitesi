@@ -2,6 +2,8 @@
 baslik: Ahşap Kabin
 kategori: ozel-tasarim
 kapak: ahsap-kabin-04
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: ahsap-kabin-04

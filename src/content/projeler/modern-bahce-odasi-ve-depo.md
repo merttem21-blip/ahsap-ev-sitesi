@@ -2,6 +2,8 @@
 baslik: Modern Bahçe Odası ve Depo
 kategori: ozel-tasarim
 kapak: modern-bahce-odasi-ve-depo-01
+# Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
+konum:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: modern-bahce-odasi-ve-depo-01

@@ -41,6 +41,7 @@ export const yasalSayfalar = [
 export const menu = [
   { ad: 'Ana Sayfa', href: '/' },
   { ad: 'Projeler', href: '/projeler' },
+  { ad: 'Galeri', href: '/galeri' },
   { ad: 'Hakkımızda', href: '/hakkimizda' },
   { ad: 'SSS', href: '/sss' },
   { ad: 'İletişim', href: '/iletisim' },
@@ -144,3 +145,11 @@ export const kategoriler = [
 ];
 
 export type Kategori = (typeof kategoriler)[number];
+
+/** Menü linki bulunulan sayfaya mı ait? Kategori ve proje sayfaları (/bungalov, /bungalov/proje)
+    "Projeler"e aittir. yol sonda eğik çizgisiz verilir ("/" hariç). Header ve mobil alt menü kullanır. */
+export function menuAktifMi(yol: string, href: string) {
+  if (href === '/') return yol === '/';
+  if (yol === href || yol.startsWith(`${href}/`)) return true;
+  return href === '/projeler' && kategoriler.some((k) => yol === `/${k.slug}` || yol.startsWith(`/${k.slug}/`));
+}
