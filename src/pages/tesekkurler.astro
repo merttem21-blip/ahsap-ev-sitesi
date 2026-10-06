@@ -1,0 +1,121 @@
+---
+// Form gönderildikten sonra açılan sayfa. Arama sonuçlarında yer almaz (noindex; sitemap'e de girmez).
+import { siWhatsapp } from 'simple-icons';
+import Layout from '../layouts/Layout.astro';
+import SonrakiAdimlar from '../components/SonrakiAdimlar.astro';
+import { whatsappLinki } from '../data/site';
+import { ikon } from '../data/ikonlar';
+
+const whatsappMesaj = 'Merhaba, 2K AHŞAP web sitenizden talep gönderdim. Eklemek istediğim bilgiler var.';
+---
+
+<Layout
+  title="Talebiniz Alındı, En Kısa Sürede Dönüyoruz | 2K AHŞAP"
+  description="Talebiniz 2K AHŞAP'a ulaştı. Bilgilerinizi inceleyip en kısa sürede sizinle iletişime geçeceğiz; dilerseniz WhatsApp'tan da yazabilirsiniz."
+  noindex
+  whatsappMesaj={whatsappMesaj}
+>
+  <section class="tesekkur" aria-labelledby="tesekkur-baslik">
+    <div class="kap tesekkur-ic">
+      <svg class="ikon tesekkur-ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.onay} />
+      <p class="etiket">Teşekkür ederiz</p>
+      <h1 id="tesekkur-baslik">Talebiniz alındı</h1>
+      <p class="tesekkur-metin">
+        Bilgileriniz bize ulaştı. Talebinizi inceleyip en kısa sürede sizinle iletişime geçeceğiz.
+      </p>
+
+      <div class="tesekkur-adimlar">
+        <h2>Bundan sonra ne olacak?</h2>
+        <SonrakiAdimlar />
+      </div>
+
+      <div class="tesekkur-dugmeler">
+        <a href={whatsappLinki(whatsappMesaj)} class="dugme" target="_blank" rel="noopener noreferrer">
+          <svg class="wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+          WhatsApp'tan yazın
+        </a>
+        <a href="/projeler" class="tesekkur-link">Projelerimizi inceleyin</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .tesekkur {
+    padding-block: var(--bosluk-6) var(--bolum-dar);
+  }
+
+  .tesekkur-ic {
+    max-width: 720px;
+  }
+
+  .tesekkur-ikon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--bosluk-3);
+    color: var(--color-ahsap);
+    stroke-width: 1.25;
+  }
+
+  .tesekkur h1 {
+    margin-top: var(--bosluk-1);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+  }
+
+  .tesekkur-metin {
+    max-width: var(--olcu-metin);
+    margin: var(--bosluk-2) 0 0;
+    font-size: var(--text-giris);
+  }
+
+  .tesekkur-adimlar {
+    display: grid;
+    gap: var(--bosluk-3);
+    margin-top: var(--bosluk-5);
+    padding-top: var(--bosluk-5);
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .tesekkur-adimlar h2 {
+    font-size: var(--text-h3);
+  }
+
+  .tesekkur-dugmeler {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--bosluk-2) var(--bosluk-4);
+    margin-top: var(--bosluk-5);
+  }
+
+  .tesekkur-dugmeler .dugme {
+    gap: 10px;
+  }
+
+  .wa-ikon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+
+  .tesekkur-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-metin);
+    text-underline-offset: 4px;
+  }
+
+  .tesekkur-link:hover {
+    color: var(--color-ahsap-acik);
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .tesekkur {
+      padding-top: var(--bosluk-7);
+    }
+  }
+</style>

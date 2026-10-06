@@ -1,0 +1,16 @@
+---
+// Zorunlu KVKK onay kutusu (guvenlik-kurallari §4). Onay zamanı işaretlendiği anda kaydedilir
+// ve talep bilgileriyle birlikte gönderilir (src/scripts/form.ts).
+---
+
+<div class="alan onay" data-alan="kvkk">
+  <label class="onay-kutu" for="alan-kvkk">
+    <input type="checkbox" id="alan-kvkk" name="kvkk" value="Evet" required aria-describedby="hata-kvkk" />
+    <span>
+      <a href="/kvkk" target="_blank" rel="noopener noreferrer"
+        >KVKK Aydınlatma Metni<span class="gizli"> (yeni sekmede açılır)</span></a
+      > kapsamında kişisel verilerimin, talebimin yanıtlanması amacıyla işlenmesini kabul ediyorum.
+    </span>
+  </label>
+  <p class="alan-hata" id="hata-kvkk" data-hata></p>
+</div>

@@ -7,9 +7,10 @@ import { ikon } from '../data/ikonlar';
 
 interface Props {
   whatsappMesaj?: string;
+  teklifAdresi?: string;
 }
 
-const { whatsappMesaj } = Astro.props;
+const { whatsappMesaj, teklifAdresi = '/teklif-al' } = Astro.props;
 const whatsapp = whatsappLinki(whatsappMesaj);
 const kurumsal = menu.filter((m) => m.href !== '/');
 const yil = new Date().getFullYear();
@@ -26,7 +27,7 @@ const sosyal = [
     <div class="kap alt-cta-ic">
       <p class="alt-cta-baslik">Projenizi birlikte konuşalım</p>
       <div class="alt-cta-dugmeler">
-        <a href="/iletisim" class="dugme dugme-dolu">Teklif Al</a>
+        <a href={teklifAdresi} class="dugme dugme-dolu">Teklif Al</a>
         <a href={whatsapp} class="dugme" target="_blank" rel="noopener noreferrer">
           <svg class="wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
           WhatsApp'tan Hemen Danışın

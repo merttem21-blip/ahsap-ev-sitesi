@@ -1,0 +1,14 @@
+---
+// Gönderim durumu: görünen kutu + ekran okuyucular için ayrı canlı bölge.
+// Metinleri src/scripts/form.ts yazar (textContent).
+import { siWhatsapp } from 'simple-icons';
+---
+
+<div class="gizli" role="status" data-durum-canli></div>
+<div class="form-durum" data-durum hidden>
+  <p data-durum-metin></p>
+  <a class="dugme form-durum-link" data-durum-link target="_blank" rel="noopener noreferrer" hidden>
+    <svg class="wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+    WhatsApp'ı açın
+  </a>
+</div>

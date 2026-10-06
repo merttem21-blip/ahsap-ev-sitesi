@@ -10,9 +10,11 @@ interface Props {
   /** Ana sayfa: hero fotoğrafının üzerinde şeffaf durur ve logo büyük gösterilir.
       Diğer sayfalarda antrasit zemin ve standart logo boyutu. */
   seffaf?: boolean;
+  /** "Teklif Al" linki; proje ve kategori sayfalarında yapı tipini ön seçer */
+  teklifAdresi?: string;
 }
 
-const { seffaf = false } = Astro.props;
+const { seffaf = false, teklifAdresi = '/teklif-al' } = Astro.props;
 
 const yol = Astro.url.pathname.replace(/\/$/, '') || '/';
 // Kategori ve proje sayfaları (/bungalov, /bungalov/proje) "Projeler" menüsüne aittir
@@ -59,7 +61,7 @@ const aktifMi = (href: string) =>
           ))
         }
       </ul>
-      <a href="/iletisim" class="dugme menu-cta">Teklif Al</a>
+      <a href={teklifAdresi} class="dugme menu-cta">Teklif Al</a>
     </nav>
   </div>
 </header>

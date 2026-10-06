@@ -1,0 +1,20 @@
+---
+// Formların ortak gizli alanları ve honeypot (guvenlik-kurallari §2).
+// JS kapalıyken form doğrudan Web3Forms'a gönderilir ve başarılıysa /tesekkurler'e döner;
+// JS açıkken src/scripts/form.ts aynı alanları okuyup fetch ile gönderir.
+import { siteAdresi, web3formsAnahtari } from '../../data/site';
+
+interface Props {
+  konu: string; // JS kapalıyken e-posta konusu (JS açıkken konu forma göre üretilir)
+}
+
+const { konu } = Astro.props;
+const site = Astro.site ?? new URL(siteAdresi);
+---
+
+<input type="hidden" name="access_key" value={web3formsAnahtari} />
+<input type="hidden" name="subject" value={konu} />
+<input type="hidden" name="from_name" value="2K AHŞAP Web Sitesi" />
+<input type="hidden" name="redirect" value={new URL('/tesekkurler', site).href} />
+<!-- Honeypot: insanlar görmez, botlar doldurur; işaretliyse hiçbir şey gönderilmez -->
+<input type="checkbox" name="botcheck" class="bal-kupu" tabindex="-1" autocomplete="off" aria-hidden="true" />

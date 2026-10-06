@@ -37,9 +37,11 @@ const kapak = await gorsel(fotoYolu(proje, kapakFotosu(proje).dosya));
 
 const site = Astro.site ?? new URL(siteAdresi);
 const sayfaAdresi = new URL(projeYolu(proje), site).href;
-// Sayfadaki teklif butonu, footer ve yüzen buton aynı hazır mesajı kullanır
+// Sayfadaki WhatsApp linki, footer ve yüzen buton aynı hazır mesajı kullanır
 const whatsappMesaj = `Merhaba, sitenizdeki "${proje.data.baslik}" projesi için teklif almak istiyorum: ${sayfaAdresi}`;
 const whatsappTeklif = whatsappLinki(whatsappMesaj);
+// Teklif formu yapı tipini ve proje adını bu parametreden doldurur
+const teklifAdresi = `/teklif-al?proje=${proje.slug}`;
 
 // Yalnızca fotoğraftan oluşan sayfa "zayıf içerik" sayılır (seo-kurallar §13);
 // açıklama veya teknik şartname eklenince sayfa otomatik olarak indekslenir.
@@ -52,6 +54,7 @@ const zayifIcerik = !aciklamaVar && sartname.length === 0;
   image={kapak.buyuk}
   noindex={zayifIcerik}
   whatsappMesaj={whatsappMesaj}
+  teklifAdresi={teklifAdresi}
 >
   <section class="proje-ust" aria-labelledby="proje-baslik">
     <div class="kap">
@@ -106,12 +109,13 @@ const zayifIcerik = !aciklamaVar && sartname.length === 0;
     <aside class="teklif" aria-labelledby="teklif-baslik" data-ortaya>
       <h2 id="teklif-baslik">Benzer bir yapı mı istiyorsunuz?</h2>
       <p>
-        Bu projeyi ihtiyaçlarınıza ve arazinize göre yeniden tasarlayabiliriz. Proje adıyla birlikte
-        WhatsApp'tan yazın, sizinle iletişime geçelim.
+        Bu projeyi ihtiyaçlarınıza ve arazinize göre yeniden tasarlayabiliriz. Teklif formunda proje adı
+        hazır gelir; birkaç soruyu yanıtlamanız yeterli.
       </p>
-      <a href={whatsappTeklif} class="dugme dugme-birincil teklif-dugme" rel="noopener noreferrer" target="_blank">
+      <a href={teklifAdresi} class="dugme teklif-dugme">Bu proje için teklif alın</a>
+      <a href={whatsappTeklif} class="teklif-wa" rel="noopener noreferrer" target="_blank">
         <svg class="ikon wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
-        Bu proje için teklif alın
+        WhatsApp'tan yazın
       </a>
       <p class="teklif-tel">
         veya arayın: <a href={firma.telefonLink}>{firma.telefonGorunen}</a>
@@ -215,8 +219,23 @@ const zayifIcerik = !aciklamaVar && sartname.length === 0;
   }
 
   .teklif-dugme {
-    gap: 10px;
     width: 100%;
+  }
+
+  .teklif-wa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    margin-top: 12px;
+    color: var(--color-metin);
+    font-weight: 500;
+    text-underline-offset: 4px;
+  }
+
+  .teklif-wa:hover {
+    color: var(--color-ahsap-acik);
   }
 
   .wa-ikon {
@@ -225,7 +244,7 @@ const zayifIcerik = !aciklamaVar && sartname.length === 0;
   }
 
   .teklif .teklif-tel {
-    margin: 16px 0 0;
+    margin: 4px 0 0;
     font-size: 0.875rem;
     text-align: center;
   }

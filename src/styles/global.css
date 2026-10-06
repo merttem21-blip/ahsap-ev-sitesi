@@ -32,6 +32,10 @@
   --color-cizgi-ince: rgba(235, 220, 198, 0.08); /* fotoğraflı kart çerçevesi */
   --color-ahsap-isik: rgba(166, 124, 82, 0.32); /* fotoğraflı kart hover'ında alttan gelen sıcak iç ışık */
   --color-ust-kucuk: rgba(46, 46, 46, 0.95); /* kaydırınca header zemini: arkası beyaz olsa bile menü metni ≥ 5.8:1 */
+  /* Formlar. Girdi kenarı bileşen sınırıdır (WCAG 1.4.11): gece ve kart yüzeyi üstünde ≥ 3.2:1 */
+  --color-cizgi-girdi: rgba(235, 220, 198, 0.45);
+  --color-yuzey-secili: rgba(235, 220, 198, 0.08); /* seçili seçenek kartı */
+  --color-hata: var(--color-ahsap-acik); /* palette kırmızı yok: hata metni ikon + metinle ayrılır, ≥ 4.6:1 */
 
   /* Yazı */
   --font-baslik: 'Poppins', system-ui, sans-serif;
@@ -72,6 +76,7 @@
   --radius-kart: 16px; /* kart ve kutu; karta yaslı görsel kartın köşesine kırpılır */
   --radius-gorsel: 12px; /* tek başına duran görsel (galeri, ışık kutusu) */
   --radius-tam: 999px; /* buton (pill), etiket ve yuvarlak öğeler */
+  --radius-girdi: 12px; /* form girdisi ve seçim kartı */
   --cizgi: 1px;
   --golge-yuzen: 0 6px 20px rgba(30, 30, 30, 0.6); /* yalnızca yüzen WhatsApp butonu */
 
@@ -165,6 +170,10 @@ ul {
   outline-offset: 2px;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .gizli {
   position: absolute;
   width: 1px;
@@ -237,6 +246,7 @@ ul {
   border-radius: var(--radius-tam);
   background: transparent;
   color: var(--color-krem);
+  font-family: inherit;
   font-size: var(--text-dugme);
   font-weight: 600;
   letter-spacing: 0.02em;

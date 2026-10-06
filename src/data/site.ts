@@ -3,6 +3,10 @@
 
 export const siteAdresi = 'https://2kahsap.com';
 
+// Web3Forms erişim anahtarı (web3forms.com). Teklif ve iletişim formları bu anahtarla doğrudan e-postaya gider.
+// Herkese açık bir anahtardır, gizli değildir. Boşken formlar bilgileri WhatsApp mesajı olarak açar.
+export const web3formsAnahtari = '';
+
 // Open Graph ve schema.org için varsayılan görsel (gerçek proje fotoğrafı)
 export const varsayilanGorsel = '/images/a-frame/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
 

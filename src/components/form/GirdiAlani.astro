@@ -1,0 +1,55 @@
+---
+// Etiketli metin girdisi veya metin alanı: etiket → yardım metni → girdi → hata (aria-describedby ile bağlı).
+// Hata metnini src/scripts/form.ts yazar. Sayfada tek form olduğu için id'ler alan adından üretilir.
+interface Props {
+  ad: string;
+  etiket: string;
+  tip?: 'text' | 'tel' | 'email' | 'textarea';
+  zorunlu?: boolean;
+  yardim?: string;
+  ornek?: string; // placeholder: yalnızca biçim örneği, etiketin yerine geçmez
+  autocomplete?: string;
+  inputmode?: 'text' | 'tel' | 'email' | 'numeric' | 'decimal';
+  maxlength: number;
+}
+
+const { ad, etiket, tip = 'text', zorunlu = false, yardim, ornek, autocomplete = 'off', inputmode, maxlength } =
+  Astro.props;
+const id = `alan-${ad}`;
+const aciklama = [yardim && `yardim-${ad}`, `hata-${ad}`].filter(Boolean).join(' ');
+---
+
+<div class="alan" data-alan={ad}>
+  <label class="alan-etiket" for={id}>
+    {etiket}{!zorunlu && <span class="alan-istege"> (isteğe bağlı)</span>}
+  </label>
+  {yardim && <p class="alan-yardim" id={`yardim-${ad}`}>{yardim}</p>}
+  {
+    tip === 'textarea' ? (
+      <textarea
+        class="girdi girdi-uzun"
+        id={id}
+        name={ad}
+        rows="5"
+        maxlength={maxlength}
+        placeholder={ornek}
+        required={zorunlu}
+        aria-describedby={aciklama}
+      />
+    ) : (
+      <input
+        class="girdi"
+        id={id}
+        name={ad}
+        type={tip}
+        maxlength={maxlength}
+        placeholder={ornek}
+        autocomplete={autocomplete}
+        inputmode={inputmode}
+        required={zorunlu}
+        aria-describedby={aciklama}
+      />
+    )
+  }
+  <p class="alan-hata" id={`hata-${ad}`} data-hata></p>
+</div>

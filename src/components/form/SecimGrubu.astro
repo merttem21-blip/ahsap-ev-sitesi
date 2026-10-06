@@ -1,0 +1,43 @@
+---
+// Tek seçimli radyo grubu: fieldset + legend. Seçenekler pill ya da açıklamalı kart (kart) olarak görünür.
+// Yerel radyo düğmesi görünür kalır (klavye ve ekran okuyucu desteği tarayıcıdan gelir).
+interface Secenek {
+  deger: string;
+  aciklama?: string;
+  slug?: string; // URL'den ön seçim için (?yapi=<slug>)
+}
+
+interface Props {
+  ad: string;
+  baslik: string;
+  secenekler: (string | Secenek)[];
+  zorunlu?: boolean;
+  yardim?: string;
+  kart?: boolean;
+}
+
+const { ad, baslik, secenekler, zorunlu = false, yardim, kart = false } = Astro.props;
+const liste = secenekler.map((s) => (typeof s === 'string' ? { deger: s } : s));
+const aciklama = [yardim && `yardim-${ad}`, `hata-${ad}`].filter(Boolean).join(' ');
+---
+
+<fieldset class="alan secim-grubu" data-alan={ad} aria-describedby={aciklama}>
+  <legend class="alan-etiket">
+    {baslik}{!zorunlu && <span class="alan-istege"> (isteğe bağlı)</span>}
+  </legend>
+  {yardim && <p class="alan-yardim" id={`yardim-${ad}`}>{yardim}</p>}
+  <div class:list={['secimler', { 'secimler-kart': kart }]}>
+    {
+      liste.map((s, i) => (
+        <label class:list={['secim', { 'secim-kart': kart }]}>
+          <input type="radio" name={ad} value={s.deger} data-slug={s.slug} required={zorunlu && i === 0} />
+          <span class="secim-ic">
+            <span class="secim-ad">{s.deger}</span>
+            {s.aciklama && <span class="secim-aciklama">{s.aciklama}</span>}
+          </span>
+        </label>
+      ))
+    }
+  </div>
+  <p class="alan-hata" id={`hata-${ad}`} data-hata></p>
+</fieldset>

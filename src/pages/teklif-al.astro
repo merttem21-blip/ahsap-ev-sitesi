@@ -1,0 +1,628 @@
+---
+// Çok adımlı teklif formu: 1 Yapı · 2 Arsa ve plan · 3 İletişim. Gönderim: src/scripts/form.ts
+// (Web3Forms; anahtar boşsa ya da gönderim başarısızsa WhatsApp). JS kapalıyken tüm adımlar alt alta görünür.
+// Proje sayfasından ?proje=<slug>, kategori sayfasından ?yapi=<kategori-slug> ile gelinirse yapı tipi ve
+// referans proje otomatik dolar. Canonical parametresizdir (SEO.astro).
+import { getCollection } from 'astro:content';
+import { siWhatsapp } from 'simple-icons';
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import SonrakiAdimlar from '../components/SonrakiAdimlar.astro';
+import GirdiAlani from '../components/form/GirdiAlani.astro';
+import SecimGrubu from '../components/form/SecimGrubu.astro';
+import FormOrtak from '../components/form/FormOrtak.astro';
+import KvkkOnay from '../components/form/KvkkOnay.astro';
+import FormDurum from '../components/form/FormDurum.astro';
+import { firma, kategoriler, whatsappLinki } from '../data/site';
+import { iller } from '../data/iller';
+import { ikon } from '../data/ikonlar';
+import { jsonLd } from '../lib/projeler';
+import '../styles/form.css';
+
+const whatsappMesaj = 'Merhaba, ahşap yapı projem için teklif almak istiyorum.';
+
+const ipuclari: Record<string, string> = {
+  'ahsap-ev': 'Kalıcı konut ve yazlık',
+  bungalov: 'Bahçe, tatil ve turizm',
+  villa: 'Geniş, ferah planlı yaşam',
+  'tiny-house': 'Az alanda konforlu yaşam',
+  'a-frame': 'Üçgen formlu ev ve bungalov',
+  cardak: 'Bahçe, otel ve tesisler',
+  'otel-bar': 'Otel, plaj ve işletmeler',
+  'cocuk-oyun-parki': 'Oyun evi ve oyun parkı',
+  'ozel-tasarim': 'Kabin, kulübe, vitrin ve diğerleri',
+};
+const yapiTipleri = kategoriler.map((k) => ({ deger: k.ad, aciklama: ipuclari[k.slug], slug: k.slug }));
+
+// ?proje=<slug> ile gelindiğinde başlık ve kategori buradan okunur (bilinmeyen slug yok sayılır)
+const projeler = await getCollection('projeler');
+const projeListesi = Object.fromEntries(
+  projeler.map((p) => [p.slug, { baslik: p.data.baslik, kategori: p.data.kategori }]),
+);
+
+const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
+---
+
+<Layout
+  title="Ahşap Ev Teklif Formu: Projenizi Anlatın | 2K AHŞAP"
+  description="Ahşap ev, bungalov, villa veya tiny house projeniz için üç adımlık teklif formunu doldurun; ihtiyacınızı inceleyip size özel teklifimizi hazırlayalım."
+  whatsappMesaj={whatsappMesaj}
+>
+  <section class="sayfa-ust" aria-labelledby="sayfa-baslik">
+    <div class="kap">
+      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Teklif Al' }]} />
+      <h1 id="sayfa-baslik">Ahşap Yapınız İçin Teklif Alın</h1>
+      <p class="sayfa-giris">
+        Birkaç soruyla ihtiyacınızı tanıyalım, projenize özel teklifimizi hazırlayıp size dönelim. Fiyat ve
+        süre projeye göre değişir, teklifte netleştirilir.
+      </p>
+    </div>
+  </section>
+
+  <div class="kap teklif-govde">
+    <div class="form-kart" data-teklif-kart>
+      <div class="ilerleme" data-ilerleme hidden>
+        <p class="ilerleme-durum">
+          <span class="etiket">Adım <span data-adim-no>1</span> / {adimlar.length}</span>
+          <span class="ilerleme-ad" data-adim-ad>{adimlar[0]}</span>
+        </p>
+        <ol class="ilerleme-adimlar" aria-label="Form adımları">
+          {
+            adimlar.map((a, i) => (
+              <li data-durum={i === 0 ? 'aktif' : undefined} aria-current={i === 0 ? 'step' : undefined}>
+                <span class="ilerleme-cizgi" aria-hidden="true" />
+                <span class="ilerleme-etiket">{a}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <form
+        class="form"
+        action="https://api.web3forms.com/submit"
+        method="post"
+        data-teklif
+        data-whatsapp={firma.whatsapp}
+      >
+        <FormOrtak konu="Yeni teklif talebi" />
+        <input type="hidden" name="proje" value="" />
+
+        <section class="adim" data-adim data-ad={adimlar[0]} aria-labelledby="adim-1-baslik">
+          <h2 id="adim-1-baslik" class="adim-baslik" tabindex="-1">
+            <span class="gizli">Adım 1 / 3: </span>Nasıl bir yapı düşünüyorsunuz?
+          </h2>
+
+          <div class="referans" data-referans hidden>
+            <p>
+              <span class="etiket">Referans proje</span>
+              <span class="referans-ad" data-referans-ad></span>
+            </p>
+            <button type="button" class="referans-kaldir" data-referans-kaldir aria-label="Referans projeyi kaldır">
+              Kaldır
+            </button>
+          </div>
+
+          <SecimGrubu ad="yapi_tipi" baslik="Yapı tipi" secenekler={yapiTipleri} kart zorunlu />
+          <GirdiAlani
+            ad="alan_m2"
+            etiket="Yaklaşık alan (m²)"
+            inputmode="decimal"
+            maxlength={8}
+            ornek="ör. 60"
+            yardim="Kesin bilmiyorsanız tahmini yazabilir ya da boş bırakabilirsiniz."
+          />
+          <SecimGrubu
+            ad="kullanim"
+            baslik="Kullanım amacı"
+            secenekler={['Konut', 'Tatil evi', 'Turizm / işletme', 'Diğer']}
+            zorunlu
+          />
+
+          <div class="form-dugmeler" data-js hidden>
+            <button type="button" class="dugme" data-ileri>Devam et</button>
+          </div>
+        </section>
+
+        <section class="adim" data-adim data-ad={adimlar[1]} aria-labelledby="adim-2-baslik">
+          <h2 id="adim-2-baslik" class="adim-baslik" tabindex="-1">
+            <span class="gizli">Adım 2 / 3: </span>Arsa ve plan
+          </h2>
+
+          <div class="alan-cifti">
+            <div class="alan" data-alan="konum_il">
+              <label class="alan-etiket" for="alan-konum_il">Yapının kurulacağı il</label>
+              <select
+                class="girdi"
+                id="alan-konum_il"
+                name="konum_il"
+                autocomplete="address-level1"
+                required
+                aria-describedby="hata-konum_il"
+              >
+                <option value="">İl seçin</option>
+                {iller.map((il) => <option value={il}>{il}</option>)}
+              </select>
+              <p class="alan-hata" id="hata-konum_il" data-hata></p>
+            </div>
+            <GirdiAlani
+              ad="konum_ilce"
+              etiket="İlçe"
+              autocomplete="address-level2"
+              maxlength={60}
+              ornek="ör. Sapanca"
+            />
+          </div>
+          <SecimGrubu
+            ad="arsa"
+            baslik="Arsa durumu"
+            secenekler={['Arsam var, imar durumu belli', 'Arsam var, imar durumunu bilmiyorum', 'Henüz arsam yok']}
+            yardim="İmar durumunu bilmiyorsanız sorun değil; süreci birlikte netleştiririz."
+            zorunlu
+          />
+          <SecimGrubu
+            ad="butce"
+            baslik="Bütçe aralığı"
+            secenekler={[
+              "500 bin TL'ye kadar",
+              '500 bin – 1 milyon TL',
+              '1 – 2,5 milyon TL',
+              '2,5 – 5 milyon TL',
+              '5 milyon TL ve üzeri',
+              'Belirtmek istemiyorum',
+            ]}
+            yardim="Bütçeniz size uygun seçenekleri önermemize yardımcı olur; kesin fiyat teklifte netleştirilir."
+            zorunlu
+          />
+          <SecimGrubu
+            ad="zaman"
+            baslik="Ne zaman başlamayı planlıyorsunuz?"
+            secenekler={['1–3 ay içinde', '3–6 ay içinde', '6–12 ay içinde', 'Henüz belli değil']}
+            zorunlu
+          />
+
+          <div class="form-dugmeler" data-js hidden>
+            <button type="button" class="form-geri" data-geri>
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.geri} />
+              Geri
+            </button>
+            <button type="button" class="dugme" data-ileri>Devam et</button>
+          </div>
+        </section>
+
+        <section class="adim" data-adim data-ad={adimlar[2]} aria-labelledby="adim-3-baslik">
+          <h2 id="adim-3-baslik" class="adim-baslik" tabindex="-1">
+            <span class="gizli">Adım 3 / 3: </span>İletişim bilgileriniz
+          </h2>
+
+          <GirdiAlani ad="ad" etiket="Ad soyad" autocomplete="name" maxlength={100} zorunlu />
+          <div class="alan-cifti">
+            <GirdiAlani
+              ad="telefon"
+              etiket="Telefon"
+              tip="tel"
+              autocomplete="tel"
+              maxlength={20}
+              ornek="05xx xxx xx xx"
+              zorunlu
+            />
+            <GirdiAlani
+              ad="eposta"
+              etiket="E-posta"
+              tip="email"
+              autocomplete="email"
+              maxlength={120}
+              ornek="adiniz@ornek.com"
+            />
+          </div>
+          <GirdiAlani
+            ad="not"
+            etiket="Eklemek istedikleriniz"
+            tip="textarea"
+            maxlength={2000}
+            yardim="Oda sayısı, beğendiğiniz bir proje veya özel istekleriniz. En fazla 2000 karakter."
+          />
+          <KvkkOnay />
+
+          <div class="form-dugmeler">
+            <button type="button" class="form-geri" data-geri data-js hidden>
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.geri} />
+              Geri
+            </button>
+            <button type="submit" class="dugme" data-gonder>Teklif talebini gönder</button>
+            <button type="button" class="form-wa" data-whatsapp-gonder data-js hidden>
+              <svg class="wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+              WhatsApp ile gönder
+            </button>
+          </div>
+          <FormDurum />
+        </section>
+      </form>
+    </div>
+
+    <aside class="teklif-yan" aria-labelledby="yan-baslik">
+      <h2 id="yan-baslik">Formu gönderdikten sonra</h2>
+      <SonrakiAdimlar />
+      <div class="yan-iletisim">
+        <p>Hemen konuşmak isterseniz</p>
+        <a href={firma.telefonLink}>
+          <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.telefon} />
+          {firma.telefonGorunen}
+        </a>
+        <a href={whatsappLinki(whatsappMesaj)} target="_blank" rel="noopener noreferrer">
+          <svg class="wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+          WhatsApp'tan yazın
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <script is:inline type="application/json" id="proje-listesi" set:html={jsonLd(projeListesi)} />
+</Layout>
+
+<script>
+  import { formuKur, kural } from '../scripts/form';
+
+  const form = document.querySelector<HTMLFormElement>('[data-teklif]');
+  const kart = document.querySelector<HTMLElement>('[data-teklif-kart]');
+  const ilerleme = document.querySelector<HTMLElement>('[data-ilerleme]');
+
+  if (form && kart && ilerleme) {
+    const adimlar = [...form.querySelectorAll<HTMLElement>('[data-adim]')];
+    const sonAdim = adimlar.length - 1;
+    let aktif = 0;
+
+    const adimAlanlari = (i: number) =>
+      [...adimlar[i].querySelectorAll<HTMLElement>('[data-alan]')].map((a) => a.dataset.alan ?? '');
+
+    const goster = (i: number, odakla = true) => {
+      aktif = i;
+      adimlar.forEach((a, j) => (a.hidden = j !== i));
+      ilerleme.querySelectorAll('li').forEach((li, j) => {
+        li.dataset.durum = j < i ? 'tamam' : j === i ? 'aktif' : '';
+        if (j === i) li.setAttribute('aria-current', 'step');
+        else li.removeAttribute('aria-current');
+      });
+      const no = ilerleme.querySelector('[data-adim-no]');
+      const ad = ilerleme.querySelector('[data-adim-ad]');
+      if (no) no.textContent = String(i + 1);
+      if (ad) ad.textContent = adimlar[i].dataset.ad ?? '';
+      if (!odakla) return;
+      // Yeni adım kartın başından başlar; odak adım başlığına taşınır
+      if (kart.getBoundingClientRect().top < 0) kart.scrollIntoView({ block: 'start' });
+      adimlar[i].querySelector<HTMLElement>('.adim-baslik')?.focus({ preventScroll: true });
+    };
+
+    const ileri = () => {
+      if (aktif < sonAdim && dogrula(adimAlanlari(aktif))) goster(aktif + 1);
+    };
+
+    const { dogrula } = formuKur(form, {
+      giris: 'Merhaba, 2K AHŞAP web sitesinden teklif talebi gönderiyorum.',
+      bolumler: [
+        {
+          baslik: 'Yapı',
+          alanlar: [
+            ['yapi_tipi', 'Yapı tipi'],
+            ['proje', 'Referans proje'],
+            ['alan_m2', 'Yaklaşık alan', (d) => `${d} m²`],
+            ['kullanim', 'Kullanım amacı'],
+          ],
+        },
+        {
+          baslik: 'Arsa ve plan',
+          alanlar: [
+            ['konum_il', 'İl'],
+            ['konum_ilce', 'İlçe'],
+            ['arsa', 'Arsa durumu'],
+            ['butce', 'Bütçe aralığı'],
+            ['zaman', 'Zaman planı'],
+          ],
+        },
+        {
+          baslik: 'İletişim',
+          alanlar: [
+            ['ad', 'Ad soyad'],
+            ['telefon', 'Telefon'],
+            ['eposta', 'E-posta'],
+          ],
+        },
+        { baslik: 'Ek not', alanlar: [['not', 'Not']] },
+      ],
+      konu: (d) => `Yeni teklif talebi - ${d('yapi_tipi')} - ${d('ad')}`,
+      kurallar: {
+        yapi_tipi: kural.zorunlu('Lütfen yapı tipini seçin.'),
+        alan_m2: (d) =>
+          !d || /^\d{1,5}([.,]\d{1,2})?$/.test(d) ? null : 'Yaklaşık alanı rakamla yazın (ör. 60) ya da boş bırakın.',
+        kullanim: kural.zorunlu('Lütfen kullanım amacını seçin.'),
+        konum_il: kural.zorunlu('Lütfen yapının kurulacağı ili seçin.'),
+        arsa: kural.zorunlu('Lütfen arsa durumunuzu seçin.'),
+        butce: kural.zorunlu('Lütfen bir bütçe aralığı ya da “Belirtmek istemiyorum” seçeneğini işaretleyin.'),
+        zaman: kural.zorunlu('Lütfen zaman planınızı seçin.'),
+        ad: kural.adSoyad,
+        telefon: kural.telefon,
+        eposta: kural.eposta,
+        kvkk: kural.kvkk,
+      },
+      // Son adıma kadar Enter tuşu "Devam et" gibi çalışır
+      gondermedenOnce: () => {
+        if (aktif === sonAdim) return true;
+        ileri();
+        return false;
+      },
+      alanaGit: (kap) => {
+        const i = adimlar.findIndex((a) => a.contains(kap));
+        if (i >= 0 && i !== aktif) goster(i, false);
+      },
+    });
+
+    form.querySelectorAll('[data-ileri]').forEach((d) => d.addEventListener('click', ileri));
+    form.querySelectorAll('[data-geri]').forEach((d) => d.addEventListener('click', () => goster(aktif - 1)));
+
+    // Proje veya kategori sayfasından gelindiyse ön seçim
+    const parametre = new URLSearchParams(location.search);
+    const liste = JSON.parse(document.getElementById('proje-listesi')?.textContent || '{}') as Record<
+      string,
+      { baslik: string; kategori: string }
+    >;
+    const projeSlug = parametre.get('proje') ?? '';
+    const proje = Object.prototype.hasOwnProperty.call(liste, projeSlug) ? liste[projeSlug] : undefined;
+    const yapiSlug = proje?.kategori ?? parametre.get('yapi');
+    const yapiRadyolari = [...form.querySelectorAll<HTMLInputElement>('input[name="yapi_tipi"]')];
+    yapiRadyolari.forEach((r) => (r.checked = r.dataset.slug === yapiSlug));
+
+    const projeAlani = form.elements.namedItem('proje') as HTMLInputElement | null;
+    const referans = form.querySelector<HTMLElement>('[data-referans]');
+    if (proje && projeAlani && referans) {
+      projeAlani.value = proje.baslik;
+      const ad = referans.querySelector('[data-referans-ad]');
+      if (ad) ad.textContent = proje.baslik;
+      referans.hidden = false;
+      referans.querySelector('[data-referans-kaldir]')?.addEventListener('click', () => {
+        projeAlani.value = '';
+        referans.hidden = true;
+        (yapiRadyolari.find((r) => r.checked) ?? yapiRadyolari[0])?.focus();
+      });
+    }
+
+    ilerleme.hidden = false;
+    goster(0, false);
+  }
+</script>
+
+<style>
+  .sayfa-ust {
+    padding-block: var(--bosluk-2) var(--bosluk-5);
+    background: var(--color-zemin-ara);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .sayfa-ust h1 {
+    margin-top: var(--bosluk-1);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .sayfa-giris {
+    max-width: var(--olcu-metin);
+    margin: var(--bosluk-2) 0 0;
+  }
+
+  .teklif-govde {
+    display: grid;
+    gap: var(--bosluk-5);
+    padding-block: var(--bosluk-5) var(--bolum-dar);
+  }
+
+  .form-kart {
+    min-width: 0;
+    padding: var(--bosluk-3) var(--bosluk-2);
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-kart);
+    background: var(--color-yuzey);
+  }
+
+  /* İlerleme çubuğu: her adım bir çizgi parçası; dolum yalnızca transform (scaleX) */
+  .ilerleme {
+    margin-bottom: var(--bosluk-4);
+  }
+
+  .ilerleme-durum {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+    margin: 0 0 12px;
+  }
+
+  .ilerleme-ad {
+    color: var(--color-krem);
+    font-weight: 500;
+  }
+
+  .ilerleme-adimlar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--bosluk-1);
+  }
+
+  .ilerleme-cizgi {
+    position: relative;
+    display: block;
+    height: 3px;
+    overflow: hidden;
+    border-radius: var(--radius-tam);
+    background: var(--color-cizgi);
+  }
+
+  .ilerleme-cizgi::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-ahsap);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--sure-kart) var(--ease-out);
+  }
+
+  .ilerleme-adimlar li[data-durum='aktif'] .ilerleme-cizgi::after,
+  .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-cizgi::after {
+    transform: scaleX(1);
+  }
+
+  .ilerleme-etiket {
+    display: none;
+  }
+
+  .adim {
+    display: grid;
+    gap: var(--bosluk-4);
+  }
+
+  .adim-baslik {
+    font-size: var(--text-h3);
+  }
+
+  /* Proje sayfasından gelindiğinde seçili proje */
+  .referans {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bosluk-1) var(--bosluk-2);
+    padding: 12px var(--bosluk-2);
+    border: var(--cizgi) solid var(--color-ahsap);
+    border-radius: var(--radius-girdi);
+  }
+
+  .referans p {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    min-width: 0;
+  }
+
+  .referans-ad {
+    color: var(--color-krem);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .referans-kaldir {
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: var(--color-metin);
+    font: inherit;
+    font-size: var(--text-kucuk);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+
+  .referans-kaldir:hover {
+    color: var(--color-ahsap-acik);
+  }
+
+  .teklif-yan {
+    align-self: start;
+    display: grid;
+    gap: var(--bosluk-3);
+  }
+
+  .teklif-yan h2 {
+    font-size: var(--text-h3);
+  }
+
+  .yan-iletisim {
+    display: grid;
+    gap: 4px;
+    padding-top: var(--bosluk-3);
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .yan-iletisim p {
+    margin: 0 0 4px;
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+  }
+
+  .yan-iletisim a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    color: var(--color-krem);
+    text-decoration: none;
+  }
+
+  .yan-iletisim a:hover {
+    color: var(--color-ahsap-acik);
+  }
+
+  .yan-iletisim .ikon {
+    color: var(--color-ahsap);
+  }
+
+  .yan-iletisim .wa-ikon {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-ahsap);
+  }
+
+  /* ≥ 640px: adım adları çizgilerin altında */
+  @media (min-width: 640px) {
+    .form-kart {
+      padding: var(--bosluk-4);
+    }
+
+    .ilerleme-ad {
+      display: none;
+    }
+
+    .ilerleme-etiket {
+      display: block;
+      margin-top: 12px;
+      color: var(--color-metin-soluk);
+      font-size: var(--text-kucuk);
+    }
+
+    .ilerleme-adimlar li[data-durum='aktif'] .ilerleme-etiket {
+      color: var(--color-krem);
+      font-weight: 500;
+    }
+
+    .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-etiket {
+      color: var(--color-ahsap-acik);
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .sayfa-ust {
+      padding-block: var(--bosluk-3) var(--bosluk-6);
+    }
+
+    .teklif-govde {
+      padding-top: var(--bosluk-6);
+    }
+  }
+
+  /* ≥ 1024px: form + yan kutu */
+  @media (min-width: 1024px) {
+    .teklif-govde {
+      grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+      gap: var(--bosluk-6);
+    }
+
+    .form-kart {
+      padding: var(--bosluk-5);
+    }
+
+    .teklif-yan {
+      position: sticky;
+      top: 120px;
+    }
+  }
+</style>

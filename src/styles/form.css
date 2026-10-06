@@ -1,0 +1,392 @@
+/* 2K AHŞAP — form bileşenleri (teklif ve iletişim formları). Kurallar: .claude/skills/marka-stili
+   Koyu zemin, ince çizgi, pill butonlar; hareket yalnızca opacity ve transform. Mobile-first. */
+
+.form {
+  --ikon-uyari: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v4'/%3E%3Cpath d='M12 16h.01'/%3E%3C/svg%3E");
+  --ikon-asagi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EBDCC6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
+  display: grid;
+  gap: var(--bosluk-4);
+}
+
+.form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form legend {
+  padding: 0;
+}
+
+/* Alan: etiket → yardım → girdi → hata */
+.alan {
+  display: grid;
+  gap: var(--bosluk-1);
+  min-width: 0;
+}
+
+.alan-etiket {
+  color: var(--color-baslik);
+  font-size: var(--text-dugme);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.alan-istege {
+  color: var(--color-metin-soluk);
+  font-weight: 400;
+}
+
+.alan-yardim {
+  margin: 0;
+  color: var(--color-metin-soluk);
+  font-size: var(--text-kucuk);
+  line-height: 1.5;
+}
+
+.alan-hata {
+  display: flex;
+  gap: var(--bosluk-1);
+  margin: 0;
+  color: var(--color-hata);
+  font-size: var(--text-kucuk);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.alan-hata:empty {
+  display: none;
+}
+
+.alan-hata::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  flex-shrink: 0;
+  background: currentColor;
+  -webkit-mask: var(--ikon-uyari) center / contain no-repeat;
+  mask: var(--ikon-uyari) center / contain no-repeat;
+}
+
+/* Metin girdisi, seçim listesi, metin alanı. 16px yazı: iOS odakta yakınlaştırmaz */
+.girdi {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px var(--bosluk-2);
+  border: var(--cizgi) solid var(--color-cizgi-girdi);
+  border-radius: var(--radius-girdi);
+  background: var(--color-zemin);
+  color: var(--color-krem);
+  font: inherit;
+  font-size: var(--text-govde);
+  line-height: 1.5;
+}
+
+.girdi::placeholder {
+  color: var(--color-metin-soluk);
+  opacity: 1;
+}
+
+.girdi:hover {
+  border-color: var(--color-ahsap);
+}
+
+.girdi:focus-visible {
+  border-color: var(--color-krem);
+}
+
+.girdi[aria-invalid='true'] {
+  border-color: var(--color-hata);
+}
+
+.girdi-uzun {
+  min-height: 144px;
+  resize: vertical;
+}
+
+select.girdi {
+  padding-right: 48px;
+  appearance: none;
+  background: var(--color-zemin) var(--ikon-asagi) right 16px center / 20px no-repeat;
+  cursor: pointer;
+}
+
+/* İki alan yan yana (≥ 640px), ör. il / ilçe */
+.alan-cifti {
+  display: grid;
+  gap: var(--bosluk-4);
+}
+
+/* Seçim (radyo) grupları: pill ya da açıklamalı kart. Radyo ve görünen kutu aynı ızgara hücresinde
+   üst üste durur; seçili durum kardeş seçiciyle verilir. */
+.secimler {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.secim {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.secim input {
+  z-index: 1;
+  grid-area: 1 / 1;
+  align-self: center;
+  width: 18px;
+  height: 18px;
+  margin: 0 0 0 18px;
+  accent-color: var(--color-krem);
+  cursor: pointer;
+}
+
+.secim-ic {
+  position: relative;
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 22px 10px 48px;
+  border: var(--cizgi) solid var(--color-cizgi-girdi);
+  border-radius: var(--radius-tam);
+  color: var(--color-metin);
+  line-height: 1.35;
+}
+
+/* Hover: ahşap çerçeveli katman belirir (yalnızca opacity) */
+.secim-ic::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--cizgi) * -1);
+  border: var(--cizgi) solid var(--color-ahsap);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--gecis);
+}
+
+.secim:hover .secim-ic::before {
+  opacity: 1;
+}
+
+.secim input:checked + .secim-ic {
+  border-color: var(--color-krem);
+  background: var(--color-yuzey-secili);
+  color: var(--color-krem);
+}
+
+.secim input:checked + .secim-ic::before {
+  opacity: 0;
+}
+
+/* Odak halkası radyonun değil, görünen kutunun çevresinde */
+.secim input:focus-visible {
+  outline: none;
+}
+
+.secim input:focus-visible + .secim-ic {
+  outline: 2px solid var(--color-krem);
+  outline-offset: 2px;
+}
+
+.secim input[aria-invalid='true'] + .secim-ic {
+  border-color: var(--color-hata);
+}
+
+/* Yapı tipi kartları: mobilde 2, ≥ 640px'te 3 sütun */
+.secimler-kart {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.secim-kart {
+  display: grid;
+}
+
+.secim-kart input {
+  align-self: start;
+  margin: 18px 0 0 16px;
+}
+
+.secim-kart .secim-ic {
+  justify-content: flex-start;
+  gap: 4px;
+  min-height: 100%;
+  padding: 16px 14px 16px 44px;
+  border-radius: var(--radius-girdi);
+}
+
+.secim-ad {
+  overflow-wrap: anywhere;
+}
+
+.secim-kart .secim-ad {
+  color: var(--color-baslik);
+  font-weight: 600;
+}
+
+.secim-aciklama {
+  color: var(--color-metin-soluk);
+  font-size: var(--text-kucuk);
+  line-height: 1.45;
+}
+
+/* KVKK onay kutusu */
+.onay-kutu {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: var(--text-kucuk);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.onay-kutu input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--color-krem);
+  cursor: pointer;
+}
+
+.onay-kutu a {
+  color: var(--color-krem);
+  text-underline-offset: 3px;
+}
+
+.onay-kutu a:hover {
+  color: var(--color-ahsap-acik);
+}
+
+/* Honeypot: insanlar görmez */
+.bal-kupu {
+  display: none;
+}
+
+/* Butonlar: mobilde birincil tam genişlik; Geri solda küçük metin butonu */
+.form-dugmeler {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: var(--bosluk-1);
+}
+
+.form-dugmeler .dugme {
+  width: 100%;
+}
+
+button.dugme {
+  cursor: pointer;
+}
+
+.dugme:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.form-geri,
+.form-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bosluk-1);
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--color-metin);
+  font: inherit;
+  font-size: var(--text-dugme);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.form-geri {
+  align-self: flex-start;
+}
+
+.form-geri .ikon {
+  transition: transform var(--gecis);
+}
+
+.form-geri:hover {
+  color: var(--color-krem);
+}
+
+.form-geri:hover .ikon {
+  transform: translateX(-4px);
+}
+
+.form-wa {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.form-wa:hover {
+  color: var(--color-ahsap-acik);
+}
+
+.wa-ikon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+/* Gönderim durumu */
+.form-durum {
+  display: grid;
+  gap: var(--bosluk-2);
+  padding: var(--bosluk-3);
+  border: var(--cizgi) solid var(--color-ahsap);
+  border-radius: var(--radius-girdi);
+}
+
+.form-durum p {
+  margin: 0;
+  color: var(--color-krem);
+}
+
+.form-durum-link {
+  justify-self: start;
+  gap: 10px;
+}
+
+/* ≥ 640px */
+@media (min-width: 640px) {
+  .alan-cifti {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .secimler-kart {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .form-dugmeler {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px var(--bosluk-3);
+  }
+
+  .form-dugmeler .dugme {
+    width: auto;
+  }
+
+  .form-geri {
+    align-self: center;
+    margin-right: auto;
+  }
+}

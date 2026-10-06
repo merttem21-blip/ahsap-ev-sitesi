@@ -1,21 +1,361 @@
 ---
+// İletişim: solda iletişim bilgileri ve harita, sağda kısa form. Gönderim: src/scripts/form.ts.
+// Harita yalnızca tıklanınca Google Haritalar'dan yüklenir (seo-kurallar §10; çerez ve hız).
+import { siWhatsapp } from 'simple-icons';
 import Layout from '../layouts/Layout.astro';
-import Yakinda from '../components/Yakinda.astro';
-import { whatsappLinki } from '../data/site';
-// Geçici sayfa: iletişim formu hazır olunca noindex kaldırılacak.
-// Form gelince KVKK onay kutusu /kvkk'ya bağlanır.
-const whatsappMesaj = 'Merhaba, ahşap yapı projem için teklif almak istiyorum.';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import GirdiAlani from '../components/form/GirdiAlani.astro';
+import FormOrtak from '../components/form/FormOrtak.astro';
+import KvkkOnay from '../components/form/KvkkOnay.astro';
+import FormDurum from '../components/form/FormDurum.astro';
+import { firma, whatsappLinki } from '../data/site';
+import { ikon } from '../data/ikonlar';
+import '../styles/form.css';
+
+const whatsappMesaj = 'Merhaba, 2K AHŞAP web sitenizden yazıyorum. Ahşap yapı projem hakkında bilgi almak istiyorum.';
+const haritaKaynagi = `https://www.google.com/maps?q=${encodeURIComponent(firma.adres)}&output=embed`;
+
+const kanallar = [
+  { etiket: 'Telefon', deger: firma.telefonGorunen, href: firma.telefonLink, ikon: ikon.telefon },
+  { etiket: 'WhatsApp', deger: "WhatsApp'tan yazın", href: whatsappLinki(whatsappMesaj), dis: true },
+  { etiket: 'E-posta', deger: firma.eposta, href: `mailto:${firma.eposta}`, ikon: ikon.eposta },
+  { etiket: 'Adres', deger: firma.adres, href: firma.harita, ikon: ikon.konum, dis: true },
+];
 ---
 
 <Layout
-  title="İletişim ve Teklif Al: Ahşap Ev Projeleri | 2K AHŞAP"
-  description="Ahşap ev, bungalov veya villa projeniz için 2K AHŞAP'a telefon, WhatsApp ya da e-posta ile ulaşın. Pendik/İstanbul'dayız; hemen teklif alın."
-  noindex
+  title="İletişim: Ahşap Ev Projeniz İçin Bize Ulaşın | 2K AHŞAP"
+  description="Ahşap ev, bungalov veya villa projeniz için 2K AHŞAP'a telefon, WhatsApp, e-posta ya da iletişim formuyla ulaşın. Pendik, İstanbul'dayız."
   whatsappMesaj={whatsappMesaj}
 >
-  <Yakinda
-    baslik="İletişim"
-    metin="İletişim formumuzu hazırlıyoruz. Şimdilik teklif ve sorularınız için bize telefon, WhatsApp veya e-posta ile ulaşabilirsiniz."
-    whatsapp={whatsappLinki(whatsappMesaj)}
-  />
+  <section class="sayfa-ust" aria-labelledby="sayfa-baslik">
+    <div class="kap">
+      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'İletişim' }]} />
+      <h1 id="sayfa-baslik">İletişim</h1>
+      <p class="sayfa-giris">
+        Ahşap yapı projeniz için sorularınızı yanıtlamaktan memnuniyet duyarız. Bize telefon, WhatsApp veya
+        e-postayla ulaşabilir ya da kısa bir mesaj bırakabilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <div class="kap iletisim-govde">
+    <section class="iletisim-bilgi" aria-labelledby="bilgi-baslik">
+      <h2 id="bilgi-baslik">Bize ulaşın</h2>
+      <ul class="kanallar">
+        {
+          kanallar.map((k) => (
+            <li>
+              <a
+                href={k.href}
+                class="kanal"
+                target={k.dis ? '_blank' : undefined}
+                rel={k.dis ? 'noopener noreferrer' : undefined}
+              >
+                <span class="kanal-ikon" aria-hidden="true">
+                  {k.ikon ? (
+                    <svg class="ikon" viewBox="0 0 24 24" set:html={k.ikon} />
+                  ) : (
+                    <svg class="wa-ikon" viewBox="0 0 24 24">
+                      <path d={siWhatsapp.path} />
+                    </svg>
+                  )}
+                </span>
+                <span class="kanal-metin">
+                  <span class="etiket">{k.etiket}</span>
+                  <span class="kanal-deger">{k.deger}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="harita" data-harita data-kaynak={haritaKaynagi} hidden>
+        <svg class="ikon harita-ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
+        <p>Harita, Google Haritalar'dan yüklenir.</p>
+        <button type="button" class="dugme" data-harita-goster>Haritayı göster</button>
+      </div>
+    </section>
+
+    <section class="form-kart" aria-labelledby="form-baslik">
+      <h2 id="form-baslik">Mesaj gönderin</h2>
+      <p class="form-giris">
+        Mesajınızı bırakın, size dönelim. Projeniz için ayrıntılı teklif isterseniz
+        <a href="/teklif-al">teklif formunu doldurun</a>.
+      </p>
+
+      <form class="form" action="https://api.web3forms.com/submit" method="post" data-iletisim data-whatsapp={firma.whatsapp}>
+        <FormOrtak konu="Yeni iletişim mesajı" />
+        <GirdiAlani ad="ad" etiket="Ad soyad" autocomplete="name" maxlength={100} zorunlu />
+        <div class="alan-cifti">
+          <GirdiAlani
+            ad="telefon"
+            etiket="Telefon"
+            tip="tel"
+            autocomplete="tel"
+            maxlength={20}
+            ornek="05xx xxx xx xx"
+            zorunlu
+          />
+          <GirdiAlani
+            ad="eposta"
+            etiket="E-posta"
+            tip="email"
+            autocomplete="email"
+            maxlength={120}
+            ornek="adiniz@ornek.com"
+          />
+        </div>
+        <GirdiAlani
+          ad="mesaj"
+          etiket="Mesajınız"
+          tip="textarea"
+          maxlength={2000}
+          yardim="En fazla 2000 karakter."
+          zorunlu
+        />
+        <KvkkOnay />
+
+        <div class="form-dugmeler">
+          <button type="submit" class="dugme" data-gonder>Mesajı gönder</button>
+          <button type="button" class="form-wa" data-whatsapp-gonder data-js hidden>
+            <svg class="wa-ikon" viewBox="0 0 24 24" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+            WhatsApp ile gönder
+          </button>
+        </div>
+        <FormDurum />
+      </form>
+    </section>
+  </div>
 </Layout>
+
+<script>
+  import { formuKur, kural } from '../scripts/form';
+
+  const form = document.querySelector<HTMLFormElement>('[data-iletisim]');
+  if (form) {
+    formuKur(form, {
+      giris: 'Merhaba, 2K AHŞAP web sitesindeki iletişim formundan yazıyorum.',
+      bolumler: [
+        {
+          baslik: 'İletişim',
+          alanlar: [
+            ['ad', 'Ad soyad'],
+            ['telefon', 'Telefon'],
+            ['eposta', 'E-posta'],
+          ],
+        },
+        { baslik: 'Mesaj', alanlar: [['mesaj', 'Mesaj']] },
+      ],
+      konu: (d) => `Yeni iletişim mesajı - ${d('ad')}`,
+      kurallar: {
+        ad: kural.adSoyad,
+        telefon: kural.telefon,
+        eposta: kural.eposta,
+        mesaj: kural.zorunlu('Lütfen mesajınızı yazın.'),
+        kvkk: kural.kvkk,
+      },
+    });
+  }
+
+  // Harita tıklanınca yüklenir; JS yoksa kutu hiç görünmez (adres satırı Google Haritalar'a gider)
+  const harita = document.querySelector<HTMLElement>('[data-harita]');
+  if (harita) {
+    harita.hidden = false;
+    harita.querySelector('[data-harita-goster]')?.addEventListener('click', () => {
+      const cerceve = document.createElement('iframe');
+      cerceve.src = harita.dataset.kaynak ?? '';
+      cerceve.title = '2K AHŞAP adresi, Google Haritalar';
+      cerceve.loading = 'lazy';
+      cerceve.referrerPolicy = 'no-referrer-when-downgrade';
+      harita.replaceChildren(cerceve);
+      harita.classList.add('harita-yuklu');
+      cerceve.focus();
+    });
+  }
+</script>
+
+<style>
+  .sayfa-ust {
+    padding-block: var(--bosluk-2) var(--bosluk-5);
+    background: var(--color-zemin-ara);
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .sayfa-ust h1 {
+    margin-top: var(--bosluk-1);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+  }
+
+  .sayfa-giris {
+    max-width: var(--olcu-metin);
+    margin: var(--bosluk-2) 0 0;
+  }
+
+  .iletisim-govde {
+    display: grid;
+    gap: var(--bosluk-6);
+    padding-block: var(--bosluk-5) var(--bolum-dar);
+  }
+
+  .iletisim-bilgi {
+    display: grid;
+    align-content: start;
+    gap: var(--bosluk-3);
+    min-width: 0;
+  }
+
+  h2 {
+    font-size: var(--text-h3);
+  }
+
+  .kanallar {
+    display: grid;
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .kanallar li {
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .kanal {
+    display: flex;
+    align-items: center;
+    gap: var(--bosluk-2);
+    min-height: 72px;
+    padding-block: 12px;
+    text-decoration: none;
+  }
+
+  .kanal-ikon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: 50%;
+    color: var(--color-ahsap);
+  }
+
+  .kanal-ikon .wa-ikon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  .kanal-metin {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .kanal-deger {
+    color: var(--color-krem);
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+  }
+
+  .kanal:hover .kanal-deger {
+    color: var(--color-ahsap-acik);
+    text-decoration-color: currentColor;
+  }
+
+  .harita {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 12px;
+    aspect-ratio: 4 / 3;
+    padding: var(--bosluk-3);
+    overflow: hidden;
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-gorsel);
+    background: var(--color-zemin-ara);
+    text-align: center;
+  }
+
+  .harita p {
+    margin: 0;
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+  }
+
+  .harita-ikon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-ahsap);
+  }
+
+  .harita-yuklu {
+    display: block;
+    padding: 0;
+  }
+
+  .harita :global(iframe) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .form-kart {
+    min-width: 0;
+    padding: var(--bosluk-3) var(--bosluk-2);
+    border: var(--cizgi) solid var(--color-cizgi);
+    border-radius: var(--radius-kart);
+    background: var(--color-yuzey);
+  }
+
+  .form-giris {
+    margin: 12px 0 var(--bosluk-4);
+  }
+
+  .form-giris a {
+    color: var(--color-krem);
+    text-underline-offset: 4px;
+  }
+
+  .form-giris a:hover {
+    color: var(--color-ahsap-acik);
+  }
+
+  /* ≥ 640px */
+  @media (min-width: 640px) {
+    .form-kart {
+      padding: var(--bosluk-4);
+    }
+
+    .harita {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  /* ≥ 768px */
+  @media (min-width: 768px) {
+    .sayfa-ust {
+      padding-block: var(--bosluk-3) var(--bosluk-6);
+    }
+
+    .iletisim-govde {
+      padding-top: var(--bosluk-6);
+    }
+  }
+
+  /* ≥ 1024px: solda bilgiler, sağda form */
+  @media (min-width: 1024px) {
+    .iletisim-govde {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--bosluk-6);
+    }
+
+    .form-kart {
+      padding: var(--bosluk-5);
+    }
+  }
+</style>

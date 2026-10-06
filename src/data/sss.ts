@@ -38,7 +38,7 @@ export const sorular: Soru[] = [
   {
     soru: 'Ahşap ev için nasıl teklif alabilirim?',
     cevap:
-      "İletişim formunu doldurabilir, bizi arayabilir ya da WhatsApp'tan yazabilirsiniz. Yapının türünü, yaklaşık ölçülerini ve arazinizin konumunu paylaşmanız yeterli; varsa örnek fotoğraf veya çizim de gönderebilirsiniz. İhtiyaçlarınızı birlikte netleştirdikten sonra size özel teklifimizi hazırlıyoruz.",
+      "Teklif formunu doldurabilir, bizi arayabilir ya da WhatsApp'tan yazabilirsiniz. Yapının türünü, yaklaşık ölçülerini ve arazinizin konumunu paylaşmanız yeterli; varsa örnek fotoğraf veya çizim de gönderebilirsiniz. İhtiyaçlarınızı birlikte netleştirdikten sonra size özel teklifimizi hazırlıyoruz.",
     grup: 'fiyat-ve-odeme',
     kategoriler: ['ozel-tasarim'],
   },

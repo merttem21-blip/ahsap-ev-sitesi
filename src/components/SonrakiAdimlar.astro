@@ -1,0 +1,71 @@
+---
+// Form gönderildikten sonraki adımlar (/teklif-al yan kutusu ve /tesekkurler).
+// Süre veya fiyat taahhüdü yazılmaz (CLAUDE.md metin kuralı).
+const adimlar = [
+  {
+    baslik: 'Talebinizi inceliyoruz',
+    metin: 'Paylaştığınız yapı, arsa ve kullanım bilgilerini ekibimiz değerlendirir.',
+  },
+  {
+    baslik: 'Sizinle iletişime geçiyoruz',
+    metin: 'İhtiyaçlarınızı netleştirmek ve sorularınızı yanıtlamak için sizi arıyoruz.',
+  },
+  {
+    baslik: 'Teklifinizi hazırlıyoruz',
+    metin: 'Tasarım, kapsam, süre ve fiyat projenize göre teklifte netleştirilir.',
+  },
+];
+---
+
+<ol class="sonraki">
+  {
+    adimlar.map((a, i) => (
+      <li>
+        <span class="sonraki-no" aria-hidden="true">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <div>
+          <h3>{a.baslik}</h3>
+          <p>{a.metin}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .sonraki {
+    display: grid;
+    gap: var(--bosluk-3);
+  }
+
+  .sonraki li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--bosluk-2);
+  }
+
+  .sonraki-no {
+    padding-top: 3px;
+    color: var(--color-ahsap-acik);
+    font-size: var(--text-etiket);
+    font-weight: 500;
+    letter-spacing: var(--aralik-etiket);
+  }
+
+  .sonraki li > div {
+    padding-left: var(--bosluk-2);
+    border-left: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .sonraki h3 {
+    font-size: 1.0625rem;
+    letter-spacing: 0;
+  }
+
+  .sonraki p {
+    margin: 4px 0 0;
+    color: var(--color-metin);
+    font-size: var(--text-kucuk);
+  }
+</style>
