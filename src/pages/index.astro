@@ -15,17 +15,16 @@ const baslik = 'Özel Tasarım Ahşap Ev, Bungalov ve Villa | 2K AHŞAP';
 const aciklama =
   "2015'ten beri 300+ projeyle özel tasarım ahşap ev, bungalov, villa ve tiny house üretiyoruz. Projelerimizi inceleyin, hemen teklif alın.";
 
-// Hero fotoğrafları scripts/hero-gorseli.mjs ile üretilir. Birden fazla eklenirse slayt olur.
-// odak: masaüstünde ev sağdaki fotoğraf alanında kalır; odakMobil: dikey ekranda verandaya ortalanır.
-const heroSlaytlari = [
-  {
-    yol: '/images/hero/kiremit-catili-ahsap-ev-hero',
-    alt: 'Spiral şimşirli bahçesi ve taş basamaklı yoluyla verandalı, kiremit çatılı ahşap ev',
-    odak: '30% 60%',
-    odakMobil: '58% 50%',
-  },
-];
-const ogGorsel = (await gorsel(heroSlaytlari[0].yol)).buyuk;
+// Hero fotoğrafı: kaynak public/images/ahsap-ev/hero-anasayfa.jpeg. Mobil sürüm A-frame'e kırpılmış dikey kesimdir.
+const heroGorseli = {
+  mobil: '/images/hero/hero-mobile.webp',
+  tablet: '/images/hero/hero-tablet.webp',
+  masaustu: '/images/hero/hero-desktop.webp',
+  width: 1376,
+  height: 768,
+  alt: 'Doğa içinde A-frame ve kütük ahşap ev',
+};
+const ogGorsel = heroGorseli.masaustu;
 
 // Ürün kartları: 4:5 vitrin fotoğrafları scripts/vitrin-gorseli.mjs ile aynı ışık ve renkte üretilir.
 // Kartın genişliği: ≥ 1280px'te 4 sütun (286px), 640–1279px'te 2 sütun; mobilde ekranın ~%78'i (yatay şerit).
@@ -69,7 +68,7 @@ const digerKategoriler = kategoriler.filter((k) => !urunler.some((u) => u.slug =
 ---
 
 <Layout title={baslik} description={aciklama} image={ogGorsel} seffafHeader>
-  <Hero slaytlar={heroSlaytlari}>
+  <Hero gorsel={heroGorseli}>
     <h1 id="hero-baslik">Doğayla Uyumlu, Size Özel Ahşap Evler</h1>
     <p>
       Bungalovdan villaya, tiny house'tan çardağa; modern mimariyi doğal ahşapla buluşturan
