@@ -32,6 +32,23 @@
   --color-cizgi-ince: rgba(235, 220, 198, 0.08); /* fotoğraflı kart çerçevesi */
   --color-ahsap-isik: rgba(166, 124, 82, 0.32); /* fotoğraflı kart hover'ında alttan gelen sıcak iç ışık */
   --color-ust-kucuk: rgba(46, 46, 46, 0.95); /* kaydırınca header zemini: arkası beyaz olsa bile menü metni ≥ 5.8:1 */
+  /* Fotoğrafın sayfa zeminine erimesi (hero'nun alt kenarı, marka-stili §8). Aşağıda tam zemin, yukarıda saydam;
+     yumuşak başlayıp yumuşak biter (smoothstep), erimenin başladığı yerde çizgi belli olmaz.
+     Uygulandığı katmanın boyuna yayılır: background: var(--zemine-eris) bottom / 100% <boy> no-repeat */
+  --zemine-eris: linear-gradient(
+    0deg,
+    var(--color-zemin) 0%,
+    rgba(30, 30, 30, 0.97) 10%,
+    rgba(30, 30, 30, 0.9) 20%,
+    rgba(30, 30, 30, 0.78) 30%,
+    rgba(30, 30, 30, 0.65) 40%,
+    rgba(30, 30, 30, 0.5) 50%,
+    rgba(30, 30, 30, 0.35) 60%,
+    rgba(30, 30, 30, 0.22) 70%,
+    rgba(30, 30, 30, 0.1) 80%,
+    rgba(30, 30, 30, 0.03) 90%,
+    rgba(30, 30, 30, 0) 100%
+  );
   /* Formlar. Girdi kenarı bileşen sınırıdır (WCAG 1.4.11): gece ve kart yüzeyi üstünde ≥ 3.2:1 */
   --color-cizgi-girdi: rgba(235, 220, 198, 0.45);
   --color-yuzey-secili: rgba(235, 220, 198, 0.08); /* seçili seçenek kartı */
