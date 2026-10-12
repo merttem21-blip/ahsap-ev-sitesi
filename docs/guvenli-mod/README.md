@@ -100,6 +100,7 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
 | 12 Ekim 2026 | dd31535 | Y ve İ yenilendi: yasal metinler tamamlandı, KVKK kutusu metni "KVKK Aydınlatma Metni'ni okudum." oldu (onaylı). T2 ve T3 eklendi. |
 | 12 Ekim 2026 | a216212 | 39 referansın tümü yenilendi: kategori ve proje düzenlemesi (onaylı). Ahşap Cami kategorisi eklendi, A-Frame "Üçgen Ev" oldu, projeler taşındı, birleştirildi, biri kaldırıldı. Değişen yerler: her sayfada footer kategori sütunu; A2 kategori butonları; P2 kartları; G2 filtresi ve ilk ekran; T2-1 yapı tipi kartları. Eski ve yeni derlemenin CSS/JS'i bayt bayt aynı, gövde HTML'i bu bölgeler dışında aynıydı. |
 | 12 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | M1 ve M2 eklendi (4 referans): mobil menü paneli hatası düzeltildikten sonra çekildi. Kaydırılmış sayfada panel header'a hapsolup kesiliyordu (`docs/hata-mobil-menu/`). Mevcut 39 referans değişmedi, düzeltmeden sonra da 39/39 aynı çıktı. Bu dört çekim düzeltme öncesi derlemede 4/4 fark verdi. |
+| 13 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | Yalnızca A (ana sayfa, 3 referans) yenilendi: bölüm geçişleri düzenlendi (onaylı; `docs/gecis-secenekleri/`). Tek boşluk ritmi, bölüm sınırlarında çizgi yok, ara bölümlerde `#262625`, Ürünlerimiz bandı kartların altından başlıyor. Yenilemeden önce fark yalnızca A'nın 3 çekimindeydi; diğer 40 çekim aynıydı (ikisi gürültü düzeyinde). Ayar kapalıyken hazırlanan önizleme derlemeleri de 43/43 geçmişti. |
 
 ### Bilinen sınırlar
 

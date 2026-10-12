@@ -19,6 +19,8 @@
   /* Koyu tema rolleri. Kontrast oranları en kötü zemine göre: antrasit üstündeki kart (≈ #363534) */
   --color-zemin: var(--color-gece); /* sayfa zemini */
   --color-zemin-ara: var(--color-antrasit); /* bölümler arası ton farkı */
+  --color-zemin-ara-yumusak: #262625; /* gece + krem %4 (gece üstündeki kart yüzeyiyle aynı ton): ana sayfanın ara
+                                         bölümleri; ton farkı sezilir düzeyde kalır */
   --color-yuzey: rgba(235, 220, 198, 0.04); /* kart: gece üstünde ≈ #262625, antrasit üstünde ≈ #363534 */
   --color-baslik: var(--color-krem); /* ≥ 9.1:1 */
   --color-metin: #c2b6a4; /* krem %80 + gece; ≥ 6.1:1 */

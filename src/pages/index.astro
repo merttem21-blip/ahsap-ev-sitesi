@@ -49,31 +49,30 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
 ---
 
 <Layout title={baslik} description={aciklama} image={ogGorsel} seffafHeader>
-  <Hero gorsel={heroGorseli}>
-    <h1 id="hero-baslik">Doğayla Uyumlu, Size Özel Ahşap Evler</h1>
-    <p>
-      Bungalovdan villaya, tiny house'tan çardağa; modern mimariyi doğal ahşapla buluşturan
-      yapıları sizin için tasarlıyor ve üretiyoruz.
-    </p>
-    <div class="hero-dugmeler">
-      <a href="/teklif-al" class="dugme">Teklif Al</a>
-      <a href="/projeler" class="dugme">Projeleri İncele</a>
-    </div>
-  </Hero>
+  <!-- .ana-akis: ana sayfanın bölüm ritmini (--bolum-ritim) taşır; Sürecimiz, Neden Ahşap ve SSS bunu kullanır -->
+  <div class="ana-akis">
+    <Hero gorsel={heroGorseli}>
+      <h1 id="hero-baslik">Doğayla Uyumlu, Size Özel Ahşap Evler</h1>
+      <p>
+        Bungalovdan villaya, tiny house'tan çardağa; modern mimariyi doğal ahşapla buluşturan
+        yapıları sizin için tasarlıyor ve üretiyoruz.
+      </p>
+      <div class="hero-dugmeler">
+        <a href="/teklif-al" class="dugme">Teklif Al</a>
+        <a href="/projeler" class="dugme">Projeleri İncele</a>
+      </div>
+    </Hero>
 
-  <section id="kategoriler" class="urunler" aria-labelledby="kategoriler-baslik">
-    <div class="kap">
-      <header class="urunler-baslik" data-ortaya>
-        <div>
-          <p class="etiket">Ürünlerimiz</p>
-          <h2 id="kategoriler-baslik">Size Özel Ahşap Yapılar</h2>
-        </div>
-        <p>Her yapıyı ihtiyaçlarınıza ve arazinize göre özel olarak tasarlayıp üretiyoruz.</p>
-      </header>
-    </div>
-
-    <div class="urunler-govde">
+    <section id="kategoriler" class="urunler" aria-labelledby="kategoriler-baslik">
       <div class="kap">
+        <header class="urunler-baslik" data-ortaya>
+          <div>
+            <p class="etiket">Ürünlerimiz</p>
+            <h2 id="kategoriler-baslik">Size Özel Ahşap Yapılar</h2>
+          </div>
+          <p>Her yapıyı ihtiyaçlarınıza ve arazinize göre özel olarak tasarlayıp üretiyoruz.</p>
+        </header>
+
         <ul class="urun-izgara" data-ortaya-grup>
           {
             kartlar.map((k) => (
@@ -107,44 +106,55 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
             ))
           }
         </ul>
+      </div>
 
-        <div class="urunler-alt" data-ortaya>
-          <nav aria-label="Diğer kategoriler">
-            <ul class="kategori-linkleri">
-              {
-                digerKategoriler.map((k) => (
-                  <li>
-                    <a href={`/${k.slug}`} class="kategori-link">
-                      {k.ad}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </nav>
-          <a href="/projeler" class="tum-projeler">
-            Tüm projeler
-            <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
-          </a>
+      <!-- Bant kartların alt kenarından başlar; kartlar tamamen gece zeminde durur -->
+      <div class="urunler-bant">
+        <div class="kap">
+          <div class="urunler-alt" data-ortaya>
+            <nav aria-label="Diğer kategoriler">
+              <ul class="kategori-linkleri">
+                {
+                  digerKategoriler.map((k) => (
+                    <li>
+                      <a href={`/${k.slug}`} class="kategori-link">
+                        {k.ad}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+            <a href="/projeler" class="tum-projeler">
+              Tüm projeler
+              <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.ok} />
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <Surecimiz />
-  <NedenAhsap />
-  <SssBolumu sorular={anaSayfaSorulari} />
+    <Surecimiz />
+    <NedenAhsap />
+    <SssBolumu sorular={anaSayfaSorulari} />
+  </div>
 </Layout>
 
 <style>
-  /* Ürünlerimiz: hero'dan geçiş.
-     Hero'nun altı gece zemine erir; bölüm başlığı ve kartların üst kısmı (--bindirme) bu zeminde kalır,
-     kartların gerisi antrasit banda oturur. Kartlar iki tonun sınırına biner (masaüstünde 80px). */
+  /* Bölüm ritmi: her bölümün üst ve alt iç boşluğu --bolum-ritim (mobil 64px, ≥ 768px 96px). Sürecimiz,
+     Neden Ahşap ve SSS bu değişkeni bulursa kullanır; başka sayfalarda kendi --bolum boşluklarında kalırlar.
+     Bölümleri yalnızca zemin tonu ayırır (gece ↔ ara yumuşak ton); sınırlarda çizgi ve gradyan yok. */
+  .ana-akis {
+    --bolum-ritim: var(--bosluk-6);
+  }
+
+  /* Ürünlerimiz: hero'dan geçiş. Hero'nun altı gece zemine erir, bölüm aynı zeminde sürer. Hero ikon şeridinin
+     altındaki 48px (Hero.astro, .hero-ic) ile birlikte şeritten bölüm etiketine 2 ritim. Kartlar tamamen
+     gece zeminde durur; ara tondaki bant kartların alt kenarından başlar ve bölümün sonuna kadar uzanır. */
   .urunler {
-    --bindirme: 48px;
-    padding-top: var(--bosluk-5);
+    --izgara-pay: 6px; /* mobil şeridin dikey iç boşluğu: odak halkası ve kenarlar kırpılmasın */
+    padding-top: calc(2 * var(--bolum-ritim) - var(--bosluk-5));
     background: var(--color-zemin);
-    border-bottom: var(--cizgi) solid var(--color-cizgi);
   }
 
   .urunler-baslik {
@@ -164,28 +174,13 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
     margin: var(--bosluk-2) 0 0;
   }
 
-  .urunler-govde {
-    position: relative;
-    isolation: isolate;
-    padding-bottom: var(--bolum);
-  }
-
-  .urunler-govde::before {
-    content: '';
-    position: absolute;
-    inset: var(--bindirme) 0 0;
-    z-index: -1;
-    border-top: var(--cizgi) solid var(--color-cizgi);
-    background: var(--color-zemin-ara);
-  }
-
   /* Mobil: yatay kaydırmalı şerit. Şerit ekran kenarına kadar uzar, kartlar .kap hizasında durur;
      sonraki kartın kenarı görünür kalır (kaydırılabildiği anlaşılır). */
   .urun-izgara {
     display: flex;
     gap: var(--bosluk-2);
     margin-inline: calc(var(--bosluk-2) * -1);
-    padding: 6px var(--bosluk-2); /* odak halkası ve kenarlar kırpılmasın */
+    padding: var(--izgara-pay) var(--bosluk-2);
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
@@ -363,13 +358,19 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
     transform: translateX(6px);
   }
 
-  /* Kartların altı: diğer kategoriler (pill) ve tüm projeler linki */
+  /* Kartların altı: diğer kategoriler (pill) ve tüm projeler linki. Bant ara yumuşak tondadır ve kartların alt
+     kenarından başlar: mobil şeridin alt iç boşluğu (--izgara-pay) kadar yukarı çekilir. */
+  .urunler-bant {
+    margin-top: calc(var(--izgara-pay) * -1);
+    padding: calc(var(--bosluk-5) + var(--izgara-pay)) 0 var(--bolum-ritim);
+    background: var(--color-zemin-ara-yumusak);
+  }
+
   .urunler-alt {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--bosluk-3) var(--bosluk-4);
-    margin-top: var(--bosluk-5);
   }
 
   .kategori-linkleri {
@@ -438,7 +439,7 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
   /* ≥ 640px: 2 × 2 ızgara (1024px'te 4 sütun kartı ~220px'e düşürür, metin fotoğrafı örter; iPad yatay da buradadır) */
   @media (min-width: 640px) {
     .urunler {
-      --bindirme: 64px;
+      --izgara-pay: 0px; /* ızgaranın iç boşluğu yok; bant tam kartların altında başlar */
     }
 
     .urun-izgara {
@@ -458,6 +459,10 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
 
   /* ≥ 768px */
   @media (min-width: 768px) {
+    .ana-akis {
+      --bolum-ritim: var(--bosluk-7);
+    }
+
     .urun {
       --ic: 24px;
       --ust: 80px;
@@ -466,10 +471,6 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
 
   /* ≥ 1024px: başlık solda, açıklama sağda */
   @media (min-width: 1024px) {
-    .urunler {
-      --bindirme: 80px;
-    }
-
     .urunler-baslik {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);

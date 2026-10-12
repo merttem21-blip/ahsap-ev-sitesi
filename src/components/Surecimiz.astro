@@ -66,8 +66,9 @@ const adimlar = [
 </section>
 
 <style>
+  /* Sayfanın bölüm ritmi (--bolum-ritim; ana sayfa) varsa onu, yoksa --bolum'u kullanır */
   .surec {
-    padding-block: var(--bolum);
+    padding-block: var(--bolum-ritim, var(--bolum));
     background: var(--color-zemin);
   }
 

@@ -65,10 +65,11 @@ const maddeler = [
 </section>
 
 <style>
+  /* Ana sayfanın bölüm ritmi (--bolum-ritim, index.astro) varsa onu kullanır. Ara yumuşak ton; çevresindeki gece
+     bölümlerden yalnızca ton farkıyla ayrılır, sınırda çizgi yok. */
   .neden {
-    padding-block: var(--bolum);
-    background: var(--color-zemin-ara);
-    border-block: var(--cizgi) solid var(--color-cizgi);
+    padding-block: var(--bolum-ritim, var(--bolum));
+    background: var(--color-zemin-ara-yumusak);
   }
 
   .neden-ust {

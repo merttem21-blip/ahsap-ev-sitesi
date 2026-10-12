@@ -41,6 +41,7 @@ Sayfa ve bileşenler marka renklerini değil, önce bu rol token'larını kullan
 |---|---|---|---|
 | Sayfa zemini | `--color-zemin` | gece `#1E1E1E` | `body` ve varsayılan bölüm zemini |
 | Ara bölüm zemini | `--color-zemin-ara` | antrasit `#2E2E2E` | Bölümleri ayırmak için dönüşümlü kullanılır |
+| Ara bölüm zemini, yumuşak | `--color-zemin-ara-yumusak` | `#262625` (gece + krem %4) | Ana sayfanın ara bölümleri; gece ile ton farkı sezilir düzeyde (§8) |
 | Kart yüzeyi | `--color-yuzey` | krem %4 saydam | Zeminden biraz açık: gece üstünde ≈ `#262625`, antrasit üstünde ≈ `#363534` |
 | Başlık | `--color-baslik` | krem `#EBDCC6` | h1–h3, kart başlıkları |
 | Gövde metni | `--color-metin` | `#C2B6A4` (krem %80 + gece) | Paragraflar, liste ve link metni |
@@ -49,7 +50,7 @@ Sayfa ve bileşenler marka renklerini değil, önce bu rol token'larını kullan
 | İnce çizgi | `--color-cizgi` | krem %14 saydam | Kart kenarı, ayraç, bölüm çizgisi (dekoratif) |
 | Fotoğraf karartması | `--color-karartma` | gece %70 saydam | Fotoğraf üstündeki metnin altı |
 
-- **Beyaz, krem veya açık zeminli bölüm yoktur.** Bölümler `#1E1E1E` ↔ `#2E2E2E` ton farkı ve ince çizgiyle ayrılır.
+- **Beyaz, krem veya açık zeminli bölüm yoktur.** Bölümler `#1E1E1E` ↔ `#2E2E2E` ton farkı ve ince çizgiyle ayrılır. Ana sayfada yalnızca ton farkıyla ayrılır, çizgi yoktur (§8).
 - Saydam türevler yalnızca bu paletten türetilir ve `src/styles/global.css` içinde token olarak tanımlanır. Sayfa ve bileşenlerde sabit hex/rgba yazılmaz; yeni bir ton gerekirse önce token eklenir.
 - **Dağılım:** ~%85 koyu zemin (gece + antrasit), ~%10 krem metin, ~%5 ahşap + yeşil vurgu. Yeşil çok az kullanılır; büyük yeşil alan veya yeşil buton yoktur.
 
@@ -237,7 +238,11 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - **Karartma:** soldan sağa açılan gece gradyanı — metnin durduğu sol tarafta en koyu (etkin opaklık ≥ %70), sağa doğru azalır ve fotoğrafın ışıklı kısmı görünür kalır. Mobilde metin genişliği kapladığı için karartma metin bölgesinde en az %70 kalır.
 - Tek `<h1>`: net değer önerisi. Altında 1–2 cümlelik açıklama ve güven unsuru ("2015'ten beri · 300+ proje").
 - Butonlar: pill çerçeveli "Teklif Al" ve "Projeleri İncele" (bkz. §9). Yeşil veya dolu buton yok.
-- Fotoğraf masaüstünde metin sütununun bittiği yerden başlar (en az %42) ve sola doğru zemine erir; başlık evin üstüne binmez. Hero'nun alt %25'i sayfa zeminine erir, sonraki bölüm aynı zemin renginden başlar. Ana sayfada sonraki bölümün (Ürünlerimiz) başlığı ve kartların üst kısmı bu gece zeminde kalır, kartların gerisi antrasit banda oturur; kartlar iki tonun sınırına biner (mobil 48px, tablet 64px, masaüstü 80px, `--bindirme`). Sınırda 1px `--color-cizgi` çizgisi vardır.
+- Fotoğraf masaüstünde metin sütununun bittiği yerden başlar (en az %42) ve sola doğru zemine erir; başlık evin üstüne binmez. Hero'nun alt %25'i sayfa zeminine erir, sonraki bölüm aynı zemin renginden başlar. Ana sayfada sonraki bölümün (Ürünlerimiz) başlığı ve kartları tamamen bu gece zeminde durur. Kartların alt kenarından başlayan ara yumuşak tonda (`--color-zemin-ara-yumusak`) bir bant, kategori linklerini taşır ve bölümün sonuna kadar uzanır. Bandın kenarı kartların ortasından geçmez. Sınırda çizgi ve gradyan yoktur.
+- **Ana sayfa bölüm geçişleri** (müşteri onaylı, 13 Ekim 2026; ayrıntı `docs/gecis-secenekleri/README.md`):
+  - Tek boşluk ritmi: her bölümün üst ve alt iç boşluğu `--bolum-ritim`, mobilde 64px, ≥ 768px'te 96px. Hero → Ürünlerimiz aynı zeminde sürdüğü için ikon şeridinden bölüm etiketine 2 ritim.
+  - Ara bölümler (Ürünlerimiz bandı, Neden Ahşap) antrasit yerine `--color-zemin-ara-yumusak` (`#262625`) kullanır.
+  - Bölümleri yalnızca ton farkı ayırır; bölüm sınırlarında 1px çizgi ve gradyan yoktur.
 - Altında, ince dikey çizgilerle ayrılmış **3 ikonlu bilgi şeridi**: "Doğal Malzeme" (yaprak), "Modern Tasarım" (ev), "Güvenilir Uygulama" (kalkan). Ahşap çizgi ikon + büyük harfli etiket; rakam kullanılmaz.
 - Hero fotoğrafları `scripts/hero-gorseli.mjs` ile üretilir (kadraj, sıcak renk düzeltmesi, netlik; kaynak dosyaya dokunulmaz).
 - Hero görseli LCP öğesidir: `loading="eager"`, `fetchpriority="high"`, WebP/AVIF, `srcset` ile boyutlandırılmış. Lazy-load yapılmaz.
