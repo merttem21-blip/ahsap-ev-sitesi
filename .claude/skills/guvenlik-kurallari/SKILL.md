@@ -53,8 +53,12 @@ Kurallar:
 3. **Paylaşmama:** Veriler üçüncü kişilerle paylaşılmaz (form servisi hariç, bu Aydınlatma Metni'nde belirtilir).
 4. **Silme hakkı:** Kullanıcı verilerinin silinmesini talep edebilir.
 
-Örnek onay metni:
-"Kişisel verilerimin, KVKK Aydınlatma Metni kapsamında talebimin yanıtlanması amacıyla işlenmesini kabul ediyorum."
+Onay kutusu metni (sitede kullanılan, onaylı):
+"KVKK Aydınlatma Metni'ni okudum." ("Aydınlatma Metni" /kvkk sayfasına yeni sekmede açılan link)
+
+Kutu açık rıza istemez; aydınlatma metninin okunduğunu belirtir. Talebin yanıtlanması için veri işleme
+açık rızaya değil KVKK md. 5/2-c'ye dayanır ve açık rıza bir hizmetin ön şartı yapılmaz. Kutu sayfa
+açıldığında, geri tuşunda ve yenilemede her zaman boş gelir.
 
 ## 5. HTTPS
 

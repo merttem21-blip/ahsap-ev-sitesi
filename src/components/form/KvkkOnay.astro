@@ -1,6 +1,6 @@
 ---
-// Zorunlu KVKK onay kutusu (guvenlik-kurallari §4). Onay zamanı işaretlendiği anda kaydedilir
-// ve talep bilgileriyle birlikte gönderilir (src/scripts/form.ts).
+// Zorunlu KVKK kutusu (guvenlik-kurallari §4): rıza değil, aydınlatma metninin okunduğunu belirtir.
+// İşaretlendiği zaman kaydedilir ve talep bilgileriyle birlikte gönderilir (src/scripts/form.ts).
 // Kutu her zaman boş gelir: autocomplete="off" tarayıcının geri tuşu ve yenilemede eski işareti geri
 // yüklemesini engeller; sayfa geri-ileri önbelleğinden dönerse form.ts kutuyu boşaltır.
 ---
@@ -17,9 +17,9 @@
       aria-describedby="hata-kvkk"
     />
     <span>
-      <a href="/kvkk" target="_blank" rel="noopener noreferrer"
-        >KVKK Aydınlatma Metni<span class="gizli"> (yeni sekmede açılır)</span></a
-      > kapsamında kişisel verilerimin, talebimin yanıtlanması amacıyla işlenmesini kabul ediyorum.
+      KVKK <a href="/kvkk" target="_blank" rel="noopener noreferrer"
+        >Aydınlatma Metni<span class="gizli"> (yeni sekmede açılır)</span></a
+      >'ni okudum.
     </span>
   </label>
   <p class="alan-hata" id="hata-kvkk" data-hata></p>

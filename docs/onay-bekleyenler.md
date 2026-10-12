@@ -13,7 +13,7 @@ Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yap
 | `[ONAY: MERSİS numarası]` | `firma.mersis` boş. Boşken satır etiketiyle birlikte hiç görünmüyor. | MERSİS numarası. Doldurulunca KVKK sayfasındaki "Veri Sorumlusu" tablosunda kendiliğinden çıkar. |
 | `[ONAY: KEP adresi, varsa]` | `firma.kep` boş. Boşken hem tablo satırı hem §8'deki "KEP adresimize" ifadesi görünmüyor. | KEP adresi. Doldurulunca iki yerde de kendiliğinden çıkar. |
 | `[ONAY: VERBİS kayıt durumu veya muafiyet bilgisi]` | Satır tamamen kaldırıldı. VERBİS kaydı veya muafiyeti hakkında hiçbir ifade yok. | Bir şey yazılacaksa önce hukukçu onayı. |
-| `[ONAY: ticari elektronik ileti gönderilecek mi?]` | §3'teki "Açık rızanız olması hâlinde bilgilendirme ve tanıtım iletileri göndermek" maddesi kaldırıldı. Yanıt belli olmadan bu amacı yazmak, yapılmayan bir işlemi bildirmek olurdu. | Tanıtım iletisi gönderilecek mi? Gönderilecekse: madde geri eklenir, formlara ayrı ve isteğe bağlı bir izin kutusu gerekir, İYS kaydı yapılır. |
+| `[ONAY: ticari elektronik ileti gönderilecek mi?]` | §3'teki "Açık rızanız olması hâlinde bilgilendirme ve tanıtım iletileri göndermek" maddesi kaldırıldı. **Kaldırılması onaylandı (12 Ekim 2026).** | Kampanya veya SMS gönderilmeye başlanırsa madde metne geri eklenecek ve formlara ayrı, isteğe bağlı bir izin kutusu konacak (zorunlu KVKK kutusundan bağımsız). İYS kaydı da gerekir. |
 | `[ONAY: iş ortağı türleri]` | Yalnızca yer tutucu silindi. "Nakliye, kurulum, muhasebe ve mali müşavirlik gibi hizmet aldığımız iş ortaklarına" cümlesi kaldı. | Gerçekte veri paylaşılan iş ortağı türlerinin listesi. |
 | `[ONAY: e-posta hizmet sağlayıcısı]` | Yalnızca yer tutucu silindi. Metin genel: "e-posta hizmet sağlayıcımıza". | info@2kahsap.com kutusunun sağlayıcısı (ör. Google Workspace, Yandex, barındırma firması) ve sunucularının yurt dışında olup olmadığı. |
 | `[ONAY: yurt dışı aktarım dayanağı, ör. standart sözleşme ve Kurul'a bildirim]` | Yalnızca yer tutucu silindi. "Yurt dışına aktarım KVKK'nın 9. maddesindeki şartlara uygun olarak yapılır" cümlesi kaldı. | Vercel, Web3Forms, e-posta sağlayıcısı ve WhatsApp/Meta için 9. madde dayanağı. Hukukçu teyidi gerekir. |
@@ -21,37 +21,37 @@ Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yap
 
 ## 2. Uygulandı, teyit edilmeli
 
-- **Vergi numarası 11 haneli (`41998593334`).** Şirketlerin vergi kimlik numarası 10 hanelidir. 11 hane, şahıs işletmesi olduğunu ve bu numaranın işletme sahibinin T.C. kimlik numarası olabileceğini gösterir. Numara artık KVKK sayfasında herkese açık. Yayına almadan (push) önce bunun bilerek yapıldığını teyit edin. Gerekirse `firma.vergiNo` boşaltılıp satır gizlenebilir.
+- **Vergi numarası.** Vergi no (11 hane, T.C. kimlik no olabilir) bilinçli olarak gizlendi; yayınlanması gerekip gerekmediği muhasebeciye sorulacak. Numara `src/data/site.ts` içinde `firma.vergiNo` alanında duruyor. Hiçbir sayfada, meta veride veya JSON-LD'de kullanılmıyor. KVKK sayfasında yalnızca vergi dairesi görünüyor.
 - **Ticari unvan.** Şahıs işletmesinde ticaret unvanı işletme sahibinin adı ve soyadını içerir (TTK md. 40). "Azra Ahşap Ev" bir işletme adı olabilir. Vergi levhasındaki unvanla birebir aynı olmalı.
 - **Marka yazımı.** Prompt'ta "2K Ahşap" yazıyordu. Sitenin her yerinde "2K AHŞAP" kullanıldığı için yasal metinlerde de bu yazım kullanıldı: "Azra Ahşap Ev (2K AHŞAP)". Değiştirmek için `firma.marka` yeterli. Bu durumda header, footer ve schema.org'daki ad da değişir.
 
-## 3. KVKK onay kutusu metni: öneri (uygulanmadı)
+## 3. KVKK onay kutusu metni (onaylandı ve uygulandı, 12 Ekim 2026)
 
 Teklif formu (`/teklif-al`, 3. adım) ve iletişim formu (`/iletisim`) aynı bileşeni kullanır: `src/components/form/KvkkOnay.astro`.
 
-**Mevcut metin:**
+**Eski metin:**
 
 > KVKK Aydınlatma Metni kapsamında kişisel verilerimin, talebimin yanıtlanması amacıyla işlenmesini kabul ediyorum.
 
-**Sorun:** Metin, kutunun işaretlenmesini bir rıza beyanı gibi kuruyor ("işlenmesini kabul ediyorum"). Kutu zorunlu olduğu için talep göndermek bu rızaya bağlanmış oluyor. Talebi yanıtlamak için veri işlemenin dayanağı açık rıza değil, KVKK md. 5/2-c'dir (sözleşmenin kurulması). KVKK sayfası da bunu böyle anlatıyor. Aydınlatma ile açık rıza ayrı tutulmalı ve açık rıza bir hizmetin ön şartı yapılmamalı. Bu yüzden kutu, rıza yerine aydınlatma metninin okunduğunu belirtmeli.
+**Neden değişti:** Eski metin, kutunun işaretlenmesini bir rıza beyanı gibi kuruyordu ("işlenmesini kabul ediyorum"). Kutu zorunlu olduğu için talep göndermek bu rızaya bağlanmış oluyordu. Talebi yanıtlamak için veri işlemenin dayanağı açık rıza değil, KVKK md. 5/2-c'dir (sözleşmenin kurulması). Aydınlatma ile açık rıza ayrı tutulur ve açık rıza bir hizmetin ön şartı yapılmaz.
 
-**Önerilen metin:**
+**Yeni metin:**
 
-> [KVKK Aydınlatma Metni](/kvkk)'ni okudum.
+> KVKK [Aydınlatma Metni](/kvkk)'ni okudum.
 
-Kutunun `name="kvkk"`, `value="Evet"`, zorunluluğu ve stili aynı kalır; yalnızca metin değişir.
+"Aydınlatma Metni" `/kvkk` sayfasına yeni sekmede açılan linktir. Kutunun `name="kvkk"`, `value="Evet"`, zorunluluğu ve stili aynı. Kutu her zaman boş gelir.
 
-**Metin onaylanırsa birlikte değişmesi gerekenler** (aynı ifadeyi tekrarlıyorlar):
+**Birlikte güncellenen metinler** (aynı ifadeyi tekrarlıyorlardı):
 
-| Yer | Şu an | Öneri |
+| Yer | Eski | Yeni |
 |---|---|---|
 | `src/scripts/form.ts`, hata mesajı | Formu gönderebilmek için KVKK Aydınlatma Metni'ni onaylamanız gerekiyor. | Formu gönderebilmek için KVKK Aydınlatma Metni'ni okuduğunuzu işaretleyin. |
 | `src/scripts/form.ts`, e-postadaki "KVKK onayı" alanı | Evet. KVKK Aydınlatma Metni kapsamında kişisel verilerinin talebinin yanıtlanması amacıyla işlenmesini kabul etti. | Evet. KVKK Aydınlatma Metni'ni okuduğunu işaretledi. |
 | `src/scripts/form.ts`, WhatsApp mesajının son satırı | KVKK Aydınlatma Metni'ni okudum ve onaylıyorum (tarih). | KVKK Aydınlatma Metni'ni okudum (tarih). |
 | `src/pages/kvkk.astro`, §4 "Web sitesi formları" | Formdaki onayınız ve onay zamanı da talebinizle birlikte iletilir. | Aydınlatma metnini okuduğunuzu işaretlediğiniz bilgisi ve zamanı da talebinizle birlikte iletilir. |
-| `.claude/skills/guvenlik-kurallari/SKILL.md` §4, örnek onay metni | Kişisel verilerimin, KVKK Aydınlatma Metni kapsamında … işlenmesini kabul ediyorum. | Önerilen metinle aynı. |
+| `.claude/skills/guvenlik-kurallari/SKILL.md` §4, örnek onay metni | Kişisel verilerimin, KVKK Aydınlatma Metni kapsamında … işlenmesini kabul ediyorum. | Yeni metin ve kısa gerekçesi. |
 
-E-postadaki alan adı ("KVKK onayı") ve gönderim akışı değişmez; yalnızca değerler değişir. Form envanteri etkilenmez.
+E-postadaki alan adı ("KVKK onayı") ve gönderim akışı değişmedi; yalnızca değerler değişti. Form envanteri etkilenmedi.
 
 ## 4. Çerez politikası (bilgi)
 

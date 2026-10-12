@@ -38,6 +38,8 @@ export const firma = {
     'https://www.google.com/maps/search/?api=1&query=' +
     encodeURIComponent('2K AHŞAP Kaynarca Akdeniz Cd. No:4/A Pendik İstanbul'),
   vergiDairesi: 'Sarıgazi Vergi Dairesi',
+  // Yalnızca kayıt için: hiçbir sayfada, meta veride veya JSON-LD'de yayınlanmaz (11 hane, T.C. kimlik no
+  // olabilir). Yayınlanıp yayınlanmayacağı muhasebeciye sorulacak: docs/onay-bekleyenler.md
   vergiNo: '41998593334',
   mersis: '',
   kep: '',

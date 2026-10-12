@@ -42,7 +42,7 @@ export const kural = {
   },
   eposta: (d: string) =>
     !d || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d) ? null : 'E-posta adresinizi kontrol edin, ör. adiniz@ornek.com.',
-  kvkk: (d: string) => (d ? null : "Formu gönderebilmek için KVKK Aydınlatma Metni'ni onaylamanız gerekiyor."),
+  kvkk: (d: string) => (d ? null : "Formu gönderebilmek için KVKK Aydınlatma Metni'ni okuduğunuzu işaretleyin."),
 };
 
 const tarih = (t: Date) =>
@@ -141,7 +141,7 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
       const dolu = doluAlanlar(b.alanlar);
       if (dolu.length) satirlar.push(`*${b.baslik}*`, ...dolu.map(([e, d]) => `${e}: ${d}`), '');
     }
-    satirlar.push(`KVKK Aydınlatma Metni'ni okudum ve onaylıyorum (${tarih(onayZamani ?? new Date())}).`);
+    satirlar.push(`KVKK Aydınlatma Metni'ni okudum (${tarih(onayZamani ?? new Date())}).`);
     return satirlar.join('\n');
   };
 
@@ -155,8 +155,7 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
     if (eposta) veri.replyto = eposta;
     for (const b of ayar.bolumler) for (const [e, d] of doluAlanlar(b.alanlar)) veri[e] = d;
     const t = onayZamani ?? new Date();
-    veri['KVKK onayı'] =
-      "Evet. KVKK Aydınlatma Metni kapsamında kişisel verilerinin talebinin yanıtlanması amacıyla işlenmesini kabul etti.";
+    veri['KVKK onayı'] = "Evet. KVKK Aydınlatma Metni'ni okuduğunu işaretledi.";
     veri['KVKK onay zamanı'] = `${tarih(t)} · ${t.toISOString()}`;
     veri['Gönderildiği sayfa'] = location.href;
     return veri;
