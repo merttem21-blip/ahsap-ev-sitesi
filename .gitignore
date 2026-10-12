@@ -17,3 +17,7 @@ Thumbs.db
 ham-gorseller/
 
 __pycache__/
+
+# Güvenli mod: görsel-kontrol son çekimleri ve fark görselleri (referanslar depoda tutulur)
+docs/guvenli-mod/son/
+docs/guvenli-mod/fark/

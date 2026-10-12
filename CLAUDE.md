@@ -91,3 +91,10 @@ Konum: `public/logo/`. Format: **SVG**. Ayrıntılı kullanım kuralları marka-
 - Tüm değişiklikler git commit'lerine koyulmalı
 - Commit mesajları Türkçe ve açıklayıcı olmalı
 - Her büyük adımda push'la (Vercel otomatik deploy eder)
+
+## Güvenli Mod (müşteri onaylı tasarım)
+- Mevcut sayfaların görünümü değişmez: renk, font, boyut, boşluk, düzen, metin, ikon, animasyon, hover ve aktif durumlar. Mevcut stil sınıflarını ve bileşenlerin görünen çıktısını değiştirme.
+- Promptun açıkça izin vermediği bir görünür değişiklik gerekiyorsa yapma; dur, nasıl görüneceğini anlat ve sor.
+- Formlar: form servisi entegrasyonu (Web3Forms veya hangisi kullanılıyorsa) korunur. access_key, action/endpoint, method, tüm input name değerleri, gizli alanlar (subject, from_name, redirect, botcheck vb.) ve gönderim akışı değişmez. Forma alan eklenmez, çıkarılmaz, yeniden adlandırılmaz.
+- Her görevin sonunda form-kontrol ve gorsel-kontrol çalıştırılır; izin verilmeyen bir fark varsa iş bitmiş sayılmaz.
+- Paket güncellemelerinde major sürüm atlanmaz.

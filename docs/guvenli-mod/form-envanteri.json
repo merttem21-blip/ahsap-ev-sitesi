@@ -1,0 +1,377 @@
+{
+  "$aciklama": "Müşteri onaylı formların envanteri (CLAUDE.md \"Güvenli Mod\"). npm run form-kontrol build çıktısını bu dosyayla karşılaştırır. Yalnızca onaylı bir form değişikliğinden sonra elle güncellenir.",
+  "olusturulma": "2026-10-12",
+  "onayliSurum": "git etiketi onayli-tasarim",
+  "servis": {
+    "ad": "Web3Forms",
+    "adres": "https://api.web3forms.com/submit",
+    "ozet": "Sunucu tarafı kod yok; formlar doğrudan Web3Forms'a gider. Web3Forms e-postayı anahtarın bağlı olduğu adrese iletir (alıcı adres Web3Forms panelinde tanımlıdır, bu depoda görünmez)."
+  },
+  "erisimAnahtari": {
+    "alan": "access_key",
+    "kaynakDosya": "src/data/site.ts",
+    "degisken": "web3formsAnahtari",
+    "kullanildigiYer": "src/components/form/FormOrtak.astro (gizli input, her iki formda)",
+    "referansGit": "onayli-tasarim",
+    "not": "Değer bu dosyaya yazılmaz. Anahtar herkese açık bir Web3Forms anahtarıdır (HTML'de görünür). Boş bırakılırsa formlar bilgileri WhatsApp mesajı olarak açar."
+  },
+  "gonderimAkisi": {
+    "jsAcik": [
+      "src/scripts/form.ts formun varsayılan gönderimini durdurur (preventDefault), alanları istemci tarafında doğrular.",
+      "botcheck işaretliyse hiçbir şey gönderilmez, /tesekkurler'e gidilir.",
+      "access_key boşsa bilgiler WhatsApp mesajı olarak açılır (wa.me/905322504077).",
+      "Son gönderimden 30 sn geçmediyse gönderilmez (localStorage: 2k-ahsap-son-gonderim).",
+      "fetch POST https://api.web3forms.com/submit, Content-Type: application/json, 15 sn zaman aşımı. Gövde: access_key, subject (forma göre üretilir), from_name, replyto (e-posta doluysa), Türkçe etiketli dolu alanlar, KVKK onayı ve zamanı, gönderildiği sayfa.",
+      "Başarılıysa location.href = \"/tesekkurler\"; başarısızsa aynı bilgiler WhatsApp mesajı olarak açılır.",
+      "Formdaki \"WhatsApp ile gönder\" düğmesi doğrulamadan sonra bilgileri doğrudan WhatsApp'a aktarır."
+    ],
+    "jsKapali": "Form HTML olarak POST edilir (action/method). Web3Forms başarılı gönderimden sonra redirect alanındaki https://2kahsap.com/tesekkurler adresine yönlendirir. Teklif formunun tüm adımları alt alta görünür.",
+    "gonderimSonrasi": "/tesekkurler (src/pages/tesekkurler.astro, noindex)"
+  },
+  "formlar": [
+    {
+      "ad": "İletişim formu",
+      "sayfa": "/iletisim",
+      "kaynakDosya": "src/pages/iletisim.astro",
+      "bilesenler": [
+        "src/components/form/FormOrtak.astro",
+        "src/components/form/GirdiAlani.astro",
+        "src/components/form/KvkkOnay.astro",
+        "src/components/form/FormDurum.astro",
+        "src/scripts/form.ts"
+      ],
+      "kimlik": "data-iletisim",
+      "action": "https://api.web3forms.com/submit",
+      "method": "post",
+      "gizliAlanlar": [
+        {
+          "ad": "access_key",
+          "tip": "hidden",
+          "deger": null,
+          "not": "Web3Forms erişim anahtarı. Değer bu dosyaya yazılmaz; form-kontrol boş olmadığını ve onaylı sürümdekiyle aynı olduğunu denetler."
+        },
+        {
+          "ad": "subject",
+          "tip": "hidden",
+          "deger": "Yeni iletişim mesajı",
+          "not": "JS kapalıyken e-posta konusu (JS açıkken konu src/scripts/form.ts içinde forma göre üretilir)."
+        },
+        {
+          "ad": "from_name",
+          "tip": "hidden",
+          "deger": "2K AHŞAP Web Sitesi",
+          "not": "E-postada görünen gönderen adı."
+        },
+        {
+          "ad": "redirect",
+          "tip": "hidden",
+          "deger": "https://2kahsap.com/tesekkurler",
+          "not": "JS kapalıyken Web3Forms başarılı gönderimden sonra buraya yönlendirir."
+        },
+        {
+          "ad": "botcheck",
+          "tip": "checkbox",
+          "deger": "",
+          "not": "Honeypot (bal küpü): CSS ile gizli onay kutusu (.bal-kupu). İşaretliyse JS gönderim yapmaz, Web3Forms da reddeder."
+        }
+      ],
+      "alanlar": [
+        {
+          "ad": "ad",
+          "tip": "text",
+          "zorunlu": true
+        },
+        {
+          "ad": "telefon",
+          "tip": "tel",
+          "zorunlu": true
+        },
+        {
+          "ad": "eposta",
+          "tip": "email",
+          "zorunlu": false
+        },
+        {
+          "ad": "mesaj",
+          "tip": "textarea",
+          "zorunlu": true
+        },
+        {
+          "ad": "kvkk",
+          "tip": "checkbox",
+          "zorunlu": true,
+          "deger": "Evet"
+        }
+      ],
+      "jsEpostaKonusu": "Yeni iletişim mesajı - <ad>",
+      "jsGonderim": {
+        "betik": "src/scripts/form.ts (sayfanın paketlenmiş modül betiği ve içe aktardıkları)",
+        "gerekenIfadeler": [
+          "https://api.web3forms.com/submit",
+          "access_key",
+          "subject",
+          "from_name",
+          "replyto",
+          "botcheck",
+          "/tesekkurler"
+        ]
+      }
+    },
+    {
+      "ad": "Teklif formu (3 adımlı)",
+      "sayfa": "/teklif-al",
+      "kaynakDosya": "src/pages/teklif-al.astro",
+      "bilesenler": [
+        "src/components/form/FormOrtak.astro",
+        "src/components/form/GirdiAlani.astro",
+        "src/components/form/KvkkOnay.astro",
+        "src/components/form/FormDurum.astro",
+        "src/scripts/form.ts",
+        "src/components/form/SecimGrubu.astro"
+      ],
+      "kimlik": "data-teklif",
+      "action": "https://api.web3forms.com/submit",
+      "method": "post",
+      "gizliAlanlar": [
+        {
+          "ad": "access_key",
+          "tip": "hidden",
+          "deger": null,
+          "not": "Web3Forms erişim anahtarı. Değer bu dosyaya yazılmaz; form-kontrol boş olmadığını ve onaylı sürümdekiyle aynı olduğunu denetler."
+        },
+        {
+          "ad": "subject",
+          "tip": "hidden",
+          "deger": "Yeni teklif talebi",
+          "not": "JS kapalıyken e-posta konusu (JS açıkken konu src/scripts/form.ts içinde forma göre üretilir)."
+        },
+        {
+          "ad": "from_name",
+          "tip": "hidden",
+          "deger": "2K AHŞAP Web Sitesi",
+          "not": "E-postada görünen gönderen adı."
+        },
+        {
+          "ad": "redirect",
+          "tip": "hidden",
+          "deger": "https://2kahsap.com/tesekkurler",
+          "not": "JS kapalıyken Web3Forms başarılı gönderimden sonra buraya yönlendirir."
+        },
+        {
+          "ad": "botcheck",
+          "tip": "checkbox",
+          "deger": "",
+          "not": "Honeypot (bal küpü): CSS ile gizli onay kutusu (.bal-kupu). İşaretliyse JS gönderim yapmaz, Web3Forms da reddeder."
+        },
+        {
+          "ad": "proje",
+          "tip": "hidden",
+          "deger": "",
+          "not": "Proje sayfasından ?proje=<slug> ile gelindiğinde JS ile proje başlığıyla doldurulur; e-postada \"Referans proje\" olarak gider."
+        }
+      ],
+      "alanlar": [
+        {
+          "ad": "yapi_tipi",
+          "tip": "radio",
+          "zorunlu": true,
+          "secenekler": [
+            "Ahşap Ev",
+            "Bungalov",
+            "Villa",
+            "Tiny House",
+            "A-Frame",
+            "Çardak",
+            "Otel-Bar",
+            "Çocuk Oyun Parkı",
+            "Özel Tasarım"
+          ]
+        },
+        {
+          "ad": "alan_m2",
+          "tip": "text",
+          "zorunlu": false
+        },
+        {
+          "ad": "kullanim",
+          "tip": "radio",
+          "zorunlu": true,
+          "secenekler": [
+            "Konut",
+            "Tatil evi",
+            "Turizm / işletme",
+            "Diğer"
+          ]
+        },
+        {
+          "ad": "konum_il",
+          "tip": "select",
+          "zorunlu": true,
+          "secenekler": [
+            "",
+            "Adana",
+            "Adıyaman",
+            "Afyonkarahisar",
+            "Ağrı",
+            "Aksaray",
+            "Amasya",
+            "Ankara",
+            "Antalya",
+            "Ardahan",
+            "Artvin",
+            "Aydın",
+            "Balıkesir",
+            "Bartın",
+            "Batman",
+            "Bayburt",
+            "Bilecik",
+            "Bingöl",
+            "Bitlis",
+            "Bolu",
+            "Burdur",
+            "Bursa",
+            "Çanakkale",
+            "Çankırı",
+            "Çorum",
+            "Denizli",
+            "Diyarbakır",
+            "Düzce",
+            "Edirne",
+            "Elazığ",
+            "Erzincan",
+            "Erzurum",
+            "Eskişehir",
+            "Gaziantep",
+            "Giresun",
+            "Gümüşhane",
+            "Hakkâri",
+            "Hatay",
+            "Iğdır",
+            "Isparta",
+            "İstanbul",
+            "İzmir",
+            "Kahramanmaraş",
+            "Karabük",
+            "Karaman",
+            "Kars",
+            "Kastamonu",
+            "Kayseri",
+            "Kırıkkale",
+            "Kırklareli",
+            "Kırşehir",
+            "Kilis",
+            "Kocaeli",
+            "Konya",
+            "Kütahya",
+            "Malatya",
+            "Manisa",
+            "Mardin",
+            "Mersin",
+            "Muğla",
+            "Muş",
+            "Nevşehir",
+            "Niğde",
+            "Ordu",
+            "Osmaniye",
+            "Rize",
+            "Sakarya",
+            "Samsun",
+            "Siirt",
+            "Sinop",
+            "Sivas",
+            "Şanlıurfa",
+            "Şırnak",
+            "Tekirdağ",
+            "Tokat",
+            "Trabzon",
+            "Tunceli",
+            "Uşak",
+            "Van",
+            "Yalova",
+            "Yozgat",
+            "Zonguldak",
+            "Yurt dışı"
+          ]
+        },
+        {
+          "ad": "konum_ilce",
+          "tip": "text",
+          "zorunlu": false
+        },
+        {
+          "ad": "arsa",
+          "tip": "radio",
+          "zorunlu": true,
+          "secenekler": [
+            "Arsam var, imar durumu belli",
+            "Arsam var, imar durumunu bilmiyorum",
+            "Henüz arsam yok"
+          ]
+        },
+        {
+          "ad": "butce",
+          "tip": "radio",
+          "zorunlu": true,
+          "secenekler": [
+            "500 bin TL'ye kadar",
+            "500 bin – 1 milyon TL",
+            "1 – 2,5 milyon TL",
+            "2,5 – 5 milyon TL",
+            "5 milyon TL ve üzeri",
+            "Belirtmek istemiyorum"
+          ]
+        },
+        {
+          "ad": "zaman",
+          "tip": "radio",
+          "zorunlu": true,
+          "secenekler": [
+            "1–3 ay içinde",
+            "3–6 ay içinde",
+            "6–12 ay içinde",
+            "Henüz belli değil"
+          ]
+        },
+        {
+          "ad": "ad",
+          "tip": "text",
+          "zorunlu": true
+        },
+        {
+          "ad": "telefon",
+          "tip": "tel",
+          "zorunlu": true
+        },
+        {
+          "ad": "eposta",
+          "tip": "email",
+          "zorunlu": false
+        },
+        {
+          "ad": "not",
+          "tip": "textarea",
+          "zorunlu": false
+        },
+        {
+          "ad": "kvkk",
+          "tip": "checkbox",
+          "zorunlu": true,
+          "deger": "Evet"
+        }
+      ],
+      "jsEpostaKonusu": "Yeni teklif talebi - <yapi_tipi> - <ad>",
+      "jsGonderim": {
+        "betik": "src/scripts/form.ts (sayfanın paketlenmiş modül betiği ve içe aktardıkları)",
+        "gerekenIfadeler": [
+          "https://api.web3forms.com/submit",
+          "access_key",
+          "subject",
+          "from_name",
+          "replyto",
+          "botcheck",
+          "/tesekkurler"
+        ]
+      }
+    }
+  ]
+}

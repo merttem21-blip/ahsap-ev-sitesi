@@ -9,7 +9,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "images": "node scripts/optimize-images.mjs",
-    "check:images": "node scripts/check-images.mjs"
+    "check:images": "node scripts/check-images.mjs",
+    "form-kontrol": "node scripts/guvenli-mod/form-kontrol.mjs",
+    "gorsel-kontrol": "node scripts/guvenli-mod/gorsel-kontrol.mjs"
   },
   "keywords": [
     "astro",
@@ -26,6 +28,10 @@
     "simple-icons": "^16.34.0"
   },
   "devDependencies": {
+    "node-html-parser": "9.0.4",
+    "pixelmatch": "7.2.0",
+    "playwright": "1.63.0",
+    "pngjs": "7.0.0",
     "sharp": "^0.33.5"
   }
 }
