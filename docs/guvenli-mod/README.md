@@ -48,7 +48,10 @@ Müşteri sitenin mevcut görünümünü onayladı. Bundan sonraki işler yalnı
 Çekim koşulları:
 
 - `prefers-reduced-motion: reduce` açık, CSS animasyonları kapalı.
-- Lazy olanlar dahil tüm görünür görseller ve fontlar yüklenmiş.
+- Lazy olanlar dahil tüm görünür görseller yüklenmiş.
+- Fontlar tamamen yüklenmiş. `document.fonts.ready`, yüklenmekte olan font kalmayana dek yeniden beklenir.
+- Stil, yüklenmiş fontlarla yeniden hesaplatılmış. Kök font boyutu bir anlığına değiştirilip geri alınır; yalnızca test tarayıcısındaki sayfada yapılır, sitenin stili değişmez (gerekçesi: Bilinen sınırlar).
+- Ardından sayfa boyutu 100 ms arayla art arda 5 ölçümde aynı kalmış. Fontlar ya da boyut 15 sn içinde oturmazsa uyarı yazılır, çekim yine yapılır.
 - Tam sayfa çekilir. Sabit öğeler (alt menü, WhatsApp düğmesi) ilk ekrandaki yerlerinde görünür.
 - Galeri sonsuz kaydırmalı olduğu için yalnızca ilk ekranı çekilir.
 - T2 ve T3: önceki adımlar örnek verilerle doldurulur (yapı tipi, 60 m², Konut; İstanbul/Pendik, arsa, "Belirtmek istemiyorum", "Henüz belli değil") ve "Devam et" ile geçilir. Çekilen adım boş kalır. Çekimden önce sayfa en üste kaydırılır.
@@ -106,5 +109,10 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
   ```
 
 - Fontlar Google Fonts'tan yüklenir, bu yüzden çekim sırasında internet bağlantısı gerekir.
-- Gürültüden ayrı olarak, aynı derlemede seyrek bir düzen oynaması görülebilir. Bir çekimin boyu birkaç on piksel uzayabilir (sayfa sonunda zemin renginde şerit) ya da bir paragraf farklı satıra kırılabilir. 12 Ekim 2026'da aynı derlemeyle yapılan 6 çalıştırmanın 3'ünde, her seferinde farklı bir sayfada görüldü (A 768, G 768, T2 768, İ 1280). Nedeni doğrulanmadı; font yükleme zamanlamasından şüpheleniliyor. Bu farklar gürültü sayılmaz ve hata verir. Derleme çıktısı değişmediyse kontrol yeniden çalıştırılır. Fark tekrarlanıyorsa gerçektir.
+- Gürültüden ayrı olarak, aynı derlemede seyrek bir düzen oynaması görülebilir. Bir çekimin boyu birkaç on piksel uzayabilir (sayfa sonunda zemin renginde şerit) ya da bir paragraf farklı satıra kırılabilir. 12 Ekim 2026'da aynı derlemeyle yapılan 6 çalıştırmanın 3'ünde, her seferinde farklı bir sayfada görüldü (A 768, G 768, T2 768, İ 1280).
+  - **Neden:** Metin sütunları `--olcu-metin: 65ch` ile sınırlıdır. Stil, Inter yüklenmeden hesaplanırsa `ch` yedek fontun ölçüsüyle belirlenir. Chromium bu değeri font yüklendikten sonra her zaman güncellemez. Sütun daralır, satırlar farklı kırılır, sayfa boyu değişir ve sayfa bu düzende sabit kalır.
+  - **Ölçüm:** Galeri 768 px'te 24 açılışın 23'ünde sütun 650 px, birinde 520 px çıktı; o açılışta da fontlar yüklenmişti. Fontlar yapay olarak 1,5 sn geciktirilince hakkımızda 1280 px'te 3 açılışın 2'sinde sütun 585 px, sayfa boyu 1856 px oldu. Stil yeniden hesaplatılınca 715 px ve 1825 px'e, yani referans değerlerine döndü.
+  - **Önlem:** Yalnızca beklemek yetmiyor; sayfa yanlış düzende de sabitleniyor. Bu yüzden çekimden önce stil yüklenmiş fontlarla yeniden hesaplatılır (Çekim koşulları). Fontlar 1,5 sn geciktirildiğinde önlemsiz kod 1 çekimde fark verdi, önlemli kod iki turda da 39/39 temiz geçti.
+  - Aynı bayatlık gerçek ziyaretçilerde de olabilir: font geç yüklenirse metin sütunu dar kalabilir. Bu sitenin kendisiyle ilgili ayrı bir konudur; fontların sitenin kendi dosyalarına alınmasıyla birlikte ele alınacak.
+  - Böyle bir fark yine çıkarsa gürültü sayılmaz ve hata verir. Derleme çıktısı değişmediyse kontrol yeniden çalıştırılır. Fark tekrarlanıyorsa gerçektir.
 - Footer'daki yıl derleme anında yazılır (`© 2026`). Yıl değişince tüm sayfalarda küçük bir fark çıkar. Bu beklenen bir farktır ve referanslar o zaman yenilenir.

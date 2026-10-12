@@ -11,7 +11,8 @@
 //                                                       yeniler; diğerleri her zamanki gibi karşılaştırılır
 //
 // Her sayfa tipinden bir örnek 375, 768 ve 1280 px genişlikte çekilir: hareket azaltılmış
-// (prefers-reduced-motion), CSS animasyonları kapalı, tüm görseller (lazy olanlar dahil) ve fontlar yüklenmiş.
+// (prefers-reduced-motion), CSS animasyonları kapalı, tüm görseller (lazy olanlar dahil) ve fontlar yüklenmiş,
+// stil yüklenmiş fontlarla yeniden hesaplatılmış, sayfa boyutu art arda birkaç ölçümde sabit.
 // Galeri sonsuz kaydırmalı olduğu için yalnızca ilk ekran çekilir. Teklif formunun 2. ve 3. adımı, önceki
 // adımlar örnek verilerle doldurulup "Devam et" ile geçilerek çekilir; form hiçbir zaman gönderilmez
 // (Web3Forms'a giden her istek engellenir ve hata sayılır).
@@ -117,13 +118,22 @@ const FARK = path.join(GUVENLI_MOD, 'fark');
 const ESIK = Number(secenekDegeri('--esik') ?? 0);
 const GORSEL_ZAMAN_ASIMI = 30_000;
 
+// Düzenin oturması: fontlar tamamen yüklenir, stil yüklenmiş fontlarla yeniden hesaplatılır, ardından sayfa boyutu
+// OLCUM_SAYISI ölçüm boyunca (OLCUM_ARALIGI ms arayla) aynı kalmalı. Font geç yüklenince ch birimi bayat kalıp
+// satırlar farklı kırılabiliyor, sayfa boyu değişebiliyordu (docs/guvenli-mod/README.md, Bilinen sınırlar).
+const OLCUM_SAYISI = 5;
+const OLCUM_ARALIGI = 100;
+const DUZEN_ZAMAN_ASIMI = 15_000;
+
 // Gürültü toleransı (dosya başındaki açıklamaya bakın)
 const GURULTU = !secenekVar('--gurultu-yok');
 const GURULTU_ESIK = 0.001; // %, bu değerin altı
 const GURULTU_ARALIK = 8; // px: iki fark pikseli arasındaki en küçük uzaklık (yatay, dikey ya da çapraz)
 const FARK_RENGI = [255, 0, 0]; // fark görselinde değişen pikseller
 
-/** Sayfayı çekime hazırlar: tüm görseller yüklenip çözülmüş, fontlar hazır, iki kare boyanmış. */
+/** Sayfayı çekime hazırlar: tüm görseller yüklenip çözülmüş, fontlar tamamen yüklenmiş, stil yeniden hesaplanmış,
+    sayfa boyutu sabit.
+    Döner: oturmayan her şey için bir uyarı metni (boşsa çekime hazır). */
 async function hazirla(sayfa, { ilkEkran, hazir }) {
   if (hazir) await sayfa.waitForSelector(hazir, { state: 'attached', timeout: GORSEL_ZAMAN_ASIMI });
   const eksik = await sayfa.evaluate(
@@ -144,13 +154,55 @@ async function hazirla(sayfa, { ilkEkran, hazir }) {
         ).then(() => (r.currentSrc ? r.decode().catch(() => {}) : undefined));
       const sure = new Promise((tamam) => setTimeout(tamam, zamanAsimi, 'zaman-asimi'));
       const sonuc = await Promise.race([Promise.all(resimler.map(bekle)), sure]);
-      await document.fonts.ready;
-      await new Promise((tamam) => requestAnimationFrame(() => requestAnimationFrame(tamam)));
       return sonuc === 'zaman-asimi' ? resimler.filter((r) => !r.complete).map((r) => r.currentSrc || r.src) : [];
     },
     { ilkEkran: !!ilkEkran, zamanAsimi: GORSEL_ZAMAN_ASIMI }
   );
-  return eksik;
+  const duzen = await sayfa.evaluate(
+    async ({ olcumSayisi, olcumAraligi, zamanAsimi }) => {
+      const bitis = Date.now() + zamanAsimi;
+      const ikiKare = () => new Promise((tamam) => requestAnimationFrame(() => requestAnimationFrame(tamam)));
+      // 1. Fontlar: ready, yükleme sürerken başlayan yeni yüklemeler için yeniden beklenir; yüklenmekte olan
+      //    yüz kalmayınca biter. İki kare, yeni fontla düzenin yeniden hesaplanması için.
+      let fontlar = false;
+      while (!fontlar && Date.now() < bitis) {
+        await document.fonts.ready;
+        await ikiKare();
+        fontlar = document.fonts.status === 'loaded' && [...document.fonts].every((f) => f.status !== 'loading');
+      }
+      // 2. Font yüklenmeden hesaplanan ch/em birimleri Chromium'da bazen bayat kalır: 65ch'lik metin sütunu yedek
+      //    fontun ölçüsüyle daralır, sayfa boyu değişir ve öyle sabitlenir. Kök font boyutu bir anlığına değiştirilip
+      //    geri alınır; tüm stil yüklenmiş fontlarla yeniden hesaplanır. Sayfanın kendi stili değişmez.
+      const kok = document.documentElement.style;
+      const eski = [kok.getPropertyValue('font-size'), kok.getPropertyPriority('font-size')];
+      kok.setProperty('font-size', '1px', 'important');
+      void document.documentElement.offsetHeight;
+      if (eski[0]) kok.setProperty('font-size', ...eski);
+      else kok.removeProperty('font-size');
+      void document.documentElement.offsetHeight;
+      await ikiKare();
+      // 3. Sayfa boyutu art arda olcumSayisi ölçümde aynı
+      const olc = () =>
+        `${document.documentElement.scrollWidth}×` +
+        Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, document.body.offsetHeight);
+      let onceki = olc();
+      let ayni = 1;
+      while (ayni < olcumSayisi && Date.now() < bitis) {
+        await new Promise((tamam) => setTimeout(tamam, olcumAraligi));
+        await ikiKare();
+        const simdi = olc();
+        ayni = simdi === onceki ? ayni + 1 : 1;
+        onceki = simdi;
+      }
+      return { fontlar, sabit: ayni >= olcumSayisi, boyut: onceki };
+    },
+    { olcumSayisi: OLCUM_SAYISI, olcumAraligi: OLCUM_ARALIGI, zamanAsimi: DUZEN_ZAMAN_ASIMI }
+  );
+  return [
+    ...eksik.map((e) => `yüklenemeyen görsel: ${e}`),
+    ...(duzen.fontlar ? [] : ['fontlar zaman aşımına kadar yüklenmedi']),
+    ...(duzen.sabit ? [] : [`sayfa boyutu sabitlenmedi (son ölçüm ${duzen.boyut})`]),
+  ];
 }
 
 async function cek(tarayici, adres, s, g, hedef) {
@@ -181,10 +233,10 @@ async function cek(tarayici, adres, s, g, hedef) {
     const yanit = await sayfa.goto(adres + s.yol, { waitUntil: 'networkidle', timeout: 60_000 });
     if (!yanit?.ok()) throw new Error(`HTTP ${yanit?.status()}`);
     if (s.hazirlik) await s.hazirlik(sayfa);
-    const eksik = await hazirla(sayfa, s);
+    const hazirlik = await hazirla(sayfa, s);
     await sayfa.screenshot({ path: hedef, fullPage: !s.ilkEkran, animations: 'disabled', caret: 'hide' });
     if (gonderimDenendi) throw new Error(`${s.yol} (${s.ad}): çekim sırasında form gönderilmeye çalışıldı`);
-    return { uyarilar: [...basarisiz, ...eksik.map((e) => `yüklenemeyen görsel: ${e}`)] };
+    return { uyarilar: [...basarisiz, ...hazirlik] };
   } finally {
     await baglam.close();
   }
