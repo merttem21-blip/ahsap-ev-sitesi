@@ -3,8 +3,8 @@
 import { firma, siteAdresi, varsayilanGorsel } from '../data/site';
 
 interface Props {
-  title: string; // 50–60 karakter, "| 2K AHŞAP" dahil
-  description: string; // 120–160 karakter
+  title: string; // en fazla 60 karakter, "| 2K AHŞAP" dahil
+  description: string; // 120–155 karakter
   image?: string; // gerçek proje fotoğrafı
   noindex?: boolean;
 }
@@ -16,8 +16,8 @@ const canonical = new URL(yol, site).href;
 const ogGorsel = new URL(image, site).href;
 
 if (import.meta.env.DEV) {
-  if (title.length < 50 || title.length > 60) console.warn(`[SEO] Başlık ${title.length} karakter: ${yol}`);
-  if (description.length < 120 || description.length > 160)
+  if (title.length > 60) console.warn(`[SEO] Başlık ${title.length} karakter: ${yol}`);
+  if (description.length < 120 || description.length > 155)
     console.warn(`[SEO] Açıklama ${description.length} karakter: ${yol}`);
 }
 ---

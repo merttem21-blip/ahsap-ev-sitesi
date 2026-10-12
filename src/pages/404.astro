@@ -1,0 +1,18 @@
+---
+// Bulunamayan adresler. Astro bunu dist/404.html olarak derler; Vercel de 404 durum koduyla sunar.
+// Arama sonuçlarına girmez (noindex); @astrojs/sitemap 404 sayfasını kendiliğinden dışarıda bırakır.
+// Bu sayfaya özel stil yazılmaz: düzen Yakinda bileşeninden, düğmeler site geneli .dugme sınıfından gelir.
+import Layout from '../layouts/Layout.astro';
+import Yakinda from '../components/Yakinda.astro';
+---
+
+<Layout
+  title="Sayfa Bulunamadı | 2K AHŞAP"
+  description="Aradığınız sayfa bulunamadı. Adres değişmiş ya da sayfa kaldırılmış olabilir; ana sayfadan veya projelerimizden devam edebilirsiniz."
+  noindex
+>
+  <Yakinda etiket="404" baslik="Aradığınız sayfa bulunamadı" metin="Adres değişmiş ya da sayfa kaldırılmış olabilir.">
+    <a slot="eylemler" href="/" class="dugme">Ana Sayfa</a>
+    <a slot="eylemler" href="/projeler" class="dugme">Projeler</a>
+  </Yakinda>
+</Layout>

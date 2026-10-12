@@ -39,30 +39,31 @@ Bu liste başlangıç içindir. Yayından sonra Google Search Console verisine g
 5. Meta açıklama
 6. En az bir görselin alt metni
 
-## 2. Meta Başlık — 50–60 karakter
+## 2. Meta Başlık — en fazla 60 karakter
 
 - Biçim: `{Sayfa konusu} | 2K AHŞAP` ("| 2K AHŞAP" karakter sayısına dahildir).
 - Her sayfada **benzersiz**. Aynı başlık iki sayfada asla kullanılmaz.
 - Birincil kelime başa yakın; büyük harfle bağırma, emoji, "!!!" yok.
+- Kategori ve proje sayfalarında elle yazılmaz, veriden üretilir (`src/lib/projeler.ts`): kategoride sayfadaki H1 (`{H1} | 2K AHŞAP`), projede proje adı.
 
 | Sayfa | Örnek | Karakter |
 |---|---|---|
 | Ana sayfa | Özel Tasarım Ahşap Ev, Bungalov ve Villa \| 2K AHŞAP | 51 |
-| Kategori | Ahşap Bungalov Modelleri ve Özel Projeler \| 2K AHŞAP | 52 |
-| Kategori | Tiny House Modelleri, Özel Tasarım Ahşap \| 2K AHŞAP | 51 |
+| Kategori | Ahşap Bungalov Projeleri \| 2K AHŞAP | 35 |
 | Proje | İki Katlı Verandalı Ahşap Bungalov Projesi \| 2K AHŞAP | 53 |
 | İletişim | İletişim ve Teklif Al: Ahşap Ev Projeleri \| 2K AHŞAP | 52 |
 
-## 3. Meta Açıklama — 120–160 karakter
+## 3. Meta Açıklama — 120–155 karakter
 
-- Her sayfada **benzersiz**; sayfanın gerçekte ne sunduğunu anlatır.
+- Her sayfada **benzersiz**; sayfanın gerçekte ne sunduğunu anlatır. Sayfada görünmeyen bilgi yazılmaz.
+- Kategori açıklaması sayfadaki giriş paragrafından, proje açıklaması proje adı ve fotoğraf sayısından üretilir (`src/lib/projeler.ts`).
 - Birincil kelime bir kez ve doğal biçimde geçer; sonunda eylem çağrısı olur ("inceleyin", "teklif alın").
-- Doğrulanamayan iddia yok ("en ucuz", "1 numara"). Somut bilgi kullan: 2015, 300+ proje.
+- Doğrulanamayan iddia yok ("en ucuz", "1 numara"). Proje sayısı, süre, fiyat, garanti gibi rakam ve taahhüt yazılmaz (CLAUDE.md Metin Kuralı).
 
 | Sayfa | Örnek | Karakter |
 |---|---|---|
-| Ana sayfa | 2015'ten beri 300+ projeyle özel tasarım ahşap ev, bungalov, villa ve tiny house üretiyoruz. Projelerimizi inceleyin, hemen teklif alın. | 136 |
-| Kategori | Doğayla uyumlu ahşap bungalov modellerimizi inceleyin. Özel ölçülerde tasarlayıp ürettiğimiz bungalov projeleri için hemen teklif alın. | 135 |
+| Ana sayfa | Bungalovdan villaya, tiny house'tan çardağa; doğayla uyumlu, size özel ahşap ev ve yapılar tasarlayıp üretiyoruz. Projelerimizi inceleyin, teklif alın. | 151 |
+| Kategori | Bahçeniz, tatil eviniz veya turizm tesisiniz için ürettiğimiz ahşap bungalov projeleri. Proje fotoğraflarını inceleyin, 2K AHŞAP'tan teklif alın. | 145 |
 | Proje | Ön verandalı, iki katlı ahşap bungalov projemizin fotoğrafları ve teknik şartnamesi. Benzer bir proje için 2K AHŞAP'tan teklif alın. | 132 |
 
 ## 4. Başlıklar — Her sayfada tek H1
@@ -273,8 +274,8 @@ Her sayfa ortak layout üzerinden bu bileşeni kullanır. `title` ve `descriptio
 ---
 // src/components/SEO.astro
 interface Props {
-  title: string;        // 50–60 karakter, "| 2K AHŞAP" dahil
-  description: string;  // 120–160 karakter
+  title: string;        // en fazla 60 karakter, "| 2K AHŞAP" dahil
+  description: string;  // 120–155 karakter
   image?: string;       // 1200×630 gerçek proje fotoğrafı
   noindex?: boolean;
 }
@@ -284,8 +285,8 @@ const canonical = new URL(yol, Astro.site).href;
 const ogGorsel = new URL(image, Astro.site).href;
 
 if (import.meta.env.DEV) {
-  if (title.length < 50 || title.length > 60) console.warn(`[SEO] Başlık ${title.length} karakter: ${yol}`);
-  if (description.length < 120 || description.length > 160) console.warn(`[SEO] Açıklama ${description.length} karakter: ${yol}`);
+  if (title.length > 60) console.warn(`[SEO] Başlık ${title.length} karakter: ${yol}`);
+  if (description.length < 120 || description.length > 155) console.warn(`[SEO] Açıklama ${description.length} karakter: ${yol}`);
 }
 ---
 <title>{title}</title>
@@ -307,8 +308,8 @@ Open Graph etiketleri, link WhatsApp'ta veya sosyal medyada paylaşıldığında
 
 ## 15. Teslim Öncesi Kontrol Listesi
 
-- [ ] Meta başlık 50–60 karakter ve benzersiz
-- [ ] Meta açıklama 120–160 karakter ve benzersiz
+- [ ] Meta başlık en fazla 60 karakter ve benzersiz
+- [ ] Meta açıklama 120–155 karakter, benzersiz ve sayfada görünenle örtüşüyor
 - [ ] Sayfada tek H1 var, birincil kelimeyi içeriyor; başlık sırası atlanmıyor
 - [ ] Tüm görsellerde anlamlı ve birbirinden farklı alt metni var; dosya adları anlamlı
 - [ ] URL temiz: küçük harf, tireli, Türkçe karakter yok, `/kategori/proje-adi` biçiminde

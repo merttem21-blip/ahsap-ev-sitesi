@@ -10,7 +10,14 @@ import SssBolumu from '../components/SssBolumu.astro';
 import { kategoriler, whatsappLinki } from '../data/site';
 import { kategoriSorulari } from '../data/sss';
 import { gorsel } from '../lib/gorsel';
-import { fotoYolu, kapakFotosu, kategoriProjeleri, kategoriVitrini } from '../lib/projeler';
+import {
+  fotoYolu,
+  kapakFotosu,
+  kategoriMetaAciklamasi,
+  kategoriMetaBasligi,
+  kategoriProjeleri,
+  kategoriVitrini,
+} from '../lib/projeler';
 
 export function getStaticPaths() {
   return kategoriler.map((k) => ({ params: { kategori: k.slug }, props: { kategori: k } }));
@@ -25,8 +32,8 @@ const ogGorsel = vitrin ? (await gorsel(fotoYolu(vitrin, kapakFotosu(vitrin).dos
 ---
 
 <Layout
-  title={kategori.title}
-  description={kategori.description}
+  title={kategoriMetaBasligi(kategori)}
+  description={kategoriMetaAciklamasi(kategori)}
   image={ogGorsel}
   noindex={!ilk}
   whatsappMesaj={whatsappMesaj}

@@ -1,25 +1,29 @@
 ---
 // Henüz hazırlanmamış sayfalar için geçici içerik. Sayfa hazır olunca kaldırılır.
+// 404 sayfası da aynı düzeni kullanır: etiketi ve "eylemler" yuvasıyla düğmeleri kendisi verir.
 import { firma, whatsappLinki } from '../data/site';
 
 interface Props {
   baslik: string; // sayfanın tek H1'i
   metin: string;
+  etiket?: string; // başlığın üstündeki küçük etiket
   whatsapp?: string; // sayfaya göre hazır mesajlı WhatsApp linki
 }
 
-const { baslik, metin, whatsapp = whatsappLinki() } = Astro.props;
+const { baslik, metin, etiket = 'Yakında', whatsapp = whatsappLinki() } = Astro.props;
 ---
 
 <section class="yakinda" aria-labelledby="yakinda-baslik">
   <div class="kap">
-    <p class="yakinda-etiket">Yakında</p>
+    <p class="yakinda-etiket">{etiket}</p>
     <h1 id="yakinda-baslik">{baslik}</h1>
     <p class="yakinda-metin">{metin}</p>
     <div class="yakinda-eylemler">
-      <a href={firma.telefonLink} class="dugme dugme-birincil">Bizi arayın: {firma.telefonGorunen}</a>
-      <a href={whatsapp} class="yakinda-link" target="_blank" rel="noopener noreferrer">WhatsApp'tan yazın</a>
-      <a href={`mailto:${firma.eposta}`} class="yakinda-link">{firma.eposta}</a>
+      <slot name="eylemler">
+        <a href={firma.telefonLink} class="dugme dugme-birincil">Bizi arayın: {firma.telefonGorunen}</a>
+        <a href={whatsapp} class="yakinda-link" target="_blank" rel="noopener noreferrer">WhatsApp'tan yazın</a>
+        <a href={`mailto:${firma.eposta}`} class="yakinda-link">{firma.eposta}</a>
+      </slot>
     </div>
   </div>
 </section>

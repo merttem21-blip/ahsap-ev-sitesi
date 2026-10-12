@@ -61,8 +61,30 @@ export function projeMetaBasligi(baslik: string) {
   return (uygun ?? adaylar.find((a) => (a + ek).length <= 60) ?? baslik) + ek;
 }
 
+// Meta açıklama en fazla 155 karakter olsun diye sığan ilk (en uzun) kalıp seçilir
+const sigan = (adaylar: string[]) => adaylar.find((a) => a.length <= 155) ?? adaylar[adaylar.length - 1];
+
 export function projeMetaAciklamasi(p: Proje) {
-  return `${p.data.baslik} projemizin ${p.data.fotograflar.length} fotoğrafını inceleyin. Özel ölçülerde tasarlayıp ürettiğimiz benzer bir yapı için 2K AHŞAP'tan teklif alın.`;
+  const giris = `${p.data.baslik} projemizin ${p.data.fotograflar.length} fotoğrafını inceleyin.`;
+  return sigan([
+    `${giris} Özel ölçülerde tasarlayıp ürettiğimiz benzer bir yapı için 2K AHŞAP'tan teklif alın.`,
+    `${giris} Özel ölçülerde benzer bir yapı için 2K AHŞAP'tan teklif alın.`,
+    `${giris} Benzer bir yapı için teklif alın.`,
+  ]);
+}
+
+// Kategori sayfasının meta bilgisi sayfada görünen H1 ve giriş paragrafından üretilir
+export function kategoriMetaBasligi(k: Kategori) {
+  const ek = ' | 2K AHŞAP';
+  return [`${k.h1}${ek}`, `${k.ad} Projeleri${ek}`].find((a) => a.length <= 60) ?? `${k.ad}${ek}`;
+}
+
+export function kategoriMetaAciklamasi(k: Kategori) {
+  return sigan([
+    `${k.giris} Proje fotoğraflarını inceleyin, size özel tasarım için 2K AHŞAP'tan teklif alın.`,
+    `${k.giris} Proje fotoğraflarını inceleyin, 2K AHŞAP'tan teklif alın.`,
+    `${k.giris} Fotoğrafları inceleyin, teklif alın.`,
+  ]);
 }
 
 /** JSON-LD'yi <script> içine güvenle yazar (</script> kaçışı). */
