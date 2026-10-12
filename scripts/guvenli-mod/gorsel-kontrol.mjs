@@ -15,7 +15,8 @@
 // stil yüklenmiş fontlarla yeniden hesaplatılmış, sayfa boyutu art arda birkaç ölçümde sabit.
 // Galeri sonsuz kaydırmalı olduğu için yalnızca ilk ekran çekilir. Teklif formunun 2. ve 3. adımı, önceki
 // adımlar örnek verilerle doldurulup "Devam et" ile geçilerek çekilir; form hiçbir zaman gönderilmez
-// (Web3Forms'a giden her istek engellenir ve hata sayılır).
+// (Web3Forms'a giden her istek engellenir ve hata sayılır). Mobil menü paneli, kaydırılmış bir sayfada açılıp
+// panel en üstte ve en altta iken, panelin kendi içinde kaydığı kısa ekranlarda (375×667, 768×600) çekilir.
 //
 // Referans yoksa (ilk çalıştırma) çekimler docs/guvenli-mod/referans/ altına kaydedilir. Varsa son çekimler
 // docs/guvenli-mod/son/ altına yazılır, referansla karşılaştırılır; farklı olanların fark görseli (değişen
@@ -71,9 +72,32 @@ async function adimdaBekle(sayfa, no) {
   await sayfa.evaluate(() => window.scrollTo(0, 0));
 }
 
+/**
+ * Mobil menü paneli (M1, M2): sayfa kaydırılmışken açılır; header küçülmüş durumdadır (panelin header'a hapsolup
+ * kesildiği hata bu durumda görülüyordu). Panel en üste ya da en alta kaydırılır. Düğmeye gerçek dokunuş gibi
+ * koordinatla basılır: locator.click yapışkan header'ı görünüme kaydırırken sayfayı da oynatır.
+ */
+async function menuyuAc(sayfa, konum) {
+  await sayfa.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }));
+  await sayfa.waitForFunction(() => document.querySelector('[data-ust]')?.classList.contains('ust-kucuk'));
+  const kutu = await sayfa.locator('[data-menu-dugme]').filter({ visible: true }).boundingBox();
+  await sayfa.mouse.click(kutu.x + kutu.width / 2, kutu.y + kutu.height / 2);
+  await sayfa.waitForFunction(() => document.getElementById('ana-menu')?.classList.contains('acik'));
+  await sayfa.evaluate((konum) => {
+    const panel = document.getElementById('ana-menu');
+    panel.scrollTop = konum === 'alt' ? panel.scrollHeight : 0;
+  }, konum);
+  await sayfa.mouse.move(0, 0);
+  await sayfa.evaluate(() => new Promise((tamam) => requestAnimationFrame(() => requestAnimationFrame(tamam))));
+}
+
 // Sayfa tipleri: A ana sayfa, P projeler, K kategori, D proje detayı, G galeri, H hakkımızda, S SSS,
-// T teklif al (T2, T3: formun 2. ve 3. adımı), İ iletişim, TŞ teşekkürler, Y yasal sayfa
+// T teklif al (T2, T3: formun 2. ve 3. adımı), İ iletişim, TŞ teşekkürler, Y yasal sayfa,
+// M1, M2 mobil menü paneli açık (en üstte, en altta)
 // hazirlik: çekimden önce sayfada yapılacak etkileşim (yalnızca görünüm; form gönderilmez)
+// sonra: görseller ve düzen oturduktan sonra, çekimden hemen önce yapılacak etkileşim (kaydırma konumu hazırlıktaki
+//        stil yeniden hesaplamasında sıfırlanabildiği için kaydırma burada yapılır)
+// genislikler: GENISLIKLER yerine kullanılacak ekran boyutları
 const SAYFALAR = [
   { kod: 'A', ad: 'ana-sayfa', yol: '/' },
   { kod: 'P', ad: 'projeler', yol: '/projeler' },
@@ -104,6 +128,22 @@ const SAYFALAR = [
   { kod: 'İ', ad: 'iletisim', yol: '/iletisim' },
   { kod: 'TŞ', ad: 'tesekkurler', yol: '/tesekkurler' },
   { kod: 'Y', ad: 'yasal-kvkk', yol: '/kvkk' },
+  {
+    kod: 'M1',
+    ad: 'mobil-menu-acik-ust',
+    yol: '/iletisim',
+    ilkEkran: true,
+    genislikler: 'menu',
+    sonra: (sayfa) => menuyuAc(sayfa, 'ust'),
+  },
+  {
+    kod: 'M2',
+    ad: 'mobil-menu-acik-alt',
+    yol: '/iletisim',
+    ilkEkran: true,
+    genislikler: 'menu',
+    sonra: (sayfa) => menuyuAc(sayfa, 'alt'),
+  },
 ];
 
 const GENISLIKLER = [
@@ -111,6 +151,16 @@ const GENISLIKLER = [
   { genislik: 768, yukseklik: 1024, mobil: true },
   { genislik: 1280, yukseklik: 800, mobil: false },
 ];
+
+// Mobil menü paneli: 375 px'te alt menüdeki, 768 px'te header'daki düğmeyle açılır. Ekranlar kısa tutulur
+// (iPhone SE boyu ve yatay tutulmuş telefon/kısa pencere); panel sığmaz ve kendi içinde kayar, "en alt" çekimi
+// son öğenin alt menünün ve ekran kenarının üstünde kaldığını gösterir.
+const MENU_GENISLIKLERI = [
+  { genislik: 375, yukseklik: 667, mobil: true },
+  { genislik: 768, yukseklik: 600, mobil: true },
+];
+
+const genislikleri = (s) => (s.genislikler === 'menu' ? MENU_GENISLIKLERI : GENISLIKLER);
 
 const REFERANS = path.join(GUVENLI_MOD, 'referans');
 const SON = path.join(GUVENLI_MOD, 'son');
@@ -234,6 +284,7 @@ async function cek(tarayici, adres, s, g, hedef) {
     if (!yanit?.ok()) throw new Error(`HTTP ${yanit?.status()}`);
     if (s.hazirlik) await s.hazirlik(sayfa);
     const hazirlik = await hazirla(sayfa, s);
+    if (s.sonra) await s.sonra(sayfa);
     await sayfa.screenshot({ path: hedef, fullPage: !s.ilkEkran, animations: 'disabled', caret: 'hide' });
     if (gonderimDenendi) throw new Error(`${s.yol} (${s.ad}): çekim sırasında form gönderilmeye çalışıldı`);
     return { uyarilar: [...basarisiz, ...hazirlik] };
@@ -314,9 +365,9 @@ async function main() {
   let olusturulan = 0;
   try {
     for (const s of SAYFALAR) {
-      // Aynı sayfanın üç genişliği paralel çekilir
+      // Aynı sayfanın tüm genişlikleri paralel çekilir
       await Promise.all(
-        GENISLIKLER.map(async (g) => {
+        genislikleri(s).map(async (g) => {
           const dosya = `${s.ad}-${g.genislik}.png`;
           const referansYolu = path.join(REFERANS, dosya);
           const referansYaz = yenilensinMi(s) || !fs.existsSync(referansYolu);
@@ -341,7 +392,7 @@ async function main() {
   }
 
   const sirali = SAYFALAR.flatMap((s) =>
-    GENISLIKLER.map((g) => satirlar.find((r) => r.s === s && r.g === g)).filter(Boolean)
+    genislikleri(s).map((g) => satirlar.find((r) => r.s === s && r.g === g)).filter(Boolean)
   );
   const farklar = sirali.filter((r) => r.durum === 'fark');
   const gurultuler = sirali.filter((r) => r.durum === 'gurultu');

@@ -27,7 +27,7 @@ Müşteri sitenin mevcut görünümünü onayladı. Bundan sonraki işler yalnı
 
 ## gorsel-kontrol
 
-`scripts/guvenli-mod/gorsel-kontrol.mjs` dosyası her sayfa tipinden bir örneği 375, 768 ve 1280 px genişlikte Playwright (Chromium) ile çeker:
+`scripts/guvenli-mod/gorsel-kontrol.mjs` dosyası her sayfa tipinden bir örneği 375, 768 ve 1280 px genişlikte Playwright (Chromium) ile çeker. Mobil menü paneli (M1, M2) yalnızca 375 ve 768 px'te çekilir:
 
 | Kod | Sayfa | Örnek adres |
 |---|---|---|
@@ -44,6 +44,8 @@ Müşteri sitenin mevcut görünümünü onayladı. Bundan sonraki işler yalnı
 | İ | İletişim | `/iletisim` |
 | TŞ | Teşekkürler | `/tesekkurler` |
 | Y | Yasal sayfa | `/kvkk` |
+| M1 | Mobil menü paneli açık, en üstte (375×667, 768×600) | `/iletisim` |
+| M2 | Mobil menü paneli açık, en alta kaydırılmış (375×667, 768×600) | `/iletisim` |
 
 Çekim koşulları:
 
@@ -55,11 +57,12 @@ Müşteri sitenin mevcut görünümünü onayladı. Bundan sonraki işler yalnı
 - Tam sayfa çekilir. Sabit öğeler (alt menü, WhatsApp düğmesi) ilk ekrandaki yerlerinde görünür.
 - Galeri sonsuz kaydırmalı olduğu için yalnızca ilk ekranı çekilir.
 - T2 ve T3: önceki adımlar örnek verilerle doldurulur (yapı tipi, 60 m², Konut; İstanbul/Pendik, arsa, "Belirtmek istemiyorum", "Henüz belli değil") ve "Devam et" ile geçilir. Çekilen adım boş kalır. Çekimden önce sayfa en üste kaydırılır.
+- M1 ve M2: sayfa 600 px kaydırılır, header küçülmüş duruma geçer. Panel, 375 px'te alt menüdeki, 768 px'te header'daki düğmeyle açılır. Düğmeye koordinatla basılır, çünkü Playwright'ın `locator.click`'i yapışkan header'ı görünüme kaydırırken sayfayı da oynatır. Ardından panel en üste (M1) ya da en alta (M2) kaydırılır ve yalnızca ekran çekilir. Ekranlar kasıtlı olarak kısadır (iPhone SE boyu ve yatay telefon ya da kısa pencere). Panel bu ekranlara sığmadığı için kendi içinde kayar. M2, son öğenin alt menünün ve ekranın alt kenarının üstünde kaldığını gösterir. Kaydırma, stil yeniden hesaplandıktan sonra yapılır; yeniden hesaplama kaydırma konumunu sıfırlayabilir.
 - Hiçbir form gönderilmez: çekim sırasında Web3Forms'a giden her istek engellenir ve hata sayılır.
 
 | Klasör | İçerik | Depoda mı? |
 |---|---|---|
-| `referans/` | Onaylı görünüm (39 PNG) | Evet |
+| `referans/` | Onaylı görünüm (43 PNG) | Evet |
 | `son/` | Son çalıştırmanın çekimleri | Hayır (`.gitignore`) |
 | `fark/` | Fark görselleri (değişen pikseller kırmızı) ve `rapor.md` | Hayır (`.gitignore`) |
 
@@ -95,7 +98,8 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
 |---|---|---|
 | 12 Ekim 2026 | `onayli-tasarim` (57268a2) | İlk 33 referans: müşteri onaylı görünüm |
 | 12 Ekim 2026 | dd31535 | Y ve İ yenilendi: yasal metinler tamamlandı, KVKK kutusu metni "KVKK Aydınlatma Metni'ni okudum." oldu (onaylı). T2 ve T3 eklendi. |
-| 12 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | 39 referansın tümü yenilendi: kategori ve proje düzenlemesi (onaylı). Ahşap Cami kategorisi eklendi, A-Frame "Üçgen Ev" oldu, projeler taşındı, birleştirildi, biri kaldırıldı. Değişen yerler: her sayfada footer kategori sütunu; A2 kategori butonları; P2 kartları; G2 filtresi ve ilk ekran; T2-1 yapı tipi kartları. Eski ve yeni derlemenin CSS/JS'i bayt bayt aynı, gövde HTML'i bu bölgeler dışında aynıydı. |
+| 12 Ekim 2026 | a216212 | 39 referansın tümü yenilendi: kategori ve proje düzenlemesi (onaylı). Ahşap Cami kategorisi eklendi, A-Frame "Üçgen Ev" oldu, projeler taşındı, birleştirildi, biri kaldırıldı. Değişen yerler: her sayfada footer kategori sütunu; A2 kategori butonları; P2 kartları; G2 filtresi ve ilk ekran; T2-1 yapı tipi kartları. Eski ve yeni derlemenin CSS/JS'i bayt bayt aynı, gövde HTML'i bu bölgeler dışında aynıydı. |
+| 12 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | M1 ve M2 eklendi (4 referans): mobil menü paneli hatası düzeltildikten sonra çekildi. Kaydırılmış sayfada panel header'a hapsolup kesiliyordu (`docs/hata-mobil-menu/`). Mevcut 39 referans değişmedi, düzeltmeden sonra da 39/39 aynı çıktı. Bu dört çekim düzeltme öncesi derlemede 4/4 fark verdi. |
 
 ### Bilinen sınırlar
 

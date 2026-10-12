@@ -65,8 +65,10 @@ function yumusakKaydirma() {
     lerp: 0.1,
     // Sabit header'ın altında kalmaması için çapa hedefleri biraz yukarıda durur
     anchors: { offset: -96 },
-    // Işık kutusu ve açık menü gibi kendi kaydırması olan alanlar Lenis'e girmez
-    prevent: (dugum) => dugum.closest('dialog, [data-lenis-prevent]') !== null,
+    // Işık kutusu ve açık menü gibi kendi kaydırması olan alanlar Lenis'e girmez. Menü paneli açıkken
+    // Lenis hiç devreye girmez: tekerlek paneli kaydırır, arkadaki (kilitli) sayfayı değil.
+    prevent: (dugum) =>
+      dugum.closest('dialog, [data-lenis-prevent]') !== null || document.documentElement.classList.contains('menu-acik'),
   });
 
   const katmanlar = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];

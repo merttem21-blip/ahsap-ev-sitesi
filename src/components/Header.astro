@@ -78,6 +78,8 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
 
   const ayarla = (acik: boolean) => {
     for (const d of dugmeler) d.setAttribute('aria-expanded', String(acik));
+    // Panel her açılışta en üstten başlar
+    if (acik && menu) menu.scrollTop = 0;
     menu?.classList.toggle('acik', acik);
     // Panel açıkken arkadaki sayfa kaymaz
     document.documentElement.classList.toggle('menu-acik', acik);
@@ -249,10 +251,14 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
   }
 
   /* Açık mobil menü tam ekran sabit paneldir; dönüşümlü bir üst öğe onu header'a hapseder.
-     Panel açıkken header üst durumuna döner (panel her şeyi örttüğü için görünmez). */
+     Panel açıkken header üst durumuna döner (panel her şeyi örttüğü için görünmez).
+     Kaydırılmış durumun kuralları (.ust-kucuk .ust-ic, .ust-kucuk .logo img) daha özgül olduğu için ayrıca
+     sıfırlanır: yoksa translateY(0) bile paneli header'ın kutusuna hapseder, panel kesilir ve kaymaz. */
   :global(html.menu-acik) .ust,
   :global(html.menu-acik) .ust-ic,
-  :global(html.menu-acik) .logo img {
+  :global(html.menu-acik) .logo img,
+  :global(html.menu-acik) .ust-kucuk .ust-ic,
+  :global(html.menu-acik) .ust-kucuk .logo img {
     transform: none;
     transition: none;
   }
@@ -289,12 +295,15 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
     display: block;
   }
 
-  /* Mobilde panelin altı yüzen alt menünün altında kalmaz */
+  /* Mobilde panelin altı yüzen alt menünün (ve iPhone'un alt güvenli alanının) altında kalmaz */
   .menu {
-    --alt-pay: calc(var(--alt-menu-alan) + var(--bosluk-2));
+    --alt-serit: var(--alt-menu-alan);
+    --alt-pay: var(--bosluk-2);
   }
 
-  /* Mobil: tam ekran koyu panel */
+  /* Mobil: tam ekran koyu panel. Sığmazsa kendi içinde kayar; kaydırma arkadaki sayfaya taşmaz.
+     Üstteki logo şeridi ve alttaki alt menü şeridi dolgu değil, zeminle aynı renkte kenarlıktır: kaydırma alanı
+     ikisinin arasında kalır, kayan bağlantılar logonun ve alt menünün altından geçmez. */
   .menu {
     position: fixed;
     inset: 0;
@@ -302,8 +311,12 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
     flex-direction: column;
     justify-content: space-between;
     gap: var(--bosluk-5);
-    padding: calc(var(--h) + var(--bosluk-2)) var(--bosluk-2) var(--alt-pay);
+    padding: var(--bosluk-2) var(--bosluk-2) var(--alt-pay);
+    border-style: solid;
+    border-color: var(--color-zemin);
+    border-width: var(--h) 0 var(--alt-serit);
     overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--color-zemin);
     visibility: hidden;
     opacity: 0;
@@ -384,6 +397,7 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
     }
 
     .menu {
+      --alt-serit: 0px;
       --alt-pay: var(--bosluk-5);
       padding-inline: var(--bosluk-3);
     }
@@ -425,6 +439,7 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
       align-items: center;
       gap: var(--bosluk-5);
       padding: 0;
+      border: 0;
       overflow: visible;
       background: none;
       visibility: visible;
