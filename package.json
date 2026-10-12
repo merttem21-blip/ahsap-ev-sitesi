@@ -10,6 +10,7 @@
     "astro": "astro",
     "images": "node scripts/optimize-images.mjs",
     "check:images": "node scripts/check-images.mjs",
+    "yeni-proje": "node scripts/yeni-proje.mjs",
     "form-kontrol": "node scripts/guvenli-mod/form-kontrol.mjs",
     "gorsel-kontrol": "node scripts/guvenli-mod/gorsel-kontrol.mjs"
   },

@@ -11,6 +11,7 @@
 // Genişlikler mevcut fotoğraf kütüphanesiyle aynıdır; böylece sitedeki srcset tek düzende kalır.
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 
 const GENISLIKLER = [600, 1000, 1600];
@@ -28,7 +29,7 @@ const ZORLA = process.argv.includes('--zorla');
 
 // "Kiremit Çatılı Ev (3).JPG" → "kiremit-catili-ev-3"
 const TR = { ç: 'c', ğ: 'g', ı: 'i', i̇: 'i', ö: 'o', ş: 's', ü: 'u' };
-const slug = (ad) =>
+export const slug = (ad) =>
   ad
     .toLocaleLowerCase('tr')
     .replace(/[çğıöşü]|i̇/g, (h) => TR[h])
@@ -54,7 +55,7 @@ const guncelMi = async (kaynak, ciktilar) => {
   return true;
 };
 
-async function main() {
+export async function main() {
   if (!(await fs.stat(KAYNAK).catch(() => null))) {
     console.log(`Kaynak klasör yok: ${path.relative(process.cwd(), KAYNAK) || KAYNAK}`);
     console.log('Ham fotoğrafları ham-gorseller/<kategori>/<proje-slug>/ altına koyup tekrar çalıştırın.');
@@ -107,7 +108,10 @@ async function main() {
     console.log(`HEIC desteklenmiyor, önce JPG'ye çevirin: ${sayac.desteklenmeyen.join(', ')}`);
 }
 
-main().catch((hata) => {
-  console.error(hata.message);
-  process.exitCode = 1;
-});
+// Doğrudan çalıştırılınca (npm run images); scripts/yeni-proje.mjs içe aktarıp kendisi çağırır
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((hata) => {
+    console.error(hata.message);
+    process.exitCode = 1;
+  });
+}

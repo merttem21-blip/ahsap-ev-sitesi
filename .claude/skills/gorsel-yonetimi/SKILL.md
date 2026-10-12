@@ -20,6 +20,7 @@ npm run build && npm run check:images            ← kırık görsel varsa çık
 ```
 
 - `npm run images` (`scripts/optimize-images.mjs`): EXIF yönünü uygular, büyütmeden 600/1000/1600px genişliğe küçültür, WebP kalite 80 yazar. Güncel olanları atlar; `-- --zorla` hepsini yeniden üretir.
+- **Yeni proje:** `npm run yeni-proje` (`scripts/yeni-proje.mjs`) = `npm run images` + kaydı olmayan her proje klasörü için fotoğraf listesi hazır `.md` taslağı. Kod bilmeyenler için adım adım rehber: `docs/yeni-proje-ekleme.md`.
 - **HEIC/HEIF desteklenmez**; önce JPG'ye çevrilir.
 - Klasör ve dosya adları otomatik slug'lanır (Türkçe karakter → Latin, boşluk → tire). Yine de anlamlı ad verin: `IMG_2041.jpg` değil, `<proje-slug>-01.jpg`.
 - sharp çıktıda EXIF/GPS bilgisini siler; müşterinin konumu fotoğraftan sızmaz. Script'e `withMetadata()` **eklenmez**.

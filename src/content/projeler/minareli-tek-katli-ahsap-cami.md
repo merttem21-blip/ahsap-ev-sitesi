@@ -4,6 +4,11 @@ kategori: ozel-tasarim
 kapak: minareli-tek-katli-ahsap-cami-01
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:
+# Şu an sitede gösterilmez; sonraki özellikler için hazırlık. Hepsi boş bırakılabilir.
+# il: ör. İstanbul (yalnızca müşteri izin verdiyse) · one_cikan: true veya false · etiketler: ör. veranda, asma kat
+il:
+one_cikan:
+etiketler:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: minareli-tek-katli-ahsap-cami-01
@@ -26,7 +31,7 @@ fotograflar:
     alt: "Minareli tek katlı ahşap cami – yapım aşamasında revak"
 
 # Teknik şartname — boş bırakılan alanlar sitede gösterilmez.
-# Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" · teslim_suresi: "45 gün"
+# Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" (kesin süre veya fiyat taahhüdü yazılmaz)
 kapali_alan_m2:
 kat_sayisi:
 oda_sayisi:

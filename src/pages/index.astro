@@ -33,40 +33,19 @@ const ogGorsel = heroGorseli.masaustu;
 const kartBoyutu =
   '(min-width: 1280px) 286px, (min-width: 1024px) calc((100vw - 88px) / 2), (min-width: 768px) calc((100vw - 72px) / 2), (min-width: 640px) calc((100vw - 56px) / 2), 78vw';
 
-const urunler = [
-  {
-    slug: 'ahsap-ev',
-    alt: 'Gri çatılı verandalı ahşap ev – taş kaideli köşe veranda',
-    aciklama: 'Ailenizin ihtiyaçlarına göre tasarlanan, uzun ömürlü ve sıcak yaşam alanları.',
-  },
-  {
-    slug: 'bungalov',
-    alt: 'Geniş verandalı asma katlı bungalov – cam üçgen cephe ve ön veranda',
-    aciklama: 'Bahçeniz, tatil eviniz veya turizm tesisiniz için doğayla uyumlu bungalovlar.',
-  },
-  {
-    slug: 'villa',
-    alt: 'Geniş verandalı ahşap villa – köşeden uzun kavisli saçak ve veranda',
-    aciklama: 'Geniş verandalı, ferah planlı; modern mimariyle doğal ahşabı buluşturan villalar.',
-  },
-  {
-    slug: 'tiny-house',
-    alt: 'Lombar pencereli modern tiny house – çevresi teraslı yan cephe',
-    aciklama: 'Az alanda konforlu yaşam: kompakt, işlevsel ve size özel tasarım.',
-  },
-];
+// Kart metinleri ve sırası src/data/site.ts'deki kategorilerin anaSayfa alanından gelir
+const urunler = kategoriler.flatMap((k) => (k.anaSayfa ? [{ slug: k.slug, ad: k.ad, ...k.anaSayfa }] : []));
 
 const kartlar = await Promise.all(
   urunler.map(async (u, i) => ({
     ...u,
-    ad: kategoriler.find((k) => k.slug === u.slug)!.ad,
     no: String(i + 1).padStart(2, '0'),
     g: await gorsel(`/images/vitrin/${u.slug}-vitrin`),
   }))
 );
 
 // Kartı olmayan kategoriler kartların altında pill link olarak listelenir
-const digerKategoriler = kategoriler.filter((k) => !urunler.some((u) => u.slug === k.slug));
+const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
 ---
 
 <Layout title={baslik} description={aciklama} image={ogGorsel} seffafHeader>

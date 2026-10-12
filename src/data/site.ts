@@ -77,10 +77,14 @@ export const menu = [
   { ad: 'İletişim', href: '/iletisim' },
 ];
 
-// Kategori sayfaları (/<slug>). Fotoğraflar public/images/<slug>/<proje-slug>/ altında,
-// projeler src/content/projeler/ altında. title/description sayfanın meta bilgisidir,
-// giris sayfadaki ilk paragraftır (birincil anahtar kelime burada geçer).
-// vitrin: kapak fotoğrafı kategoriyi temsil eden projenin slug'ı.
+// Kategorilerin tek kaynağı (/<slug> sayfaları, menüler, teklif formu, ana sayfa kartları; sıra da buradan gelir).
+// Fotoğraflar public/images/<slug>/<proje-slug>/ altında, projeler src/content/projeler/ altında.
+// title/description sayfanın meta bilgisidir, giris sayfadaki ilk paragraftır (birincil anahtar kelime burada geçer).
+// vitrin: kapak fotoğrafı kategoriyi temsil eden projenin slug'ı (yoksa ilk proje).
+// teklifIpucu: teklif formunda yapı tipi seçeneğinin altındaki kısa açıklama.
+// anaSayfa: ana sayfadaki "Ürünlerimiz" kartı (yalnızca kartı olan kategorilerde). Kart fotoğrafı
+// public/images/vitrin/<slug>-vitrin-*.webp (scripts/vitrin-gorseli.mjs); alt, o fotoğrafın alt metnidir.
+// anaSayfa'sı olmayan kategoriler kartların altında link olarak listelenir.
 export const kategoriler = [
   {
     ad: 'Ahşap Ev',
@@ -91,6 +95,11 @@ export const kategoriler = [
     title: 'Ahşap Ev Modelleri ve Tamamlanan Projelerimiz | 2K AHŞAP',
     description:
       "Ailenizin ihtiyaçlarına göre tasarlayıp ürettiğimiz ahşap ev projelerinin fotoğraflarını inceleyin. Size özel ahşap ev için 2K AHŞAP'tan teklif alın.",
+    teklifIpucu: 'Kalıcı konut ve yazlık',
+    anaSayfa: {
+      aciklama: 'Ailenizin ihtiyaçlarına göre tasarlanan, uzun ömürlü ve sıcak yaşam alanları.',
+      alt: 'Gri çatılı verandalı ahşap ev – taş kaideli köşe veranda',
+    },
   },
   {
     ad: 'Bungalov',
@@ -101,6 +110,11 @@ export const kategoriler = [
     title: 'Ahşap Bungalov Modelleri ve Özel Projeler | 2K AHŞAP',
     description:
       "Doğayla uyumlu ahşap bungalov projelerimizin fotoğraflarını inceleyin. Özel ölçülerde tasarlanan bungalovunuz için 2K AHŞAP'tan hemen teklif alın.",
+    teklifIpucu: 'Bahçe, tatil ve turizm',
+    anaSayfa: {
+      aciklama: 'Bahçeniz, tatil eviniz veya turizm tesisiniz için doğayla uyumlu bungalovlar.',
+      alt: 'Geniş verandalı asma katlı bungalov – cam üçgen cephe ve ön veranda',
+    },
   },
   {
     ad: 'Villa',
@@ -111,6 +125,11 @@ export const kategoriler = [
     title: 'Özel Tasarım Ahşap Villa Modelleri ve Projeleri | 2K AHŞAP',
     description:
       "Geniş verandalı, ferah planlı ahşap villa projelerimizin fotoğraflarını inceleyin. Size özel tasarlanacak ahşap villa için 2K AHŞAP'tan teklif alın.",
+    teklifIpucu: 'Geniş, ferah planlı yaşam',
+    anaSayfa: {
+      aciklama: 'Geniş verandalı, ferah planlı; modern mimariyle doğal ahşabı buluşturan villalar.',
+      alt: 'Geniş verandalı ahşap villa – köşeden uzun kavisli saçak ve veranda',
+    },
   },
   {
     ad: 'Tiny House',
@@ -121,6 +140,11 @@ export const kategoriler = [
     title: 'Tiny House Modelleri ve Küçük Ahşap Ev Projeleri | 2K AHŞAP',
     description:
       "Az alanda konforlu yaşam sunan tiny house projelerimizin fotoğraflarını inceleyin. Size özel tasarlanacak tiny house için 2K AHŞAP'tan teklif alın.",
+    teklifIpucu: 'Az alanda konforlu yaşam',
+    anaSayfa: {
+      aciklama: 'Az alanda konforlu yaşam: kompakt, işlevsel ve size özel tasarım.',
+      alt: 'Lombar pencereli modern tiny house – çevresi teraslı yan cephe',
+    },
   },
   {
     ad: 'A-Frame',
@@ -131,6 +155,7 @@ export const kategoriler = [
     title: 'A-Frame Ev Modelleri ve Bungalov Projeleri | 2K AHŞAP',
     description:
       "Üçgen formlu a-frame ev ve bungalov projelerimizin fotoğraflarını inceleyin. Size özel ölçülerde a-frame ev için 2K AHŞAP'tan hemen teklif alın.",
+    teklifIpucu: 'Üçgen formlu ev ve bungalov',
   },
   {
     ad: 'Çardak',
@@ -141,6 +166,7 @@ export const kategoriler = [
     title: 'Ahşap Çardak Modelleri ve Bahçe Çardakları | 2K AHŞAP',
     description:
       "Bahçe, otel ve tesisler için ürettiğimiz ahşap çardak projelerinin fotoğraflarını inceleyin. Size özel ahşap çardak için 2K AHŞAP'tan teklif alın.",
+    teklifIpucu: 'Bahçe, otel ve tesisler',
   },
   {
     ad: 'Otel-Bar',
@@ -151,6 +177,7 @@ export const kategoriler = [
     title: 'Otel ve Plajlar İçin Ahşap Bar ve Yapılar | 2K AHŞAP',
     description:
       "Otel ve plaj işletmeleri için ürettiğimiz ahşap bar ve konaklama yapılarının fotoğraflarını inceleyin. İşletmeniz için 2K AHŞAP'tan teklif alın.",
+    teklifIpucu: 'Otel, plaj ve işletmeler',
   },
   {
     ad: 'Çocuk Oyun Parkı',
@@ -161,6 +188,7 @@ export const kategoriler = [
     title: 'Ahşap Çocuk Oyun Parkı ve Oyun Evi Modelleri | 2K AHŞAP',
     description:
       "Bahçeniz için tasarlayıp ürettiğimiz ahşap çocuk oyun evi ve oyun parkı projelerinin fotoğraflarını inceleyin. 2K AHŞAP'tan hemen teklif alın.",
+    teklifIpucu: 'Oyun evi ve oyun parkı',
   },
   {
     ad: 'Özel Tasarım',
@@ -171,6 +199,7 @@ export const kategoriler = [
     title: 'Özel Tasarım Ahşap Yapılar: Kabin, Kulübe, Vitrin | 2K AHŞAP',
     description:
       "Cami, vitrin, kulübe, kabin ve depo gibi ihtiyaca özel tasarlayıp ürettiğimiz ahşap yapıların fotoğraflarını inceleyin. 2K AHŞAP'tan teklif alın.",
+    teklifIpucu: 'Kabin, kulübe, vitrin ve diğerleri',
   },
 ];
 

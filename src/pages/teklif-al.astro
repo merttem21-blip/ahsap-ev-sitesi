@@ -21,18 +21,7 @@ import '../styles/form.css';
 
 const whatsappMesaj = 'Merhaba, ahşap yapı projem için teklif almak istiyorum.';
 
-const ipuclari: Record<string, string> = {
-  'ahsap-ev': 'Kalıcı konut ve yazlık',
-  bungalov: 'Bahçe, tatil ve turizm',
-  villa: 'Geniş, ferah planlı yaşam',
-  'tiny-house': 'Az alanda konforlu yaşam',
-  'a-frame': 'Üçgen formlu ev ve bungalov',
-  cardak: 'Bahçe, otel ve tesisler',
-  'otel-bar': 'Otel, plaj ve işletmeler',
-  'cocuk-oyun-parki': 'Oyun evi ve oyun parkı',
-  'ozel-tasarim': 'Kabin, kulübe, vitrin ve diğerleri',
-};
-const yapiTipleri = kategoriler.map((k) => ({ deger: k.ad, aciklama: ipuclari[k.slug], slug: k.slug }));
+const yapiTipleri = kategoriler.map((k) => ({ deger: k.ad, aciklama: k.teklifIpucu, slug: k.slug }));
 
 // ?proje=<slug> ile gelindiğinde başlık ve kategori buradan okunur (bilinmeyen slug yok sayılır)
 const projeler = await getCollection('projeler');
