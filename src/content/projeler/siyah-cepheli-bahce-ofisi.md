@@ -1,6 +1,6 @@
 ---
 baslik: Siyah Cepheli Bahçe Ofisi
-kategori: tiny-house
+kategori: ahsap-ev
 kapak: siyah-cepheli-bahce-ofisi-01
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:

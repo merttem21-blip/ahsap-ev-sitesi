@@ -23,7 +23,9 @@ const p = (kategori, proje, no) => `public/images/${kategori}/${proje}/${proje}-
 const VITRIN = [
   {
     ad: 'ahsap-ev-vitrin',
-    kaynak: p('ahsap-ev', 'gri-catili-verandali-ahsap-ev', '01'),
+    // Taş Kaideli Verandalı Ahşap Ev'in tamamlanmış hali. Bu fotoğrafların projesi tekrar olduğu için
+    // kaldırıldı; fotoğraflar sitede yayınlanmayan arşivde duruyor.
+    kaynak: 'arsiv/gorseller/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-01-1600.webp',
     // Sol köşe veranda, üçgen çatı ve taş kaide kadrajda; sağdaki bahçe eşyaları dışarıda
     kadraj: { left: 40, top: 0, width: 960, height: 1200 },
     // Vernik sarıya çalıyor; yeşil kanal biraz kısılınca ahşap diğer kartlardaki bal tonuna yaklaşır
@@ -44,7 +46,7 @@ const VITRIN = [
   },
   {
     ad: 'tiny-house-vitrin',
-    kaynak: p('tiny-house', 'lombar-pencereli-modern-tiny-house', '01'),
+    kaynak: p('tiny-house', 'romorklu-tiny-house', '05'),
     // Panoramik kaynaktan lombar pencere, kapı ve teras; kaynak 720px yüksek olduğu için 576px genişlik
     kadraj: { left: 410, top: 0, width: 576, height: 720 },
   },

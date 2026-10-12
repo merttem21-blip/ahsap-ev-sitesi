@@ -57,7 +57,7 @@ Konum: `public/logo/`. Format: **SVG**. Ayrıntılı kullanım kuralları marka-
 
 ## Sayfalar ve Fonksiyonları
 1. **Ana Sayfa (/)** → Hero, Kategoriler, Öne çıkan projeler, Hakkımızda
-2. **Kategoriler (/kategoriler)** → 8 kategori: Bungalov, Villa, Tiny House, A-Frame, Çardak, Otel-Bar, Çocuk Oyun Parkı, Diğer
+2. **Kategoriler (/kategoriler)** → 10 kategori (tek kaynak: `src/data/site.ts`): Ahşap Ev, Bungalov, Villa, Tiny House, Üçgen Ev, Çardak, Otel-Bar, Çocuk Oyun Parkı, Ahşap Cami, Özel Tasarım
 3. **Kategori Detayı (/kategori/:id)** → Filtren/seçilmiş kategori fotoğrafları galeri
 4. **Proje Detayı (/proje/:id)** → Büyük fotoğraf, teknik şartname tablosu, "Teklif Al" butonu
    - **Galeri (/galeri)** → Tüm proje fotoğrafları; kategori filtresi (?kategori=), masonry ızgara, ışık kutusu (?foto=)

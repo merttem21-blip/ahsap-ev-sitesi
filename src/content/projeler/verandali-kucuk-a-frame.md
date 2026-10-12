@@ -1,6 +1,6 @@
 ---
 baslik: Verandalı Küçük A-Frame
-kategori: a-frame
+kategori: ucgen-ev
 kapak: verandali-kucuk-a-frame-01
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:

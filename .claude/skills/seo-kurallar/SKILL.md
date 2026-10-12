@@ -22,10 +22,11 @@ Her sayfanın **tek bir birincil** anahtar kelimesi olur. İki sayfa aynı birin
 | Bungalov | `/bungalov` | ahşap bungalov | bungalov ev, bungalov modelleri |
 | Villa | `/villa` | ahşap villa | ahşap villa projeleri |
 | Tiny House | `/tiny-house` | tiny house | tiny house modelleri, küçük ahşap ev |
-| A-Frame | `/a-frame` | a-frame ev | a-frame bungalov |
+| Üçgen Ev | `/ucgen-ev` | üçgen ev | a-frame ev, a-frame bungalov (eski adı; 12 Ekim 2026'da `/a-frame`'den 301) |
 | Çardak | `/cardak` | ahşap çardak | bahçe çardağı |
 | Otel-Bar | `/otel-bar` | ahşap bar | otel ahşap yapıları |
 | Çocuk Oyun Parkı | `/cocuk-oyun-parki` | ahşap çocuk oyun parkı | ahşap oyun evi |
+| Ahşap Cami | `/ahsap-cami` | ahşap cami | ahşap cami projeleri |
 | Diğer | `/ozel-tasarim` | özel tasarım ahşap yapı | — ("diğer" aranan bir kelime olmadığı için bu slug önerilir) |
 
 Bu liste başlangıç içindir. Yayından sonra Google Search Console verisine göre güncelle; arama hacmi uydurma.

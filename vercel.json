@@ -9,5 +9,15 @@
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/a-frame{/}?", "destination": "/ucgen-ev", "statusCode": 301 },
+    { "source": "/a-frame/a-frame-bungalov{/}?", "destination": "/ucgen-ev/a-frame-bungalov", "statusCode": 301 },
+    { "source": "/a-frame/verandali-kucuk-a-frame{/}?", "destination": "/ucgen-ev/verandali-kucuk-a-frame", "statusCode": 301 },
+    { "source": "/ozel-tasarim/iki-katli-ahsap-cami{/}?", "destination": "/ahsap-cami/iki-katli-ahsap-cami", "statusCode": 301 },
+    { "source": "/ozel-tasarim/minareli-tek-katli-ahsap-cami{/}?", "destination": "/ahsap-cami/minareli-tek-katli-ahsap-cami", "statusCode": 301 },
+    { "source": "/tiny-house/siyah-cepheli-bahce-ofisi{/}?", "destination": "/ahsap-ev/siyah-cepheli-bahce-ofisi", "statusCode": 301 },
+    { "source": "/tiny-house/lombar-pencereli-modern-tiny-house{/}?", "destination": "/tiny-house/romorklu-tiny-house", "statusCode": 301 },
+    { "source": "/ahsap-ev/gri-catili-verandali-ahsap-ev{/}?", "destination": "/ahsap-ev/tas-kaideli-verandali-ahsap-ev", "statusCode": 301 }
   ]
 }

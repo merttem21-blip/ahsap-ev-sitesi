@@ -8,7 +8,7 @@ export const siteAdresi = 'https://2kahsap.com';
 export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 
 // Open Graph ve schema.org için varsayılan görsel (gerçek proje fotoğrafı)
-export const varsayilanGorsel = '/images/a-frame/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
+export const varsayilanGorsel = '/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
 
 // Firma bilgilerinin tek kaynağı: sitede bu bilgilerin geçtiği her yer buradan okur.
 // Sitede görünen ad marka adıdır; yasal metinlerde "Unvan (Marka)" biçimi kullanılır (yasalAd).
@@ -98,7 +98,7 @@ export const kategoriler = [
     teklifIpucu: 'Kalıcı konut ve yazlık',
     anaSayfa: {
       aciklama: 'Ailenizin ihtiyaçlarına göre tasarlanan, uzun ömürlü ve sıcak yaşam alanları.',
-      alt: 'Gri çatılı verandalı ahşap ev – taş kaideli köşe veranda',
+      alt: 'Taş kaideli verandalı ahşap ev – gri çatılı köşe veranda',
     },
   },
   {
@@ -134,7 +134,7 @@ export const kategoriler = [
   {
     ad: 'Tiny House',
     slug: 'tiny-house',
-    vitrin: 'lombar-pencereli-modern-tiny-house',
+    vitrin: 'romorklu-tiny-house',
     h1: 'Tiny House Projeleri',
     giris: 'Az alanda konforlu yaşam için tasarlayıp ürettiğimiz tiny house ve kompakt ahşap yapı projeleri.',
     title: 'Tiny House Modelleri ve Küçük Ahşap Ev Projeleri | 2K AHŞAP',
@@ -143,18 +143,19 @@ export const kategoriler = [
     teklifIpucu: 'Az alanda konforlu yaşam',
     anaSayfa: {
       aciklama: 'Az alanda konforlu yaşam: kompakt, işlevsel ve size özel tasarım.',
-      alt: 'Lombar pencereli modern tiny house – çevresi teraslı yan cephe',
+      alt: 'Römorklu tiny house – çevresi teraslı yan cephe',
     },
   },
   {
-    ad: 'A-Frame',
-    slug: 'a-frame',
+    ad: 'Üçgen Ev',
+    slug: 'ucgen-ev',
     vitrin: 'a-frame-bungalov',
-    h1: 'A-Frame Ev ve Bungalov Projeleri',
-    giris: 'Üçgen formuyla öne çıkan a-frame ev ve bungalov projelerimiz.',
-    title: 'A-Frame Ev Modelleri ve Bungalov Projeleri | 2K AHŞAP',
+    h1: 'Üçgen Ev ve Bungalov Projeleri',
+    // Eski adı "A-frame" aramalarda da kullanıldığı için giriş ve açıklamada bir kez parantezde geçer
+    giris: 'Üçgen ev (A-frame) formunda tasarlayıp ürettiğimiz ahşap yapı ve bungalov projeleri.',
+    title: 'Üçgen Ev Modelleri ve Bungalov Projeleri | 2K AHŞAP',
     description:
-      "Üçgen formlu a-frame ev ve bungalov projelerimizin fotoğraflarını inceleyin. Size özel ölçülerde a-frame ev için 2K AHŞAP'tan hemen teklif alın.",
+      "Üçgen ev (A-frame) ve bungalov projelerimizin fotoğraflarını inceleyin. Size özel ölçülerde üçgen ev için 2K AHŞAP'tan hemen teklif alın.",
     teklifIpucu: 'Üçgen formlu ev ve bungalov',
   },
   {
@@ -191,14 +192,25 @@ export const kategoriler = [
     teklifIpucu: 'Oyun evi ve oyun parkı',
   },
   {
+    ad: 'Ahşap Cami',
+    slug: 'ahsap-cami',
+    vitrin: 'iki-katli-ahsap-cami',
+    h1: 'Ahşap Cami Projeleri',
+    giris: 'Cemaatin ihtiyaçlarına göre tasarlayıp ürettiğimiz ahşap cami projeleri.',
+    title: 'Ahşap Cami Modelleri ve Tamamlanan Projelerimiz | 2K AHŞAP',
+    description:
+      "Cemaatin ihtiyaçlarına göre tasarlayıp ürettiğimiz ahşap cami projelerinin fotoğraflarını inceleyin. Size özel ahşap cami için 2K AHŞAP'tan teklif alın.",
+    teklifIpucu: 'Tek ve iki katlı, minareli',
+  },
+  {
     ad: 'Özel Tasarım',
     slug: 'ozel-tasarim',
-    vitrin: 'iki-katli-ahsap-cami',
+    vitrin: 'iskele-giris-kulubesi',
     h1: 'Özel Tasarım Ahşap Yapılar',
-    giris: 'Cami, vitrin, kulübe, kabin ve depo gibi ihtiyaca göre özel tasarım ahşap yapı projelerimiz.',
+    giris: 'Vitrin, kulübe, kabin ve depo gibi ihtiyaca göre özel tasarım ahşap yapı projelerimiz.',
     title: 'Özel Tasarım Ahşap Yapılar: Kabin, Kulübe, Vitrin | 2K AHŞAP',
     description:
-      "Cami, vitrin, kulübe, kabin ve depo gibi ihtiyaca özel tasarlayıp ürettiğimiz ahşap yapıların fotoğraflarını inceleyin. 2K AHŞAP'tan teklif alın.",
+      "Vitrin, kulübe, kabin ve depo gibi ihtiyaca özel tasarlayıp ürettiğimiz ahşap yapıların fotoğraflarını inceleyin. 2K AHŞAP'tan teklif alın.",
     teklifIpucu: 'Kabin, kulübe, vitrin ve diğerleri',
   },
 ];

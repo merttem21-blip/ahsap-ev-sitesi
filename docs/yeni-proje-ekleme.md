@@ -52,11 +52,12 @@ Bu rehberde bundan sonra bu ada **proje-adı** diyeceğiz.
 | Bungalov | `bungalov` |
 | Villa | `villa` |
 | Tiny House | `tiny-house` |
-| A-Frame | `a-frame` |
+| Üçgen Ev | `ucgen-ev` |
 | Çardak | `cardak` |
 | Otel-Bar | `otel-bar` |
 | Çocuk Oyun Parkı | `cocuk-oyun-parki` |
-| Özel Tasarım (cami, vitrin, kulübe, kabin, depo ve diğerleri) | `ozel-tasarim` |
+| Ahşap Cami | `ahsap-cami` |
+| Özel Tasarım (vitrin, kulübe, kabin, depo ve diğerleri) | `ozel-tasarim` |
 
 Klasör adı tablodaki gibi yazılmalıdır. Yeni bir kategori gerekiyorsa geliştiriciye sorun.
 

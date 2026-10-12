@@ -1,0 +1,2227 @@
+{
+  "$aciklama": "Proje ve kategori verisinin 12 Ekim 2026 müşteri talepleri (Ahşap Cami kategorisi, A-Frame → Üçgen Ev, proje taşıma/birleştirme/kaldırma) uygulanmadan önceki hali. Geri dönüş ve karşılaştırma içindir; site bu dosyayı okumaz.",
+  "tarih": "2026-10-12",
+  "gitSurumu": "2285fd6",
+  "kaynaklar": [
+    "src/data/site.ts (kategoriler)",
+    "src/data/sss.ts (soruların kategori atamaları)",
+    "src/content/projeler/*.md (projeler)"
+  ],
+  "ozet": [
+    {
+      "kategori": "Ahşap Ev",
+      "adres": "/ahsap-ev",
+      "projeSayisi": 4,
+      "fotografSayisi": 49,
+      "projeler": [
+        "Deniz Manzaralı Teraslı Ahşap Ev",
+        "Gri Çatılı Verandalı Ahşap Ev",
+        "Kiremit Çatılı Ahşap Ev",
+        "Taş Kaideli Verandalı Ahşap Ev"
+      ]
+    },
+    {
+      "kategori": "Bungalov",
+      "adres": "/bungalov",
+      "projeSayisi": 3,
+      "fotografSayisi": 40,
+      "projeler": [
+        "Asma Katlı Verandalı Bungalov",
+        "Geniş Verandalı Asma Katlı Bungalov",
+        "Kemerli Pod Bungalov"
+      ]
+    },
+    {
+      "kategori": "Villa",
+      "adres": "/villa",
+      "projeSayisi": 1,
+      "fotografSayisi": 24,
+      "projeler": [
+        "Geniş Verandalı Ahşap Villa"
+      ]
+    },
+    {
+      "kategori": "Tiny House",
+      "adres": "/tiny-house",
+      "projeSayisi": 3,
+      "fotografSayisi": 20,
+      "projeler": [
+        "Lombar Pencereli Modern Tiny House",
+        "Römorklu Tiny House",
+        "Siyah Cepheli Bahçe Ofisi"
+      ]
+    },
+    {
+      "kategori": "A-Frame",
+      "adres": "/a-frame",
+      "projeSayisi": 2,
+      "fotografSayisi": 14,
+      "projeler": [
+        "A-Frame Bungalov",
+        "Verandalı Küçük A-Frame"
+      ]
+    },
+    {
+      "kategori": "Çardak",
+      "adres": "/cardak",
+      "projeSayisi": 2,
+      "fotografSayisi": 15,
+      "projeler": [
+        "Sekizgen Otel Çardağı",
+        "Taş Duvarlı Bahçe Çardağı"
+      ]
+    },
+    {
+      "kategori": "Otel-Bar",
+      "adres": "/otel-bar",
+      "projeSayisi": 2,
+      "fotografSayisi": 19,
+      "projeler": [
+        "Deniz Üstü Ahşap Otel Odaları",
+        "Hasır Çatılı Plaj Barı"
+      ]
+    },
+    {
+      "kategori": "Çocuk Oyun Parkı",
+      "adres": "/cocuk-oyun-parki",
+      "projeSayisi": 2,
+      "fotografSayisi": 30,
+      "projeler": [
+        "Kaydıraklı Şato Oyun Evi",
+        "Lila Renkli Çocuk Oyun Evi"
+      ]
+    },
+    {
+      "kategori": "Özel Tasarım",
+      "adres": "/ozel-tasarim",
+      "projeSayisi": 9,
+      "fotografSayisi": 78,
+      "projeler": [
+        "Ahşap Kabin",
+        "Ahşap Soyunma Kabinleri",
+        "Bahçe Deposu",
+        "İki Katlı Ahşap Cami",
+        "İskele Giriş Kulübesi",
+        "Marka Vitrini",
+        "Minareli Tek Katlı Ahşap Cami",
+        "Modern Bahçe Odası ve Depo",
+        "Yol Kenarı Satış Tezgâhları"
+      ]
+    }
+  ],
+  "kategoriler": [
+    {
+      "ad": "Ahşap Ev",
+      "slug": "ahsap-ev",
+      "vitrin": "kiremit-catili-ahsap-ev",
+      "h1": "Ahşap Ev Modelleri ve Projeleri",
+      "giris": "Ailenizin ihtiyaçlarına göre tasarlayıp ürettiğimiz ahşap ev projeleri.",
+      "title": "Ahşap Ev Modelleri ve Tamamlanan Projelerimiz | 2K AHŞAP",
+      "description": "Ailenizin ihtiyaçlarına göre tasarlayıp ürettiğimiz ahşap ev projelerinin fotoğraflarını inceleyin. Size özel ahşap ev için 2K AHŞAP'tan teklif alın.",
+      "teklifIpucu": "Kalıcı konut ve yazlık",
+      "anaSayfa": {
+        "aciklama": "Ailenizin ihtiyaçlarına göre tasarlanan, uzun ömürlü ve sıcak yaşam alanları.",
+        "alt": "Gri çatılı verandalı ahşap ev – taş kaideli köşe veranda"
+      }
+    },
+    {
+      "ad": "Bungalov",
+      "slug": "bungalov",
+      "vitrin": "asma-katli-verandali-bungalov",
+      "h1": "Ahşap Bungalov Projeleri",
+      "giris": "Bahçeniz, tatil eviniz veya turizm tesisiniz için ürettiğimiz ahşap bungalov projeleri.",
+      "title": "Ahşap Bungalov Modelleri ve Özel Projeler | 2K AHŞAP",
+      "description": "Doğayla uyumlu ahşap bungalov projelerimizin fotoğraflarını inceleyin. Özel ölçülerde tasarlanan bungalovunuz için 2K AHŞAP'tan hemen teklif alın.",
+      "teklifIpucu": "Bahçe, tatil ve turizm",
+      "anaSayfa": {
+        "aciklama": "Bahçeniz, tatil eviniz veya turizm tesisiniz için doğayla uyumlu bungalovlar.",
+        "alt": "Geniş verandalı asma katlı bungalov – cam üçgen cephe ve ön veranda"
+      }
+    },
+    {
+      "ad": "Villa",
+      "slug": "villa",
+      "vitrin": "genis-verandali-ahsap-villa",
+      "h1": "Ahşap Villa Projeleri",
+      "giris": "Geniş verandalı, ferah planlı; modern mimariyle doğal ahşabı buluşturan ahşap villa projelerimiz.",
+      "title": "Özel Tasarım Ahşap Villa Modelleri ve Projeleri | 2K AHŞAP",
+      "description": "Geniş verandalı, ferah planlı ahşap villa projelerimizin fotoğraflarını inceleyin. Size özel tasarlanacak ahşap villa için 2K AHŞAP'tan teklif alın.",
+      "teklifIpucu": "Geniş, ferah planlı yaşam",
+      "anaSayfa": {
+        "aciklama": "Geniş verandalı, ferah planlı; modern mimariyle doğal ahşabı buluşturan villalar.",
+        "alt": "Geniş verandalı ahşap villa – köşeden uzun kavisli saçak ve veranda"
+      }
+    },
+    {
+      "ad": "Tiny House",
+      "slug": "tiny-house",
+      "vitrin": "lombar-pencereli-modern-tiny-house",
+      "h1": "Tiny House Projeleri",
+      "giris": "Az alanda konforlu yaşam için tasarlayıp ürettiğimiz tiny house ve kompakt ahşap yapı projeleri.",
+      "title": "Tiny House Modelleri ve Küçük Ahşap Ev Projeleri | 2K AHŞAP",
+      "description": "Az alanda konforlu yaşam sunan tiny house projelerimizin fotoğraflarını inceleyin. Size özel tasarlanacak tiny house için 2K AHŞAP'tan teklif alın.",
+      "teklifIpucu": "Az alanda konforlu yaşam",
+      "anaSayfa": {
+        "aciklama": "Az alanda konforlu yaşam: kompakt, işlevsel ve size özel tasarım.",
+        "alt": "Lombar pencereli modern tiny house – çevresi teraslı yan cephe"
+      }
+    },
+    {
+      "ad": "A-Frame",
+      "slug": "a-frame",
+      "vitrin": "a-frame-bungalov",
+      "h1": "A-Frame Ev ve Bungalov Projeleri",
+      "giris": "Üçgen formuyla öne çıkan a-frame ev ve bungalov projelerimiz.",
+      "title": "A-Frame Ev Modelleri ve Bungalov Projeleri | 2K AHŞAP",
+      "description": "Üçgen formlu a-frame ev ve bungalov projelerimizin fotoğraflarını inceleyin. Size özel ölçülerde a-frame ev için 2K AHŞAP'tan hemen teklif alın.",
+      "teklifIpucu": "Üçgen formlu ev ve bungalov"
+    },
+    {
+      "ad": "Çardak",
+      "slug": "cardak",
+      "vitrin": "sekizgen-otel-cardagi",
+      "h1": "Ahşap Çardak Projeleri",
+      "giris": "Bahçeler, oteller ve tesisler için tasarlayıp ürettiğimiz ahşap çardak projeleri.",
+      "title": "Ahşap Çardak Modelleri ve Bahçe Çardakları | 2K AHŞAP",
+      "description": "Bahçe, otel ve tesisler için ürettiğimiz ahşap çardak projelerinin fotoğraflarını inceleyin. Size özel ahşap çardak için 2K AHŞAP'tan teklif alın.",
+      "teklifIpucu": "Bahçe, otel ve tesisler"
+    },
+    {
+      "ad": "Otel-Bar",
+      "slug": "otel-bar",
+      "vitrin": "deniz-ustu-ahsap-otel-odalari",
+      "h1": "Ahşap Bar ve Otel Yapıları",
+      "giris": "Otel ve plaj işletmeleri için tasarlayıp ürettiğimiz ahşap bar ve konaklama yapıları.",
+      "title": "Otel ve Plajlar İçin Ahşap Bar ve Yapılar | 2K AHŞAP",
+      "description": "Otel ve plaj işletmeleri için ürettiğimiz ahşap bar ve konaklama yapılarının fotoğraflarını inceleyin. İşletmeniz için 2K AHŞAP'tan teklif alın.",
+      "teklifIpucu": "Otel, plaj ve işletmeler"
+    },
+    {
+      "ad": "Çocuk Oyun Parkı",
+      "slug": "cocuk-oyun-parki",
+      "vitrin": "kaydirakli-sato-oyun-evi",
+      "h1": "Ahşap Çocuk Oyun Parkı ve Oyun Evleri",
+      "giris": "Bahçeler için tasarlayıp ürettiğimiz ahşap çocuk oyun parkı ve oyun evi projeleri.",
+      "title": "Ahşap Çocuk Oyun Parkı ve Oyun Evi Modelleri | 2K AHŞAP",
+      "description": "Bahçeniz için tasarlayıp ürettiğimiz ahşap çocuk oyun evi ve oyun parkı projelerinin fotoğraflarını inceleyin. 2K AHŞAP'tan hemen teklif alın.",
+      "teklifIpucu": "Oyun evi ve oyun parkı"
+    },
+    {
+      "ad": "Özel Tasarım",
+      "slug": "ozel-tasarim",
+      "vitrin": "iki-katli-ahsap-cami",
+      "h1": "Özel Tasarım Ahşap Yapılar",
+      "giris": "Cami, vitrin, kulübe, kabin ve depo gibi ihtiyaca göre özel tasarım ahşap yapı projelerimiz.",
+      "title": "Özel Tasarım Ahşap Yapılar: Kabin, Kulübe, Vitrin | 2K AHŞAP",
+      "description": "Cami, vitrin, kulübe, kabin ve depo gibi ihtiyaca özel tasarlayıp ürettiğimiz ahşap yapıların fotoğraflarını inceleyin. 2K AHŞAP'tan teklif alın.",
+      "teklifIpucu": "Kabin, kulübe, vitrin ve diğerleri"
+    }
+  ],
+  "sssKategorileri": [
+    {
+      "soru": "Ahşap ev fiyatları neye göre belirlenir?",
+      "kategoriler": [
+        "ahsap-ev",
+        "villa",
+        "ozel-tasarim"
+      ]
+    },
+    {
+      "soru": "Ahşap ev için nasıl teklif alabilirim?",
+      "kategoriler": [
+        "ozel-tasarim"
+      ]
+    },
+    {
+      "soru": "Ahşap ev için ruhsat gerekir mi?",
+      "kategoriler": [
+        "ahsap-ev",
+        "tiny-house"
+      ]
+    },
+    {
+      "soru": "Bungalov için ruhsat gerekir mi?",
+      "kategoriler": [
+        "bungalov",
+        "a-frame"
+      ]
+    },
+    {
+      "soru": "Ahşap ev kışın soğuk olur mu?",
+      "kategoriler": [
+        "bungalov",
+        "tiny-house",
+        "a-frame"
+      ]
+    },
+    {
+      "soru": "Ahşap ev depreme dayanıklı mı?",
+      "kategoriler": [
+        "ahsap-ev",
+        "villa"
+      ]
+    },
+    {
+      "soru": "Ahşap ev yangına dayanıklı mı?",
+      "kategoriler": [
+        "villa",
+        "otel-bar"
+      ]
+    },
+    {
+      "soru": "Ahşap ev kaç yıl dayanır?",
+      "kategoriler": [
+        "ahsap-ev"
+      ]
+    },
+    {
+      "soru": "Ahşap ev bakımı nasıl yapılır?",
+      "kategoriler": [
+        "a-frame",
+        "cardak",
+        "otel-bar",
+        "cocuk-oyun-parki"
+      ]
+    },
+    {
+      "soru": "Ahşap evde hangi ahşap kullanılır?",
+      "kategoriler": [
+        "cardak",
+        "cocuk-oyun-parki"
+      ]
+    },
+    {
+      "soru": "Ahşap ev için arazi nasıl hazırlanır?",
+      "kategoriler": [
+        "bungalov",
+        "tiny-house"
+      ]
+    },
+    {
+      "soru": "Ahşap ev için temel gerekir mi?",
+      "kategoriler": [
+        "cardak"
+      ]
+    },
+    {
+      "soru": "Teslimden sonra destek veriyor musunuz?",
+      "kategoriler": [
+        "otel-bar"
+      ]
+    },
+    {
+      "soru": "Kendi planımla ahşap ev yaptırabilir miyim?",
+      "kategoriler": [
+        "villa",
+        "tiny-house",
+        "cardak",
+        "ozel-tasarim"
+      ]
+    },
+    {
+      "soru": "Ahşap ev tasarımında sonradan değişiklik yapılabilir mi?",
+      "kategoriler": [
+        "ozel-tasarim"
+      ]
+    },
+    {
+      "soru": "Otel ve işletmeler için ahşap yapı yapıyor musunuz?",
+      "kategoriler": [
+        "bungalov",
+        "otel-bar"
+      ]
+    },
+    {
+      "soru": "Bahçe için ahşap oyun evi yaptırabilir miyim?",
+      "kategoriler": [
+        "cocuk-oyun-parki"
+      ]
+    }
+  ],
+  "projeler": [
+    {
+      "slug": "a-frame-bungalov",
+      "adres": "/a-frame/a-frame-bungalov",
+      "baslik": "A-Frame Bungalov",
+      "kategori": "a-frame",
+      "kapak": "a-frame-bungalov-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "a-frame-bungalov-01",
+          "alt": "A-frame bungalov – gece ışıklandırılmış bahçe ve köy manzarası"
+        },
+        {
+          "dosya": "a-frame-bungalov-09",
+          "alt": "A-frame bungalov – taş kaplı şömine ve oturma köşesi"
+        },
+        {
+          "dosya": "a-frame-bungalov-06",
+          "alt": "A-frame bungalov – granit tezgâhlı L mutfak"
+        },
+        {
+          "dosya": "a-frame-bungalov-11",
+          "alt": "A-frame bungalov – siyah dolaplı mutfak ve buzdolabı"
+        },
+        {
+          "dosya": "a-frame-bungalov-10",
+          "alt": "A-frame bungalov – eğik ahşap tavanlı banyo ve lavabo"
+        },
+        {
+          "dosya": "a-frame-bungalov-02",
+          "alt": "A-frame bungalov – montaj aşamasında beyaz dolaplar"
+        },
+        {
+          "dosya": "a-frame-bungalov-04",
+          "alt": "A-frame bungalov – yapım sürecinde iç mekân"
+        },
+        {
+          "dosya": "a-frame-bungalov-08",
+          "alt": "A-frame bungalov – inşaat sırasında asma kat merdiveni"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "ahsap-kabin",
+      "adres": "/ozel-tasarim/ahsap-kabin",
+      "baslik": "Ahşap Kabin",
+      "kategori": "ozel-tasarim",
+      "kapak": "ahsap-kabin-04",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "ahsap-kabin-04",
+          "alt": "Ahşap kabin – vitray süslemeli çift kanatlı cam kapı"
+        },
+        {
+          "dosya": "ahsap-kabin-03",
+          "alt": "Ahşap kabin – sürgülü cam kapılı yan cephe"
+        },
+        {
+          "dosya": "ahsap-kabin-05",
+          "alt": "Ahşap kabin – kemerli çatı ve tabelalı ön cephe"
+        },
+        {
+          "dosya": "ahsap-kabin-01",
+          "alt": "Ahşap kabin – kemerli çatı ve antrasit çerçeveli arka cephe"
+        },
+        {
+          "dosya": "ahsap-kabin-02",
+          "alt": "Ahşap kabin – suni çimen üzerinde arka köşe görünümü"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "ahsap-soyunma-kabinleri",
+      "adres": "/ozel-tasarim/ahsap-soyunma-kabinleri",
+      "baslik": "Ahşap Soyunma Kabinleri",
+      "kategori": "ozel-tasarim",
+      "kapak": "ahsap-soyunma-kabinleri-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "ahsap-soyunma-kabinleri-01",
+          "alt": "Ahşap soyunma kabinleri – havuz başında tek kişilik kabin"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-02",
+          "alt": "Ahşap soyunma kabinleri – yan açıdan kabin ve şezlonglar"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-03",
+          "alt": "Ahşap soyunma kabinleri – açık kapı ve iç oturma bankı"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-04",
+          "alt": "Ahşap soyunma kabinleri – kabin içi ve ahşap bank"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-05",
+          "alt": "Ahşap soyunma kabinleri – çimenlik kenarında kabin"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-06",
+          "alt": "Ahşap soyunma kabinleri – bitkiler arasında yandan görünüm"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-07",
+          "alt": "Ahşap soyunma kabinleri – havuz çitinin önünde kabin"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-08",
+          "alt": "Ahşap soyunma kabinleri – terasta çift bölmeli kabin"
+        },
+        {
+          "dosya": "ahsap-soyunma-kabinleri-09",
+          "alt": "Ahşap soyunma kabinleri – palmiyeli terasta çift kabin"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "asma-katli-verandali-bungalov",
+      "adres": "/bungalov/asma-katli-verandali-bungalov",
+      "baslik": "Asma Katlı Verandalı Bungalov",
+      "kategori": "bungalov",
+      "kapak": "asma-katli-verandali-bungalov-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "asma-katli-verandali-bungalov-01",
+          "alt": "Asma katlı verandalı bungalov – shingle çatı ve dağ manzaralı veranda"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-12",
+          "alt": "Asma katlı verandalı bungalov – üçgen alınlıklı ön cephe ve soba bacası"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-08",
+          "alt": "Asma katlı verandalı bungalov – ahşap korkuluklu ön veranda"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-09",
+          "alt": "Asma katlı verandalı bungalov – veranda ve shingle kaplı çatı"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-10",
+          "alt": "Asma katlı verandalı bungalov – ayaklar üzerindeki yan cephe"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-11",
+          "alt": "Asma katlı verandalı bungalov – ağaçların arasından görünüm"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-02",
+          "alt": "Asma katlı verandalı bungalov – tekerlek avizeli yüksek tavan ve asma kat"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-03",
+          "alt": "Asma katlı verandalı bungalov – asma kat altındaki beyaz mutfak"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-04",
+          "alt": "Asma katlı verandalı bungalov – asma kata çıkan merdiven ve mutfak"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-05",
+          "alt": "Asma katlı verandalı bungalov – iki gözlü ocaklı beyaz mutfak tezgâhı"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-06",
+          "alt": "Asma katlı verandalı bungalov – mutfak dolapları ve merdiven"
+        },
+        {
+          "dosya": "asma-katli-verandali-bungalov-07",
+          "alt": "Asma katlı verandalı bungalov – evye ve tezgâh üstü dolaplar"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "bahce-deposu",
+      "adres": "/ozel-tasarim/bahce-deposu",
+      "baslik": "Bahçe Deposu",
+      "kategori": "ozel-tasarim",
+      "kapak": "bahce-deposu-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "bahce-deposu-01",
+          "alt": "Bahçe deposu – sundurmalı ahşap depo ve çift kapı"
+        },
+        {
+          "dosya": "bahce-deposu-02",
+          "alt": "Bahçe deposu – bahçe duvarı önünde karşıdan görünüm"
+        },
+        {
+          "dosya": "bahce-deposu-03",
+          "alt": "Bahçe deposu – yan açıdan sundurma ve kapılar"
+        },
+        {
+          "dosya": "bahce-deposu-04",
+          "alt": "Bahçe deposu – bahçeden genel görünüm"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "deniz-manzarali-terasli-ahsap-ev",
+      "adres": "/ahsap-ev/deniz-manzarali-terasli-ahsap-ev",
+      "baslik": "Deniz Manzaralı Teraslı Ahşap Ev",
+      "kategori": "ahsap-ev",
+      "kapak": "deniz-manzarali-terasli-ahsap-ev-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-01",
+          "alt": "Deniz manzaralı teraslı ahşap ev – yeşil çatı ve deniz kıyısındaki yamaç"
+        },
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-02",
+          "alt": "Deniz manzaralı teraslı ahşap ev – geniş camlı cephe ve dış merdiven"
+        },
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-03",
+          "alt": "Deniz manzaralı teraslı ahşap ev – teras korkulukları ve giriş kapısı"
+        },
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-04",
+          "alt": "Deniz manzaralı teraslı ahşap ev – yan açıdan teras ve büyük pencereler"
+        },
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-05",
+          "alt": "Deniz manzaralı teraslı ahşap ev – antrasit boyalı cephe, teras ve dış merdiven"
+        },
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-06",
+          "alt": "Deniz manzaralı teraslı ahşap ev – köşe camlı teras ve antrasit cephe"
+        },
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-07",
+          "alt": "Deniz manzaralı teraslı ahşap ev – korkuluklu teras ve geniş pencereler"
+        },
+        {
+          "dosya": "deniz-manzarali-terasli-ahsap-ev-08",
+          "alt": "Deniz manzaralı teraslı ahşap ev – saçaklı giriş kapısı ve boyalı merdiven"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "deniz-ustu-ahsap-otel-odalari",
+      "adres": "/otel-bar/deniz-ustu-ahsap-otel-odalari",
+      "baslik": "Deniz Üstü Ahşap Otel Odaları",
+      "kategori": "otel-bar",
+      "kapak": "deniz-ustu-ahsap-otel-odalari-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-01",
+          "alt": "Deniz üstü ahşap otel odaları – su üzerindeki sıra odalar ve teraslar"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-11",
+          "alt": "Deniz üstü ahşap otel odaları – iskele boyunca uzanan oda dizisi"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-02",
+          "alt": "Deniz üstü ahşap otel odaları – hasır paravanlı oda terası"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-03",
+          "alt": "Deniz üstü ahşap otel odaları – denize inen merdivenli teras"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-07",
+          "alt": "Deniz üstü ahşap otel odaları – deniz manzaralı teras oturma grubu"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-09",
+          "alt": "Deniz üstü ahşap otel odaları – çizgili minderli teras koltukları"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-08",
+          "alt": "Deniz üstü ahşap otel odaları – cam kapı önünde teras"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-06",
+          "alt": "Deniz üstü ahşap otel odaları – tavan vantilatörlü yatak odası"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-13",
+          "alt": "Deniz üstü ahşap otel odaları – klimalı odada koltuklar ve çift kişilik yatak"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-14",
+          "alt": "Deniz üstü ahşap otel odaları – tül perdeli geniş pencere önünde yatak"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-15",
+          "alt": "Deniz üstü ahşap otel odaları – çizgili örtülü yatak ve TV ünitesi"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-12",
+          "alt": "Deniz üstü ahşap otel odaları – kapıdan deniz manzaralı oda"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-04",
+          "alt": "Deniz üstü ahşap otel odaları – kütük görünümlü giriş cephesi"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-10",
+          "alt": "Deniz üstü ahşap otel odaları – numaralı oda kapısı ve arka cephe"
+        },
+        {
+          "dosya": "deniz-ustu-ahsap-otel-odalari-05",
+          "alt": "Deniz üstü ahşap otel odaları – odalar arasındaki dar geçit"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "genis-verandali-ahsap-villa",
+      "adres": "/villa/genis-verandali-ahsap-villa",
+      "baslik": "Geniş Verandalı Ahşap Villa",
+      "kategori": "villa",
+      "kapak": "genis-verandali-ahsap-villa-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "genis-verandali-ahsap-villa-01",
+          "alt": "Geniş verandalı ahşap villa – taş kaide ve bahçe yolu ile ön cephe"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-02",
+          "alt": "Geniş verandalı ahşap villa – geniş çimenli bahçeden görünüm"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-03",
+          "alt": "Geniş verandalı ahşap villa – karşıdan büyük pencereli cephe"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-04",
+          "alt": "Geniş verandalı ahşap villa – iki merdivenli çevre verandası"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-06",
+          "alt": "Geniş verandalı ahşap villa – süs bitkileri ve veranda merdiveni"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-07",
+          "alt": "Geniş verandalı ahşap villa – köşeden uzun saçak ve veranda"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-08",
+          "alt": "Geniş verandalı ahşap villa – yan cephe ve iki katlı bölüm"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-19",
+          "alt": "Geniş verandalı ahşap villa – bahçenin köşesinden genel görünüm"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-20",
+          "alt": "Geniş verandalı ahşap villa – uzaktan dikey kadraj"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-22",
+          "alt": "Geniş verandalı ahşap villa – yerleşmiş bahçe ve beyaz taş yol ile ön cephe"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-05",
+          "alt": "Geniş verandalı ahşap villa – saçak altı ve sürme cam kapılar"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-13",
+          "alt": "Geniş verandalı ahşap villa – ahşap deck kaplı veranda"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-23",
+          "alt": "Geniş verandalı ahşap villa – taş kaide üzerinde veranda korkuluğu ve merdiven"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-24",
+          "alt": "Geniş verandalı ahşap villa – verandaya çıkan ahşap merdiven"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-15",
+          "alt": "Geniş verandalı ahşap villa – ahşap tavanlı salon ve mutfak köşesi"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-21",
+          "alt": "Geniş verandalı ahşap villa – salon ve çift kanatlı cam kapılar"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-16",
+          "alt": "Geniş verandalı ahşap villa – gri mavi mutfak dolapları"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-14",
+          "alt": "Geniş verandalı ahşap villa – koridora açılan iç kapılar"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-17",
+          "alt": "Geniş verandalı ahşap villa – pencereli ve cam kapılı oda"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-18",
+          "alt": "Geniş verandalı ahşap villa – verandaya açılan cam kapı"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-09",
+          "alt": "Geniş verandalı ahşap villa – inşaat aşamasında dış cephe"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-10",
+          "alt": "Geniş verandalı ahşap villa – taş kaide üzerinde yapım süreci"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-11",
+          "alt": "Geniş verandalı ahşap villa – yapım sırasında yan cephe"
+        },
+        {
+          "dosya": "genis-verandali-ahsap-villa-12",
+          "alt": "Geniş verandalı ahşap villa – iskele ve veranda kirişleri"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "genis-verandali-asma-katli-bungalov",
+      "adres": "/bungalov/genis-verandali-asma-katli-bungalov",
+      "baslik": "Geniş Verandalı Asma Katlı Bungalov",
+      "kategori": "bungalov",
+      "kapak": "genis-verandali-asma-katli-bungalov-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-01",
+          "alt": "Geniş verandalı asma katlı bungalov – çimenlik üzerinde ön veranda"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-02",
+          "alt": "Geniş verandalı asma katlı bungalov – köşeden veranda ve yan cephe"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-03",
+          "alt": "Geniş verandalı asma katlı bungalov – karşıdan ön cephe ve basamaklar"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-11",
+          "alt": "Geniş verandalı asma katlı bungalov – ahşap basamaklı giriş verandası"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-12",
+          "alt": "Geniş verandalı asma katlı bungalov – yan açıdan çatı ve veranda"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-13",
+          "alt": "Geniş verandalı asma katlı bungalov – uzun yan cephe ve pencereler"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-14",
+          "alt": "Geniş verandalı asma katlı bungalov – yakından veranda korkulukları"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-15",
+          "alt": "Geniş verandalı asma katlı bungalov – küçük pencereli arka cephe"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-16",
+          "alt": "Geniş verandalı asma katlı bungalov – arka köşeden yan duvar ve koyu pencereler"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-08",
+          "alt": "Geniş verandalı asma katlı bungalov – asma kat ve merdivenli salon"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-07",
+          "alt": "Geniş verandalı asma katlı bungalov – yüksek tavanlı salon ve pencereler"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-17",
+          "alt": "Geniş verandalı asma katlı bungalov – asma kat korkuluğu ve gün ışığı alan salon"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-09",
+          "alt": "Geniş verandalı asma katlı bungalov – mutfak ve asma kat merdiveni"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-10",
+          "alt": "Geniş verandalı asma katlı bungalov – merdiven altı mutfak dolapları"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-04",
+          "alt": "Geniş verandalı asma katlı bungalov – merdiven korkuluğu arkasında mutfak"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-05",
+          "alt": "Geniş verandalı asma katlı bungalov – duş alanı ve klozetli banyo"
+        },
+        {
+          "dosya": "genis-verandali-asma-katli-bungalov-06",
+          "alt": "Geniş verandalı asma katlı bungalov – lavabo ve pencereli banyo"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "gri-catili-verandali-ahsap-ev",
+      "adres": "/ahsap-ev/gri-catili-verandali-ahsap-ev",
+      "baslik": "Gri Çatılı Verandalı Ahşap Ev",
+      "kategori": "ahsap-ev",
+      "kapak": "gri-catili-verandali-ahsap-ev-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "gri-catili-verandali-ahsap-ev-01",
+          "alt": "Gri çatılı verandalı ahşap ev – taş kaideli köşe veranda"
+        },
+        {
+          "dosya": "gri-catili-verandali-ahsap-ev-02",
+          "alt": "Gri çatılı verandalı ahşap ev – süs tekerlekli giriş ve ön bahçe"
+        },
+        {
+          "dosya": "gri-catili-verandali-ahsap-ev-03",
+          "alt": "Gri çatılı verandalı ahşap ev – çiçekli yol ve giriş merdiveni"
+        },
+        {
+          "dosya": "gri-catili-verandali-ahsap-ev-04",
+          "alt": "Gri çatılı verandalı ahşap ev – yan veranda ve çimenli bahçe"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "hasir-catili-plaj-bari",
+      "adres": "/otel-bar/hasir-catili-plaj-bari",
+      "baslik": "Hasır Çatılı Plaj Barı",
+      "kategori": "otel-bar",
+      "kapak": "hasir-catili-plaj-bari-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "hasir-catili-plaj-bari-01",
+          "alt": "Hasır çatılı plaj barı – palmiyeler arasında ahşap bar tezgâhı"
+        },
+        {
+          "dosya": "hasir-catili-plaj-bari-04",
+          "alt": "Hasır çatılı plaj barı – deniz kenarında ahşap direkli tezgâh"
+        },
+        {
+          "dosya": "hasir-catili-plaj-bari-02",
+          "alt": "Hasır çatılı plaj barı – gözetleme kulesi önünde bar alanı"
+        },
+        {
+          "dosya": "hasir-catili-plaj-bari-03",
+          "alt": "Hasır çatılı plaj barı – gün batımında hasır çatı silueti"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "iki-katli-ahsap-cami",
+      "adres": "/ozel-tasarim/iki-katli-ahsap-cami",
+      "baslik": "İki Katlı Ahşap Cami",
+      "kategori": "ozel-tasarim",
+      "kapak": "iki-katli-ahsap-cami-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "iki-katli-ahsap-cami-01",
+          "alt": "İki katlı ahşap cami – minare ve ahşap süslemeli giriş revakı"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-13",
+          "alt": "İki katlı ahşap cami – köşeden minare ve yan cephe"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-02",
+          "alt": "İki katlı ahşap cami – taş döşeli avludan revak"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-06",
+          "alt": "İki katlı ahşap cami – iki katlı revakın yandan görünümü"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-07",
+          "alt": "İki katlı ahşap cami – peyzaj alanından yan cephe"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-08",
+          "alt": "İki katlı ahşap cami – çam fidanları ve revaklı cephe"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-09",
+          "alt": "İki katlı ahşap cami – uzun yan cephe ve pencere sıraları"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-10",
+          "alt": "İki katlı ahşap cami – arka cephe ve üçgen alınlık"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-11",
+          "alt": "İki katlı ahşap cami – sivri tepelikli arka cephe"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-12",
+          "alt": "İki katlı ahşap cami – uzaktan arka cephe"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-03",
+          "alt": "İki katlı ahşap cami – avludaki dış merdivenli ek bina"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-04",
+          "alt": "İki katlı ahşap cami – ek binanın çift kollu merdiveni"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-05",
+          "alt": "İki katlı ahşap cami – ek binanın yan cephesi ve merdiven"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-15",
+          "alt": "İki katlı ahşap cami – turkuaz halılı harimin geniş açılı görünümü"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-16",
+          "alt": "İki katlı ahşap cami – ahşap tavan ve iki sıra pencereli yan duvar"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-17",
+          "alt": "İki katlı ahşap cami – avize, mihrap ve minber"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-18",
+          "alt": "İki katlı ahşap cami – ahşap minber ve halı saflar"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-19",
+          "alt": "İki katlı ahşap cami – kırma ahşap tavanlı harim ve mihrap duvarı"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-20",
+          "alt": "İki katlı ahşap cami – karşıdan mihrap ve avizeli harim"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-21",
+          "alt": "İki katlı ahşap cami – mahfil katı ve ahşap merdiven"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-22",
+          "alt": "İki katlı ahşap cami – mahfil korkuluğu, avize ve pencere sıraları"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-23",
+          "alt": "İki katlı ahşap cami – mahfilden harime yukarıdan bakış"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-24",
+          "alt": "İki katlı ahşap cami – oymalı panelli çift kanatlı ahşap kapı"
+        },
+        {
+          "dosya": "iki-katli-ahsap-cami-14",
+          "alt": "İki katlı ahşap cami – yapım aşamasında minare ve mihrap çıkıntılı cephe"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "iskele-giris-kulubesi",
+      "adres": "/ozel-tasarim/iskele-giris-kulubesi",
+      "baslik": "İskele Giriş Kulübesi",
+      "kategori": "ozel-tasarim",
+      "kapak": "iskele-giris-kulubesi-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "iskele-giris-kulubesi-01",
+          "alt": "İskele giriş kulübesi – deniz kıyısında saçaklı ahşap kulübe"
+        },
+        {
+          "dosya": "iskele-giris-kulubesi-02",
+          "alt": "İskele giriş kulübesi – pencereli ön cephe ve saçak altı"
+        },
+        {
+          "dosya": "iskele-giris-kulubesi-03",
+          "alt": "İskele giriş kulübesi – bayraklı iskele meydanında görünüm"
+        },
+        {
+          "dosya": "iskele-giris-kulubesi-04",
+          "alt": "İskele giriş kulübesi – deniz ve iskele ile uzaktan görünüm"
+        },
+        {
+          "dosya": "iskele-giris-kulubesi-05",
+          "alt": "İskele giriş kulübesi – vapur iskelesi önünde kulübe"
+        },
+        {
+          "dosya": "iskele-giris-kulubesi-06",
+          "alt": "İskele giriş kulübesi – yan açıdan geniş saçak ve banklar"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "kaydirakli-sato-oyun-evi",
+      "adres": "/cocuk-oyun-parki/kaydirakli-sato-oyun-evi",
+      "baslik": "Kaydıraklı Şato Oyun Evi",
+      "kategori": "cocuk-oyun-parki",
+      "kapak": "kaydirakli-sato-oyun-evi-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-01",
+          "alt": "Kaydıraklı şato oyun evi – akşam ışıklandırmasıyla bahçe görünümü"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-16",
+          "alt": "Kaydıraklı şato oyun evi – gece aydınlatılmış ön cephe"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-07",
+          "alt": "Kaydıraklı şato oyun evi – yeşil kaydıraklı kule ve açık mavi cephe"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-08",
+          "alt": "Kaydıraklı şato oyun evi – palmiyeli bahçede geniş açı"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-09",
+          "alt": "Kaydıraklı şato oyun evi – yan açıdan kule ve kaydırak"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-10",
+          "alt": "Kaydıraklı şato oyun evi – basamak taşlı bahçe yolu"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-11",
+          "alt": "Kaydıraklı şato oyun evi – gün batımında çatı pencereleri"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-15",
+          "alt": "Kaydıraklı şato oyun evi – kule balkonu ve kaydırak"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-19",
+          "alt": "Kaydıraklı şato oyun evi – evin yanından kaydırak ve kule"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-22",
+          "alt": "Kaydıraklı şato oyun evi – güneş ışığında yan cephe"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-12",
+          "alt": "Kaydıraklı şato oyun evi – arka bahçe ve salıncak"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-13",
+          "alt": "Kaydıraklı şato oyun evi – salıncak ve arka cephe penceresi"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-20",
+          "alt": "Kaydıraklı şato oyun evi – A ayaklı salıncak ve arka cephe"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-21",
+          "alt": "Kaydıraklı şato oyun evi – bahçe salıncakları ve yan duvar"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-14",
+          "alt": "Kaydıraklı şato oyun evi – dar yan geçit"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-06",
+          "alt": "Kaydıraklı şato oyun evi – beyaz korkuluklu üst kat terası"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-05",
+          "alt": "Kaydıraklı şato oyun evi – kemerli kapıdan ahşap iç koridor"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-02",
+          "alt": "Kaydıraklı şato oyun evi – üst kata çıkan ahşap merdiven"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-03",
+          "alt": "Kaydıraklı şato oyun evi – spot aydınlatmalı oyun odası ve merdiven"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-04",
+          "alt": "Kaydıraklı şato oyun evi – çatı katı ve beyaz korkuluklar"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-17",
+          "alt": "Kaydıraklı şato oyun evi – renkli yer minderli oyun alanı"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-18",
+          "alt": "Kaydıraklı şato oyun evi – ahşap duvarlı oyun odası ve merdiven"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-23",
+          "alt": "Kaydıraklı şato oyun evi – boya öncesi ahşap cephe"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-24",
+          "alt": "Kaydıraklı şato oyun evi – yapım aşamasında kule ve ustalar"
+        },
+        {
+          "dosya": "kaydirakli-sato-oyun-evi-25",
+          "alt": "Kaydıraklı şato oyun evi – boyama sürecinde bahçeden görünüm"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "kemerli-pod-bungalov",
+      "adres": "/bungalov/kemerli-pod-bungalov",
+      "baslik": "Kemerli Pod Bungalov",
+      "kategori": "bungalov",
+      "kapak": "kemerli-pod-bungalov-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "kemerli-pod-bungalov-01",
+          "alt": "Kemerli pod bungalov – shingle kaplı kemerli uçlar ve ahşap deck"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-07",
+          "alt": "Kemerli pod bungalov – iki kemerli bölüm arasında ahşap cephe"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-08",
+          "alt": "Kemerli pod bungalov – pencereli yan cephe ve deck"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-02",
+          "alt": "Kemerli pod bungalov – kemerli pencere önünde oturma grubu"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-03",
+          "alt": "Kemerli pod bungalov – açık kemerli kapıdan doğa manzarası"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-04",
+          "alt": "Kemerli pod bungalov – iki kemerli kapı arasındaki oturma odası"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-09",
+          "alt": "Kemerli pod bungalov – mutfak tezgâhı ve oturma alanı"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-05",
+          "alt": "Kemerli pod bungalov – kemerli duvar önünde ahşap dolap"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-06",
+          "alt": "Kemerli pod bungalov – kapıdan oturma alanına bakış"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-10",
+          "alt": "Kemerli pod bungalov – inşaat alanında yapım aşaması"
+        },
+        {
+          "dosya": "kemerli-pod-bungalov-11",
+          "alt": "Kemerli pod bungalov – yapım sırasında kemerli giriş bölümü"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "kiremit-catili-ahsap-ev",
+      "adres": "/ahsap-ev/kiremit-catili-ahsap-ev",
+      "baslik": "Kiremit Çatılı Ahşap Ev",
+      "kategori": "ahsap-ev",
+      "kapak": "kiremit-catili-ahsap-ev-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "kiremit-catili-ahsap-ev-01",
+          "alt": "Kiremit çatılı ahşap ev – taş basamaklı bahçe yolu ve ön veranda"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-02",
+          "alt": "Kiremit çatılı ahşap ev – çimenli bahçeden ön cephe"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-03",
+          "alt": "Kiremit çatılı ahşap ev – yan açıdan veranda ve süs bitkileri"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-04",
+          "alt": "Kiremit çatılı ahşap ev – bahçe lambası ve yan cephe"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-05",
+          "alt": "Kiremit çatılı ahşap ev – spiral budanmış bitkilerle çevrili veranda"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-06",
+          "alt": "Kiremit çatılı ahşap ev – sürgülü cam kapılı yan cephe"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-19",
+          "alt": "Kiremit çatılı ahşap ev – bahçeden köşe veranda ve sürgülü kapı"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-07",
+          "alt": "Kiremit çatılı ahşap ev – ortada şömineli oturma alanı"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-08",
+          "alt": "Kiremit çatılı ahşap ev – şömine ve L koltuklu salon"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-11",
+          "alt": "Kiremit çatılı ahşap ev – avizeli salon ve şöminenin dikey görünümü"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-12",
+          "alt": "Kiremit çatılı ahşap ev – kristal avizeler ve şömineli salon"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-09",
+          "alt": "Kiremit çatılı ahşap ev – yemek masası ve mutfağa bakan salon"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-10",
+          "alt": "Kiremit çatılı ahşap ev – avizeli salondan mutfak ve yemek alanı"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-13",
+          "alt": "Kiremit çatılı ahşap ev – iç koridor ve ahşap kapılar"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-15",
+          "alt": "Kiremit çatılı ahşap ev – iki tek kişilik yataklı yatak odası"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-16",
+          "alt": "Kiremit çatılı ahşap ev – avizeli yatak odası"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-14",
+          "alt": "Kiremit çatılı ahşap ev – cam duşakabinli mozaik banyo"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-20",
+          "alt": "Kiremit çatılı ahşap ev – ahşap lavabo dolaplı banyo"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-17",
+          "alt": "Kiremit çatılı ahşap ev – yapım aşamasında veranda ve cephe"
+        },
+        {
+          "dosya": "kiremit-catili-ahsap-ev-18",
+          "alt": "Kiremit çatılı ahşap ev – peyzaj öncesi bahçe ve yan cephe"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "lila-renkli-cocuk-oyun-evi",
+      "adres": "/cocuk-oyun-parki/lila-renkli-cocuk-oyun-evi",
+      "baslik": "Lila Renkli Çocuk Oyun Evi",
+      "kategori": "cocuk-oyun-parki",
+      "kapak": "lila-renkli-cocuk-oyun-evi-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "lila-renkli-cocuk-oyun-evi-01",
+          "alt": "Lila renkli çocuk oyun evi – beyaz kapı ve çiçeklikli pencereler"
+        },
+        {
+          "dosya": "lila-renkli-cocuk-oyun-evi-05",
+          "alt": "Lila renkli çocuk oyun evi – yan açıdan çatı ve cephe"
+        },
+        {
+          "dosya": "lila-renkli-cocuk-oyun-evi-03",
+          "alt": "Lila renkli çocuk oyun evi – atölye avlusunda teslim öncesi"
+        },
+        {
+          "dosya": "lila-renkli-cocuk-oyun-evi-02",
+          "alt": "Lila renkli çocuk oyun evi – uzaktan ön cephe"
+        },
+        {
+          "dosya": "lila-renkli-cocuk-oyun-evi-04",
+          "alt": "Lila renkli çocuk oyun evi – köşeden yan pencereler"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "lombar-pencereli-modern-tiny-house",
+      "adres": "/tiny-house/lombar-pencereli-modern-tiny-house",
+      "baslik": "Lombar Pencereli Modern Tiny House",
+      "kategori": "tiny-house",
+      "kapak": "lombar-pencereli-modern-tiny-house-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "lombar-pencereli-modern-tiny-house-01",
+          "alt": "Lombar pencereli modern tiny house – çevresi teraslı yan cephe"
+        },
+        {
+          "dosya": "lombar-pencereli-modern-tiny-house-05",
+          "alt": "Lombar pencereli modern tiny house – basamaklı giriş terası"
+        },
+        {
+          "dosya": "lombar-pencereli-modern-tiny-house-03",
+          "alt": "Lombar pencereli modern tiny house – karşıdan teras ve cephe"
+        },
+        {
+          "dosya": "lombar-pencereli-modern-tiny-house-04",
+          "alt": "Lombar pencereli modern tiny house – çapraz korkuluklu teras"
+        },
+        {
+          "dosya": "lombar-pencereli-modern-tiny-house-02",
+          "alt": "Lombar pencereli modern tiny house – turuncu cephe ve köşe teras"
+        },
+        {
+          "dosya": "lombar-pencereli-modern-tiny-house-06",
+          "alt": "Lombar pencereli modern tiny house – ahşap tezgâhlı mutfak ve koridor"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "marka-vitrini",
+      "adres": "/ozel-tasarim/marka-vitrini",
+      "baslik": "Marka Vitrini",
+      "kategori": "ozel-tasarim",
+      "kapak": "marka-vitrini-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "marka-vitrini-01",
+          "alt": "Marka vitrini – açık kapılı ahşap teşhir alanı"
+        },
+        {
+          "dosya": "marka-vitrini-02",
+          "alt": "Marka vitrini – pergolalı teşhir alanı ve ahşap merdiven süsü"
+        },
+        {
+          "dosya": "marka-vitrini-07",
+          "alt": "Marka vitrini – köşeden pergola ve ahşap deck"
+        },
+        {
+          "dosya": "marka-vitrini-08",
+          "alt": "Marka vitrini – kapalı bölüm ve açık pergola"
+        },
+        {
+          "dosya": "marka-vitrini-09",
+          "alt": "Marka vitrini – deniz manzaralı terasta yan görünüm"
+        },
+        {
+          "dosya": "marka-vitrini-06",
+          "alt": "Marka vitrini – kapalı kapılar ve pergola"
+        },
+        {
+          "dosya": "marka-vitrini-04",
+          "alt": "Marka vitrini – kapalı ahşap kapılar ve deck"
+        },
+        {
+          "dosya": "marka-vitrini-05",
+          "alt": "Marka vitrini – karşıdan kapalı ön cephe"
+        },
+        {
+          "dosya": "marka-vitrini-03",
+          "alt": "Marka vitrini – açılır ahşap kapı kanatları"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "minareli-tek-katli-ahsap-cami",
+      "adres": "/ozel-tasarim/minareli-tek-katli-ahsap-cami",
+      "baslik": "Minareli Tek Katlı Ahşap Cami",
+      "kategori": "ozel-tasarim",
+      "kapak": "minareli-tek-katli-ahsap-cami-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-01",
+          "alt": "Minareli tek katlı ahşap cami – akşam ışığında revak ve minare"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-04",
+          "alt": "Minareli tek katlı ahşap cami – park içinde yan açıdan görünüm"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-05",
+          "alt": "Minareli tek katlı ahşap cami – turuncu kapılar ve ahşap revak"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-07",
+          "alt": "Minareli tek katlı ahşap cami – aydınlatılmış minare ve saçak"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-08",
+          "alt": "Minareli tek katlı ahşap cami – karşıdan giriş cephesi"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-09",
+          "alt": "Minareli tek katlı ahşap cami – alacakaranlıkta ön cephe"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-06",
+          "alt": "Minareli tek katlı ahşap cami – minare ve yan pencere"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-03",
+          "alt": "Minareli tek katlı ahşap cami – parkın yolundan uzaktan görünüm"
+        },
+        {
+          "dosya": "minareli-tek-katli-ahsap-cami-02",
+          "alt": "Minareli tek katlı ahşap cami – yapım aşamasında revak"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "modern-bahce-odasi-ve-depo",
+      "adres": "/ozel-tasarim/modern-bahce-odasi-ve-depo",
+      "baslik": "Modern Bahçe Odası ve Depo",
+      "kategori": "ozel-tasarim",
+      "kapak": "modern-bahce-odasi-ve-depo-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "modern-bahce-odasi-ve-depo-01",
+          "alt": "Modern bahçe odası ve depo – geniş çimenlikte ahşap kaplı oda"
+        },
+        {
+          "dosya": "modern-bahce-odasi-ve-depo-03",
+          "alt": "Modern bahçe odası ve depo – cam cepheli köşe ve beton kaide"
+        },
+        {
+          "dosya": "modern-bahce-odasi-ve-depo-02",
+          "alt": "Modern bahçe odası ve depo – ağaçların arasında montaj aşaması"
+        },
+        {
+          "dosya": "modern-bahce-odasi-ve-depo-04",
+          "alt": "Modern bahçe odası ve depo – ağaç yanındaki ahşap depo"
+        },
+        {
+          "dosya": "modern-bahce-odasi-ve-depo-05",
+          "alt": "Modern bahçe odası ve depo – kırmızı çakıllı alanda depo"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "romorklu-tiny-house",
+      "adres": "/tiny-house/romorklu-tiny-house",
+      "baslik": "Römorklu Tiny House",
+      "kategori": "tiny-house",
+      "kapak": "romorklu-tiny-house-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "romorklu-tiny-house-01",
+          "alt": "Römorklu tiny house – siyah çerçeveli pencereli dar ön cephe"
+        },
+        {
+          "dosya": "romorklu-tiny-house-04",
+          "alt": "Römorklu tiny house – şasi üzerindeki uzun yan cephe"
+        },
+        {
+          "dosya": "romorklu-tiny-house-02",
+          "alt": "Römorklu tiny house – laminat zeminli iç mekân ve mutfak dolabı"
+        },
+        {
+          "dosya": "romorklu-tiny-house-03",
+          "alt": "Römorklu tiny house – pencereli iç mekân ve cam kapı"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "sekizgen-otel-cardagi",
+      "adres": "/cardak/sekizgen-otel-cardagi",
+      "baslik": "Sekizgen Otel Çardağı",
+      "kategori": "cardak",
+      "kapak": "sekizgen-otel-cardagi-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "sekizgen-otel-cardagi-01",
+          "alt": "Sekizgen otel çardağı – havuz başında yuvarlak deck üzerinde"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-05",
+          "alt": "Sekizgen otel çardağı – otel binası önünde camlı bölümler"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-04",
+          "alt": "Sekizgen otel çardağı – havuz ve otel ile uzaktan görünüm"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-02",
+          "alt": "Sekizgen otel çardağı – kütük görünümlü kapalı duvarlar"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-03",
+          "alt": "Sekizgen otel çardağı – yakından shingle çatı ve saçak"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-08",
+          "alt": "Sekizgen otel çardağı – ahşap deck ve açık pencereler"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-09",
+          "alt": "Sekizgen otel çardağı – çimenlik kenarında yan görünüm"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-10",
+          "alt": "Sekizgen otel çardağı – geniş yuvarlak ahşap deck"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-06",
+          "alt": "Sekizgen otel çardağı – kemerli girişli açık çardak"
+        },
+        {
+          "dosya": "sekizgen-otel-cardagi-07",
+          "alt": "Sekizgen otel çardağı – içeriden ışınsal ahşap tavan kirişleri"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "siyah-cepheli-bahce-ofisi",
+      "adres": "/tiny-house/siyah-cepheli-bahce-ofisi",
+      "baslik": "Siyah Cepheli Bahçe Ofisi",
+      "kategori": "tiny-house",
+      "kapak": "siyah-cepheli-bahce-ofisi-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-01",
+          "alt": "Siyah cepheli bahçe ofisi – ağaçlı bahçede sürgülü cam kapılı cephe"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-02",
+          "alt": "Siyah cepheli bahçe ofisi – çatı pencereli genel görünüm"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-07",
+          "alt": "Siyah cepheli bahçe ofisi – çit önünde cam cephe"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-05",
+          "alt": "Siyah cepheli bahçe ofisi – karşıdan geniş cam cephe"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-06",
+          "alt": "Siyah cepheli bahçe ofisi – yan pencere ve cam kapı"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-03",
+          "alt": "Siyah cepheli bahçe ofisi – ağaç gövdesi yanında yan cephe"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-04",
+          "alt": "Siyah cepheli bahçe ofisi – giriş basamakları ve dar yan cephe"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-08",
+          "alt": "Siyah cepheli bahçe ofisi – ağaçların arasından uzaktan görünüm"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-09",
+          "alt": "Siyah cepheli bahçe ofisi – çatı pencereli ahşap iç mekân"
+        },
+        {
+          "dosya": "siyah-cepheli-bahce-ofisi-10",
+          "alt": "Siyah cepheli bahçe ofisi – çalışma koltuğu ve masa köşesi"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "tas-duvarli-bahce-cardagi",
+      "adres": "/cardak/tas-duvarli-bahce-cardagi",
+      "baslik": "Taş Duvarlı Bahçe Çardağı",
+      "kategori": "cardak",
+      "kapak": "tas-duvarli-bahce-cardagi-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "tas-duvarli-bahce-cardagi-01",
+          "alt": "Taş duvarlı bahçe çardağı – yeşil çatılı çardak ve depo kutusu"
+        },
+        {
+          "dosya": "tas-duvarli-bahce-cardagi-02",
+          "alt": "Taş duvarlı bahçe çardağı – ormanlık bahçede genel görünüm"
+        },
+        {
+          "dosya": "tas-duvarli-bahce-cardagi-03",
+          "alt": "Taş duvarlı bahçe çardağı – korkuluklu giriş ve iç oturma alanı"
+        },
+        {
+          "dosya": "tas-duvarli-bahce-cardagi-04",
+          "alt": "Taş duvarlı bahçe çardağı – şömine ve ahşap oturma bankları"
+        },
+        {
+          "dosya": "tas-duvarli-bahce-cardagi-05",
+          "alt": "Taş duvarlı bahçe çardağı – köşe bank ve ortadaki asma şömine"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "tas-kaideli-verandali-ahsap-ev",
+      "adres": "/ahsap-ev/tas-kaideli-verandali-ahsap-ev",
+      "baslik": "Taş Kaideli Verandalı Ahşap Ev",
+      "kategori": "ahsap-ev",
+      "kapak": "tas-kaideli-verandali-ahsap-ev-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-01",
+          "alt": "Taş kaideli verandalı ahşap ev – çimenli bahçe ve taş yol ile ön cephe"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-14",
+          "alt": "Taş kaideli verandalı ahşap ev – bahçe yolundan uzaktan görünüm"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-15",
+          "alt": "Taş kaideli verandalı ahşap ev – bahçe duvarı ve çevresiyle genel görünüm"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-16",
+          "alt": "Taş kaideli verandalı ahşap ev – taş duvar önünde kütük kaplamalı bahçe deposu"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-17",
+          "alt": "Taş kaideli verandalı ahşap ev – çift kanat kapılı bahçe deposu ve taş duvar"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-02",
+          "alt": "Taş kaideli verandalı ahşap ev – döner merdivenli, yüksek tavanlı salon"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-03",
+          "alt": "Taş kaideli verandalı ahşap ev – asma kata çıkan siyah döner merdiven"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-04",
+          "alt": "Taş kaideli verandalı ahşap ev – ahşap kirişli tavan ve salon penceresi"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-05",
+          "alt": "Taş kaideli verandalı ahşap ev – döner merdiven ve iç kapılar"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-06",
+          "alt": "Taş kaideli verandalı ahşap ev – avizeli salonun dikey görünümü"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-07",
+          "alt": "Taş kaideli verandalı ahşap ev – geniş açıdan salon ve asma kat"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-08",
+          "alt": "Taş kaideli verandalı ahşap ev – salon ve mutfağın panoramik görünümü"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-13",
+          "alt": "Taş kaideli verandalı ahşap ev – kırmızı buzdolaplı ahşap mutfak"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-09",
+          "alt": "Taş kaideli verandalı ahşap ev – inşaat sırasında taş yol ve ön cephe"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-10",
+          "alt": "Taş kaideli verandalı ahşap ev – inşaat aşamasında veranda korkulukları"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-11",
+          "alt": "Taş kaideli verandalı ahşap ev – yapım sürecinde ön veranda"
+        },
+        {
+          "dosya": "tas-kaideli-verandali-ahsap-ev-12",
+          "alt": "Taş kaideli verandalı ahşap ev – taş kaide üzerindeki köşe veranda"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "verandali-kucuk-a-frame",
+      "adres": "/a-frame/verandali-kucuk-a-frame",
+      "baslik": "Verandalı Küçük A-Frame",
+      "kategori": "a-frame",
+      "kapak": "verandali-kucuk-a-frame-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "verandali-kucuk-a-frame-01",
+          "alt": "Verandalı küçük A-frame – ahşap deck ve shingle kaplı çatı"
+        },
+        {
+          "dosya": "verandali-kucuk-a-frame-02",
+          "alt": "Verandalı küçük A-frame – bahçede yandan genel görünüm"
+        },
+        {
+          "dosya": "verandali-kucuk-a-frame-03",
+          "alt": "Verandalı küçük A-frame – karşıdan üçgen ön cephe"
+        },
+        {
+          "dosya": "verandali-kucuk-a-frame-04",
+          "alt": "Verandalı küçük A-frame – yuvarlak pencere ve camlı giriş kapısı"
+        },
+        {
+          "dosya": "verandali-kucuk-a-frame-05",
+          "alt": "Verandalı küçük A-frame – çit önünde deck ve ön cephe"
+        },
+        {
+          "dosya": "verandali-kucuk-a-frame-06",
+          "alt": "Verandalı küçük A-frame – taş duvarlı bahçede uzaktan görünüm"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    },
+    {
+      "slug": "yol-kenari-satis-tezgahlari",
+      "adres": "/ozel-tasarim/yol-kenari-satis-tezgahlari",
+      "baslik": "Yol Kenarı Satış Tezgâhları",
+      "kategori": "ozel-tasarim",
+      "kapak": "yol-kenari-satis-tezgahlari-01",
+      "konum": null,
+      "il": null,
+      "one_cikan": null,
+      "etiketler": null,
+      "fotograflar": [
+        {
+          "dosya": "yol-kenari-satis-tezgahlari-01",
+          "alt": "Yol kenarı satış tezgâhları – ağaçlı yol boyunca beşli tezgâh dizisi"
+        },
+        {
+          "dosya": "yol-kenari-satis-tezgahlari-02",
+          "alt": "Yol kenarı satış tezgâhları – kaldırım üzerinde yan açıdan sıra"
+        },
+        {
+          "dosya": "yol-kenari-satis-tezgahlari-07",
+          "alt": "Yol kenarı satış tezgâhları – karşı kaldırımdan genel görünüm"
+        },
+        {
+          "dosya": "yol-kenari-satis-tezgahlari-05",
+          "alt": "Yol kenarı satış tezgâhları – kapalı yan duvar ve tezgâh dizisi"
+        },
+        {
+          "dosya": "yol-kenari-satis-tezgahlari-06",
+          "alt": "Yol kenarı satış tezgâhları – arka cepheden kaldırım görünümü"
+        },
+        {
+          "dosya": "yol-kenari-satis-tezgahlari-03",
+          "alt": "Yol kenarı satış tezgâhları – ahşap tezgâh ve aydınlatma yeri"
+        },
+        {
+          "dosya": "yol-kenari-satis-tezgahlari-04",
+          "alt": "Yol kenarı satış tezgâhları – yakından tezgâh bölmesi ve saçak"
+        }
+      ],
+      "kapali_alan_m2": null,
+      "kat_sayisi": null,
+      "oda_sayisi": null,
+      "ahsap_turu": null,
+      "tasiyici_sistem": null,
+      "cati_kaplama": null,
+      "dis_cephe": null,
+      "yalitim": null,
+      "dograma": null,
+      "ic_kaplama": null,
+      "teslim_suresi": null,
+      "notlar": null,
+      "govde": ""
+    }
+  ]
+}

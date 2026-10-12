@@ -180,12 +180,14 @@
             "Bungalov",
             "Villa",
             "Tiny House",
-            "A-Frame",
+            "Üçgen Ev",
             "Çardak",
             "Otel-Bar",
             "Çocuk Oyun Parkı",
+            "Ahşap Cami",
             "Özel Tasarım"
-          ]
+          ],
+          "not": "Seçenekler src/data/site.ts kategorilerinin adlarıdır (sıra da oradan). 12 Ekim 2026, müşteri onaylı: \"A-Frame\" → \"Üçgen Ev\", \"Ahşap Cami\" eklendi. Alan adı (yapi_tipi) değişmedi."
         },
         {
           "ad": "alan_m2",

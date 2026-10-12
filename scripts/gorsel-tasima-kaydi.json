@@ -2042,5 +2042,478 @@
     "proje": "genis-verandali-asma-katli-bungalov",
     "baslik": "Geniş Verandalı Asma Katlı Bungalov",
     "kategori": "bungalov"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-01",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-01",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-02",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-02",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-03",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-03",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-04",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-04",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-05",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-05",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-06",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-06",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-07",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-07",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-08",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-08",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-09",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-09",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-10",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-10",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-11",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-11",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-12",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-12",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-13",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-13",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-14",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-14",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-15",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-15",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-16",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-16",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-17",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-17",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-18",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-18",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-19",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-19",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-20",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-20",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-21",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-21",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-22",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-22",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-23",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-23",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/iki-katli-ahsap-cami/iki-katli-ahsap-cami-24",
+    "yeni": "/images/ahsap-cami/iki-katli-ahsap-cami/iki-katli-ahsap-cami-24",
+    "proje": "iki-katli-ahsap-cami",
+    "baslik": "İki Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-01",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-01",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-02",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-02",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-03",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-03",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-04",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-04",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-05",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-05",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-06",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-06",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-07",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-07",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-08",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-08",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/ozel-tasarim/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-09",
+    "yeni": "/images/ahsap-cami/minareli-tek-katli-ahsap-cami/minareli-tek-katli-ahsap-cami-09",
+    "proje": "minareli-tek-katli-ahsap-cami",
+    "baslik": "Minareli Tek Katlı Ahşap Cami",
+    "kategori": "ahsap-cami"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-01",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-02",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-02",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-04",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-04",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-06",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-06",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-08",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-08",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-09",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-09",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-10",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-10",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/a-frame-bungalov/a-frame-bungalov-11",
+    "yeni": "/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-11",
+    "proje": "a-frame-bungalov",
+    "baslik": "A-Frame Bungalov",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-01",
+    "yeni": "/images/ucgen-ev/verandali-kucuk-a-frame/verandali-kucuk-a-frame-01",
+    "proje": "verandali-kucuk-a-frame",
+    "baslik": "Verandalı Küçük A-Frame",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-02",
+    "yeni": "/images/ucgen-ev/verandali-kucuk-a-frame/verandali-kucuk-a-frame-02",
+    "proje": "verandali-kucuk-a-frame",
+    "baslik": "Verandalı Küçük A-Frame",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-03",
+    "yeni": "/images/ucgen-ev/verandali-kucuk-a-frame/verandali-kucuk-a-frame-03",
+    "proje": "verandali-kucuk-a-frame",
+    "baslik": "Verandalı Küçük A-Frame",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-04",
+    "yeni": "/images/ucgen-ev/verandali-kucuk-a-frame/verandali-kucuk-a-frame-04",
+    "proje": "verandali-kucuk-a-frame",
+    "baslik": "Verandalı Küçük A-Frame",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-05",
+    "yeni": "/images/ucgen-ev/verandali-kucuk-a-frame/verandali-kucuk-a-frame-05",
+    "proje": "verandali-kucuk-a-frame",
+    "baslik": "Verandalı Küçük A-Frame",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/a-frame/verandali-kucuk-a-frame/verandali-kucuk-a-frame-06",
+    "yeni": "/images/ucgen-ev/verandali-kucuk-a-frame/verandali-kucuk-a-frame-06",
+    "proje": "verandali-kucuk-a-frame",
+    "baslik": "Verandalı Küçük A-Frame",
+    "kategori": "ucgen-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-01",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-01",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-02",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-02",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-03",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-03",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-04",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-04",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-05",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-05",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-06",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-06",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-07",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-07",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-08",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-08",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-09",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-09",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-10",
+    "yeni": "/images/ahsap-ev/siyah-cepheli-bahce-ofisi/siyah-cepheli-bahce-ofisi-10",
+    "proje": "siyah-cepheli-bahce-ofisi",
+    "baslik": "Siyah Cepheli Bahçe Ofisi",
+    "kategori": "ahsap-ev"
+  },
+  {
+    "eski": "/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-01",
+    "yeni": "/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-05",
+    "proje": "romorklu-tiny-house",
+    "baslik": "Römorklu Tiny House",
+    "kategori": "tiny-house"
+  },
+  {
+    "eski": "/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-02",
+    "yeni": "/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-06",
+    "proje": "romorklu-tiny-house",
+    "baslik": "Römorklu Tiny House",
+    "kategori": "tiny-house"
+  },
+  {
+    "eski": "/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-03",
+    "yeni": "/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-07",
+    "proje": "romorklu-tiny-house",
+    "baslik": "Römorklu Tiny House",
+    "kategori": "tiny-house"
+  },
+  {
+    "eski": "/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-04",
+    "yeni": "/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-08",
+    "proje": "romorklu-tiny-house",
+    "baslik": "Römorklu Tiny House",
+    "kategori": "tiny-house"
+  },
+  {
+    "eski": "/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-05",
+    "yeni": "/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-09",
+    "proje": "romorklu-tiny-house",
+    "baslik": "Römorklu Tiny House",
+    "kategori": "tiny-house"
+  },
+  {
+    "eski": "/images/tiny-house/lombar-pencereli-modern-tiny-house/lombar-pencereli-modern-tiny-house-06",
+    "yeni": "/images/tiny-house/romorklu-tiny-house/romorklu-tiny-house-10",
+    "proje": "romorklu-tiny-house",
+    "baslik": "Römorklu Tiny House",
+    "kategori": "tiny-house"
+  },
+  {
+    "eski": "/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-01",
+    "yeni": "arsiv/gorseller/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-01",
+    "proje": "gri-catili-verandali-ahsap-ev",
+    "baslik": "Gri Çatılı Verandalı Ahşap Ev",
+    "kategori": "ahsap-ev",
+    "not": "Proje kaldırıldı: Taş Kaideli Verandalı Ahşap Ev ile aynı yapı. Fotoğraf arşivde, sitede yayınlanmaz."
+  },
+  {
+    "eski": "/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-02",
+    "yeni": "arsiv/gorseller/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-02",
+    "proje": "gri-catili-verandali-ahsap-ev",
+    "baslik": "Gri Çatılı Verandalı Ahşap Ev",
+    "kategori": "ahsap-ev",
+    "not": "Proje kaldırıldı: Taş Kaideli Verandalı Ahşap Ev ile aynı yapı. Fotoğraf arşivde, sitede yayınlanmaz."
+  },
+  {
+    "eski": "/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-03",
+    "yeni": "arsiv/gorseller/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-03",
+    "proje": "gri-catili-verandali-ahsap-ev",
+    "baslik": "Gri Çatılı Verandalı Ahşap Ev",
+    "kategori": "ahsap-ev",
+    "not": "Proje kaldırıldı: Taş Kaideli Verandalı Ahşap Ev ile aynı yapı. Fotoğraf arşivde, sitede yayınlanmaz."
+  },
+  {
+    "eski": "/images/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-04",
+    "yeni": "arsiv/gorseller/ahsap-ev/gri-catili-verandali-ahsap-ev/gri-catili-verandali-ahsap-ev-04",
+    "proje": "gri-catili-verandali-ahsap-ev",
+    "baslik": "Gri Çatılı Verandalı Ahşap Ev",
+    "kategori": "ahsap-ev",
+    "not": "Proje kaldırıldı: Taş Kaideli Verandalı Ahşap Ev ile aynı yapı. Fotoğraf arşivde, sitede yayınlanmaz."
   }
 ]

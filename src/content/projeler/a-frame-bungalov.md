@@ -1,6 +1,6 @@
 ---
 baslik: A-Frame Bungalov
-kategori: a-frame
+kategori: ucgen-ev
 kapak: a-frame-bungalov-01
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:

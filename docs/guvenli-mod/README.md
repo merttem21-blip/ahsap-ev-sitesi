@@ -95,13 +95,14 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
 |---|---|---|
 | 12 Ekim 2026 | `onayli-tasarim` (57268a2) | İlk 33 referans: müşteri onaylı görünüm |
 | 12 Ekim 2026 | dd31535 | Y ve İ yenilendi: yasal metinler tamamlandı, KVKK kutusu metni "KVKK Aydınlatma Metni'ni okudum." oldu (onaylı). T2 ve T3 eklendi. |
+| 12 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | 39 referansın tümü yenilendi: kategori ve proje düzenlemesi (onaylı). Ahşap Cami kategorisi eklendi, A-Frame "Üçgen Ev" oldu, projeler taşındı, birleştirildi, biri kaldırıldı. Değişen yerler: her sayfada footer kategori sütunu; A2 kategori butonları; P2 kartları; G2 filtresi ve ilk ekran; T2-1 yapı tipi kartları. Eski ve yeni derlemenin CSS/JS'i bayt bayt aynı, gövde HTML'i bu bölgeler dışında aynıydı. |
 
 ### Bilinen sınırlar
 
-- Çekimler tarayıcı sürümüne, işletim sistemine ve fontlara bağlıdır. Playwright sürümü `package.json` içinde sabittir (`1.63.0`). Referanslar bu Windows bilgisayarında üretildi. Başka bir ortamda karşılaştırma yapmadan önce referansları, Referans geçmişi'ndeki son sürümden yeniden üretin (aşağıda `dd31535`):
+- Çekimler tarayıcı sürümüne, işletim sistemine ve fontlara bağlıdır. Playwright sürümü `package.json` içinde sabittir (`1.63.0`). Referanslar bu Windows bilgisayarında üretildi. Başka bir ortamda karşılaştırma yapmadan önce referansları, Referans geçmişi'ndeki son sürümden yeniden üretin. Bu sürüm, `referans/` klasörünü en son değiştiren commit'tir; aşağıdaki ilk komut onu kendisi bulur:
 
   ```bash
-  git worktree add ../2k-onayli dd31535                 # referansların sürümünün ayrı bir kopyası
+  git worktree add ../2k-onayli $(git log -1 --format=%h -- docs/guvenli-mod/referans)   # referansların sürümünün ayrı bir kopyası
   (cd ../2k-onayli && npm ci && npm run build)
   rm -rf dist && cp -r ../2k-onayli/dist dist           # onaylı sürümün derlemesi
   npm run gorsel-kontrol -- --derleme-yok --referans-yenile
@@ -115,4 +116,8 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
   - **Önlem:** Yalnızca beklemek yetmiyor; sayfa yanlış düzende de sabitleniyor. Bu yüzden çekimden önce stil yüklenmiş fontlarla yeniden hesaplatılır (Çekim koşulları). Fontlar 1,5 sn geciktirildiğinde önlemsiz kod 1 çekimde fark verdi, önlemli kod iki turda da 39/39 temiz geçti.
   - Aynı bayatlık gerçek ziyaretçilerde de olabilir: font geç yüklenirse metin sütunu dar kalabilir. Bu sitenin kendisiyle ilgili ayrı bir konudur; fontların sitenin kendi dosyalarına alınmasıyla birlikte ele alınacak.
   - Böyle bir fark yine çıkarsa gürültü sayılmaz ve hata verir. Derleme çıktısı değişmediyse kontrol yeniden çalıştırılır. Fark tekrarlanıyorsa gerçektir.
+- 1280 px'te header'daki "Teklif Al" düğmesinin yuvarlak kenarı iki çizim durumu arasında gidip gelir. Yaklaşık 60 bitişik pikselde renk 1–2 düzey değişir; gözle fark edilmez. Bölge x 1106–1247, y 34–77; ana sayfada saydam header yüzünden y 72–115.
+  - Fark bitişik piksellerden oluştuğu için gürültü toleransına takılmaz ve hata verir. Referansların kendisi de iki durumdan birini taşıyabilir.
+  - **Ölçüm:** 12 Ekim 2026'da kategori düzenlemesi öncesindeki derlemeyle aynı sayfa (İletişim ve Hakkımızda, 1280 px) 10'ar kez çekildi; ikisinde de 2 çekimde öbür durum çıktı. Yani içerik ya da stil farkı değildir.
+  - Fark yalnızca bu bölgedeyse kontrol yeniden çalıştırılır; referans yenilenmez, kod geri alınmaz. Düğme bölgesinin dışına taşan fark gerçektir.
 - Footer'daki yıl derleme anında yazılır (`© 2026`). Yıl değişince tüm sayfalarda küçük bir fark çıkar. Bu beklenen bir farktır ve referanslar o zaman yenilenir.

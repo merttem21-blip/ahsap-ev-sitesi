@@ -32,7 +32,7 @@ export const sorular: Soru[] = [
     cevap:
       'Fiyat; yapının alanına, planına, kat sayısına, ahşap türüne, yalıtım ve kaplama tercihlerine göre değişir. Arazinin konumu ve kurulum koşulları da maliyeti etkiler. Bu yüzden sabit bir m² fiyatı yerine, projenize özel teklifte tüm kalemleri açıkça netleştiriyoruz.',
     grup: 'fiyat-ve-odeme',
-    kategoriler: ['ahsap-ev', 'villa', 'ozel-tasarim'],
+    kategoriler: ['ahsap-ev', 'villa', 'ahsap-cami', 'ozel-tasarim'],
     anaSayfa: true,
   },
   {
@@ -78,7 +78,7 @@ export const sorular: Soru[] = [
     cevap:
       'Bungalov için izin gerekip gerekmediği; arazinin imar durumuna, yapının büyüklüğüne ve kullanım amacına göre değişir. Kesin bilgiyi arazinizin bağlı olduğu belediye verir. İmar durumunu öğrendikten sonra tasarımı bu bilgiye göre birlikte şekillendiririz.',
     grup: 'izin-ve-ruhsat',
-    kategoriler: ['bungalov', 'a-frame'],
+    kategoriler: ['bungalov', 'ucgen-ev'],
   },
   {
     soru: 'Arsanın imar durumu nasıl öğrenilir?',
@@ -99,14 +99,14 @@ export const sorular: Soru[] = [
     cevap:
       'Hayır. Ahşap ısıyı yavaş ileten doğal bir malzemedir; duvar, çatı ve döşemedeki yalıtımla birlikte ahşap ev kışın sıcak, yazın serin kalır. Yalıtım malzemesi ve kalınlığı bölgenizin iklimine göre belirlenir ve teklifte yazılır.',
     grup: 'teknik-ve-malzeme',
-    kategoriler: ['bungalov', 'tiny-house', 'a-frame'],
+    kategoriler: ['bungalov', 'tiny-house', 'ucgen-ev'],
   },
   {
     soru: 'Ahşap ev depreme dayanıklı mı?',
     cevap:
       'Ahşap, ağırlığına oranla dayanıklı ve esnek bir malzemedir; hafif olduğu için deprem anında yapıya daha az yük biner. Yapının depremdeki davranışı en çok doğru tasarlanmış taşıyıcı sisteme ve işçiliğe bağlıdır. Bu yüzden taşıyıcı sistemi her projede ayrıca planlıyoruz.',
     grup: 'teknik-ve-malzeme',
-    kategoriler: ['ahsap-ev', 'villa'],
+    kategoriler: ['ahsap-ev', 'villa', 'ahsap-cami'],
     anaSayfa: true,
   },
   {
@@ -121,7 +121,7 @@ export const sorular: Soru[] = [
     cevap:
       'Ahşap evin ömrü; kullanılan ahşabın kalitesine, doğru işçiliğe ve düzenli bakıma bağlıdır. Nemden korunan ve bakımı aksatılmayan ahşap yapılar uzun yıllar kullanılabilir; dünyada yüzyıllardır ayakta duran ahşap yapılar bunun örneğidir.',
     grup: 'teknik-ve-malzeme',
-    kategoriler: ['ahsap-ev'],
+    kategoriler: ['ahsap-ev', 'ahsap-cami'],
     anaSayfa: true,
   },
   {
@@ -129,7 +129,7 @@ export const sorular: Soru[] = [
     cevap:
       'Dış cephedeki koruyucu boya veya vernik, ahşabı güneş ve yağıştan korumak için belirli aralıklarla yenilenir. Bu aralık iklime, cephenin yönüne ve kullanılan ürüne göre değişir. Teslimde yapınıza uygun bakım önerilerini sizinle paylaşıyoruz.',
     grup: 'teknik-ve-malzeme',
-    kategoriler: ['a-frame', 'cardak', 'otel-bar', 'cocuk-oyun-parki'],
+    kategoriler: ['ucgen-ev', 'cardak', 'otel-bar', 'cocuk-oyun-parki'],
   },
   {
     soru: 'Ahşap evde hangi ahşap kullanılır?',
@@ -183,7 +183,7 @@ export const sorular: Soru[] = [
     cevap:
       'Evet. Elinizdeki plan, çizim veya örnek fotoğraf üzerinden çalışabiliriz. Planı ahşap yapıya ve arazinize uygun hâle getirmek için gereken düzenlemeleri sizinle birlikte yapıyoruz.',
     grup: 'ozel-tasarim',
-    kategoriler: ['villa', 'tiny-house', 'cardak', 'ozel-tasarim'],
+    kategoriler: ['villa', 'tiny-house', 'cardak', 'ahsap-cami', 'ozel-tasarim'],
   },
   {
     soru: 'Ahşap ev tasarımında sonradan değişiklik yapılabilir mi?',

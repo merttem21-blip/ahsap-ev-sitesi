@@ -1,6 +1,6 @@
 ---
 baslik: Minareli Tek Katlı Ahşap Cami
-kategori: ozel-tasarim
+kategori: ahsap-cami
 kapak: minareli-tek-katli-ahsap-cami-01
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:
