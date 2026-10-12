@@ -5,10 +5,15 @@
 //   npm run gorsel-kontrol -- --esik=0.05               % olarak izin verilen fark (varsayılan 0)
 //   npm run gorsel-kontrol -- --referans-yenile         referansları baştan üretir (yalnızca müşteri onaylı
 //                                                       bir görünüm değişikliğinden sonra)
+//   npm run gorsel-kontrol -- --referans-yenile=yasal-kvkk,iletisim
+//                                                       yalnızca adı (ya da kodu) verilen sayfaların referansını
+//                                                       yeniler; diğerleri her zamanki gibi karşılaştırılır
 //
 // Her sayfa tipinden bir örnek 375, 768 ve 1280 px genişlikte çekilir: hareket azaltılmış
 // (prefers-reduced-motion), CSS animasyonları kapalı, tüm görseller (lazy olanlar dahil) ve fontlar yüklenmiş.
-// Galeri sonsuz kaydırmalı olduğu için yalnızca ilk ekran çekilir.
+// Galeri sonsuz kaydırmalı olduğu için yalnızca ilk ekran çekilir. Teklif formunun 2. ve 3. adımı, önceki
+// adımlar örnek verilerle doldurulup "Devam et" ile geçilerek çekilir; form hiçbir zaman gönderilmez
+// (Web3Forms'a giden her istek engellenir ve hata sayılır).
 //
 // Referans yoksa (ilk çalıştırma) çekimler docs/guvenli-mod/referans/ altına kaydedilir. Varsa son çekimler
 // docs/guvenli-mod/son/ altına yazılır, referansla karşılaştırılır; farklı olanların fark görseli (değişen
@@ -16,7 +21,7 @@
 //
 // Not: Çekimler tarayıcı sürümüne, işletim sistemine ve font yüklemesine bağlıdır. Referanslar bu bilgisayarda
 // ve package.json'da sabitlenmiş Playwright sürümüyle üretilmiştir; başka ortamda karşılaştırma yapılacaksa
-// önce onayli-tasarim etiketinden referans yeniden üretilmelidir (docs/guvenli-mod/README.md).
+// önce referanslar, README'deki "Referans geçmişi"nin son sürümünden yeniden üretilmelidir (docs/guvenli-mod/README.md).
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
@@ -24,8 +29,44 @@ import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 import { GUVENLI_MOD, derle, secenekDegeri, secenekVar, sunucuBaslat } from './ortak.mjs';
 
+/** Teklif formunda görünen adımın "Devam et" düğmesine basar. */
+async function devamEt(sayfa) {
+  await sayfa.locator('[data-adim]:not([hidden]) [data-ileri]').click();
+}
+
+/** Teklif formu 1. adım: örnek verilerle doldurur ve 2. adıma geçer. */
+async function teklifAdim1(sayfa) {
+  await sayfa.locator('input[name="yapi_tipi"]').first().check();
+  await sayfa.fill('input[name="alan_m2"]', '60');
+  await sayfa.locator('input[name="kullanim"][value="Konut"]').check();
+  await devamEt(sayfa);
+}
+
+/** Teklif formu 1. ve 2. adım: örnek verilerle doldurur ve 3. adıma geçer (3. adım boş kalır, gönderilmez). */
+async function teklifAdim2(sayfa) {
+  await teklifAdim1(sayfa);
+  await sayfa.selectOption('select[name="konum_il"]', 'İstanbul');
+  await sayfa.fill('input[name="konum_ilce"]', 'Pendik');
+  await sayfa.locator('input[name="arsa"]').first().check();
+  await sayfa.locator('input[name="butce"][value="Belirtmek istemiyorum"]').check();
+  await sayfa.locator('input[name="zaman"][value="Henüz belli değil"]').check();
+  await devamEt(sayfa);
+}
+
+/** Adım geçişinden sonra: istenen adım görünür, sayfa en üstte (sabit öğeler ilk ekrandaki yerinde), imleç kenarda. */
+async function adimdaBekle(sayfa, no) {
+  await sayfa.waitForFunction(
+    (no) => document.querySelector('[data-adim-no]')?.textContent === String(no),
+    no,
+    { timeout: 10_000 }
+  );
+  await sayfa.mouse.move(0, 0);
+  await sayfa.evaluate(() => window.scrollTo(0, 0));
+}
+
 // Sayfa tipleri: A ana sayfa, P projeler, K kategori, D proje detayı, G galeri, H hakkımızda, S SSS,
-// T teklif al, İ iletişim, TŞ teşekkürler, Y yasal sayfa
+// T teklif al (T2, T3: formun 2. ve 3. adımı), İ iletişim, TŞ teşekkürler, Y yasal sayfa
+// hazirlik: çekimden önce sayfada yapılacak etkileşim (yalnızca görünüm; form gönderilmez)
 const SAYFALAR = [
   { kod: 'A', ad: 'ana-sayfa', yol: '/' },
   { kod: 'P', ad: 'projeler', yol: '/projeler' },
@@ -35,6 +76,24 @@ const SAYFALAR = [
   { kod: 'H', ad: 'hakkimizda', yol: '/hakkimizda' },
   { kod: 'S', ad: 'sss', yol: '/sss' },
   { kod: 'T', ad: 'teklif-al', yol: '/teklif-al' },
+  {
+    kod: 'T2',
+    ad: 'teklif-al-adim-2',
+    yol: '/teklif-al',
+    hazirlik: async (sayfa) => {
+      await teklifAdim1(sayfa);
+      await adimdaBekle(sayfa, 2);
+    },
+  },
+  {
+    kod: 'T3',
+    ad: 'teklif-al-adim-3',
+    yol: '/teklif-al',
+    hazirlik: async (sayfa) => {
+      await teklifAdim2(sayfa);
+      await adimdaBekle(sayfa, 3);
+    },
+  },
   { kod: 'İ', ad: 'iletisim', yol: '/iletisim' },
   { kod: 'TŞ', ad: 'tesekkurler', yol: '/tesekkurler' },
   { kod: 'Y', ad: 'yasal-kvkk', yol: '/kvkk' },
@@ -93,6 +152,12 @@ async function cek(tarayici, adres, s, g, hedef) {
     locale: 'tr-TR',
     timezoneId: 'Europe/Istanbul',
   });
+  // Çekim sırasında hiçbir form gönderilemez: Web3Forms'a giden istek engellenir ve hata sayılır
+  let gonderimDenendi = false;
+  await baglam.route(/api\.web3forms\.com/, (istek) => {
+    gonderimDenendi = true;
+    return istek.abort();
+  });
   const sayfa = await baglam.newPage();
   const basarisiz = new Set();
   // Tarayıcının kendi iptal ettiği istekler (ör. <picture> kaynağı değişince) sorun sayılmaz
@@ -103,8 +168,10 @@ async function cek(tarayici, adres, s, g, hedef) {
   try {
     const yanit = await sayfa.goto(adres + s.yol, { waitUntil: 'networkidle', timeout: 60_000 });
     if (!yanit?.ok()) throw new Error(`HTTP ${yanit?.status()}`);
+    if (s.hazirlik) await s.hazirlik(sayfa);
     const eksik = await hazirla(sayfa, s);
     await sayfa.screenshot({ path: hedef, fullPage: !s.ilkEkran, animations: 'disabled', caret: 'hide' });
+    if (gonderimDenendi) throw new Error(`${s.yol} (${s.ad}): çekim sırasında form gönderilmeye çalışıldı`);
     return { uyarilar: [...basarisiz, ...eksik.map((e) => `yüklenemeyen görsel: ${e}`)] };
   } finally {
     await baglam.close();
@@ -135,8 +202,21 @@ function karsilastir(referansYolu, sonYolu, farkYolu) {
   };
 }
 
+/** --referans-yenile: hepsi; --referans-yenile=ad,kod,…: yalnızca verilen sayfalar. Referansı yenilenecek mi? */
+function yenilemeSecimi() {
+  const liste = secenekDegeri('--referans-yenile');
+  if (liste === undefined) return secenekVar('--referans-yenile') ? () => true : () => false;
+  const istenen = liste.split(',').map((x) => x.trim()).filter(Boolean);
+  const bilinmeyen = istenen.filter((x) => !SAYFALAR.some((s) => s.ad === x || s.kod === x));
+  if (!istenen.length || bilinmeyen.length) {
+    console.error(`--referans-yenile: bilinmeyen sayfa "${bilinmeyen.join(', ')}". Geçerli adlar: ${SAYFALAR.map((s) => s.ad).join(', ')}`);
+    process.exit(1);
+  }
+  return (s) => istenen.includes(s.ad) || istenen.includes(s.kod);
+}
+
 async function main() {
-  const yenile = secenekVar('--referans-yenile');
+  const yenilensinMi = yenilemeSecimi();
   derle();
   for (const k of [REFERANS, SON, FARK]) fs.mkdirSync(k, { recursive: true });
   for (const k of [SON, FARK]) for (const d of fs.readdirSync(k)) fs.rmSync(path.join(k, d), { force: true });
@@ -152,7 +232,7 @@ async function main() {
         GENISLIKLER.map(async (g) => {
           const dosya = `${s.ad}-${g.genislik}.png`;
           const referansYolu = path.join(REFERANS, dosya);
-          const referansYaz = yenile || !fs.existsSync(referansYolu);
+          const referansYaz = yenilensinMi(s) || !fs.existsSync(referansYolu);
           const hedef = referansYaz ? referansYolu : path.join(SON, dosya);
           const { uyarilar } = await cek(tarayici, sunucu.adres, s, g, hedef);
           for (const u of uyarilar) console.warn(`  UYARI ${s.yol} @${g.genislik}: ${u}`);
