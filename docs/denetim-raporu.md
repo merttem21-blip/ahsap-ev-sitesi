@@ -133,6 +133,8 @@ Derleme çıktısındaki 832 `<img>`:
 
 `npm run check:images` sonucu: 48 sayfa, 885 dosya. 1 sorun raporlanıyor: `/galeri → boş görsel adresi (img src)`. Bu, `src/pages/galeri.astro` içindeki ışık kutusu `<img>`'inin `src`'siz olması; kırık bir dosya değil.
 
+> **Not:** Galerideki boş `src` konusu Prompt 8'de ele alınacak. O zamana kadar `check:images` bu sorunu her çalıştırmada raporlar; beklenen bir sonuçtur.
+
 ### 10. [ONAY: …] yer tutucuları: Var
 
 Sitede ziyaretçiye görünüyorlar: `/kvkk` sayfasında 14, `/gizlilik` ve `/cerez-politikasi` sayfalarında 1'er kez.
