@@ -1,6 +1,6 @@
 ---
 // Sayfa meta etiketleri. Kurallar: .claude/skills/seo-kurallar
-import { siteAdresi, varsayilanGorsel } from '../data/site';
+import { firma, siteAdresi, varsayilanGorsel } from '../data/site';
 
 interface Props {
   title: string; // 50–60 karakter, "| 2K AHŞAP" dahil
@@ -29,7 +29,7 @@ if (import.meta.env.DEV) {
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="tr_TR" />
-<meta property="og:site_name" content="2K AHŞAP" />
+<meta property="og:site_name" content={firma.marka} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />

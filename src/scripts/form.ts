@@ -261,8 +261,15 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
     if (dogrula()) whatsappAc('Bilgileriniz WhatsApp mesajı olarak hazırlandı.');
   });
 
-  // Geri tuşuyla dönülürse buton "Gönderiliyor…" durumunda kalmaz
-  window.addEventListener('pageshow', () => yukleniyor(false));
+  // Geri tuşuyla dönülürse buton "Gönderiliyor…" durumunda kalmaz. Sayfa geri-ileri önbelleğinden
+  // dönerse KVKK kutusu boşaltılır: önceki gönderimin işareti ve onay zamanı yeni talebe taşınmaz.
+  window.addEventListener('pageshow', (e) => {
+    yukleniyor(false);
+    if (!e.persisted) return;
+    const kvkk = form.elements.namedItem('kvkk');
+    if (kvkk instanceof HTMLInputElement) kvkk.checked = false;
+    onayZamani = null;
+  });
 
   return { dogrula, deger };
 }

@@ -3,7 +3,7 @@
 // Header her yerde koyudur; plakasız koyu zemin SVG logosu kullanılır (marka-stili §4, §8).
 // Sayfa kaydırılınca üstte sabit kalır ve küçülür. Küçülme yalnızca transform/opacity ile yapılır:
 // header'ın kapladığı yer değişmez, layout kayması olmaz.
-import { menu, menuAktifMi } from '../data/site';
+import { firma, menu, menuAktifMi } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
 interface Props {
@@ -22,12 +22,12 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
 
 <header class:list={['ust', { 'ust-seffaf': seffaf }]} data-ust>
   <div class="kap ust-ic">
-    <a href="/" class="logo" aria-label="2K AHŞAP ana sayfa">
+    <a href="/" class="logo" aria-label={`${firma.marka} ana sayfa`}>
       <img
         src="/logo/2k-ahsap-logo-koyu-zemin.svg"
         width="560"
         height="500"
-        alt="2K AHŞAP"
+        alt={firma.marka}
         loading="eager"
       />
     </a>

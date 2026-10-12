@@ -1,8 +1,8 @@
 ---
-// KVKK aydınlatma metni (6698 sayılı Kanun md. 10). TASLAK: [ONAY] alanları firma tarafından doldurulmalı
-// ve metin yayından önce bir hukukçuya kontrol ettirilmelidir.
+// KVKK aydınlatma metni (6698 sayılı Kanun md. 10). Firma bilgileri src/data/site.ts'ten gelir; eksik
+// bilgiler docs/onay-bekleyenler.md'de. Metin yayından önce bir hukukçuya kontrol ettirilmelidir.
 import YasalLayout from '../layouts/YasalLayout.astro';
-import { firma } from '../data/site';
+import { firma, yasalAd } from '../data/site';
 ---
 
 <YasalLayout
@@ -12,7 +12,7 @@ import { firma } from '../data/site';
 >
   <p>
     6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") 10. maddesi uyarınca, veri sorumlusu
-    sıfatıyla <span class="onay">[ONAY: ticari unvan]</span> ("2K AHŞAP") olarak kişisel verilerinizi
+    sıfatıyla {yasalAd} olarak kişisel verilerinizi
     hangi amaçlarla ve hangi hukuki sebeplere dayanarak işlediğimizi, kimlere aktarabileceğimizi ve
     sahip olduğunuz hakları aşağıda açıklıyoruz.
   </p>
@@ -21,7 +21,7 @@ import { firma } from '../data/site';
   <dl>
     <div>
       <dt>Ticari unvan</dt>
-      <dd><span class="onay">[ONAY: ticari unvan]</span></dd>
+      <dd>{yasalAd}</dd>
     </div>
     <div>
       <dt>Adres</dt>
@@ -33,23 +33,27 @@ import { firma } from '../data/site';
     </div>
     <div>
       <dt>KVKK başvuruları için e-posta</dt>
-      <dd><span class="onay">[ONAY: veri sorumlusu e-posta adresi]</span></dd>
+      <dd><a href={`mailto:${firma.kvkkEposta}`}>{firma.kvkkEposta}</a></dd>
     </div>
-    <div>
-      <dt>KEP adresi</dt>
-      <dd><span class="onay">[ONAY: KEP adresi, varsa]</span></dd>
-    </div>
-    <div>
-      <dt>MERSİS numarası</dt>
-      <dd><span class="onay">[ONAY: MERSİS numarası]</span></dd>
-    </div>
+    {
+      firma.kep && (
+        <div>
+          <dt>KEP adresi</dt>
+          <dd>{firma.kep}</dd>
+        </div>
+      )
+    }
+    {
+      firma.mersis && (
+        <div>
+          <dt>MERSİS numarası</dt>
+          <dd>{firma.mersis}</dd>
+        </div>
+      )
+    }
     <div>
       <dt>Vergi dairesi ve numarası</dt>
-      <dd><span class="onay">[ONAY: vergi dairesi / vergi numarası]</span></dd>
-    </div>
-    <div>
-      <dt>VERBİS kaydı</dt>
-      <dd><span class="onay">[ONAY: VERBİS kayıt durumu veya muafiyet bilgisi]</span></dd>
+      <dd>{firma.vergiDairesi} / {firma.vergiNo}</dd>
     </div>
   </dl>
 
@@ -78,11 +82,7 @@ import { firma } from '../data/site';
     <li>Keşif, tasarım, teklif, sözleşme, üretim, nakliye, kurulum ve teslim süreçlerini yürütmek,</li>
     <li>Satış sonrası destek taleplerinizi karşılamak,</li>
     <li>Fatura, muhasebe ve vergi mevzuatından doğan yükümlülükleri yerine getirmek,</li>
-    <li>Web sitesinin ve bilgi sistemlerinin güvenliğini sağlamak,</li>
-    <li>
-      Açık rızanız olması hâlinde bilgilendirme ve tanıtım iletileri göndermek
-      <span class="onay">[ONAY: ticari elektronik ileti gönderilecek mi?]</span>.
-    </li>
+    <li>Web sitesinin ve bilgi sistemlerinin güvenliğini sağlamak.</li>
   </ul>
 
   <h2>4. Toplama Yöntemi ve Hukuki Sebepler</h2>
@@ -115,15 +115,15 @@ import { firma } from '../data/site';
   <ul>
     <li>
       Nakliye, kurulum, muhasebe ve mali müşavirlik gibi hizmet aldığımız iş ortaklarına, yalnızca
-      hizmetin gerektirdiği ölçüde <span class="onay">[ONAY: iş ortağı türleri]</span>,
+      hizmetin gerektirdiği ölçüde,
     </li>
     <li>Kanunen yetkili kamu kurum ve kuruluşlarına, talep edilmesi hâlinde,</li>
     <li>
       Web sitemizin barındırma hizmetini sağlayan Vercel Inc.'e, form bilgilerini e-posta adresimize
-      ileten Web3Forms'a, e-posta hizmet sağlayıcımıza <span class="onay">[ONAY: e-posta hizmet sağlayıcısı]</span>
+      ileten Web3Forms'a, e-posta hizmet sağlayıcımıza
       ve WhatsApp üzerinden yazmanız hâlinde mesajlaşma altyapısını sağlayan WhatsApp/Meta'ya. Bu hizmet sağlayıcıların sunucuları
       yurt dışında bulunabilir; yurt dışına aktarım KVKK'nın 9. maddesindeki şartlara uygun olarak
-      yapılır <span class="onay">[ONAY: yurt dışı aktarım dayanağı, ör. standart sözleşme ve Kurul'a bildirim]</span>.
+      yapılır.
     </li>
   </ul>
 
@@ -131,7 +131,7 @@ import { firma } from '../data/site';
   <p>
     Kişisel verileriniz, işlendikleri amaç için gereken süre ve ilgili mevzuatta öngörülen süreler
     boyunca saklanır. Bu süreler sona erdiğinde verileriniz silinir, yok edilir veya anonim hâle
-    getirilir <span class="onay">[ONAY: kişisel veri saklama ve imha politikası]</span>.
+    getirilir.
   </p>
 
   <h2>7. KVKK 11. Madde Kapsamındaki Haklarınız</h2>
@@ -160,8 +160,8 @@ import { firma } from '../data/site';
   <h2>8. Başvuru Yöntemi</h2>
   <p>
     Taleplerinizi, Veri Sorumlusuna Başvuru Usul ve Esasları Hakkında Tebliğ'e uygun olarak,
-    kimliğinizi tespit edici bilgilerle birlikte yazılı olarak yukarıdaki adresimize, KEP adresimize
-    veya <span class="onay">[ONAY: veri sorumlusu e-posta adresi]</span> adresine iletebilirsiniz.
+    kimliğinizi tespit edici bilgilerle birlikte yazılı olarak yukarıdaki adresimize{firma.kep && ', KEP adresimize'}
+    veya <a href={`mailto:${firma.kvkkEposta}`}>{firma.kvkkEposta}</a> adresine iletebilirsiniz.
     Başvurunuz, talebin niteliğine göre en kısa sürede ve Kanun'da öngörülen en geç otuz gün içinde
     ücretsiz olarak sonuçlandırılır. İşlemin ayrıca bir maliyet gerektirmesi hâlinde Kişisel Verileri
     Koruma Kurulu'nca belirlenen tarifedeki ücret alınabilir.

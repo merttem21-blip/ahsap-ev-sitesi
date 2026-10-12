@@ -10,19 +10,44 @@ export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 // Open Graph ve schema.org için varsayılan görsel (gerçek proje fotoğrafı)
 export const varsayilanGorsel = '/images/a-frame/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
 
+// Firma bilgilerinin tek kaynağı: sitede bu bilgilerin geçtiği her yer buradan okur.
+// Sitede görünen ad marka adıdır; yasal metinlerde "Unvan (Marka)" biçimi kullanılır (yasalAd).
+// mersis ve kep boşken yasal sayfalarda etiketleriyle birlikte hiç görünmez, doldurulunca kendiliğinden çıkar.
+// Henüz bilinmeyen bilgiler: docs/onay-bekleyenler.md
+const adresParcalari = {
+  sokak: 'Kaynarca, Akdeniz Cd. No:4/A',
+  ilce: 'Pendik',
+  il: 'İstanbul',
+  postaKodu: '34893',
+};
+
 export const firma = {
+  marka: '2K AHŞAP',
+  unvan: 'Azra Ahşap Ev',
+  kurulusYili: '2015',
+  kurucu: 'Kadir Avcı',
   telefonGorunen: '0532 250 40 77',
   telefonLink: 'tel:+905322504077',
+  telefonUluslararasi: '+90 532 250 40 77', // schema.org
   whatsapp: 'https://wa.me/905322504077',
   eposta: 'info@2kahsap.com',
-  adres: 'Kaynarca, Akdeniz Cd. No:4/A, 34893 Pendik/İstanbul',
+  kvkkEposta: 'info@2kahsap.com', // veri sorumlusu iletişim e-postası (KVKK başvuruları)
+  adres: `${adresParcalari.sokak}, ${adresParcalari.postaKodu} ${adresParcalari.ilce}/${adresParcalari.il}`,
+  adresParcalari,
   harita:
     'https://www.google.com/maps/search/?api=1&query=' +
     encodeURIComponent('2K AHŞAP Kaynarca Akdeniz Cd. No:4/A Pendik İstanbul'),
+  vergiDairesi: 'Sarıgazi Vergi Dairesi',
+  vergiNo: '41998593334',
+  mersis: '',
+  kep: '',
   instagram: 'https://www.instagram.com/2kahsap/',
   facebook: 'https://www.facebook.com/profile.php?id=61594732547189',
   linkedin: 'https://www.linkedin.com/in/kadir-avc%C4%B1-a069b1440/',
 };
+
+/** Yasal metinlerdeki veri sorumlusu adı: "Azra Ahşap Ev (2K AHŞAP)" */
+export const yasalAd = `${firma.unvan} (${firma.marka})`;
 
 // WhatsApp linki hazır mesajla açılır; mesaj bulunulan sayfaya göre değişir (Layout'un whatsappMesaj prop'u).
 export const varsayilanWhatsappMesaji =
@@ -30,6 +55,9 @@ export const varsayilanWhatsappMesaji =
 
 export const whatsappLinki = (mesaj = varsayilanWhatsappMesaji) =>
   `${firma.whatsapp}?text=${encodeURIComponent(mesaj)}`;
+
+// Yasal sayfaların "Son güncelleme" tarihi (YYYY-AA-GG); metin değiştikçe güncellenir.
+export const yasalGuncelleme = '2026-10-12';
 
 // Footer alt şeridi ve yasal sayfalar
 export const yasalSayfalar = [

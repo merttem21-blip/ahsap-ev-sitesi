@@ -1,9 +1,9 @@
 ---
 // Yasal sayfalar (/kvkk, /gizlilik, /cerez-politikasi) için ortak iskelet: başlık bandı + okunur metin sütunu.
-// Taslak metinlerde bilinmeyen firma bilgileri <span class="onay">[ONAY: …]</span> ile işaretlidir.
+// Firma bilgileri ve son güncelleme tarihi src/data/site.ts'ten gelir; henüz bilinmeyenler docs/onay-bekleyenler.md'de.
 import Layout from './Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { yasalSayfalar } from '../data/site';
+import { yasalGuncelleme, yasalSayfalar } from '../data/site';
 
 interface Props {
   title: string;
@@ -14,6 +14,12 @@ interface Props {
 const { title, description, baslik } = Astro.props;
 const yol = Astro.url.pathname.replace(/\/$/, '');
 const digerleri = yasalSayfalar.filter((y) => y.href !== yol);
+const guncellemeMetni = new Date(`${yasalGuncelleme}T00:00:00Z`).toLocaleDateString('tr-TR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
 ---
 
 <Layout title={title} description={description}>
@@ -21,7 +27,7 @@ const digerleri = yasalSayfalar.filter((y) => y.href !== yol);
     <div class="kap">
       <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: baslik }]} />
       <h1 id="yasal-baslik">{baslik}</h1>
-      <p class="yasal-tarih">Son güncelleme: <span class="onay">[ONAY: yürürlük tarihi]</span></p>
+      <p class="yasal-tarih">Son güncelleme: <time datetime={yasalGuncelleme}>{guncellemeMetni}</time></p>
     </div>
   </section>
 
@@ -136,12 +142,6 @@ const digerleri = yasalSayfalar.filter((y) => y.href !== yol);
   .yasal-metin :global(dd) {
     margin: 0;
     overflow-wrap: anywhere;
-  }
-
-  /* Bilinmeyen firma bilgisi: kolay bulunsun diye vurgulu */
-  :global(.onay) {
-    color: var(--color-ahsap-acik);
-    font-weight: 600;
   }
 
   .yasal-diger {

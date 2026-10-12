@@ -39,12 +39,12 @@ const sosyal = [
   <div class="kap">
     <div class="alt-izgara">
       <div class="alt-marka">
-        <a href="/" class="alt-logo" aria-label="2K AHŞAP ana sayfa">
+        <a href="/" class="alt-logo" aria-label={`${firma.marka} ana sayfa`}>
           <img
             src="/logo/2k-ahsap-logo-koyu-zemin.svg"
             width="560"
             height="500"
-            alt="2K AHŞAP"
+            alt={firma.marka}
             loading="lazy"
             decoding="async"
           />
@@ -115,7 +115,7 @@ const sosyal = [
     </div>
 
     <div class="alt-serit">
-      <p>© {yil} 2K AHŞAP</p>
+      <p>© {yil} {firma.marka}</p>
       <nav aria-label="Yasal bilgiler">
         <ul class="alt-yasal">
           {

@@ -1,11 +1,21 @@
 ---
 // Zorunlu KVKK onay kutusu (guvenlik-kurallari §4). Onay zamanı işaretlendiği anda kaydedilir
 // ve talep bilgileriyle birlikte gönderilir (src/scripts/form.ts).
+// Kutu her zaman boş gelir: autocomplete="off" tarayıcının geri tuşu ve yenilemede eski işareti geri
+// yüklemesini engeller; sayfa geri-ileri önbelleğinden dönerse form.ts kutuyu boşaltır.
 ---
 
 <div class="alan onay" data-alan="kvkk">
   <label class="onay-kutu" for="alan-kvkk">
-    <input type="checkbox" id="alan-kvkk" name="kvkk" value="Evet" required aria-describedby="hata-kvkk" />
+    <input
+      type="checkbox"
+      id="alan-kvkk"
+      name="kvkk"
+      value="Evet"
+      required
+      autocomplete="off"
+      aria-describedby="hata-kvkk"
+    />
     <span>
       <a href="/kvkk" target="_blank" rel="noopener noreferrer"
         >KVKK Aydınlatma Metni<span class="gizli"> (yeni sekmede açılır)</span></a
