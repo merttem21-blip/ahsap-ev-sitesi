@@ -27,11 +27,12 @@ Müşteri sitenin mevcut görünümünü onayladı. Bundan sonraki işler yalnı
 
 ## gorsel-kontrol
 
-`scripts/guvenli-mod/gorsel-kontrol.mjs` dosyası her sayfa tipinden bir örneği 375, 768 ve 1280 px genişlikte Playwright (Chromium) ile çeker. Mobil menü paneli (M1, M2) yalnızca 375 ve 768 px'te çekilir:
+`scripts/guvenli-mod/gorsel-kontrol.mjs` dosyası her sayfa tipinden bir örneği 375, 768 ve 1280 px genişlikte Playwright (Chromium) ile çeker. Mobil menü paneli (M1, M2) ve ana sayfanın ilk ekranı (A1) kendi ekran boylarında çekilir:
 
 | Kod | Sayfa | Örnek adres |
 |---|---|---|
 | A | Ana sayfa | `/` |
+| A1 | Ana sayfa, yalnızca ilk ekran (hero; 412×915, 768×1024) | `/` |
 | P | Projeler | `/projeler` |
 | K | Kategori | `/bungalov` |
 | D | Proje detayı | `/bungalov/asma-katli-verandali-bungalov` |
@@ -56,13 +57,14 @@ Müşteri sitenin mevcut görünümünü onayladı. Bundan sonraki işler yalnı
 - Ardından sayfa boyutu 100 ms arayla art arda 5 ölçümde aynı kalmış. Fontlar ya da boyut 15 sn içinde oturmazsa uyarı yazılır, çekim yine yapılır.
 - Tam sayfa çekilir. Sabit öğeler (alt menü, WhatsApp düğmesi) ilk ekrandaki yerlerinde görünür.
 - Galeri sonsuz kaydırmalı olduğu için yalnızca ilk ekranı çekilir.
+- A1: ana sayfanın yalnızca ilk ekranı, Android telefon (412×915) ve dikey tablet (768×1024) boyunda. Hero'nun boyu ekran boyuna ve mobil alt menüye göre hesaplanır; tam sayfa çekim bunu ekran boyunda göstermez. Telefonda başlık, açıklama ve iki düğme alt menünün üstünde tamamen görünmelidir; tablette hero ekran boyunca uzamaz (`docs/hata-hero/`).
 - T2 ve T3: önceki adımlar örnek verilerle doldurulur (yapı tipi, 60 m², Konut; İstanbul/Pendik, arsa, "Belirtmek istemiyorum", "Henüz belli değil") ve "Devam et" ile geçilir. Çekilen adım boş kalır. Çekimden önce sayfa en üste kaydırılır.
 - M1 ve M2: sayfa 600 px kaydırılır, header küçülmüş duruma geçer. Panel, 375 px'te alt menüdeki, 768 px'te header'daki düğmeyle açılır. Düğmeye koordinatla basılır, çünkü Playwright'ın `locator.click`'i yapışkan header'ı görünüme kaydırırken sayfayı da oynatır. Ardından panel en üste (M1) ya da en alta (M2) kaydırılır ve yalnızca ekran çekilir. Ekranlar kasıtlı olarak kısadır (iPhone SE boyu ve yatay telefon ya da kısa pencere). Panel bu ekranlara sığmadığı için kendi içinde kayar. M2, son öğenin alt menünün ve ekranın alt kenarının üstünde kaldığını gösterir. Kaydırma, stil yeniden hesaplandıktan sonra yapılır; yeniden hesaplama kaydırma konumunu sıfırlayabilir.
 - Hiçbir form gönderilmez: çekim sırasında Web3Forms'a giden her istek engellenir ve hata sayılır.
 
 | Klasör | İçerik | Depoda mı? |
 |---|---|---|
-| `referans/` | Onaylı görünüm (43 PNG) | Evet |
+| `referans/` | Onaylı görünüm (45 PNG) | Evet |
 | `son/` | Son çalıştırmanın çekimleri | Hayır (`.gitignore`) |
 | `fark/` | Fark görselleri (değişen pikseller kırmızı) ve `rapor.md` | Hayır (`.gitignore`) |
 
@@ -101,6 +103,7 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
 | 12 Ekim 2026 | a216212 | 39 referansın tümü yenilendi: kategori ve proje düzenlemesi (onaylı). Ahşap Cami kategorisi eklendi, A-Frame "Üçgen Ev" oldu, projeler taşındı, birleştirildi, biri kaldırıldı. Değişen yerler: her sayfada footer kategori sütunu; A2 kategori butonları; P2 kartları; G2 filtresi ve ilk ekran; T2-1 yapı tipi kartları. Eski ve yeni derlemenin CSS/JS'i bayt bayt aynı, gövde HTML'i bu bölgeler dışında aynıydı. |
 | 12 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | M1 ve M2 eklendi (4 referans): mobil menü paneli hatası düzeltildikten sonra çekildi. Kaydırılmış sayfada panel header'a hapsolup kesiliyordu (`docs/hata-mobil-menu/`). Mevcut 39 referans değişmedi, düzeltmeden sonra da 39/39 aynı çıktı. Bu dört çekim düzeltme öncesi derlemede 4/4 fark verdi. |
 | 13 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | Yalnızca A (ana sayfa, 3 referans) yenilendi: bölüm geçişleri düzenlendi (onaylı; `docs/gecis-secenekleri/`). Tek boşluk ritmi, bölüm sınırlarında çizgi yok, ara bölümlerde `#262625`, Ürünlerimiz bandı kartların altından başlıyor. Yenilemeden önce fark yalnızca A'nın 3 çekimindeydi; diğer 40 çekim aynıydı (ikisi gürültü düzeyinde). Ayar kapalıyken hazırlanan önizleme derlemeleri de 43/43 geçmişti. |
+| 13 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | A 375 ve A 768 yenilendi, A1 eklendi (2 referans): ana sayfa hero'su telefonda ve dikey tablette düzeltildi (onaylı; `docs/hata-hero/`). Telefonda metin mobil alt menünün üstüne yaslanıyor; 641–1279 px'te hero en fazla genişliğin %90'ı kadar uzuyor. A 1280'in referansı bayt bayt aynı kaldı. Aynı commit'te kaydırılmış header'ın zemini tam opak oldu (onaylı). Bu katman kaydırılmamış çekimlerde görünmez; M1 ve M2'de de açık panelin altında kalır. Yenilemeden önce fark yalnızca A 375 ve A 768'deydi; diğer 41 çekim %0 aynıydı. |
 
 ### Bilinen sınırlar
 

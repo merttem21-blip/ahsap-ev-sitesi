@@ -5,9 +5,11 @@
 // Fotoğraf <picture> ile seçilir: ≤ 640px'te ana yapıya kırpılmış dikey kesim, ≤ 1023px'te 960px'lik
 // sürüm, üstünde tam boyut. Dosyalar public/images/hero/ içindedir.
 //
-// Mobilde dikey kesim kendi oranında hero'nun üstünde durur (yapı yandan kırpılmaz), metin altında başlar.
-// ≥ 641px'te fotoğraf hero'yu kaplar. İki düzende de fotoğrafın alt kenarı sayfa zeminine erir (--zemine-eris);
-// sonraki bölüm aynı zeminden başladığı için hero ile arasında çizgi oluşmaz.
+// Mobilde dikey kesim kendi oranında hero'nun üstünde durur (yapı yandan kırpılmaz). Metin ilk ekranın altına,
+// mobil alt menünün üstüne yaslanır; ikon şeridi alt menünün altında, ilk ekranın dışında kalır.
+// ≥ 641px'te fotoğraf hero'yu kaplar; dikey tablette ve uzun ekranda hero'nun boyu sınırlıdır.
+// İki düzende de fotoğrafın alt kenarı sayfa zeminine erir (--zemine-eris); sonraki bölüm aynı zeminden
+// başladığı için hero ile arasında çizgi oluşmaz.
 //
 // Hareket (marka-stili §6): fotoğrafta çok yavaş yakınlaşma, metin sırayla belirir.
 // prefers-reduced-motion açıkken ikisi de olmaz. Parallax için .hero-sahne'ye data-parallax verilir
@@ -80,18 +82,25 @@ const serit = [
 </section>
 
 <style>
+  /* --ekran: sayfa açıldığındaki görünür ekran boyu. svh, tarayıcının adres ve araç çubukları görünürkenki boydur;
+     dvh kullanılmaz: çubuklar kaydırınca gizlendiğinde hero'nun boyu değişir, sayfa zıplar. */
   .hero {
     --h-ust: 122px; /* ana sayfa header'ı: 90px logo + 2 × 16px (Header.astro) */
     --karartma-ton: 20 18 16; /* fotoğraf karartmasının rengi (rgb kanalları) */
+    --ekran: 100vh;
     position: relative;
     display: flex;
-    min-height: 100vh;
-    min-height: 100svh;
     padding-top: var(--h-ust);
     overflow: hidden;
     isolation: isolate; /* katmanlar (fotoğraf 0, karartma 1, metin 2) hero'nun dışına karışmaz */
     background: var(--color-zemin);
     color: var(--color-krem);
+  }
+
+  @supports (height: 100svh) {
+    .hero {
+      --ekran: 100svh;
+    }
   }
 
   /* Fotoğraf katmanı. Parallax bu katmana uygulanır.
@@ -125,22 +134,25 @@ const serit = [
     pointer-events: none;
   }
 
+  /* Mobil: ilk ekran, mobil alt menünün (ve iPhone'un alt güvenli alanının) üstünde kalan görünür alandır.
+     Metin bloğu (başlık, açıklama, düğmeler) bu alanın altına --metin-pay kadar boşlukla yaslanır; ikon şeridi
+     ilk ekranın altından devam eder. Metin alana sığmayacak kadar kısa ekranda header'ın hemen altından başlar. */
   .hero-ic {
+    --metin-pay: var(--bosluk-3);
     position: relative;
     z-index: 2;
-    display: flex;
+    display: grid;
     flex: 1;
-    flex-direction: column;
-    justify-content: flex-end;
+    grid-template-rows:
+      minmax(calc(var(--ekran) - var(--alt-menu-alan) - var(--h-ust) - var(--metin-pay)), auto)
+      auto;
     gap: var(--bosluk-5);
-    /* Mobil: metin en erken fotoğraf boyunun %80'inde, yapının hemen altında başlar.
-       Dikey padding yüzdesi genişliğe göredir: 80% × (boy / en) = fotoğraf boyunun %80'i. */
-    padding-top: calc(80% * var(--mobil-h) / var(--mobil-w) - var(--h-ust));
     padding-bottom: var(--bosluk-5);
   }
 
   .hero-metin {
     position: relative;
+    align-self: end;
     max-width: 36rem;
   }
 
@@ -163,9 +175,13 @@ const serit = [
     text-shadow: 0 2px 20px rgb(0 0 0 / 0.35);
   }
 
+  /* Mobilde açıklamanın üst ve alt boşluğu kısa ekranda bir adım (8px) daralır: 560 px boyda 16 / 24px, 640 px ve
+     üstünde 24 / 32px. Böylece iPhone SE'de bile (Safari'de ~553 px görünür alan) metin bloğu header ile alt menünün
+     arasına sığar. Yazı boyutları değişmez. */
   .hero-metin :global(p) {
     max-width: 48ch;
-    margin: var(--bosluk-3) 0 var(--bosluk-4);
+    margin: clamp(var(--bosluk-2), calc(var(--ekran) / 10 - 40px), var(--bosluk-3)) 0
+      clamp(var(--bosluk-3), calc(var(--ekran) / 10 - 32px), var(--bosluk-4));
     color: var(--color-krem);
     font-size: var(--text-giris);
   }
@@ -276,8 +292,30 @@ const serit = [
 
   /* ≥ 641px: tablet ve masaüstü fotoğrafı (<picture> kaynaklarıyla aynı sınır); fotoğraf hero'yu kaplar.
      Karartma soldaki metin bölgesinde en koyu, sağa doğru açılır. Alt %30 sayfa zeminine erir ve ikon şeridini
-     okutur; erime hero'ya bağlıdır, parallax'ta fotoğraf altından kayar ve kenar görünmez. */
+     okutur; erime hero'ya bağlıdır, parallax'ta fotoğraf altından kayar ve kenar görünmez.
+     Hero ekran boyundadır, ama en fazla genişliğin %90'ı kadar: dikey tablette ve uzun ekranda (ör. telefonda
+     "masaüstü sitesi") fotoğraf ekran boyunca uzayıp yalnızca ortasını göstermez, fotoğrafın en az ~%60'ı
+     görünür. Yatay ekranda sınır devreye girmez. Metin header ile ikon şeridinin arasında dikeyde ortalıdır. */
   @media (min-width: 641px) {
+    .hero {
+      min-height: min(var(--ekran), 90vw);
+    }
+
+    .hero-ic {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-metin {
+      align-self: auto;
+      margin-block: auto;
+    }
+
+    .hero-metin :global(p) {
+      margin: var(--bosluk-3) 0 var(--bosluk-4);
+    }
+
     .hero-sahne {
       inset: 0;
       aspect-ratio: auto;
@@ -291,10 +329,6 @@ const serit = [
     .hero-sahne::after,
     .hero-metin::before {
       content: none;
-    }
-
-    .hero-ic {
-      padding-top: 34svh;
     }
 
     .hero::before {
@@ -315,20 +349,21 @@ const serit = [
     }
   }
 
-  /* ≥ 1024px: metin solda dikeyde ortalı, ikon şeridi altta */
+  /* ≥ 1024px: metin sütunu fotoğrafın %42'sinden önce biter */
   @media (min-width: 1024px) {
     .hero {
       --h-ust: 188px; /* 140px logo + 2 × 24px */
     }
 
-    .hero-ic {
-      justify-content: space-between;
-      padding-top: 0;
-    }
-
     .hero-metin {
-      margin-block: auto;
       max-width: min(32rem, calc(42vw - 80px));
+    }
+  }
+
+  /* ≥ 1280px: masaüstünde hero her zaman ekran boyundadır (onaylı görünüm; boy sınırı yok) */
+  @media (min-width: 1280px) {
+    .hero {
+      min-height: var(--ekran);
     }
   }
 </style>

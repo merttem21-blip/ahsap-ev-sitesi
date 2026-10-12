@@ -17,6 +17,8 @@
 // adımlar örnek verilerle doldurulup "Devam et" ile geçilerek çekilir; form hiçbir zaman gönderilmez
 // (Web3Forms'a giden her istek engellenir ve hata sayılır). Mobil menü paneli, kaydırılmış bir sayfada açılıp
 // panel en üstte ve en altta iken, panelin kendi içinde kaydığı kısa ekranlarda (375×667, 768×600) çekilir.
+// Ana sayfanın ilk ekranı (A1, hero) ayrıca telefon (412×915) ve dikey tablet (768×1024) boyunda çekilir: hero'nun
+// boyu ekran boyuna ve mobil alt menüye göre hesaplanır, tam sayfa çekim bunu ekran boyunda göstermez.
 //
 // Referans yoksa (ilk çalıştırma) çekimler docs/guvenli-mod/referans/ altına kaydedilir. Varsa son çekimler
 // docs/guvenli-mod/son/ altına yazılır, referansla karşılaştırılır; farklı olanların fark görseli (değişen
@@ -91,8 +93,8 @@ async function menuyuAc(sayfa, konum) {
   await sayfa.evaluate(() => new Promise((tamam) => requestAnimationFrame(() => requestAnimationFrame(tamam))));
 }
 
-// Sayfa tipleri: A ana sayfa, P projeler, K kategori, D proje detayı, G galeri, H hakkımızda, S SSS,
-// T teklif al (T2, T3: formun 2. ve 3. adımı), İ iletişim, TŞ teşekkürler, Y yasal sayfa,
+// Sayfa tipleri: A ana sayfa (A1: yalnızca ilk ekran, hero), P projeler, K kategori, D proje detayı, G galeri,
+// H hakkımızda, S SSS, T teklif al (T2, T3: formun 2. ve 3. adımı), İ iletişim, TŞ teşekkürler, Y yasal sayfa,
 // M1, M2 mobil menü paneli açık (en üstte, en altta)
 // hazirlik: çekimden önce sayfada yapılacak etkileşim (yalnızca görünüm; form gönderilmez)
 // sonra: görseller ve düzen oturduktan sonra, çekimden hemen önce yapılacak etkileşim (kaydırma konumu hazırlıktaki
@@ -100,6 +102,7 @@ async function menuyuAc(sayfa, konum) {
 // genislikler: GENISLIKLER yerine kullanılacak ekran boyutları
 const SAYFALAR = [
   { kod: 'A', ad: 'ana-sayfa', yol: '/' },
+  { kod: 'A1', ad: 'ana-sayfa-ilk-ekran', yol: '/', ilkEkran: true, genislikler: 'hero' },
   { kod: 'P', ad: 'projeler', yol: '/projeler' },
   { kod: 'K', ad: 'kategori-bungalov', yol: '/bungalov' },
   { kod: 'D', ad: 'proje-asma-katli-verandali-bungalov', yol: '/bungalov/asma-katli-verandali-bungalov' },
@@ -160,7 +163,15 @@ const MENU_GENISLIKLERI = [
   { genislik: 768, yukseklik: 600, mobil: true },
 ];
 
-const genislikleri = (s) => (s.genislikler === 'menu' ? MENU_GENISLIKLERI : GENISLIKLER);
+// Ana sayfa ilk ekranı (A1): Android telefon ve dikey tablet. Telefonda başlık, açıklama ve düğmeler alt menünün
+// üstünde tamamen görünür; tablette hero ekran boyunca uzamaz (docs/hata-hero/).
+const HERO_GENISLIKLERI = [
+  { genislik: 412, yukseklik: 915, mobil: true },
+  { genislik: 768, yukseklik: 1024, mobil: true },
+];
+
+const EKRANLAR = { menu: MENU_GENISLIKLERI, hero: HERO_GENISLIKLERI };
+const genislikleri = (s) => EKRANLAR[s.genislikler] ?? GENISLIKLER;
 
 const REFERANS = path.join(GUVENLI_MOD, 'referans');
 const SON = path.join(GUVENLI_MOD, 'son');

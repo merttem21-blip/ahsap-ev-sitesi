@@ -33,7 +33,7 @@
   --color-karartma-yogun: rgba(30, 30, 30, 0.9); /* fotoğraflı kartın metin bloğu; %85 opak krem bile ≥ 4.5:1 */
   --color-cizgi-ince: rgba(235, 220, 198, 0.08); /* fotoğraflı kart çerçevesi */
   --color-ahsap-isik: rgba(166, 124, 82, 0.32); /* fotoğraflı kart hover'ında alttan gelen sıcak iç ışık */
-  --color-ust-kucuk: rgba(46, 46, 46, 0.95); /* kaydırınca header zemini: arkası beyaz olsa bile menü metni ≥ 5.8:1 */
+  --color-ust-kucuk: var(--color-antrasit); /* kaydırınca header zemini: tam opak, arkadan geçen sayfa metni görünmez */
   /* Fotoğrafın sayfa zeminine erimesi (hero'nun alt kenarı, marka-stili §8). Aşağıda tam zemin, yukarıda saydam;
      yumuşak başlayıp yumuşak biter (smoothstep), erimenin başladığı yerde çizgi belli olmaz.
      Uygulandığı katmanın boyuna yayılır: background: var(--zemine-eris) bottom / 100% <boy> no-repeat */
