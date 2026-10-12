@@ -3,6 +3,7 @@
 //   npm run gorsel-kontrol                              önce derler, sonra çeker ve karşılaştırır
 //   npm run gorsel-kontrol -- --derleme-yok             mevcut dist/ ile
 //   npm run gorsel-kontrol -- --esik=0.05               % olarak izin verilen fark (varsayılan 0)
+//   npm run gorsel-kontrol -- --gurultu-yok             gürültü toleransı kapalı: tek bir piksel farkı bile hata
 //   npm run gorsel-kontrol -- --referans-yenile         referansları baştan üretir (yalnızca müşteri onaylı
 //                                                       bir görünüm değişikliğinden sonra)
 //   npm run gorsel-kontrol -- --referans-yenile=yasal-kvkk,iletisim
@@ -18,6 +19,11 @@
 // Referans yoksa (ilk çalıştırma) çekimler docs/guvenli-mod/referans/ altına kaydedilir. Varsa son çekimler
 // docs/guvenli-mod/son/ altına yazılır, referansla karşılaştırılır; farklı olanların fark görseli (değişen
 // pikseller kırmızı) docs/guvenli-mod/fark/ altına, özet rapor fark/rapor.md'ye yazılır. Fark varsa çıkış kodu 1.
+//
+// Gürültü: Chromium aynı derlemeyi bile ara sıra yazı ve simge kenarlarında birkaç tekil pikseli farklı boyar.
+// Fark %0,001'in altındaysa ve dağınıksa (her fark pikselinin 8 px yakınında başka fark pikseli yoksa) çekim
+// "geçti (gürültü)" sayılır; raporda fark görseliyle birlikte yine gösterilir. Bir harf ya da noktalama değişikliği
+// bitişik piksellerden oluştuğu için gürültü sayılmaz. Eşiğin üstündeki ya da toplu her fark hata olarak kalır.
 //
 // Not: Çekimler tarayıcı sürümüne, işletim sistemine ve font yüklemesine bağlıdır. Referanslar bu bilgisayarda
 // ve package.json'da sabitlenmiş Playwright sürümüyle üretilmiştir; başka ortamda karşılaştırma yapılacaksa
@@ -111,6 +117,12 @@ const FARK = path.join(GUVENLI_MOD, 'fark');
 const ESIK = Number(secenekDegeri('--esik') ?? 0);
 const GORSEL_ZAMAN_ASIMI = 30_000;
 
+// Gürültü toleransı (dosya başındaki açıklamaya bakın)
+const GURULTU = !secenekVar('--gurultu-yok');
+const GURULTU_ESIK = 0.001; // %, bu değerin altı
+const GURULTU_ARALIK = 8; // px: iki fark pikseli arasındaki en küçük uzaklık (yatay, dikey ya da çapraz)
+const FARK_RENGI = [255, 0, 0]; // fark görselinde değişen pikseller
+
 /** Sayfayı çekime hazırlar: tüm görseller yüklenip çözülmüş, fontlar hazır, iki kare boyanmış. */
 async function hazirla(sayfa, { ilkEkran, hazir }) {
   if (hazir) await sayfa.waitForSelector(hazir, { state: 'attached', timeout: GORSEL_ZAMAN_ASIMI });
@@ -192,14 +204,37 @@ function karsilastir(referansYolu, sonYolu, farkYolu) {
     return tuval.data;
   };
   const fark = new PNG({ width: genislik, height: yukseklik });
-  const piksel = pixelmatch(genislet(a), genislet(b), fark.data, genislik, yukseklik, { threshold: 0.1 });
+  const piksel = pixelmatch(genislet(a), genislet(b), fark.data, genislik, yukseklik, {
+    threshold: 0.1,
+    diffColor: FARK_RENGI,
+  });
   if (piksel > 0) fs.writeFileSync(farkYolu, PNG.sync.write(fark));
+  const yuzde = (piksel / (genislik * yukseklik)) * 100;
+  const ayniBoyut = a.width === b.width && a.height === b.height;
   return {
     piksel,
-    yuzde: (piksel / (genislik * yukseklik)) * 100,
+    yuzde,
+    gurultu: GURULTU && piksel > 0 && ayniBoyut && yuzde < GURULTU_ESIK && daginikMi(fark, piksel),
     referansBoyut: `${a.width}×${a.height}`,
     sonBoyut: `${b.width}×${b.height}`,
   };
+}
+
+/** Fark görselindeki fark pikselleri birbirinden en az GURULTU_ARALIK px uzakta mı (bitişik, toplu fark yok)? */
+function daginikMi(fark, beklenen) {
+  const noktalar = [];
+  for (let i = 0; i < fark.data.length; i += 4) {
+    if (fark.data[i] === FARK_RENGI[0] && fark.data[i + 1] === FARK_RENGI[1] && fark.data[i + 2] === FARK_RENGI[2]) {
+      noktalar.push([(i / 4) % fark.width, Math.floor(i / 4 / fark.width)]);
+    }
+  }
+  // Sayım pixelmatch'inkiyle tutmuyorsa emin olunamaz: gürültü sayılmaz
+  if (noktalar.length !== beklenen) return false;
+  return noktalar.every(([x, y], i) =>
+    noktalar
+      .slice(i + 1)
+      .every(([x2, y2]) => Math.max(Math.abs(x - x2), Math.abs(y - y2)) >= GURULTU_ARALIK)
+  );
 }
 
 /** --referans-yenile: hepsi; --referans-yenile=ad,kod,…: yalnızca verilen sayfalar. Referansı yenilenecek mi? */
@@ -242,7 +277,8 @@ async function main() {
             return;
           }
           const sonuc = karsilastir(referansYolu, hedef, path.join(FARK, dosya));
-          satirlar.push({ s, g, dosya, durum: sonuc.yuzde > ESIK ? 'fark' : 'ayni', ...sonuc });
+          const durum = sonuc.gurultu ? 'gurultu' : sonuc.yuzde > ESIK ? 'fark' : 'ayni';
+          satirlar.push({ s, g, dosya, durum, ...sonuc });
         })
       );
       process.stdout.write(`  ${s.kod.padEnd(2)} ${s.yol} ✓\n`);
@@ -256,7 +292,12 @@ async function main() {
     GENISLIKLER.map((g) => satirlar.find((r) => r.s === s && r.g === g)).filter(Boolean)
   );
   const farklar = sirali.filter((r) => r.durum === 'fark');
+  const gurultuler = sirali.filter((r) => r.durum === 'gurultu');
   const karsilastirilan = sirali.filter((r) => r.durum !== 'referans');
+  const DURUM = { ayni: '✓ aynı', gurultu: '✓ geçti (gürültü)', fark: '✗ fark var' };
+  const tolerans = GURULTU
+    ? `%${GURULTU_ESIK} altı ve dağınık (fark pikselleri arası en az ${GURULTU_ARALIK} px)`
+    : 'kapalı (--gurultu-yok)';
 
   if (olusturulan) {
     console.log(`\n${olusturulan} referans görüntü ${path.relative(process.cwd(), REFERANS)} altına kaydedildi.`);
@@ -266,13 +307,14 @@ async function main() {
   const rapor = [
     '# Görsel kontrol raporu',
     '',
-    `Tarih: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' })} · Eşik: %${ESIK}`,
+    `Tarih: ${new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' })} · Eşik: %${ESIK}` +
+      ` · Gürültü toleransı: ${tolerans}`,
     '',
     '| Kod | Sayfa | Genişlik | Durum | Fark | Referans boyutu | Son boyut | Fark görseli |',
     '|---|---|---|---|---|---|---|---|',
     ...karsilastirilan.map(
       (r) =>
-        `| ${r.s.kod} | ${r.s.yol} | ${r.g.genislik} | ${r.durum === 'fark' ? '✗ fark var' : '✓ aynı'} | ` +
+        `| ${r.s.kod} | ${r.s.yol} | ${r.g.genislik} | ${DURUM[r.durum]} | ` +
         `%${r.yuzde.toFixed(4)} (${r.piksel} px) | ${r.referansBoyut} | ${r.sonBoyut} | ` +
         `${r.piksel > 0 ? `fark/${r.dosya}` : '-'} |`
     ),
@@ -283,9 +325,10 @@ async function main() {
   console.log('');
   for (const r of karsilastirilan) {
     const boyut = r.referansBoyut !== r.sonBoyut ? `  boyut ${r.referansBoyut} → ${r.sonBoyut}` : '';
+    const gurultu = r.durum === 'gurultu' ? `  geçti (gürültü: ${r.piksel} dağınık piksel)` : '';
     console.log(
       `  ${r.durum === 'fark' ? '✗' : '✓'} ${r.s.kod.padEnd(2)} ${r.s.yol.padEnd(42)} ${String(r.g.genislik).padStart(4)}px  ` +
-        `%${r.yuzde.toFixed(4)}${boyut}`
+        `%${r.yuzde.toFixed(4)}${boyut}${gurultu}`
     );
   }
   if (farklar.length) {
@@ -294,6 +337,14 @@ async function main() {
     );
     console.error('İzin verilmeyen bir görünüm farkı varsa iş bitmiş sayılmaz (CLAUDE.md "Güvenli Mod").');
     process.exit(1);
+  }
+  if (gurultuler.length) {
+    console.log(
+      `\ngorsel-kontrol: ${karsilastirilan.length} çekim geçti; ${karsilastirilan.length - gurultuler.length} aynı, ` +
+        `${gurultuler.length} gürültü düzeyinde (dağınık birkaç piksel). ` +
+        `Fark görselleri ve rapor: ${path.relative(process.cwd(), FARK)} ✓`
+    );
+    return;
   }
   console.log(`\ngorsel-kontrol: ${karsilastirilan.length} çekim referansla aynı. ✓`);
 }
