@@ -81,6 +81,8 @@ export const menu = [
 // Fotoğraflar public/images/<slug>/<proje-slug>/ altında, projeler src/content/projeler/ altında.
 // giris sayfadaki ilk paragraftır (birincil anahtar kelime burada geçer). Meta başlık h1'den, meta açıklama
 // giris'ten üretilir (src/lib/projeler.ts); böylece arama sonucundaki metin sayfada görünenle aynı kalır.
+// googleBasligi (isteğe bağlı): arama sonucundaki başlık, h1'de olmayan aranan kelimeyi ("… Modelleri") taşımak için.
+// " | 2K AHŞAP" eki kodda eklenir, toplam en fazla 60 karakter. Boşsa başlık h1'den üretilir; sayfadaki H1 değişmez.
 // vitrin: kapak fotoğrafı kategoriyi temsil eden projenin slug'ı (yoksa ilk proje).
 // teklifIpucu: teklif formunda yapı tipi seçeneğinin altındaki kısa açıklama.
 // anaSayfa: ana sayfadaki "Ürünlerimiz" kartı (yalnızca kartı olan kategorilerde). Kart fotoğrafı
@@ -104,6 +106,7 @@ export const kategoriler = [
     slug: 'bungalov',
     vitrin: 'asma-katli-verandali-bungalov',
     h1: 'Ahşap Bungalov Projeleri',
+    googleBasligi: 'Ahşap Bungalov Modelleri ve Projeleri',
     giris: 'Bahçeniz, tatil eviniz veya turizm tesisiniz için ürettiğimiz ahşap bungalov projeleri.',
     teklifIpucu: 'Bahçe, tatil ve turizm',
     anaSayfa: {
@@ -116,6 +119,7 @@ export const kategoriler = [
     slug: 'villa',
     vitrin: 'genis-verandali-ahsap-villa',
     h1: 'Ahşap Villa Projeleri',
+    googleBasligi: 'Ahşap Villa Modelleri ve Projeleri',
     giris: 'Geniş verandalı, ferah planlı; modern mimariyle doğal ahşabı buluşturan ahşap villa projelerimiz.',
     teklifIpucu: 'Geniş, ferah planlı yaşam',
     anaSayfa: {
@@ -128,6 +132,7 @@ export const kategoriler = [
     slug: 'tiny-house',
     vitrin: 'romorklu-tiny-house',
     h1: 'Tiny House Projeleri',
+    googleBasligi: 'Tiny House Modelleri ve Küçük Ahşap Ev Projeleri',
     giris: 'Az alanda konforlu yaşam için tasarlayıp ürettiğimiz tiny house ve kompakt ahşap yapı projeleri.',
     teklifIpucu: 'Az alanda konforlu yaşam',
     anaSayfa: {
@@ -140,6 +145,7 @@ export const kategoriler = [
     slug: 'ucgen-ev',
     vitrin: 'a-frame-bungalov',
     h1: 'Üçgen Ev ve Bungalov Projeleri',
+    googleBasligi: 'Üçgen Ev (A-Frame) Modelleri ve Projeleri',
     // Eski adı "A-frame" aramalarda da kullanıldığı için girişte (dolayısıyla meta açıklamada) bir kez parantezde geçer
     giris: 'Üçgen ev (A-frame) formunda tasarlayıp ürettiğimiz ahşap yapı ve bungalov projeleri.',
     teklifIpucu: 'Üçgen formlu ev ve bungalov',
@@ -149,6 +155,7 @@ export const kategoriler = [
     slug: 'cardak',
     vitrin: 'sekizgen-otel-cardagi',
     h1: 'Ahşap Çardak Projeleri',
+    googleBasligi: 'Ahşap Çardak Modelleri ve Bahçe Çardakları',
     giris: 'Bahçeler, oteller ve tesisler için tasarlayıp ürettiğimiz ahşap çardak projeleri.',
     teklifIpucu: 'Bahçe, otel ve tesisler',
   },
@@ -165,6 +172,7 @@ export const kategoriler = [
     slug: 'cocuk-oyun-parki',
     vitrin: 'kaydirakli-sato-oyun-evi',
     h1: 'Ahşap Çocuk Oyun Parkı ve Oyun Evleri',
+    googleBasligi: 'Ahşap Çocuk Oyun Parkı ve Oyun Evi Modelleri',
     giris: 'Bahçeler için tasarlayıp ürettiğimiz ahşap çocuk oyun parkı ve oyun evi projeleri.',
     teklifIpucu: 'Oyun evi ve oyun parkı',
   },
@@ -173,6 +181,7 @@ export const kategoriler = [
     slug: 'ahsap-cami',
     vitrin: 'iki-katli-ahsap-cami',
     h1: 'Ahşap Cami Projeleri',
+    googleBasligi: 'Ahşap Cami Modelleri ve Projeleri',
     giris: 'Cemaatin ihtiyaçlarına göre tasarlayıp ürettiğimiz ahşap cami projeleri.',
     teklifIpucu: 'Tek ve iki katlı, minareli',
   },
@@ -181,6 +190,7 @@ export const kategoriler = [
     slug: 'ozel-tasarim',
     vitrin: 'iskele-giris-kulubesi',
     h1: 'Özel Tasarım Ahşap Yapılar',
+    googleBasligi: 'Özel Tasarım Ahşap Yapılar: Kabin, Kulübe, Vitrin',
     giris: 'Vitrin, kulübe, kabin ve depo gibi ihtiyaca göre özel tasarım ahşap yapı projelerimiz.',
     teklifIpucu: 'Kabin, kulübe, vitrin ve diğerleri',
   },

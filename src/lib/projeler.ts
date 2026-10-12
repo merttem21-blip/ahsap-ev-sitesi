@@ -73,10 +73,12 @@ export function projeMetaAciklamasi(p: Proje) {
   ]);
 }
 
-// Kategori sayfasının meta bilgisi sayfada görünen H1 ve giriş paragrafından üretilir
+// Kategori sayfasının meta bilgisi sayfada görünen H1 ve giriş paragrafından üretilir.
+// googleBasligi doluysa başlıkta o kullanılır; 60 karakteri aşarsa H1'e dönülür.
 export function kategoriMetaBasligi(k: Kategori) {
   const ek = ' | 2K AHŞAP';
-  return [`${k.h1}${ek}`, `${k.ad} Projeleri${ek}`].find((a) => a.length <= 60) ?? `${k.ad}${ek}`;
+  const adaylar = [k.googleBasligi, k.h1, `${k.ad} Projeleri`].filter(Boolean).map((a) => `${a}${ek}`);
+  return adaylar.find((a) => a.length <= 60) ?? `${k.ad}${ek}`;
 }
 
 export function kategoriMetaAciklamasi(k: Kategori) {

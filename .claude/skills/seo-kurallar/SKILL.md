@@ -44,12 +44,13 @@ Bu liste başlangıç içindir. Yayından sonra Google Search Console verisine g
 - Biçim: `{Sayfa konusu} | 2K AHŞAP` ("| 2K AHŞAP" karakter sayısına dahildir).
 - Her sayfada **benzersiz**. Aynı başlık iki sayfada asla kullanılmaz.
 - Birincil kelime başa yakın; büyük harfle bağırma, emoji, "!!!" yok.
-- Kategori ve proje sayfalarında elle yazılmaz, veriden üretilir (`src/lib/projeler.ts`): kategoride sayfadaki H1 (`{H1} | 2K AHŞAP`), projede proje adı.
+- Kategori ve proje sayfalarında veriden üretilir (`src/lib/projeler.ts`): projede proje adı, kategoride sayfadaki H1 (`{H1} | 2K AHŞAP`). H1'de olmayan aranan bir kelime ("Tiny House Modelleri") gerekiyorsa kategorinin isteğe bağlı `googleBasligi` alanına yazılır (`src/data/site.ts`); H1 değişmez.
 
 | Sayfa | Örnek | Karakter |
 |---|---|---|
 | Ana sayfa | Özel Tasarım Ahşap Ev, Bungalov ve Villa \| 2K AHŞAP | 51 |
-| Kategori | Ahşap Bungalov Projeleri \| 2K AHŞAP | 35 |
+| Kategori (H1'den) | Ahşap Bar ve Otel Yapıları \| 2K AHŞAP | 37 |
+| Kategori (`googleBasligi`) | Ahşap Bungalov Modelleri ve Projeleri \| 2K AHŞAP | 48 |
 | Proje | İki Katlı Verandalı Ahşap Bungalov Projesi \| 2K AHŞAP | 53 |
 | İletişim | İletişim ve Teklif Al: Ahşap Ev Projeleri \| 2K AHŞAP | 52 |
 
