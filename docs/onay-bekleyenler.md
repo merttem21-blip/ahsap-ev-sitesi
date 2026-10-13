@@ -13,6 +13,7 @@ Bu dosyadaki açık soruların özeti. Ayrıntı, her maddenin sonundaki bölüm
 - **VERBİS:** Kayıt yükümlülüğü var mı, yoksa muafiyet mi? Metinde şu an bu konuda hiçbir ifade yok. → §1, VERBİS satırı
 - **Yurt dışına aktarım:** Vercel, Web3Forms, e-posta sağlayıcısı ve WhatsApp/Meta için KVKK md. 9 dayanağı nedir? Metinde yalnızca genel bir cümle var. → §1, yurt dışı aktarım satırı
 - **Saklama süresi:** Form verisi ne kadar tutulmalı, sitede süre yazılmalı mı? (`guvenlik-kurallari` "en fazla 1 yıl" diyor; CLAUDE.md kesin süre yazılmasını yasaklıyor.) → §1, saklama ve imha satırı
+- **KVKK kutusu metni:** Kutu rıza istemiyor, yalnızca aydınlatma metninin okunduğunu belirtiyor. Talebi yanıtlamak için veri işlemenin dayanağı açık rıza değil, KVKK md. 5/2-c (sözleşmenin kurulması) olarak kuruldu. Bu gerekçe doğru mu? → §3
 - **Form taslağı:** Tarayıcıda saklanması için çerez politikası ve gizlilik metnine eklenen cümle yeterli mi? Onay istenmemesi doğru mu? → §5
 - **Metinde anılmayanlar:** `2k-ahsap-son-gonderim` kaydı (30 sn bekleme) ve `/iletisim`'de tıklanınca yüklenen Google Haritalar penceresi metinde anılmalı mı? Eklenmeleri sizin onayınızı da bekliyor. → §4, §5
 
@@ -27,12 +28,6 @@ Bu dosyadaki açık soruların özeti. Ayrıntı, her maddenin sonundaki bölüm
 
 - **E-posta sağlayıcısı:** info@2kahsap.com hangi sağlayıcıda, sunucuları yurt dışında mı? Yurt dışı aktarım sorusunu da etkiler. → §1, e-posta hizmet sağlayıcısı satırı
 - **İş ortakları:** Gerçekte veri paylaşılan iş ortağı türleri, metindeki "nakliye, kurulum, muhasebe ve mali müşavirlik" listesiyle örtüşüyor mu? → §1, iş ortağı türleri satırı
-
-**Yasal metin: sizin kararınız**
-
-- **Marka yazımı:** Yasal metinlerdeki "Azra Ahşap Ev (2K AHŞAP)" yazımı doğru mu? → §2
-- **Yazı tipleri maddesi:** `/gizlilik` §3'e "Yazı tipleri kendi sunucumuzdan yüklenir" maddesi eklensin mi? → §6
-
 ## 1. Metinden çıkarılan yer tutucular
 
 Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yapıldığı aşağıda.
@@ -52,7 +47,7 @@ Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yap
 
 - **Vergi numarası.** Vergi no (11 hane, T.C. kimlik no olabilir) bilinçli olarak gizlendi; yayınlanması gerekip gerekmediği muhasebeciye sorulacak. Numara `src/data/site.ts` içinde `firma.vergiNo` alanında duruyor. Hiçbir sayfada, meta veride veya JSON-LD'de kullanılmıyor. KVKK sayfasında yalnızca vergi dairesi görünüyor.
 - **Ticari unvan.** Şahıs işletmesinde ticaret unvanı işletme sahibinin adı ve soyadını içerir (TTK md. 40). "Azra Ahşap Ev" bir işletme adı olabilir. Vergi levhasındaki unvanla birebir aynı olmalı.
-- **Marka yazımı.** Prompt'ta "2K Ahşap" yazıyordu. Sitenin her yerinde "2K AHŞAP" kullanıldığı için yasal metinlerde de bu yazım kullanıldı: "Azra Ahşap Ev (2K AHŞAP)". Değiştirmek için `firma.marka` yeterli. Bu durumda header, footer ve schema.org'daki ad da değişir.
+- **Marka yazımı.** Prompt'ta "2K Ahşap" yazıyordu. Sitenin her yerinde "2K AHŞAP" kullanıldığı için yasal metinlerde de bu yazım kullanıldı: "Azra Ahşap Ev (2K AHŞAP)". Değiştirmek için `firma.marka` yeterli. Bu durumda header, footer ve schema.org'daki ad da değişir. **Kapandı (14 Ekim 2026):** "2K AHŞAP" yazımı kalır.
 
 ## 3. KVKK onay kutusu metni (onaylandı ve uygulandı, 12 Ekim 2026)
 
@@ -81,6 +76,8 @@ Teklif formu (`/teklif-al`, 3. adım) ve iletişim formu (`/iletisim`) aynı bil
 | `.claude/skills/guvenlik-kurallari/SKILL.md` §4, örnek onay metni | Kişisel verilerimin, KVKK Aydınlatma Metni kapsamında … işlenmesini kabul ediyorum. | Yeni metin ve kısa gerekçesi. |
 
 E-postadaki alan adı ("KVKK onayı") ve gönderim akışı değişmedi; yalnızca değerler değişti. Form envanteri etkilenmedi.
+
+**Hukukçu kontrolü (yayından önce):** md. 5/2-c gerekçesi bir hukukçu tarafından teyit edilmedi (bkz. "Hukukçuya sorulacaklar").
 
 ## 4. Çerez politikası (bilgi)
 
@@ -116,7 +113,7 @@ Fontlar (Inter, Poppins) sitenin kendi dosyalarına alındı (`public/fonts/`). 
 | `/gizlilik` (`src/pages/gizlilik.astro`, §3) | **Google Fonts:** Sitedeki yazı tipleri Google sunucularından yüklenir; bu sırada tarayıcınız IP adresinizi Google'a iletir. Google Fonts çerez kullanmaz. |
 | `/cerez-politikasi` (`src/pages/cerez-politikasi.astro`, §3) | **Google Fonts:** Yazı tipleri Google sunucularından yüklenir. Google Fonts çerez bırakmaz; ancak bu sırada tarayıcınız IP adresinizi Google'a iletir. |
 
-- Yerine yeni bir madde yazılmadı. İstenirse `/gizlilik` §3'e şu eklenebilir: **Yazı tipleri:** Sitedeki yazı tipleri kendi sunucumuzdan yüklenir; bu sırada üçüncü bir tarafa bilgi gönderilmez.
+- Yerine yeni bir madde yazılmadı. Önerilen madde: **Yazı tipleri:** Sitedeki yazı tipleri kendi sunucumuzdan yüklenir; bu sırada üçüncü bir tarafa bilgi gönderilmez. **Kapandı (14 Ekim 2026):** madde eklenmeyecek; fontlar sitenin kendi dosyalarından geldiği için üçüncü tarafa bilgi gitmiyor.
 - gorsel-kontrol bu iki sayfayı çekmez (yasal sayfa örneği `/kvkk`); referans yenilemesi gerekmedi.
 
 ## 7. Sonraki iş: CSS'i sayfaya gömme (14 Ekim 2026)
