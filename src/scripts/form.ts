@@ -5,10 +5,12 @@
 //   başarısızsa aynı bilgiler biçimli bir WhatsApp mesajı olarak açılır.
 // - Honeypot (botcheck) işaretliyse hiçbir şey gönderilmez. İki e-posta gönderimi arasında en az 30 sn.
 //   Gönderim sürerken gönder ve WhatsApp düğmeleri yok sayılır (çift gönderim olmaz).
-// - Girilenler tarayıcıda taslak olarak saklanır (localStorage, son değişiklikten 7 gün); sayfaya dönülünce alanlar
-//   sessizce dolar. Gizli alanlar, KVKK kutusu ve honeypot saklanmaz. Taslak yalnızca e-posta gönderimi başarılı
-//   olunca silinir; ağ hatasında ve WhatsApp'a aktarımda kalır. Depolama kapalıysa form taslaksız çalışır.
+// - Girilenler tarayıcıda taslak olarak saklanır (localStorage, son değişiklikten 7 gün; süresi dolan taslağı sitenin
+//   her sayfası açılırken siler, src/scripts/taslak.ts); sayfaya dönülünce alanlar sessizce dolar. Gizli alanlar,
+//   KVKK kutusu ve honeypot saklanmaz. Taslak e-posta gönderimi başarılı olunca silinir; ağ hatasında ve WhatsApp'a
+//   aktarımda kalır. Depolama kapalıysa form taslaksız çalışır.
 // - Kullanıcı verisi sayfaya yalnızca textContent ya da alan değeri olarak yazılır ve konsola yazdırılmaz.
+import { TASLAK, taslakOku } from './taslak';
 
 type Kural = (deger: string) => string | null; // hata mesajı ya da null
 type Alan = [ad: string, etiket: string, bicim?: (deger: string) => string];
@@ -32,8 +34,6 @@ const WEB3FORMS = 'https://api.web3forms.com/submit';
 const BEKLEME = 30_000;
 const ZAMAN_ASIMI = 15_000;
 const SON_GONDERIM = '2k-ahsap-son-gonderim';
-const TASLAK = '2k-ahsap-taslak-';
-const TASLAK_OMRU = 7 * 24 * 60 * 60 * 1000;
 const SAYAC_UYARI = 100; // kalan karakter bu sayıya inince ekran okuyucuya da duyurulur
 const SAYAC_BEKLEME = 1_000; // duyuru, yazmaya bu kadar ara verilince yapılır (her tuşta değil)
 
@@ -158,22 +158,15 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
     }
   };
 
-  // Yalnızca formda hâlâ var olan alan ve seçenekler geri yüklenir; süresi geçmiş ya da bozuk taslak yok sayılır
+  // Yalnızca formda hâlâ var olan alan ve seçenekler geri yüklenir; süresi geçmiş ya da bozuk taslak silinir
   const taslakYukle = () => {
-    let alanlar: Record<string, unknown>;
+    let alanlar: Record<string, unknown> | null;
     try {
-      const kayit = JSON.parse(localStorage.getItem(taslakAnahtari) ?? 'null');
-      if (!kayit) return;
-      const gecersiz =
-        typeof kayit.zaman !== 'number' || Date.now() - kayit.zaman > TASLAK_OMRU || typeof kayit.alanlar !== 'object';
-      if (gecersiz) {
-        localStorage.removeItem(taslakAnahtari);
-        return;
-      }
-      alanlar = kayit.alanlar ?? {};
+      alanlar = taslakOku(taslakAnahtari);
     } catch {
-      return;
+      return; // depolama kapalı
     }
+    if (!alanlar) return;
     for (const g of taslakAlanlari()) {
       const d = alanlar[g.name];
       if (typeof d !== 'string') continue;

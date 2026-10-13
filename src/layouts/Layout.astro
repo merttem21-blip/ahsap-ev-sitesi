@@ -78,6 +78,10 @@ const site = Astro.site ?? new URL(siteAdresi);
 
     <script>
       import '../scripts/hareket';
+      import { eskiTaslaklariSil } from '../scripts/taslak';
+
+      // Süresi dolan form taslakları her sayfa açılırken silinir (çerez politikası ve gizlilik metninde yazılı)
+      eskiTaslaklariSil();
     </script>
   </body>
 </html>

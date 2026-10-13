@@ -62,12 +62,21 @@ Sitede onay gerektiren çerez veya betik yok. `/cerez-politikasi` ve `/gizlilik`
 
 Bu, `docs/denetim-raporu.md` madde 8'de de not edilmişti. Eklenmesi bir metin değişikliği olduğu için onay bekliyor.
 
-## 5. Teklif formu: taslak kaydetme (Prompt 9, 13 Ekim 2026)
+## 5. Form taslağı tarayıcıda saklanır (onaylandı ve uygulandı, 14 Ekim 2026)
 
-Teklif formunda taslak kaydetme henüz yok. Prompt 9'da yapılacak.
+Teklif ve iletişim formuna yazılanlar ziyaretçinin kendi tarayıcısında taslak olarak saklanır (`localStorage`: `2k-ahsap-taslak-teklif`, `2k-ahsap-taslak-iletisim`). Sayfaya dönülünce alanlar dolu gelir. Kod: `src/scripts/form.ts`, `src/scripts/taslak.ts`.
 
-- Taslak, 13 Ekim 2026'da 1. adıma eklenen `proje_aciklamasi` alanını ("Projenizi kısaca anlatın", en fazla 1000 karakter) da kapsamalı (müşteri isteği).
-- Bu alan yapı tipi "Diğer" seçiliyken zorunludur. Taslaktan "Diğer" geri yüklenirse alanın zorunlu durumu ve kalan karakter sayacı da güncellenmeli (`src/pages/teklif-al.astro` ve `src/scripts/form.ts`). Ayrıntı: `docs/teklif-formu/README.md`.
+- Saklanmayanlar: KVKK kutusu, honeypot ve gizli alanlar.
+- Silinme: e-posta gönderimi başarılı olunca. Gönderilmezse son değişiklikten 7 gün sonra, siteyi ilk ziyarette (her sayfa açılırken denetlenir). Ziyaretçi siteye hiç dönmezse kayıt kendi tarayıcısında kalır; tarayıcı verisini silince gider.
+- Taslak sunucuya, bize veya üçüncü kişilere gönderilmez. Yalnızca ziyaretçi formu gönderince bilgiler Web3Forms üzerinden iletilir.
+- `proje_aciklamasi` alanı da taslağa dahil. Taslaktan "Diğer" geri yüklenince alanın zorunlu durumu ve kalan karakter sayacı da güncellenir.
+- Metne eklenen cümle (`/cerez-politikasi` §2 ayrı paragraf, `/gizlilik` §4 paragraf içinde):
+
+  > Teklif ve iletişim formlarına yazdığınız bilgiler, sayfadan ayrılsanız da kaybolmaması için yalnızca kendi tarayıcınızda saklanır; formu gönderdiğinizde, gönderilmezse de 7 gün sonra siteyi ilk ziyaretinizde silinir. Bu bilgiler siz formu göndermedikçe bize veya üçüncü kişilere iletilmez.
+
+- Yasal sayfaların "Son güncelleme" tarihi 14 Ekim 2026 oldu (`src/data/site.ts`, `yasalGuncelleme`).
+
+**Hukukçu kontrolü (yayından önce): form taslağının tarayıcıda saklanması.** Sorulacak: bu işlev için yukarıdaki cümlenin yeterli olup olmadığı. Taslak, ziyaretçinin istediği işlev için cihazında tutulan zorunlu bir kayıttır ve çerez onayı istenmiyor. Aynı soru `2k-ahsap-son-gonderim` kaydı için de geçerli (§4).
 
 ## 6. Yazı tipleri artık Google'dan yüklenmiyor (onaylandı ve uygulandı, 14 Ekim 2026)
 
