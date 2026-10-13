@@ -1,6 +1,7 @@
 ---
 // Etiketli metin girdisi veya metin alanı: etiket → yardım metni → girdi → hata (aria-describedby ile bağlı).
 // Hata metnini src/scripts/form.ts yazar. Sayfada tek form olduğu için id'ler alan adından üretilir.
+// sayac: metin alanının altında kalan karakter sayısı (yalnızca JS açıkken görünür; sayıyı form.ts günceller).
 interface Props {
   ad: string;
   etiket: string;
@@ -11,12 +12,23 @@ interface Props {
   autocomplete?: string;
   inputmode?: 'text' | 'tel' | 'email' | 'numeric' | 'decimal';
   maxlength: number;
+  sayac?: boolean;
 }
 
-const { ad, etiket, tip = 'text', zorunlu = false, yardim, ornek, autocomplete = 'off', inputmode, maxlength } =
-  Astro.props;
+const {
+  ad,
+  etiket,
+  tip = 'text',
+  zorunlu = false,
+  yardim,
+  ornek,
+  autocomplete = 'off',
+  inputmode,
+  maxlength,
+  sayac = false,
+} = Astro.props;
 const id = `alan-${ad}`;
-const aciklama = [yardim && `yardim-${ad}`, `hata-${ad}`].filter(Boolean).join(' ');
+const aciklama = [yardim && `yardim-${ad}`, sayac && `sayac-${ad}`, `hata-${ad}`].filter(Boolean).join(' ');
 ---
 
 <div class="alan" data-alan={ad}>
@@ -49,6 +61,16 @@ const aciklama = [yardim && `yardim-${ad}`, `hata-${ad}`].filter(Boolean).join('
         required={zorunlu}
         aria-describedby={aciklama}
       />
+    )
+  }
+  {
+    sayac && (
+      <>
+        <p class="alan-sayac" id={`sayac-${ad}`} data-sayac data-js hidden>
+          {maxlength} karakter kaldı
+        </p>
+        <span class="gizli" role="status" data-sayac-canli />
+      </>
     )
   }
   <p class="alan-hata" id={`hata-${ad}`} data-hata></p>

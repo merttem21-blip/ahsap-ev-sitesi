@@ -21,7 +21,11 @@ import '../styles/form.css';
 
 const whatsappMesaj = 'Merhaba, ahşap yapı projem için teklif almak istiyorum.';
 
-const yapiTipleri = kategoriler.map((k) => ({ deger: k.ad, aciklama: k.teklifIpucu, slug: k.slug }));
+// Kategoriler + listede olmayan yapılar için "Diğer" (seçilince proje açıklaması zorunlu olur)
+const yapiTipleri = [
+  ...kategoriler.map((k) => ({ deger: k.ad, aciklama: k.teklifIpucu, slug: k.slug })),
+  { deger: 'Diğer', aciklama: 'Listede olmayan bir yapı' },
+];
 
 // ?proje=<slug> ile gelindiğinde başlık ve kategori buradan okunur (bilinmeyen slug yok sayılır)
 const projeler = await getCollection('projeler');
@@ -29,7 +33,8 @@ const projeListesi = Object.fromEntries(
   projeler.map((p) => [p.slug, { baslik: p.data.baslik, kategori: p.data.kategori }]),
 );
 
-const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
+// Adım göstergesindeki adlar (adım başlıkları h2'lerde)
+const adimlar = ['Yapı', 'Arsa', 'İletişim'];
 ---
 
 <Layout
@@ -51,16 +56,21 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
   <div class="kap teklif-govde">
     <div class="form-kart" data-teklif-kart>
       <div class="ilerleme" data-ilerleme hidden>
-        <p class="ilerleme-durum">
-          <span class="etiket">Adım <span data-adim-no>1</span> / {adimlar.length}</span>
-          <span class="ilerleme-ad" data-adim-ad>{adimlar[0]}</span>
+        <p class="gizli">
+          Adım <span data-adim-no>1</span> / {adimlar.length}: <span data-adim-ad>{adimlar[0]}</span>
         </p>
         <ol class="ilerleme-adimlar" aria-label="Form adımları">
           {
             adimlar.map((a, i) => (
               <li data-durum={i === 0 ? 'aktif' : undefined} aria-current={i === 0 ? 'step' : undefined}>
-                <span class="ilerleme-cizgi" aria-hidden="true" />
-                <span class="ilerleme-etiket">{a}</span>
+                <span class="ilerleme-isaret" aria-hidden="true">
+                  <span class="ilerleme-no">{i + 1}</span>
+                  <svg class="ikon" viewBox="0 0 24 24" set:html={ikon.tik} />
+                </span>
+                <span class="ilerleme-etiket">
+                  {a}<span class="gizli" data-adim-tamam />
+                </span>
+                {i < adimlar.length - 1 && <span class="ilerleme-cizgi" aria-hidden="true" />}
               </li>
             ))
           }
@@ -93,6 +103,14 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
           </div>
 
           <SecimGrubu ad="yapi_tipi" baslik="Yapı tipi" secenekler={yapiTipleri} kart zorunlu />
+          <GirdiAlani
+            ad="proje_aciklamasi"
+            etiket="Projenizi kısaca anlatın"
+            tip="textarea"
+            maxlength={1000}
+            yardim="Örn. ne için kullanacağınız, kaç kişinin kalacağı, mutlaka olmasını istediğiniz özellikler."
+            sayac
+          />
           <GirdiAlani
             ad="alan_m2"
             etiket="Yaklaşık alan (m²)"
@@ -271,6 +289,8 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
         li.dataset.durum = j < i ? 'tamam' : j === i ? 'aktif' : '';
         if (j === i) li.setAttribute('aria-current', 'step');
         else li.removeAttribute('aria-current');
+        const tamam = li.querySelector('[data-adim-tamam]');
+        if (tamam) tamam.textContent = j < i ? ', tamamlandı' : '';
       });
       const no = ilerleme.querySelector('[data-adim-no]');
       const ad = ilerleme.querySelector('[data-adim-ad]');
@@ -286,7 +306,10 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
       if (aktif < sonAdim && dogrula(adimAlanlari(aktif))) goster(aktif + 1);
     };
 
-    const { dogrula } = formuKur(form, {
+    const yapiTipi = () => (form.elements.namedItem('yapi_tipi') as RadioNodeList | null)?.value ?? '';
+    const digerSecili = () => yapiTipi() === 'Diğer';
+
+    const { dogrula, alaniDogrula, hataGosteriyor } = formuKur(form, {
       giris: 'Merhaba, 2K AHŞAP web sitesinden teklif talebi gönderiyorum.',
       bolumler: [
         {
@@ -296,6 +319,7 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
             ['proje', 'Referans proje'],
             ['alan_m2', 'Yaklaşık alan', (d) => `${d} m²`],
             ['kullanim', 'Kullanım amacı'],
+            ['proje_aciklamasi', 'Proje açıklaması'],
           ],
         },
         {
@@ -321,6 +345,9 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
       konu: (d) => `Yeni teklif talebi - ${d('yapi_tipi')} - ${d('ad')}`,
       kurallar: {
         yapi_tipi: kural.zorunlu('Lütfen yapı tipini seçin.'),
+        // Normalde isteğe bağlı; "Diğer" seçiliyse zorunlu
+        proje_aciklamasi: (d) =>
+          d || !digerSecili() ? null : 'Lütfen nasıl bir yapı düşündüğünüzü kısaca yazın.',
         alan_m2: (d) =>
           !d || /^\d{1,5}([.,]\d{1,2})?$/.test(d) ? null : 'Yaklaşık alanı rakamla yazın (ör. 60) ya da boş bırakın.',
         kullanim: kural.zorunlu('Lütfen kullanım amacını seçin.'),
@@ -374,6 +401,19 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
       });
     }
 
+    // "Diğer" seçiliyken proje açıklaması zorunludur: etiketteki "(isteğe bağlı)" kalkar, alan zorunlu duyurulur.
+    // Seçim değişince gösterilen hata yeniden denetlenir (başka bir tip seçilince kalkar).
+    const aciklama = form.elements.namedItem('proje_aciklamasi') as HTMLTextAreaElement | null;
+    const aciklamaIstege = form.querySelector<HTMLElement>('[data-alan="proje_aciklamasi"] .alan-istege');
+    const aciklamaZorunlu = () => {
+      const zorunlu = digerSecili();
+      if (aciklama) aciklama.required = zorunlu;
+      if (aciklamaIstege) aciklamaIstege.hidden = zorunlu;
+      if (hataGosteriyor('proje_aciklamasi')) alaniDogrula('proje_aciklamasi');
+    };
+    yapiRadyolari.forEach((r) => r.addEventListener('change', aciklamaZorunlu));
+    aciklamaZorunlu();
+
     ilerleme.hidden = false;
     goster(0, false);
   }
@@ -411,36 +451,74 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
     background: var(--color-yuzey);
   }
 
-  /* İlerleme çubuğu: her adım bir çizgi parçası; dolum yalnızca transform (scaleX) */
+  /* Adım göstergesi: tek satırda numaralı daire + adım adı, aralarında ince çizgi. Tamamlanan adım ahşap çerçeveli
+     onay işareti, bulunulan adım krem çerçeveli ve seçili yüzeyli, sıradaki adım soluk. Daire, ad ve çizgi aynı
+     satırda dikeyde ortalı. Çizgi, önündeki adım tamamlanınca ahşapla dolar (yalnızca transform: scaleX). */
   .ilerleme {
     margin-bottom: var(--bosluk-4);
   }
 
-  .ilerleme-durum {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 4px 12px;
-    margin: 0 0 12px;
-  }
-
-  .ilerleme-ad {
-    color: var(--color-krem);
-    font-weight: 500;
-  }
-
   .ilerleme-adimlar {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ilerleme-adimlar li {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
     gap: var(--bosluk-1);
+    min-width: 0;
+  }
+
+  .ilerleme-adimlar li:last-child {
+    flex: 0 0 auto;
+  }
+
+  .ilerleme-isaret {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border: var(--cizgi) solid var(--color-cizgi-girdi);
+    border-radius: var(--radius-tam);
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .ilerleme-isaret .ikon {
+    display: none;
+    width: 16px;
+    height: 16px;
+  }
+
+  /* < 360px: yalnızca bulunulan adımın adı görünür (diğerleri ekran okuyucuda kalır) */
+  .ilerleme-etiket {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    color: var(--color-metin-soluk);
+    font-size: var(--text-kucuk);
+    line-height: 1.4;
   }
 
   .ilerleme-cizgi {
     position: relative;
-    display: block;
-    height: 3px;
+    flex: 1 1 auto;
+    min-width: var(--bosluk-2);
+    height: var(--cizgi);
+    margin-right: var(--bosluk-1);
     overflow: hidden;
-    border-radius: var(--radius-tam);
     background: var(--color-cizgi);
   }
 
@@ -454,13 +532,41 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
     transition: transform var(--sure-kart) var(--ease-out);
   }
 
-  .ilerleme-adimlar li[data-durum='aktif'] .ilerleme-cizgi::after,
-  .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-cizgi::after {
-    transform: scaleX(1);
+  .ilerleme-adimlar li[data-durum='aktif'] .ilerleme-isaret {
+    border-color: var(--color-krem);
+    background: var(--color-yuzey-secili);
+    color: var(--color-krem);
   }
 
-  .ilerleme-etiket {
+  .ilerleme-adimlar li[data-durum='aktif'] .ilerleme-etiket {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    color: var(--color-krem);
+    font-weight: 500;
+  }
+
+  .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-isaret {
+    border-color: var(--color-ahsap);
+    color: var(--color-ahsap);
+  }
+
+  .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-no {
     display: none;
+  }
+
+  .ilerleme-adimlar li[data-durum='tamam'] .ikon {
+    display: block;
+  }
+
+  .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-etiket {
+    color: var(--color-ahsap-acik);
+  }
+
+  .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-cizgi::after {
+    transform: scaleX(1);
   }
 
   .adim {
@@ -560,30 +666,34 @@ const adimlar = ['Yapı', 'Arsa ve plan', 'İletişim'];
     fill: var(--color-ahsap);
   }
 
-  /* ≥ 640px: adım adları çizgilerin altında */
+  /* ≥ 360px: üç adımın adı da görünür */
+  @media (min-width: 360px) {
+    .ilerleme-adimlar .ilerleme-etiket {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip: auto;
+    }
+  }
+
+  /* ≥ 640px */
   @media (min-width: 640px) {
     .form-kart {
       padding: var(--bosluk-4);
     }
 
-    .ilerleme-ad {
-      display: none;
+    .ilerleme-isaret {
+      width: 32px;
+      height: 32px;
     }
 
-    .ilerleme-etiket {
-      display: block;
-      margin-top: 12px;
-      color: var(--color-metin-soluk);
-      font-size: var(--text-kucuk);
+    .ilerleme-adimlar li {
+      gap: 12px;
     }
 
-    .ilerleme-adimlar li[data-durum='aktif'] .ilerleme-etiket {
-      color: var(--color-krem);
-      font-weight: 500;
-    }
-
-    .ilerleme-adimlar li[data-durum='tamam'] .ilerleme-etiket {
-      color: var(--color-ahsap-acik);
+    .ilerleme-cizgi {
+      margin-right: 12px;
     }
   }
 

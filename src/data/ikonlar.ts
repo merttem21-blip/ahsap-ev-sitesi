@@ -14,6 +14,7 @@ export const ikon = {
   eposta: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
   mesaj: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
   onay: '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+  tik: '<path d="M20 6 9 17l-5-5"/>', // teklif formunda tamamlanan adım
   // Mobil alt menü: Projeler (layout-grid), Galeri (images), Teklif Al (file-text)
   izgara:
     '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',

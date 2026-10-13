@@ -61,3 +61,10 @@ Sitede onay gerektiren çerez veya betik yok. `/cerez-politikasi` ve `/gizlilik`
 - form gönderildikten sonra tarayıcıya yazılan `2k-ahsap-son-gonderim` kaydı (30 sn bekleme için, zorunlu işlev)
 
 Bu, `docs/denetim-raporu.md` madde 8'de de not edilmişti. Eklenmesi bir metin değişikliği olduğu için onay bekliyor.
+
+## 5. Teklif formu: taslak kaydetme (Prompt 9, 13 Ekim 2026)
+
+Teklif formunda taslak kaydetme henüz yok. Prompt 9'da yapılacak.
+
+- Taslak, 13 Ekim 2026'da 1. adıma eklenen `proje_aciklamasi` alanını ("Projenizi kısaca anlatın", en fazla 1000 karakter) da kapsamalı (müşteri isteği).
+- Bu alan yapı tipi "Diğer" seçiliyken zorunludur. Taslaktan "Diğer" geri yüklenirse alanın zorunlu durumu ve kalan karakter sayacı da güncellenmeli (`src/pages/teklif-al.astro` ve `src/scripts/form.ts`). Ayrıntı: `docs/teklif-formu/README.md`.

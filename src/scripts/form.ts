@@ -26,6 +26,8 @@ const WEB3FORMS = 'https://api.web3forms.com/submit';
 const BEKLEME = 30_000;
 const ZAMAN_ASIMI = 15_000;
 const SON_GONDERIM = '2k-ahsap-son-gonderim';
+const SAYAC_UYARI = 100; // kalan karakter bu sayıya inince ekran okuyucuya da duyurulur
+const SAYAC_BEKLEME = 1_000; // duyuru, yazmaya bu kadar ara verilince yapılır (her tuşta değil)
 
 export const kural = {
   zorunlu:
@@ -111,6 +113,24 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
   };
 
   const hataGosteriyor = (ad: string) => !!alanKabi(ad)?.classList.contains('alan-hatali');
+
+  // Kalan karakter sayacı (GirdiAlani'nın sayac seçeneği). Görünen sayı her tuşta güncellenir; ekran okuyucuya
+  // yalnızca sınıra yaklaşınca ve yazmaya ara verilince "… karakter kaldı" diye duyurulur.
+  form.querySelectorAll<HTMLElement>('[data-sayac]').forEach((sayac) => {
+    const kap = sayac.closest<HTMLElement>('[data-alan]');
+    const alan = kap?.querySelector<HTMLTextAreaElement>('textarea');
+    const canli = kap?.querySelector<HTMLElement>('[data-sayac-canli]');
+    if (!alan || alan.maxLength < 0) return;
+    let zamanlayici = 0;
+    const metin = () => `${alan.maxLength - alan.value.length} karakter kaldı`;
+    sayac.textContent = metin();
+    alan.addEventListener('input', () => {
+      sayac.textContent = metin();
+      clearTimeout(zamanlayici);
+      if (canli && alan.maxLength - alan.value.length <= SAYAC_UYARI)
+        zamanlayici = window.setTimeout(() => (canli.textContent = metin()), SAYAC_BEKLEME);
+    });
+  });
 
   form.addEventListener('input', (e) => {
     const ad = (e.target as HTMLInputElement).name;
@@ -270,5 +290,5 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
     onayZamani = null;
   });
 
-  return { dogrula, deger };
+  return { dogrula, deger, alaniDogrula, hataGosteriyor };
 }

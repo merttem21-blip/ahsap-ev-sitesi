@@ -185,9 +185,16 @@
             "Otel-Bar",
             "Çocuk Oyun Parkı",
             "Ahşap Cami",
-            "Özel Tasarım"
+            "Özel Tasarım",
+            "Diğer"
           ],
-          "not": "Seçenekler src/data/site.ts kategorilerinin adlarıdır (sıra da oradan). 12 Ekim 2026, müşteri onaylı: \"A-Frame\" → \"Üçgen Ev\", \"Ahşap Cami\" eklendi. Alan adı (yapi_tipi) değişmedi."
+          "not": "Seçenekler src/data/site.ts kategorilerinin adlarıdır (sıra da oradan); sondaki \"Diğer\" yalnızca teklif sayfasında eklenir (src/pages/teklif-al.astro), kategori değildir. 12 Ekim 2026, müşteri onaylı: \"A-Frame\" → \"Üçgen Ev\", \"Ahşap Cami\" eklendi. 13 Ekim 2026, müşteri onaylı: \"Diğer\" eklendi (alt metni \"Listede olmayan bir yapı\"). Alan adı (yapi_tipi) değişmedi."
+        },
+        {
+          "ad": "proje_aciklamasi",
+          "tip": "textarea",
+          "zorunlu": false,
+          "not": "13 Ekim 2026, müşteri onaylı. 1. adımda, yapı tipi kartlarının altında: \"Projenizi kısaca anlatın\", en fazla 1000 karakter, kalan karakter sayacı. HTML'de isteğe bağlıdır; JS açıkken yapı tipi \"Diğer\" seçilince zorunlu olur (hata: \"Lütfen nasıl bir yapı düşündüğünüzü kısaca yazın.\"). E-postada ve WhatsApp mesajında \"Proje açıklaması\" başlığıyla gider, boşsa hiç yer almaz. 3. adımdaki \"not\" alanından ayrıdır."
         },
         {
           "ad": "alan_m2",

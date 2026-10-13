@@ -107,6 +107,16 @@
   resize: vertical;
 }
 
+/* Kalan karakter sayacı: metin alanının sağ altında, hatanın üstünde */
+.alan-sayac {
+  justify-self: end;
+  margin: 0;
+  color: var(--color-metin-soluk);
+  font-size: var(--text-kucuk);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+
 select.girdi {
   padding-right: 48px;
   appearance: none;
