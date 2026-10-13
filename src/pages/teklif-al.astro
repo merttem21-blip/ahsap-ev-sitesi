@@ -1,8 +1,9 @@
 ---
 // Çok adımlı teklif formu: 1 Yapı · 2 Arsa ve plan · 3 İletişim. Gönderim: src/scripts/form.ts
 // (Web3Forms; anahtar boşsa ya da gönderim başarısızsa WhatsApp). JS kapalıyken tüm adımlar alt alta görünür.
-// Proje sayfasından ?proje=<slug>, kategori sayfasından ?yapi=<kategori-slug> ile gelinirse yapı tipi ve
-// referans proje otomatik dolar. Canonical parametresizdir (SEO.astro).
+// Proje sayfasından ?proje=<slug>, kategori sayfasından ?yapi=<kategori-slug> (ya da ?tip=<kategori-slug>,
+// ör. /teklif-al?tip=bungalov) ile gelinirse yapı tipi ve referans proje otomatik dolar. Canonical
+// parametresizdir (SEO.astro).
 import { getCollection } from 'astro:content';
 import { siWhatsapp } from 'simple-icons';
 import Layout from '../layouts/Layout.astro';
@@ -209,6 +210,7 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
               etiket="Telefon"
               tip="tel"
               autocomplete="tel"
+              inputmode="tel"
               maxlength={20}
               ornek="05xx xxx xx xx"
               zorunlu
@@ -218,6 +220,7 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
               etiket="E-posta"
               tip="email"
               autocomplete="email"
+              inputmode="email"
               maxlength={120}
               ornek="adiniz@ornek.com"
             />
@@ -310,6 +313,7 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
     const digerSecili = () => yapiTipi() === 'Diğer';
 
     const { dogrula, alaniDogrula, hataGosteriyor } = formuKur(form, {
+      taslak: 'teklif',
       giris: 'Merhaba, 2K AHŞAP web sitesinden teklif talebi gönderiyorum.',
       bolumler: [
         {
@@ -375,7 +379,8 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
     form.querySelectorAll('[data-ileri]').forEach((d) => d.addEventListener('click', ileri));
     form.querySelectorAll('[data-geri]').forEach((d) => d.addEventListener('click', () => goster(aktif - 1)));
 
-    // Proje veya kategori sayfasından gelindiyse ön seçim
+    // Proje veya kategori sayfasından (ya da ?tip=<kategori-slug> linkiyle) gelindiyse ön seçim. URL'deki tip
+    // taslaktaki seçimin önüne geçer; tip yoksa ya da tanınmıyorsa taslaktaki seçim (formuKur) olduğu gibi kalır.
     const parametre = new URLSearchParams(location.search);
     const liste = JSON.parse(document.getElementById('proje-listesi')?.textContent || '{}') as Record<
       string,
@@ -383,9 +388,10 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
     >;
     const projeSlug = parametre.get('proje') ?? '';
     const proje = Object.prototype.hasOwnProperty.call(liste, projeSlug) ? liste[projeSlug] : undefined;
-    const yapiSlug = proje?.kategori ?? parametre.get('yapi');
+    const yapiSlug = (proje?.kategori ?? parametre.get('tip') ?? parametre.get('yapi') ?? '').toLowerCase();
     const yapiRadyolari = [...form.querySelectorAll<HTMLInputElement>('input[name="yapi_tipi"]')];
-    yapiRadyolari.forEach((r) => (r.checked = r.dataset.slug === yapiSlug));
+    const urlTipi = yapiRadyolari.find((r) => r.dataset.slug === yapiSlug);
+    if (urlTipi) urlTipi.checked = true;
 
     const projeAlani = form.elements.namedItem('proje') as HTMLInputElement | null;
     const referans = form.querySelector<HTMLElement>('[data-referans]');

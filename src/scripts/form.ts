@@ -4,12 +4,18 @@
 // - Gönderim Web3Forms'a istemci tarafı fetch ile. Anahtar boşsa (src/data/site.ts) ya da gönderim
 //   başarısızsa aynı bilgiler biçimli bir WhatsApp mesajı olarak açılır.
 // - Honeypot (botcheck) işaretliyse hiçbir şey gönderilmez. İki e-posta gönderimi arasında en az 30 sn.
-// - Kullanıcı verisi sayfaya yalnızca textContent ile yazılır ve konsola yazdırılmaz.
+//   Gönderim sürerken gönder ve WhatsApp düğmeleri yok sayılır (çift gönderim olmaz).
+// - Girilenler tarayıcıda taslak olarak saklanır (localStorage, son değişiklikten 7 gün); sayfaya dönülünce alanlar
+//   sessizce dolar. Gizli alanlar, KVKK kutusu ve honeypot saklanmaz. Taslak yalnızca e-posta gönderimi başarılı
+//   olunca silinir; ağ hatasında ve WhatsApp'a aktarımda kalır. Depolama kapalıysa form taslaksız çalışır.
+// - Kullanıcı verisi sayfaya yalnızca textContent ya da alan değeri olarak yazılır ve konsola yazdırılmaz.
 
 type Kural = (deger: string) => string | null; // hata mesajı ya da null
 type Alan = [ad: string, etiket: string, bicim?: (deger: string) => string];
 
 export interface FormAyari {
+  /** Taslağın localStorage anahtarındaki form adı (ör. "teklif" → 2k-ahsap-taslak-teklif) */
+  taslak: string;
   /** WhatsApp mesajının ilk satırı */
   giris: string;
   /** E-posta ve WhatsApp mesajındaki bölümler; boş alanlar yazılmaz */
@@ -26,6 +32,8 @@ const WEB3FORMS = 'https://api.web3forms.com/submit';
 const BEKLEME = 30_000;
 const ZAMAN_ASIMI = 15_000;
 const SON_GONDERIM = '2k-ahsap-son-gonderim';
+const TASLAK = '2k-ahsap-taslak-';
+const TASLAK_OMRU = 7 * 24 * 60 * 60 * 1000;
 const SAYAC_UYARI = 100; // kalan karakter bu sayıya inince ekran okuyucuya da duyurulur
 const SAYAC_BEKLEME = 1_000; // duyuru, yazmaya bu kadar ara verilince yapılır (her tuşta değil)
 
@@ -113,6 +121,73 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
   };
 
   const hataGosteriyor = (ad: string) => !!alanKabi(ad)?.classList.contains('alan-hatali');
+
+  // Taslak: ziyaretçinin yazdığı ve seçtiği alanlar. Gizli alanlar ve onay kutuları (KVKK, honeypot) dışarıda kalır.
+  const taslakAnahtari = TASLAK + ayar.taslak;
+  const taslakAlanlari = () =>
+    [...form.elements].filter(
+      (g): g is HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement =>
+        ((g instanceof HTMLInputElement && !['hidden', 'checkbox', 'submit', 'button'].includes(g.type)) ||
+          g instanceof HTMLTextAreaElement ||
+          g instanceof HTMLSelectElement) &&
+        !!g.name &&
+        g.name !== 'kvkk',
+    );
+
+  const taslakKaydet = () => {
+    const alanlar: Record<string, string> = {};
+    for (const g of taslakAlanlari()) {
+      if (g instanceof HTMLInputElement && g.type === 'radio') {
+        if (g.checked) alanlar[g.name] = g.value;
+      } else if (g.value) alanlar[g.name] = g.value;
+    }
+    try {
+      if (Object.keys(alanlar).length)
+        localStorage.setItem(taslakAnahtari, JSON.stringify({ zaman: Date.now(), alanlar }));
+      else localStorage.removeItem(taslakAnahtari);
+    } catch {
+      /* depolama kapalı ya da dolu: taslak saklanmaz */
+    }
+  };
+
+  const taslakSil = () => {
+    try {
+      localStorage.removeItem(taslakAnahtari);
+    } catch {
+      /* depolama kapalı */
+    }
+  };
+
+  // Yalnızca formda hâlâ var olan alan ve seçenekler geri yüklenir; süresi geçmiş ya da bozuk taslak yok sayılır
+  const taslakYukle = () => {
+    let alanlar: Record<string, unknown>;
+    try {
+      const kayit = JSON.parse(localStorage.getItem(taslakAnahtari) ?? 'null');
+      if (!kayit) return;
+      const gecersiz =
+        typeof kayit.zaman !== 'number' || Date.now() - kayit.zaman > TASLAK_OMRU || typeof kayit.alanlar !== 'object';
+      if (gecersiz) {
+        localStorage.removeItem(taslakAnahtari);
+        return;
+      }
+      alanlar = kayit.alanlar ?? {};
+    } catch {
+      return;
+    }
+    for (const g of taslakAlanlari()) {
+      const d = alanlar[g.name];
+      if (typeof d !== 'string') continue;
+      if (g instanceof HTMLInputElement && g.type === 'radio') {
+        if (g.value === d) g.checked = true;
+      } else if (g instanceof HTMLSelectElement) {
+        if ([...g.options].some((o) => o.value === d)) g.value = d;
+      } else g.value = g.maxLength >= 0 ? d.slice(0, g.maxLength) : d;
+    }
+  };
+
+  taslakYukle();
+  form.addEventListener('input', taslakKaydet);
+  form.addEventListener('change', taslakKaydet);
 
   // Kalan karakter sayacı (GirdiAlani'nın sayac seçeneği). Görünen sayı her tuşta güncellenir; ekran okuyucuya
   // yalnızca sınıra yaklaşınca ve yazmaya ara verilince "… karakter kaldı" diye duyurulur.
@@ -267,8 +342,10 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
       const sonuc = await yanit.json().catch(() => null);
       if (!yanit.ok || !sonuc?.success) throw new Error('Gönderilemedi');
       gonderimiKaydet();
+      taslakSil();
       location.href = '/tesekkurler';
     } catch {
+      // Girilen bilgiler formda ve taslakta kalır
       yukleniyor(false);
       whatsappAc('Formu şu an e-postayla iletemedik; bilgileriniz WhatsApp mesajı olarak hazırlandı.');
     } finally {
@@ -277,6 +354,7 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
   });
 
   form.querySelector('[data-whatsapp-gonder]')?.addEventListener('click', () => {
+    if (gonderiliyor) return; // e-posta gönderimi sürerken aynı talep WhatsApp'a da aktarılmaz
     if (dogrula()) whatsappAc('Bilgileriniz WhatsApp mesajı olarak hazırlandı.');
   });
 
