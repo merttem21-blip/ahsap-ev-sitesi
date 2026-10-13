@@ -97,18 +97,16 @@ En kötü durum, antrasit bölümdeki kart yüzeyidir (≈ `#363534`).
 - **Başlıklar:** Poppins — 600 (SemiBold), 700 (Bold)
 - **Metinler:** Inter — 400 (Regular), 500 (Medium), 600 (butonlar)
 
-Astro layout `<head>` içinde yükle (alternatif: `@fontsource/poppins` + `@fontsource/inter` ile self-host — harici istek olmaz, daha hızlı):
+Fontlar sitenin kendi dosyalarıdır (14 Ekim 2026'dan beri); Google Fonts'a bağlantı eklenmez (ziyaretçinin IP adresi Google'a gitmez, sayfa daha hızlı açılır):
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-```
+- Dosyalar `public/fonts/` içinde: Google Fonts'un verdiği woff2 dosyalarının aynısı, adında sürüm var (`inter-v20-latin.woff2`, `poppins-v24-600-latin.woff2` …). Sürüm değişmeden dosya değiştirilmez; `/fonts/` uzun süre önbellekte tutulur (`vercel.json`).
+- `@font-face` kuralları `src/styles/fontlar.css` içinde (`font-display: swap`, alt kümeler `unicode-range` ile); `Layout.astro` içe aktarır ve `inter-v20-latin.woff2` dosyasını `preload` eder.
+- Inter'in yedeği `'Inter Yedek'` (Arial) ve `'Inter Yedek Roboto'`: `size-adjust` ile "0" genişliği Inter'e eşitlenmiştir. Metin sütunları `ch` ile sınırlı olduğu için Inter geç gelse de sütun genişliği değişmez. Font değişirse bu ölçüler yeniden hesaplanır (yöntem dosyanın başında).
 
 ```css
 :root {
   --font-baslik: 'Poppins', system-ui, sans-serif;
-  --font-metin: 'Inter', system-ui, sans-serif;
+  --font-metin: 'Inter', 'Inter Yedek', 'Inter Yedek Roboto', system-ui, sans-serif;
 }
 ```
 

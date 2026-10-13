@@ -118,12 +118,15 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
   git worktree remove --force ../2k-onayli
   ```
 
-- Fontlar Google Fonts'tan yüklenir, bu yüzden çekim sırasında internet bağlantısı gerekir.
+- Fontlar 14 Ekim 2026'dan beri sitenin kendi dosyalarıdır (`public/fonts/`, `src/styles/fontlar.css`); çekim için internet bağlantısı gerekmez. Dosyalar Google Fonts'un verdiği dosyaların bayt bayt aynısıdır; geçişten sonra 45 çekimin 45'i %0 farkla aynı çıktı.
 - Gürültüden ayrı olarak, aynı derlemede seyrek bir düzen oynaması görülebilir. Bir çekimin boyu birkaç on piksel uzayabilir (sayfa sonunda zemin renginde şerit) ya da bir paragraf farklı satıra kırılabilir. 12 Ekim 2026'da aynı derlemeyle yapılan 6 çalıştırmanın 3'ünde, her seferinde farklı bir sayfada görüldü (A 768, G 768, T2 768, İ 1280).
   - **Neden:** Metin sütunları `--olcu-metin: 65ch` ile sınırlıdır. Stil, Inter yüklenmeden hesaplanırsa `ch` yedek fontun ölçüsüyle belirlenir. Chromium bu değeri font yüklendikten sonra her zaman güncellemez. Sütun daralır, satırlar farklı kırılır, sayfa boyu değişir ve sayfa bu düzende sabit kalır.
   - **Ölçüm:** Galeri 768 px'te 24 açılışın 23'ünde sütun 650 px, birinde 520 px çıktı; o açılışta da fontlar yüklenmişti. Fontlar yapay olarak 1,5 sn geciktirilince hakkımızda 1280 px'te 3 açılışın 2'sinde sütun 585 px, sayfa boyu 1856 px oldu. Stil yeniden hesaplatılınca 715 px ve 1825 px'e, yani referans değerlerine döndü.
   - **Önlem:** Yalnızca beklemek yetmiyor; sayfa yanlış düzende de sabitleniyor. Bu yüzden çekimden önce stil yüklenmiş fontlarla yeniden hesaplatılır (Çekim koşulları). Fontlar 1,5 sn geciktirildiğinde önlemsiz kod 1 çekimde fark verdi, önlemli kod iki turda da 39/39 temiz geçti.
-  - Aynı bayatlık gerçek ziyaretçilerde de olabilir: font geç yüklenirse metin sütunu dar kalabilir. Bu sitenin kendisiyle ilgili ayrı bir konudur; fontların sitenin kendi dosyalarına alınmasıyla birlikte ele alınacak.
+  - **Sitedeki çözüm (14 Ekim 2026):** Aynı bayatlık gerçek ziyaretçilerde de olabiliyordu. Fontlar sitenin kendi dosyalarına alındı ve Inter latin önceden yükleniyor (preload). Asıl önlem yedek fonttadır: Inter'in yedeği (Arial; Android'de Roboto), "0" genişliği Inter'inkine eşit olacak şekilde `size-adjust` ile ölçeklendi (`src/styles/fontlar.css`). Böylece `ch` Inter gelmeden önce de sonra da aynıdır; değer bayat kalsa bile sütun genişliği değişmez.
+    - **Kanıt, fontlar hiç gelmezken:** ch ile sınırlı her sütunun `max-width`'i fontlu ölçümle karşılaştırıldı (12 sayfa × 375/768/1280 px, 228 sütun). Önceki derlemede 228'i de dardı (ör. 650 → 585 px); yeni derlemede fark 0.
+    - **Kanıt, fontlar 0,5 / 1,5 / 3 sn geciktirilince:** Önceki derlemede 165 açılışın 8'inde sütun bayat kaldı (hakkımızda 1280 px'te 585 px, sayfa boyu 1856 px). Yeni derlemede 165 açılışın hiçbirinde.
+    - Ayrıntı: `docs/denetim-raporu.md`, "Fontlar ve 65ch sütunları". gorsel-kontrol'deki stil yeniden hesaplatma önlemi zararsız olduğu için yerinde bırakıldı.
   - Böyle bir fark yine çıkarsa gürültü sayılmaz ve hata verir. Derleme çıktısı değişmediyse kontrol yeniden çalıştırılır. Fark tekrarlanıyorsa gerçektir.
 - 1280 px'te header'daki "Teklif Al" düğmesinin yuvarlak kenarı iki çizim durumu arasında gidip gelir. Yaklaşık 60 bitişik pikselde renk 1–2 düzey değişir; gözle fark edilmez. Bölge x 1106–1247, y 34–77; ana sayfada saydam header yüzünden y 72–115.
   - Fark bitişik piksellerden oluştuğu için gürültü toleransına takılmaz ve hata verir. Referansların kendisi de iki durumdan birini taşıyabilir.

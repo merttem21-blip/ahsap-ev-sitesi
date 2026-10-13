@@ -68,3 +68,23 @@ Teklif formunda taslak kaydetme henüz yok. Prompt 9'da yapılacak.
 
 - Taslak, 13 Ekim 2026'da 1. adıma eklenen `proje_aciklamasi` alanını ("Projenizi kısaca anlatın", en fazla 1000 karakter) da kapsamalı (müşteri isteği).
 - Bu alan yapı tipi "Diğer" seçiliyken zorunludur. Taslaktan "Diğer" geri yüklenirse alanın zorunlu durumu ve kalan karakter sayacı da güncellenmeli (`src/pages/teklif-al.astro` ve `src/scripts/form.ts`). Ayrıntı: `docs/teklif-formu/README.md`.
+
+## 6. Yazı tipleri artık Google'dan yüklenmiyor (onaylandı ve uygulandı, 14 Ekim 2026)
+
+Fontlar (Inter, Poppins) sitenin kendi dosyalarına alındı (`public/fonts/`). Ziyaretçinin tarayıcısı Google'a bağlanmıyor; IP adresi Google'a gitmiyor. İki yasal sayfa eski durumu anlatıyordu; kullanıcı onayıyla Google Fonts maddeleri kaldırıldı. Google Haritalar'ı anan "Dış bağlantılar" maddesi olduğu gibi duruyor.
+
+| Sayfa | Kaldırılan madde |
+|---|---|
+| `/gizlilik` (`src/pages/gizlilik.astro`, §3) | **Google Fonts:** Sitedeki yazı tipleri Google sunucularından yüklenir; bu sırada tarayıcınız IP adresinizi Google'a iletir. Google Fonts çerez kullanmaz. |
+| `/cerez-politikasi` (`src/pages/cerez-politikasi.astro`, §3) | **Google Fonts:** Yazı tipleri Google sunucularından yüklenir. Google Fonts çerez bırakmaz; ancak bu sırada tarayıcınız IP adresinizi Google'a iletir. |
+
+- Yerine yeni bir madde yazılmadı. İstenirse `/gizlilik` §3'e şu eklenebilir: **Yazı tipleri:** Sitedeki yazı tipleri kendi sunucumuzdan yüklenir; bu sırada üçüncü bir tarafa bilgi gönderilmez.
+- gorsel-kontrol bu iki sayfayı çekmez (yasal sayfa örneği `/kvkk`); referans yenilemesi gerekmedi.
+
+## 7. Sonraki iş: CSS'i sayfaya gömme (14 Ekim 2026)
+
+Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS dosyalarıdır (render-blocking): her sayfada ortak stil dosyası (~27 KB, sıkıştırılmış ~7 KB) ve sayfanın kendi dosyası ayrı istekle gelir.
+
+- **Öneri:** `astro.config.mjs` içinde `build: { inlineStylesheets: 'always' }`. CSS, `<link>` yerine aynı sırayla `<style>` olarak sayfaya gömülür. Görünüm değişmemeli; her sayfanın HTML'i yaklaşık 7–9 KB (sıkıştırılmış) büyür, CSS sayfalar arasında önbellekten gelmez.
+- **Kazanç beklentisi:** Mobilde ilk açılışta bir istek turu (Lighthouse benzetiminde yaklaşık 150–450 ms FCP/LCP).
+- **Yapılmadı:** kullanıcı kararıyla bu turda denenmedi. Yapılırsa önce/sonra Lighthouse, form-kontrol ve gorsel-kontrol (fark %0 beklenir) birlikte çalıştırılır.

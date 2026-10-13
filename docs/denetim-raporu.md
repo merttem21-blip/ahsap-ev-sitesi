@@ -16,7 +16,7 @@
 | 5 | Open Graph | Var | `src/components/SEO.astro` |
 | 6 | 404 sayfası ve durum kodu | Yok (özel sayfa yok) | `src/pages/404.astro` yok |
 | 7 | Form spam koruması | Kısmen | `src/components/form/FormOrtak.astro`, `src/scripts/form.ts`, `src/styles/form.css` |
-| 8 | Üçüncü taraf betikler | Yok | Harici kaynak olarak yalnızca Google Fonts: `src/layouts/Layout.astro` |
+| 8 | Üçüncü taraf betikler | Yok | Harici kaynak olarak yalnızca Google Fonts: `src/layouts/Layout.astro` (14 Ekim 2026'dan beri o da yok; fontlar yerel, rapor sonundaki bölüm) |
 | 8 | Çerezler | Yok | Ölçümde hiçbir sayfada çerez oluşmadı |
 | 9 | Görsel formatları (WebP) | Var | `public/images/`, `src/lib/gorsel.ts` |
 | 9 | Lazy load | Var | `src/components/*.astro`, `src/pages/*.astro` |
@@ -103,6 +103,8 @@ Playwright ile 48 sayfanın hepsi 1280 px genişlikte açıldı ve sayfa sonuna 
 |---|---|---|---|
 | Google Fonts CSS (Inter, Poppins) | Her sayfada | `fonts.googleapis.com` | `src/layouts/Layout.astro` |
 | Google Fonts dosyaları | Her sayfada | `fonts.gstatic.com` | `src/layouts/Layout.astro` |
+
+> **14 Ekim 2026:** Google Fonts kaldırıldı; fontlar `public/fonts/` içinden yükleniyor (rapor sonundaki "Hız ve erişilebilirlik" bölümü). Sayfa yüklenirken dış alan adına istek gitmiyor.
 | Google Haritalar iframe'i | Yalnızca `/iletisim` sayfasında "Haritayı göster" tıklanınca | `www.google.com`, `maps.googleapis.com`, `maps.gstatic.com` | `src/pages/iletisim.astro` |
 | Web3Forms API | Yalnızca form gönderilince | `api.web3forms.com` | `src/scripts/form.ts` |
 
@@ -190,3 +192,95 @@ Bilgi almak için `astro check`, `package.json`'a yazılmadan geçici olarak ça
   - `type` nitelikli `<script>`'lerin `is:inline` sayılması (astro 4000): `SssBolumu.astro`, `galeri.astro`, `sss.astro`. Bu bilinçli bir kullanım ve uyarının işlevsel etkisi yok.
 
 **npm audit:** 15 açık. Ayrıntısı Öne çıkan bulgular, madde 4'te. Bu oturumda eklenen geliştirme paketleri (`playwright`, `pixelmatch`, `pngjs`, `node-html-parser`) yeni açık getirmedi.
+
+---
+
+# Hız ve erişilebilirlik (14 Ekim 2026)
+
+- **Sürüm:** `gelistirme-2026`, b0cca36 üzerine bu bölümü ekleyen commit
+- **Kapsam (harita kodları):** A1 hero, A2 Ürünlerimiz kartları, A5 ana sayfa SSS, D2 proje galerisi ve ışık kutusu, G3 galeri ızgarası, G4 galeri görüntüleyicisi, K3 kategori SSS, S2 SSS sayfası, O1 mobil menü paneli
+- **Güvenli Mod:** Görünüm değişmedi. Kullanıcı onayıyla yalnızca iki yasal sayfadan Google Fonts maddeleri kaldırıldı (`docs/onay-bekleyenler.md` §6). Kontrast ve odak bulguları yalnızca listelendi, düzeltilmedi.
+
+## Lighthouse (mobil): önce ve sonra
+
+**Yöntem:** Lighthouse 12.8.2, varsayılan mobil ayar (Moto G Power benzetimi, yavaş 4G, 4 kat CPU yavaşlatma), Chrome 155 headless. `dist/` bu bilgisayarda gzip'li yerel sunucuyla yayınlandı. Önceki derleme (b0cca36) ile yeni derleme sırayla, dönüşümlü ölçüldü (önce, sonra, önce, sonra…); tabloda medyan var. Bu bilgisayarda tek koşular çok dalgalı olduğu için (aynı derleme bir koşuda TBT 0, diğerinde 4 sn) dönüşümlü ölçüm seçildi. Vercel'de (HTTP/2, brotli, CDN) sayılar farklı çıkar; karşılaştırma için anlamlı olan önce/sonra farkıdır.
+
+| Sayfa | Performans | FCP | LCP | TBT | CLS | Speed Index | Erişilebilirlik | En iyi uygulamalar | SEO |
+|---|---|---|---|---|---|---|---|---|---|
+| Ana sayfa `/` | 85 → **90** | 2,98 → **1,84 sn** | 3,48 → **3,17 sn** | 0 → 0 ms | 0 → 0 | 3,21 → 4,12 sn | 100 → 100 | 100 → 100 | 100 → 100 |
+| Kategori `/bungalov` | 81 → 76 | 2,95 → **1,90 sn** | 4,15 → 4,37 sn | 0 → 335 ms | 0,032 → **0** | 3,10 → 2,62 sn | 100 → 100 | 100 → 100 | 100 → 100 |
+| Proje `/bungalov/asma-katli-verandali-bungalov` | 75 → 75 | 2,95 → **1,84 sn** | 5,19 → **4,23 sn** | 0 → 324 ms | 0,001 → 0 | 2,99 → 3,95 sn | 100 → 100 | 100 → 100 | 69 → 69 |
+| Galeri `/galeri` | 87 → 89 ¹ | 3,14 → **2,06 sn** ² | 3,14 → 3,33 sn ² | 0 → 360 ms ¹ | 0,001 → 0 ² | 3,14 → 4,01 sn ² | 100 → 100 | 100 → 100 | 100 → 100 |
+| Diğer sayfalar | ölçülmedi | | | | | | | | |
+
+Koşular (önce / sonra): ana sayfa 85/86/85/85/85 → 92/90/90/90/90; kategori 75/81/41/81/81 → 78/73/76/76/82; proje 75/76/75/71/76 → 75/75/74/82/75; galeri 87/68/86/99 → 94/69/88/90.
+
+1. Galeri ölçümü kullanıcı kararıyla 4 + 4 koşuda kesildi; medyan ortadaki iki koşunun ortalaması.
+2. Bu koşularda FCP, LCP, CLS ve Speed Index kaydedilmedi. Değerler aynı gün ayrı yapılan 5'er koşuluk ölçümden (önce ve sonra ayrı ayrı, dönüşümlü değil).
+
+**Değerlendirme:**
+
+- **İlk boyama (FCP) dört sayfada da ~1,1 sn erken.** Önceden her sayfa, Google'a ayrı bağlantı kurulup font CSS'i inene kadar çizilmiyordu; bu engel kalktı. Lighthouse'un "render-blocking" önerisi 1,9–2,2 sn'den 0,8–1,0 sn'ye indi; kalan kısım sitenin kendi CSS dosyaları (`docs/onay-bekleyenler.md` §7).
+- **LCP** ana sayfada 0,3 sn, proje sayfasında 1 sn iyileşti; kategori ve galeride ölçüm dalgalanması içinde.
+- **Kategori sayfasındaki yerleşim kayması (CLS 0,032) kalktı.**
+- **TBT neden arttı (muhtemel neden, kesinleştirilmedi):** Lighthouse yalnızca FCP'den sonraki uzun görevleri sayar. Sitenin ana betiğinde (`_astro/hoisted.*.js`) iki derlemede de ~600 ms'lik (4 kat yavaşlatılmış) bir uzun görev görüldü. Sayfa artık ~1 sn erken çizildiği için bu görev TBT'nin sayıldığı aralığa giriyor olmalı. Bu turda eklenen JS gzip'li ~0,6 KB; yüklemede yalnızca dinleyici kurup birkaç nitelik ekliyor. Kategori sayfasının performans puanındaki düşüş (81 → 76) büyük ölçüde bu sayımdan geliyor. Uzun görevin kaynağı (büyük olasılıkla kaydırınca ortaya çıkma kurulumundaki düzen ölçümleri, `src/scripts/hareket.ts`) sonraki işte incelenmeli.
+- **Speed Index** ana sayfada ve proje sayfasında ~1 sn kötüleşti, kategori sayfasında iyileşti; nedeni bu turda incelenmedi.
+- Proje sayfasında SEO 69: sayfa bilinçli olarak `noindex` (açıklama ve şartname boş, denetim raporu madde 2).
+
+## Yapılanlar
+
+| Kod | Değişiklik | Dosya |
+|---|---|---|
+| Tüm sayfalar | Google Fonts kaldırıldı; Inter ve Poppins sitenin kendi dosyaları (aynı woff2 dosyaları, aynı ağırlıklar, aynı `unicode-range`, `font-display: swap`). Inter latin önceden yükleniyor (preload). Ziyaretçinin IP adresi Google'a gitmiyor; sayfalardan dış alan adına istek kalmadı. | `public/fonts/`, `src/styles/fontlar.css`, `src/layouts/Layout.astro`, `vercel.json` |
+| Tüm sayfalar | Inter'in yedek fontu (Arial; Android'de Roboto), "0" genişliği Inter'inkine eşit olacak şekilde ölçeklendi. 65ch ile sınırlı metin sütunları Inter geç gelse de dar kalmıyor (aşağıda kanıt). | `src/styles/fontlar.css`, `src/styles/global.css` (`--font-metin`) |
+| G3 | Galeri fotoğraflarının alt metni artık projenin verisinden geliyor (ör. "Asma katlı verandalı bungalov – shingle çatı ve dağ manzaralı veranda"). Önceden "Proje adı, Kategori – 3. görsel" biçimindeydi. | `src/pages/galeri.astro` |
+| O1 | Panel açıkken sayfa içeriği, footer ve yüzen buton `inert`; Tab header ile mobil alt menü arasında döner. Aşağı/Yukarı, Home ve End ile menü bağlantıları arasında gezilir. Esc paneli kapatır, odak açan düğmeye döner. Alt menüdeki "Menü" klavyeyle açılınca odak ilk bağlantıya geçer. Önceden geçmiyordu: odak, panelin `visibility` geçişi sürerken veriliyordu. Dokunma ve farede odak eskisi gibi düğmede kalır. | `src/components/Header.astro`, `src/scripts/odak.ts` |
+| A5, K3, S2 | SSS sorularında Aşağı/Yukarı, Home ve End ile gezinme. Akordeon doğal `<details>/<summary>` olduğu için açık/kapalı durumunu tarayıcı zaten bildiriyor; ek ARIA niteliği gerekmedi. | `src/components/SssAkordeon.astro` |
+| D2, G4 | Fotoğraf bağlantıları "iletişim kutusu açar" diye okunuyor (`aria-haspopup="dialog"`, yalnızca JS varken). Tab ışık kutusunun içinde döner. Sağ/Sol ok önceden de vardı; Home ve End ilk ve son fotoğrafa gider. Fotoğraf değişince sırası ve açıklaması görünmeyen bir durum alanından okunur ("Fotoğraf 3 / 12: …"). Esc ile kapanma ve odağın açan öğeye dönmesi `<dialog>` ile zaten çalışıyordu; test edildi. | `src/components/Galeri.astro`, `src/pages/galeri.astro` |
+| A1, A2, D2, G3, K | Görseller zaten WebP, `srcset`/`sizes` ve `width`/`height` ile veriliyordu. İlk ekran görseli (A1 hero, D2 kapak, kategoride ve galeride ilk görsel) `eager` + `fetchpriority="high"`, diğerleri `lazy`. Değişiklik gerekmedi (aşağıdaki notlar). | — |
+
+Klavye davranışı Playwright ile denendi: O1 375 ve 768 px'te, SSS üç sayfada, D2, G4 375 ve 1280 px'te. Odak 40 Tab boyunca menüde, 10 Tab boyunca ışık kutusunda kaldı. Esc'ten sonra odak açan öğeye döndü. Fareyle aç/kapa değişmedi. Konsol hatası yok.
+
+## Fontlar ve 65ch sütunları: kanıt
+
+Sorun (`docs/guvenli-mod/README.md`, Bilinen sınırlar): stil Inter yüklenmeden hesaplanırsa `ch` yedek fontla belirleniyor ve Chromium bunu her zaman güncellemiyor; sütun dar kalıyordu (ör. hakkımızda 1280 px'te 715 yerine 585 px).
+
+Çözüm: yedek fontun "0" genişliği Inter'inkine eşitlendi (Arial 400 için `size-adjust: 113.4328%`; 500, 600 ve Roboto için ayrı değerler, `src/styles/fontlar.css`). Böylece `ch` Inter gelmeden önce de sonra da aynıdır; değer bayat kalsa bile görünür bir fark doğmaz. Inter latin ayrıca önceden yükleniyor.
+
+| Deneme | Önceki derleme (Google Fonts) | Yeni derleme (yerel font) |
+|---|---|---|
+| Fontlar hiç gelmez. ch ile sınırlı her sütunun `max-width`'i fontlu ölçümle karşılaştırıldı (12 sayfa × 375/768/1280 px, 228 sütun). | 228 / 228 sütun dar (ör. 650 → 585 px, 715 → 650 px) | 0 / 228 fark |
+| Fontlar yapay olarak 0,5 / 1,5 / 3 sn geciktirildi. Sayfa oturunca sütunlar ölçüldü, stil zorla yeniden hesaplatılıp yeniden ölçüldü (fark = bayat ch). | 165 açılışın 8'inde bayat sütun (hakkımızda 1280 px: 6/60, galeri 768 px: 2/60, diğer 3 sayfa: 0/45). Örnek: `p.giris` 585 → 715 px, sayfa boyu 1856 → 1825 px. | 165 açılışın 0'ında |
+
+- Geciktirme Playwright `route` ile yapıldı: önceki derlemede `fonts.gstatic.com`, yenisinde `/fonts/*.woff2` istekleri bekletildi (önceden yüklenen dosya dahil).
+- Ölçümler bu bilgisayarda Chromium ile yapıldı (Windows, Arial yüklü). Roboto yedeği (Android) aynı yöntemle hesaplandı ama gerçek bir Android cihazda denenmedi.
+- gorsel-kontrol: fontlar yerele alındıktan sonra 45/45 çekim %0 fark.
+
+## Kontrast (yalnızca tespit, düzeltilmedi)
+
+**Yöntem:**
+
+- axe-core 4.14 (WCAG 2.2 A/AA): 13 sayfa × 375/1280 px; ayrıca SSS'ler açık, mobil menü açık, D2 ışık kutusu ve G4 görüntüleyici açık (toplam 37 durum). Hiç ihlal yok.
+- axe'in "elle incelenmeli" dediği metinler (fotoğraf, karartma ya da sözde öğe üzerindekiler) piksel ölçümüyle denetlendi. Metinler saydam yapılıp gerçek arka plan çekildi; her metnin rengi bu piksellere karşı ölçüldü ve metin kutusundaki en kötü %5'lik piksel esas alındı. Kapsam: 12 sayfa × 375/1280 px, ana sayfa ayrıca 1024/1440/1920 px, mobil menü, alt menü, yüzen düğme ve iki ışık kutusu.
+
+| # | Yer | Genişlik | Ölçülen (en kötü %5 / ortanca) | Gereken | Not |
+|---|---|---|---|---|---|
+| 1 | Ana sayfa header menüsü, sayfa en üstteyken (şeffaf header, hero fotoğrafının üzerinde): "Hakkımızda", "SSS", "İletişim" | 1024, 1280, 1440, 1920 px | 4,03–4,44 / 4,30–4,58 | 4,5:1 (14 px) | Renk `--color-metin` (#C2B6A4). Gökyüzünün açık bölgesine denk gelen bağlantılar. Aktif "Ana Sayfa" (krem), "Projeler" ve "Galeri" geçiyor. Kaydırınca header zemini opak olduğu için sorun kalmıyor. Olası çözüm (görünür değişiklik, onay gerekir): şeffaf header'da menü metnini krem yapmak ya da karartmayı artırmak. |
+| 2 | A2 Ürünlerimiz kartlarındaki sıra numaraları ("01"–"04", `.urun-no`) | 1024 ve 1920 px | 2,68–4,18 / 2,96–4,46 | 4,5:1 (12 px) | Numara `aria-hidden` ve süs amaçlı; WCAG 1.4.3'ün salt süsleme istisnasına girebilir. Fotoğrafın açık köşesine denk geldiğinde zayıflıyor. |
+
+Diğer tüm metinler eşiği geçti: hero başlığı, açıklaması ve düğmeleri, kart metinleri, galeri bilgi şeridi, ışık kutuları, menü paneli, alt menü.
+
+## Odak göstergesi (yalnızca tespit, düzeltilmedi)
+
+**Yöntem:** 13 sayfa × 375/1280 px'te Tab ile 1141 odak durağı gezildi. Her durakta öğenin çevresi odaklıyken ve odak kaldırılınca çekildi, iki görüntü karşılaştırıldı. Göstergesi olmayan öğe bulunmadı. Şüpheli çıkan 21 durak elle incelendi: teklif formundaki seçim kartlarının halkası kartın kenarına çizildiği için ölçüm alanının dışında kalmıştı; "İçeriğe geç" bağlantısı odaklanınca görünüyor.
+
+| # | Bulgu | Nerede | Not |
+|---|---|---|---|
+| 1 | Sağ alttaki yüzen WhatsApp düğmesi, Tab ile ekranın en altına gelen öğenin sağ ucunu örtebiliyor; odak halkasının alt kenarı ekranın dışında kalabiliyor. | ≥ 768 px. Örnekler (1280 px): `/sss` "Ahşap ev için ödeme planı nasıl olur?", `/iletisim` "teklif formunu doldurun", `/cerez-politikasi` "Gizlilik Politikası" | ≥ 768 px'te `scroll-padding-bottom` 0. Öğe kısmen görünür kaldığı için WCAG 2.4.11 (AA) sağlanıyor, 2.4.12 (AAA) sağlanmıyor. Olası çözüm: ≥ 768 px'te yüzen düğme kadar `scroll-padding-bottom`. |
+
+## Görseller: notlar
+
+- Fotoğrafların tamamı WebP ve üç genişlikte (600/1000/1600) `srcset` ile veriliyor; `sizes` görüntülenen genişliği anlatıyor; her görselde `width`/`height` var.
+- **AVIF eklenmedi.** Her fotoğraf için yeni dosya üretmek gerekir; farklı sıkıştırma her fotoğrafın piksellerini değiştirir ve gorsel-kontrol farkı %0'ın üstüne çıkar. Orijinaller (`ham-gorseller/`) bu bilgisayarda yok; AVIF ancak WebP'den yeniden kodlanabilirdi (kayıplıdan kayıplıya).
+- **Kalan Lighthouse önerisi (uses-responsive-images):** Lighthouse'un mobil ekranı 412 px genişliğinde ve 1,75 piksel yoğunluğunda. Telefonda ~380 px genişliğindeki kart ve kapak için ~665 px'lik dosya gerekiyor; 600 px yetmediği için 1000 px'lik dosya iniyor. Ara bir genişlik (ör. 800 px) bunu küçültür, ama yukarıdaki nedenle yeni dosya üretmeyi gerektirir ve test genişliklerinde seçilen dosyayı değiştirir (D 768 px). Sonraki iş olarak bırakıldı.
+- Sayfa çizilmeden önce beklenen CSS dosyaları (render-blocking) kalan en büyük öneri; CSS'i sayfaya gömmek kullanıcı kararıyla sonraki işe bırakıldı (`docs/onay-bekleyenler.md` §7).

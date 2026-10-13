@@ -58,7 +58,8 @@ const kapak = fotolar[kapakSirasi];
 
   <dialog class="isik-kutusu" aria-label={`${proje.data.baslik} fotoğraf galerisi`} data-isik-kutusu>
     <div class="ik-ust">
-      <p class="ik-sayac" data-ik-sayac aria-live="polite"></p>
+      <p class="ik-sayac" data-ik-sayac></p>
+      <span class="gizli" role="status" data-ik-duyuru></span>
       <button type="button" class="ik-dugme" data-ik-kapat aria-label="Galeriyi kapat">
         <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.kapat} />
       </button>
@@ -77,6 +78,12 @@ const kapak = fotolar[kapakSirasi];
 </div>
 
 <script>
+  // Klavye ve ekran okuyucu: kapak ve küçük resimler "iletişim kutusu açar" diye okunur (aria-haspopup). Açılınca
+  // odak kapatma düğmesine geçer; Tab ışık kutusunun içinde döner. Sağ/Sol oklar fotoğrafı değiştirir, Home ve End
+  // ilk ve son fotoğrafa gider. Değişen fotoğrafın sırası ve açıklaması görünmeyen bir durum alanından okunur.
+  // Esc <dialog>'un kendi davranışıyla kapatır; odak ışık kutusunu açan bağlantıya döner.
+  import { odagiTut, odaklanabilirler } from '../scripts/odak';
+
   const kok = document.querySelector<HTMLElement>('[data-galeri]');
   const kutu = kok?.querySelector<HTMLDialogElement>('[data-isik-kutusu]');
 
@@ -84,9 +91,13 @@ const kapak = fotolar[kapakSirasi];
     const ogeler = [...kok.querySelectorAll<HTMLAnchorElement>('[data-galeri-oge]')];
     const resim = kutu.querySelector<HTMLImageElement>('[data-ik-gorsel]')!;
     const sayac = kutu.querySelector<HTMLElement>('[data-ik-sayac]')!;
+    const duyuru = kutu.querySelector<HTMLElement>('[data-ik-duyuru]')!;
     const aciklama = kutu.querySelector<HTMLElement>('[data-ik-aciklama]')!;
     let aktif = 0;
     let tetikleyen: HTMLElement | null = null;
+
+    // Bağlantılar JS varken büyük görseli değil ışık kutusunu açar
+    for (const a of kok.querySelectorAll('[data-galeri-ac]')) a.setAttribute('aria-haspopup', 'dialog');
 
     const kaynak = (i: number) => ogeler[(i + ogeler.length) % ogeler.length].querySelector('img')!;
 
@@ -102,6 +113,7 @@ const kapak = fotolar[kapakSirasi];
       // Kullanıcıya gösterilen metinler textContent ile yazılır (innerHTML kullanılmaz)
       sayac.textContent = `${aktif + 1} / ${ogeler.length}`;
       aciklama.textContent = k.alt;
+      duyuru.textContent = `Fotoğraf ${aktif + 1} / ${ogeler.length}: ${k.alt}`;
       // Komşu fotoğrafları önceden yükle
       for (const j of [aktif + 1, aktif - 1]) {
         const on = new Image();
@@ -138,6 +150,11 @@ const kapak = fotolar[kapakSirasi];
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         goster(aktif - 1);
+      } else if (e.key === 'Home' || e.key === 'End') {
+        e.preventDefault();
+        goster(e.key === 'Home' ? 0 : ogeler.length - 1);
+      } else if (e.key === 'Tab') {
+        odagiTut(e, odaklanabilirler(kutu));
       }
     });
 

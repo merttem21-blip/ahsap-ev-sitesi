@@ -1,5 +1,7 @@
 ---
-// SSS akordeonu: native <details>/<summary> (klavye ve ekran okuyucu desteği tarayıcıdan gelir).
+// SSS akordeonu: native <details>/<summary> (klavye ve ekran okuyucu desteği tarayıcıdan gelir: summary bir
+// düğme olarak okunur, açık/kapalı durumu bildirilir; Enter ve Boşluk açıp kapatır). Ek ARIA niteliği gerekmez.
+// Klavyeyle sorular arasında Aşağı/Yukarı oklar, Home ve End ile gezilir (aynı listedeki sorular).
 // Açılırken cevap yalnızca opacity ve transform ile belirir; yükseklik animasyonu yok (marka-stili §6).
 import { ikon } from '../data/ikonlar';
 import type { Soru } from '../data/sss';
@@ -11,7 +13,7 @@ interface Props {
 const { sorular } = Astro.props;
 ---
 
-<ul class="sss-liste">
+<ul class="sss-liste" data-sss-liste>
   {
     sorular.map((s) => (
       <li data-ortaya>
@@ -28,6 +30,15 @@ const { sorular } = Astro.props;
     ))
   }
 </ul>
+
+<script>
+  import { oklarlaGez } from '../scripts/odak';
+
+  for (const liste of document.querySelectorAll<HTMLElement>('[data-sss-liste]')) {
+    const sorular = [...liste.querySelectorAll<HTMLElement>(':scope > li > details > summary')];
+    liste.addEventListener('keydown', (e) => oklarlaGez(e, sorular));
+  }
+</script>
 
 <style>
   .sss-liste {

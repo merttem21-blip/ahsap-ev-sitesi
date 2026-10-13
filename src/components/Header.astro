@@ -64,10 +64,18 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
 <script>
   // Menü paneli iki düğmeyle açılır: header'daki (768px ve üstü) ve mobil alt menüdeki "Menü" (AltMenu.astro).
   // aria-expanded ikisinde de aynı tutulur.
+  //
+  // Klavye ve ekran okuyucu: panel açıkken header ve mobil alt menü dışındaki her şey (sayfa içeriği, footer,
+  // yüzen buton) inert olur; panel onları zaten örttüğü için görünüm ve dokunma davranışı değişmez. Tab, header ile
+  // alt menü arasında döner, sayfanın arkasına geçmez. Panel bağlantılarında Aşağı/Yukarı oklar, Home ve End ile
+  // gezilir. Esc paneli kapatır ve odak paneli açan düğmeye döner.
+  import { odagiTut, odaklanabilirler, oklarlaGez } from '../scripts/odak';
+
   const ust = document.querySelector<HTMLElement>('[data-ust]');
   const dugmeler = [...document.querySelectorAll<HTMLButtonElement>('[data-menu-dugme]')];
   const etiket = document.querySelector<HTMLElement>('[data-menu-etiket]');
   const menu = document.getElementById('ana-menu');
+  const altMenu = dugmeler.find((d) => !ust?.contains(d))?.closest('nav') ?? null;
   const masaustu = window.matchMedia('(min-width: 1024px)');
   let acanDugme: HTMLButtonElement | null = null;
 
@@ -75,6 +83,15 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
   // Header ve menü düğmeleri menünün parçası sayılır: aralarında gezinmek menüyü kapatmaz
   const menudeMi = (dugum: Node | null) =>
     !!dugum && (!!ust?.contains(dugum) || dugmeler.some((d) => d.contains(dugum)));
+  // Klavye odağı için panelle birlikte görünen mobil alt menü de menünün parçasıdır
+  const odakAlanindaMi = (dugum: Node | null) => menudeMi(dugum) || (!!dugum && !!altMenu?.contains(dugum));
+  const odakAlani = () => odaklanabilirler(ust, altMenu);
+
+  // Panelin arkasında kalan, header ve alt menü dışındaki sayfa öğeleri
+  const arkaPlan = () =>
+    [...document.body.children].filter(
+      (e): e is HTMLElement => e instanceof HTMLElement && e !== ust && e !== altMenu && e.tagName !== 'SCRIPT'
+    );
 
   const ayarla = (acik: boolean) => {
     for (const d of dugmeler) d.setAttribute('aria-expanded', String(acik));
@@ -83,31 +100,49 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
     menu?.classList.toggle('acik', acik);
     // Panel açıkken arkadaki sayfa kaymaz
     document.documentElement.classList.toggle('menu-acik', acik);
+    for (const e of arkaPlan()) e.inert = acik;
     if (etiket) etiket.textContent = acik ? 'Menüyü kapat' : 'Menüyü aç';
   };
 
   for (const d of dugmeler) {
-    d.addEventListener('click', () => {
+    d.addEventListener('click', (e) => {
       const acilacak = !acikMi();
       acanDugme = d;
       ayarla(acilacak);
-      // Alt menüden açılınca odak panele geçer (panel DOM'da düğmeden önce durur)
-      if (acilacak && !ust?.contains(d)) menu?.querySelector<HTMLElement>('a')?.focus();
+      // Alt menüden klavyeyle (Enter/Boşluk: detail 0) açılınca odak panele geçer; panel DOM'da düğmeden önce durur.
+      // Dokunma ve farede odak düğmede kalır (görünüm değişmez). Panel visibility geçişinin ilk anında henüz gizli
+      // sayılır ve odak alamaz; odak, panelin görünür olduğu ilk karede verilir.
+      const ilk = menu?.querySelector<HTMLElement>('a');
+      if (acilacak && ilk && !ust?.contains(d) && e.detail === 0) {
+        let kare = 0;
+        const odakla = () => {
+          if (!acikMi()) return;
+          ilk.focus();
+          if (document.activeElement !== ilk && ++kare < 30) requestAnimationFrame(odakla);
+        };
+        odakla();
+      }
     });
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && acikMi()) {
+    if (!acikMi()) return;
+    if (e.key === 'Escape') {
       ayarla(false);
       acanDugme?.focus();
+      return;
     }
+    if (e.key === 'Tab') odagiTut(e, odakAlani());
+    if (menu?.contains(document.activeElement)) oklarlaGez(e, odaklanabilirler(menu));
   });
 
-  // Tab ile menünün dışına çıkılınca veya dışarı tıklanınca kapanır
-  ust?.addEventListener('focusout', (e) => {
-    const hedef = e.relatedTarget as Node | null;
-    if (acikMi() && hedef && !menudeMi(hedef)) ayarla(false);
-  });
+  // Odak header ve alt menünün dışına çıkarsa (ör. ekran okuyucuyla) veya dışarı tıklanınca kapanır
+  for (const alan of [ust, altMenu]) {
+    alan?.addEventListener('focusout', (e) => {
+      const hedef = e.relatedTarget as Node | null;
+      if (acikMi() && hedef && !odakAlanindaMi(hedef)) ayarla(false);
+    });
+  }
 
   document.addEventListener('click', (e) => {
     if (acikMi() && !menudeMi(e.target as Node)) ayarla(false);

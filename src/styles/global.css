@@ -59,9 +59,10 @@
   --color-cizgi-menu: rgba(235, 220, 198, 0.12);
   --color-yuzey-aktif: rgba(235, 220, 198, 0.1);
 
-  /* Yazı */
+  /* Yazı. 'Inter Yedek' ve 'Inter Yedek Roboto' yalnızca Inter yüklenene kadar kullanılır; ölçüleri Inter'e
+     eşitlenmiştir, böylece ch birimi (--olcu-metin) font gelmeden de doğru hesaplanır (src/styles/fontlar.css). */
   --font-baslik: 'Poppins', system-ui, sans-serif;
-  --font-metin: 'Inter', system-ui, sans-serif;
+  --font-metin: 'Inter', 'Inter Yedek', 'Inter Yedek Roboto', system-ui, sans-serif;
 
   --text-h1: clamp(2.5rem, 7vw, 5.5rem);
   --text-h2: clamp(1.75rem, 4vw, 3rem);
