@@ -4,6 +4,35 @@
 - **Kapsam:** Yasal sayfalarda (`/kvkk`, `/gizlilik`, `/cerez-politikasi`) karşılığı henüz olmayan bilgiler ve onay gerektiren metin önerileri.
 - **Firma bilgilerinin kaynağı:** `src/data/site.ts` (`firma`). Bir bilgi netleşince orada doldurulur; yasal sayfalar kendiliğinden güncellenir.
 
+## Hukukçuya sorulacaklar
+
+Bu dosyadaki açık soruların özeti. Ayrıntı, her maddenin sonundaki bölümde. Yanıt gelince ilgili bölüm güncellenir, madde buradan silinir.
+
+**Hukukçu**
+
+- **VERBİS:** Kayıt yükümlülüğü var mı, yoksa muafiyet mi? Metinde şu an bu konuda hiçbir ifade yok. → §1, VERBİS satırı
+- **Yurt dışına aktarım:** Vercel, Web3Forms, e-posta sağlayıcısı ve WhatsApp/Meta için KVKK md. 9 dayanağı nedir? Metinde yalnızca genel bir cümle var. → §1, yurt dışı aktarım satırı
+- **Saklama süresi:** Form verisi ne kadar tutulmalı, sitede süre yazılmalı mı? (`guvenlik-kurallari` "en fazla 1 yıl" diyor; CLAUDE.md kesin süre yazılmasını yasaklıyor.) → §1, saklama ve imha satırı
+- **Form taslağı:** Tarayıcıda saklanması için çerez politikası ve gizlilik metnine eklenen cümle yeterli mi? Onay istenmemesi doğru mu? → §5
+- **Metinde anılmayanlar:** `2k-ahsap-son-gonderim` kaydı (30 sn bekleme) ve `/iletisim`'de tıklanınca yüklenen Google Haritalar penceresi metinde anılmalı mı? Eklenmeleri sizin onayınızı da bekliyor. → §4, §5
+
+**Muhasebeci**
+
+- **Vergi numarası:** Sitede yayınlanmalı mı? 11 hane, T.C. kimlik no olabilir; şu an hiçbir yerde görünmüyor. → §2
+- **Ticari unvan:** "Azra Ahşap Ev" vergi levhasındaki unvanla birebir aynı mı? Şahıs işletmesinde unvan sahibin adını ve soyadını içerir (TTK md. 40). → §2
+- **MERSİS numarası** (varsa). → §1, MERSİS satırı
+- **KEP adresi** (varsa). → §1, KEP satırı
+
+**Sizden gereken bilgi (yasal metin için)**
+
+- **E-posta sağlayıcısı:** info@2kahsap.com hangi sağlayıcıda, sunucuları yurt dışında mı? Yurt dışı aktarım sorusunu da etkiler. → §1, e-posta hizmet sağlayıcısı satırı
+- **İş ortakları:** Gerçekte veri paylaşılan iş ortağı türleri, metindeki "nakliye, kurulum, muhasebe ve mali müşavirlik" listesiyle örtüşüyor mu? → §1, iş ortağı türleri satırı
+
+**Yasal metin: sizin kararınız**
+
+- **Marka yazımı:** Yasal metinlerdeki "Azra Ahşap Ev (2K AHŞAP)" yazımı doğru mu? → §2
+- **Yazı tipleri maddesi:** `/gizlilik` §3'e "Yazı tipleri kendi sunucumuzdan yüklenir" maddesi eklensin mi? → §6
+
 ## 1. Metinden çıkarılan yer tutucular
 
 Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yapıldığı aşağıda.
