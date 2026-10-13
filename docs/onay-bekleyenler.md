@@ -28,6 +28,7 @@ Bu dosyadaki açık soruların özeti. Ayrıntı, her maddenin sonundaki bölüm
 
 - **E-posta sağlayıcısı:** info@2kahsap.com hangi sağlayıcıda, sunucuları yurt dışında mı? Yurt dışı aktarım sorusunu da etkiler. → §1, e-posta hizmet sağlayıcısı satırı
 - **İş ortakları:** Gerçekte veri paylaşılan iş ortağı türleri, metindeki "nakliye, kurulum, muhasebe ve mali müşavirlik" listesiyle örtüşüyor mu? → §1, iş ortağı türleri satırı
+
 ## 1. Metinden çıkarılan yer tutucular
 
 Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yapıldığı aşağıda.
