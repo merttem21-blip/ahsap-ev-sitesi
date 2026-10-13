@@ -7,25 +7,14 @@ import Surecimiz from '../components/Surecimiz.astro';
 import NedenAhsap from '../components/NedenAhsap.astro';
 import SssBolumu from '../components/SssBolumu.astro';
 import { ikon } from '../data/ikonlar';
-import { kategoriler } from '../data/site';
+import { heroGorseli, kategoriler } from '../data/site';
 import { gorsel } from '../lib/gorsel';
+import { anaSayfaPaylasimi } from '../lib/paylasim';
 import { anaSayfaSorulari } from '../data/sss';
 
 const baslik = 'Özel Tasarım Ahşap Ev, Bungalov ve Villa | 2K AHŞAP';
 const aciklama =
   "Bungalovdan villaya, tiny house'tan çardağa; doğayla uyumlu, size özel ahşap ev ve yapılar tasarlayıp üretiyoruz. Projelerimizi inceleyin, teklif alın.";
-
-// Hero fotoğrafı: kaynak public/images/ahsap-ev/hero-anasayfa.jpeg. Mobil sürüm A-frame'e kırpılmış dikey kesimdir.
-const heroGorseli = {
-  mobil: '/images/hero/hero-mobile.webp',
-  mobilWidth: 612,
-  mobilHeight: 768,
-  tablet: '/images/hero/hero-tablet.webp',
-  masaustu: '/images/hero/hero-desktop.webp',
-  width: 1376,
-  height: 768,
-  alt: 'Doğa içinde A-frame ve kütük ahşap ev',
-};
 
 // Ürün kartları: 4:5 vitrin fotoğrafları scripts/vitrin-gorseli.mjs ile aynı ışık ve renkte üretilir.
 // Kartın genişliği: ≥ 1280px'te 4 sütun (286px), 640–1279px'te 2 sütun; mobilde ekranın ~%78'i (yatay şerit).
@@ -47,7 +36,13 @@ const kartlar = await Promise.all(
 const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
 ---
 
-<Layout title={baslik} description={aciklama} seffafHeader>
+<Layout
+  title={baslik}
+  description={aciklama}
+  image={anaSayfaPaylasimi.yol}
+  imageAlt={anaSayfaPaylasimi.alt}
+  seffafHeader
+>
   <!-- .ana-akis: ana sayfanın bölüm ritmini (--bolum-ritim) taşır; Sürecimiz, Neden Ahşap ve SSS bunu kullanır -->
   <div class="ana-akis">
     <Hero gorsel={heroGorseli}>

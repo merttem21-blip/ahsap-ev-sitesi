@@ -1,10 +1,11 @@
 // Bağlantı önizlemesi (Open Graph / Twitter) görselleri: 1200×630 JPEG, derlemede üretilir
 // (src/pages/paylasim/[...yol].ts). Sitede görünmez; yalnızca WhatsApp ve sosyal medyada link
 // paylaşılınca çıkar. JPEG seçildi: her platform açar, WhatsApp'ın önizleme sınırının (~300 KB) altında kalır.
-// Proje ve kategori sayfaları kapak fotoğrafından, diğer sayfalar logolu varsayılan görselden yararlanır.
+// Ana sayfa hero fotoğrafından, proje ve kategori sayfaları kapak fotoğrafından, diğer genel sayfalar (SSS,
+// İletişim, yasal sayfalar vb.) logolu varsayılan görselden yararlanır.
 import path from 'node:path';
 import sharp from 'sharp';
-import type { Kategori } from '../data/site';
+import { heroGorseli, type Kategori } from '../data/site';
 import { gorsel } from './gorsel';
 import { fotoYolu, kapakFotosu, kategoriVitrini, type Proje } from './projeler';
 
@@ -22,6 +23,14 @@ export interface Paylasim {
 }
 
 export const varsayilanPaylasim: Paylasim = { yol: '/paylasim/2k-ahsap.jpg', alt: '2K AHŞAP logosu' };
+
+/** Ana sayfa: hero fotoğrafının sitede görünen masaüstü kadrajından (1376×768; kırpma yalnızca üst ve alttan
+    birkaç piksel, iki ev de kadrajda kalır). */
+export const anaSayfaPaylasimi: Paylasim = {
+  yol: '/paylasim/ana-sayfa.jpg',
+  alt: heroGorseli.alt,
+  kaynak: heroGorseli.masaustu,
+};
 
 /** Projenin kapak fotoğrafından: /paylasim/<kategori>/<proje>.jpg */
 export async function projePaylasimi(p: Proje): Promise<Paylasim> {

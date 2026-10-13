@@ -86,7 +86,7 @@ Bir sayfada **yalnızca bir** görsel `fetchpriority="high"` taşır.
 
 - `public/` içindeki dosyalar Astro tarafından **optimize edilmez**, olduğu gibi yayınlanır. Büyük PNG/JPG oraya konup doğrudan kullanılmaz.
 - Logolar SVG olarak doğrudan kullanılır (`public/logo/*.svg`). SVG'si olmayan tekil raster görseller için görüntülenme boyutunun ~2 katı genişlikte WebP üretilir.
-- Bağlantı önizlemesi (Open Graph) görselleri `public/`'e konmaz; derlemede kapak fotoğraflarından 1200×630 JPEG olarak üretilir (`src/lib/paylasim.ts`, ayrıntı `seo-kurallar` §14). Proje ve kategori sayfaları kapak fotoğrafını, diğer sayfalar logolu varsayılan görseli kullanır. `src/data/site.ts` → `varsayilanGorsel` yalnızca schema.org işletme şemasının görselidir.
+- Bağlantı önizlemesi (Open Graph) görselleri `public/`'e konmaz; derlemede kapak fotoğraflarından 1200×630 JPEG olarak üretilir (`src/lib/paylasim.ts`, ayrıntı `seo-kurallar` §14). Ana sayfa hero fotoğrafını, proje ve kategori sayfaları kapak fotoğrafını, diğer genel sayfalar logolu varsayılan görseli kullanır. `src/data/site.ts` → `varsayilanGorsel` yalnızca schema.org işletme şemasının görselidir.
 
 ## 6. Denetim
 

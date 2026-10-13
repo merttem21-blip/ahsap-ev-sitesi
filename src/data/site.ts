@@ -11,6 +11,19 @@ export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 // ayrıca üretilir: src/lib/paylasim.ts
 export const varsayilanGorsel = '/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
 
+// Ana sayfa hero fotoğrafı: kaynak public/images/ahsap-ev/hero-anasayfa.jpeg. Mobil sürüm A-frame'e kırpılmış
+// dikey kesimdir. Ana sayfanın bağlantı önizlemesi de masaüstü sürümden üretilir (src/lib/paylasim.ts).
+export const heroGorseli = {
+  mobil: '/images/hero/hero-mobile.webp',
+  mobilWidth: 612,
+  mobilHeight: 768,
+  tablet: '/images/hero/hero-tablet.webp',
+  masaustu: '/images/hero/hero-desktop.webp',
+  width: 1376,
+  height: 768,
+  alt: 'Doğa içinde A-frame ve kütük ahşap ev',
+};
+
 // schema.org logo alanı: Google logoyu beyaz zeminde ve raster gösterdiği için açık zemin logosunun PNG'si
 export const semaLogosu = '/logo/2k-ahsap-logo-acik-zemin.png';
 

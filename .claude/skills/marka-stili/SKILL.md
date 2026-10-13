@@ -277,7 +277,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - Semantik HTML: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`.
 - Sayfa başına tek `<h1>`; başlık sırası atlanmaz (h1 → h2 → h3). Seviye yapıya göre seçilir, görünüm CSS ile ayarlanır.
 - Her görselde anlamlı Türkçe `alt` metni (ör. "Ön verandalı iki katlı ahşap bungalov"). Dekoratif görsellerde `alt=""`.
-- Her sayfada benzersiz `<title>` ve meta description; Open Graph görseli proje ve kategori sayfalarında gerçek proje fotoğrafı (kapak), diğer sayfalarda logolu varsayılan görsel (`seo-kurallar` §14).
+- Her sayfada benzersiz `<title>` ve meta description; Open Graph görseli ana sayfada hero fotoğrafı, proje ve kategori sayfalarında gerçek proje fotoğrafı (kapak), diğer genel sayfalarda logolu varsayılan görsel (`seo-kurallar` §14).
 - Açıklayıcı link metinleri ("buraya tıklayın" değil, "Bungalov projelerini inceleyin").
 - Hız da SEO'dur: WebP/AVIF, hero dışındaki görsellerde lazy-load, `width`/`height` belirterek layout kaymasını (CLS) önle. Ortaya çıkma animasyonu yer kaplamayı değiştirmez (yalnızca `transform`/`opacity`), CLS üretmez.
 
