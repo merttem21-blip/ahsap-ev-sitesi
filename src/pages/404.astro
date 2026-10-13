@@ -1,6 +1,6 @@
 ---
 // Bulunamayan adresler. Astro bunu dist/404.html olarak derler; Vercel de 404 durum koduyla sunar.
-// Arama sonuçlarına girmez (noindex); @astrojs/sitemap 404 sayfasını kendiliğinden dışarıda bırakır.
+// Arama sonuçlarına girmez (noindex) ve sitemap.xml'e alınmaz (astro.config.mjs).
 // Bu sayfaya özel stil yazılmaz: düzen Yakinda bileşeninden, düğmeler site geneli .dugme sınıfından gelir.
 import Layout from '../layouts/Layout.astro';
 import Yakinda from '../components/Yakinda.astro';

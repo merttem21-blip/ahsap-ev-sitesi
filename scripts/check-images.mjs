@@ -3,7 +3,7 @@
 //   npm run build && npm run check:images
 //
 // Denetlenen başvurular: <img src/srcset>, <source srcset>, ikon <link>'leri, og:image /
-// twitter:image, JSON-LD "image"/"logo" alanları ve görsele giden <a href>'ler (galeri).
+// twitter:image, JSON-LD "image"/"logo"/"contentUrl" alanları ve görsele giden <a href>'ler (galeri).
 // Her dosya için: var mı, boş mu, gerçekten açılabiliyor mu; srcset'teki "NNNw" değeri
 // dosyanın gerçek genişliğiyle aynı mı. Sorun varsa çıkış kodu 1'dir.
 import fs from 'node:fs';
@@ -68,7 +68,9 @@ for (const sayfa of sayfalar) {
   for (const [s] of html.matchAll(/<source\b[^>]*>/g)) srcset(nitelik(s, 'srcset') ?? '', 'source srcset');
   for (const [l] of html.matchAll(/<link\b[^>]*>/g))
     if (/rel="[^"]*(icon|apple-touch-icon)[^"]*"/.test(l) || /as="image"/.test(l)) ekle(nitelik(l, 'href'), 'link');
-  for (const [m] of html.matchAll(/<meta\b[^>]*(?:og:image|twitter:image)[^>]*>/g)) ekle(nitelik(m, 'content'), 'og:image');
+  // og:image:width, og:image:alt gibi ek etiketler adres değildir; yalnızca og:image ve twitter:image
+  for (const [m] of html.matchAll(/<meta\b[^>]*(?:property|name)="(?:og:image|twitter:image)"[^>]*>/g))
+    ekle(nitelik(m, 'content'), 'og:image');
   for (const [a] of html.matchAll(/<a\b[^>]*href="[^"]*"[^>]*>/g)) {
     const href = nitelik(a, 'href');
     if (GORSEL_UZANTI.test(href.split(/[?#]/)[0])) ekle(href, 'a href');
@@ -78,7 +80,7 @@ for (const sayfa of sayfalar) {
       if (Array.isArray(d)) return d.forEach(yuru);
       if (d && typeof d === 'object')
         for (const [k, v] of Object.entries(d)) {
-          if ((k === 'image' || k === 'logo') && typeof v === 'string') ekle(v, `JSON-LD ${k}`);
+          if (['image', 'logo', 'contentUrl'].includes(k) && typeof v === 'string') ekle(v, `JSON-LD ${k}`);
           else yuru(v);
         }
     })(JSON.parse(json));

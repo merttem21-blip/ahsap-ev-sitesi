@@ -7,7 +7,7 @@ description: 2K AHŞAP web sitesi SEO kuralları — meta başlık ve açıklama
 
 Site Astro (statik) ile yapılır ve Vercel'de yayınlanır. Görsel tasarım için `marka-stili`, görsel işleme için `gorsel-yonetimi` skill'ine bak.
 
-> **Alan adı:** Örneklerde `https://2kahsap.com` (www'suz) kullanılır. Alan adı kesinleşince `astro.config` içindeki `site` değerini ve `robots.txt`'yi güncelle.
+> **Alan adı:** Örneklerde `https://2kahsap.com` (www'suz) kullanılır. Alan adının tek kaynağı `src/data/site.ts` → `siteAdresi`; `astro.config`'teki `site`, canonical, sitemap, robots.txt ve JSON-LD oradan okur. Alan adı değişirse yalnızca orası güncellenir.
 
 ## 1. Anahtar Kelimeler
 
@@ -118,32 +118,16 @@ Sitede 350+ fotoğraf var; **alt metni olmayan görsel yayına çıkmaz.**
 
 ## 8. Sitemap.xml ve robots.txt
 
-`@astrojs/sitemap` entegrasyonunu kullan. `site` ayarı zorunludur:
+İkisi de derleme sonunda `astro.config.mjs` içindeki `site-haritasi` entegrasyonuyla `dist/`'e yazılır (`@astrojs/sitemap` kullanılmaz; tek dosya `sitemap.xml` istendi). Alan adının tek kaynağı `src/data/site.ts` → `siteAdresi`; `astro.config`'teki `site` de oradan okunur.
 
-```js
-// astro.config.mjs
-import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
-
-export default defineConfig({
-  site: 'https://2kahsap.com',
-  trailingSlash: 'never',
-  integrations: [
-    sitemap({
-      filter: (sayfa) => !sayfa.includes('/admin') && !sayfa.includes('/404'),
-    }),
-  ],
-});
-```
-
-- Derleme sonunda `sitemap-index.xml` ve `sitemap-0.xml` dosyaları oluşur.
-- Sitemap'te yalnızca indekslenmesi istenen, 200 dönen, canonical URL'ler bulunur. Admin, 404 ve `noindex` sayfalar girmez.
-- `public/robots.txt`:
+- `sitemap.xml`: derlenen tüm HTML sayfalar otomatik girer (sayfa, kategori, proje). `noindex` taşıyanlar (Yakında sayfaları, zayıf içerikli projeler) HTML'den okunup dışarıda bırakılır; içerik eklenince kendiliğinden girer. Teşekkürler, 404 ve `/admin` her durumda hariçtir.
+- Adresler canonical ile aynı biçimdedir (ana sayfa `https://2kahsap.com/`, diğerleri sonda eğik çizgisiz).
+- `robots.txt` (`public/` içinde değil, üretilir):
   ```
   User-agent: *
   Allow: /
 
-  Sitemap: https://2kahsap.com/sitemap-index.xml
+  Sitemap: https://2kahsap.com/sitemap.xml
   ```
 - Yayından sonra sitemap'i Google Search Console'a gönder.
 - `/admin` sayfaları `<meta name="robots" content="noindex, nofollow">` taşır. Erişim güvenliği için `guvenlik-kurallari` skill'ine bak.
@@ -152,17 +136,21 @@ export default defineConfig({
 
 Astro'da şöyle eklenir: `<script type="application/ld+json" set:html={JSON.stringify(sema)} />`
 
-### Her sayfada — İşletme
+Şemalar firma bilgilerinden (`src/data/site.ts`) ve proje verisinden üretilir; elle yazılmaz. İşletme ve proje şeması `src/lib/sema.ts`, konum çubuğu `src/components/Breadcrumb.astro`, SSS `src/data/sss.ts` (`sssSemasi`). Derlemeden sonra `npm run jsonld-kontrol` hepsini sayfada görünenle karşılaştırır.
+
+### Her sayfada — İşletme (Organization + HomeAndConstructionBusiness)
+
+Tek varlık iki türü birden taşır; ad, adres ve telefon tek yerde durur.
 
 ```js
 const isletme = {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
+  "@type": ["Organization", "HomeAndConstructionBusiness"],
   "@id": "https://2kahsap.com/#isletme",
   "name": "2K AHŞAP",
-  "url": "https://2kahsap.com",
+  "url": "https://2kahsap.com/",
   "logo": "https://2kahsap.com/logo/2k-ahsap-logo-acik-zemin.png", // Google logoyu beyaz zeminde gösterir
-  "image": "https://2kahsap.com/og-varsayilan.jpg", // gerçek proje fotoğrafı
+  "image": "https://2kahsap.com/images/…-1600.webp", // gerçek proje fotoğrafı (site.ts → varsayilanGorsel)
   "description": "2015'ten beri özel tasarım ahşap ev, bungalov, villa ve tiny house üreten firma.",
   "telephone": "+90 532 250 40 77",
   "email": "info@2kahsap.com",
@@ -192,14 +180,14 @@ const isletme = {
 - Çalışma saatleri ve koordinatlar (`openingHoursSpecification`, `geo`) **bilinmeden eklenmez**. Öğrenilince eklenir.
 - Ad, adres ve telefon footer'daki ve Google İşletme Profili'ndeki bilgiyle birebir aynı olmalı.
 
-### Kategori ve proje sayfalarında — BreadcrumbList
+### Konum çubuğu olan her sayfada — BreadcrumbList
 
 ```js
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://2kahsap.com" },
+    { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://2kahsap.com/" },
     { "@type": "ListItem", "position": 2, "name": "Bungalov", "item": "https://2kahsap.com/bungalov" },
     { "@type": "ListItem", "position": 3, "name": "İki Katlı Verandalı Bungalov" }
   ]
@@ -207,6 +195,14 @@ const isletme = {
 ```
 
 Sayfada görünen breadcrumb ile şema aynı olmalı.
+
+### SSS gösteren sayfalarda — FAQPage
+
+Ana sayfa, kategori sayfaları ve `/sss`: yalnızca o sayfada görünen sorular, sayfadaki sırayla. Görünmeyen soru şemaya girmez.
+
+### Proje detayında — CreativeWork
+
+Proje adı (H1), açıklaması ("Proje Hakkında" metni; yoksa meta açıklama) ve galerideki tüm fotoğraflar (`ImageObject`: adres, alt metni, boyut, `creditText`). `Product` kullanılmaz (bkz. Yasaklar).
 
 ### Yasaklar
 - **Sahte veya kendi kendine verilmiş puan yok.** Referanslar sayfasındaki yorumlar için işletmeye `AggregateRating` / `Review` eklenmez. Google bunları yıldız olarak göstermez, sahtesi ise spam sayılır.
@@ -269,41 +265,21 @@ Google siteyi mobil sürümüne göre değerlendirir. Responsive tasarım kurall
 
 ## 14. Olmalı ✅ — Astro SEO Bileşeni
 
-Her sayfa ortak layout üzerinden bu bileşeni kullanır. `title` ve `description` zorunlu prop'tur; böylece eksik meta ile sayfa üretilemez.
+Her sayfa ortak layout (`src/layouts/Layout.astro`) üzerinden `src/components/SEO.astro`'yu kullanır. `title` ve `description` zorunlu prop'tur; böylece eksik meta ile sayfa üretilemez. Bileşen her sayfaya şunları yazar:
 
-```astro
----
-// src/components/SEO.astro
-interface Props {
-  title: string;        // en fazla 60 karakter, "| 2K AHŞAP" dahil
-  description: string;  // 120–155 karakter
-  image?: string;       // 1200×630 gerçek proje fotoğrafı
-  noindex?: boolean;
-}
-const { title, description, image = '/og-varsayilan.jpg', noindex = false } = Astro.props;
-const yol = Astro.url.pathname.replace(/\/$/, '') || '/';
-const canonical = new URL(yol, Astro.site).href;
-const ogGorsel = new URL(image, Astro.site).href;
+- `<title>`, `description`, mutlak ve kendini gösteren `canonical`, gerekirse `robots: noindex` (geliştirmede başlık/açıklama uzunluğu uyarısı)
+- Open Graph: `og:type`, `og:locale`, `og:site_name`, `og:title`, `og:description`, `og:url` (= canonical), `og:image` + `:type`, `:width`, `:height`, `:alt`
+- Twitter kartı: `summary_large_image`, `twitter:title`, `twitter:description`, `twitter:image`, `twitter:image:alt`
 
-if (import.meta.env.DEV) {
-  if (title.length > 60) console.warn(`[SEO] Başlık ${title.length} karakter: ${yol}`);
-  if (description.length < 120 || description.length > 155) console.warn(`[SEO] Açıklama ${description.length} karakter: ${yol}`);
-}
----
-<title>{title}</title>
-<meta name="description" content={description} />
-<link rel="canonical" href={canonical} />
-{noindex && <meta name="robots" content="noindex" />}
+**Paylaşım görseli** (`src/lib/paylasim.ts`, derlemede `/paylasim/…` altına 1200×630 JPEG olarak üretilir; sitede görünmez):
 
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="tr_TR" />
-<meta property="og:site_name" content="2K AHŞAP" />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:url" content={canonical} />
-<meta property="og:image" content={ogGorsel} />
-<meta name="twitter:card" content="summary_large_image" />
-```
+| Sayfa | Görsel |
+|---|---|
+| Proje | Projenin kapak fotoğrafı: `/paylasim/<kategori>/<proje>.jpg` |
+| Kategori | Kategoriyi temsil eden projenin (`vitrin`) kapağı: `/paylasim/<kategori>.jpg` |
+| Diğer tüm sayfalar ve projesi olmayan kategori | Logolu varsayılan görsel: `/paylasim/2k-ahsap.jpg` (gece zemin, ortada koyu zemin logosu) |
+
+Fotoğraf ortadan kırpılır; çok dikey fotoğraf (en/boy < 0,7) 4:5'e kırpılıp gece zemine ortalanır. `og:image:alt` kapak fotoğrafının alt metnidir. Yeni proje için ek adım gerekmez.
 
 Open Graph etiketleri, link WhatsApp'ta veya sosyal medyada paylaşıldığında görünen önizlemeyi belirler.
 
@@ -316,7 +292,7 @@ Open Graph etiketleri, link WhatsApp'ta veya sosyal medyada paylaşıldığında
 - [ ] URL temiz: küçük harf, tireli, Türkçe karakter yok, `/kategori/proje-adi` biçiminde
 - [ ] Canonical mutlak ve kendini gösteriyor
 - [ ] Sayfa sitemap'te (admin, 404 ve noindex sayfalar hariç)
-- [ ] Gerekli JSON-LD var ve doğrulandı; sahte puan yok
+- [ ] Gerekli JSON-LD var ve doğrulandı (`npm run jsonld-kontrol`); sahte puan yok
 - [ ] Mobil Lighthouse ≥ 90, LCP < 2.5 sn, CLS < 0.1
 - [ ] İç linkler var (breadcrumb, benzer projeler, teklif al); link metinleri açıklayıcı
 - [ ] Keyword stuffing ve kopya içerik yok; proje açıklaması özgün

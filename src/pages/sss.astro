@@ -1,11 +1,11 @@
 ---
 // /sss: tüm sorular gruplara göre; üstte grup kısayolları, sonda iletişim kutusu.
-// Veri: src/data/sss.ts (tek kaynak). FAQPage JSON-LD tüm soruları kapsar.
+// Veri: src/data/sss.ts (tek kaynak). FAQPage JSON-LD tüm soruları sayfadaki sırayla (gruplara göre) kapsar.
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import SssAkordeon from '../components/SssAkordeon.astro';
 import { whatsappLinki } from '../data/site';
-import { grubunSorulari, sorular, sssGruplari, sssSemasi } from '../data/sss';
+import { grubunSorulari, sssGruplari, sssSemasi } from '../data/sss';
 import { jsonLd } from '../lib/projeler';
 
 const whatsappMesaj = 'Merhaba, sıkça sorulan sorularda cevabını bulamadığım bir sorum var.';
@@ -17,7 +17,7 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
   description="Ahşap ev ve bungalov fiyatı, ruhsat, yapım süresi, deprem dayanımı, bakım ve garanti hakkında merak edilenler. Sorunuz burada yoksa bize hemen ulaşın."
   whatsappMesaj={whatsappMesaj}
 >
-  <script type="application/ld+json" set:html={jsonLd(sssSemasi(sorular))} />
+  <script type="application/ld+json" set:html={jsonLd(sssSemasi(gruplar.flatMap((g) => g.sorular)))} />
 
   <section class="sss-sayfa-ust" aria-labelledby="sss-sayfa-baslik">
     <div class="kap">

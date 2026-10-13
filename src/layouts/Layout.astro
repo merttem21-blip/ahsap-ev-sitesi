@@ -6,14 +6,20 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import AltMenu from '../components/AltMenu.astro';
-import { firma, siteAdresi, varsayilanGorsel } from '../data/site';
+import { siteAdresi } from '../data/site';
+import { jsonLd } from '../lib/projeler';
+import { isletmeSemasi } from '../lib/sema';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description: string;
+  /** Bağlantı önizlemesi görseli (src/lib/paylasim.ts); verilmezse logolu varsayılan görsel. */
   image?: string;
+  imageAlt?: string;
   noindex?: boolean;
+  /** Sayfaya özel JSON-LD (ör. proje detayı); <head> içine yazılır. */
+  sema?: Record<string, unknown>;
   /** Header hero fotoğrafının üzerinde şeffaf durur; yoksa antrasit zeminli olur. */
   seffafHeader?: boolean;
   /** Footer, yüzen buton ve mobil alt menüdeki WhatsApp linkinin hazır mesajı (sayfaya göre). */
@@ -25,38 +31,15 @@ interface Props {
 const {
   title,
   description,
-  image = varsayilanGorsel,
+  image,
+  imageAlt,
   noindex = false,
+  sema,
   seffafHeader = false,
   whatsappMesaj,
   teklifAdresi = '/teklif-al',
 } = Astro.props;
 const site = Astro.site ?? new URL(siteAdresi);
-
-const isletmeSemasi = {
-  '@context': 'https://schema.org',
-  '@type': 'HomeAndConstructionBusiness',
-  '@id': new URL('/#isletme', site).href,
-  name: firma.marka,
-  url: new URL('/', site).href,
-  logo: new URL('/logo/2k-ahsap-logo-acik-zemin.png', site).href,
-  image: new URL(varsayilanGorsel, site).href,
-  description: '2015’ten beri özel tasarım ahşap ev, bungalov, villa ve tiny house üreten firma.',
-  telephone: firma.telefonUluslararasi,
-  email: firma.eposta,
-  foundingDate: firma.kurulusYili,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: firma.adresParcalari.sokak,
-    addressLocality: firma.adresParcalari.ilce,
-    addressRegion: firma.adresParcalari.il,
-    postalCode: firma.adresParcalari.postaKodu,
-    addressCountry: 'TR',
-  },
-  areaServed: { '@type': 'Country', name: 'Türkiye' },
-  founder: { '@type': 'Person', name: firma.kurucu, sameAs: firma.linkedin },
-  sameAs: [firma.instagram, firma.facebook],
-};
 ---
 
 <!doctype html>
@@ -64,7 +47,7 @@ const isletmeSemasi = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <SEO title={title} description={description} image={image} noindex={noindex} />
+    <SEO title={title} description={description} image={image} imageAlt={imageAlt} noindex={noindex} />
     <meta name="theme-color" content="#1E1E1E" />
 
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -78,7 +61,8 @@ const isletmeSemasi = {
       rel="stylesheet"
     />
 
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(isletmeSemasi)} />
+    <script is:inline type="application/ld+json" set:html={jsonLd(isletmeSemasi(site))} />
+    {sema && <script is:inline type="application/ld+json" set:html={jsonLd(sema)} />}
   </head>
 
   <body>

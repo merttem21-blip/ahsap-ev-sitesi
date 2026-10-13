@@ -26,7 +26,6 @@ const heroGorseli = {
   height: 768,
   alt: 'Doğa içinde A-frame ve kütük ahşap ev',
 };
-const ogGorsel = heroGorseli.masaustu;
 
 // Ürün kartları: 4:5 vitrin fotoğrafları scripts/vitrin-gorseli.mjs ile aynı ışık ve renkte üretilir.
 // Kartın genişliği: ≥ 1280px'te 4 sütun (286px), 640–1279px'te 2 sütun; mobilde ekranın ~%78'i (yatay şerit).
@@ -48,7 +47,7 @@ const kartlar = await Promise.all(
 const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
 ---
 
-<Layout title={baslik} description={aciklama} image={ogGorsel} seffafHeader>
+<Layout title={baslik} description={aciklama} seffafHeader>
   <!-- .ana-akis: ana sayfanın bölüm ritmini (--bolum-ritim) taşır; Sürecimiz, Neden Ahşap ve SSS bunu kullanır -->
   <div class="ana-akis">
     <Hero gorsel={heroGorseli}>

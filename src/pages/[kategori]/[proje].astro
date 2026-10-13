@@ -8,9 +8,10 @@ import Galeri from '../../components/Galeri.astro';
 import ProjeKarti from '../../components/ProjeKarti.astro';
 import { firma, siteAdresi, whatsappLinki } from '../../data/site';
 import { gorsel } from '../../lib/gorsel';
+import { projePaylasimi } from '../../lib/paylasim';
+import { projeSemasi } from '../../lib/sema';
 import {
   fotoYolu,
-  kapakFotosu,
   kategoriProjeleri,
   projeKategorisi,
   projeMetaAciklamasi,
@@ -33,7 +34,7 @@ const { Content } = await proje.render();
 const aciklamaVar = proje.body.trim().length > 0;
 const sartname = sartnameSatirlari(proje);
 const digerProjeler = (await kategoriProjeleri(kategori.slug, proje.slug)).slice(0, 3);
-const kapak = await gorsel(fotoYolu(proje, kapakFotosu(proje).dosya));
+const paylasim = await projePaylasimi(proje);
 
 const site = Astro.site ?? new URL(siteAdresi);
 const sayfaAdresi = new URL(projeYolu(proje), site).href;
@@ -46,13 +47,24 @@ const teklifAdresi = `/teklif-al?proje=${proje.slug}`;
 // Yalnızca fotoğraftan oluşan sayfa "zayıf içerik" sayılır (seo-kurallar §13);
 // açıklama veya teknik şartname eklenince sayfa otomatik olarak indekslenir.
 const zayifIcerik = !aciklamaVar && sartname.length === 0;
+
+// JSON-LD: proje adı, açıklaması ve galerideki fotoğraflar (kapak önce, ardından galeri sırası)
+const metaAciklama = projeMetaAciklamasi(proje);
+const fotolar = await Promise.all(
+  [...proje.data.fotograflar]
+    .sort((a, b) => Number(b.dosya === proje.data.kapak) - Number(a.dosya === proje.data.kapak))
+    .map(async (f) => ({ alt: f.alt, g: await gorsel(fotoYolu(proje, f.dosya)) }))
+);
+const sema = projeSemasi({ proje, kategori, sayfaAdresi, metaAciklama, fotolar, site });
 ---
 
 <Layout
   title={projeMetaBasligi(proje.data.baslik)}
-  description={projeMetaAciklamasi(proje)}
-  image={kapak.buyuk}
+  description={metaAciklama}
+  image={paylasim.yol}
+  imageAlt={paylasim.alt}
   noindex={zayifIcerik}
+  sema={sema}
   whatsappMesaj={whatsappMesaj}
   teklifAdresi={teklifAdresi}
 >

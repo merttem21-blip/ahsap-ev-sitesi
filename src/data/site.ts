@@ -7,8 +7,12 @@ export const siteAdresi = 'https://2kahsap.com';
 // Herkese açık bir anahtardır, gizli değildir. Boşken formlar bilgileri WhatsApp mesajı olarak açar.
 export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 
-// Open Graph ve schema.org için varsayılan görsel (gerçek proje fotoğrafı)
+// schema.org işletme şemasının görseli (gerçek proje fotoğrafı). Bağlantı önizlemesi (Open Graph) görselleri
+// ayrıca üretilir: src/lib/paylasim.ts
 export const varsayilanGorsel = '/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
+
+// schema.org logo alanı: Google logoyu beyaz zeminde ve raster gösterdiği için açık zemin logosunun PNG'si
+export const semaLogosu = '/logo/2k-ahsap-logo-acik-zemin.png';
 
 // Firma bilgilerinin tek kaynağı: sitede bu bilgilerin geçtiği her yer buradan okur.
 // Sitede görünen ad marka adıdır; yasal metinlerde "Unvan (Marka)" biçimi kullanılır (yasalAd).
