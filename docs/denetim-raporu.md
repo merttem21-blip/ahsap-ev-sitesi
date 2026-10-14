@@ -112,6 +112,12 @@ Playwright ile 48 sayfanın hepsi 1280 px genişlikte açıldı ve sayfa sonuna 
 - **Çerez:** Hiçbir sayfada çerez oluşmadı. Harita yüklendikten sonra da ölçümde çerez görülmedi. Gerçek tarayıcılarda, üçüncü taraf çerez ayarına bağlı olarak Google alan adları harita açıldığında çerez bırakabilir.
 - **Yerel depolama:** Yalnızca form başarıyla gönderildiğinde `localStorage` içine `2k-ahsap-son-gonderim` (son gönderim zamanı) yazılıyor.
 - **Çerez politikasıyla uyum:** `src/pages/cerez-politikasi.astro` Google Fonts'u doğru anlatıyor. Sayfa içinde açılan Google Haritalar'ı ve localStorage kaydını ayrıca anmıyor; metin yalnızca dış bağlantılardan söz ediyor. Metni değiştirmek görünür bir değişiklik olduğu için onay gerektirir.
+- **Gömülü haritadaki "Haritalar'da aç" (bilinen durum, 14 Ekim 2026):** Google'ın iframe içindeki kendi düğmesi telefonda (Android Chrome, önizleme) açılmıyor. Neden bizim kodumuz değil:
+  - Iframe'de `sandbox` niteliği yok.
+  - CSP yalnızca Report-Only. Hiçbir şeyi engellemez, açılan yeni sekmeye de uygulanmaz.
+  - Düğme, `maps.google.com/maps?…&cid=8383073593410855210` adresine giden düz bir `target="_blank"` bağlantısı. Android taklidinde (masaüstü Chromium) açılıyor.
+
+  Kod değiştirilmedi. Ziyaretçi işletme profilini haritanın üstündeki adres linkiyle açabilir (`firma.harita`, `maps.google.com/?cid=…`; telefonda doğrulandı). Kısa link (`maps.app.goo.gl`) Android Chrome'da `about:blank#blocked` açtığı için kullanılmıyor.
 
 ### 9. Görsel formatları ve lazy load: Var
 
