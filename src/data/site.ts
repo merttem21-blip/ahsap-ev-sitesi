@@ -38,15 +38,25 @@ const adresParcalari = {
   postaKodu: '34893',
 };
 
+// Telefon ve WhatsApp numarasının tek kaynağı: ülke koduyla, yalnızca rakamlar. Görünen biçimler, tel: ve
+// wa.me linkleri buradan üretilir; numara değişince yalnızca bu satır güncellenir.
+const telefonNumarasi = '905322504077';
+const telefonGruplari = [
+  telefonNumarasi.slice(2, 5),
+  telefonNumarasi.slice(5, 8),
+  telefonNumarasi.slice(8, 10),
+  telefonNumarasi.slice(10),
+].join(' '); // "532 250 40 77"
+
 export const firma = {
   marka: '2K AHŞAP',
   unvan: 'Azra Ahşap Ev',
   kurulusYili: '2015',
   kurucu: 'Kadir Avcı',
-  telefonGorunen: '0532 250 40 77',
-  telefonLink: 'tel:+905322504077',
-  telefonUluslararasi: '+90 532 250 40 77', // schema.org
-  whatsapp: 'https://wa.me/905322504077',
+  telefonGorunen: `0${telefonGruplari}`, // 0532 250 40 77
+  telefonLink: `tel:+${telefonNumarasi}`,
+  telefonUluslararasi: `+90 ${telefonGruplari}`, // schema.org
+  whatsapp: `https://wa.me/${telefonNumarasi}`,
   eposta: 'info@2kahsap.com',
   kvkkEposta: 'info@2kahsap.com', // veri sorumlusu iletişim e-postası (KVKK başvuruları)
   adres: `${adresParcalari.sokak}, ${adresParcalari.postaKodu} ${adresParcalari.ilce}/${adresParcalari.il}`,
@@ -68,7 +78,8 @@ export const firma = {
 /** Yasal metinlerdeki veri sorumlusu adı: "Azra Ahşap Ev (2K AHŞAP)" */
 export const yasalAd = `${firma.unvan} (${firma.marka})`;
 
-// WhatsApp linki hazır mesajla açılır; mesaj bulunulan sayfaya göre değişir (Layout'un whatsappMesaj prop'u).
+// WhatsApp linki hazır mesajla açılır; mesaj bulunulan sayfaya göre değişir (Layout'un whatsappMesaj prop'u):
+// proje sayfasında proje adı ve sayfa linki, kategori sayfasında kategori adı, mesajı olmayan sayfalarda bu genel mesaj.
 export const varsayilanWhatsappMesaji =
   'Merhaba, 2K AHŞAP web sitenizden yazıyorum. Ahşap yapı projem hakkında bilgi almak istiyorum.';
 

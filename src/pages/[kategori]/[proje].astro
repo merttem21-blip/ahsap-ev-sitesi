@@ -39,7 +39,7 @@ const paylasim = await projePaylasimi(proje);
 const site = Astro.site ?? new URL(siteAdresi);
 const sayfaAdresi = new URL(projeYolu(proje), site).href;
 // Sayfadaki WhatsApp linki, footer ve yüzen buton aynı hazır mesajı kullanır
-const whatsappMesaj = `Merhaba, sitenizdeki "${proje.data.baslik}" projesi için teklif almak istiyorum: ${sayfaAdresi}`;
+const whatsappMesaj = `Merhaba, ${proje.data.baslik} projeniz hakkında bilgi almak istiyorum: ${sayfaAdresi}`;
 const whatsappTeklif = whatsappLinki(whatsappMesaj);
 // Teklif formu yapı tipini ve proje adını bu parametreden doldurur
 const teklifAdresi = `/teklif-al?proje=${proje.slug}`;
