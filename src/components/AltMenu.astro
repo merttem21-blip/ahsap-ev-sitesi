@@ -15,7 +15,7 @@ interface Props {
 
 const { teklifAdresi = '/teklif-al', whatsappMesaj } = Astro.props;
 const yol = Astro.url.pathname.replace(/\/$/, '') || '/';
-const aktif = (href: string) => (menuAktifMi(yol, href) ? 'page' : undefined);
+const aktif = (href: string): 'page' | undefined => (menuAktifMi(yol, href) ? 'page' : undefined);
 ---
 
 <nav class="alt-menu" aria-label="Hızlı erişim">

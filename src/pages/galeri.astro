@@ -86,7 +86,8 @@ const sizes =
     </div>
   </section>
 
-  <!-- JS varsa filtre görünür ve ızgara JS ile dizilir; yerleşim kaymasını önlemek için ilk boyamadan önce -->
+  <!-- JS varsa filtre görünür ve ızgara JS ile dizilir; yerleşim kaymasını önlemek için ilk boyamadan önce.
+       Bu betik değişirse vercel.json'daki CSP'de yer alan sha256 özeti de güncellenmeli. -->
   <script is:inline>
     document.documentElement.classList.add('js-galeri');
     // Galeri betiği çalışmazsa 4 sn sonra JS'siz görünüme dönülür (fotoğraflar gizli kalmaz)

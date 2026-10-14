@@ -41,19 +41,6 @@ const turleri = (d) => [d?.['@type']].flat().filter(Boolean);
 const turuVar = (d, tur) => turleri(d).includes(tur);
 const esit = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
-/** Blok içindeki tüm düğümler (@graph ve iç içe nesneler dahil) */
-function dugumler(veri) {
-  const liste = [];
-  (function yuru(d) {
-    if (Array.isArray(d)) return d.forEach(yuru);
-    if (d && typeof d === 'object') {
-      if (d['@type']) liste.push(d);
-      Object.values(d).forEach(yuru);
-    }
-  })(veri);
-  return liste;
-}
-
 /** Şemadaki tüm metin değerleri (adres denetimi için) */
 function dizeler(veri, liste = []) {
   if (typeof veri === 'string') liste.push(veri);
