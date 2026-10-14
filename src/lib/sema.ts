@@ -29,6 +29,8 @@ export const isletmeSemasi = (site: URL) => ({
     postalCode: firma.adresParcalari.postaKodu,
     addressCountry: 'TR',
   },
+  geo: { '@type': 'GeoCoordinates', latitude: firma.konum.enlem, longitude: firma.konum.boylam },
+  hasMap: firma.harita,
   areaServed: { '@type': 'Country', name: 'Türkiye' },
   founder: { '@type': 'Person', name: firma.kurucu, sameAs: firma.linkedin },
   sameAs: [firma.instagram, firma.facebook],

@@ -13,7 +13,6 @@ import { ikon } from '../data/ikonlar';
 import '../styles/form.css';
 
 const whatsappMesaj = 'Merhaba, 2K AHŞAP web sitenizden yazıyorum. Ahşap yapı projem hakkında bilgi almak istiyorum.';
-const haritaKaynagi = `https://www.google.com/maps?q=${encodeURIComponent(firma.adres)}&output=embed`;
 
 const kanallar = [
   { etiket: 'Telefon', deger: firma.telefonGorunen, href: firma.telefonLink, ikon: ikon.telefon },
@@ -71,7 +70,7 @@ const kanallar = [
         }
       </ul>
 
-      <div class="harita" data-harita data-kaynak={haritaKaynagi} hidden>
+      <div class="harita" data-harita data-kaynak={firma.haritaYerlestirme} hidden>
         <svg class="ikon harita-ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
         <p>Harita, Google Haritalar'dan yüklenir.</p>
         <button type="button" class="dugme" data-harita-goster>Haritayı göster</button>

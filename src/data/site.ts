@@ -61,9 +61,13 @@ export const firma = {
   kvkkEposta: 'info@2kahsap.com', // veri sorumlusu iletişim e-postası (KVKK başvuruları)
   adres: `${adresParcalari.sokak}, ${adresParcalari.postaKodu} ${adresParcalari.ilce}/${adresParcalari.il}`,
   adresParcalari,
-  harita:
-    'https://www.google.com/maps/search/?api=1&query=' +
-    encodeURIComponent('2K AHŞAP Kaynarca Akdeniz Cd. No:4/A Pendik İstanbul'),
+  // Google İşletme Profili: adres linkleri (footer, /iletisim) ve schema.org hasMap bu kısa linke gider.
+  harita: 'https://maps.app.goo.gl/nE8jAvDeUaF3w6KTA',
+  // /iletisim'de "Haritayı göster" ile açılan gömülü haritanın adresi (Google Haritalar → Paylaş → Harita yerleştirme)
+  haritaYerlestirme:
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.799859476108!2d29.256386499999998!3d40.876266199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cadd121ba2fb5f%3A0x7456a9048d36212a!2zMmthaMWfYXA!5e0!3m2!1str!2str!4v1791987225622!5m2!1str!2str',
+  // İşletme profilindeki konum (schema.org geo)
+  konum: { enlem: 40.8762662, boylam: 29.2563865 },
   vergiDairesi: 'Sarıgazi Vergi Dairesi',
   // Yalnızca kayıt için: hiçbir sayfada, meta veride veya JSON-LD'de yayınlanmaz (11 hane, T.C. kimlik no
   // olabilir). Yayınlanıp yayınlanmayacağı muhasebeciye sorulacak: docs/onay-bekleyenler.md

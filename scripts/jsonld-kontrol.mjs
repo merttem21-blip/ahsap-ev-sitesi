@@ -6,7 +6,8 @@
 // Her sayfada:
 // - Her JSON-LD bloğu geçerli JSON, @context https://schema.org, her düğümde @type var.
 // - Organization + HomeAndConstructionBusiness tek varlık olarak bir kez var; ad, logo, telefon, adres ve sosyal
-//   profiller dolu; tüm sayfalarda aynı. Telefon footer'daki tel: bağlantısıyla, adres footer'daki adresle aynı.
+//   profiller dolu; tüm sayfalarda aynı. Telefon footer'daki tel: bağlantısıyla, adres footer'daki adresle,
+//   hasMap footer'daki adres linkiyle aynı; geo enlem/boylamı geçerli.
 // - Konum çubuğu (nav.konum) varsa BreadcrumbList bir kez var ve görünen öğelerle birebir aynı (ad, sıra, bağlantı);
 //   yoksa BreadcrumbList yok.
 // - Sayfada SSS soruları görünüyorsa FAQPage bir kez var ve yalnızca o soruları aynı sırayla, aynı cevaplarla taşır;
@@ -112,6 +113,11 @@ for (const dosya of sayfalar) {
     const footer = metin(kok.querySelector('footer'));
     for (const parca of [isletme.address?.streetAddress, isletme.address?.postalCode])
       if (parca && !footer.includes(parca)) hata(`adres parçası footer'da görünmüyor: ${parca}`);
+    const haritaLinki = kok.querySelector('footer address a[target="_blank"][href*="maps"]')?.getAttribute('href');
+    if (isletme.hasMap !== haritaLinki) hata(`hasMap şemada ${isletme.hasMap}, footer'daki adres linki ${haritaLinki}`);
+    const { latitude: enlem, longitude: boylam } = isletme.geo ?? {};
+    if (!turuVar(isletme.geo, 'GeoCoordinates') || !(Math.abs(enlem) <= 90) || !(Math.abs(boylam) <= 180))
+      hata(`işletme konumu (geo) eksik ya da geçersiz: ${JSON.stringify(isletme.geo)}`);
   }
 
   // 3) Konum çubuğu ↔ BreadcrumbList
