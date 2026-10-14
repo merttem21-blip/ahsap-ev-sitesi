@@ -157,12 +157,14 @@ const isletme = {
   "foundingDate": "2015",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Kaynarca, Akdeniz Cd. No:4/A",
+    "streetAddress": "Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A",
     "addressLocality": "Pendik",
     "addressRegion": "İstanbul",
-    "postalCode": "34893",
+    "postalCode": "34890",
     "addressCountry": "TR"
   },
+  "geo": { "@type": "GeoCoordinates", "latitude": 40.8762662, "longitude": 29.2563865 },
+  "hasMap": "https://maps.app.goo.gl/nE8jAvDeUaF3w6KTA", // Google İşletme Profili (site.ts → firma.harita)
   "areaServed": { "@type": "Country", "name": "Türkiye" },
   "founder": {
     "@type": "Person",

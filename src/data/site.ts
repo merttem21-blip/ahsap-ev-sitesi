@@ -31,11 +31,12 @@ export const semaLogosu = '/logo/2k-ahsap-logo-acik-zemin.png';
 // Sitede görünen ad marka adıdır; yasal metinlerde "Unvan (Marka)" biçimi kullanılır (yasalAd).
 // mersis ve kep boşken yasal sayfalarda etiketleriyle birlikte hiç görünmez, doldurulunca kendiliğinden çıkar.
 // Henüz bilinmeyen bilgiler: docs/onay-bekleyenler.md
+// Adres, Google İşletme Profili'ndeki resmi adresle birebir aynıdır (firma.adres bu parçalardan oluşur).
 const adresParcalari = {
-  sokak: 'Kaynarca, Akdeniz Cd. No:4/A',
+  sokak: 'Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A',
   ilce: 'Pendik',
   il: 'İstanbul',
-  postaKodu: '34893',
+  postaKodu: '34890',
 };
 
 // Telefon ve WhatsApp numarasının tek kaynağı: ülke koduyla, yalnızca rakamlar. Görünen biçimler, tel: ve

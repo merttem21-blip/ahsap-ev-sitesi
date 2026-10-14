@@ -91,7 +91,7 @@ Ayrıntılar `docs/onay-bekleyenler.md` dosyasında.
 
 - 2kahsap.com alan adının siteye bağlanması ve www'lu adresin www'suz adrese yönlendirilmesi. E-posta kayıtlarına dokunulmayacak.
 - Sitenin Google Search Console'a eklenip site haritasının gönderilmesi.
-- Google İşletme Profili onaylanınca harita bağlantısının siteye işlenmesi.
+- Google İşletme Profili harita bağlantısının siteye işlenmesi. **Tamamlandı:** adres linkleri ve İletişim sayfasındaki harita işletme profilinizi gösteriyor; sitedeki adres profildeki resmi adresle aynı.
 - Yayından sonra her iki formdan deneme gönderimi.
 - Hız ölçümünün yayındaki adreste yeniden yapılması.
 

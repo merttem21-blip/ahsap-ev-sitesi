@@ -3,7 +3,7 @@
 ## Şirket Bilgileri
 - **Adı:** 2K AHŞAP
 - **Açıklaması:** 2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp üreten, modern mimariye doğal malzemeleri harmanlayan bir şirket.
-- **Adres:** Kaynarca, Akdeniz Cd. No:4/A, 34893 Pendik/İstanbul
+- **Adres:** Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A, 34890 Pendik/İstanbul (Google İşletme Profili'ndeki resmi adres)
 - **Telefon:** 0532 250 40 77
 - **Email:** info@2kahsap.com
 - **WhatsApp:** 0532 250 40 77
