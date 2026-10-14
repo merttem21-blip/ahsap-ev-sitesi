@@ -131,4 +131,7 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
   1. `2kahsap.com` eklenir ve ana adres yapılır. Canonical, sitemap, paylaşım görselleri ve form sonrası yönlendirme (`/tesekkurler`) bu adresi kullanır (`src/data/site.ts`, `siteAdresi`).
   2. `www.2kahsap.com` eklenir ve "Redirect to 2kahsap.com" (308) seçilir.
   3. DNS'te Vercel'in gösterdiği A ve CNAME kayıtları girilir. E-posta (MX) kayıtlarına dokunulmaz; info@2kahsap.com çalışmaya devam etmeli.
-  4. Kontrol: `https://www.2kahsap.com/iletisim` 308 ile `https://2kahsap.com/iletisim`'e, `http://2kahsap.com/` HTTPS'e yönlenmeli; `/iletisim/` ve `/iletisim/index.html` `/iletisim`'e yönlenmeli (`vercel.json`: `trailingSlash: false`, `cleanUrls: true`). Bağlandıktan sonra teklif formundan bir test gönderimi yapılır.
+  4. Kontrol: `https://www.2kahsap.com/iletisim` 308 ile `https://2kahsap.com/iletisim`'e, `http://2kahsap.com/` HTTPS'e yönlenmeli; `/iletisim/` ve `/iletisim/index.html` `/iletisim`'e yönlenmeli (`vercel.json`: `trailingSlash: false`, `cleanUrls: true`).
+- **Google Search Console.** 2kahsap.com mülk olarak eklenir ve `https://2kahsap.com/sitemap.xml` gönderilir.
+- **Google İşletme Profili.** Profil onaylanınca harita linki `src/data/site.ts` içindeki `firma.harita` alanına işlenir (ayrı prompt hazır).
+- **Form denemesi.** Yayından sonra teklif formundan bir deneme gönderilir; Teşekkürler sayfasının açıldığı ve mailin info@2kahsap.com'a geldiği kontrol edilir.
