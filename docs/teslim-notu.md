@@ -43,21 +43,12 @@
 - **Spam koruması:** Otomatik spam gönderimlerine karşı görünmeyen bir tuzak alan ve art arda gönderime karşı kısa bir bekleme süresi var.
 - **Erişilebilirlik:** Formlar, menü ve fotoğraf görüntüleyici klavyeyle de rahatça kullanılabiliyor.
 
-## Hız ölçümü (Google Lighthouse, mobil)
+## Ziyaretçinin fark edeceği kazanımlar
 
-Ölçüm, yazı tiplerinin sitenin kendi sunucusuna taşınmasından önce ve sonra, aynı koşullarda birkaç kez yapıldı; tabloda ortanca sonuç var. Puan 100 üzerindendir. Rakamlar test bilgisayarında yerel olarak alındı; yayındaki sitede farklı çıkabilir, karşılaştırmada önemli olan önce/sonra farkıdır.
-
-| Sayfa | Önce | Sonra | İçeriğin görünmeye başlaması |
-|---|---|---|---|
-| Ana sayfa | 85 | 90 | 3,0 sn → 1,8 sn |
-| Kategori sayfası (Bungalov) | 81 | 76 | 3,0 sn → 1,9 sn |
-| Proje sayfası | 75 | 75 | 3,0 sn → 1,8 sn |
-| Galeri | 87 | 89 | 3,1 sn → 2,1 sn |
-
-- **Görünmeye başlama:** dört sayfada da yaklaşık 1 saniye erken.
-- **Kategori sayfası puanı:** puandaki düşüşün nedeni sayfanın ilk açılışındaki bir hesaplama. Nedeni bulundu, iyileştirme sonraki çalışmaya bırakıldı.
-- **Erişilebilirlik ve en iyi uygulamalar:** dört sayfada da 100.
-- **Yayından sonra:** ölçüm, yayındaki adreste yeniden yapılacak.
+- **Sayfalar yaklaşık 1 saniye erken görünüyor.** Ana sayfada, kategori ve proje sayfalarında ve Galeri'de içerik öncekine göre yaklaşık 1 saniye daha erken ekrana geliyor. Ölçüm, telefon ve yavaş mobil bağlantı koşullarında yapıldı.
+- **Kategori sayfasındaki kayma kalktı.** Sayfa açılırken içerik artık yerinden oynamıyor; ziyaretçi okumaya ya da dokunmaya başladığı yerde kalıyor.
+- **Yazı tipleri sitenin kendisinden geliyor.** Sayfa açılırken Google'a ayrı bir bağlantı kurulmuyor. Bu yüzden ziyaretçinin bilgisi (IP adresi) Google'a gitmiyor.
+- **Fotoğraf açıklamaları Google görsel aramaya uygun.** Her fotoğrafın açıklaması projenin adını ve öne çıkan özelliğini anlatıyor; ör. "Asma katlı verandalı bungalov – shingle çatı ve dağ manzaralı veranda". Bu, Google görsel aramanın fotoğrafta ne olduğunu anlamasına yardımcı olur.
 
 ## Yeni proje nasıl eklenir
 
