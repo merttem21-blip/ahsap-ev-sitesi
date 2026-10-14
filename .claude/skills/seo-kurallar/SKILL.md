@@ -164,7 +164,7 @@ const isletme = {
     "addressCountry": "TR"
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 40.8762662, "longitude": 29.2563865 },
-  "hasMap": "https://maps.app.goo.gl/nE8jAvDeUaF3w6KTA", // Google İşletme Profili (site.ts → firma.harita)
+  "hasMap": "https://maps.google.com/?cid=8383073593410855210", // Google İşletme Profili (site.ts → firma.harita)
   "areaServed": { "@type": "Country", "name": "Türkiye" },
   "founder": {
     "@type": "Person",

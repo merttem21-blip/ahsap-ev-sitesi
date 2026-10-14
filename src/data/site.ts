@@ -62,8 +62,9 @@ export const firma = {
   kvkkEposta: 'info@2kahsap.com', // veri sorumlusu iletişim e-postası (KVKK başvuruları)
   adres: `${adresParcalari.sokak}, ${adresParcalari.postaKodu} ${adresParcalari.ilce}/${adresParcalari.il}`,
   adresParcalari,
-  // Google İşletme Profili: adres linkleri (footer, /iletisim) ve schema.org hasMap bu kısa linke gider.
-  harita: 'https://maps.app.goo.gl/nE8jAvDeUaF3w6KTA',
+  // Google İşletme Profili: adres linkleri (footer, /iletisim) ve schema.org hasMap bu linke gider. cid, profilin
+  // kimliğidir. Kısa link (maps.app.goo.gl/nE8jAvDeUaF3w6KTA) Android Chrome'da "about:blank#blocked" açtığı için kullanılmaz.
+  harita: 'https://maps.google.com/?cid=8383073593410855210',
   // /iletisim'de "Haritayı göster" ile açılan gömülü haritanın adresi (Google Haritalar → Paylaş → Harita yerleştirme)
   haritaYerlestirme:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.799859476108!2d29.256386499999998!3d40.876266199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cadd121ba2fb5f%3A0x7456a9048d36212a!2zMmthaMWfYXA!5e0!3m2!1str!2str!4v1791987225622!5m2!1str!2str',
