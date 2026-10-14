@@ -124,3 +124,11 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 - **Öneri:** `astro.config.mjs` içinde `build: { inlineStylesheets: 'always' }`. CSS, `<link>` yerine aynı sırayla `<style>` olarak sayfaya gömülür. Görünüm değişmemeli; her sayfanın HTML'i yaklaşık 7–9 KB (sıkıştırılmış) büyür, CSS sayfalar arasında önbellekten gelmez.
 - **Kazanç beklentisi:** Mobilde ilk açılışta bir istek turu (Lighthouse benzetiminde yaklaşık 150–450 ms FCP/LCP).
 - **Yapılmadı:** kullanıcı kararıyla bu turda denenmedi. Yapılırsa önce/sonra Lighthouse, form-kontrol ve gorsel-kontrol (fark %0 beklenir) birlikte çalıştırılır.
+
+## 8. Yayın günü yapılacaklar
+
+- **Alan adını bağlama (www → 2kahsap.com).** 2kahsap.com henüz bu siteye bağlı değil; şu an hem `2kahsap.com` hem `www.2kahsap.com` başka bir sunucudan yanıt veriyor ve biri diğerine yönlenmiyor (14 Ekim 2026). Vercel → proje → Settings → Domains:
+  1. `2kahsap.com` eklenir ve ana adres yapılır. Canonical, sitemap, paylaşım görselleri ve form sonrası yönlendirme (`/tesekkurler`) bu adresi kullanır (`src/data/site.ts`, `siteAdresi`).
+  2. `www.2kahsap.com` eklenir ve "Redirect to 2kahsap.com" (308) seçilir.
+  3. DNS'te Vercel'in gösterdiği A ve CNAME kayıtları girilir. E-posta (MX) kayıtlarına dokunulmaz; info@2kahsap.com çalışmaya devam etmeli.
+  4. Kontrol: `https://www.2kahsap.com/iletisim` 308 ile `https://2kahsap.com/iletisim`'e, `http://2kahsap.com/` HTTPS'e yönlenmeli; `/iletisim/` ve `/iletisim/index.html` `/iletisim`'e yönlenmeli (`vercel.json`: `trailingSlash: false`, `cleanUrls: true`). Bağlandıktan sonra teklif formundan bir test gönderimi yapılır.

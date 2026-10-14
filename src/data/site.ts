@@ -11,7 +11,7 @@ export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 // ayrıca üretilir: src/lib/paylasim.ts
 export const varsayilanGorsel = '/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
 
-// Ana sayfa hero fotoğrafı: kaynak public/images/ahsap-ev/hero-anasayfa.jpeg. Mobil sürüm A-frame'e kırpılmış
+// Ana sayfa hero fotoğrafı: kaynak arsiv/gorseller/ahsap-ev/hero-anasayfa.jpeg. Mobil sürüm A-frame'e kırpılmış
 // dikey kesimdir. Ana sayfanın bağlantı önizlemesi de masaüstü sürümden üretilir (src/lib/paylasim.ts).
 export const heroGorseli = {
   mobil: '/images/hero/hero-mobile.webp',

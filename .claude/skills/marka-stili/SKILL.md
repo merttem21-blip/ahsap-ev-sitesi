@@ -131,7 +131,7 @@ Fontlar sitenin kendi dosyalarıdır (14 Ekim 2026'dan beri); Google Fonts'a ba�
 
 ## 4. Logo
 
-Dosyalar `public/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeniden çizilmez, renkleri değiştirilmez, oranı bozulmaz.
+Sitede kullanılan dosyalar `public/logo/`, yalnızca kaynak olarak duranlar (açık zemin ve ikon SVG'leri, PNG kaynaklar; schema.org PNG'si hariç) `arsiv/logo/` klasöründe. Sadece bu dosyalar kullanılır; logo yeniden çizilmez, renkleri değiştirilmez, oranı bozulmaz.
 
 | Dosya | Nerede kullanılır | Neden |
 |---|---|---|

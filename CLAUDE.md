@@ -43,11 +43,11 @@
 - **Skill kullanımı:** Her istekte konuya uyan skill'ler (yukarıdaki proje skill'leri ve ui-ux-pro-max) ayrıca söylenmesini beklemeden kullanılır. Hallmark ve ui-ux-pro-max ile gelen diğer skill'ler bunun dışındadır; yalnızca açıkça çağrıldıklarında kullanılır.
 
 ## Logo Dosyaları
-Konum: `public/logo/`. Format: **SVG**. Ayrıntılı kullanım kuralları marka-stili skill'inde.
-- **Site geneli (header, footer, tüm koyu alanlar):** `2k-ahsap-logo-koyu-zemin.svg` — site baştan sona koyu temadır
-- **Açık zeminli alanlar (site dışı: baskı, belge):** `2k-ahsap-logo-acik-zemin.svg`
-- **Favicon:** `public/` kökünde `favicon.ico`, `apple-touch-icon.png`, `favicon.svg` (kaynak: `2k-ahsap-ikon.svg`)
-- ✅ Üç SVG de `public/logo/` içinde. `favicon.svg`, ikon SVG'sinden kare tuvale ortalanarak üretildi.
+Konum: sitede kullanılanlar `public/logo/`, yalnızca kaynak olanlar `arsiv/logo/` (yayınlanmaz). Format: **SVG**. Ayrıntılı kullanım kuralları marka-stili skill'inde.
+- **Site geneli (header, footer, tüm koyu alanlar):** `public/logo/2k-ahsap-logo-koyu-zemin.svg` — site baştan sona koyu temadır
+- **Açık zeminli alanlar (site dışı: baskı, belge):** `arsiv/logo/2k-ahsap-logo-acik-zemin.svg`
+- **Favicon:** `public/` kökünde `favicon.ico`, `apple-touch-icon.png`, `favicon.svg` (kaynak: `arsiv/logo/2k-ahsap-ikon.svg`)
+- ✅ Üç SVG de mevcut. `favicon.svg`, ikon SVG'sinden kare tuvale ortalanarak üretildi. `public/logo/` içinde yalnızca koyu zemin SVG'si ve schema.org için açık zemin PNG'si kalır.
 
 ## Teknik Bilgiler
 - **Framework:** Astro (hızlı, SEO-friendly, statik site)
