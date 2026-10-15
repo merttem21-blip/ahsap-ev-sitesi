@@ -20,10 +20,27 @@ interface Props {
   baslik: string;
   baslikId: string;
   /** Fotoğraflı varyant: proje slug'ı, fotoğraf dosyası ve isteğe bağlı object-position */
-  foto?: { proje: string; dosya: string; konum?: string };
+  foto?: {
+    proje: string;
+    dosya: string;
+    konum?: string;
+    /** Telefon kadrajı (≤ 640px): yapı kutunun alt yarısındaki başlık bloğunun ve erimenin altında kalıyorsa
+        fotoğraf odak noktası etrafında sabit yakınlaştırılır (hareket değil; Hakkımızda hikâye fotoğrafı gibi) */
+    mobil?: { olcek: number; odak: string };
+  };
 }
 
 const { ogeler, baslik, baslikId, foto } = Astro.props;
+const mobil = foto?.mobil;
+const stil = [
+  foto?.konum && `object-position: ${foto.konum}`,
+  mobil && `--sb-olcek: ${mobil.olcek}; --sb-odak: ${mobil.odak}`,
+]
+  .filter(Boolean)
+  .join('; ');
+// Telefonda yakınlaştırılmış görsel kutudan geniş çizilir; dar-uzun ekranda fotoğraf yükseklikten oturduğu için
+// genişlik ~1,25 kat daha artar (390×844'te 472px). sizes buna göre büyük kaynağı seçtirir.
+const sizes = mobil ? `(max-width: 640px) ${Math.ceil(mobil.olcek * 125)}vw, 100vw` : '100vw';
 
 let resim;
 if (foto) {
@@ -51,13 +68,14 @@ const giris = Astro.slots.has('default')
           class="sb-resim"
           src={resim.src}
           srcset={resim.srcset}
-          sizes="100vw"
+          sizes={sizes}
           width={resim.width}
           height={resim.height}
           alt={resim.alt}
           loading="eager"
           fetchpriority="high"
-          style={foto?.konum ? `object-position: ${foto.konum}` : undefined}
+          data-mobil-kadraj={mobil ? '' : undefined}
+          style={stil || undefined}
         />
         <div class="kap sb-ic">
           <Breadcrumb ogeler={ogeler} />
@@ -138,6 +156,13 @@ const giris = Astro.slots.has('default')
     object-fit: cover;
   }
 
+  /* Telefon kadrajı: odak noktası etrafında sabit yakınlaştırma. Odak alt kenardaysa görsel kutuyu her yerde
+     kaplamaya devam eder (alt kenar yerinde kalır, üst ve yanlar taşar, kutunun overflow'u keser). */
+  .sb-resim[data-mobil-kadraj] {
+    transform: scale(var(--sb-olcek));
+    transform-origin: var(--sb-odak);
+  }
+
   .sb-ic {
     position: relative;
     z-index: 2;
@@ -205,6 +230,10 @@ const giris = Astro.slots.has('default')
 
     .sb-ic::before {
       content: none;
+    }
+
+    .sb-resim[data-mobil-kadraj] {
+      transform: none;
     }
   }
 

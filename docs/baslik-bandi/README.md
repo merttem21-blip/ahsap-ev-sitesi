@@ -135,9 +135,24 @@ Alt kenar: fotoğraf kutusunun son iki satırı ve altındaki satırın ortalama
 | Teklif Al | 375×667 | evet (205–283) | fotoğraf yok | | |
 | Proje detayı | 375×667 | evet (229–345) | fotoğraf yok | | |
 
-Hiçbir görüntüde fotoğrafı yatayda kesen sert kenar yok (gözle de kontrol edildi). Bilinen sınırlama: Galeri'nin gece
-fotoğrafı telefonda kutuyla aynı oranda olduğu için A-frame alttaki erimenin altında kalır; telefonda koyu gökyüzü ve
-köy ışıkları görünür, yapı belirgin değildir.
+Hiçbir görüntüde fotoğrafı yatayda kesen sert kenar yok (gözle de kontrol edildi).
+
+### Galeri telefon kadrajı (müşteri isteği, 15 Ekim 2026)
+
+İlk halde Galeri'nin gece fotoğrafı telefonda kutuyla aynı oranda olduğu için A-frame başlık bloğunun ve erimenin
+altında kalıyordu. Aynı projenin diğer fotoğrafları iç mekân ya da yapım aşaması (tek dış çekim 01), daha büyük
+kaynak da yok; bu yüzden ≤ 640px'te aynı fotoğraf odak noktası etrafında sabit yakınlaştırılır
+(`foto.mobil`: ölçek 1,8, odak `54.5% 100%`; Hakkımızda hikâye fotoğrafındaki gibi hareket değil). Odak alt kenarda
+olduğu için görsel kutuyu her yerde kaplar; masaüstü ve tablet (≥ 641px) değişmez. `sizes` büyük kaynağı seçtirir.
+
+| Ekran | A-frame tepesi (kutu içi y) | Işıklı pencere | Başlık bloğu başı | H1 ilk ekranda | En kötü satır | Alt kenar |
+|---|---|---|---|---|---|---|
+| 375×667 (`son/galeri-375x667.png`) | 7 | 38–104 | 118 | evet (274–344) | %29,6 (y 338, H1 harfleri) | 30,0 / 30,0 → 30,0 |
+| 390×844 | 10 | 48–131 | 192 | evet (348–418) | %28,5 (y 412, H1 harfleri) | 30,0 / 30,0 → 30,0 |
+| 390×664 (iPhone Safari görünür alanı) | 2 | 33–102 | 117 | evet (273–343) | %28,5 (y 337, H1 harfleri) | 30,0 / 30,2 → 30,0 |
+
+gorsel-kontrol: yalnızca Galeri 375px farklı (%11,5; farklı satırlar 88–388, yani yalnızca fotoğraf kutusu), diğer 44
+çekim geçti; referansı yenilendi. form-kontrol temiz.
 
 ### Güvenli mod
 

@@ -79,7 +79,13 @@ const sizes =
     ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Galeri' }]}
     baslik="Ahşap Yapı Fotoğraf Galerisi"
     baslikId="galeri-baslik"
-    foto={{ proje: 'a-frame-bungalov', dosya: 'a-frame-bungalov-01', konum: 'center 70%' }}
+    foto={{
+      proje: 'a-frame-bungalov',
+      dosya: 'a-frame-bungalov-01',
+      konum: 'center 70%',
+      // Telefonda A-frame (tepe %46, ışıklı pencere %52–65) başlık bloğunun altında kalmasın: tepe kutunun üstüne gelir
+      mobil: { olcek: 1.8, odak: '54.5% 100%' },
+    }}
   >
       <p>
         Tasarlayıp ürettiğimiz ahşap ev, bungalov, villa ve diğer yapıların fotoğraflarını tek yerde inceleyin.
