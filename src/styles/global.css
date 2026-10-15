@@ -116,8 +116,9 @@
   /* İkon: Lucide arrow-right, CSS maskesi olarak (buton oku) */
   --ikon-ok: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
 
-  /* Hareket: yalnızca opacity ve transform */
-  --sure-kisa: 200ms; /* hover, menü */
+  /* Hareket: yalnızca opacity ve transform (tek istisna: SSS cevabının yüksekliği, müşteri isteği 15 Ekim 2026) */
+  --sure-kisa: 200ms; /* hover, menü, SSS cevabının kapanması */
+  --sure-akordeon: 250ms; /* SSS cevabının açılması */
   --sure: 300ms; /* header küçülmesi */
   --sure-kart: 400ms; /* fotoğraflı kart hover'ı */
   --sure-ortaya: 700ms; /* kaydırınca ortaya çıkma ve hero metni */

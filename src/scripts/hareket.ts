@@ -12,6 +12,9 @@ import 'lenis/dist/lenis.css';
 const azHareket = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const inceImlec = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+/** Açıksa Lenis örneği: sayfayı kendisi kaydıran betikler (ör. SSS akordeonu) kaydırmayı bunun üzerinden yapar. */
+export let lenis: Lenis | null = null;
+
 // --- 1. Ortaya çıkma ---
 function ortayaCikma() {
   const ogeler = [...document.querySelectorAll<HTMLElement>('[data-ortaya]')];
@@ -60,7 +63,7 @@ function ortayaCikma() {
 function yumusakKaydirma() {
   if (azHareket || !inceImlec) return;
 
-  const lenis = new Lenis({
+  lenis = new Lenis({
     autoRaf: true,
     lerp: 0.1,
     // Sabit header'ın altında kalmaması için çapa hedefleri biraz yukarıda durur

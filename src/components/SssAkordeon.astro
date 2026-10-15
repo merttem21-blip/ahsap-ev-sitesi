@@ -2,7 +2,18 @@
 // SSS akordeonu: native <details>/<summary> (klavye ve ekran okuyucu desteği tarayıcıdan gelir: summary bir
 // düğme olarak okunur, açık/kapalı durumu bildirilir; Enter ve Boşluk açıp kapatır). Ek ARIA niteliği gerekmez.
 // Klavyeyle sorular arasında Aşağı/Yukarı oklar, Home ve End ile gezilir (aynı listedeki sorular).
-// Açılırken cevap yalnızca opacity ve transform ile belirir; yükseklik animasyonu yok (marka-stili §6).
+//
+// Tek cevap açık: bütün sorular aynı name="sss" grubundadır (tarayıcının dışlayıcı akordeonu); bir soru açılınca
+// sayfadaki diğer açık soru kapanır. SSS sayfasında tüm gruplar tek liste gibi davranır. name'i desteklemeyen
+// tarayıcıda aynı işi aşağıdaki betik yapar.
+// Açılma/kapanma: destekleyen tarayıcıda cevabın yüksekliği (::details-content + interpolate-size) yumuşakça
+// değişir, kapanırken cevap solar; açılırken cevap opacity ve transform ile belirir. Desteklemeyen tarayıcıda
+// yükseklik anında değişir. Hareket azaltılmışsa animasyon yok. Yükseklik animasyonu marka-stili §6'nın
+// müşteri onaylı istisnasıdır (15 Ekim 2026).
+// Zıplama yok: tıklanan sorunun ekrandaki yeri korunur (yukarıdaki açık cevap kapanırken sayfa aynı karede
+// dengelenir); soru başlığı yapışkan header'ın altında kalmaz.
+// Paylaşılabilir link: her sorunun kalıcı id'si var (src/data/sss.ts). Adres #kimlik ile açılınca o soru açık
+// gelir; soru açılınca adres çubuğu sayfa geçmişine kayıt eklemeden (replaceState) güncellenir.
 import { ikon } from '../data/ikonlar';
 import type { Soru } from '../data/sss';
 
@@ -17,7 +28,7 @@ const { sorular } = Astro.props;
   {
     sorular.map((s) => (
       <li data-ortaya>
-        <details class="sss">
+        <details class="sss" id={s.id} name="sss">
           <summary>
             <span class="sss-soru">{s.soru}</span>
             <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.asagi} />
@@ -32,12 +43,159 @@ const { sorular } = Astro.props;
 </ul>
 
 <script>
+  import { lenis } from '../scripts/hareket';
   import { oklarlaGez } from '../scripts/odak';
 
-  for (const liste of document.querySelectorAll<HTMLElement>('[data-sss-liste]')) {
-    const sorular = [...liste.querySelectorAll<HTMLElement>(':scope > li > details > summary')];
-    liste.addEventListener('keydown', (e) => oklarlaGez(e, sorular));
+  const listeler = [...document.querySelectorAll<HTMLElement>('[data-sss-liste]')];
+  const tumSorular = listeler.flatMap((l) => [...l.querySelectorAll<HTMLDetailsElement>(':scope > li > details')]);
+  const yerlesikGrup = 'name' in HTMLDetailsElement.prototype;
+  const azHareket = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const kok = getComputedStyle(document.documentElement);
+  // Derlemede CSS küçültülürken "250ms" ".25s" olabiliyor: iki birim de milisaniyeye çevrilir
+  const sureDegeri = kok.getPropertyValue('--sure-akordeon').trim();
+  const SURE = (sureDegeri.endsWith('ms') ? parseFloat(sureDegeri) : parseFloat(sureDegeri) * 1000) || 250;
+  const yukseklikAnimasyonu = CSS.supports('interpolate-size: allow-keywords') && CSS.supports('selector(::details-content)');
+
+  /** name grubunu desteklemeyen tarayıcı için: aynı gruptaki diğer açık soruları kapatır. */
+  function digerleriniKapat(acilan: HTMLDetailsElement) {
+    const grup = acilan.getAttribute('name');
+    for (const s of tumSorular) {
+      if (s !== acilan && s.open && s.getAttribute('name') === grup) s.open = false;
+    }
   }
+
+  /**
+   * Sayfayı anında kaydırır; Lenis açıksa onun üzerinden (yarım kalmış yumuşak kaydırma da durur). Hedef tam
+   * piksele yuvarlanır: WebKit kesirli kaydırmayı kendi yuvarladığında 1–2 px'lik kalıntı birikiyordu.
+   */
+  function kaydir(fark: number) {
+    const hedef = Math.round(window.scrollY + fark);
+    if (lenis) lenis.scrollTo(hedef, { immediate: true, force: true });
+    else window.scrollTo({ top: hedef, behavior: 'instant' });
+  }
+
+  /**
+   * Öğenin ekrandaki üst kenarı, kaydırınca ortaya çıkma kaymasından (hareket.ts, li'deki translateY) bağımsız:
+   * soru yeni belirirken basılırsa dengeleme bu kaymayı "zıplama" sanıp sayfayı oynatmaz.
+   */
+  function ekranUstu(oge: Element) {
+    const li = oge.closest('[data-ortaya]');
+    const donusum = li ? getComputedStyle(li).transform : 'none';
+    const kayma = donusum === 'none' ? 0 : new DOMMatrixReadOnly(donusum).m42;
+    return oge.getBoundingClientRect().top - kayma;
+  }
+
+  // Tıklanan sorunun başlığı, cevaplar açılıp kapanırken ekrandaki yerinde tutulur: her karede başlığın kaydığı
+  // kadar sayfa kaydırılır (yukarıdaki açık cevap kapanırken soru yukarı kaçmaz). Başlık yapışkan header'ın
+  // altına denk geliyorsa (scroll-padding-top) aynı sürede header'ın altına iner. Bu sırada tarayıcının kendi
+  // kaydırma sabitlemesi kapatılır (iki düzeltme üst üste binmesin); kullanıcı kaydırmaya başlarsa bırakılır.
+  let aktif: object | null = null;
+
+  function dengelemeyiBitir() {
+    aktif = null;
+    document.body.style.overflowAnchor = '';
+  }
+
+  function yeriniKoru(ozet: HTMLElement) {
+    const benim = {};
+    aktif = benim;
+    document.body.style.overflowAnchor = 'none';
+
+    const ilk = ekranUstu(ozet);
+    const hedef = Math.max(ilk, parseFloat(kok.scrollPaddingTop) || 0);
+    const sure = azHareket.matches ? 0 : SURE;
+    const basla = performance.now();
+    const bitis = basla + sure + 100; // kapanma ve açılma geçişlerinin ikisi de biter
+
+    const adim = (simdi: number) => {
+      if (aktif !== benim) return;
+      const t = sure ? Math.min(1, Math.max(0, (simdi - basla) / sure)) : 1;
+      const istenen = ilk + (hedef - ilk) * (1 - (1 - t) ** 3);
+      const fark = ekranUstu(ozet) - istenen;
+      if (Math.abs(fark) >= 0.5) kaydir(fark);
+      if (simdi < bitis) requestAnimationFrame(adim);
+      else dengelemeyiBitir();
+    };
+    requestAnimationFrame(adim);
+  }
+
+  for (const olay of ['wheel', 'touchstart']) {
+    window.addEventListener(olay, () => aktif && dengelemeyiBitir(), { passive: true });
+  }
+
+  function adresiGuncelle(id: string | null) {
+    history.replaceState(history.state, '', `${location.pathname}${location.search}${id ? `#${id}` : ''}`);
+  }
+
+  /**
+   * Adresteki #kimlik bir soruysa onu açar ve görünür yapar: sayfa açılışında anında, adres sonradan
+   * değiştiyse (hashchange) yumuşakça. Tarayıcının kendi çapa kaydırmasına bırakılmaz: aynı anda kapanan başka
+   * bir cevap hedefi kaydırır, WebKit'te yumuşak kaydırma da yarıda kalıyor. Soru, ortaya çıkma kaymasıyla
+   * gizliyse hemen görünür olur (kayma hedefi şaşırtmasın).
+   */
+  function adrestekiSoruyuAc(e?: Event) {
+    let id = '';
+    try {
+      id = decodeURIComponent(location.hash.slice(1));
+    } catch {
+      return;
+    }
+    const soru = tumSorular.find((s) => s.id === id);
+    if (!soru) return;
+
+    const li = soru.closest<HTMLElement>('[data-ortaya]');
+    if (li?.classList.contains('ortaya-gizli')) {
+      li.style.transition = 'none';
+      li.classList.remove('ortaya-gizli');
+      li.getBoundingClientRect(); // gizlemesiz stil geçişsiz uygulanır
+      li.style.transition = '';
+    }
+
+    const kapanan = tumSorular.some((s) => s !== soru && s.open);
+    if (!soru.open) {
+      if (!yerlesikGrup) digerleriniKapat(soru);
+      soru.open = true;
+    }
+
+    const yumusak = e !== undefined && !azHareket.matches;
+    const git = () => {
+      const pay = (parseFloat(kok.scrollPaddingTop) || 0) + (parseFloat(getComputedStyle(soru).scrollMarginTop) || 0);
+      const hedef = window.scrollY + ekranUstu(soru) - pay;
+      if (lenis) lenis.scrollTo(hedef, { immediate: !yumusak, force: true });
+      else window.scrollTo({ top: hedef, behavior: yumusak ? 'smooth' : 'instant' });
+    };
+    // Kapanan cevabın yükseklik geçişi bitince hedef yerine oturmuş olur
+    if (kapanan && yukseklikAnimasyonu && !azHareket.matches) setTimeout(git, SURE);
+    else git();
+  }
+
+  for (const liste of listeler) {
+    const ozetler = [...liste.querySelectorAll<HTMLElement>(':scope > li > details > summary')];
+    liste.addEventListener('keydown', (e) => oklarlaGez(e, ozetler));
+
+    // Enter ve Boşluk da summary'de click olayı üretir; varsayılan davranış (aç/kapat) olaydan hemen sonra çalışır.
+    liste.addEventListener('click', (e) => {
+      const ozet = (e.target as Element).closest('summary');
+      if (!ozet || !ozetler.includes(ozet)) return;
+      const soru = ozet.parentElement as HTMLDetailsElement;
+      if (!yerlesikGrup && !soru.open) digerleriniKapat(soru); // aynı karede kapanır, ayrı bir zıplama olmaz
+      yeriniKoru(ozet);
+    });
+  }
+
+  for (const soru of tumSorular) {
+    soru.addEventListener('toggle', () => {
+      if (soru.open) {
+        if (!yerlesikGrup) digerleriniKapat(soru);
+        adresiGuncelle(soru.id);
+      } else if (location.hash === `#${soru.id}`) {
+        adresiGuncelle(null);
+      }
+    });
+  }
+
+  adrestekiSoruyuAc();
+  window.addEventListener('hashchange', (e) => adrestekiSoruyuAc(e));
 </script>
 
 <style>
@@ -50,6 +208,8 @@ const { sorular } = Astro.props;
     border: var(--cizgi) solid var(--color-cizgi);
     border-radius: var(--radius-kart);
     background: var(--color-yuzey);
+    /* #kimlik ile açılınca soru header'ın altında biraz boşlukla durur (scroll-padding-top'a eklenir) */
+    scroll-margin-top: var(--bosluk-2);
   }
 
   .sss[open] {
@@ -100,7 +260,7 @@ const { sorular } = Astro.props;
   }
 
   .sss[open] .sss-cevap {
-    animation: sss-ac var(--sure-ortaya) var(--ease-ortaya);
+    animation: sss-ac var(--sure-akordeon) var(--ease-out);
   }
 
   .sss-cevap p {
@@ -112,6 +272,34 @@ const { sorular } = Astro.props;
     from {
       opacity: 0;
       transform: translateY(-8px);
+    }
+  }
+
+  /* Yumuşak açılma/kapanma: yalnızca ::details-content ve auto'ya geçişi destekleyen tarayıcıda ve hareket
+     azaltılmamışsa. Kapalıyken cevap zaten çizilmez; bu kurallar kapalı görünümü değiştirmez. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (interpolate-size: allow-keywords) and selector(::details-content) {
+      .sss {
+        interpolate-size: allow-keywords;
+      }
+
+      .sss::details-content {
+        block-size: 0;
+        overflow-y: clip;
+        transition:
+          block-size var(--sure-kisa) var(--ease-out),
+          content-visibility var(--sure-kisa) var(--ease-out) allow-discrete;
+      }
+
+      .sss[open]::details-content {
+        block-size: auto;
+        transition-duration: var(--sure-akordeon);
+      }
+
+      .sss:not([open]) .sss-cevap {
+        opacity: 0;
+        transition: opacity var(--sure-kisa) var(--ease-out);
+      }
     }
   }
 

@@ -188,7 +188,7 @@ Sitede kullanılan dosyalar `public/logo/`, yalnızca kaynak olarak duranlar (a�
 
 ## 6. Hareket
 
-Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. **Yalnızca `transform` ve `opacity` animasyonu yapılır** (`width`, `height`, `top`, `left`, `margin`, `box-shadow`, `filter`, renk geçişi animasyonu yok; renk değişimi gereken yerde ikinci bir katmanın `opacity`'si değiştirilir).
+Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. **Yalnızca `transform` ve `opacity` animasyonu yapılır** (`width`, `height`, `top`, `left`, `margin`, `box-shadow`, `filter`, renk geçişi animasyonu yok; renk değişimi gereken yerde ikinci bir katmanın `opacity`'si değiştirilir). Tek istisna SSS akordeonudur (aşağıdaki tablo).
 
 | Hareket | Kural | Süre |
 |---|---|---|
@@ -202,6 +202,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 | Fotoğraflı kart hover (ana sayfa kategori kartı) | Kart 6px yukarı kalkar, ahşap çerçeveli katman ve alttan sıcak iç ışık belirir (`opacity`), görsel `scale(1.06)`, ok 6px sağa kayar, açıklama %85'ten tam opaklığa çıkar. Gölge yok. Odakta da aynısı. | 400ms (`--sure-kart`) |
 | Menü linki | Alt çizgi soldan sağa uzar (`scaleX`). | 200–300ms |
 | Buton hover | Çerçeve ahşaba döner (ahşap çerçeveli katmanın `opacity`'si), ok 4px sağa kayar. | 200–300ms |
+| SSS akordeonu (müşteri onaylı istisna, 15 Ekim 2026) | Sayfada tek cevap açık (`<details name="sss">`). Cevabın yüksekliği `::details-content` + `interpolate-size` ile açılır/kapanır; desteklemeyen tarayıcıda anında. Tıklanan soru ekrandaki yerinde kalır (yukarıdaki cevap kapanırken sayfa dengelenir). Ayrıntı `SssAkordeon.astro`. | Açılma 250ms (`--sure-akordeon`), kapanma 200ms |
 
 - Eğri: kısa etkileşimlerde `--ease-out` (`cubic-bezier(0.22, 1, 0.36, 1)`), ortaya çıkmada `--ease-ortaya`.
 - **JS kapalıyken içerik görünür:** başlangıçtaki gizli durum yalnızca JS'nin eklediği bir sınıf altında uygulanır (ör. `html.hareket .ortaya-cik { opacity: 0 }`); JS yoksa sınıf eklenmez, içerik doğrudan görünür.
