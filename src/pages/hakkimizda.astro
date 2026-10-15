@@ -1,8 +1,10 @@
 ---
 // Hakkımızda: tanıtım, hikâye, vizyon ve misyon, Neden 2K Ahşap ve çalışma süreci (müşteri onaylı düzen, 15 Ekim 2026;
-// docs/hakkimizda/yeniden-tasarim/). Ekip sonraki aşamada eklenecek.
-// Akış ve zemin: açılış fotoğrafı (metin alttaki bantta, düz gece karartması) → Hikâyemiz (gece; dikey fotoğraf solda,
-// metin sağda) → büyük alıntı (gece) → Vizyonumuz / Misyonumuz (gece; ahşap üst çizgili iki açık panel) →
+// docs/hakkimizda/yeniden-tasarim/; alıntı bandı ve hikâye fotoğrafı: docs/hakkimizda/duzeltme/). Ekip sonraki
+// aşamada eklenecek.
+// Akış ve zemin: açılış fotoğrafı (metin alttaki bantta, düz gece karartması) → Hikâyemiz (gece; 4:5 fotoğraf solda,
+// metin sağda) → büyük alıntı (tam genişlikte ara yumuşak tonlu bant, ortalı) → Vizyonumuz / Misyonumuz (gece; ahşap
+// üst çizgili iki açık panel) →
 // Neden 2K Ahşap (ara yumuşak ton) → tam genişlik fotoğraf bandı → Sürecimiz (gece) → footer teklif bandı.
 // Bölüm boşlukları ana sayfanın ritmiyle aynıdır (--bolum-ritim: mobil 64px, ≥ 768px 96px); Neden 2K Ahşap ve
 // Sürecimiz bu değişkeni kendiliğinden kullanır.
@@ -29,7 +31,7 @@ async function projeFotosu(proje: string, dosya: string) {
 const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
   projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-04'),
   projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-07'),
-  projeFotosu('genis-verandali-asma-katli-bungalov', 'genis-verandali-asma-katli-bungalov-17'),
+  projeFotosu('kemerli-pod-bungalov', 'kemerli-pod-bungalov-02'),
   projeFotosu('genis-verandali-ahsap-villa', 'genis-verandali-ahsap-villa-05'),
 ]);
 ---
@@ -103,22 +105,25 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
               yapılara dönüştürmeye devam ediyoruz.
             </p>
           </div>
-          <img
-            class="hikaye-foto"
-            src={hikaye.src}
-            srcset={hikaye.srcset}
-            sizes="(min-width: 1280px) 453px, (min-width: 1024px) 35vw, (min-width: 768px) 448px, calc(100vw - 32px)"
-            width={hikaye.width}
-            height={hikaye.height}
-            alt={hikaye.alt}
-            loading="lazy"
-            decoding="async"
-            data-ortaya
-          />
+          <!-- Görsel kadraja 1,36 kat yakınlaştırılır (CSS); sizes bu genişliği anlatır -->
+          <div class="hikaye-foto" data-ortaya>
+            <img
+              src={hikaye.src}
+              srcset={hikaye.srcset}
+              sizes="(min-width: 1280px) 616px, (min-width: 1024px) 48vw, (min-width: 768px) 609px, calc(136vw - 44px)"
+              width={hikaye.width}
+              height={hikaye.height}
+              alt={hikaye.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
+      </div>
 
-        <!-- Alıntı, Hikâyemiz'deki cümlenin büyük puntolu tekrarıdır; ekran okuyucu iki kez okumasın -->
-        <div class="alinti-blok" aria-hidden="true" data-ortaya>
+      <!-- Alıntı, Hikâyemiz'deki cümlenin büyük puntolu tekrarıdır; ekran okuyucu iki kez okumasın -->
+      <div class="alinti-blok" aria-hidden="true">
+        <div class="kap" data-ortaya>
           <p class="alinti">Her yapıya, kendi evimizi inşa ediyormuş gibi yaklaşmak.</p>
         </div>
       </div>
@@ -257,32 +262,46 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     margin-top: var(--bosluk-3);
   }
 
+  /* Döşenmiş, düz çekilmiş iç mekân (kemerli pod bungalov). 4:5: masaüstünde metin sütunuyla dengeli boy.
+     Kadraj fotoğrafın üst %69'u ve yatayda ortadaki %74'üdür (1,36 kat, üst ortadan): avize, kemerli pencere ve
+     ışık kalır; öndeki kanepenin naylonlu minderleri (fotoğraf boyunun ~%73'ünden aşağısı) kadraj dışındadır.
+     Yakınlaştırma sabittir (hareket değil); sizes 1,36 katı anlatır. */
   .hikaye-foto {
     width: 100%;
     max-width: 28rem;
-    aspect-ratio: 5 / 7; /* 3:4 fotoğraftan biraz dar: soldaki siyah kapı kasası kadraj dışında kalır */
-    object-fit: cover;
-    object-position: right center;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
     border-radius: var(--radius-gorsel);
   }
 
+  .hikaye-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.36);
+    transform-origin: center top;
+  }
+
   /* Büyük alıntı: Hikâyemiz ile Vizyon/Misyon arasında ara durak; sayfanın tek iddialı tipografik öğesi.
-     Üstündeki ince çizgi bölümü ayırır; başka süs yok. */
+     Tam genişlikte ara yumuşak tonlu bant; alıntı ortada, satırları dengeli kırılır. Bandın üstünde, içinde ve
+     altında (Vizyonumuz'un üst boşluğu) birer ritim. */
   .alinti-blok {
     margin-top: var(--bolum-ritim);
-    padding-top: var(--bolum-ritim);
-    border-top: var(--cizgi) solid var(--color-cizgi);
+    padding-block: var(--bolum-ritim);
+    background: var(--color-zemin-ara-yumusak);
   }
 
   .alinti {
     max-width: 18ch;
-    margin: 0;
+    margin: 0 auto;
     color: var(--color-baslik);
     font-family: var(--font-baslik);
     font-size: clamp(2rem, 5vw, 3.75rem);
     font-weight: 600;
     line-height: var(--satir-baslik);
     letter-spacing: var(--aralik-baslik);
+    text-align: center;
     text-wrap: balance;
   }
 
@@ -369,6 +388,7 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
       grid-template-columns: minmax(0, 1fr) minmax(0, 36rem);
       column-gap: var(--bosluk-7);
       align-items: end;
+      align-items: last baseline; /* tanıtımın son satırı başlığın taban çizgisinde */
       padding-block: var(--bosluk-3) var(--bosluk-6);
     }
 

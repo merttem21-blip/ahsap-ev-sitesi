@@ -463,12 +463,14 @@ const digerKategoriler = kategoriler.filter((k) => !k.anaSayfa);
     }
   }
 
-  /* ≥ 1024px: başlık solda, açıklama sağda */
+  /* ≥ 1024px: başlık solda, açıklama sağda; açıklamanın son satırı başlığın taban çizgisinde (last baseline;
+     desteklemeyen tarayıcıda kutuların altı hizalanır) */
   @media (min-width: 1024px) {
     .urunler-baslik {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
       align-items: end;
+      align-items: last baseline;
       gap: var(--bosluk-5);
       margin-bottom: var(--bosluk-5);
     }
