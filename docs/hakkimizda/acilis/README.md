@@ -1,5 +1,7 @@
 # Hakkımızda açılışı (15 Ekim 2026, müşteri onaylı: a)
 
+> Aynı gün yerini 3. tura bıraktı: `docs/hakkimizda/acilis-v3/` (ince bant da fotoğrafı yatayda kestiği için kaldırıldı).
+
 ## Sorun
 
 Uzun tanıtım paragrafı fotoğrafın üstündeki düz karartmalı bandın içindeydi. Bant fotoğrafın yarısını kaplıyor,

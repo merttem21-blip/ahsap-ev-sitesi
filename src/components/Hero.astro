@@ -86,7 +86,6 @@ const serit = [
      dvh kullanılmaz: çubuklar kaydırınca gizlendiğinde hero'nun boyu değişir, sayfa zıplar. */
   .hero {
     --h-ust: 122px; /* ana sayfa header'ı: 90px logo + 2 × 16px (Header.astro) */
-    --karartma-ton: 20 18 16; /* fotoğraf karartmasının rengi (rgb kanalları) */
     --ekran: 100vh;
     position: relative;
     display: flex;
@@ -338,13 +337,7 @@ const serit = [
       z-index: 1;
       background:
         var(--zemine-eris) bottom / 100% 30% no-repeat,
-        linear-gradient(
-          90deg,
-          rgb(var(--karartma-ton) / 0.85) 0%,
-          rgb(var(--karartma-ton) / 0.65) 35%,
-          rgb(var(--karartma-ton) / 0.25) 65%,
-          rgb(var(--karartma-ton) / 0.1) 100%
-        );
+        var(--karartma-yatay);
       pointer-events: none;
     }
   }

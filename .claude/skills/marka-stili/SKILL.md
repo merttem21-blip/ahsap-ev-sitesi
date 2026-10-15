@@ -245,7 +245,7 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - Hero fotoğrafları `scripts/hero-gorseli.mjs` ile üretilir (kadraj, sıcak renk düzeltmesi, netlik; kaynak dosyaya dokunulmaz).
 - Hero görseli LCP öğesidir: `loading="eager"`, `fetchpriority="high"`, WebP/AVIF, `srcset` ile boyutlandırılmış. Lazy-load yapılmaz.
 - Alt sayfalarda (kategori, proje) daha kısa bir başlık bandı (~40svh) kullanılır; zemini ara bölüm tonudur.
-- **Hakkımızda istisnası** (müşteri onaylı, 15 Ekim 2026; `docs/hakkimizda/yeniden-tasarim/`, açılış bandı `docs/hakkimizda/acilis/`): Açılış tam genişlikte bir proje fotoğrafıdır (mobil 60svh, ≥ 768px 55svh, ≥ 1024px 70svh). Fotoğrafın altındaki ince bantta yalnızca breadcrumb ve H1 durur; bant fotoğrafın en az üçte ikisini açık bırakır ve H1 her ekranda ilk ekranda görünür. Bandın zemini düz gece karartmasıdır (`--color-karartma`); gradyan kullanılmaz. Tanıtım metni fotoğrafın üstünde değil, altında düz gece zeminde durur. Header antrasit kalır.
+- **Hakkımızda istisnası** (müşteri onaylı, 15 Ekim 2026; `docs/hakkimizda/yeniden-tasarim/`, açılış `docs/hakkimizda/acilis-v3/`): Açılış tam genişlikte bir proje fotoğrafıdır (mobil 60svh, ≥ 768px 55svh, ≥ 1024px 70svh). Breadcrumb ve H1 fotoğrafın sol altında durur; karartma ana sayfa hero'sununkiyle birebir aynıdır (≥ 641px'te `--karartma-yatay` + alt %30'un zemine erimesi; telefonda alt %45'in erimesi + başlık bloğuna bağlı %70 rampa). Fotoğrafı yatayda kesen sert kenarlı bant kullanılmaz. Tanıtım metni fotoğrafın altında, düz gece zeminde durur. Header antrasit kalır.
 
 ### Header (her sayfada)
 - Koyu: ana sayfada hero fotoğrafının üzerinde şeffaf; diğer sayfalarda antrasit zemin. Kaydırınca sabitlenen header da koyu kalır.

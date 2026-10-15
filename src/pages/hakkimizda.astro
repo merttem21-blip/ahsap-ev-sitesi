@@ -1,10 +1,10 @@
 ---
 // Hakkımızda: tanıtım, hikâye, vizyon ve misyon, Neden 2K Ahşap ve çalışma süreci (müşteri onaylı düzen, 15 Ekim 2026;
 // docs/hakkimizda/yeniden-tasarim/; alıntı bandı ve hikâye fotoğrafı: docs/hakkimizda/duzeltme/; açılış:
-// docs/hakkimizda/acilis/). Ekip sonraki aşamada eklenecek.
-// Akış ve zemin: açılış fotoğrafı (altında breadcrumb ve H1'i taşıyan ince bant, düz gece karartması) → tanıtım
-// metni (gece) → Hikâyemiz (gece; 4:5 fotoğraf solda, metin sağda) → büyük alıntı (tam genişlikte ara yumuşak tonlu bant, ortalı) → Vizyonumuz / Misyonumuz (gece; ahşap
-// üst çizgili iki açık panel) →
+// docs/hakkimizda/acilis-v3/). Ekip sonraki aşamada eklenecek.
+// Akış ve zemin: açılış fotoğrafı (breadcrumb ve H1 sol altta, ana sayfa hero'sunun karartması; alt kenarı zemine
+// erir) → tanıtım metni (gece) → Hikâyemiz (gece; 4:5 fotoğraf solda, metin sağda) → büyük alıntı (tam genişlikte
+// ara yumuşak tonlu bant, ortalı) → Vizyonumuz / Misyonumuz (gece; ahşap üst çizgili iki açık panel) →
 // Neden 2K Ahşap (ara yumuşak ton) → tam genişlik fotoğraf bandı → Sürecimiz (gece) → footer teklif bandı.
 // Bölüm boşlukları ana sayfanın ritmiyle aynıdır (--bolum-ritim: mobil 64px, ≥ 768px 96px); Neden 2K Ahşap ve
 // Sürecimiz bu değişkeni kendiliğinden kullanır.
@@ -64,14 +64,12 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
             fetchpriority="high"
           />
         </picture>
-        <div class="acilis-bant">
-          <div class="kap acilis-ic">
-            <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Hakkımızda' }]} />
-            <h1 id="hakkimizda-baslik">Hakkımızda</h1>
-          </div>
+        <div class="kap acilis-ic">
+          <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Hakkımızda' }]} />
+          <h1 id="hakkimizda-baslik">Hakkımızda</h1>
         </div>
       </div>
-      <!-- Tanıtım fotoğrafın üstünde değil, düz gece zeminde: bant ince kalır, H1 her ekranda ilk ekranda görünür -->
+      <!-- Tanıtım fotoğrafın altında, düz gece zeminde -->
       <div class="kap acilis-metin">
         <p class="giris">
           2K AHŞAP, 2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp
@@ -187,17 +185,19 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     --bolum-ritim: var(--bosluk-6);
   }
 
-  /* Açılış (müşteri onaylı, docs/hakkimizda/acilis/): tam genişlik fotoğraf; altında yalnızca breadcrumb ve H1'i
-     taşıyan ince bant. Bandın zemini düz gece karartması (%70; galerideki bilgi bandıyla aynı yöntem): fotoğrafın en
-     açık yerinde bile krem metin ≥ 4.5:1 (marka-stili §2). Bant fotoğrafın en az üçte ikisini açık bırakır.
-     Tanıtım metni fotoğrafın altında, düz gece zeminde. */
+  /* Açılış (müşteri onaylı, docs/hakkimizda/acilis-v3/): tam genişlik fotoğraf, breadcrumb ve H1 sol altta.
+     Karartma ana sayfa hero'sununkiyle birebir aynıdır (Hero.astro); fotoğrafı yatayda kesen sert kenar yoktur.
+     Telefonda (≤ 640px) fotoğrafın alt %45'i sayfa zeminine erir; başlık bloğunun 64px üstünden başlayan rampayla
+     açılan %70 gece karartması başlığın altına yayılır. ≥ 641px'te soldan sağa açılan yatay karartma
+     (--karartma-yatay, %85 → %10) ve alt %30'un zemine erimesi. Fotoğrafın alt kenarı zemine erir; altındaki
+     tanıtım metniyle arasında çizgi oluşmaz. */
   .acilis {
     background: var(--color-zemin);
   }
 
   .acilis-gorsel {
     position: relative;
-    isolation: isolate;
+    isolation: isolate; /* katmanlar: fotoğraf, karartma (1), metin (2) */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -206,19 +206,55 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     overflow: hidden;
   }
 
+  .acilis-gorsel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--zemine-eris) bottom / 100% 45% no-repeat;
+    pointer-events: none;
+  }
+
   .acilis-foto {
     position: absolute;
     inset: 0;
-    z-index: -1;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top; /* dikey kadrajın üstünde ışıklı kirişler ve avize */
   }
 
+  .acilis-ic {
+    position: relative;
+    z-index: 2;
+    padding-block: var(--bosluk-2) var(--bosluk-3);
+  }
+
+  /* Hero'daki .hero-metin::before ile aynı: yanlara ve aşağı taşar, fotoğraf kutusunun overflow'u keser */
+  .acilis-ic::before {
+    --rampa: 64px;
+    content: '';
+    position: absolute;
+    inset: calc(var(--rampa) * -1) -100vw -100vh;
+    z-index: -1;
+    background: linear-gradient(180deg, transparent, var(--color-karartma) var(--rampa));
+    pointer-events: none;
+  }
+
+  /* Fotoğraf üstünde yalnızca krem metin (marka-stili §2) */
+  .acilis :global(.konum a),
+  .acilis :global(.konum li + li::before) {
+    color: var(--color-krem);
+  }
+
   /* Tip ölçeği (1280px'te): H1 72 → alıntı 60 → H2 48 → H3 24 */
   .acilis h1 {
+    margin-top: var(--bosluk-1);
     font-size: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .acilis-metin {
+    padding-top: var(--bosluk-3);
   }
 
   .giris {
@@ -228,26 +264,17 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     font-size: var(--text-giris);
   }
 
-  .acilis-bant {
-    background: var(--color-karartma);
-  }
+  /* ≥ 641px: hero'nun tablet ve masaüstü karartması (Hero.astro ile aynı sınır) */
+  @media (min-width: 641px) {
+    .acilis-gorsel::before {
+      background:
+        var(--zemine-eris) bottom / 100% 30% no-repeat,
+        var(--karartma-yatay);
+    }
 
-  .acilis-ic {
-    padding-block: var(--bosluk-2) var(--bosluk-3);
-  }
-
-  /* Fotoğraf üstünde yalnızca krem metin (marka-stili §2) */
-  .acilis-bant :global(.konum a),
-  .acilis-bant :global(.konum li + li::before) {
-    color: var(--color-krem);
-  }
-
-  .acilis h1 {
-    margin-top: var(--bosluk-1);
-  }
-
-  .acilis-metin {
-    padding-top: var(--bosluk-5);
+    .acilis-ic::before {
+      content: none;
+    }
   }
 
   /* Hikâyemiz: mobilde metin, altında fotoğraf; ≥ 1024px'te fotoğraf solda, metin sağda */
@@ -373,7 +400,7 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     }
 
     .acilis-metin {
-      padding-top: var(--bosluk-6);
+      padding-top: var(--bosluk-4);
     }
 
     .foto-bant img {
@@ -384,7 +411,7 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
   /* ≥ 1024px: açılışta yatay kadraj ve daha uzun fotoğraf; hikâyede fotoğraf solda */
   @media (min-width: 1024px) {
     .acilis-foto {
-      object-position: center 20%; /* tavan kirişleri ve ışıklar bandın üstünde kalır */
+      object-position: center 20%; /* tavan kirişleri ve ışıklar başlığın üstünde kalır */
     }
 
     .acilis-gorsel {

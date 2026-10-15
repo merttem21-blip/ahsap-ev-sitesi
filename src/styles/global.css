@@ -51,6 +51,15 @@
     rgba(30, 30, 30, 0.03) 90%,
     rgba(30, 30, 30, 0) 100%
   );
+  /* Fotoğraf üstündeki yatay karartma (ana sayfa hero'su ve Hakkımızda açılışı, ≥ 641px): metnin durduğu solda en
+     koyu, sağa doğru açılır. Rengi gecenin biraz koyusu (rgb 20 18 16). */
+  --karartma-yatay: linear-gradient(
+    90deg,
+    rgb(20 18 16 / 0.85) 0%,
+    rgb(20 18 16 / 0.65) 35%,
+    rgb(20 18 16 / 0.25) 65%,
+    rgb(20 18 16 / 0.1) 100%
+  );
   /* Formlar. Girdi kenarı bileşen sınırıdır (WCAG 1.4.11): gece ve kart yüzeyi üstünde ≥ 3.2:1 */
   --color-cizgi-girdi: rgba(235, 220, 198, 0.45);
   --color-yuzey-secili: rgba(235, 220, 198, 0.08); /* seçili seçenek kartı */
