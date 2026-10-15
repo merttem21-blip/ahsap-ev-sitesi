@@ -1,39 +1,39 @@
 ---
-// Neden Ahşap: ahşabın genel faydaları, 6 maddelik ikonlu ızgara (ana sayfa).
+// Neden 2K Ahşap: firmanın çalışma biçimi, 6 maddelik ikonlu ızgara. Ana sayfada ve Hakkımızda'da kullanılır.
 // Mobilde tek sütun, ≥ 640px'te 2 × 3, ≥ 1024px'te 3 × 2.
-// Metinler genel bilgidir; kesin rakam ve taahhüt yazılmaz (CLAUDE.md metin kuralı).
+// Metinde süre, fiyat, garanti gibi kesin rakam ve taahhüt yazılmaz (CLAUDE.md metin kuralı).
 import { ikon } from '../data/ikonlar';
 
 const maddeler = [
   {
-    ikon: ikon.termometre,
-    baslik: 'Doğal Yalıtım',
-    metin: 'Ahşabın hücre yapısı ısıyı yavaş iletir. Doğru yalıtımla birleştiğinde kışın sıcak, yazın serin bir iç mekân sağlar.',
+    ikon: ikon.cekic,
+    baslik: 'Kendi Atölyemizde Üretim',
+    metin: 'Yapılarımızı kendi atölyemizde, her aşamasını kontrol ederek üretiyoruz.',
   },
   {
-    ikon: ikon.ruzgar,
-    baslik: 'Sağlıklı Yaşam Alanı',
-    metin: 'Ahşap, iç mekândaki nemi dengelemeye yardımcı olur. Doğal dokusu ve sıcak görünümüyle huzurlu bir ortam oluşturur.',
-  },
-  {
-    ikon: ikon.zamanlayici,
-    baslik: 'Hızlı Kurulum',
-    metin: 'Parçalar atölyede hazırlandığı için yerinde kurulum genellikle kısa sürer. Kesin süre projeye göre değişir, teklifte netleştirilir.',
-  },
-  {
-    ikon: ikon.agac,
-    baslik: 'Sürdürülebilirlik',
-    metin: 'Ahşap yenilenebilir bir malzemedir ve büyürken karbon depolar. Üretimi birçok yapı malzemesine göre daha az enerji gerektirir.',
-  },
-  {
-    ikon: ikon.tuy,
-    baslik: 'Depreme Uygun Hafif Yapı',
-    metin: 'Ahşap, ağırlığına oranla dayanıklı ve hafif bir malzemedir. Hafif yapılar deprem anında daha az yüke maruz kalır.',
+    ikon: ikon.ekip,
+    baslik: 'Kendi Kurulum Ekibimiz',
+    metin: 'Kurulumu, üretimi de yakından bilen kendi ekibimiz yapıyor.',
   },
   {
     ikon: ikon.kalemCetvel,
-    baslik: 'Kişiye Özel Tasarım',
-    metin: 'Hazır kalıplar yerine her yapıyı arazinize ve ihtiyaçlarınıza göre tasarlıyoruz. Plan, ölçü ve detayları birlikte belirliyoruz.',
+    baslik: 'Size Özel Tasarım',
+    metin: 'Her projeyi arazinize, ihtiyacınıza ve zevkinize göre tasarlıyoruz.',
+  },
+  {
+    ikon: ikon.kalkan,
+    baslik: 'Teslim Sonrası Destek',
+    metin: 'Yapınızı teslim ettikten sonra da bakım ve destek için yanınızdayız.',
+  },
+  {
+    ikon: ikon.konum,
+    baslik: 'Türkiye Geneli Hizmet',
+    metin: 'Farklı illerdeki projelerinizi yerinde hayata geçiriyoruz.',
+  },
+  {
+    ikon: ikon.rota,
+    baslik: 'Tek Muhatap, Uçtan Uca Süreç',
+    metin: 'Tasarımdan teslime kadar tüm süreci tek ekip yönetir; sorumluluk tek elde toplanır.',
   },
 ];
 ---
@@ -41,10 +41,10 @@ const maddeler = [
 <section class="neden" aria-labelledby="neden-baslik">
   <div class="kap">
     <header class="neden-ust" data-ortaya>
-      <h2 id="neden-baslik">Neden Ahşap?</h2>
+      <h2 id="neden-baslik">Neden 2K Ahşap?</h2>
       <p>
-        Ahşap; doğru tasarım ve özenli işçilikle birleştiğinde konforlu, sağlıklı ve doğayla uyumlu
-        yaşam alanları sunar.
+        2015'ten bu yana, doğal ahşabı modern mimariyle buluşturan yapıları tasarlıyor, üretiyor ve
+        kuruyoruz.
       </p>
     </header>
 
@@ -90,7 +90,8 @@ const maddeler = [
     gap: var(--bosluk-2);
   }
 
-  /* Kart: yüzey zemini, ince çizgi kenar, 16px köşe; gölge ve hover yok (tıklanabilir değil) */
+  /* Kart: yüzey zemini, ince çizgi kenar, 16px köşe; gölge yok. Tıklanabilir değil: hover'da kart değil,
+     yalnızca ikon tepki verir (aşağıda). */
   .neden-madde {
     padding: var(--bosluk-4) var(--bosluk-3);
     background: var(--color-yuzey);
@@ -99,6 +100,7 @@ const maddeler = [
   }
 
   .neden-ikon {
+    position: relative;
     display: grid;
     place-items: center;
     width: 56px;
@@ -107,11 +109,48 @@ const maddeler = [
     border: var(--cizgi) solid var(--color-cizgi);
     border-radius: var(--radius-tam);
     color: var(--color-ahsap);
+    transition: transform var(--gecis);
+  }
+
+  /* Hover katmanı: butonlardaki gibi ahşap çerçeve, yalnızca opacity ile belirir */
+  .neden-ikon::before {
+    content: '';
+    position: absolute;
+    inset: calc(var(--cizgi) * -1);
+    border: var(--cizgi) solid var(--color-ahsap);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--gecis);
   }
 
   .neden-ikon .ikon {
     width: 26px;
     height: 26px;
+  }
+
+  /* Kartın üzerine gelince ikonun çerçevesi ahşaba döner ve ikon 3px kalkar. Dokunmatik ekranda (hover: none)
+     yok; hareket azaltılmışsa yalnızca çerçeve rengi değişir. Kartta odaklanabilir öğe olursa klavyede de çalışır. */
+  .neden-madde:focus-within .neden-ikon::before {
+    opacity: 1;
+  }
+
+  @media (hover: hover) {
+    .neden-madde:hover .neden-ikon::before {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .neden-madde:focus-within .neden-ikon {
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .neden-madde:hover .neden-ikon {
+      transform: translateY(-3px);
+    }
   }
 
   .neden-madde h3 {
