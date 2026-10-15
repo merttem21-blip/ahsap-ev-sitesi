@@ -1,9 +1,9 @@
 ---
 // Hakkımızda: tanıtım, hikâye, vizyon ve misyon, Neden 2K Ahşap ve çalışma süreci (müşteri onaylı düzen, 15 Ekim 2026;
-// docs/hakkimizda/yeniden-tasarim/; alıntı bandı ve hikâye fotoğrafı: docs/hakkimizda/duzeltme/). Ekip sonraki
-// aşamada eklenecek.
-// Akış ve zemin: açılış fotoğrafı (metin alttaki bantta, düz gece karartması) → Hikâyemiz (gece; 4:5 fotoğraf solda,
-// metin sağda) → büyük alıntı (tam genişlikte ara yumuşak tonlu bant, ortalı) → Vizyonumuz / Misyonumuz (gece; ahşap
+// docs/hakkimizda/yeniden-tasarim/; alıntı bandı ve hikâye fotoğrafı: docs/hakkimizda/duzeltme/; açılış:
+// docs/hakkimizda/acilis/). Ekip sonraki aşamada eklenecek.
+// Akış ve zemin: açılış fotoğrafı (altında breadcrumb ve H1'i taşıyan ince bant, düz gece karartması) → tanıtım
+// metni (gece) → Hikâyemiz (gece; 4:5 fotoğraf solda, metin sağda) → büyük alıntı (tam genişlikte ara yumuşak tonlu bant, ortalı) → Vizyonumuz / Misyonumuz (gece; ahşap
 // üst çizgili iki açık panel) →
 // Neden 2K Ahşap (ara yumuşak ton) → tam genişlik fotoğraf bandı → Sürecimiz (gece) → footer teklif bandı.
 // Bölüm boşlukları ana sayfanın ritmiyle aynıdır (--bolum-ritim: mobil 64px, ≥ 768px 96px); Neden 2K Ahşap ve
@@ -42,39 +42,44 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
 >
   <div class="hakkimizda-akis">
     <section class="acilis" aria-labelledby="hakkimizda-baslik">
-      <picture>
-        <source
-          media="(min-width: 1024px)"
-          srcset={acilisGenis.srcset}
-          sizes="100vw"
-          width={acilisGenis.width}
-          height={acilisGenis.height}
-        />
-        <!-- Telefonda fotoğraf açılışın boyuna göre ölçeklenir: görünen genişlik ekranın ~1,6 katı -->
-        <img
-          class="acilis-foto"
-          src={acilis.src}
-          srcset={acilis.srcset}
-          sizes="(min-width: 768px) 100vw, 160vw"
-          width={acilis.width}
-          height={acilis.height}
-          alt={acilis.alt}
-          loading="eager"
-          fetchpriority="high"
-        />
-      </picture>
-      <div class="acilis-bant">
-        <div class="kap acilis-ic">
-          <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Hakkımızda' }]} />
-          <h1 id="hakkimizda-baslik">Hakkımızda</h1>
-          <p class="giris">
-            2K AHŞAP, 2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp
-            üretiyor. Pendik/İstanbul merkezli ekibimizle bungalovdan villaya, tiny house'tan çardağa,
-            otel ve bar yapılarından çocuk oyun parklarına kadar farklı ihtiyaçlara yapılar hazırlıyoruz.
-            Modern mimariyi doğal malzemeyle harmanlıyor, her projeyi arazinize ve beklentilerinize göre
-            sizinle birlikte şekillendiriyoruz.
-          </p>
+      <div class="acilis-gorsel">
+        <picture>
+          <source
+            media="(min-width: 1024px)"
+            srcset={acilisGenis.srcset}
+            sizes="100vw"
+            width={acilisGenis.width}
+            height={acilisGenis.height}
+          />
+          <!-- < 1024px: aynı salonun dikey fotoğrafı; kutu fotoğraftan yatık olduğu için genişliğe oturur -->
+          <img
+            class="acilis-foto"
+            src={acilis.src}
+            srcset={acilis.srcset}
+            sizes="100vw"
+            width={acilis.width}
+            height={acilis.height}
+            alt={acilis.alt}
+            loading="eager"
+            fetchpriority="high"
+          />
+        </picture>
+        <div class="acilis-bant">
+          <div class="kap acilis-ic">
+            <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Hakkımızda' }]} />
+            <h1 id="hakkimizda-baslik">Hakkımızda</h1>
+          </div>
         </div>
+      </div>
+      <!-- Tanıtım fotoğrafın üstünde değil, düz gece zeminde: bant ince kalır, H1 her ekranda ilk ekranda görünür -->
+      <div class="kap acilis-metin">
+        <p class="giris">
+          2K AHŞAP, 2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp
+          üretiyor. Pendik/İstanbul merkezli ekibimizle bungalovdan villaya, tiny house'tan çardağa,
+          otel ve bar yapılarından çocuk oyun parklarına kadar farklı ihtiyaçlara yapılar hazırlıyoruz.
+          Modern mimariyi doğal malzemeyle harmanlıyor, her projeyi arazinize ve beklentilerinize göre
+          sizinle birlikte şekillendiriyoruz.
+        </p>
       </div>
     </section>
 
@@ -182,22 +187,23 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     --bolum-ritim: var(--bosluk-6);
   }
 
-  /* Açılış: tam genişlik fotoğraf, üst kısmı açık. Metin alttaki bantta; bandın zemini düz gece karartması (%70;
-     galerideki bilgi bandıyla aynı yöntem): fotoğrafın en açık yerinde bile krem metin ≥ 4.5:1 (marka-stili §2).
-     Telefonda bandın üstünde en az 280px (ya da ekranın %36'sı) fotoğraf kalır: 320–430px genişlikte bu, açılışın
-     en az üçte biridir (bant ~460–560px). */
+  /* Açılış (müşteri onaylı, docs/hakkimizda/acilis/): tam genişlik fotoğraf; altında yalnızca breadcrumb ve H1'i
+     taşıyan ince bant. Bandın zemini düz gece karartması (%70; galerideki bilgi bandıyla aynı yöntem): fotoğrafın en
+     açık yerinde bile krem metin ≥ 4.5:1 (marka-stili §2). Bant fotoğrafın en az üçte ikisini açık bırakır.
+     Tanıtım metni fotoğrafın altında, düz gece zeminde. */
   .acilis {
+    background: var(--color-zemin);
+  }
+
+  .acilis-gorsel {
     position: relative;
     isolation: isolate;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    min-height: 80vh;
-    min-height: 80svh;
-    padding-top: max(36vh, 17.5rem);
-    padding-top: max(36svh, 17.5rem);
+    min-height: 60vh;
+    min-height: 60svh;
     overflow: hidden;
-    background: var(--color-zemin);
   }
 
   .acilis-foto {
@@ -210,22 +216,6 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     object-position: center top; /* dikey kadrajın üstünde ışıklı kirişler ve avize */
   }
 
-  .acilis-bant {
-    background: var(--color-karartma);
-  }
-
-  /* Mobil: bandın iç boşlukları dar tutulur (metin kısaltılmaz), fotoğrafa daha çok yer kalır */
-  .acilis-ic {
-    display: grid;
-    padding-block: var(--bosluk-1) var(--bosluk-4);
-  }
-
-  /* Fotoğraf üstünde yalnızca krem metin (marka-stili §2) */
-  .acilis :global(.konum a),
-  .acilis :global(.konum li + li::before) {
-    color: var(--color-krem);
-  }
-
   /* Tip ölçeği (1280px'te): H1 72 → alıntı 60 → H2 48 → H3 24 */
   .acilis h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -233,9 +223,31 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
 
   .giris {
     max-width: 60ch;
-    margin: var(--bosluk-2) 0 0;
+    margin: 0;
     color: var(--color-krem);
     font-size: var(--text-giris);
+  }
+
+  .acilis-bant {
+    background: var(--color-karartma);
+  }
+
+  .acilis-ic {
+    padding-block: var(--bosluk-2) var(--bosluk-3);
+  }
+
+  /* Fotoğraf üstünde yalnızca krem metin (marka-stili §2) */
+  .acilis-bant :global(.konum a),
+  .acilis-bant :global(.konum li + li::before) {
+    color: var(--color-krem);
+  }
+
+  .acilis h1 {
+    margin-top: var(--bosluk-1);
+  }
+
+  .acilis-metin {
+    padding-top: var(--bosluk-5);
   }
 
   /* Hikâyemiz: mobilde metin, altında fotoğraf; ≥ 1024px'te fotoğraf solda, metin sağda */
@@ -351,21 +363,17 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
       --bolum-ritim: var(--bosluk-7);
     }
 
-    .acilis {
-      padding-top: 36vh;
-      padding-top: 36svh;
+    .acilis-gorsel {
+      min-height: 55vh;
+      min-height: 55svh;
     }
 
     .acilis-ic {
-      padding-block: var(--bosluk-2) var(--bosluk-5);
+      padding-block: var(--bosluk-3) var(--bosluk-4);
     }
 
-    .acilis h1 {
-      margin-top: var(--bosluk-1);
-    }
-
-    .giris {
-      margin-top: var(--bosluk-3);
+    .acilis-metin {
+      padding-top: var(--bosluk-6);
     }
 
     .foto-bant img {
@@ -373,36 +381,19 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     }
   }
 
-  /* ≥ 1024px: yatay kadraj; açılış bandında başlık solda, tanıtım sağda; hikâyede fotoğraf solda */
+  /* ≥ 1024px: açılışta yatay kadraj ve daha uzun fotoğraf; hikâyede fotoğraf solda */
   @media (min-width: 1024px) {
-    .acilis {
-      padding-top: 40vh;
-      padding-top: 40svh;
-    }
-
     .acilis-foto {
       object-position: center 20%; /* tavan kirişleri ve ışıklar bandın üstünde kalır */
     }
 
+    .acilis-gorsel {
+      min-height: 70vh;
+      min-height: 70svh;
+    }
+
     .acilis-ic {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 36rem);
-      column-gap: var(--bosluk-7);
-      align-items: end;
-      align-items: last baseline; /* tanıtımın son satırı başlığın taban çizgisinde */
-      padding-block: var(--bosluk-3) var(--bosluk-6);
-    }
-
-    .acilis-ic :global(.konum) {
-      grid-column: 1 / -1;
-      margin-bottom: var(--bosluk-3);
-    }
-
-    .acilis h1 {
-      margin-top: 0;
-    }
-
-    .giris {
-      margin: 0;
+      padding-block: var(--bosluk-3) var(--bosluk-5);
     }
 
     .hikaye-izgara {
