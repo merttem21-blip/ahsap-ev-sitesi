@@ -3,7 +3,7 @@
 // Harita yalnızca tıklanınca Google Haritalar'dan yüklenir (seo-kurallar §10; çerez ve hız).
 import { siWhatsapp } from 'simple-icons';
 import Layout from '../layouts/Layout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
 import GirdiAlani from '../components/form/GirdiAlani.astro';
 import FormOrtak from '../components/form/FormOrtak.astro';
 import KvkkOnay from '../components/form/KvkkOnay.astro';
@@ -27,16 +27,17 @@ const kanallar = [
   description="Ahşap ev, bungalov veya villa projeniz için 2K AHŞAP'a telefon, WhatsApp, e-posta ya da iletişim formuyla ulaşın. Pendik, İstanbul'dayız."
   whatsappMesaj={whatsappMesaj}
 >
-  <section class="sayfa-ust" aria-labelledby="sayfa-baslik">
-    <div class="kap">
-      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'İletişim' }]} />
-      <h1 id="sayfa-baslik">İletişim</h1>
-      <p class="sayfa-giris">
+  <SayfaBasi
+    ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'İletişim' }]}
+    baslik="İletişim"
+    baslikId="sayfa-baslik"
+    foto={{ proje: 'deniz-ustu-ahsap-otel-odalari', dosya: 'deniz-ustu-ahsap-otel-odalari-07', konum: 'center 62%' }}
+  >
+      <p>
         Ahşap yapı projeniz için sorularınızı yanıtlamaktan memnuniyet duyarız. Bize telefon, WhatsApp veya
         e-postayla ulaşabilir ya da kısa bir mesaj bırakabilirsiniz.
       </p>
-    </div>
-  </section>
+  </SayfaBasi>
 
   <div class="kap iletisim-govde">
     <section class="iletisim-bilgi" aria-labelledby="bilgi-baslik">
@@ -179,23 +180,6 @@ const kanallar = [
 </script>
 
 <style>
-  .sayfa-ust {
-    padding-block: var(--bosluk-2) var(--bosluk-5);
-    background: var(--color-zemin-ara);
-    border-bottom: var(--cizgi) solid var(--color-cizgi);
-  }
-
-  .sayfa-ust h1 {
-    margin-top: var(--bosluk-1);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-  }
-
-  .sayfa-giris {
-    max-width: var(--olcu-metin);
-    margin: var(--bosluk-2) 0 0;
-  }
-
   .iletisim-govde {
     display: grid;
     gap: var(--bosluk-6);
@@ -340,10 +324,6 @@ const kanallar = [
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .sayfa-ust {
-      padding-block: var(--bosluk-3) var(--bosluk-6);
-    }
-
     .iletisim-govde {
       padding-top: var(--bosluk-6);
     }

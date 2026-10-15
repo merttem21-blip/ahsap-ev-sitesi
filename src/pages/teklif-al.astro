@@ -7,7 +7,7 @@
 import { getCollection } from 'astro:content';
 import { siWhatsapp } from 'simple-icons';
 import Layout from '../layouts/Layout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
 import SonrakiAdimlar from '../components/SonrakiAdimlar.astro';
 import GirdiAlani from '../components/form/GirdiAlani.astro';
 import SecimGrubu from '../components/form/SecimGrubu.astro';
@@ -43,16 +43,16 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
   description="Ahşap ev, bungalov, villa veya tiny house projeniz için üç adımlık teklif formunu doldurun; ihtiyacınızı inceleyip size özel teklifimizi hazırlayalım."
   whatsappMesaj={whatsappMesaj}
 >
-  <section class="sayfa-ust" aria-labelledby="sayfa-baslik">
-    <div class="kap">
-      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Teklif Al' }]} />
-      <h1 id="sayfa-baslik">Ahşap Yapınız İçin Teklif Alın</h1>
-      <p class="sayfa-giris">
+  <SayfaBasi
+    ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Teklif Al' }]}
+    baslik="Ahşap Yapınız İçin Teklif Alın"
+    baslikId="sayfa-baslik"
+  >
+      <p>
         Birkaç soruyla ihtiyacınızı tanıyalım, projenize özel teklifimizi hazırlayıp size dönelim. Fiyat ve
         süre projeye göre değişir, teklifte netleştirilir.
       </p>
-    </div>
-  </section>
+  </SayfaBasi>
 
   <div class="kap teklif-govde">
     <div class="form-kart" data-teklif-kart>
@@ -426,23 +426,6 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
 </script>
 
 <style>
-  .sayfa-ust {
-    padding-block: var(--bosluk-2) var(--bosluk-5);
-    background: var(--color-zemin-ara);
-    border-bottom: var(--cizgi) solid var(--color-cizgi);
-  }
-
-  .sayfa-ust h1 {
-    margin-top: var(--bosluk-1);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-  }
-
-  .sayfa-giris {
-    max-width: var(--olcu-metin);
-    margin: var(--bosluk-2) 0 0;
-  }
-
   .teklif-govde {
     display: grid;
     gap: var(--bosluk-5);
@@ -705,10 +688,6 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .sayfa-ust {
-      padding-block: var(--bosluk-3) var(--bosluk-6);
-    }
-
     .teklif-govde {
       padding-top: var(--bosluk-6);
     }

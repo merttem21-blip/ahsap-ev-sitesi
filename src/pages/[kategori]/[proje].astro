@@ -3,7 +3,7 @@
 import { getCollection } from 'astro:content';
 import { siWhatsapp } from 'simple-icons';
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
 import Galeri from '../../components/Galeri.astro';
 import ProjeKarti from '../../components/ProjeKarti.astro';
 import { firma, siteAdresi, whatsappLinki } from '../../data/site';
@@ -68,18 +68,15 @@ const sema = projeSemasi({ proje, kategori, sayfaAdresi, metaAciklama, fotolar, 
   whatsappMesaj={whatsappMesaj}
   teklifAdresi={teklifAdresi}
 >
-  <section class="proje-ust" aria-labelledby="proje-baslik">
-    <div class="kap">
-      <Breadcrumb
-        ogeler={[
-          { ad: 'Ana Sayfa', href: '/' },
-          { ad: kategori.ad, href: `/${kategori.slug}` },
-          { ad: proje.data.baslik },
-        ]}
-      />
-      <h1 id="proje-baslik">{proje.data.baslik}</h1>
-    </div>
-  </section>
+  <SayfaBasi
+    ogeler={[
+      { ad: 'Ana Sayfa', href: '/' },
+      { ad: kategori.ad, href: `/${kategori.slug}` },
+      { ad: proje.data.baslik },
+    ]}
+    baslik={proje.data.baslik}
+    baslikId="proje-baslik"
+  />
 
   <section class="proje-galeri" aria-label="Fotoğraflar">
     <div class="kap">
@@ -157,17 +154,6 @@ const sema = projeSemasi({ proje, kategori, sayfaAdresi, metaAciklama, fotolar, 
 </Layout>
 
 <style>
-  .proje-ust {
-    padding-block: 16px 32px;
-    background: var(--color-zemin-ara);
-  }
-
-  .proje-ust h1 {
-    margin-top: 8px;
-    font-size: clamp(1.75rem, 4.5vw, 3rem);
-    font-weight: 700;
-  }
-
   .proje-galeri {
     padding-top: 24px;
   }
@@ -293,10 +279,6 @@ const sema = projeSemasi({ proje, kategori, sayfaAdresi, metaAciklama, fotolar, 
   }
 
   @media (min-width: 768px) {
-    .proje-ust {
-      padding-block: 24px 40px;
-    }
-
     .proje-galeri {
       padding-top: 32px;
     }

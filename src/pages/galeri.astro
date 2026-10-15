@@ -6,7 +6,7 @@
 // JS kapalıyken: filtre gizli, tüm fotoğraflar CSS sütunlarıyla görünür, her fotoğraf büyük görsele bağlantıdır.
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
 import { kategoriler } from '../data/site';
 import { ikon } from '../data/ikonlar';
 import { gorsel } from '../lib/gorsel';
@@ -75,16 +75,17 @@ const sizes =
   description="Ahşap ev, bungalov, villa, tiny house, çardak ve oyun evi fotoğraflarımız tek galeride. Kategoriye göre süzün, beğendiğiniz yapı için teklif alın."
   whatsappMesaj="Merhaba, sitenizdeki fotoğraf galerisini inceledim. Ahşap yapı projem hakkında bilgi almak istiyorum."
 >
-  <section class="galeri-ust" aria-labelledby="galeri-baslik">
-    <div class="kap">
-      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Galeri' }]} />
-      <h1 id="galeri-baslik">Ahşap Yapı Fotoğraf Galerisi</h1>
+  <SayfaBasi
+    ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Galeri' }]}
+    baslik="Ahşap Yapı Fotoğraf Galerisi"
+    baslikId="galeri-baslik"
+    foto={{ proje: 'a-frame-bungalov', dosya: 'a-frame-bungalov-01', konum: 'center 70%' }}
+  >
       <p>
         Tasarlayıp ürettiğimiz ahşap ev, bungalov, villa ve diğer yapıların fotoğraflarını tek yerde inceleyin.
         Bir fotoğrafı büyüterek projenin ayrıntılarına geçebilir, benzer bir yapı için teklif isteyebilirsiniz.
       </p>
-    </div>
-  </section>
+  </SayfaBasi>
 
   <!-- JS varsa filtre görünür ve ızgara JS ile dizilir; yerleşim kaymasını önlemek için ilk boyamadan önce.
        Bu betik değişirse vercel.json'daki CSP'de yer alan sha256 özeti de güncellenmeli. -->
@@ -651,22 +652,6 @@ const sizes =
 </script>
 
 <style>
-  .galeri-ust {
-    padding-block: 16px 40px;
-    background: var(--color-zemin-ara);
-  }
-
-  .galeri-ust h1 {
-    margin-top: 8px;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-  }
-
-  .galeri-ust p {
-    max-width: var(--olcu-metin);
-    margin: 16px 0 0;
-  }
-
   .galeri-bolum {
     padding-block: var(--bosluk-3) var(--bosluk-6);
   }
@@ -1111,10 +1096,6 @@ const sizes =
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .galeri-ust {
-      padding-block: 24px 56px;
-    }
-
     .galeri-bolum {
       padding-block: var(--bosluk-5) var(--bosluk-7);
     }

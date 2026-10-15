@@ -2,7 +2,7 @@
 // /sss: tüm sorular gruplara göre; üstte grup kısayolları, sonda iletişim kutusu.
 // Veri: src/data/sss.ts (tek kaynak). FAQPage JSON-LD tüm soruları sayfadaki sırayla (gruplara göre) kapsar.
 import Layout from '../layouts/Layout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
 import SssAkordeon from '../components/SssAkordeon.astro';
 import { whatsappLinki } from '../data/site';
 import { grubunSorulari, sssGruplari, sssSemasi } from '../data/sss';
@@ -19,11 +19,13 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
 >
   <script type="application/ld+json" set:html={jsonLd(sssSemasi(gruplar.flatMap((g) => g.sorular)))} />
 
-  <section class="sss-sayfa-ust" aria-labelledby="sss-sayfa-baslik">
-    <div class="kap">
-      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Sıkça Sorulan Sorular' }]} />
-      <h1 id="sss-sayfa-baslik">Sıkça Sorulan Sorular</h1>
-      <p class="giris">
+  <SayfaBasi
+    ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Sıkça Sorulan Sorular' }]}
+    baslik="Sıkça Sorulan Sorular"
+    baslikId="sss-sayfa-baslik"
+    foto={{ proje: 'kiremit-catili-ahsap-ev', dosya: 'kiremit-catili-ahsap-ev-19', konum: 'center 40%' }}
+  >
+      <p>
         Ahşap yapı yaptırmadan önce en çok merak edilen fiyat, süre, ruhsat, malzeme ve kurulum
         sorularını yanıtladık. Projenize özel konuları teklif aşamasında birlikte netleştiriyoruz.
       </p>
@@ -40,8 +42,7 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
           }
         </ul>
       </nav>
-    </div>
-  </section>
+  </SayfaBasi>
 
   <div class="sss-gruplar">
     {
@@ -80,24 +81,6 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
 </Layout>
 
 <style>
-  .sss-sayfa-ust {
-    padding-block: var(--bosluk-2) var(--bosluk-5);
-    background: var(--color-zemin-ara);
-    border-bottom: var(--cizgi) solid var(--color-cizgi);
-  }
-
-  .sss-sayfa-ust h1 {
-    margin-top: var(--bosluk-1);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-  }
-
-  .giris {
-    max-width: var(--olcu-metin);
-    margin: var(--bosluk-3) 0 0;
-    font-size: var(--text-giris);
-  }
-
   /* Grup kısayolları: kategori linkleriyle aynı pill (marka-stili §9) */
   .grup-kisayollari {
     margin-top: var(--bosluk-4);
@@ -187,10 +170,6 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .sss-sayfa-ust {
-      padding-block: var(--bosluk-3) var(--bosluk-6);
-    }
-
     .sss-gruplar {
       padding-top: var(--bosluk-7);
     }

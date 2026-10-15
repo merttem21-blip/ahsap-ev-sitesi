@@ -1,0 +1,255 @@
+---
+// Alt sayfaların başlık bandı: breadcrumb, tek H1 ve isteğe bağlı giriş metni (varsayılan slot). Müşteri onaylı
+// (15 Ekim 2026, docs/baslik-bandi/). İki varyant:
+//   Fotoğraflı (foto verilirse; Projeler, Galeri, İletişim, SSS, kategori sayfaları): Hakkımızda açılışının kısa
+//     hali (mobil 42svh, ≥ 768px 45svh, ≥ 1024px 50svh). Karartma ana sayfa hero'su ve Hakkımızda ile birebir aynı:
+//     ≥ 641px --karartma-yatay + alt %30'un zemine erimesi; telefonda alt %45'in erimesi + başlık bloğuna bağlı %70
+//     rampa. Fotoğrafı yatayda kesen sert kenarlı bant yoktur. Breadcrumb ve H1 fotoğrafın sol altında, giriş metni
+//     altında düz gece zeminde.
+//   Sade (foto verilmezse; Teklif Al, proje detayı, yasal sayfalar): fotoğrafsız gece zemin; antrasit header'dan ton
+//     farkıyla ayrılır. Kısa ahşap ayraç ve büyük H1; ≥ 1024px'te başlık solda, giriş metni sağda, ikisi alta hizalı.
+// Fotoğraf yalnızca proje galerilerinde zaten yayında olan bir fotoğraftır; alt metni projenin kendi kaydından gelir.
+// Proje veya fotoğraf kaldırılırsa derleme durur.
+import { getEntry } from 'astro:content';
+import Breadcrumb from './Breadcrumb.astro';
+import { gorsel } from '../lib/gorsel';
+import { fotoYolu } from '../lib/projeler';
+
+interface Props {
+  ogeler: { ad: string; href?: string }[]; // breadcrumb; son öğe bulunulan sayfa
+  baslik: string;
+  baslikId: string;
+  /** Fotoğraflı varyant: proje slug'ı, fotoğraf dosyası ve isteğe bağlı object-position */
+  foto?: { proje: string; dosya: string; konum?: string };
+}
+
+const { ogeler, baslik, baslikId, foto } = Astro.props;
+
+let resim;
+if (foto) {
+  const kayit = await getEntry('projeler', foto.proje);
+  const kayitFoto = kayit?.data.fotograflar.find((f) => f.dosya === foto.dosya);
+  if (!kayit || !kayitFoto) throw new Error(`[sayfa başı] Proje fotoğrafı bulunamadı: ${foto.proje}/${foto.dosya}`);
+  resim = { ...(await gorsel(fotoYolu(kayit, foto.dosya))), alt: kayitFoto.alt };
+}
+
+// Giriş metninde tireli sözcükler ("e-postayla") satır sonunda tireden bölünmez: metin aynen kalır, yalnızca
+// sözcük bölünmez bir span'e alınır. Etiketlere ve özniteliklere dokunulmaz, yalnızca metin düğümleri işlenir.
+const tireliSozcuk = /[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)+/gu;
+const giris = Astro.slots.has('default')
+  ? (await Astro.slots.render('default')).replace(/>([^<]+)</g, (_, metin: string) =>
+      `>${metin.replace(tireliSozcuk, (s) => `<span class="bolunmez">${s}</span>`)}<`,
+    )
+  : '';
+---
+
+{
+  resim ? (
+    <section class="sb sb-foto" aria-labelledby={baslikId}>
+      <div class="sb-gorsel">
+        <img
+          class="sb-resim"
+          src={resim.src}
+          srcset={resim.srcset}
+          sizes="100vw"
+          width={resim.width}
+          height={resim.height}
+          alt={resim.alt}
+          loading="eager"
+          fetchpriority="high"
+          style={foto?.konum ? `object-position: ${foto.konum}` : undefined}
+        />
+        <div class="kap sb-ic">
+          <Breadcrumb ogeler={ogeler} />
+          <h1 id={baslikId}>{baslik}</h1>
+        </div>
+      </div>
+      {giris && <div class="kap sb-metin" set:html={giris} />}
+    </section>
+  ) : (
+    <section class="sb sb-sade" aria-labelledby={baslikId}>
+      <div class="kap">
+        <Breadcrumb ogeler={ogeler} />
+        <div class="sb-izgara">
+          <div>
+            <span class="sb-ayrac" aria-hidden="true" />
+            <h1 id={baslikId}>{baslik}</h1>
+          </div>
+          {giris && <div class="sb-metin" set:html={giris} />}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .sb {
+    background: var(--color-zemin);
+  }
+
+  .sb h1 {
+    max-width: 16ch;
+    text-wrap: balance;
+  }
+
+  /* Giriş metni: boyut ve renk kapsayıcıdan miras alınır; sayfanın kendi sınıfı (ör. .yasal-tarih) öncelikli kalır */
+  .sb-metin {
+    font-size: var(--text-giris);
+  }
+
+  /* Fotoğraflı varyantta .sb-metin aynı zamanda .kap olduğu için ölçü paragrafa verilir */
+  .sb-metin > :global(p) {
+    max-width: var(--olcu-metin);
+    margin: 0;
+  }
+
+  .sb-metin :global(.bolunmez) {
+    white-space: nowrap;
+  }
+
+  /* ---------- Fotoğraflı ---------- */
+  .sb-gorsel {
+    position: relative;
+    isolation: isolate; /* katmanlar: fotoğraf, karartma (1), metin (2) */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 42vh;
+    min-height: 42svh;
+    overflow: hidden;
+  }
+
+  /* Alt kenar 1px aşağı taşar (kutunun overflow'u keser): kutu boyu kesirli olduğunda (ör. 50svh = 328,5px) son
+     piksel satırı erimenin altında kalıp fotoğraftan sızmaz, alt kenarda ince açık çizgi oluşmaz. */
+  .sb-gorsel::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 -1px;
+    z-index: 1;
+    background: var(--zemine-eris) bottom / 100% 45% no-repeat;
+    pointer-events: none;
+  }
+
+  .sb-resim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sb-ic {
+    position: relative;
+    z-index: 2;
+    padding-block: var(--bosluk-2) var(--bosluk-3);
+  }
+
+  /* Hakkımızda'daki .acilis-ic::before ile aynı rampa: yanlara ve aşağı taşar, fotoğraf kutusunun overflow'u keser */
+  .sb-ic::before {
+    --rampa: 64px;
+    content: '';
+    position: absolute;
+    inset: calc(var(--rampa) * -1) -100vw -100vh;
+    z-index: -1;
+    background: linear-gradient(180deg, transparent, var(--color-karartma) var(--rampa));
+    pointer-events: none;
+  }
+
+  /* Fotoğraf üstünde yalnızca krem metin (marka-stili §2) */
+  .sb-foto :global(.konum a),
+  .sb-foto :global(.konum li + li::before) {
+    color: var(--color-krem);
+  }
+
+  .sb-foto h1 {
+    margin-top: var(--bosluk-1);
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+
+  .sb-foto .sb-metin {
+    padding-top: var(--bosluk-3);
+    color: var(--color-krem);
+  }
+
+  /* ---------- Sade ---------- */
+  .sb-sade {
+    padding-block: var(--bosluk-2) var(--bosluk-5);
+  }
+
+  .sb-izgara {
+    display: grid;
+    gap: var(--bosluk-3);
+    margin-top: var(--bosluk-4);
+  }
+
+  .sb-ayrac {
+    display: block;
+    width: var(--bosluk-6);
+    height: var(--cizgi);
+    margin-bottom: var(--bosluk-3);
+    background: var(--color-ahsap);
+  }
+
+  .sb-sade h1 {
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    line-height: 1.08;
+  }
+
+  /* ≥ 641px: hero'nun tablet ve masaüstü karartması (Hero.astro ve Hakkımızda ile aynı sınır) */
+  @media (min-width: 641px) {
+    .sb-gorsel::before {
+      background:
+        var(--zemine-eris) bottom / 100% 30% no-repeat,
+        var(--karartma-yatay);
+    }
+
+    .sb-ic::before {
+      content: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .sb-gorsel {
+      min-height: 45vh;
+      min-height: 45svh;
+    }
+
+    .sb-ic {
+      padding-block: var(--bosluk-3) var(--bosluk-4);
+    }
+
+    .sb-foto .sb-metin {
+      padding-top: var(--bosluk-4);
+    }
+
+    .sb-sade {
+      padding-block: var(--bosluk-3) var(--bosluk-6);
+    }
+
+    .sb-izgara {
+      margin-top: var(--bosluk-6);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sb-gorsel {
+      min-height: 50vh;
+      min-height: 50svh;
+    }
+
+    .sb-ic {
+      padding-block: var(--bosluk-3) var(--bosluk-5);
+    }
+
+    /* Başlık solda, giriş metni sağda; ikisi alta hizalı */
+    .sb-izgara {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: var(--bosluk-7);
+      align-items: end;
+    }
+
+    .sb-sade .sb-metin {
+      max-width: 44ch;
+    }
+  }
+</style>

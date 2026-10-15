@@ -2,7 +2,7 @@
 // /projeler: projesi olan tüm kategoriler kart olarak listelenir; kartlar kategori sayfalarına gider.
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
 import Kart from '../components/Kart.astro';
 import { kategoriler } from '../data/site';
 import { gorsel } from '../lib/gorsel';
@@ -29,22 +29,23 @@ for (const kategori of kategoriler) {
   title="Ahşap Yapı Projelerimiz ve Modellerimiz | 2K AHŞAP"
   description="Ahşap ev, bungalov, villa, tiny house, çardak ve oyun evi projelerimizi kategorilere göre inceleyin. Size özel ahşap yapı için 2K AHŞAP'tan teklif alın."
 >
-  <section class="projeler-ust" aria-labelledby="projeler-baslik">
-    <div class="kap">
-      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Projeler' }]} />
-      <h1 id="projeler-baslik">Ahşap Yapı Projelerimiz</h1>
+  <SayfaBasi
+    ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Projeler' }]}
+    baslik="Ahşap Yapı Projelerimiz"
+    baslikId="projeler-baslik"
+    foto={{ proje: 'genis-verandali-ahsap-villa', dosya: 'genis-verandali-ahsap-villa-22', konum: 'center 45%' }}
+  >
       <p>
         Tasarlayıp ürettiğimiz ahşap yapıları kategorilere göre inceleyin. Bir kategori seçerek o
         kategorideki tüm projeleri ve fotoğraflarını görebilirsiniz.
       </p>
-    </div>
-  </section>
+  </SayfaBasi>
 
   <section class="projeler-liste" aria-label="Proje kategorileri">
     <div class="kap">
       <ul class="kart-izgara">
         {
-          kartlar.map((k, i) => (
+          kartlar.map((k) => (
             <li data-ortaya>
               <Kart
                 href={`/${k.kategori.slug}`}
@@ -53,7 +54,6 @@ for (const kategori of kategoriler) {
                 gorsel={k.gorsel}
                 alt={k.alt}
                 eylem="Projeleri inceleyin"
-                oncelikli={i === 0}
               />
             </li>
           ))
@@ -64,22 +64,6 @@ for (const kategori of kategoriler) {
 </Layout>
 
 <style>
-  .projeler-ust {
-    padding-block: 16px 40px;
-    background: var(--color-zemin-ara);
-  }
-
-  .projeler-ust h1 {
-    margin-top: 8px;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-  }
-
-  .projeler-ust p {
-    max-width: 65ch;
-    margin: 16px 0 0;
-  }
-
   .projeler-liste {
     padding-block: 40px 64px;
   }
@@ -96,10 +80,6 @@ for (const kategori of kategoriler) {
   }
 
   @media (min-width: 768px) {
-    .projeler-ust {
-      padding-block: 24px 56px;
-    }
-
     .projeler-liste {
       padding-block: 56px 96px;
     }

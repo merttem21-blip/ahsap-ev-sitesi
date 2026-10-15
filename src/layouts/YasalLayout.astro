@@ -2,7 +2,7 @@
 // Yasal sayfalar (/kvkk, /gizlilik, /cerez-politikasi) için ortak iskelet: başlık bandı + okunur metin sütunu.
 // Firma bilgileri ve son güncelleme tarihi src/data/site.ts'ten gelir; henüz bilinmeyenler docs/onay-bekleyenler.md'de.
 import Layout from './Layout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
 import { yasalGuncelleme, yasalSayfalar } from '../data/site';
 
 interface Props {
@@ -23,13 +23,9 @@ const guncellemeMetni = new Date(`${yasalGuncelleme}T00:00:00Z`).toLocaleDateStr
 ---
 
 <Layout title={title} description={description}>
-  <section class="yasal-ust" aria-labelledby="yasal-baslik">
-    <div class="kap">
-      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: baslik }]} />
-      <h1 id="yasal-baslik">{baslik}</h1>
-      <p class="yasal-tarih">Son güncelleme: <time datetime={yasalGuncelleme}>{guncellemeMetni}</time></p>
-    </div>
-  </section>
+  <SayfaBasi ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: baslik }]} baslik={baslik} baslikId="yasal-baslik">
+    <p class="yasal-tarih">Son güncelleme: <time datetime={yasalGuncelleme}>{guncellemeMetni}</time></p>
+  </SayfaBasi>
 
   <div class="kap yasal-govde">
     <article class="yasal-metin">
@@ -51,20 +47,8 @@ const guncellemeMetni = new Date(`${yasalGuncelleme}T00:00:00Z`).toLocaleDateStr
 </Layout>
 
 <style>
-  .yasal-ust {
-    padding-block: var(--bosluk-2) var(--bosluk-5);
-    background: var(--color-zemin-ara);
-    border-bottom: var(--cizgi) solid var(--color-cizgi);
-  }
-
-  .yasal-ust h1 {
-    margin-top: var(--bosluk-1);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-  }
-
+  /* Başlık bandının (SayfaBasi, sade) giriş satırı: küçük ve soluk kalır */
   .yasal-tarih {
-    margin: var(--bosluk-2) 0 0;
     color: var(--color-metin-soluk);
     font-size: var(--text-kucuk);
   }
@@ -177,10 +161,6 @@ const guncellemeMetni = new Date(`${yasalGuncelleme}T00:00:00Z`).toLocaleDateStr
 
   /* ≥ 768px */
   @media (min-width: 768px) {
-    .yasal-ust {
-      padding-block: var(--bosluk-3) var(--bosluk-6);
-    }
-
     .yasal-govde {
       padding-top: var(--bosluk-7);
     }
