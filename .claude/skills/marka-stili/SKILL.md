@@ -244,7 +244,8 @@ Hareket sakin ve tek seferliktir; içeriği öne çıkarır, dikkat dağıtmaz. 
 - Altında, ince dikey çizgilerle ayrılmış **3 ikonlu bilgi şeridi**: "Doğal Malzeme" (yaprak), "Modern Tasarım" (ev), "Güvenilir Uygulama" (kalkan). Ahşap çizgi ikon + büyük harfli etiket; rakam kullanılmaz.
 - Hero fotoğrafları `scripts/hero-gorseli.mjs` ile üretilir (kadraj, sıcak renk düzeltmesi, netlik; kaynak dosyaya dokunulmaz).
 - Hero görseli LCP öğesidir: `loading="eager"`, `fetchpriority="high"`, WebP/AVIF, `srcset` ile boyutlandırılmış. Lazy-load yapılmaz.
-- Alt sayfalarda (kategori, proje, hakkımızda) daha kısa bir başlık bandı (~40svh) kullanılır; zemini ara bölüm tonudur.
+- Alt sayfalarda (kategori, proje) daha kısa bir başlık bandı (~40svh) kullanılır; zemini ara bölüm tonudur.
+- **Hakkımızda istisnası** (müşteri onaylı, 15 Ekim 2026; `docs/hakkimizda/yeniden-tasarim/`): Açılış tam genişlikte bir proje fotoğrafıdır (~80svh). H1 ve tanıtım metni alttaki bantta durur. Bandın zemini düz gece karartmasıdır (`--color-karartma`); gradyan kullanılmaz. Telefonda bandın üstünde fotoğrafın en az üçte biri görünür kalır. Header antrasit kalır.
 
 ### Header (her sayfada)
 - Koyu: ana sayfada hero fotoğrafının üzerinde şeffaf; diğer sayfalarda antrasit zemin. Kaydırınca sabitlenen header da koyu kalır.

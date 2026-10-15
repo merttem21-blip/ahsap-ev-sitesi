@@ -1,60 +1,131 @@
 ---
-// Hakkımızda: tanıtım, hikâye, vizyon ve misyon, Neden 2K Ahşap ve çalışma süreci. Ekip sonraki aşamada eklenecek.
-// Zemin sırası: başlık bandı (ara ton) → hikâye ve vizyon/misyon (gece) → Neden 2K Ahşap (ara yumuşak ton)
-// → Sürecimiz (gece) → footer teklif bandı.
+// Hakkımızda: tanıtım, hikâye, vizyon ve misyon, Neden 2K Ahşap ve çalışma süreci (müşteri onaylı düzen, 15 Ekim 2026;
+// docs/hakkimizda/yeniden-tasarim/). Ekip sonraki aşamada eklenecek.
+// Akış ve zemin: açılış fotoğrafı (metin alttaki bantta, düz gece karartması) → Hikâyemiz (gece; dikey fotoğraf solda,
+// metin sağda) → büyük alıntı (gece) → Vizyonumuz / Misyonumuz (gece; ahşap üst çizgili iki açık panel) →
+// Neden 2K Ahşap (ara yumuşak ton) → tam genişlik fotoğraf bandı → Sürecimiz (gece) → footer teklif bandı.
+// Bölüm boşlukları ana sayfanın ritmiyle aynıdır (--bolum-ritim: mobil 64px, ≥ 768px 96px); Neden 2K Ahşap ve
+// Sürecimiz bu değişkeni kendiliğinden kullanır.
+// Fotoğraflar yalnızca proje galerilerinde zaten yayında olan fotoğraflardır; alt metinleri projenin kendi kaydından
+// gelir (src/content/projeler). Proje veya fotoğraf kaldırılırsa derleme durur.
+import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import NedenAhsap from '../components/NedenAhsap.astro';
 import Surecimiz from '../components/Surecimiz.astro';
+import { gorsel } from '../lib/gorsel';
+import { fotoYolu } from '../lib/projeler';
+
+async function projeFotosu(proje: string, dosya: string) {
+  const kayit = await getEntry('projeler', proje);
+  const foto = kayit?.data.fotograflar.find((f) => f.dosya === dosya);
+  if (!kayit || !foto) throw new Error(`[hakkımızda] Proje fotoğrafı bulunamadı: ${proje}/${dosya}`);
+  return { ...(await gorsel(fotoYolu(kayit, dosya))), alt: foto.alt };
+}
+
+// Açılış iki kadrajla verilir (art direction): < 1024px'te açılış dikeydir, aynı salonun dikey fotoğrafı kullanılır;
+// yatay fotoğraf bu alana ~3,5 kat büyütülüp bulanıklaşırdı. ≥ 1024px'te yatay fotoğraf. Alt metni dikey
+// fotoğrafınkidir; iki kadrajda da görünen şeyi (kirişli tavan, salon penceresi) anlatır.
+const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
+  projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-04'),
+  projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-07'),
+  projeFotosu('genis-verandali-asma-katli-bungalov', 'genis-verandali-asma-katli-bungalov-17'),
+  projeFotosu('genis-verandali-ahsap-villa', 'genis-verandali-ahsap-villa-05'),
+]);
 ---
 
 <Layout
   title="Hakkımızda: Hikâyemiz, Vizyonumuz ve Misyonumuz | 2K AHŞAP"
   description="2015'ten beri ahşap ev ve yapıları tasarlıyor, üretiyor ve kuruyoruz. Hikâyemizi, vizyon ve misyonumuzu, çalışma biçimimizi ve sürecimizi tanıyın."
 >
-  <section class="hakkimizda-ust" aria-labelledby="hakkimizda-baslik">
-    <div class="kap">
-      <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Hakkımızda' }]} />
-      <h1 id="hakkimizda-baslik">Hakkımızda</h1>
-      <p class="giris">
-        2K AHŞAP, 2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp
-        üretiyor. Pendik/İstanbul merkezli ekibimizle bungalovdan villaya, tiny house'tan çardağa,
-        otel ve bar yapılarından çocuk oyun parklarına kadar farklı ihtiyaçlara yapılar hazırlıyoruz.
-        Modern mimariyi doğal malzemeyle harmanlıyor, her projeyi arazinize ve beklentilerinize göre
-        sizinle birlikte şekillendiriyoruz.
-      </p>
-    </div>
-  </section>
+  <div class="hakkimizda-akis">
+    <section class="acilis" aria-labelledby="hakkimizda-baslik">
+      <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcset={acilisGenis.srcset}
+          sizes="100vw"
+          width={acilisGenis.width}
+          height={acilisGenis.height}
+        />
+        <!-- Telefonda fotoğraf açılışın boyuna göre ölçeklenir: görünen genişlik ekranın ~1,6 katı -->
+        <img
+          class="acilis-foto"
+          src={acilis.src}
+          srcset={acilis.srcset}
+          sizes="(min-width: 768px) 100vw, 160vw"
+          width={acilis.width}
+          height={acilis.height}
+          alt={acilis.alt}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </picture>
+      <div class="acilis-bant">
+        <div class="kap acilis-ic">
+          <Breadcrumb ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Hakkımızda' }]} />
+          <h1 id="hakkimizda-baslik">Hakkımızda</h1>
+          <p class="giris">
+            2K AHŞAP, 2015 yılından beri Türkiye'de ahşap ev ve yapıları özel olarak tasarlayıp
+            üretiyor. Pendik/İstanbul merkezli ekibimizle bungalovdan villaya, tiny house'tan çardağa,
+            otel ve bar yapılarından çocuk oyun parklarına kadar farklı ihtiyaçlara yapılar hazırlıyoruz.
+            Modern mimariyi doğal malzemeyle harmanlıyor, her projeyi arazinize ve beklentilerinize göre
+            sizinle birlikte şekillendiriyoruz.
+          </p>
+        </div>
+      </div>
+    </section>
 
-  <section class="hikaye" aria-labelledby="hikaye-baslik">
-    <div class="kap" data-ortaya>
-      <h2 id="hikaye-baslik">Hikâyemiz</h2>
-      <p>
-        Her şey, bir ağacın gövdesindeki halkalara bakarken duyulan o sessiz hayranlıkla başladı.
-        Ahşap, yıllar boyunca rüzgârı, yağmuru ve güneşi içinde biriktirir; işlendiğinde bu birikimi
-        yaşadığımız mekâna, soluduğumuz havaya, dokunduğumuz her yüzeye taşır. Biz de ahşabı tam bu
-        yüzden seçtik. Çünkü bir ev yalnızca duvarlardan ve çatıdan ibaret değildir; içinde kurulan
-        hayallerin, paylaşılan sofraların ve büyüyen çocukların hikâyesidir.
-      </p>
-      <p>
-        Ahşaba duyduğumuz ilgi, çocukluk yıllarımıza uzanan bir merakla başladı. Bir tahta parçasından
-        yeni bir şey yaratmanın heyecanı yıllar içinde bir tutkuya, 2015'te ise 2K AHŞAP'a dönüştü.
-        Amacımız o günden beri aynı: insanların doğayla yeniden bağ kurabileceği yaşam alanları
-        üretmek. İlk projemizden bu yana değişmeyen tek bir ilkemiz var: Her yapıya, kendi evimizi
-        inşa ediyormuş gibi yaklaşmak. Bir bungalovun verandasında içilen ilk çay, bir tiny house'un
-        penceresinden izlenen ilk gün doğumu, bir bahçe çardağında kurulan ilk sofra… Bizim için asıl
-        başarı, teslim ettiğimiz her yapının içinde güzel anıların birikmeye başlamasıdır.
-      </p>
-      <p>
-        Bugün aynı heyecanla çalışıyor; doğadan aldığımız ilhamı, özenle ve ustalıkla şekillenen
-        yapılara dönüştürmeye devam ediyoruz.
-      </p>
-    </div>
-  </section>
+    <section class="hikaye" aria-labelledby="hikaye-baslik">
+      <div class="kap">
+        <div class="hikaye-izgara">
+          <div class="hikaye-metin" data-ortaya>
+            <h2 id="hikaye-baslik">Hikâyemiz</h2>
+            <p>
+              Her şey, bir ağacın gövdesindeki halkalara bakarken duyulan o sessiz hayranlıkla başladı.
+              Ahşap, yıllar boyunca rüzgârı, yağmuru ve güneşi içinde biriktirir; işlendiğinde bu
+              birikimi yaşadığımız mekâna, soluduğumuz havaya, dokunduğumuz her yüzeye taşır. Biz de
+              ahşabı tam bu yüzden seçtik. Çünkü bir ev yalnızca duvarlardan ve çatıdan ibaret değildir;
+              içinde kurulan hayallerin, paylaşılan sofraların ve büyüyen çocukların hikâyesidir.
+            </p>
+            <p>
+              Ahşaba duyduğumuz ilgi, çocukluk yıllarımıza uzanan bir merakla başladı. Bir tahta
+              parçasından yeni bir şey yaratmanın heyecanı yıllar içinde bir tutkuya, 2015'te ise 2K
+              AHŞAP'a dönüştü. Amacımız o günden beri aynı: insanların doğayla yeniden bağ kurabileceği
+              yaşam alanları üretmek. İlk projemizden bu yana değişmeyen tek bir ilkemiz var: Her yapıya,
+              kendi evimizi inşa ediyormuş gibi yaklaşmak. Bir bungalovun verandasında içilen ilk çay, bir
+              tiny house'un penceresinden izlenen ilk gün doğumu, bir bahçe çardağında kurulan ilk sofra…
+              Bizim için asıl başarı, teslim ettiğimiz her yapının içinde güzel anıların birikmeye
+              başlamasıdır.
+            </p>
+            <p>
+              Bugün aynı heyecanla çalışıyor; doğadan aldığımız ilhamı, özenle ve ustalıkla şekillenen
+              yapılara dönüştürmeye devam ediyoruz.
+            </p>
+          </div>
+          <img
+            class="hikaye-foto"
+            src={hikaye.src}
+            srcset={hikaye.srcset}
+            sizes="(min-width: 1280px) 453px, (min-width: 1024px) 35vw, (min-width: 768px) 448px, calc(100vw - 32px)"
+            width={hikaye.width}
+            height={hikaye.height}
+            alt={hikaye.alt}
+            loading="lazy"
+            decoding="async"
+            data-ortaya
+          />
+        </div>
 
-  <section class="degerler" aria-label="Vizyonumuz ve misyonumuz">
-    <div class="kap">
-      <div class="degerler-izgara">
+        <!-- Alıntı, Hikâyemiz'deki cümlenin büyük puntolu tekrarıdır; ekran okuyucu iki kez okumasın -->
+        <div class="alinti-blok" aria-hidden="true" data-ortaya>
+          <p class="alinti">Her yapıya, kendi evimizi inşa ediyormuş gibi yaklaşmak.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="degerler" aria-label="Vizyonumuz ve misyonumuz">
+      <div class="kap degerler-izgara">
         <article class="deger" aria-labelledby="vizyon-baslik" data-ortaya>
           <h2 id="vizyon-baslik">Vizyonumuz</h2>
           <p>
@@ -79,94 +150,265 @@ import Surecimiz from '../components/Surecimiz.astro';
           </p>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <NedenAhsap />
-  <Surecimiz />
+    <NedenAhsap />
+
+    <div class="foto-bant">
+      <img
+        src={bant.src}
+        srcset={bant.srcset}
+        sizes="100vw"
+        width={bant.width}
+        height={bant.height}
+        alt={bant.alt}
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <Surecimiz />
+  </div>
 </Layout>
 
 <style>
-  .hakkimizda-ust {
-    padding-block: var(--bosluk-2) var(--bosluk-6);
-    background: var(--color-zemin-ara);
-    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  /* Bölüm ritmi: ana sayfayla aynı (index.astro, .ana-akis) */
+  .hakkimizda-akis {
+    --bolum-ritim: var(--bosluk-6);
   }
 
-  .hakkimizda-ust h1 {
-    margin-top: var(--bosluk-1);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
+  /* Açılış: tam genişlik fotoğraf, üst kısmı açık. Metin alttaki bantta; bandın zemini düz gece karartması (%70;
+     galerideki bilgi bandıyla aynı yöntem): fotoğrafın en açık yerinde bile krem metin ≥ 4.5:1 (marka-stili §2).
+     Telefonda bandın üstünde en az 280px (ya da ekranın %36'sı) fotoğraf kalır: 320–430px genişlikte bu, açılışın
+     en az üçte biridir (bant ~460–560px). */
+  .acilis {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 80vh;
+    min-height: 80svh;
+    padding-top: max(36vh, 17.5rem);
+    padding-top: max(36svh, 17.5rem);
+    overflow: hidden;
+    background: var(--color-zemin);
+  }
+
+  .acilis-foto {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* dikey kadrajın üstünde ışıklı kirişler ve avize */
+  }
+
+  .acilis-bant {
+    background: var(--color-karartma);
+  }
+
+  /* Mobil: bandın iç boşlukları dar tutulur (metin kısaltılmaz), fotoğrafa daha çok yer kalır */
+  .acilis-ic {
+    display: grid;
+    padding-block: var(--bosluk-1) var(--bosluk-4);
+  }
+
+  /* Fotoğraf üstünde yalnızca krem metin (marka-stili §2) */
+  .acilis :global(.konum a),
+  .acilis :global(.konum li + li::before) {
+    color: var(--color-krem);
+  }
+
+  /* Tip ölçeği (1280px'te): H1 72 → alıntı 60 → H2 48 → H3 24 */
+  .acilis h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
   }
 
   .giris {
-    max-width: var(--olcu-metin);
-    margin: var(--bosluk-3) 0 0;
+    max-width: 60ch;
+    margin: var(--bosluk-2) 0 0;
+    color: var(--color-krem);
     font-size: var(--text-giris);
   }
 
-  /* Hikâye ve vizyon/misyon aynı gece zeminde tek blok gibi sürer: hikâyenin alt boşluğu yok,
-     aradaki boşluğu kartların üst boşluğu verir. */
+  /* Hikâyemiz: mobilde metin, altında fotoğraf; ≥ 1024px'te fotoğraf solda, metin sağda */
   .hikaye {
-    padding-top: var(--bolum);
+    padding-block: var(--bolum-ritim) 0;
     background: var(--color-zemin);
+  }
+
+  .hikaye-izgara {
+    display: grid;
+    gap: var(--bosluk-6);
   }
 
   .hikaye h2 {
     font-size: var(--text-h2);
   }
 
-  .hikaye p {
+  .hikaye-metin p {
     max-width: var(--olcu-metin);
     margin: var(--bosluk-2) 0 0;
   }
 
-  .hikaye h2 + p {
+  .hikaye-metin h2 + p {
     margin-top: var(--bosluk-3);
   }
 
+  .hikaye-foto {
+    width: 100%;
+    max-width: 28rem;
+    aspect-ratio: 5 / 7; /* 3:4 fotoğraftan biraz dar: soldaki siyah kapı kasası kadraj dışında kalır */
+    object-fit: cover;
+    object-position: right center;
+    border-radius: var(--radius-gorsel);
+  }
+
+  /* Büyük alıntı: Hikâyemiz ile Vizyon/Misyon arasında ara durak; sayfanın tek iddialı tipografik öğesi.
+     Üstündeki ince çizgi bölümü ayırır; başka süs yok. */
+  .alinti-blok {
+    margin-top: var(--bolum-ritim);
+    padding-top: var(--bolum-ritim);
+    border-top: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .alinti {
+    max-width: 18ch;
+    margin: 0;
+    color: var(--color-baslik);
+    font-family: var(--font-baslik);
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    font-weight: 600;
+    line-height: var(--satir-baslik);
+    letter-spacing: var(--aralik-baslik);
+    text-wrap: balance;
+  }
+
+  /* Vizyonumuz / Misyonumuz: gece zemin; kart yok, iki açık panel. Her panelin üstünde ince ahşap çizgi.
+     Mobilde alt alta, ≥ 1024px'te yan yana. */
   .degerler {
-    padding-block: var(--bosluk-6) var(--bolum);
+    padding-block: var(--bolum-ritim);
     background: var(--color-zemin);
   }
 
   .degerler-izgara {
     display: grid;
-    gap: var(--bosluk-2);
+    gap: var(--bosluk-6);
   }
 
-  /* Kart: Neden 2K Ahşap kartlarıyla aynı yüzey, ince çizgi kenar ve 16px köşe; tıklanabilir değil */
   .deger {
-    padding: var(--bosluk-4) var(--bosluk-3);
-    background: var(--color-yuzey);
-    border: var(--cizgi) solid var(--color-cizgi);
-    border-radius: var(--radius-kart);
+    padding-top: var(--bosluk-4);
+    border-top: var(--cizgi) solid var(--color-ahsap);
   }
 
   .deger h2 {
-    font-size: var(--text-h3);
+    font-size: var(--text-h2);
   }
 
   .deger p {
-    margin: var(--bosluk-2) 0 0;
+    max-width: 56ch;
+    margin: var(--bosluk-4) 0 0;
+    font-size: var(--text-giris);
+    line-height: 1.75;
   }
 
-  /* ≥ 768px: kartlar yan yana */
+  /* Tam genişlik fotoğraf bandı (köşesiz) */
+  .foto-bant {
+    background: var(--color-zemin);
+  }
+
+  .foto-bant img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: 40% center;
+  }
+
+  /* ≥ 768px */
   @media (min-width: 768px) {
-    .hakkimizda-ust {
-      padding-block: var(--bosluk-3) var(--bosluk-7);
+    .hakkimizda-akis {
+      --bolum-ritim: var(--bosluk-7);
+    }
+
+    .acilis {
+      padding-top: 36vh;
+      padding-top: 36svh;
+    }
+
+    .acilis-ic {
+      padding-block: var(--bosluk-2) var(--bosluk-5);
+    }
+
+    .acilis h1 {
+      margin-top: var(--bosluk-1);
+    }
+
+    .giris {
+      margin-top: var(--bosluk-3);
+    }
+
+    .foto-bant img {
+      aspect-ratio: 21 / 9;
+    }
+  }
+
+  /* ≥ 1024px: yatay kadraj; açılış bandında başlık solda, tanıtım sağda; hikâyede fotoğraf solda */
+  @media (min-width: 1024px) {
+    .acilis {
+      padding-top: 40vh;
+      padding-top: 40svh;
+    }
+
+    .acilis-foto {
+      object-position: center 20%; /* tavan kirişleri ve ışıklar bandın üstünde kalır */
+    }
+
+    .acilis-ic {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 36rem);
+      column-gap: var(--bosluk-7);
+      align-items: end;
+      padding-block: var(--bosluk-3) var(--bosluk-6);
+    }
+
+    .acilis-ic :global(.konum) {
+      grid-column: 1 / -1;
+      margin-bottom: var(--bosluk-3);
+    }
+
+    .acilis h1 {
+      margin-top: 0;
+    }
+
+    .giris {
+      margin: 0;
+    }
+
+    .hikaye-izgara {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--bosluk-8);
+      align-items: center;
+    }
+
+    .hikaye-metin {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .hikaye-foto {
+      grid-column: 1;
+      grid-row: 1;
+      max-width: none;
     }
 
     .degerler-izgara {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--bosluk-3);
+      gap: var(--bosluk-7);
     }
-  }
 
-  /* ≥ 1024px */
-  @media (min-width: 1024px) {
-    .deger {
-      padding: var(--bosluk-5) var(--bosluk-4);
+    .foto-bant img {
+      aspect-ratio: 5 / 2;
     }
   }
 </style>
