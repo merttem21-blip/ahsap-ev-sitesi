@@ -1,11 +1,11 @@
 ---
 // Hakkımızda: tanıtım, hikâye, vizyon ve misyon, Neden 2K Ahşap ve çalışma süreci (müşteri onaylı düzen, 15 Ekim 2026;
-// docs/hakkimizda/yeniden-tasarim/; alıntı bandı ve hikâye fotoğrafı: docs/hakkimizda/duzeltme/; açılış:
-// docs/hakkimizda/acilis-v3/). Ekip sonraki aşamada eklenecek.
+// docs/hakkimizda/yeniden-tasarim/; hikâye fotoğrafı: docs/hakkimizda/duzeltme/; açılış: docs/hakkimizda/acilis-v3/;
+// sayfa bütünü: docs/hakkimizda/v4/). Ekip sonraki aşamada eklenecek.
 // Akış ve zemin: açılış fotoğrafı (breadcrumb ve H1 sol altta, ana sayfa hero'sunun karartması; alt kenarı zemine
-// erir) → tanıtım metni (gece) → Hikâyemiz (gece; 4:5 fotoğraf solda, metin sağda) → büyük alıntı (tam genişlikte
-// ara yumuşak tonlu bant, ortalı) → Vizyonumuz / Misyonumuz (gece; ahşap üst çizgili iki açık panel) →
-// Neden 2K Ahşap (ara yumuşak ton) → tam genişlik fotoğraf bandı → Sürecimiz (gece) → footer teklif bandı.
+// erir) → tanıtım metni (gece) → Hikâyemiz (gece; masaüstünde fotoğraf solda metin sütunu boyunca, metin sağda)
+// → Vizyonumuz / Misyonumuz (gece; ahşap üst çizgili iki açık panel) →
+// Neden 2K Ahşap (ara yumuşak ton) → Sürecimiz (gece) → footer teklif bandı.
 // Bölüm boşlukları ana sayfanın ritmiyle aynıdır (--bolum-ritim: mobil 64px, ≥ 768px 96px); Neden 2K Ahşap ve
 // Sürecimiz bu değişkeni kendiliğinden kullanır.
 // Fotoğraflar yalnızca proje galerilerinde zaten yayında olan fotoğraflardır; alt metinleri projenin kendi kaydından
@@ -28,11 +28,10 @@ async function projeFotosu(proje: string, dosya: string) {
 // Açılış iki kadrajla verilir (art direction): < 1024px'te açılış dikeydir, aynı salonun dikey fotoğrafı kullanılır;
 // yatay fotoğraf bu alana ~3,5 kat büyütülüp bulanıklaşırdı. ≥ 1024px'te yatay fotoğraf. Alt metni dikey
 // fotoğrafınkidir; iki kadrajda da görünen şeyi (kirişli tavan, salon penceresi) anlatır.
-const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
+const [acilis, acilisGenis, hikaye] = await Promise.all([
   projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-04'),
   projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-07'),
   projeFotosu('kemerli-pod-bungalov', 'kemerli-pod-bungalov-02'),
-  projeFotosu('genis-verandali-ahsap-villa', 'genis-verandali-ahsap-villa-05'),
 ]);
 ---
 
@@ -108,12 +107,14 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
               yapılara dönüştürmeye devam ediyoruz.
             </p>
           </div>
-          <!-- Görsel kadraja 1,36 kat yakınlaştırılır (CSS); sizes bu genişliği anlatır -->
+          <!-- Görsel kadraja yakınlaştırılır (CSS); sizes görselin çizilen genişliğini anlatır: telefonda kutunun
+               1,36 katı; masaüstünde kutu metin sütunu kadar uzun, görsel kutu boyunun ~1,09 katı genişlikte
+               (ölçüm: ≥ 1280px'te 676px, 1024–1279px'te 676–852px) -->
           <div class="hikaye-foto" data-ortaya>
             <img
               src={hikaye.src}
               srcset={hikaye.srcset}
-              sizes="(min-width: 1280px) 616px, (min-width: 1024px) 48vw, (min-width: 768px) 609px, calc(136vw - 44px)"
+              sizes="(min-width: 1280px) 676px, (min-width: 1024px) 852px, (min-width: 768px) 609px, calc(136vw - 44px)"
               width={hikaye.width}
               height={hikaye.height}
               alt={hikaye.alt}
@@ -121,13 +122,6 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
               decoding="async"
             />
           </div>
-        </div>
-      </div>
-
-      <!-- Alıntı, Hikâyemiz'deki cümlenin büyük puntolu tekrarıdır; ekran okuyucu iki kez okumasın -->
-      <div class="alinti-blok" aria-hidden="true">
-        <div class="kap" data-ortaya>
-          <p class="alinti">Her yapıya, kendi evimizi inşa ediyormuş gibi yaklaşmak.</p>
         </div>
       </div>
     </section>
@@ -161,19 +155,6 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     </section>
 
     <NedenAhsap />
-
-    <div class="foto-bant">
-      <img
-        src={bant.src}
-        srcset={bant.srcset}
-        sizes="100vw"
-        width={bant.width}
-        height={bant.height}
-        alt={bant.alt}
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
 
     <Surecimiz />
   </div>
@@ -277,9 +258,11 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     }
   }
 
-  /* Hikâyemiz: mobilde metin, altında fotoğraf; ≥ 1024px'te fotoğraf solda, metin sağda */
+  /* Hikâyemiz: mobilde metin, altında fotoğraf; ≥ 1024px'te fotoğraf solda, metin sağda, ikisi aynı yükseklikte.
+     Bölümler arası iki ritim (ana sayfa gibi): açılışın tanıtım metninin altında boşluk olmadığı için üstte iki ritim
+     (ana sayfadaki Ürünlerimiz gibi), altta bir ritim + Vizyonumuz'un üst ritmi. */
   .hikaye {
-    padding-block: var(--bolum-ritim) 0;
+    padding-block: calc(2 * var(--bolum-ritim)) var(--bolum-ritim);
     background: var(--color-zemin);
   }
 
@@ -297,15 +280,19 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     margin: var(--bosluk-2) 0 0;
   }
 
+  /* İlk paragraf giriş boyutunda; satırlar en fazla 65ch (--olcu-metin) */
   .hikaye-metin h2 + p {
     margin-top: var(--bosluk-3);
+    font-size: var(--text-giris);
   }
 
-  /* Döşenmiş, düz çekilmiş iç mekân (kemerli pod bungalov). 4:5: masaüstünde metin sütunuyla dengeli boy.
-     Kadraj fotoğrafın üst %69'u ve yatayda ortadaki %74'üdür (1,36 kat, üst ortadan): avize, kemerli pencere ve
-     ışık kalır; öndeki kanepenin naylonlu minderleri (fotoğraf boyunun ~%73'ünden aşağısı) kadraj dışındadır.
-     Yakınlaştırma sabittir (hareket değil); sizes 1,36 katı anlatır. */
+  /* Döşenmiş, düz çekilmiş iç mekân (kemerli pod bungalov). Kadraj her boyutta fotoğrafın üst ~%69'udur, yatayda
+     ortalı (üst ortadan sabit yakınlaştırma, hareket değil): avize, kemerli pencere ve ışık kalır; öndeki kanepenin
+     naylonlu minderleri (fotoğraf boyunun ~%73'ünden aşağısı) kadraj dışındadır.
+     Telefonda 4:5 kutu, 1,36 kat. ≥ 1024px'te kutu metin sütunu kadar uzar; oranı genişliğe göre değiştiği için
+     kadraj konteyner birimleriyle kurulur (bkz. aşağı). */
   .hikaye-foto {
+    position: relative;
     width: 100%;
     max-width: 28rem;
     aspect-ratio: 4 / 5;
@@ -314,6 +301,8 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
   }
 
   .hikaye-foto img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -322,30 +311,9 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
     transform-origin: center top;
   }
 
-  /* Büyük alıntı: Hikâyemiz ile Vizyon/Misyon arasında ara durak; sayfanın tek iddialı tipografik öğesi.
-     Tam genişlikte ara yumuşak tonlu bant; alıntı ortada, satırları dengeli kırılır. Bandın üstünde, içinde ve
-     altında (Vizyonumuz'un üst boşluğu) birer ritim. */
-  .alinti-blok {
-    margin-top: var(--bolum-ritim);
-    padding-block: var(--bolum-ritim);
-    background: var(--color-zemin-ara-yumusak);
-  }
-
-  .alinti {
-    max-width: 18ch;
-    margin: 0 auto;
-    color: var(--color-baslik);
-    font-family: var(--font-baslik);
-    font-size: clamp(2rem, 5vw, 3.75rem);
-    font-weight: 600;
-    line-height: var(--satir-baslik);
-    letter-spacing: var(--aralik-baslik);
-    text-align: center;
-    text-wrap: balance;
-  }
-
   /* Vizyonumuz / Misyonumuz: gece zemin; kart yok, iki açık panel. Her panelin üstünde ince ahşap çizgi.
-     Mobilde alt alta, ≥ 1024px'te yan yana. */
+     Okunurluk öncelikli: gövde giriş boyutunda (18px), ≥ 1280px'te 20px; satır aralığı 1.8; sütun en fazla 60ch.
+     Mobilde alt alta, ≥ 1024px'te yan yana (aralarında 96px, ≥ 1280px'te 128px). */
   .degerler {
     padding-block: var(--bolum-ritim);
     background: var(--color-zemin);
@@ -366,22 +334,10 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
   }
 
   .deger p {
-    max-width: 56ch;
+    max-width: 60ch;
     margin: var(--bosluk-4) 0 0;
     font-size: var(--text-giris);
-    line-height: 1.75;
-  }
-
-  /* Tam genişlik fotoğraf bandı (köşesiz) */
-  .foto-bant {
-    background: var(--color-zemin);
-  }
-
-  .foto-bant img {
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    object-position: 40% center;
+    line-height: 1.8;
   }
 
   /* ≥ 768px */
@@ -403,12 +359,9 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
       padding-top: var(--bosluk-4);
     }
 
-    .foto-bant img {
-      aspect-ratio: 21 / 9;
-    }
   }
 
-  /* ≥ 1024px: açılışta yatay kadraj ve daha uzun fotoğraf; hikâyede fotoğraf solda */
+  /* ≥ 1024px: açılışta yatay kadraj ve daha uzun fotoğraf; hikâyede fotoğraf solda, metin sütunu boyunca */
   @media (min-width: 1024px) {
     .acilis-foto {
       object-position: center 20%; /* tavan kirişleri ve ışıklar başlığın üstünde kalır */
@@ -423,10 +376,11 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
       padding-block: var(--bosluk-3) var(--bosluk-5);
     }
 
+    /* İki eşit sütun: metin sütunu 65ch'ye yakın kalır, fotoğraf sütunu çok incelmez */
     .hikaye-izgara {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      gap: var(--bosluk-8);
-      align-items: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--bosluk-6);
+      align-items: stretch;
     }
 
     .hikaye-metin {
@@ -434,19 +388,57 @@ const [acilis, acilisGenis, hikaye, bant] = await Promise.all([
       grid-row: 1;
     }
 
+    /* Fotoğraf kutusu metin sütunuyla aynı yükseklikte başlar ve biter (satırın boyunu metin belirler; görsel
+       mutlak konumlu olduğu için boya katılmaz). */
     .hikaye-foto {
       grid-column: 1;
       grid-row: 1;
       max-width: none;
+      min-height: 30rem;
+      aspect-ratio: auto;
+    }
+
+    /* Yedek (konteyner birimleri yoksa): 1,45 kat; kutu 3:4'ten uzunken kadraj üst %69 */
+    .hikaye-foto img {
+      transform: scale(1.45);
+    }
+
+    /* Kutunun oranı ne olursa olsun kadraj üst %69: görselin boyu kutu boyunun 1 / 0,69 ≈ 1,45 katı, yani 3:4
+       görselde genişliği kutu boyunun 1,087 katı (kutu genişliğinden az değil); üstten, yatayda ortadan */
+    @supports (width: 1cqh) {
+      .hikaye-foto {
+        container-type: size;
+      }
+
+      .hikaye-foto img {
+        right: auto;
+        bottom: auto;
+        left: 50%;
+        width: max(100cqw, 108.7cqh);
+        max-width: none;
+        height: auto;
+        transform: translateX(-50%);
+      }
     }
 
     .degerler-izgara {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--bosluk-7);
     }
+  }
 
-    .foto-bant img {
-      aspect-ratio: 5 / 2;
+  /* ≥ 1280px: sütun araları geniş; Vizyon/Misyon gövdesi 20px */
+  @media (min-width: 1280px) {
+    .hikaye-izgara {
+      gap: var(--bosluk-7);
+    }
+
+    .degerler-izgara {
+      gap: var(--bosluk-8);
+    }
+
+    .deger p {
+      font-size: 1.25rem;
     }
   }
 </style>
