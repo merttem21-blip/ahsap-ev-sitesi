@@ -11,7 +11,7 @@ export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 // ayrıca üretilir: src/lib/paylasim.ts
 export const varsayilanGorsel = '/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01-1600.webp';
 
-// Ana sayfa hero fotoğrafı: kaynak arsiv/gorseller/ahsap-ev/hero-anasayfa.jpeg. Mobil sürüm A-frame'e kırpılmış
+// Ana sayfa hero fotoğrafı: kaynak arsiv/gorseller/ahsap-ev/hero-anasayfa.jpeg. Mobil sürüm üçgen eve kırpılmış
 // dikey kesimdir. Ana sayfanın bağlantı önizlemesi de masaüstü sürümden üretilir (src/lib/paylasim.ts).
 export const heroGorseli = {
   mobil: '/images/hero/hero-mobile.webp',
@@ -21,7 +21,7 @@ export const heroGorseli = {
   masaustu: '/images/hero/hero-desktop.webp',
   width: 1376,
   height: 768,
-  alt: 'Doğa içinde A-frame ve kütük ahşap ev',
+  alt: 'Doğa içinde üçgen ev ve kütük ahşap ev',
 };
 
 // schema.org logo alanı: Google logoyu beyaz zeminde ve raster gösterdiği için açık zemin logosunun PNG'si
@@ -115,6 +115,8 @@ export const menu = [
 // Fotoğraflar public/images/<slug>/<proje-slug>/ altında, projeler src/content/projeler/ altında.
 // giris sayfadaki ilk paragraftır (birincil anahtar kelime burada geçer). Meta başlık h1'den, meta açıklama
 // giris'ten üretilir (src/lib/projeler.ts); böylece arama sonucundaki metin sayfada görünenle aynı kalır.
+// metaGiris (isteğe bağlı): meta açıklamada giris yerine kullanılır; yalnızca eski adı bir kez parantezde
+// taşıyan kategorilerde doludur (Üçgen Ev, Kamelya). Eski adlar sayfada görünmez.
 // googleBasligi (isteğe bağlı): arama sonucundaki başlık, h1'de olmayan aranan kelimeyi ("… Modelleri") taşımak için.
 // " | 2K AHŞAP" eki kodda eklenir, toplam en fazla 60 karakter. Boşsa başlık h1'den üretilir; sayfadaki H1 değişmez.
 // vitrin: kapak fotoğrafı kategoriyi temsil eden projenin slug'ı (yoksa ilk proje).
@@ -177,20 +179,23 @@ export const kategoriler = [
   {
     ad: 'Üçgen Ev',
     slug: 'ucgen-ev',
-    vitrin: 'a-frame-bungalov',
+    vitrin: 'ucgen-ev-bungalov',
     h1: 'Üçgen Ev ve Bungalov Projeleri',
-    googleBasligi: 'Üçgen Ev (A-Frame) Modelleri ve Projeleri',
-    // Eski adı "A-frame" aramalarda da kullanıldığı için girişte (dolayısıyla meta açıklamada) bir kez parantezde geçer
-    giris: 'Üçgen ev (A-frame) formunda tasarlayıp ürettiğimiz ahşap yapı ve bungalov projeleri.',
+    googleBasligi: 'Üçgen Ev Modelleri ve Projeleri',
+    giris: 'Üçgen ev formunda tasarlayıp ürettiğimiz ahşap yapı ve bungalov projeleri.',
+    // Eski ad ("A-frame") aramalarda da kullanıldığı için yalnızca meta açıklamada bir kez parantezde geçer
+    metaGiris: 'Üçgen ev (A-frame) formunda tasarlayıp ürettiğimiz ahşap yapı ve bungalov projeleri.',
     teklifIpucu: 'Üçgen formlu ev ve bungalov',
   },
   {
-    ad: 'Çardak',
-    slug: 'cardak',
-    vitrin: 'sekizgen-otel-cardagi',
-    h1: 'Ahşap Çardak Projeleri',
-    googleBasligi: 'Ahşap Çardak Modelleri ve Bahçe Çardakları',
-    giris: 'Bahçeler, oteller ve tesisler için tasarlayıp ürettiğimiz ahşap çardak projeleri.',
+    ad: 'Kamelya',
+    slug: 'kamelya',
+    vitrin: 'sekizgen-otel-kamelyasi',
+    h1: 'Ahşap Kamelya Projeleri',
+    googleBasligi: 'Ahşap Kamelya Modelleri ve Bahçe Kamelyaları',
+    giris: 'Bahçeler, oteller ve tesisler için tasarlayıp ürettiğimiz ahşap kamelya projeleri.',
+    // Eski ad ("çardak") aramalarda da kullanıldığı için yalnızca meta açıklamada bir kez parantezde geçer
+    metaGiris: 'Bahçeler, oteller ve tesisler için tasarlayıp ürettiğimiz ahşap kamelya (çardak) projeleri.',
     teklifIpucu: 'Bahçe, otel ve tesisler',
   },
   {

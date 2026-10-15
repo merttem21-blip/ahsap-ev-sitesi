@@ -129,14 +129,14 @@ export const sorular: Soru[] = [
     cevap:
       'Dış cephedeki koruyucu boya veya vernik, ahşabı güneş ve yağıştan korumak için belirli aralıklarla yenilenir. Bu aralık iklime, cephenin yönüne ve kullanılan ürüne göre değişir. Teslimde yapınıza uygun bakım önerilerini sizinle paylaşıyoruz.',
     grup: 'teknik-ve-malzeme',
-    kategoriler: ['ucgen-ev', 'cardak', 'otel-bar', 'cocuk-oyun-parki'],
+    kategoriler: ['ucgen-ev', 'kamelya', 'otel-bar', 'cocuk-oyun-parki'],
   },
   {
     soru: 'Ahşap evde hangi ahşap kullanılır?',
     cevap:
       'Ahşap yapılarda genellikle çam ve ladin gibi iğne yapraklı ağaçların kurutulmuş ve koruyucu işlemden geçirilmiş kerestesi tercih edilir. Projenizde kullanılacak ahşap türü ve koruyucu işlemler yapının kullanım amacına göre seçilir ve teklifte açıkça belirtilir.',
     grup: 'teknik-ve-malzeme',
-    kategoriler: ['cardak', 'cocuk-oyun-parki'],
+    kategoriler: ['kamelya', 'cocuk-oyun-parki'],
   },
 
   // Teslimat ve Kurulum
@@ -159,7 +159,7 @@ export const sorular: Soru[] = [
     cevap:
       'Kalıcı ahşap yapılar sağlam ve düzgün bir temele oturur. Temelin türü; yapının büyüklüğüne, zemin özelliklerine ve arazinin eğimine göre belirlenir. Temel işinin kapsamı ve kimin tarafından yapılacağı teklifte açıkça yazılır.',
     grup: 'teslimat-ve-kurulum',
-    kategoriler: ['cardak'],
+    kategoriler: ['kamelya'],
   },
 
   // Garanti ve Destek
@@ -183,7 +183,7 @@ export const sorular: Soru[] = [
     cevap:
       'Evet. Elinizdeki plan, çizim veya örnek fotoğraf üzerinden çalışabiliriz. Planı ahşap yapıya ve arazinize uygun hâle getirmek için gereken düzenlemeleri sizinle birlikte yapıyoruz.',
     grup: 'ozel-tasarim',
-    kategoriler: ['villa', 'tiny-house', 'cardak', 'ahsap-cami', 'ozel-tasarim'],
+    kategoriler: ['villa', 'tiny-house', 'kamelya', 'ahsap-cami', 'ozel-tasarim'],
   },
   {
     soru: 'Ahşap ev tasarımında sonradan değişiklik yapılabilir mi?',
@@ -195,7 +195,7 @@ export const sorular: Soru[] = [
   {
     soru: 'Otel ve işletmeler için ahşap yapı yapıyor musunuz?',
     cevap:
-      'Evet. Otel, kamp ve tatil işletmeleri için bungalov, çardak, bar ve konaklama yapıları tasarlayıp üretiyoruz. Yapıların sayısı, yerleşimi ve takvimi işletmenize göre planlanır ve teklifte netleştirilir.',
+      'Evet. Otel, kamp ve tatil işletmeleri için bungalov, kamelya, bar ve konaklama yapıları tasarlayıp üretiyoruz. Yapıların sayısı, yerleşimi ve takvimi işletmenize göre planlanır ve teklifte netleştirilir.',
     grup: 'ozel-tasarim',
     kategoriler: ['bungalov', 'otel-bar'],
   },

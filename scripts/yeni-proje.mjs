@@ -63,10 +63,20 @@ const taslak = (kategori, proje, fotolar) =>
 const yeniler = [];
 const uyarilar = [];
 
+// Adı değişen projelerin fotoğrafları eski klasörde durur (kayıttaki fotograf_klasoru); bu klasörler kayıtlı sayılır
+const eskiKlasorler = new Set(
+  fs
+    .readdirSync(PROJELER)
+    .filter((d) => d.endsWith('.md'))
+    .flatMap((d) =>
+      [...fs.readFileSync(path.join(PROJELER, d), 'utf8').matchAll(/^fotograf_klasoru:\s*(\S+)\s*$/gm)].map((m) => m[1])
+    )
+);
+
 for (const kategori of kategoriler) {
   for (const proje of klasorler(path.join(GORSELLER, kategori))) {
     const kayit = path.join(PROJELER, `${proje}.md`);
-    if (fs.existsSync(kayit)) continue;
+    if (fs.existsSync(kayit) || eskiKlasorler.has(`${kategori}/${proje}`)) continue;
 
     const fotolar = fs
       .readdirSync(path.join(GORSELLER, kategori, proje))

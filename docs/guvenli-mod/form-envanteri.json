@@ -183,14 +183,14 @@
             "Villa",
             "Tiny House",
             "Üçgen Ev",
-            "Çardak",
+            "Kamelya",
             "Otel-Bar",
             "Çocuk Oyun Parkı",
             "Ahşap Cami",
             "Özel Tasarım",
             "Diğer"
           ],
-          "not": "Seçenekler src/data/site.ts kategorilerinin adlarıdır (sıra da oradan); sondaki \"Diğer\" yalnızca teklif sayfasında eklenir (src/pages/teklif-al.astro), kategori değildir. 12 Ekim 2026, müşteri onaylı: \"A-Frame\" → \"Üçgen Ev\", \"Ahşap Cami\" eklendi. 13 Ekim 2026, müşteri onaylı: \"Diğer\" eklendi (alt metni \"Listede olmayan bir yapı\"). Alan adı (yapi_tipi) değişmedi."
+          "not": "Seçenekler src/data/site.ts kategorilerinin adlarıdır (sıra da oradan); sondaki \"Diğer\" yalnızca teklif sayfasında eklenir (src/pages/teklif-al.astro), kategori değildir. 12 Ekim 2026, müşteri onaylı: \"A-Frame\" → \"Üçgen Ev\", \"Ahşap Cami\" eklendi. 13 Ekim 2026, müşteri onaylı: \"Diğer\" eklendi (alt metni \"Listede olmayan bir yapı\"). 15 Ekim 2026, müşteri talebi: \"Çardak\" → \"Kamelya\" (gönderilen değer ve e-postadaki \"Yapı tipi: Kamelya\"); ?tip=cardak / ?tip=a-frame, eski ?proje= adresleri ve taslakta kalan \"Çardak\"/\"A-Frame\" yeni seçeneği seçili açar (src/data/eski-adlar.ts). Alan adı (yapi_tipi) değişmedi."
         },
         {
           "ad": "proje_aciklamasi",

@@ -272,6 +272,7 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
 
 <script>
   import { formuKur, kural } from '../scripts/form';
+  import { guncelKategori, guncelProje } from '../data/eski-adlar';
 
   const form = document.querySelector<HTMLFormElement>('[data-teklif]');
   const kart = document.querySelector<HTMLElement>('[data-teklif-kart]');
@@ -386,9 +387,10 @@ const adimlar = ['Yapı', 'Arsa', 'İletişim'];
       string,
       { baslik: string; kategori: string }
     >;
-    const projeSlug = parametre.get('proje') ?? '';
+    // Eski linklerdeki adı değişen proje ve kategori değerleri (cardak, a-frame …) yenisine çevrilir (src/data/eski-adlar.ts)
+    const projeSlug = guncelProje(parametre.get('proje') ?? '');
     const proje = Object.prototype.hasOwnProperty.call(liste, projeSlug) ? liste[projeSlug] : undefined;
-    const yapiSlug = (proje?.kategori ?? parametre.get('tip') ?? parametre.get('yapi') ?? '').toLowerCase();
+    const yapiSlug = guncelKategori(proje?.kategori ?? parametre.get('tip') ?? parametre.get('yapi') ?? '').toLowerCase();
     const yapiRadyolari = [...form.querySelectorAll<HTMLInputElement>('input[name="yapi_tipi"]')];
     const urlTipi = yapiRadyolari.find((r) => r.dataset.slug === yapiSlug);
     if (urlTipi) urlTipi.checked = true;

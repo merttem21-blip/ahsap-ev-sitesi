@@ -1,7 +1,9 @@
 ---
-baslik: Sekizgen Otel Çardağı
-kategori: cardak
+baslik: Sekizgen Otel Kamelyası
+kategori: kamelya
 kapak: sekizgen-otel-cardagi-01
+# Fotoğraflar ad değişikliğinden önceki klasörde durur (15 Ekim 2026); dosya yolları taşınmadı.
+fotograf_klasoru: cardak/sekizgen-otel-cardagi
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:
 # Şu an sitede gösterilmez; sonraki özellikler için hazırlık. Hepsi boş bırakılabilir.
@@ -12,25 +14,25 @@ etiketler:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: sekizgen-otel-cardagi-01
-    alt: "Sekizgen otel çardağı – havuz başında yuvarlak deck üzerinde"
+    alt: "Sekizgen otel kamelyası – havuz başında yuvarlak deck üzerinde"
   - dosya: sekizgen-otel-cardagi-05
-    alt: "Sekizgen otel çardağı – otel binası önünde camlı bölümler"
+    alt: "Sekizgen otel kamelyası – otel binası önünde camlı bölümler"
   - dosya: sekizgen-otel-cardagi-04
-    alt: "Sekizgen otel çardağı – havuz ve otel ile uzaktan görünüm"
+    alt: "Sekizgen otel kamelyası – havuz ve otel ile uzaktan görünüm"
   - dosya: sekizgen-otel-cardagi-02
-    alt: "Sekizgen otel çardağı – kütük görünümlü kapalı duvarlar"
+    alt: "Sekizgen otel kamelyası – kütük görünümlü kapalı duvarlar"
   - dosya: sekizgen-otel-cardagi-03
-    alt: "Sekizgen otel çardağı – yakından shingle çatı ve saçak"
+    alt: "Sekizgen otel kamelyası – yakından shingle çatı ve saçak"
   - dosya: sekizgen-otel-cardagi-08
-    alt: "Sekizgen otel çardağı – ahşap deck ve açık pencereler"
+    alt: "Sekizgen otel kamelyası – ahşap deck ve açık pencereler"
   - dosya: sekizgen-otel-cardagi-09
-    alt: "Sekizgen otel çardağı – çimenlik kenarında yan görünüm"
+    alt: "Sekizgen otel kamelyası – çimenlik kenarında yan görünüm"
   - dosya: sekizgen-otel-cardagi-10
-    alt: "Sekizgen otel çardağı – geniş yuvarlak ahşap deck"
+    alt: "Sekizgen otel kamelyası – geniş yuvarlak ahşap deck"
   - dosya: sekizgen-otel-cardagi-06
-    alt: "Sekizgen otel çardağı – kemerli girişli açık çardak"
+    alt: "Sekizgen otel kamelyası – kemerli girişli açık kamelya"
   - dosya: sekizgen-otel-cardagi-07
-    alt: "Sekizgen otel çardağı – içeriden ışınsal ahşap tavan kirişleri"
+    alt: "Sekizgen otel kamelyası – içeriden ışınsal ahşap tavan kirişleri"
 
 # Teknik şartname — boş bırakılan alanlar sitede gösterilmez.
 # Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" (kesin süre veya fiyat taahhüdü yazılmaz)

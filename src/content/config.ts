@@ -1,5 +1,5 @@
 // Projelerin tek kaynağı: src/content/projeler/<proje-slug>.md (bir dosya = bir proje)
-// Fotoğraflar: public/images/<kategori>/<proje-slug>/<dosya>-{600,1000,1600}.webp
+// Fotoğraflar: public/images/<kategori>/<proje-slug>/<dosya>-{600,1000,1600}.webp (adı değişen projede fotograf_klasoru)
 // Yeni proje ekleme rehberi: docs/yeni-proje-ekleme.md (taslak kayıt: npm run yeni-proje)
 import { defineCollection, z } from 'astro:content';
 import { kategoriler } from '../data/site';
@@ -17,6 +17,13 @@ const projeler = defineCollection({
       baslik: z.string().trim().min(3, 'baslik: proje adını yazın'),
       kategori: z.enum(kategoriSluglari),
       kapak: z.string(),
+      // Adı ve adresi sonradan değişen projede fotoğrafların durduğu eski klasör ("<kategori>/<proje-slug>").
+      // Boşsa public/images/<kategori>/<proje-slug>/ kullanılır. Dosya yolları ad değişikliğinde taşınmaz.
+      fotograf_klasoru: z
+        .string()
+        .trim()
+        .nullish()
+        .transform((v) => v || null),
       // İl/ilçe; yalnızca müşteri izin verdiyse yazılır. Boşsa galeri ve alt metinlerde gösterilmez.
       konum: z.string().trim().nullish(),
       // Sitede gösterilmeyen, sonraki özellikler için hazırlık alanları; hepsi boş bırakılabilir.

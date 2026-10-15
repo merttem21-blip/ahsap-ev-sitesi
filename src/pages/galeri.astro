@@ -72,7 +72,7 @@ const sizes =
 
 <Layout
   title="Ahşap Ev ve Yapı Fotoğrafları: Proje Galerisi | 2K AHŞAP"
-  description="Ahşap ev, bungalov, villa, tiny house, çardak ve oyun evi fotoğraflarımız tek galeride. Kategoriye göre süzün, beğendiğiniz yapı için teklif alın."
+  description="Ahşap ev, bungalov, villa, tiny house, kamelya ve oyun evi fotoğraflarımız tek galeride. Kategoriye göre süzün, beğendiğiniz yapı için teklif alın."
   whatsappMesaj="Merhaba, sitenizdeki fotoğraf galerisini inceledim. Ahşap yapı projem hakkında bilgi almak istiyorum."
 >
   <SayfaBasi
@@ -80,10 +80,10 @@ const sizes =
     baslik="Ahşap Yapı Fotoğraf Galerisi"
     baslikId="galeri-baslik"
     foto={{
-      proje: 'a-frame-bungalov',
+      proje: 'ucgen-ev-bungalov',
       dosya: 'a-frame-bungalov-01',
       konum: 'center 70%',
-      // Telefonda A-frame (tepe %46, ışıklı pencere %52–65) başlık bloğunun altında kalmasın: tepe kutunun üstüne gelir
+      // Telefonda üçgen ev (tepe %46, ışıklı pencere %52–65) başlık bloğunun altında kalmasın: tepe kutunun üstüne gelir
       mobil: { olcek: 1.8, odak: '54.5% 100%' },
     }}
   >
@@ -185,6 +185,7 @@ const sizes =
 
 <script>
   import { odagiTut, odaklanabilirler } from '../scripts/odak';
+  import { guncelKategori } from '../data/eski-adlar';
 
   type ProjeBilgi = { ad: string; kategori: string; konum: string | null; yol: string; teklif: string };
 
@@ -316,9 +317,11 @@ const sizes =
 
     // --- İlk durum: ?kategori= ve ?foto= ---
     const parametre = new URLSearchParams(location.search);
-    const istenenKategori = parametre.get('kategori') ?? '';
+    // Eski kategori adı (?kategori=cardak) yenisine çevrilir ve adres yeni adla yazılır; tanınmayan değer silinir
+    const adresKategorisi = parametre.get('kategori') ?? '';
+    const istenenKategori = guncelKategori(adresKategorisi);
     filtrele(filtreDugmeleri.some((d) => d.dataset.filtre === istenenKategori) ? istenenKategori : '');
-    if (istenenKategori && !filtre) adresYaz({ kategori: null });
+    if (adresKategorisi !== filtre) adresYaz({ kategori: filtre || null });
     gorunurlukYaz();
     liste.classList.add('dizildi');
     sonGenislik = liste.clientWidth;

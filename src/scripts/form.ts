@@ -11,6 +11,7 @@
 //   aktarımda kalır. Depolama kapalıysa form taslaksız çalışır.
 // - Kullanıcı verisi sayfaya yalnızca textContent ya da alan değeri olarak yazılır ve konsola yazdırılmaz.
 import { TASLAK, taslakOku } from './taslak';
+import { guncelYapiTipi } from '../data/eski-adlar';
 
 type Kural = (deger: string) => string | null; // hata mesajı ya da null
 type Alan = [ad: string, etiket: string, bicim?: (deger: string) => string];
@@ -171,7 +172,8 @@ export function formuKur(form: HTMLFormElement, ayar: FormAyari) {
       const d = alanlar[g.name];
       if (typeof d !== 'string') continue;
       if (g instanceof HTMLInputElement && g.type === 'radio') {
-        if (g.value === d) g.checked = true;
+        // Adı değişen yapı tipi (taslakta "Çardak" kalmışsa "Kamelya") yeni seçeneğe denk gelir
+        if (g.value === guncelYapiTipi(d)) g.checked = true;
       } else if (g instanceof HTMLSelectElement) {
         if ([...g.options].some((o) => o.value === d)) g.value = d;
       } else g.value = g.maxLength >= 0 ? d.slice(0, g.maxLength) : d;

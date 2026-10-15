@@ -1,7 +1,9 @@
 ---
-baslik: Verandalı Küçük A-Frame
+baslik: Verandalı Küçük Üçgen Ev
 kategori: ucgen-ev
 kapak: verandali-kucuk-a-frame-01
+# Fotoğraflar ad değişikliğinden önceki klasörde durur (15 Ekim 2026); dosya yolları taşınmadı.
+fotograf_klasoru: ucgen-ev/verandali-kucuk-a-frame
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:
 # Şu an sitede gösterilmez; sonraki özellikler için hazırlık. Hepsi boş bırakılabilir.
@@ -12,17 +14,17 @@ etiketler:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: verandali-kucuk-a-frame-01
-    alt: "Verandalı küçük A-frame – ahşap deck ve shingle kaplı çatı"
+    alt: "Verandalı küçük üçgen ev – ahşap deck ve shingle kaplı çatı"
   - dosya: verandali-kucuk-a-frame-02
-    alt: "Verandalı küçük A-frame – bahçede yandan genel görünüm"
+    alt: "Verandalı küçük üçgen ev – bahçede yandan genel görünüm"
   - dosya: verandali-kucuk-a-frame-03
-    alt: "Verandalı küçük A-frame – karşıdan üçgen ön cephe"
+    alt: "Verandalı küçük üçgen ev – ön cepheden görünüm"
   - dosya: verandali-kucuk-a-frame-04
-    alt: "Verandalı küçük A-frame – yuvarlak pencere ve camlı giriş kapısı"
+    alt: "Verandalı küçük üçgen ev – yuvarlak pencere ve camlı giriş kapısı"
   - dosya: verandali-kucuk-a-frame-05
-    alt: "Verandalı küçük A-frame – çit önünde deck ve ön cephe"
+    alt: "Verandalı küçük üçgen ev – çit önünde deck ve ön cephe"
   - dosya: verandali-kucuk-a-frame-06
-    alt: "Verandalı küçük A-frame – taş duvarlı bahçede uzaktan görünüm"
+    alt: "Verandalı küçük üçgen ev – taş duvarlı bahçede uzaktan görünüm"
 
 # Teknik şartname — boş bırakılan alanlar sitede gösterilmez.
 # Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" (kesin süre veya fiyat taahhüdü yazılmaz)

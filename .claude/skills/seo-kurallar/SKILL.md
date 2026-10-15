@@ -22,8 +22,8 @@ Her sayfanın **tek bir birincil** anahtar kelimesi olur. İki sayfa aynı birin
 | Bungalov | `/bungalov` | ahşap bungalov | bungalov ev, bungalov modelleri |
 | Villa | `/villa` | ahşap villa | ahşap villa projeleri |
 | Tiny House | `/tiny-house` | tiny house | tiny house modelleri, küçük ahşap ev |
-| Üçgen Ev | `/ucgen-ev` | üçgen ev | a-frame ev, a-frame bungalov (eski adı; 12 Ekim 2026'da `/a-frame`'den 301) |
-| Çardak | `/cardak` | ahşap çardak | bahçe çardağı |
+| Üçgen Ev | `/ucgen-ev` | üçgen ev | üçgen ev bungalov (eski adı "A-frame" yalnızca meta açıklamada bir kez parantezde; `/a-frame`'den 301) |
+| Kamelya | `/kamelya` | ahşap kamelya | bahçe kamelyası (eski adı "çardak" yalnızca meta açıklamada bir kez parantezde; 15 Ekim 2026'da `/cardak`'tan 301) |
 | Otel-Bar | `/otel-bar` | ahşap bar | otel ahşap yapıları |
 | Çocuk Oyun Parkı | `/cocuk-oyun-parki` | ahşap çocuk oyun parkı | ahşap oyun evi |
 | Ahşap Cami | `/ahsap-cami` | ahşap cami | ahşap cami projeleri |
@@ -63,7 +63,7 @@ Bu liste başlangıç içindir. Yayından sonra Google Search Console verisine g
 
 | Sayfa | Örnek | Karakter |
 |---|---|---|
-| Ana sayfa | Bungalovdan villaya, tiny house'tan çardağa; doğayla uyumlu, size özel ahşap ev ve yapılar tasarlayıp üretiyoruz. Projelerimizi inceleyin, teklif alın. | 151 |
+| Ana sayfa | Bungalovdan villaya, tiny house'tan kamelyaya; doğayla uyumlu, size özel ahşap ev ve yapılar tasarlayıp üretiyoruz. Projelerimizi inceleyin, teklif alın. | 153 |
 | Kategori | Bahçeniz, tatil eviniz veya turizm tesisiniz için ürettiğimiz ahşap bungalov projeleri. Proje fotoğraflarını inceleyin, 2K AHŞAP'tan teklif alın. | 145 |
 | Proje | Ön verandalı, iki katlı ahşap bungalov projemizin fotoğrafları ve teknik şartnamesi. Benzer bir proje için 2K AHŞAP'tan teklif alın. | 132 |
 
@@ -249,6 +249,7 @@ Google siteyi mobil sürümüne göre değerlendirir. Responsive tasarım kurall
 - `<meta name="robots" content="noindex">` taşır; sitemap'e girmez.
 - **Soft 404 yapılmaz:** bulunamayan her URL ana sayfaya yönlendirilmez.
 - Kaldırılan veya adı değişen bir proje için en yakın sayfaya **301** yönlendirmesi yapılır (yeni proje URL'si veya kategori sayfası). Gerçek 301 için `vercel.json` içindeki `redirects` kullanılır; adaptörsüz statik Astro'nun `redirects` ayarı yalnızca meta-refresh sayfası üretir.
+- Yönlendirme zinciri kurulmaz: her eski adres tek adımda son adrese gider. Ad yeniden değişirse önceki kuralların hedefi de güncellenir (ör. `/a-frame/a-frame-bungalov` → doğrudan `/ucgen-ev/ucgen-ev-bungalov`). Eski adın sorgu parametrelerindeki karşılığı (`?kategori=`, `?tip=`, `?proje=`) `src/data/eski-adlar.ts`'e eklenir.
 
 ## 13. Yapma ❌
 

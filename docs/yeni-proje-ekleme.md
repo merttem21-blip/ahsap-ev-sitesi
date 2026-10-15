@@ -31,7 +31,7 @@ Kurallar:
 - Yalnızca küçük harf, rakam ve tire (`-`) kullanılır.
 - Türkçe harfler Latin harfe çevrilir: ç → c, ğ → g, ı → i, ö → o, ş → s, ü → u
 - Boşluk yerine tire yazılır.
-- 3–6 kelimeyle yapıyı anlatır ve yapı türünü içerir (bungalov, villa, çardak …). Sıra numarası veya tarih kullanılmaz.
+- 3–6 kelimeyle yapıyı anlatır ve yapı türünü içerir (bungalov, villa, kamelya …). Sıra numarası veya tarih kullanılmaz.
 - Müşterinin adı kullanılmaz. Yer adı yalnızca müşteri izin verirse eklenir (ör. `sapanca-orman-bungalovu`).
 - Sitedeki başka bir projeyle aynı olamaz.
 - Yayınlandıktan sonra değiştirilmez; değişirse sayfanın adresi de değişir.
@@ -39,7 +39,7 @@ Kurallar:
 | Proje adı | Kısa ad |
 |---|---|
 | Kemerli Pod Bungalov | `kemerli-pod-bungalov` |
-| Taş Duvarlı Bahçe Çardağı | `tas-duvarli-bahce-cardagi` |
+| Taş Duvarlı Bahçe Kamelyası | `tas-duvarli-bahce-kamelyasi` |
 | Römorklu Tiny House | `romorklu-tiny-house` |
 
 Bu rehberde bundan sonra bu ada **proje-adı** diyeceğiz.
@@ -53,7 +53,7 @@ Bu rehberde bundan sonra bu ada **proje-adı** diyeceğiz.
 | Villa | `villa` |
 | Tiny House | `tiny-house` |
 | Üçgen Ev | `ucgen-ev` |
-| Çardak | `cardak` |
+| Kamelya | `kamelya` |
 | Otel-Bar | `otel-bar` |
 | Çocuk Oyun Parkı | `cocuk-oyun-parki` |
 | Ahşap Cami | `ahsap-cami` |

@@ -5,7 +5,9 @@ import { kategoriler, type Kategori } from '../data/site';
 export type Proje = CollectionEntry<'projeler'>;
 
 export const projeYolu = (p: Proje) => `/${p.data.kategori}/${p.slug}`;
-export const fotoYolu = (p: Proje, dosya: string) => `/images/${p.data.kategori}/${p.slug}/${dosya}`;
+// fotograf_klasoru doluysa fotoğraflar adı değişen projenin eski klasöründen okunur (dosya yolları değişmez)
+export const fotoYolu = (p: Proje, dosya: string) =>
+  `/images/${p.data.fotograf_klasoru ?? `${p.data.kategori}/${p.slug}`}/${dosya}`;
 export const kapakFotosu = (p: Proje) => p.data.fotograflar.find((f) => f.dosya === p.data.kapak)!;
 export const projeKategorisi = (p: Proje) => kategoriler.find((k) => k.slug === p.data.kategori)!;
 
@@ -82,10 +84,12 @@ export function kategoriMetaBasligi(k: Kategori) {
 }
 
 export function kategoriMetaAciklamasi(k: Kategori) {
+  // metaGiris: eski adı bir kez parantezde taşıyan giriş (site.ts); yoksa sayfadaki giriş
+  const giris = k.metaGiris ?? k.giris;
   return sigan([
-    `${k.giris} Proje fotoğraflarını inceleyin, size özel tasarım için 2K AHŞAP'tan teklif alın.`,
-    `${k.giris} Proje fotoğraflarını inceleyin, 2K AHŞAP'tan teklif alın.`,
-    `${k.giris} Fotoğrafları inceleyin, teklif alın.`,
+    `${giris} Proje fotoğraflarını inceleyin, size özel tasarım için 2K AHŞAP'tan teklif alın.`,
+    `${giris} Proje fotoğraflarını inceleyin, 2K AHŞAP'tan teklif alın.`,
+    `${giris} Fotoğrafları inceleyin, teklif alın.`,
   ]);
 }
 

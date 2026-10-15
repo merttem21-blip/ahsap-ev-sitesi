@@ -1,7 +1,9 @@
 ---
-baslik: Taş Duvarlı Bahçe Çardağı
-kategori: cardak
+baslik: Taş Duvarlı Bahçe Kamelyası
+kategori: kamelya
 kapak: tas-duvarli-bahce-cardagi-01
+# Fotoğraflar ad değişikliğinden önceki klasörde durur (15 Ekim 2026); dosya yolları taşınmadı.
+fotograf_klasoru: cardak/tas-duvarli-bahce-cardagi
 # Konum (ör. "Sapanca, Sakarya"): yalnızca müşteri izin verdiyse yazılır; boşsa sitede gösterilmez.
 konum:
 # Şu an sitede gösterilmez; sonraki özellikler için hazırlık. Hepsi boş bırakılabilir.
@@ -12,15 +14,15 @@ etiketler:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: tas-duvarli-bahce-cardagi-01
-    alt: "Taş duvarlı bahçe çardağı – yeşil çatılı çardak ve depo kutusu"
+    alt: "Taş duvarlı bahçe kamelyası – yeşil çatılı kamelya ve depo kutusu"
   - dosya: tas-duvarli-bahce-cardagi-02
-    alt: "Taş duvarlı bahçe çardağı – ormanlık bahçede genel görünüm"
+    alt: "Taş duvarlı bahçe kamelyası – ormanlık bahçede genel görünüm"
   - dosya: tas-duvarli-bahce-cardagi-03
-    alt: "Taş duvarlı bahçe çardağı – korkuluklu giriş ve iç oturma alanı"
+    alt: "Taş duvarlı bahçe kamelyası – korkuluklu giriş ve iç oturma alanı"
   - dosya: tas-duvarli-bahce-cardagi-04
-    alt: "Taş duvarlı bahçe çardağı – şömine ve ahşap oturma bankları"
+    alt: "Taş duvarlı bahçe kamelyası – şömine ve ahşap oturma bankları"
   - dosya: tas-duvarli-bahce-cardagi-05
-    alt: "Taş duvarlı bahçe çardağı – köşe bank ve ortadaki asma şömine"
+    alt: "Taş duvarlı bahçe kamelyası – köşe bank ve ortadaki asma şömine"
 
 # Teknik şartname — boş bırakılan alanlar sitede gösterilmez.
 # Örnek: kapali_alan_m2: 85 · kat_sayisi: 1 · oda_sayisi: "2+1" (kesin süre veya fiyat taahhüdü yazılmaz)

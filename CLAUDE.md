@@ -21,7 +21,7 @@
 - **Kuruluş Yılı:** 2015
 - **Çalışan Sayısı:** 15
 - **Tamamlanmış Projeler:** 300+
-- **Hizmet Alanları:** Bungalov, Villa, Tiny House, A-Frame, Çardak, Otel-Bar, Çocuk Oyun Parkı
+- **Hizmet Alanları:** Bungalov, Villa, Tiny House, Üçgen Ev, Kamelya, Otel-Bar, Çocuk Oyun Parkı
 
 ## Sitenin Amacı
 - Potansiyel müşterilere şirketin hizmetlerini profesyonel şekilde göstermek
@@ -57,7 +57,7 @@ Konum: sitede kullanılanlar `public/logo/`, yalnızca kaynak olanlar `arsiv/log
 
 ## Sayfalar ve Fonksiyonları
 1. **Ana Sayfa (/)** → Hero, Kategoriler, Öne çıkan projeler, Hakkımızda
-2. **Kategoriler (/kategoriler)** → 10 kategori (tek kaynak: `src/data/site.ts`): Ahşap Ev, Bungalov, Villa, Tiny House, Üçgen Ev, Çardak, Otel-Bar, Çocuk Oyun Parkı, Ahşap Cami, Özel Tasarım
+2. **Kategoriler (/kategoriler)** → 10 kategori (tek kaynak: `src/data/site.ts`): Ahşap Ev, Bungalov, Villa, Tiny House, Üçgen Ev, Kamelya, Otel-Bar, Çocuk Oyun Parkı, Ahşap Cami, Özel Tasarım
 3. **Kategori Detayı (/kategori/:id)** → Filtren/seçilmiş kategori fotoğrafları galeri
 4. **Proje Detayı (/proje/:id)** → Büyük fotoğraf, teknik şartname tablosu, "Teklif Al" butonu
    - **Galeri (/galeri)** → Tüm proje fotoğrafları; kategori filtresi (?kategori=), masonry ızgara, ışık kutusu (?foto=)
@@ -72,6 +72,7 @@ Konum: sitede kullanılanlar `public/logo/`, yalnızca kaynak olanlar `arsiv/log
 - Ahşabın genel faydaları genel bilgi olarak yazılabilir.
 - Metinler sade, güven veren, premium tonda Türkçe olur.
 - Bu kural, marka-stili'ndeki "300+ proje" gibi rakam örneklerinden önce gelir; yeni metinlere proje sayısı yazılmaz.
+- Yapı adları "Kamelya" ve "Üçgen Ev"dir (müşteri talebi, 15 Ekim 2026). Eski adlar "Çardak/çardak" ve "A-Frame/A-frame" sitenin görünen hiçbir yerinde (metin, başlık, proje adı, alt metin, form seçeneği, adres) kullanılmaz. Tek istisna: kategori sayfalarının meta açıklamasında birer kez parantez içinde "Üçgen ev (A-frame)" ve "kamelya (çardak)" (`src/data/site.ts` → `metaGiris`). Eski adresler `vercel.json`'da 301 ile, eski sorgu parametreleri `src/data/eski-adlar.ts` ile yeni adlara gider.
 
 ## Yapma
 - ❌ Stok fotoğraf kullan; sadece müşteri projeleri
