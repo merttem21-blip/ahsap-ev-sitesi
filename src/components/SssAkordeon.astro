@@ -10,8 +10,8 @@
 // değişir, kapanırken cevap solar; açılırken cevap opacity ve transform ile belirir. Desteklemeyen tarayıcıda
 // yükseklik anında değişir. Hareket azaltılmışsa animasyon yok. Yükseklik animasyonu marka-stili §6'nın
 // müşteri onaylı istisnasıdır (15 Ekim 2026).
-// Zıplama yok: tıklanan sorunun ekrandaki yeri korunur (yukarıdaki açık cevap kapanırken sayfa aynı karede
-// dengelenir); soru başlığı yapışkan header'ın altında kalmaz.
+// Zıplama yok: tıklanan sorunun başlığı ekranda tıklandığı yerde kalır (yukarıdaki açık cevap kapanırken sayfa
+// aynı karede dengelenir; aşağıdaki kapanırken zaten yerinde durur). Header'a yakın başlık da aşağı indirilmez.
 // Paylaşılabilir link: her sorunun kalıcı id'si var (src/data/sss.ts). Adres #kimlik ile açılınca o soru açık
 // gelir; soru açılınca adres çubuğu sayfa geçmişine kayıt eklemeden (replaceState) güncellenir.
 import { ikon } from '../data/ikonlar';
@@ -85,10 +85,11 @@ const { sorular } = Astro.props;
     return oge.getBoundingClientRect().top - kayma;
   }
 
-  // Tıklanan sorunun başlığı, cevaplar açılıp kapanırken ekrandaki yerinde tutulur: her karede başlığın kaydığı
-  // kadar sayfa kaydırılır (yukarıdaki açık cevap kapanırken soru yukarı kaçmaz). Başlık yapışkan header'ın
-  // altına denk geliyorsa (scroll-padding-top) aynı sürede header'ın altına iner. Bu sırada tarayıcının kendi
-  // kaydırma sabitlemesi kapatılır (iki düzeltme üst üste binmesin); kullanıcı kaydırmaya başlarsa bırakılır.
+  // Tıklanan sorunun başlığı, cevaplar açılıp kapanırken ekranda tıklandığı yerde tutulur: her karede başlığın
+  // kaydığı kadar sayfa kaydırılır (yukarıdaki açık cevap kapanırken soru yukarı kaçmaz). Başlık yapışkan header'a
+  // yakın olsa da yerinden oynatılmaz (20 Ekim 2026'ya kadar scroll-padding-top'a, 96px'e indiriliyordu; sayfa
+  // 6–50px kayıyordu). Bu sırada tarayıcının kendi kaydırma sabitlemesi kapatılır (iki düzeltme üst üste binmesin);
+  // kullanıcı kaydırmaya başlarsa bırakılır.
   let aktif: object | null = null;
 
   function dengelemeyiBitir() {
@@ -102,16 +103,12 @@ const { sorular } = Astro.props;
     document.body.style.overflowAnchor = 'none';
 
     const ilk = ekranUstu(ozet);
-    const hedef = Math.max(ilk, parseFloat(kok.scrollPaddingTop) || 0);
-    const sure = azHareket.matches ? 0 : SURE;
-    const basla = performance.now();
-    const bitis = basla + sure + 100; // kapanma ve açılma geçişlerinin ikisi de biter
+    // Kapanma ve açılma geçişlerinin ikisi de biter (hareket azaltılmışsa geçiş yok, birkaç kare yeter)
+    const bitis = performance.now() + (azHareket.matches ? 0 : SURE) + 100;
 
     const adim = (simdi: number) => {
       if (aktif !== benim) return;
-      const t = sure ? Math.min(1, Math.max(0, (simdi - basla) / sure)) : 1;
-      const istenen = ilk + (hedef - ilk) * (1 - (1 - t) ** 3);
-      const fark = ekranUstu(ozet) - istenen;
+      const fark = ekranUstu(ozet) - ilk;
       if (Math.abs(fark) >= 0.5) kaydir(fark);
       if (simdi < bitis) requestAnimationFrame(adim);
       else dengelemeyiBitir();
