@@ -1,6 +1,8 @@
 ---
 // İletişim: solda iletişim bilgileri ve harita, sağda kısa form. Gönderim: src/scripts/form.ts.
-// Harita yalnızca tıklanınca Google Haritalar'dan yüklenir (seo-kurallar §10; çerez ve hız).
+// Harita yalnızca "Haritayı yükle"ye basınca Google Haritalar'dan yüklenir (seo-kurallar §10; çerez ve hız). O zamana
+// kadar sitede barındırılan statik bir harita görseli durur (scripts/statik-harita.mjs, © OpenStreetMap); konum
+// işareti görselde konumun üstündedir. JS kapalıysa görsel ve "Google Haritalar'da aç" linki görünür, düğme görünmez.
 import { siWhatsapp } from 'simple-icons';
 import Layout from '../layouts/Layout.astro';
 import SayfaBasi from '../components/SayfaBasi.astro';
@@ -10,7 +12,10 @@ import KvkkOnay from '../components/form/KvkkOnay.astro';
 import FormDurum from '../components/form/FormDurum.astro';
 import { firma, whatsappLinki } from '../data/site';
 import { ikon } from '../data/ikonlar';
+import { gorsel } from '../lib/gorsel';
 import '../styles/form.css';
+
+const haritaGorseli = await gorsel('/images/harita/konum-haritasi');
 
 const whatsappMesaj = 'Merhaba, 2K AHŞAP web sitenizden yazıyorum. Ahşap yapı projem hakkında bilgi almak istiyorum.';
 
@@ -71,11 +76,32 @@ const kanallar = [
         }
       </ul>
 
-      <div class="harita" data-harita data-kaynak={firma.haritaYerlestirme} hidden>
-        <svg class="ikon harita-ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
-        <p>Harita, Google Haritalar'dan yüklenir.</p>
-        <button type="button" class="dugme" data-harita-goster>Haritayı göster</button>
+      <div class="harita" data-harita data-kaynak={firma.haritaYerlestirme}>
+        <img
+          class="harita-gorsel"
+          src={haritaGorseli.src}
+          srcset={haritaGorseli.srcset}
+          sizes="(min-width: 1280px) 480px, (min-width: 1024px) 38vw, 100vw"
+          width={haritaGorseli.width}
+          height={haritaGorseli.height}
+          alt="2K AHŞAP'ın Pendik Kaynarca'daki konumunu gösteren harita"
+          loading="lazy"
+          decoding="async"
+        />
+        <svg class="ikon harita-isaret" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
+        <p class="harita-kaynak">
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer"
+            >© OpenStreetMap katkıda bulunanlar<span class="gizli"> (yeni sekmede açılır)</span></a
+          >
+        </p>
+        <div class="harita-yukle" data-harita-yukle hidden>
+          <button type="button" class="dugme" data-harita-dugme>Haritayı yükle</button>
+          <p>Harita yüklendiğinde Google çerez kullanabilir.</p>
+        </div>
       </div>
+      <a class="harita-ac" href={firma.harita} target="_blank" rel="noopener noreferrer">
+        Google Haritalar'da aç<span class="gizli"> (yeni sekmede açılır)</span>
+      </a>
     </section>
 
     <section class="form-kart" aria-labelledby="form-baslik">
@@ -162,18 +188,18 @@ const kanallar = [
     });
   }
 
-  // Harita tıklanınca yüklenir; JS yoksa kutu hiç görünmez (adres satırı Google Haritalar'a gider)
+  // Google haritası yalnızca düğmeyle yüklenir; düğme JS ile görünür (JS yoksa statik görsel ve dış link kalır)
   const harita = document.querySelector<HTMLElement>('[data-harita]');
-  if (harita) {
-    harita.hidden = false;
-    harita.querySelector('[data-harita-goster]')?.addEventListener('click', () => {
+  const yukle = harita?.querySelector<HTMLElement>('[data-harita-yukle]');
+  if (harita && yukle) {
+    yukle.hidden = false;
+    yukle.querySelector('[data-harita-dugme]')?.addEventListener('click', () => {
       const cerceve = document.createElement('iframe');
       cerceve.src = harita.dataset.kaynak ?? '';
       cerceve.title = '2K AHŞAP adresi, Google Haritalar';
       cerceve.loading = 'lazy';
       cerceve.referrerPolicy = 'no-referrer-when-downgrade';
       harita.replaceChildren(cerceve);
-      harita.classList.add('harita-yuklu');
       cerceve.focus();
     });
   }
@@ -252,35 +278,102 @@ const kanallar = [
     text-decoration-color: currentColor;
   }
 
+  /* Harita kutusu: statik görsel tüm kutuyu kaplar. İşletmenin konumu görselde yatayda ortada, dikeyde %35'te
+     (scripts/statik-harita.mjs → KONUM_Y); object-position aynı noktayı her kutu oranında kutunun %35'ine oturtur,
+     işaret de oraya konur. Altta "Haritayı yükle" kartı, sağ üstte OpenStreetMap atfı; ikisi de %90 gece zeminde. */
   .harita {
-    display: grid;
-    place-content: center;
-    justify-items: center;
-    gap: 12px;
+    position: relative;
     aspect-ratio: 4 / 3;
-    padding: var(--bosluk-3);
     overflow: hidden;
     border: var(--cizgi) solid var(--color-cizgi);
     border-radius: var(--radius-gorsel);
     background: var(--color-zemin-ara);
+  }
+
+  .harita-gorsel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 35%;
+  }
+
+  /* İşaretin sivri ucu (ikonun 22/24'ü) konumun üstünde */
+  .harita-isaret {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    width: 36px;
+    height: 36px;
+    color: var(--color-krem);
+    fill: var(--color-zemin);
+    transform: translate(-50%, -92%);
+  }
+
+  .harita-kaynak {
+    position: absolute;
+    top: var(--bosluk-1);
+    right: var(--bosluk-1);
+    margin: 0;
+    font-size: var(--text-etiket);
+    line-height: 1.4;
+  }
+
+  .harita-kaynak a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding-inline: var(--bosluk-1);
+    border-radius: var(--radius-tam);
+    background: var(--color-karartma-yogun);
+    color: var(--color-metin-soluk);
+    text-decoration: none;
+  }
+
+  .harita-kaynak a:is(:hover, :focus-visible) {
+    color: var(--color-krem);
+    text-decoration: underline;
+  }
+
+  .harita-yukle {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    display: grid;
+    justify-items: center;
+    gap: var(--bosluk-1);
+    width: fit-content;
+    margin-inline: auto;
+    padding: 12px var(--bosluk-2);
+    border-radius: var(--radius-kart);
+    background: var(--color-karartma-yogun);
     text-align: center;
   }
 
-  .harita p {
+  .harita-yukle p {
     margin: 0;
-    color: var(--color-metin-soluk);
+    color: var(--color-metin);
     font-size: var(--text-kucuk);
+    line-height: 1.45;
   }
 
-  .harita-ikon {
-    width: 28px;
-    height: 28px;
-    color: var(--color-ahsap);
+  .harita-ac {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: calc(var(--bosluk-2) * -1);
+    color: var(--color-krem);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--color-ahsap);
+    text-underline-offset: 4px;
   }
 
-  .harita-yuklu {
-    display: block;
-    padding: 0;
+  .harita-ac:hover {
+    color: var(--color-ahsap-acik);
   }
 
   .harita :global(iframe) {
