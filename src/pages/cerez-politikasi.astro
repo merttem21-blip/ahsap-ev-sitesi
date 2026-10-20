@@ -1,6 +1,7 @@
 ---
-// Çerez politikası. Sitede analitik veya üçüncü taraf çerez yok; bu yüzden çerez onay bildirimi gösterilmez.
-// Analitik/pazarlama aracı eklenirse bu metin güncellenmeli ve açık rıza bildirimi eklenmelidir.
+// Çerez politikası. Sitede çerez yok; onay istenmez, yalnızca bilgilendirme bandı gösterilir (CerezBandi.astro).
+// Analitik/pazarlama aracı eklenirse (src/data/site.ts → izleme) bu metin güncellenmelidir; bant o zaman onay
+// paneline döner.
 import YasalLayout from '../layouts/YasalLayout.astro';
 import { firma } from '../data/site';
 ---
@@ -29,17 +30,26 @@ import { firma } from '../data/site';
     <li><strong>Analitik ve performans çerezleri:</strong> Kullanılmaz.</li>
     <li><strong>Reklam ve pazarlama çerezleri:</strong> Kullanılmaz.</li>
   </ul>
-  <p>
-    Sitemiz kendi çerezini bırakmaz ve ziyaretinizi izleyen bir araç kullanmaz. Bu nedenle çerez
-    onay bildirimi gösterilmez.
-  </p>
+  <p>Sitemiz kendi çerezini bırakmaz ve ziyaretinizi izleyen bir araç kullanmaz.</p>
   <p>
     Teklif ve iletişim formlarına yazdığınız bilgiler, sayfadan ayrılsanız da kaybolmaması için
     yalnızca kendi tarayıcınızda saklanır; formu gönderdiğinizde, gönderilmezse de 7 gün sonra siteyi
     ilk ziyaretinizde silinir. Bu bilgiler siz formu göndermedikçe bize veya üçüncü kişilere iletilmez.
   </p>
 
-  <h2>3. Üçüncü Taraf İçerik ve Bağlantılar</h2>
+  <h2>3. Çerez Bildirimi ve Tarayıcı Kaydı</h2>
+  <p>
+    Sitemizi ilk ziyaretinizde sayfanın altında kısa bir bilgilendirme gösterilir. Bildirimi "Anladım"
+    ile kapattığınızda, tekrar gösterilmemesi için tarayıcınızın yerel depolamasına
+    "2k-ahsap-cerez-tercihi" adlı küçük bir kayıt yazılır. Kayıt yalnızca bildirimi kapattığınızı
+    ve bunun zamanını tutar; çerez değildir ve bize veya üçüncü kişilere gönderilmez.
+  </p>
+  <p>
+    Kaydı silmek için tarayıcınızın ayarlarından bu sitenin verilerini temizleyebilirsiniz. Kayıt
+    silindiğinde bildirim bir sonraki ziyaretinizde yeniden gösterilir.
+  </p>
+
+  <h2>4. Üçüncü Taraf İçerik ve Bağlantılar</h2>
   <ul>
     <li>
       <strong>Dış bağlantılar:</strong> WhatsApp, Google Haritalar veya sosyal medya
@@ -48,20 +58,20 @@ import { firma } from '../data/site';
     </li>
   </ul>
 
-  <h2>4. Çerezleri Nasıl Yönetebilirsiniz?</h2>
+  <h2>5. Çerezleri Nasıl Yönetebilirsiniz?</h2>
   <p>
     Tarayıcınızın ayarlarından çerezleri görebilir, silebilir veya engelleyebilirsiniz. Chrome,
     Safari, Firefox ve Edge gibi tarayıcılarda bu seçenekler genellikle "Gizlilik ve güvenlik"
     bölümünde bulunur.
   </p>
 
-  <h2>5. Değişiklikler</h2>
+  <h2>6. Değişiklikler</h2>
   <p>
     İleride analitik veya benzeri çerezler kullanmaya başlarsak bu politikayı güncelleriz ve gereken
     durumlarda çerezler yerleştirilmeden önce açık rızanızı alırız.
   </p>
 
-  <h2>6. İletişim</h2>
+  <h2>7. İletişim</h2>
   <p>
     Sorularınız için <a href={`mailto:${firma.eposta}`}>{firma.eposta}</a> adresine
     yazabilirsiniz.

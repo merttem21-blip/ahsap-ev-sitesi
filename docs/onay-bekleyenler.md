@@ -80,20 +80,20 @@ E-postadaki alan adı ("KVKK onayı") ve gönderim akışı değişmedi; yalnız
 
 **Hukukçu kontrolü (yayından önce):** md. 5/2-c gerekçesi bir hukukçu tarafından teyit edilmedi (bkz. "Hukukçuya sorulacaklar").
 
-## 4. Çerez politikası (bilgi)
+## 4. Çerez politikası ve çerez bandı (çözüldü, 20 Ekim 2026)
 
-Sitede onay gerektiren çerez veya betik yok. `/cerez-politikasi` ve `/gizlilik` iki şeyden söz etmiyor:
+**Çözüldü:** Her sayfada bilgilendirme bandı var (`src/components/CerezBandi.astro`): "Sitemiz çerez kullanmaz. Yalnızca bu bildirimi kapattığınızı hatırlamak için tarayıcınızda küçük bir kayıt tutulur. Ayrıntılar için Çerez Politikası'na göz atabilirsiniz." ve "Anladım" (kullanıcı metni). `/cerez-politikasi` buna uyduruldu: "Bu nedenle çerez onay bildirimi gösterilmez" cümlesi kaldırıldı, bandı ve `2k-ahsap-cerez-tercihi` kaydını anlatan §3 eklendi (amacı, ne zaman oluşur, nasıl silinir), sonraki bölümler bir numara kaydı. Yasal sayfaların ortak "Son güncelleme" tarihi 20 Ekim 2026 oldu (`yasalGuncelleme`; üç sayfada birden görünür).
+
+**GA veya Pixel eklenince (yapılacak):** `src/data/site.ts` → `izleme` alanına bir kimlik girilince bant kendiliğinden Kabul Et / Reddet'li onay paneline döner ve "İzninizle, sitemizi geliştirmek amacıyla çerezler kullanıyoruz." metnini gösterir. "Sitemiz çerez kullanmaz" cümlesi o zaman doğru olmaz. Kimlik girilmeden önce:
+
+- Onay panelinin metni ve "Çerez ayarları"ndaki tür açıklamaları eklenen araca göre gözden geçirilmeli (`CerezBandi.astro`).
+- `/cerez-politikasi` (§2 "Kullanılmaz" maddeleri, §3) ve `/gizlilik` §4 aracı, amacını ve bıraktığı çerezleri anlatacak şekilde güncellenmeli; `yasalGuncelleme` yenilenmeli.
+- `vercel.json` CSP'sine aracın alan adları eklenmeli.
+
+**Ayrı ve hâlâ açık:** `/cerez-politikasi` ve `/gizlilik` şu iki şeyden söz etmiyor (`docs/denetim-raporu.md` madde 8):
 
 - `/iletisim`'de tıklanınca yüklenen Google Haritalar penceresi
 - form gönderildikten sonra tarayıcıya yazılan `2k-ahsap-son-gonderim` kaydı (30 sn bekleme için, zorunlu işlev)
-
-Bu, `docs/denetim-raporu.md` madde 8'de de not edilmişti. Eklenmesi bir metin değişikliği olduğu için onay bekliyor.
-
-**Çerez bandı (20 Ekim 2026, kullanıcı kararı):** Her sayfada bilgilendirme bandı var (`src/components/CerezBandi.astro`): "Sitemiz yalnızca sitenin çalışması için gerekli zorunlu çerezleri kullanır. Ayrıntılar için Çerez Politikası'na göz atabilirsiniz." ve "Anladım". Politika metni bilerek değiştirilmedi. Açık noktalar:
-
-- Bant "zorunlu çerezleri kullanır" diyor. `/cerez-politikasi` §2 ise "Zorunlu çerezler: Kullanılmaz" ve "Bu nedenle çerez onay bildirimi gösterilmez" diyor. Sitede gerçekte çerez yok; bandın kaydı ve form taslakları localStorage'da tutuluyor. İki metinden biri diğerine uydurulmalı.
-- Bandın kapatıldığını hatırlayan `2k-ahsap-cerez-tercihi` kaydını politika metni henüz anmıyor. Form taslağıyla aynı soru (§5).
-- `src/data/site.ts` → `izleme` alanına Google Analytics veya Meta Pixel kimliği girilince bant kendiliğinden Kabul Et / Reddet'li onay paneline döner. Kimlik girilmeden önce `/cerez-politikasi` ve `/gizlilik` aracı anlatacak şekilde güncellenmeli, `vercel.json` CSP'sine aracın alan adları eklenmeli.
 
 ## 5. Form taslağı tarayıcıda saklanır (onaylandı ve uygulandı, 14 Ekim 2026)
 
