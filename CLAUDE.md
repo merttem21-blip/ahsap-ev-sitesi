@@ -93,6 +93,13 @@ Konum: sitede kullanılanlar `public/logo/`, yalnızca kaynak olanlar `arsiv/log
 - Commit mesajları Türkçe ve açıklayıcı olmalı
 - Her büyük adımda push'la (Vercel otomatik deploy eder)
 
+## Çalışma Şekli
+Bu bölüm, aşağıdaki Güvenli Mod'un "dur ve sor" ve "her görevin sonunda form-kontrol ve gorsel-kontrol" kurallarından önce gelir. Form entegrasyonunu koruma kuralları aynen geçerlidir.
+- Metin, stil ve küçük düzeltmelerde soru sorulmaz. Makul olan seçilir, raporda tek satırla belirtilir.
+- Yalnızca şu durumlarda durulur ve sorulur: main'e birleştirme, dosya/veri silme, yeni ücretli servis veya izleme aracı ekleme.
+- Testlerde yalnızca değişikliğin etkilediği kontroller çalıştırılır. Tam set (form-kontrol, gorsel-kontrol) yalnızca main'e birleştirmeden önce.
+- Raporlar kısa olur: ne yapıldı (3-5 madde), önizleme linki, varsa tek karar sorusu.
+
 ## Güvenli Mod (müşteri onaylı tasarım)
 - Mevcut sayfaların görünümü değişmez: renk, font, boyut, boşluk, düzen, metin, ikon, animasyon, hover ve aktif durumlar. Mevcut stil sınıflarını ve bileşenlerin görünen çıktısını değiştirme.
 - Promptun açıkça izin vermediği bir görünür değişiklik gerekiyorsa yapma; dur, nasıl görüneceğini anlat ve sor.
