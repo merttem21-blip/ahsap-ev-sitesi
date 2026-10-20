@@ -91,10 +91,16 @@ import { cerezOnayiGerekli, izleme } from '../data/site';
       </>
     ) : (
       <>
+        {/* Mobilde (< 768px) kısa metin, masaüstünde uzun metin; görünmeyen display:none olduğu için ekran okuyucu ve
+            klavye yalnızca görüneni bulur (tek link) */}
         <p class="cerez-metin">
-          Sitemiz izleme veya reklam çerezi kullanmaz. Yalnızca sitenin çalışması için gereken bilgiler (bu
-          bildirimi kapattığınız ve form taslaklarınız) tarayıcınızda tutulur. Ayrıntılar için
-          <a href="/cerez-politikasi">Çerez Politikası</a>'na göz atabilirsiniz.
+          <span class="cerez-kisa">
+            Sitemiz izleme çerezi kullanmaz. Ayrıntılar: <a href="/cerez-politikasi">Çerez Politikası</a>
+          </span><span class="cerez-uzun">
+            Sitemiz izleme veya reklam çerezi kullanmaz. Yalnızca sitenin çalışması için gereken bilgiler (bu
+            bildirimi kapattığınız ve form taslaklarınız) tarayıcınızda tutulur. Ayrıntılar için
+            <a href="/cerez-politikasi">Çerez Politikası</a>'na göz atabilirsiniz.
+          </span>
         </p>
         <div class="cerez-dugmeler">
           <button type="button" class="dugme" data-cerez-tamam>Anladım</button>
@@ -234,29 +240,50 @@ import { cerezOnayiGerekli, izleme } from '../data/site';
     color: var(--color-metin-soluk);
   }
 
+  /* Bilgilendirme bandı, mobil (< 768px): kısa metin ve sağında küçük "Anladım" tek satırda, iç boşluk 12px
+     (375px'te bant ~87px). Metne 10rem kalmazsa (320px) düğme metnin altına geçer. Düğmenin dokunma alanı 44px. */
+  .cerez[data-kip='bilgi'] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--bosluk-1) 12px;
+    padding: 12px;
+  }
+
+  .cerez[data-kip='bilgi'] .cerez-metin {
+    flex: 1 1 10rem;
+    min-width: 0;
+    line-height: 1.45;
+  }
+
+  .cerez-uzun {
+    display: none;
+  }
+
+  .cerez[data-kip='bilgi'] .cerez-dugmeler {
+    flex-shrink: 0;
+  }
+
+  .cerez[data-kip='bilgi'] .dugme {
+    min-height: 44px;
+    gap: var(--bosluk-1);
+    padding: 0 14px 0 var(--bosluk-2);
+    font-size: var(--text-kucuk);
+  }
+
+  .cerez[data-kip='bilgi'] .dugme::after {
+    width: 16px;
+    height: 16px;
+  }
+
   /* Işık kutusu açıkken ve mobilde formda yazarken (ekran klavyesi) bant gizlenir; alt menüyle aynı kural */
   :global(html.kaydirma-kilitli) .cerez,
   :global(body:has(:is(input:not([type='checkbox'], [type='radio']), textarea, select):focus)) .cerez {
     display: none;
   }
 
-  /* ≥ 640px: bilgilendirme bandında metin solda, düğme sağda; onay panelinde Kabul/Reddet solda, ayarlar sağda */
+  /* ≥ 640px: onay panelinde Kabul/Reddet solda, ayarlar sağda */
   @media (min-width: 640px) {
-    .cerez[data-kip='bilgi'] {
-      flex-direction: row;
-      align-items: center;
-      gap: var(--bosluk-3);
-    }
-
-    .cerez[data-kip='bilgi'] .cerez-metin {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cerez[data-kip='bilgi'] .cerez-dugmeler {
-      flex-shrink: 0;
-    }
-
     .cerez[data-kip='onay'] .cerez-dugmeler {
       flex-direction: row;
       flex-wrap: wrap;
@@ -282,6 +309,38 @@ import { cerezOnayiGerekli, izleme } from '../data/site';
       max-height: calc(100vh - var(--bosluk-4));
       max-height: calc(100svh - var(--bosluk-4));
       padding: var(--bosluk-3);
+    }
+
+    /* Bilgilendirme bandı: uzun metin solda, sitenin standart "Anladım" düğmesi sağda */
+    .cerez[data-kip='bilgi'] {
+      flex-wrap: nowrap;
+      gap: var(--bosluk-3);
+      padding: var(--bosluk-3);
+    }
+
+    .cerez[data-kip='bilgi'] .cerez-metin {
+      flex: 1;
+      line-height: inherit;
+    }
+
+    .cerez-kisa {
+      display: none;
+    }
+
+    .cerez-uzun {
+      display: inline;
+    }
+
+    .cerez[data-kip='bilgi'] .dugme {
+      min-height: 48px;
+      gap: 12px;
+      padding: 12px 28px 12px 32px;
+      font-size: var(--text-dugme);
+    }
+
+    .cerez[data-kip='bilgi'] .dugme::after {
+      width: 18px;
+      height: 18px;
     }
 
     :global(body:has(:is(input:not([type='checkbox'], [type='radio']), textarea, select):focus)) .cerez {

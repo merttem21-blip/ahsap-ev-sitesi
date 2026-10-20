@@ -76,6 +76,7 @@ Seçenekler:
 - `--gurultu-yok`: gürültü toleransını kapatır; tek bir piksel farkı bile hata sayılır.
 - `--referans-yenile`: referansları baştan üretir. Yalnızca müşterinin onayladığı bir görünüm değişikliğinden sonra kullanılır.
 - `--referans-yenile=yasal-kvkk,iletisim`: yalnızca adı (veya kodu) verilen sayfaların referansını yeniler; diğerleri her zamanki gibi karşılaştırılır. Onaylı değişiklik birkaç sayfayla sınırlıysa bu kullanılır. Referansı olmayan yeni bir çekim ilk çalıştırmada kendiliğinden referans olur.
+- `--sadece=cerez-bandi`: yalnızca adı (veya kodu) verilen sayfaları çeker ve karşılaştırır. Değişikliğin etkilediği çekimler için kullanılır (CLAUDE.md "Çalışma Şekli"); tam set `main`'e birleştirmeden önce çalıştırılır.
 
 ### Gürültü toleransı
 
@@ -115,6 +116,7 @@ Tek pikselden küçük bir değişiklik (çok küçük puntoda bir nokta gibi) g
 | 20 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | Ç eklendi (3 referans): çerez bilgilendirme bandı (kullanıcı onaylı). Mevcut 45 referans yenilenmedi. Aynı gün bu bilgisayarda 45 çekimin hepsi referanstan farklı çıktı, değişiklik öncesi HEAD'de (faabf27) de yüzdesine kadar aynı farklar (Bilinen sınırlar, yazı tipi çizimi). Kanıt aynı ortamda alındı: HEAD'in ve bant eklenmiş sürümün 45 çekimi piksel olarak aynı (40'ı bayt bayt). Ç ikinci koşuda %0 aynı. |
 | 20 Ekim 2026 | Bu satırı ekleyen commit (yalnızca referanslar) | 48 referansın tümü bu bilgisayarın yeni yazı tipi çizimiyle yenilendi (kullanıcı kararı; Bilinen sınırlar). Yenilenen derleme 4c8447c: çerez bandının metni "Sitemiz çerez kullanmaz…" oldu (Ç), yasal sayfaların "Son güncelleme" tarihi 14 Ekim → 20 Ekim 2026 oldu (Y). Diğer sayfaların farkı yalnızca yazı tipi çizimi. Yenilemeden sonraki ilk koşu 48/48 aynı, uyarı yok. |
 | 20 Ekim 2026 | Bu satırı ekleyen commit (kod ve referanslar birlikte) | Yalnızca İ ve Ç yenilendi (6 referans; kullanıcı talebi). İ: harita kutusunda statik harita görseli (OpenStreetMap, sitede barındırılır), konum işareti, OSM atfı, "Haritayı yükle" kartı ve notu; kutunun altında "Google Haritalar'da aç" linki. İ 375 ve 768 px'te 52 px uzadı (link), 1280 px'te boy aynı. Ç: bant metni "Sitemiz izleme veya reklam çerezi kullanmaz…" oldu. Yenilemeden önce fark yalnızca bu 6 çekimdeydi; diğer 42 çekim %0 aynıydı. Yenileme turunda A 375'te 24 piksellik tek seferlik oynama çıktı (aynı derleme); sonraki koşu 48/48 aynı. |
+| 20 Ekim 2026 | Bu satırı ekleyen commit (kod ve referans birlikte) | Yalnızca Ç 375 yenilendi (1 referans; kullanıcı talebi): mobilde (< 768px) kısa bant, "Sitemiz izleme çerezi kullanmaz. Ayrıntılar: Çerez Politikası" ve sağında küçük "Anladım" (dokunma alanı 44px), iç boşluk 12px; 375px'te bant 87px. Ç 768 ve 1280 %0 aynı (masaüstü değişmedi). Kontrol `--sadece=cerez-bandi` ile yapıldı; bant diğer çekimlerde kapalı olduğu için onları etkilemez. |
 
 ### Bilinen sınırlar
 

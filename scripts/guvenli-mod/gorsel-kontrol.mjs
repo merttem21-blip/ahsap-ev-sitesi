@@ -9,6 +9,9 @@
 //   npm run gorsel-kontrol -- --referans-yenile=yasal-kvkk,iletisim
 //                                                       yalnızca adı (ya da kodu) verilen sayfaların referansını
 //                                                       yeniler; diğerleri her zamanki gibi karşılaştırılır
+//   npm run gorsel-kontrol -- --sadece=cerez-bandi      yalnızca adı (ya da kodu) verilen sayfaları çeker ve
+//                                                       karşılaştırır (değişikliğin etkilediği çekimler; tam set
+//                                                       main'e birleştirmeden önce)
 //
 // Her sayfa tipinden bir örnek 375, 768 ve 1280 px genişlikte çekilir: hareket azaltılmış
 // (prefers-reduced-motion), CSS animasyonları kapalı, tüm görseller (lazy olanlar dahil) ve fontlar yüklenmiş,
@@ -371,21 +374,24 @@ function daginikMi(fark, beklenen) {
   );
 }
 
-/** --referans-yenile: hepsi; --referans-yenile=ad,kod,…: yalnızca verilen sayfalar. Referansı yenilenecek mi? */
-function yenilemeSecimi() {
-  const liste = secenekDegeri('--referans-yenile');
-  if (liste === undefined) return secenekVar('--referans-yenile') ? () => true : () => false;
+/** secenek=ad,kod,…: verilen sayfalar seçili mi? Değersiz seçenek hepsini, seçenek yoksa varsayilan'ı seçer. */
+function sayfaSecimi(secenek, varsayilan) {
+  const liste = secenekDegeri(secenek);
+  if (liste === undefined) return secenekVar(secenek) ? () => true : () => varsayilan;
   const istenen = liste.split(',').map((x) => x.trim()).filter(Boolean);
   const bilinmeyen = istenen.filter((x) => !SAYFALAR.some((s) => s.ad === x || s.kod === x));
   if (!istenen.length || bilinmeyen.length) {
-    console.error(`--referans-yenile: bilinmeyen sayfa "${bilinmeyen.join(', ')}". Geçerli adlar: ${SAYFALAR.map((s) => s.ad).join(', ')}`);
+    console.error(`${secenek}: bilinmeyen sayfa "${bilinmeyen.join(', ')}". Geçerli adlar: ${SAYFALAR.map((s) => s.ad).join(', ')}`);
     process.exit(1);
   }
   return (s) => istenen.includes(s.ad) || istenen.includes(s.kod);
 }
 
 async function main() {
-  const yenilensinMi = yenilemeSecimi();
+  // --referans-yenile: hepsi; --referans-yenile=ad,kod,…: yalnızca verilen sayfaların referansı yenilenir
+  const yenilensinMi = sayfaSecimi('--referans-yenile', false);
+  // --sadece=ad,kod,…: yalnızca verilen sayfalar çekilir (yoksa hepsi)
+  const cekilsinMi = sayfaSecimi('--sadece', true);
   derle();
   for (const k of [REFERANS, SON, FARK]) fs.mkdirSync(k, { recursive: true });
   for (const k of [SON, FARK]) for (const d of fs.readdirSync(k)) fs.rmSync(path.join(k, d), { force: true });
@@ -395,7 +401,7 @@ async function main() {
   const satirlar = [];
   let olusturulan = 0;
   try {
-    for (const s of SAYFALAR) {
+    for (const s of SAYFALAR.filter(cekilsinMi)) {
       // Aynı sayfanın tüm genişlikleri paralel çekilir
       await Promise.all(
         genislikleri(s).map(async (g) => {
