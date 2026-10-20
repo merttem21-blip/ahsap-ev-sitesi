@@ -7,6 +7,21 @@ export const siteAdresi = 'https://2kahsap.com';
 // Herkese açık bir anahtardır, gizli değildir. Boşken formlar bilgileri WhatsApp mesajı olarak açar.
 export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 
+// Analitik ve pazarlama araçlarının kimlikleri. İkisi de boşken sitede bu araçlar yoktur: hiçbir betik yüklenmez ve
+// ziyaretçiye yalnızca zorunlu çerez bilgilendirme bandı ("Anladım") gösterilir (src/components/CerezBandi.astro).
+// Bir kimlik girilince bant Kabul Et / Reddet'li onay paneline döner ve footer'a "Çerez Tercihleri" eklenir. Araç
+// yalnızca ziyaretçi o türe izin verince yüklenir (src/scripts/cerez.ts). Kimlik girmeden önce:
+// - /cerez-politikasi ve /gizlilik, aracı, amacını ve bıraktığı çerezleri anlatacak şekilde güncellenmeli.
+// - vercel.json'daki Content-Security-Policy aracın alan adlarını içermeli (Google Analytics: googletagmanager.com,
+//   google-analytics.com; Meta Pixel: connect.facebook.net, facebook.com). CSP şimdilik yalnızca rapor modundadır.
+export const izleme = {
+  googleAnalytics: '', // analitik çerezler: GA4 ölçüm kimliği, ör. 'G-XXXXXXXXXX'
+  metaPixel: '', // pazarlama çerezleri: Meta Pixel kimliği (yalnızca rakam)
+};
+
+/** En az bir araç tanımlıysa çerez bandı onay panelidir (Kabul Et / Reddet); değilse bilgilendirme bandıdır. */
+export const cerezOnayiGerekli = Boolean(izleme.googleAnalytics || izleme.metaPixel);
+
 // schema.org işletme şemasının görseli (gerçek proje fotoğrafı). Bağlantı önizlemesi (Open Graph) görselleri
 // ayrıca üretilir: src/lib/paylasim.ts
 export const varsayilanGorsel = '/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01-1600.webp';

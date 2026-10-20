@@ -95,7 +95,8 @@ async function menuyuAc(sayfa, konum) {
 
 // Sayfa tipleri: A ana sayfa (A1: yalnızca ilk ekran, hero), P projeler, K kategori, D proje detayı, G galeri,
 // H hakkımızda, S SSS, T teklif al (T2, T3: formun 2. ve 3. adımı), İ iletişim, TŞ teşekkürler, Y yasal sayfa,
-// M1, M2 mobil menü paneli açık (en üstte, en altta)
+// Ç çerez bandı (ilk ziyaret, ana sayfanın ilk ekranı), M1, M2 mobil menü paneli açık (en üstte, en altta)
+// cerezBandi: çerez bandı görünür çekilir; diğer çekimlerde bant kapatılmış sayılır (CEREZ_KAYDI)
 // hazirlik: çekimden önce sayfada yapılacak etkileşim (yalnızca görünüm; form gönderilmez)
 // sonra: görseller ve düzen oturduktan sonra, çekimden hemen önce yapılacak etkileşim (kaydırma konumu hazırlıktaki
 //        stil yeniden hesaplamasında sıfırlanabildiği için kaydırma burada yapılır)
@@ -131,6 +132,7 @@ const SAYFALAR = [
   { kod: 'İ', ad: 'iletisim', yol: '/iletisim' },
   { kod: 'TŞ', ad: 'tesekkurler', yol: '/tesekkurler' },
   { kod: 'Y', ad: 'yasal-kvkk', yol: '/kvkk' },
+  { kod: 'Ç', ad: 'cerez-bandi', yol: '/', ilkEkran: true, cerezBandi: true },
   {
     kod: 'M1',
     ad: 'mobil-menu-acik-ust',
@@ -172,6 +174,12 @@ const HERO_GENISLIKLERI = [
 
 const EKRANLAR = { menu: MENU_GENISLIKLERI, hero: HERO_GENISLIKLERI };
 const genislikleri = (s) => EKRANLAR[s.genislikler] ?? GENISLIKLER;
+
+// Çerez bandının localStorage kaydı (src/scripts/cerez.ts → CEREZ_TERCIHI). Ç dışındaki çekimlerde sayfa açılmadan
+// yazılır: ziyaretçi bandı kapatmış ve analitik/pazarlamayı reddetmiş sayılır, sayfalar onaylı görünümle bantsız
+// karşılaştırılır ve hiçbir izleme betiği yüklenmez.
+const CEREZ_ANAHTARI = '2k-ahsap-cerez-tercihi';
+const CEREZ_KAYDI = JSON.stringify({ zaman: 0, analitik: false, pazarlama: false });
 
 const REFERANS = path.join(GUVENLI_MOD, 'referans');
 const SON = path.join(GUVENLI_MOD, 'son');
@@ -277,6 +285,18 @@ async function cek(tarayici, adres, s, g, hedef) {
     locale: 'tr-TR',
     timezoneId: 'Europe/Istanbul',
   });
+  if (!s.cerezBandi) {
+    await baglam.addInitScript(
+      ([anahtar, kayit]) => {
+        try {
+          localStorage.setItem(anahtar, kayit);
+        } catch {
+          /* depolama kapalı */
+        }
+      },
+      [CEREZ_ANAHTARI, CEREZ_KAYDI]
+    );
+  }
   // Çekim sırasında hiçbir form gönderilemez: Web3Forms'a giden istek engellenir ve hata sayılır
   let gonderimDenendi = false;
   await baglam.route(/api\.web3forms\.com/, (istek) => {

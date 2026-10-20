@@ -89,6 +89,12 @@ Sitede onay gerektiren çerez veya betik yok. `/cerez-politikasi` ve `/gizlilik`
 
 Bu, `docs/denetim-raporu.md` madde 8'de de not edilmişti. Eklenmesi bir metin değişikliği olduğu için onay bekliyor.
 
+**Çerez bandı (20 Ekim 2026, kullanıcı kararı):** Her sayfada bilgilendirme bandı var (`src/components/CerezBandi.astro`): "Sitemiz yalnızca sitenin çalışması için gerekli zorunlu çerezleri kullanır. Ayrıntılar için Çerez Politikası'na göz atabilirsiniz." ve "Anladım". Politika metni bilerek değiştirilmedi. Açık noktalar:
+
+- Bant "zorunlu çerezleri kullanır" diyor. `/cerez-politikasi` §2 ise "Zorunlu çerezler: Kullanılmaz" ve "Bu nedenle çerez onay bildirimi gösterilmez" diyor. Sitede gerçekte çerez yok; bandın kaydı ve form taslakları localStorage'da tutuluyor. İki metinden biri diğerine uydurulmalı.
+- Bandın kapatıldığını hatırlayan `2k-ahsap-cerez-tercihi` kaydını politika metni henüz anmıyor. Form taslağıyla aynı soru (§5).
+- `src/data/site.ts` → `izleme` alanına Google Analytics veya Meta Pixel kimliği girilince bant kendiliğinden Kabul Et / Reddet'li onay paneline döner. Kimlik girilmeden önce `/cerez-politikasi` ve `/gizlilik` aracı anlatacak şekilde güncellenmeli, `vercel.json` CSP'sine aracın alan adları eklenmeli.
+
 ## 5. Form taslağı tarayıcıda saklanır (onaylandı ve uygulandı, 14 Ekim 2026)
 
 Teklif ve iletişim formuna yazılanlar ziyaretçinin kendi tarayıcısında taslak olarak saklanır (`localStorage`: `2k-ahsap-taslak-teklif`, `2k-ahsap-taslak-iletisim`). Sayfaya dönülünce alanlar dolu gelir. Kod: `src/scripts/form.ts`, `src/scripts/taslak.ts`.

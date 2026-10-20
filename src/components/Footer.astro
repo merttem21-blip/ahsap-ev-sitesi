@@ -2,7 +2,7 @@
 // Site alt bölümü: üstte ince CTA bandı; 4 sütun (marka · kurumsal · kategoriler · iletişim);
 // en altta telif ve yasal linkler. Mobilde sıkı tek sütun. WhatsApp mesajı sayfaya göre gelir (Layout).
 import { siWhatsapp } from 'simple-icons';
-import { firma, kategoriler, menu, whatsappLinki, yasalSayfalar } from '../data/site';
+import { cerezOnayiGerekli, firma, kategoriler, menu, whatsappLinki, yasalSayfalar } from '../data/site';
 import { ikon } from '../data/ikonlar';
 
 interface Props {
@@ -120,9 +120,19 @@ const sosyal = [
         <ul class="alt-yasal">
           {
             yasalSayfalar.map((y) => (
-              <li>
-                <a href={y.href}>{y.ad}</a>
-              </li>
+              <>
+                {/* Son öğe değil: masaüstünde sayfa sonunda yüzen WhatsApp butonunun altında kalırdı */}
+                {cerezOnayiGerekli && y.href === '/cerez-politikasi' && (
+                  <li>
+                    <button type="button" data-cerez-tercih>
+                      Çerez Tercihleri
+                    </button>
+                  </li>
+                )}
+                <li>
+                  <a href={y.href}>{y.ad}</a>
+                </li>
+              </>
             ))
           }
         </ul>
@@ -318,6 +328,27 @@ const sosyal = [
   }
 
   .alt-yasal a:is(:hover, :focus-visible) {
+    color: var(--color-krem);
+    text-decoration: underline;
+    text-decoration-color: var(--color-ahsap);
+  }
+
+  /* "Çerez Tercihleri": yalnızca çerez onay panelinde (src/data/site.ts → izleme); yasal linklerle aynı görünür,
+     çerez panelini yeniden açar (src/scripts/cerez.ts) */
+  .alt-yasal button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-metin-soluk);
+    font: inherit;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+
+  .alt-yasal button:is(:hover, :focus-visible) {
     color: var(--color-krem);
     text-decoration: underline;
     text-decoration-color: var(--color-ahsap);

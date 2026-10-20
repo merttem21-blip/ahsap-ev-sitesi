@@ -138,6 +138,7 @@
   /* Katman sırası */
   --z-header: 20;
   --z-yuzen: 30;
+  --z-cerez: 35; /* çerez bandı: yüzen butonun üstünde, açık mobil menü panelinin altında */
   --z-menu: 40; /* açık mobil menü paneli yüzen WhatsApp butonunu da örter */
   --z-alt-menu: 45; /* mobil alt menü, açık menü panelinin üstünde kalır ("Menü" düğmesi paneli kapatır) */
   --z-atla: 100;

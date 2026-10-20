@@ -1,0 +1,295 @@
+---
+// Çerez bandı (her sayfada, Layout). Ziyaretçi seçim yapana kadar ekranın altında sabit durur; seçim localStorage'a
+// yazılır ve bant bir daha gösterilmez (src/scripts/cerez.ts). JS kapalıysa hiç görünmez (hidden ile gelir).
+// İki kip, src/data/site.ts → izleme:
+// - Bilgilendirme (kimlikler boş): zorunlu çerez bilgisi ve "Anladım". /cerez-politikasi metni değişmeden geçerli.
+// - Onay (en az bir kimlik dolu): Kabul Et ve Reddet eşit boyda ve aynı görünüşte; "Çerez ayarları" tür tür seçim
+//   açar. Yalnızca kimliği girilmiş türler listelenir. Footer'daki "Çerez Tercihleri" paneli yeniden açar.
+// Yerleşim: mobilde alt menünün ve Teklif Al dairesinin üstünde, alt menüyle aynı kenar payında; ≥ 768px'te sol altta,
+// yüzen WhatsApp butonunun soluna kadar. Açık mobil menü paneli bandı örter. Arama sonucu özetine girmez (data-nosnippet).
+import { cerezOnayiGerekli, izleme } from '../data/site';
+---
+
+<section
+  class="cerez"
+  aria-label={cerezOnayiGerekli ? 'Çerez tercihleri' : 'Çerez bildirimi'}
+  tabindex="-1"
+  hidden
+  data-cerez
+  data-kip={cerezOnayiGerekli ? 'onay' : 'bilgi'}
+  data-ga={izleme.googleAnalytics || undefined}
+  data-pixel={izleme.metaPixel || undefined}
+  data-nosnippet
+>
+  {
+    cerezOnayiGerekli ? (
+      <>
+        <p class="cerez-metin">
+          İzninizle, sitemizi geliştirmek amacıyla çerezler kullanıyoruz. Ayrıntılar için{' '}
+          <a href="/cerez-politikasi">Çerez Politikası</a>'na göz atabilirsiniz.
+        </p>
+        <div class="cerez-ayarlar" id="cerez-ayarlar" hidden data-cerez-ayarlar>
+          <ul class="cerez-turler">
+            <li>
+              <label class="cerez-tur">
+                <input type="checkbox" checked disabled />
+                <span>
+                  <span class="cerez-tur-ad">Zorunlu çerezler</span>
+                  <span class="cerez-tur-not">Her zaman açık</span>
+                  <span class="cerez-tur-aciklama">
+                    Sitenin çalışması ve çerez tercihinizin hatırlanması için gereklidir; kapatılamaz.
+                  </span>
+                </span>
+              </label>
+            </li>
+            {izleme.googleAnalytics && (
+              <li>
+                <label class="cerez-tur">
+                  <input type="checkbox" data-cerez-tur="analitik" />
+                  <span>
+                    <span class="cerez-tur-ad">Analitik çerezler</span>
+                    <span class="cerez-tur-aciklama">
+                      Sitenin nasıl kullanıldığını ölçerek sitemizi geliştirmemize yardımcı olur (Google Analytics).
+                    </span>
+                  </span>
+                </label>
+              </li>
+            )}
+            {izleme.metaPixel && (
+              <li>
+                <label class="cerez-tur">
+                  <input type="checkbox" data-cerez-tur="pazarlama" />
+                  <span>
+                    <span class="cerez-tur-ad">Pazarlama çerezleri</span>
+                    <span class="cerez-tur-aciklama">
+                      Reklamlarımızı ilgilenebilecek kişilere göstermemize ve etkisini ölçmemize yardımcı olur (Meta
+                      Pixel).
+                    </span>
+                  </span>
+                </label>
+              </li>
+            )}
+          </ul>
+          <button type="button" class="dugme" data-cerez-kaydet>Seçimimi kaydet</button>
+        </div>
+        <div class="cerez-dugmeler">
+          <div class="cerez-secim">
+            <button type="button" class="dugme" data-cerez-reddet>Reddet</button>
+            <button type="button" class="dugme" data-cerez-kabul>Kabul Et</button>
+          </div>
+          <button
+            type="button"
+            class="cerez-ayar-dugmesi"
+            aria-expanded="false"
+            aria-controls="cerez-ayarlar"
+            data-cerez-ayar-dugmesi
+          >
+            Çerez ayarları
+          </button>
+        </div>
+      </>
+    ) : (
+      <>
+        <p class="cerez-metin">
+          Sitemiz yalnızca sitenin çalışması için gerekli zorunlu çerezleri kullanır. Ayrıntılar için{' '}
+          <a href="/cerez-politikasi">Çerez Politikası</a>'na göz atabilirsiniz.
+        </p>
+        <div class="cerez-dugmeler">
+          <button type="button" class="dugme" data-cerez-tamam>Anladım</button>
+        </div>
+      </>
+    )
+  }
+</section>
+
+<script>
+  import { cerezBandi } from '../scripts/cerez';
+
+  cerezBandi();
+</script>
+
+<style>
+  /* Mobil (< 768px): alt menüyle aynı kenar payında, Teklif Al dairesinin (barın 16px üstüne taşar) üstünde */
+  .cerez {
+    position: fixed;
+    right: var(--alt-menu-pay);
+    bottom: calc(var(--alt-menu-alan) + var(--bosluk-2));
+    left: var(--alt-menu-pay);
+    z-index: var(--z-cerez);
+    display: flex;
+    flex-direction: column;
+    gap: var(--bosluk-2);
+    max-height: calc(100vh - var(--alt-menu-alan) - var(--bosluk-4));
+    max-height: calc(100svh - var(--alt-menu-alan) - var(--bosluk-4));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--bosluk-2);
+    border: var(--cizgi) solid var(--color-cizgi-menu);
+    border-radius: var(--radius-kart);
+    background: var(--color-antrasit);
+    color: var(--color-metin);
+    font-size: var(--text-kucuk);
+    line-height: 1.6;
+  }
+
+  .cerez-metin {
+    max-width: var(--olcu-metin);
+    margin: 0;
+  }
+
+  .cerez-metin a {
+    color: var(--color-krem);
+    text-underline-offset: 3px;
+  }
+
+  .cerez-metin a:hover {
+    color: var(--color-ahsap-acik);
+  }
+
+  .cerez-dugmeler {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Kabul Et ve Reddet: aynı genişlik ve aynı görünüş; sığmazsa (320px) alt alta, yine tam ve eşit genişlikte */
+  .cerez-secim {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+    gap: 12px;
+    width: 100%;
+  }
+
+  .cerez-ayar-dugmesi {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-krem);
+    font: inherit;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--color-ahsap);
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+
+  .cerez-ayar-dugmesi:hover {
+    color: var(--color-ahsap-acik);
+  }
+
+  /* Çerez ayarları: tür başına bir satır, ince çizgiyle ayrılır */
+  .cerez-ayarlar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--bosluk-2);
+  }
+
+  .cerez-turler {
+    width: 100%;
+    border-bottom: var(--cizgi) solid var(--color-cizgi);
+  }
+
+  .cerez-tur {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-block: 12px;
+    border-top: var(--cizgi) solid var(--color-cizgi);
+    cursor: pointer;
+  }
+
+  .cerez-tur input {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--color-krem);
+    cursor: pointer;
+  }
+
+  .cerez-tur:has(input:disabled),
+  .cerez-tur input:disabled {
+    cursor: default;
+  }
+
+  .cerez-tur-ad {
+    color: var(--color-baslik);
+    font-weight: 500;
+  }
+
+  .cerez-tur-not {
+    margin-left: var(--bosluk-1);
+    color: var(--color-ahsap-acik);
+  }
+
+  .cerez-tur-aciklama {
+    display: block;
+    color: var(--color-metin-soluk);
+  }
+
+  /* Işık kutusu açıkken ve mobilde formda yazarken (ekran klavyesi) bant gizlenir; alt menüyle aynı kural */
+  :global(html.kaydirma-kilitli) .cerez,
+  :global(body:has(:is(input:not([type='checkbox'], [type='radio']), textarea, select):focus)) .cerez {
+    display: none;
+  }
+
+  /* ≥ 640px: bilgilendirme bandında metin solda, düğme sağda; onay panelinde Kabul/Reddet solda, ayarlar sağda */
+  @media (min-width: 640px) {
+    .cerez[data-kip='bilgi'] {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--bosluk-3);
+    }
+
+    .cerez[data-kip='bilgi'] .cerez-metin {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cerez[data-kip='bilgi'] .cerez-dugmeler {
+      flex-shrink: 0;
+    }
+
+    .cerez[data-kip='onay'] .cerez-dugmeler {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px var(--bosluk-3);
+    }
+
+    .cerez-secim {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: auto;
+    }
+  }
+
+  /* ≥ 768px: mobil alt menü yok. Sol altta; sağda yüzen WhatsApp butonuna (56px, kenardan 16px) yer kalır.
+     Formda yazarken gizlenmez (ekran klavyesi yok). */
+  @media (min-width: 768px) {
+    .cerez {
+      right: calc(var(--bosluk-2) * 2 + 56px);
+      bottom: var(--bosluk-2);
+      left: var(--bosluk-2);
+      max-width: 560px;
+      max-height: calc(100vh - var(--bosluk-4));
+      max-height: calc(100svh - var(--bosluk-4));
+      padding: var(--bosluk-3);
+    }
+
+    :global(body:has(:is(input:not([type='checkbox'], [type='radio']), textarea, select):focus)) .cerez {
+      display: flex;
+    }
+  }
+
+  @media print {
+    .cerez {
+      display: none !important;
+    }
+  }
+</style>
