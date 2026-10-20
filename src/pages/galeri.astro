@@ -158,7 +158,6 @@ const sizes =
     </div>
 
     <div class="gk-sahne" data-gk-sahne>
-      <img class="gk-gorsel" data-gk-gorsel alt="" sizes="100vw" decoding="async" draggable="false" />
       <button type="button" class="gk-dugme gk-onceki" data-gk-onceki aria-label="Önceki fotoğraf">
         <svg class="ikon" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.geri} />
       </button>
@@ -342,7 +341,15 @@ const sizes =
       for (const a of liste.querySelectorAll('.g-link')) a.setAttribute('aria-haspopup', 'dialog');
 
       const sahne = kutu.querySelector<HTMLElement>('[data-gk-sahne]')!;
-      const resim = kutu.querySelector<HTMLImageElement>('[data-gk-gorsel]')!;
+      // Büyük görsel burada oluşturulur: adresi her açılışta fotoGoster verir, HTML'de adressiz <img> olmaz
+      // (check:images, geçersiz HTML). Şerit küçükleri gibi :global stilli (.gk-sahne :global(.gk-gorsel)).
+      const resim = document.createElement('img');
+      resim.className = 'gk-gorsel';
+      resim.alt = '';
+      resim.sizes = '100vw';
+      resim.decoding = 'async';
+      resim.draggable = false;
+      sahne.prepend(resim);
       const sayac = kutu.querySelector<HTMLElement>('[data-gk-sayac]')!;
       const duyuru = kutu.querySelector<HTMLElement>('[data-gk-duyuru]')!;
       const bilgi = kutu.querySelector<HTMLElement>('[data-gk-bilgi]')!;
@@ -950,7 +957,8 @@ const sizes =
     user-select: none;
   }
 
-  .gk-gorsel {
+  /* Büyük görsel JS ile oluşturulur (isikKutusuKur); kapsamlı stil özniteliği taşımadığı için :global */
+  .gk-sahne :global(.gk-gorsel) {
     width: auto;
     max-width: 100%;
     height: auto;
@@ -962,15 +970,15 @@ const sizes =
     -webkit-user-drag: none;
   }
 
-  .gk-yakin .gk-gorsel {
+  .gk-yakin :global(.gk-gorsel) {
     cursor: grab;
   }
 
-  .gk-hareket .gk-gorsel {
+  .gk-hareket :global(.gk-gorsel) {
     transition: none;
   }
 
-  .gk-yakin.gk-hareket .gk-gorsel {
+  .gk-yakin.gk-hareket :global(.gk-gorsel) {
     cursor: grabbing;
   }
 
