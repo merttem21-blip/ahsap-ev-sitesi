@@ -15,7 +15,6 @@ Bu dosyadaki açık soruların özeti. Ayrıntı, her maddenin sonundaki bölüm
 - **Saklama süresi:** Form verisi ne kadar tutulmalı, sitede süre yazılmalı mı? (`guvenlik-kurallari` "en fazla 1 yıl" diyor; CLAUDE.md kesin süre yazılmasını yasaklıyor.) → §1, saklama ve imha satırı
 - **KVKK kutusu metni:** Kutu rıza istemiyor, yalnızca aydınlatma metninin okunduğunu belirtiyor. Talebi yanıtlamak için veri işlemenin dayanağı açık rıza değil, KVKK md. 5/2-c (sözleşmenin kurulması) olarak kuruldu. Bu gerekçe doğru mu? → §3
 - **Form taslağı:** Tarayıcıda saklanması için çerez politikası ve gizlilik metnine eklenen cümle yeterli mi? Onay istenmemesi doğru mu? → §5
-- **Metinde anılmayanlar:** `2k-ahsap-son-gonderim` kaydı (30 sn bekleme) ve `/iletisim`'de tıklanınca yüklenen Google Haritalar penceresi metinde anılmalı mı? Eklenmeleri sizin onayınızı da bekliyor. → §4, §5
 
 **Muhasebeci**
 
@@ -82,7 +81,7 @@ E-postadaki alan adı ("KVKK onayı") ve gönderim akışı değişmedi; yalnız
 
 ## 4. Çerez politikası ve çerez bandı (çözüldü, 20 Ekim 2026)
 
-**Çözüldü:** Her sayfada bilgilendirme bandı var (`src/components/CerezBandi.astro`): "Sitemiz çerez kullanmaz. Yalnızca bu bildirimi kapattığınızı hatırlamak için tarayıcınızda küçük bir kayıt tutulur. Ayrıntılar için Çerez Politikası'na göz atabilirsiniz." ve "Anladım" (kullanıcı metni). `/cerez-politikasi` buna uyduruldu: "Bu nedenle çerez onay bildirimi gösterilmez" cümlesi kaldırıldı, bandı ve `2k-ahsap-cerez-tercihi` kaydını anlatan §3 eklendi (amacı, ne zaman oluşur, nasıl silinir), sonraki bölümler bir numara kaydı. Yasal sayfaların ortak "Son güncelleme" tarihi 20 Ekim 2026 oldu (`yasalGuncelleme`; üç sayfada birden görünür).
+**Çözüldü:** Her sayfada bilgilendirme bandı ve "Anladım" var (`src/components/CerezBandi.astro`; güncel metin aşağıda). `/cerez-politikasi` buna uyduruldu: "Bu nedenle çerez onay bildirimi gösterilmez" cümlesi kaldırıldı, bandı ve `2k-ahsap-cerez-tercihi` kaydını anlatan §3 eklendi (amacı, ne zaman oluşur, nasıl silinir), sonraki bölümler bir numara kaydı. Yasal sayfaların ortak "Son güncelleme" tarihi 20 Ekim 2026 oldu (`yasalGuncelleme`; üç sayfada birden görünür).
 
 **GA veya Pixel eklenince (yapılacak):** `src/data/site.ts` → `izleme` alanına bir kimlik girilince bant kendiliğinden Kabul Et / Reddet'li onay paneline döner ve "İzninizle, sitemizi geliştirmek amacıyla çerezler kullanıyoruz." metnini gösterir. "Sitemiz çerez kullanmaz" cümlesi o zaman doğru olmaz. Kimlik girilmeden önce:
 
@@ -90,10 +89,11 @@ E-postadaki alan adı ("KVKK onayı") ve gönderim akışı değişmedi; yalnız
 - `/cerez-politikasi` (§2 "Kullanılmaz" maddeleri, §3) ve `/gizlilik` §4 aracı, amacını ve bıraktığı çerezleri anlatacak şekilde güncellenmeli; `yasalGuncelleme` yenilenmeli.
 - `vercel.json` CSP'sine aracın alan adları eklenmeli.
 
-**Ayrı ve hâlâ açık:** `/cerez-politikasi` ve `/gizlilik` şu iki şeyden söz etmiyor (`docs/denetim-raporu.md` madde 8):
+**Metinde anılmayanlar, çözüldü (20 Ekim 2026, kullanıcı kararı):** `docs/denetim-raporu.md` madde 8'deki iki eksik kapandı.
 
-- `/iletisim`'de tıklanınca yüklenen Google Haritalar penceresi
-- form gönderildikten sonra tarayıcıya yazılan `2k-ahsap-son-gonderim` kaydı (30 sn bekleme için, zorunlu işlev)
+- **Google Haritalar:** `/iletisim`'de sayfa açılınca yalnızca sitede barındırılan statik bir harita görseli durur (`scripts/statik-harita.mjs`, OpenStreetMap verisi, görselin üstünde atıf). Google haritası yalnızca "Haritayı yükle" ile açılır; düğmenin altında "Harita yüklendiğinde Google çerez kullanabilir." notu, kutunun altında "Google Haritalar'da aç" linki var. `/cerez-politikasi` §4 ve `/gizlilik` §3'e birer madde eklendi.
+- **`2k-ahsap-son-gonderim`:** `/cerez-politikasi` §3 (amacı, içeriği, nasıl silinir) ve `/gizlilik` §4'te (bir cümle) anlatıldı.
+- Bant metni de buna göre değişti: "Sitemiz izleme veya reklam çerezi kullanmaz. Yalnızca sitenin çalışması için gereken bilgiler (bu bildirimi kapattığınız ve form taslaklarınız) tarayıcınızda tutulur. Ayrıntılar için Çerez Politikası'na göz atabilirsiniz."
 
 ## 5. Form taslağı tarayıcıda saklanır (onaylandı ve uygulandı, 14 Ekim 2026)
 

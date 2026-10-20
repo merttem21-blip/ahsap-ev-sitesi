@@ -31,7 +31,7 @@
 
 - **Yasal sayfalar:** KVKK Aydınlatma Metni, Gizlilik Politikası ve Çerez Politikası yayında. Metinlerdeki eksik bilgi işaretlerinin hepsi kaldırıldı.
 - **Google'a bilgi gitmiyor:** Ziyaretçinin IP adresi yazı tipleri yüzünden artık Google'a gitmiyor.
-- **Harita:** Google Haritalar, ziyaretçi "Haritayı göster"e basmadıkça yüklenmez.
+- **Harita:** Google Haritalar, ziyaretçi "Haritayı yükle"ye basmadıkça yüklenmez; o zamana kadar sitede barındırılan statik bir harita görseli görünür.
 - **Çerez yok:** Sitede reklam ya da takip çerezi kullanılmıyor, ölçümde hiçbir sayfada çerez oluşmadı. Bu yüzden çerez onay bandına gerek yok.
 - **KVKK kutusu:** Formlarda KVKK onay kutusu var; işaretlenmeden form gönderilemez.
 

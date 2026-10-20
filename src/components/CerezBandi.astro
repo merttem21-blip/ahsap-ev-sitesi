@@ -2,8 +2,8 @@
 // Çerez bandı (her sayfada, Layout). Ziyaretçi seçim yapana kadar ekranın altında sabit durur; seçim localStorage'a
 // yazılır ve bant bir daha gösterilmez (src/scripts/cerez.ts). JS kapalıysa hiç görünmez (hidden ile gelir).
 // İki kip, src/data/site.ts → izleme:
-// - Bilgilendirme (kimlikler boş): "Sitemiz çerez kullanmaz" bilgisi ve "Anladım". Metin yalnızca bu kipte doğrudur;
-//   /cerez-politikasi §3 aynı kaydı anlatır.
+// - Bilgilendirme (kimlikler boş): "Sitemiz izleme veya reklam çerezi kullanmaz" bilgisi ve "Anladım". Metin yalnızca
+//   bu kipte doğrudur; tarayıcıdaki kayıtları /cerez-politikasi §2–3 anlatır.
 // - Onay (en az bir kimlik dolu): Kabul Et ve Reddet eşit boyda ve aynı görünüşte; "Çerez ayarları" tür tür seçim
 //   açar. Yalnızca kimliği girilmiş türler listelenir. Footer'daki "Çerez Tercihleri" paneli yeniden açar.
 // Yerleşim: mobilde alt menünün ve Teklif Al dairesinin üstünde, alt menüyle aynı kenar payında; ≥ 768px'te sol altta,
@@ -92,8 +92,9 @@ import { cerezOnayiGerekli, izleme } from '../data/site';
     ) : (
       <>
         <p class="cerez-metin">
-          Sitemiz çerez kullanmaz. Yalnızca bu bildirimi kapattığınızı hatırlamak için tarayıcınızda küçük bir kayıt
-          tutulur. Ayrıntılar için <a href="/cerez-politikasi">Çerez Politikası</a>'na göz atabilirsiniz.
+          Sitemiz izleme veya reklam çerezi kullanmaz. Yalnızca sitenin çalışması için gereken bilgiler (bu
+          bildirimi kapattığınız ve form taslaklarınız) tarayıcınızda tutulur. Ayrıntılar için
+          <a href="/cerez-politikasi">Çerez Politikası</a>'na göz atabilirsiniz.
         </p>
         <div class="cerez-dugmeler">
           <button type="button" class="dugme" data-cerez-tamam>Anladım</button>
