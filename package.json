@@ -10,6 +10,7 @@
     "astro": "astro",
     "images": "node scripts/optimize-images.mjs",
     "check:images": "node scripts/check-images.mjs",
+    "check:sss": "node scripts/sss-kontrol.mjs",
     "jsonld-kontrol": "node scripts/jsonld-kontrol.mjs",
     "yeni-proje": "node scripts/yeni-proje.mjs",
     "form-kontrol": "node scripts/guvenli-mod/form-kontrol.mjs",

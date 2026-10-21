@@ -141,3 +141,11 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 - **Google Search Console.** 2kahsap.com mülk olarak eklenir ve `https://2kahsap.com/sitemap.xml` gönderilir.
 - **Google İşletme Profili.** ✅ Tamamlandı (14 Ekim 2026). Profilin linki (`maps.google.com/?cid=…`; kısa link Android Chrome'da açılmadığı için kullanılmıyor) `src/data/site.ts` → `firma.harita` (footer ve `/iletisim` adres linkleri, JSON-LD `hasMap`); "Haritayı göster" ile açılan harita `firma.haritaYerlestirme`, konum `firma.konum` (JSON-LD `geo`). Sitedeki adres, profildeki resmi adresle birebir aynı yapıldı: Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A, 34890 Pendik/İstanbul.
 - **Form denemesi.** Yayından sonra teklif formundan bir deneme gönderilir; Teşekkürler sayfasının açıldığı ve mailin info@2kahsap.com'a geldiği kontrol edilir.
+
+## 9. Yarım kalan işler (21 Ekim 2026)
+
+- **SSS kayması.** Canlıda gerçek tıklamayla görülüyor. Şüpheliler: URL hash yazımı (`SssAkordeon.astro` → `adresiGuncelle`) ve cevabın geç dolması / yüksekliğin sonradan değişmesi. Kalıcı kontrol eklendi: `npm run check:sss` (gerçek dokunma/tıklama, Chromium ve WebKit, 375 ve 1280 px, 3 sn kare kare ölçüm). Şu anki sonuç:
+  - Modern tarayıcıda /sss, / ve /bungalov'da başlık en çok 0,5 px oynuyor; ekrana çizilen karelerde de (Chromium screencast, WebKit video) başlık yerinde.
+  - `<details name>` desteği olmayan tarayıcıda (iOS 17.2 öncesi Safari; testte `¹` ile taklit edilir) başlık 105–237 px kayıyor ve WebKit'te 4 senaryo kalıyor. Olası neden: tıklama işleyicisi diğer açık cevabı kapattıktan sonra başlığın yerini ölçüyor. Düzeltme yapılmadı.
+  - Ana sayfada (≥ 1024 px, kaydırılmış) header'ın görünmeyen iç kabı (`.ust-ic`) header'ın 50 px altına taşıyor. Hemen altındaki soruya tıklanınca soru açılmıyor (testte 2 senaryo kalıyor).
+- **Proje sayfası ışık kutusundaki adressiz görsel.** `Galeri.astro`'daki büyük görsel (`data-ik-gorsel`) HTML'de `src`'siz duruyor; `check:images` onu istisnayla atlıyor. `/galeri`'deki gibi (db7a2a8) görseli JS ile oluşturup istisnayı kaldırmak gerekiyor. Yapılmadı.
