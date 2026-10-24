@@ -1,0 +1,85 @@
+---
+// Kullanım koşulları. Firma bilgileri src/data/site.ts'ten gelir; metin yayından önce bir hukukçuya
+// kontrol ettirilmelidir.
+import YasalLayout from '../layouts/YasalLayout.astro';
+import { firma, yasalAd } from '../data/site';
+---
+
+<YasalLayout
+  title="Kullanım Koşulları: Site Kullanım Kuralları | 2K AHŞAP"
+  description="2kahsap.com sitesini kullanırken geçerli olan koşullar: içeriklerin niteliği, teklif süreci, fikri mülkiyet hakları, dış bağlantılar ve sorumluluk sınırları."
+  baslik="Kullanım Koşulları"
+>
+  <p>
+    Bu koşullar, {yasalAd} tarafından işletilen 2kahsap.com sitesinin kullanımına ilişkindir. Siteyi
+    kullanarak bu koşulları kabul etmiş sayılırsınız. Kişisel verilerinizle ilgili bilgiler için
+    <a href="/gizlilik">Gizlilik Politikası</a>'nı ve <a href="/kvkk">KVKK Aydınlatma Metni</a>'ni
+    inceleyebilirsiniz.
+  </p>
+
+  <h2>1. Sitedeki İçeriklerin Niteliği</h2>
+  <p>
+    Sitedeki proje fotoğrafları, ölçüler, malzeme ve süre bilgileri tanıtım ve bilgilendirme
+    amaçlıdır. Her yapı arsaya, kullanım amacına ve tercihlerinize göre ayrıca tasarlandığı için bu
+    bilgiler bağlayıcı bir teklif ya da taahhüt değildir. Bilgileri güncel ve doğru tutmaya özen
+    gösteririz, ancak bunları önceden haber vermeden değiştirebiliriz.
+  </p>
+
+  <h2>2. Teklif Talepleri</h2>
+  <p>
+    Teklif ve iletişim formları yalnızca bizimle iletişime geçmenizi sağlar; form göndermek bir satış
+    sözleşmesi kurmaz ve sizi herhangi bir yükümlülük altına sokmaz. Fiyat, kapsam, teslim süresi ve
+    ödeme koşulları, projeniz görüşüldükten sonra yazılı olarak hazırlanan teklif ve sözleşmede
+    belirlenir. Formlarda doğru ve size ait bilgiler paylaşmanızı rica ederiz.
+  </p>
+
+  <h2>3. Fikri Mülkiyet</h2>
+  <p>
+    Sitedeki fotoğraflar, tasarımlar, metinler, logo ve marka {yasalAd}'a aittir veya izinle
+    kullanılmaktadır. Bu içerikler yazılı iznimiz olmadan kopyalanamaz, çoğaltılamaz, ticari amaçla
+    kullanılamaz ya da başka bir yapının tanıtımında kullanılamaz. Sayfa bağlantılarını kaynak
+    göstererek paylaşabilirsiniz.
+  </p>
+
+  <h2>4. Siteyi Kullanma Kuralları</h2>
+  <p>Siteyi kullanırken aşağıdakilerden kaçınmanızı bekleriz:</p>
+  <ul>
+    <li>Siteyi hukuka aykırı amaçlarla ya da başkalarının haklarını ihlal edecek biçimde kullanmak.</li>
+    <li>Sitenin çalışmasını bozacak, aşırı yük bindirecek veya güvenliğini tehlikeye atacak girişimlerde bulunmak.</li>
+    <li>Formları başkası adına, yanıltıcı bilgilerle ya da toplu ve otomatik gönderimler için kullanmak.</li>
+  </ul>
+
+  <h2>5. Dış Bağlantılar</h2>
+  <p>
+    Sitede WhatsApp, Google Haritalar, Instagram, Facebook ve LinkedIn gibi başka hizmetlere bağlantılar
+    bulunur. Bu hizmetlerin içeriğinden ve uygulamalarından sorumlu değiliz; bu sitelerde ilgili
+    hizmetin kendi koşulları ve gizlilik politikası geçerli olur.
+  </p>
+
+  <h2>6. Sorumluluğun Sınırı</h2>
+  <p>
+    Sitenin kesintisiz ve hatasız çalışması için gereken özeni gösteririz; ancak bakım, teknik arıza
+    veya altyapı sağlayıcısından kaynaklanan kesintiler yaşanabilir. Sitedeki bilgilere dayanarak,
+    yazılı teklif ve sözleşme yapılmadan alınan kararlardan doğabilecek zararlardan sorumlu tutulamayız.
+    Bu madde, yürürlükteki mevzuatın tüketicilere tanıdığı hakları sınırlamaz.
+  </p>
+
+  <h2>7. Değişiklikler</h2>
+  <p>
+    Bu koşulları zaman zaman güncelleyebiliriz. Güncel sürüm her zaman bu sayfada yayımlanır; son
+    güncelleme tarihi sayfanın başında yer alır.
+  </p>
+
+  <h2>8. Uygulanacak Hukuk</h2>
+  <p>
+    Bu koşullar Türkiye Cumhuriyeti hukukuna tabidir. Uyuşmazlıklarda, tüketicilerin yasal başvuru
+    hakları saklı kalmak kaydıyla, İstanbul Anadolu Mahkemeleri ve İcra Daireleri yetkilidir.
+  </p>
+
+  <h2>9. İletişim</h2>
+  <p>
+    Bu koşullarla ilgili sorularınız için <a href={`mailto:${firma.eposta}`}>{firma.eposta}</a>
+    adresine yazabilir, <a href={firma.telefonLink}>{firma.telefonGorunen}</a> numarasından bize
+    ulaşabilir veya {firma.adres} adresine yazılı olarak başvurabilirsiniz.
+  </p>
+</YasalLayout>

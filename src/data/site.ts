@@ -114,6 +114,8 @@ export const yasalGuncelleme = '2026-10-20';
 export const yasalSayfalar = [
   { ad: 'KVKK Aydınlatma Metni', href: '/kvkk' },
   { ad: 'Gizlilik Politikası', href: '/gizlilik' },
+  { ad: 'Kullanım Koşulları', href: '/kullanim-kosullari' },
+  // Çerez Politikası sonda kalır: footer "Çerez Tercihleri" düğmesini bunun önüne ekler (Footer.astro)
   { ad: 'Çerez Politikası', href: '/cerez-politikasi' },
 ];
 
