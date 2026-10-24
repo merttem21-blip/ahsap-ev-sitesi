@@ -51,3 +51,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Asma katlı verandalı bungalov, küçük bir taban alanını en verimli biçimde kullanmak için tasarladığımız bir ahşap bungalov projesi. Üçgen alınlıklı ön cephe, shingle kaplı dik çatı ve ahşap korkuluklu ön veranda, yapıya dağ manzarasına bakan sıcak bir karakter kazandırıyor. Bungalov zemine doğrudan oturmuyor; ayaklar üzerinde yükseltilmiş olarak duruyor.
+
+İçeride çatının eğimi tavana taşınıyor. Beyaz duvar ve tavan yüzeyleri ile açıkta bırakılan ahşap kirişler yüksek ve aydınlık bir hacim oluşturuyor; tekerlek biçimli avize bu hacmin odak noktası. Asma kat mutfağın üzerine yerleştirildiği için zemin katın geri kalanı açık kalıyor; kata dik bir merdivenle çıkılıyor. Asma katın altındaki beyaz mutfakta iki gözlü ocak, evye ve tezgâh üstü dolaplar yer alıyor.
+
+Ölçüler, asma katın kullanımı ve iç düzen her projede yeniden planlanır. Benzer bir bungalovda bu ayrıntılar ihtiyaçlarınıza göre teklifte netleştirilir.

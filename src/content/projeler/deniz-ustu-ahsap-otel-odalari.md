@@ -57,3 +57,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Deniz üstü ahşap otel odaları, bir turizm tesisi için ürettiğimiz ve su üzerinde yan yana dizilen konaklama birimlerinden oluşuyor. Odalar kıyıdan denize uzanan bir iskele hattı boyunca sıralanıyor ve her birinin denize bakan kendi terası var. Kütük görünümlü cepheler, hasır kaplı çatılar ve desenli ahşap korkuluklar, yapıları deniz kıyısındaki manzarayla uyumlu kılıyor.
+
+Terasları birbirinden ayıran paravanlar komşu odalar arasında mahremiyet sağlıyor; teraslardan denize merdivenle iniliyor. Odaların içinde çatı taşıyıcıları açıkta bırakılmış. Ahşap tavan ve zemin, tavan vantilatörü ve tül perdeli geniş camlarla birlikte ferah bir iç mekân oluşturuyor. Odalarda çift kişilik yatak, oturma koltukları, TV ünitesi ve klima yer alıyor. Kara tarafında numaralı oda kapıları ve odalar arasında dar geçitler bulunuyor.
+
+Su üzerindeki yapılarda oda sayısı, ölçüler ve taşıyıcı sistem sahanın koşullarına göre belirlenir. Benzer bir tesis için bu ayrıntılar teklifte netleştirilir.
