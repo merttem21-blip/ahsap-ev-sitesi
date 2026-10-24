@@ -61,3 +61,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Taş kaideli verandalı ahşap ev, taş duvarla çevrili bir bahçede, taş kaide üzerine oturan tek katlı bir ahşap ev projemiz. Ön cephe boyunca uzanan geniş veranda, ahşap korkulukları ve saçak boyunca devam eden dekoratif süslemeleriyle eve geleneksel bir sıcaklık katıyor; taş döşeli bahçe yolu doğrudan verandaya ulaşıyor.
+
+İçeride yüksek tavan ve açıkta bırakılan ahşap kirişler salonu ferah bir hacme dönüştürüyor. Siyah döner merdiven salonun üzerindeki asma kata çıkıyor. Ahşap duvarlar, avizeler ve dolaylı aydınlatma akşamları sıcak bir atmosfer oluşturuyor. Salona açılan mutfakta ahşap dolaplar ve kırmızı buzdolabı dikkat çekiyor. Bahçedeki kütük kaplamalı depo da projenin bir parçası; galerinin sonunda yapım aşamasına ait fotoğraflar yer alıyor.
+
+Veranda biçimi, asma kat ve oda düzeni her projede ihtiyaca göre planlanır; ayrıntılar teklifte netleştirilir.

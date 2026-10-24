@@ -41,3 +41,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Yol kenarı satış tezgâhları, ağaçlı bir yolun kenarında kaldırım boyunca sıralanan satış noktaları için ürettiğimiz özel tasarım ahşap yapılar. Yan yana birleşen bölmeler, her birinin üzerindeki üçgen alınlıklı çatıyla tek bir dizi hâlinde okunuyor; saçak boyunca uzanan dalgalı süsleme cepheye sıcak bir hareket katıyor.
+
+Bölmelerin arka duvarları kapalı, yola bakan önleri ise açık bırakılmış. Her bölmenin önünde ahşap bir tezgâh, arka duvarında ise aydınlatma yeri bulunuyor; böylece ürünler doğrudan kaldırıma doğru sergilenebiliyor. Dizinin uçlarındaki kapalı yan duvarlar cepheyi düzenli bir görünümle bitiriyor. Bal tonundaki yatay ahşap kaplama, çevredeki çam ağaçlarıyla uyum içinde.
+
+Bölme sayısı, tezgâh ölçüsü ve aydınlatma ihtiyacı kullanım alanına göre planlanır; ayrıntılar teklifte netleştirilir.

@@ -47,3 +47,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Siyah cepheli bahçe ofisi, bir evin bahçesinde ağaçların arasına yerleştirdiğimiz, çalışma alanı olarak tasarlanmış küçük bir ahşap yapı. Siyaha boyanan yatay ahşap kaplama ve tek eğimli çatı yeşil bahçe içinde yalın ve modern bir siluet çiziyor; açıkta bırakılan çatı kirişleri cepheye ince bir ritim katıyor.
+
+Ön cephedeki geniş sürgülü cam kapılar ve yan pencereler ofisi bahçeye açıyor; girişe birkaç ahşap basamakla çıkılıyor. İçeride doğal tonda bırakılan ahşap duvar ve tavan, dış cephenin koyu rengiyle güçlü bir karşıtlık oluşturuyor. Çatı pencereleri, çalışma masasının bulunduğu alana yukarıdan gün ışığı alıyor. Sakin konumu ve bol ışığıyla yapı, bahçede evden ayrı bir çalışma odası sunuyor.
+
+Ofisin ölçüsü, cam cephe yerleşimi ve iç düzen kullanım alışkanlıklarınıza göre planlanır; ayrıntılar teklifte netleştirilir.

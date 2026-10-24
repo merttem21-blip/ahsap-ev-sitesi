@@ -41,3 +41,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Verandalı küçük üçgen ev, bahçede az yer kaplayan, kompakt ölçülerde tasarladığımız bir üçgen ev projesi. Zemine kadar inen shingle kaplı dik çatı yapının iki yanını tamamen örtüyor; doğal ahşap tonundaki ön cephe ise koyu çatıyla belirgin bir karşıtlık oluşturuyor.
+
+Ön cephenin ortasındaki uzun, bölmeli camlı kapı içeriye bol gün ışığı alıyor; üstündeki yuvarlak pencere üçgen cepheyi tamamlayan zarif bir ayrıntı. Kapının önündeki geniş ahşap deck, küçük yapının kullanım alanını dışarıya doğru genişleten bir veranda görevi görüyor. Çitler ve ağaçlarla çevrili bahçede yapı, taş duvarlı peyzajla birlikte doğal bir köşe oluşturuyor.
+
+Bu ölçekteki üçgen evler misafir odası, hobi alanı ya da bahçe odası gibi farklı amaçlarla planlanabilir. Ölçüler ve iç düzen kullanım amacına göre belirlenir, teklifte netleştirilir.

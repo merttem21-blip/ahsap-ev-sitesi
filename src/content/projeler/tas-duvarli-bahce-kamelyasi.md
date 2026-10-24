@@ -39,3 +39,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Taş duvarlı bahçe kamelyası, taş duvarla çevrili, ormana bakan bir bahçe için ürettiğimiz bir ahşap kamelya. Yeşil shingle kaplı kırma çatının tepesindeki küçük çatı feneri yapıya karakter kazandırıyor; kamelya, basamaklarla çıkılan yükseltilmiş bir ahşap deck üzerinde duruyor.
+
+Ahşap dikmeler arasındaki korkuluklar oturma alanını çevreliyor, girişte ise korkuluk açık bırakılmış. İçeride kenarlar boyunca uzanan köşe banklar ve ahşap masalar geniş bir oturma düzeni sunuyor. Ortadaki metal şömine, serin akşamlarda kamelyayı sıcak bir buluşma noktasına dönüştürüyor. Kamelyanın yanındaki aynı tonda ahşap depo kutusu ise bahçe eşyaları için derli toplu bir saklama yeri oluşturuyor.
+
+Kamelyanın ölçüsü, oturma düzeni ve şömine gibi eklentiler bahçenize göre planlanır; ayrıntılar teklifte netleştirilir.

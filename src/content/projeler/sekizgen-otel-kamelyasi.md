@@ -49,3 +49,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Sekizgen otel kamelyası, bir otelin havuz alanı için ürettiğimiz sekizgen planlı bir ahşap kamelya projesi. Kamelya, çevresini saran geniş ve yuvarlak bir ahşap deck üzerinde duruyor; havuz ve otel binasıyla birlikte açık alanın odak noktası hâline geliyor.
+
+Kütük görünümlü duvarlar bazı cephelerde tamamen kapalı, bazılarında ise yarım yükseklikte bırakılarak geniş açıklıklar oluşturuyor; böylece içeride hem korunaklı hem de manzaraya açık bir alan elde ediliyor. Girişlerden biri kemerli bir açıklıkla vurgulanmış. Shingle kaplı sekizgen çatı geniş bir saçakla sona eriyor. İçeriden bakıldığında ortadaki dikmeden yayılan ahşap kirişler ışınsal bir tavan deseni oluşturuyor.
+
+Kamelyanın ölçüsü, kapalı ve açık cephelerin oranı ve deck alanı kullanım amacına göre planlanır. Benzer bir proje için ayrıntılar teklifte netleştirilir.

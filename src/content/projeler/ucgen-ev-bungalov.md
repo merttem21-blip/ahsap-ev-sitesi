@@ -45,3 +45,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Üçgen ev bungalov, zemine kadar inen dik çatısı ve üçgen siluetiyle tanınan üçgen ev tipinde tasarlayıp ürettiğimiz bir bungalov projesi. Gece çekilen fotoğrafta bahçe aydınlatması, ön cephedeki üçgen cam yüzey ve arkadaki köy manzarası yapının akşam saatlerindeki sıcak görünümünü ortaya koyuyor.
+
+İçeride eğimli duvarlar ahşapla kaplanmış, çatı kirişleri açıkta bırakılmış. Oturma alanında taş kaplı bir şömine yer alıyor; asma kata ahşap bir merdivenle çıkılıyor. Granit görünümlü tezgâhı ve siyah dolaplarıyla L mutfak, sıcak ahşap tonuyla modern bir karşıtlık kuruyor. Eğik ahşap tavanlı banyoda taş görünümlü bir lavabo dikkat çekiyor. Galerinin sonundaki fotoğraflar mutfak montajını ve yapım sürecini gösteriyor.
+
+Üçgen evlerde eğimli duvarlar iç düzeni doğrudan etkilediği için mutfak, banyo ve asma kat yerleşimi her projede ayrıca planlanır; ayrıntılar teklifte netleştirilir.
