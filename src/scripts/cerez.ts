@@ -129,17 +129,7 @@ export function cerezBandi() {
     bant.hidden = false;
   };
 
-  // İlk açılışta bandın kapladığı alt alan (üst kenarının ekranın altına uzaklığı) html'de --cerez-alan olarak tutulur;
-  // ana sayfa hero'su metnini bunun üstünde tutar (Hero.astro). İlk değeri CerezBandi.astro'daki satır içi betik yazar,
-  // burada yazı tipi yüklenince ya da genişlik değişince güncellenir. Bant kapanınca değer kalır: metin zıplamaz.
-  const alanTakibi = new ResizeObserver(() => {
-    if (bant.hidden) return;
-    const alan = Math.ceil(innerHeight - bant.getBoundingClientRect().top);
-    document.documentElement.style.setProperty('--cerez-alan', `${alan}px`);
-  });
-
   const kapat = () => {
-    alanTakibi.disconnect();
     bant.hidden = true;
     donus?.focus();
     donus = null;
@@ -180,9 +170,46 @@ export function cerezBandi() {
     });
   }
 
+  // Bilgilendirme bandı sayfa kaydırılınca açılır: kısa ekranda (CerezBandi.astro'daki satır içi betik data-ertele
+  // verir) ve bant ana sayfa hero metnini örtecekse.
+  const kaydirincaAc = () => {
+    const kaydirinca = () => {
+      if (scrollY <= 0) return;
+      removeEventListener('scroll', kaydirinca);
+      ac(false);
+    };
+    addEventListener('scroll', kaydirinca, { passive: true });
+    kaydirinca(); // sayfa kaydırılmış açıldıysa (#çapa, geri dönüş) hemen
+  };
+
+  // Örtmemesi gereken blok (ana sayfa hero metni, data-cerez-ortmesin) bandın kaldırdığı yerde bile bandın altında
+  // kalıyor mu: dar ve orta boy ekranda metin header'ın altından başlar, yukarı çıkamaz. Bant ölçüm için bir anlığına
+  // açılır (boyanmaz). Bloğun kendi kutusu ölçülür; içindekilerin giriş animasyonu (translateY) sonucu değiştirmez.
+  const bantOrtecek = (blok: Element) => {
+    bant.hidden = false;
+    const bantUst = bant.getBoundingClientRect().top;
+    bant.hidden = true;
+    return blok.getBoundingClientRect().bottom > bantUst;
+  };
+
   izinlileriYukle();
-  if (!secimVar()) {
-    ac(false);
-    alanTakibi.observe(bant);
+  if (secimVar()) return;
+
+  if (bant.hasAttribute('data-ertele')) {
+    kaydirincaAc();
+    return;
   }
+
+  // --cerez-alan (hero'nun bandın üstünde bıraktığı yer) ilk boyamadan önce yazılır ve sonra değişmez: yazı tipi
+  // yüklenince bant birkaç piksel kısalsa da hero metni kaymaz. Örtme kararı ise yazı tipleri yüklendikten sonra
+  // verilir; yedek yazı tipiyle bant ve hero metni farklı satırlara kırılabilir (en fazla 3 sn beklenir).
+  const blok = bant.dataset.kip === 'bilgi' ? document.querySelector('[data-cerez-ortmesin]') : null;
+  if (!blok) {
+    ac(false);
+    return;
+  }
+  Promise.race([document.fonts.ready, new Promise((tamam) => setTimeout(tamam, 3000))]).then(() => {
+    if (bantOrtecek(blok)) kaydirincaAc();
+    else ac(false);
+  });
 }

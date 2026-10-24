@@ -65,7 +65,8 @@ const serit = [
   </div>
 
   <div class="kap hero-ic">
-    <div class="hero-metin">
+    {/* data-cerez-ortmesin: bilgilendirme bandı bu bloğu örtecekse sayfa kaydırılınca açılır (cerez.ts) */}
+    <div class="hero-metin" data-cerez-ortmesin>
       <slot />
     </div>
 
@@ -173,21 +174,36 @@ const serit = [
     pointer-events: none;
   }
 
+  /* < 360px (320 × 568 gibi dar telefonlar): başlık 32px, açıklama 16px ve açıklamanın boşlukları bir adım dar.
+     Böylece iki düğme de alt menünün ve barın üstüne taşan Teklif Al dairesinin üstünde kalır; onaylı ölçülerle
+     metin 320 px'te iki satır uzun çıkıyor, ikinci düğme alt menünün arkasına düşüyordu. */
   .hero-metin :global(h1) {
-    font-size: clamp(2.25rem, 3.8vw, 3.75rem);
+    font-size: 2rem;
     line-height: 1.05;
     text-shadow: 0 2px 20px rgb(0 0 0 / 0.35);
   }
 
-  /* Mobilde açıklamanın üst ve alt boşluğu kısa ekranda bir adım (8px) daralır: 560 px boyda 16 / 24px, 640 px ve
-     üstünde 24 / 32px. Böylece iPhone SE'de bile (Safari'de ~553 px görünür alan) metin bloğu header ile alt menünün
-     arasına sığar. Yazı boyutları değişmez. */
   .hero-metin :global(p) {
     max-width: 48ch;
-    margin: clamp(var(--bosluk-2), calc(var(--ekran) / 10 - 40px), var(--bosluk-3)) 0
-      clamp(var(--bosluk-3), calc(var(--ekran) / 10 - 32px), var(--bosluk-4));
+    margin: clamp(var(--bosluk-1), calc(var(--ekran) / 10 - 48px), var(--bosluk-3)) 0
+      clamp(var(--bosluk-2), calc(var(--ekran) / 10 - 40px), var(--bosluk-4));
     color: var(--color-krem);
-    font-size: var(--text-giris);
+    font-size: 1rem;
+  }
+
+  /* ≥ 360px: onaylı ölçüler. Mobilde açıklamanın üst ve alt boşluğu kısa ekranda bir adım (8px) daralır: 560 px boyda
+     16 / 24px, 640 px ve üstünde 24 / 32px. Böylece iPhone SE'de bile (Safari'de ~553 px görünür alan) metin bloğu
+     header ile alt menünün arasına sığar. */
+  @media (min-width: 360px) {
+    .hero-metin :global(h1) {
+      font-size: clamp(2.25rem, 3.8vw, 3.75rem);
+    }
+
+    .hero-metin :global(p) {
+      margin: clamp(var(--bosluk-2), calc(var(--ekran) / 10 - 40px), var(--bosluk-3)) 0
+        clamp(var(--bosluk-3), calc(var(--ekran) / 10 - 32px), var(--bosluk-4));
+      font-size: var(--text-giris);
+    }
   }
 
   .hero-metin :global(.hero-dugmeler) {
