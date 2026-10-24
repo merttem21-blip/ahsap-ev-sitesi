@@ -35,3 +35,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Bahçe deposu, bahçe duvarına yaslanacak şekilde konumlandırdığımız, sade ve kullanışlı bir özel tasarım ahşap yapı. Depo, bahçe aletleri ve eşyalar için düzenli bir saklama alanı sunarken bahçenin görünümünü de tamamlıyor.
+
+Öne doğru uzatılan tek eğimli çatı, köşedeki ahşap dikmeyle taşınan bir sundurma oluşturuyor. Böylece kapıların önünde yağmurdan korunan bir alan kalıyor. Ön cephede çift kanatlı bir kapı ve yanında tek kanatlı ikinci bir kapı bulunuyor; iki kapı da cepheyle aynı ahşap tonunda. Yatay ahşap kaplama, gri bahçe duvarının önünde sıcak bir vurgu yaratıyor.
+
+Bu tür depolar bahçenin ölçüsüne ve saklanacak eşyalara göre farklı boyut ve kapı düzenleriyle planlanabilir. Ölçüler ve iç düzen ihtiyaca göre belirlenir, teklifte netleştirilir.

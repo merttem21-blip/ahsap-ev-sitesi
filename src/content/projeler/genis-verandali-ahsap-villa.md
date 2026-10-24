@@ -75,3 +75,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Geniş verandalı ahşap villa, geniş bir bahçenin ortasında taş kaide üzerine oturan ve cepheleri boyunca uzanan geniş verandasıyla öne çıkan bir ahşap villa projemiz. Uzun saçaklı beşik çatı koyu renkli dikme ve kirişlerle taşınıyor; bu çizgiler sıcak tondaki yatay ahşap kaplamayla belirgin bir karşıtlık oluşturuyor.
+
+Ahşap deck kaplı verandaya iki ayrı merdivenle çıkılıyor. Büyük pencereler ve sürme cam kapılar salonu verandaya ve bahçeye açıyor. İçeride ahşap duvarlar, açıkta bırakılan tavan kirişleri ve koyu tonlu zemin sıcak bir atmosfer yaratıyor; salonun bir köşesinde gri mavi dolaplı mutfak yer alıyor. Galerinin sonundaki fotoğraflar taş kaidenin ve veranda kirişlerinin yapım aşamasını da gösteriyor.
+
+Oda düzeni, veranda genişliği ve cephe ayrıntıları her villada yeniden planlanır. Benzer bir proje için ayrıntılar teklifte netleştirilir.

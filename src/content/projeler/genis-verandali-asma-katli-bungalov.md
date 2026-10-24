@@ -61,3 +61,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Geniş verandalı asma katlı bungalov, ön cephesi boyunca uzanan üstü örtülü verandasıyla açık havayı yaşam alanının bir parçası hâline getiren bir ahşap bungalov projesi. Ayaklar üzerinde yükseltilen yapının beşik çatısı shingle ile kaplı; ön alınlıktaki üçgen cam yüzey içeri gün ışığı alıyor.
+
+Verandanın kendi çatısı ahşap dikmelerle taşınıyor ve korkuluklarla çevriliyor; girişe ahşap basamaklarla çıkılıyor. İçeride ahşap kaplamalı duvarlar, açık tavan kirişleri ve ahşap zemin bütünlüklü bir görünüm sunuyor. Yüksek tavanlı salonun üzerinde korkuluklu bir asma kat bulunuyor; kata, altında mutfak dolaplarının yer aldığı ahşap bir merdivenle çıkılıyor. Banyoda duş alanı, klozet ve lavabo yer alıyor.
+
+Verandanın derinliği, asma katın nasıl kullanılacağı ve banyo ile mutfağın yerleşimi ihtiyaçlarınıza göre birlikte belirlenir ve teklifte netleştirilir.

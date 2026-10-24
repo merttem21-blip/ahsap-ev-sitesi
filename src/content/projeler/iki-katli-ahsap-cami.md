@@ -26,7 +26,7 @@ fotograflar:
   - dosya: iki-katli-ahsap-cami-09
     alt: "İki katlı ahşap cami – uzun yan cephe ve pencere sıraları"
   - dosya: iki-katli-ahsap-cami-10
-    alt: "İki katlı ahşap cami – arka cephe ve üçgen alınlık"
+    alt: "İki katlı ahşap cami – köşeden kırma çatı ve sivri tepelikli mihrap çıkıntısı"
   - dosya: iki-katli-ahsap-cami-11
     alt: "İki katlı ahşap cami – sivri tepelikli arka cephe"
   - dosya: iki-katli-ahsap-cami-12
@@ -34,7 +34,7 @@ fotograflar:
   - dosya: iki-katli-ahsap-cami-03
     alt: "İki katlı ahşap cami – avludaki dış merdivenli ek bina"
   - dosya: iki-katli-ahsap-cami-04
-    alt: "İki katlı ahşap cami – ek binanın çift kollu merdiveni"
+    alt: "İki katlı ahşap cami – ek binanın tek kollu dış merdiveni ve üst kat balkonu"
   - dosya: iki-katli-ahsap-cami-05
     alt: "İki katlı ahşap cami – ek binanın yan cephesi ve merdiven"
   - dosya: iki-katli-ahsap-cami-15
@@ -75,3 +75,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+İki katlı ahşap cami, geleneksel cami mimarisinin öğelerini ahşabın sıcaklığıyla yorumladığımız bir ahşap cami projesi. Koyu kızıl kahve tonlu yatay ahşap kaplama, açık renkli kaide ve geniş saçaklı kırma çatı yapının ana çizgilerini oluşturuyor. Yan cepheye bitişik minare, ahşap kaplaması ve sivri külahıyla yapının en belirgin öğesi.
+
+Girişte iki katlı bir revak yer alıyor; ahşap süslemeli konsollar ve çapraz desenli korkuluklar cepheye geleneksel bir zarafet katıyor. İki sıra pencere harimi gün ışığıyla aydınlatıyor. İçeride ahşap duvar ve tavan, turkuaz halı, avize, mihrap ve ahşap minber bir arada görülüyor; üst katta harime bakan korkuluklu bir mahfil bulunuyor. Avludaki dış merdivenli ek bina da aynı ahşap diliyle tasarlandı.
+
+Caminin ve ek binaların ölçüleri ile iç düzeni ihtiyaca ve araziye göre planlanır. Benzer bir proje için ayrıntılar teklifte netleştirilir.

@@ -35,3 +35,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Hasır çatılı plaj barı, deniz kenarındaki bir plaj alanı için ürettiğimiz ve palmiyelerin arasında konumlanan bir ahşap bar projesi. Geniş hasır çatı ahşap direklerle taşınıyor ve bar tezgâhının çevresinde gölgeli bir alan oluşturuyor.
+
+Ahşap kaplamalı bar tezgâhı, çatının tam altında ada biçiminde yer alıyor. Hasır çatının doğal dokusu ve ahşabın sıcak tonu, palmiyeler ve deniz manzarasıyla aynı çizgide buluşuyor. Açık plaj alanında duran yapı, alanı bölmeden kendi gölgesini yaratıyor. Gün batımında çekilen fotoğraf ise hasır çatının siluetini ve akşam saatlerindeki atmosferini gösteriyor.
+
+Plaj ve otel barlarında tezgâh düzeni, çatı ölçüsü ve servis alanı işletmenin ihtiyacına göre planlanır. Benzer bir bar için ayrıntılar teklifte netleştirilir.

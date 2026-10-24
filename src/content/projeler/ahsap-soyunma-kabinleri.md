@@ -45,3 +45,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Ahşap soyunma kabinleri, havuz çevresinde ihtiyaç duyulan soyunma noktaları için ürettiğimiz özel tasarım ahşap yapılar. Projede tek kişilik kabinlerin yanında çift bölmeli bir model de yer alıyor; kabinler havuz başındaki terasta, şezlongların yanında ve çimenlik kenarında konumlanıyor.
+
+Bal rengi yatay ahşap kaplama, havuz çevresindeki yeşillik ve palmiyelerle uyum sağlıyor. Öne doğru taşan tek eğimli çatı kapının üzerini koruyor, kapının üstündeki açıklık ise kabinin havalanmasına yardımcı oluyor. Kapı açıldığında içeride oturmak ve eşya bırakmak için küçük bir ahşap bank görülüyor. Dar ve sade formu sayesinde kabinler kalabalık bir alanı daraltmadan yerleştirilebiliyor.
+
+Kabin sayısı, bölme düzeni ve iç donanım alanın kullanımına göre planlanır. Benzer bir proje için ayrıntılar teklifte netleştirilir.

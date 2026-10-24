@@ -43,3 +43,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Deniz manzaralı teraslı ahşap ev, denize bakan bir yamaçta manzarayı içeri almak için tasarladığımız tek katlı bir ahşap ev projesi. Ev, eğimli araziye uyum sağlayan koyu renkli bir alt bölüm üzerinde yükseliyor; giriş kapısına küçük bir saçağın altından, dış merdivenle ulaşılıyor.
+
+Manzara yönündeki cephelerde geniş camlar ve büyük pencereler yer alıyor. Köşedeki korkuluklu teras iki cepheyi birleştirerek manzaraya bakan bir oturma alanı oluşturuyor. Fotoğraflar evi iki aşamada gösteriyor: önce doğal ahşap tonunda, ardından cephesi, korkulukları ve merdiveni antrasit renge boyanmış haliyle. Bu karşılaştırmada aynı yapının iki farklı renkte nasıl bir karakter kazandığını görebilirsiniz.
+
+Arazinin eğimi, manzara yönü ve cephe rengi her projede ayrıca değerlendirilir. Benzer bir ev için ayrıntılar teklifte netleştirilir.

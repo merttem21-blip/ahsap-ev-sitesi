@@ -39,3 +39,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+İskele giriş kulübesi, bir vapur iskelesinin girişindeki meydan için ürettiğimiz, deniz kıyısında konumlanan bir özel tasarım ahşap yapı. Kulübe, iskeleye gelenlerin ilk gördüğü noktada çevresiyle uyumlu, sıcak bir görünüm sunuyor.
+
+Kırma çatı, kapalı kulübe hacminin ötesine uzanarak ahşap dikmelerle taşınan geniş bir saçak oluşturuyor; saçağın altında güneşten ve yağmurdan korunan açık bir alan kalıyor. Kulübenin cephelerinde bölmeli küçük ahşap pencereler sıralanıyor, yatay ahşap kaplama ise bal tonunda bırakılmış. Bayraklar, deniz ve iskeleye yanaşan vapurlarla birlikte yapı, kıyı meydanının doğal bir parçası gibi duruyor.
+
+Kapalı bölüm ile saçak altının oranı, pencere yerleşimi ve iç düzen kulübenin kullanım amacına göre planlanır. Ölçüler teklifte netleştirilir.
