@@ -100,7 +100,7 @@ En kötü durum, antrasit bölümdeki kart yüzeyidir (≈ `#363534`).
 Fontlar sitenin kendi dosyalarıdır (14 Ekim 2026'dan beri); Google Fonts'a bağlantı eklenmez (ziyaretçinin IP adresi Google'a gitmez, sayfa daha hızlı açılır):
 
 - Dosyalar `public/fonts/` içinde: Google Fonts'un verdiği woff2 dosyalarının aynısı, adında sürüm var (`inter-v20-latin.woff2`, `poppins-v24-600-latin.woff2` …). Sürüm değişmeden dosya değiştirilmez; `/fonts/` uzun süre önbellekte tutulur (`vercel.json`).
-- `@font-face` kuralları `src/styles/fontlar.css` içinde (`font-display: swap`, alt kümeler `unicode-range` ile); `Layout.astro` içe aktarır ve `inter-v20-latin.woff2` dosyasını `preload` eder.
+- `@font-face` kuralları `src/styles/fontlar.css` içinde (`font-display: swap`, alt kümeler `unicode-range` ile); `Layout.astro` içe aktarır ve `inter-v20-latin.woff2` ile başlık fontunu (`poppins-v24-600-latin.woff2`, `poppins-v24-600-latin-ext.woff2`) `preload` eder.
 - Inter'in yedeği `'Inter Yedek'` (Arial) ve `'Inter Yedek Roboto'`: `size-adjust` ile "0" genişliği Inter'e eşitlenmiştir. Metin sütunları `ch` ile sınırlı olduğu için Inter geç gelse de sütun genişliği değişmez. Font değişirse bu ölçüler yeniden hesaplanır (yöntem dosyanın başında).
 
 ```css
