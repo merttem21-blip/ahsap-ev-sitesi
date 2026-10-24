@@ -37,3 +37,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Lila renkli çocuk oyun evi, bahçelere neşeli bir renk katmak için tasarladığımız tek katlı bir ahşap oyun evi. Lila tonuna boyanan yatay ahşap kaplama beyaz köşe ve pencere çerçeveleriyle tamamlanıyor; gri shingle kaplı çatının ortasındaki küçük alınlık girişi vurguluyor.
+
+Ön cephede üst bölümü camlı beyaz bir kapı ve iki yanında bölmeli beyaz pencereler yer alıyor. Pencerelerin altındaki çiçeklikler oyun evine gerçek bir ev görünümü kazandırıyor; yan cephedeki pencereler içeriye farklı yönlerden ışık alıyor. Sade formu, bahçede az yer kaplarken çocuklara kendilerine ait bir köşe sunuyor. Fotoğraflar oyun evini atölye avlusunda, teslimden önce gösteriyor.
+
+Oyun evinin rengi, pencere ve kapı yerleşimi ile ölçüleri bahçenize ve çocuklarınızın kullanımına göre belirlenebilir. Benzer bir oyun evi için ayrıntılar teklifte netleştirilir.

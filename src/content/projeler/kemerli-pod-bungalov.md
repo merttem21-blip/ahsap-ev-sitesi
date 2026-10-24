@@ -18,7 +18,7 @@ fotograflar:
   - dosya: kemerli-pod-bungalov-08
     alt: "Kemerli pod bungalov – pencereli yan cephe ve deck"
   - dosya: kemerli-pod-bungalov-02
-    alt: "Kemerli pod bungalov – kemerli pencere önünde oturma grubu"
+    alt: "Kemerli pod bungalov – kemerli çift kanatlı cam kapı önünde oturma grubu"
   - dosya: kemerli-pod-bungalov-03
     alt: "Kemerli pod bungalov – açık kemerli kapıdan doğa manzarası"
   - dosya: kemerli-pod-bungalov-04
@@ -49,3 +49,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Kemerli pod bungalov, iki ucundaki kemerli bölümleriyle sıra dışı bir siluet oluşturan bir ahşap bungalov projesi. Shingle kaplı kemerli kabuklar ortadaki düz ahşap cepheli bölümü iki yandan sarıyor; yapının tamamı geniş bir ahşap deck üzerinde duruyor. Ormanla çevrili arazide bungalovun sıcak ahşap tonu doğayla kolayca bütünleşiyor.
+
+İçeride duvarlar ve tavan ahşapla kaplanmış, tavan kirişleri açıkta bırakılmış. Kemerli uç duvarlardaki cam kapılar oturma alanını iki yönden dışarıya açıyor; kapılar açıldığında doğa manzarası doğrudan içeri giriyor. Oturma grubu, küçük bir mutfak tezgâhı ve kemerli duvarın önüne yerleştirilen ahşap dolap iç düzeni tamamlıyor. Son iki fotoğraf, kemerli bölümlerin yapım aşamasını gösteriyor.
+
+Kemerli bölümlerin sayısı, iç düzen ve deck ölçüsü projeye göre yeniden planlanır. Benzer bir bungalov için ayrıntılar teklifte netleştirilir.

@@ -77,3 +77,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Kaydıraklı şato oyun evi, çocukların hem içinde hem çevresinde oyun kurabileceği şekilde tasarlayıp ürettiğimiz iki katlı bir ahşap oyun evi projesi. Açık mavi cephe, beyaz köşe çıtaları, sivri alınlıklar ve çatı pencereleri yapıya küçük bir şato havası veriyor. Yanındaki kulenin üst katından yeşil bir kaydırak bahçeye iniyor; kule balkonu ve beyaz korkuluklu üst kat terası da oyunun bir parçası.
+
+İçeride ahşap duvarlar ve spot aydınlatmalı tavan sıcak bir oyun odası oluşturuyor. Beyaz korkuluklu ahşap merdiven üst kata çıkıyor, en üstte ağ gerili bir çatı katı bulunuyor; kemerli bir kapı ise ahşap bir koridora açılıyor. Akşam saatlerinde bahçe aydınlatmasıyla birlikte oyun evi bambaşka bir görünüme kavuşuyor. Galerinin sonunda boya öncesi ahşap cepheyi ve yapım sürecini de görebilirsiniz.
+
+Oyun evinin ölçüsü, kat sayısı ve kaydırak gibi eklentiler bahçenize ve çocukların yaşına göre planlanır; ayrıntılar teklifte netleştirilir.

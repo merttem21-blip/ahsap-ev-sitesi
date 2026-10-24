@@ -67,3 +67,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Kiremit çatılı ahşap ev, bakımlı bir bahçenin içinde konumlanan, kütük görünümlü cepheleri ve kırmızı kiremit çatısıyla klasik bir karakter taşıyan tek katlı bir ahşap ev projemiz. Köşeyi dönen üstü örtülü veranda sürgülü cam kapılarla eve bağlanıyor; taş basamaklı bahçe yolu doğrudan verandaya uzanıyor.
+
+İç mekânda ahşap duvarlar ve açık tavan kirişleri bütün evi saran sıcak bir doku oluşturuyor. Salonun ortasındaki şömine çevresindeki oturma alanının odak noktası; kristal avizeler bu sıcak dokuya zarif bir karşıtlık katıyor. Salon, yemek alanı ve mutfakla tek bir açık hacimde birleşiyor. Ahşap kapılı bir iç koridor odalara ulaşıyor; banyoda cam duşakabin ve ahşap lavabo dolabı yer alıyor. Son fotoğraflar yapım aşamasını ve peyzaj öncesi bahçeyi gösteriyor.
+
+Oda düzeni, veranda biçimi ve iç mekân tercihleri her projede ihtiyaca göre planlanır; ayrıntılar teklifte netleştirilir.

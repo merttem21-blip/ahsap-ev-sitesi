@@ -45,3 +45,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Minareli tek katlı ahşap cami, bir park alanı için ürettiğimiz, sade ve sıcak bir ahşap cami projesi. Koyu kahve tonlu yatay ahşap kaplama, beşik çatı ve cepheye bitişik ahşap kaplı minare yapının ana çizgilerini oluşturuyor. Minarenin üst kısmındaki pencereler akşamları içten aydınlatılıyor, sivri külahı ise yapıyı parkın içinde uzaktan fark edilir kılıyor.
+
+Ön cephede ince dikmelerle taşınan bir revak, ahşap deck kaplı giriş alanını örtüyor. Revak altındaki turuncu tonlu iki ahşap kapı ve aynı tondaki pencere çerçeveleri koyu cephe üzerinde sıcak bir vurgu oluşturuyor. Akşam ışığında ve alacakaranlıkta çekilen fotoğraflar, revak aydınlatması ve aydınlatılmış minareyle yapının gece görünümünü de gösteriyor. Galeride yapım aşamasına ait bir fotoğraf da yer alıyor.
+
+Caminin ölçüsü, minare yüksekliği ve iç düzeni ihtiyaca ve araziye göre planlanır; ayrıntılar teklifte netleştirilir.

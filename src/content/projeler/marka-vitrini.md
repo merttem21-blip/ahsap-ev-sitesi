@@ -45,3 +45,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Marka vitrini, bir markanın ürünlerini açık havada sergilemesi için tasarlayıp ürettiğimiz özel tasarım ahşap yapı. Tek eğimli çatılı kapalı bölüm ve yanına eklenen açık pergola, ahşap bir deck üzerinde bir arada duruyor; ön cephenin üst kısmı marka adının yer aldığı bir tabela alanı olarak kullanılıyor.
+
+Kapalı bölümün geniş ahşap kapı kanatları tamamen açıldığında yapı bir teşhir alanına dönüşüyor; kapandığında ise derli toplu bir ahşap kutu hâline geliyor. Pergolanın çıtalı çatısı altındaki deck, ürünlerin dışarıda sergilenebileceği gölgeli bir alan sunuyor. Dekoratif ahşap merdivenler teşhire sıcak bir dokunuş katıyor. Deniz manzaralı bir terasta konumlanan yapı, çevresiyle uyumlu ve dikkat çekici bir nokta oluşturuyor.
+
+Kapalı bölüm ile pergolanın oranı, kapı sistemi ve tabela alanı markanın ihtiyacına göre tasarlanır; ölçüler teklifte netleştirilir.

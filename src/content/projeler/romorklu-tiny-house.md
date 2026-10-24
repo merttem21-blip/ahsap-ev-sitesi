@@ -47,3 +47,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Römorklu tiny house, bir römork şasisi üzerinde durduğu için yeri değiştirilebilen kompakt bir yaşam alanı olarak tasarladığımız bir tiny house projesi. Turuncu tonlu cephe kaplaması, antrasit köşe profilleri ve siyah çerçeveli pencereler yapıya modern bir görünüm veriyor; yuvarlak pencere ve yatay pencereler cepheye hareket katıyor.
+
+Yapının çevresine kurulan ahşap teras, çapraz desenli korkulukları ve basamaklarıyla girişi genişleten bir açık hava alanı oluşturuyor. İçeride açık renkli duvarlar ve laminat zemin ferah bir his veriyor. Ahşap tezgâhlı mutfakta ankastre fırın ve üst dolaplar yer alıyor; geniş cam kapı ve pencereler küçük iç mekânı gün ışığıyla dolduruyor. Dar ön cephe ve şasi üzerindeki uzun yan cephe, römorklu yapının oranlarını açıkça gösteriyor.
+
+Tiny house'un iç düzeni, teras ve donanım tercihleri kullanım amacınıza göre planlanır; ayrıntılar teklifte netleştirilir.

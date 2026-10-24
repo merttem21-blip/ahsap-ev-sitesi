@@ -37,3 +37,9 @@ ic_kaplama:
 teslim_suresi:
 notlar:
 ---
+
+Modern bahçe odası ve depo, bahçede ek bir oda ile saklama alanını iki ayrı yapıda çözen bir özel tasarım ahşap yapı projesi. Bahçe odası, eğimli çatı çizgisi ve sıcak tonlu ahşap kaplamasıyla çağdaş bir kutu formunda; beton bir kaide üzerinde, geniş çimenliğin kenarında duruyor.
+
+Odanın köşesindeki geniş cam cephe içeriyi bahçeye ve ağaçlara açıyor; siyah çerçeveli camlar ahşap kaplamayla net bir karşıtlık oluşturuyor. Aynı ahşap dille tasarlanan depo ise taş bir duvarın önüne, büyük bir ağacın yanına yerleştirildi; çift kanatlı kapısıyla bahçe malzemeleri için kolay ulaşılır bir saklama alanı sunuyor. Fotoğraflardan biri ağaçların arasındaki montaj aşamasını gösteriyor.
+
+Bahçe odasının kullanım amacı, cam cephe yerleşimi ve deponun ölçüsü bahçenize göre planlanır; ayrıntılar teklifte netleştirilir.
