@@ -8,6 +8,8 @@
 //   açar. Yalnızca kimliği girilmiş türler listelenir. Footer'daki "Çerez Tercihleri" paneli yeniden açar.
 // Yerleşim: mobilde alt menünün ve Teklif Al dairesinin üstünde, alt menüyle aynı kenar payında; ≥ 768px'te sol altta,
 // yüzen WhatsApp butonunun soluna kadar. Açık mobil menü paneli bandı örter. Arama sonucu özetine girmez (data-nosnippet).
+// Bant açılacaksa kapladığı alt alan html'e --cerez-alan olarak yazılır; ana sayfa hero'su metnini bunun üstünde tutar
+// (Hero.astro). İlk değeri ilk boyamadan önce aşağıdaki satır içi betik, sonraki güncellemeleri cerez.ts yazar.
 import { cerezOnayiGerekli, izleme } from '../data/site';
 ---
 
@@ -109,6 +111,36 @@ import { cerezOnayiGerekli, izleme } from '../data/site';
     )
   }
 </section>
+
+{
+  /* İlk boyamadan önce: seçim yoksa (cerez.ts → secimVar ile aynı karar) bant bir anlığına açılıp ölçülür ve kapladığı
+     alt alan --cerez-alan olarak yazılır; hero metni ilk karede bandın üstünde durur, sonradan kaymaz. Bandı yine
+     cerez.ts açar. Bu betik değişirse vercel.json'daki CSP'de yer alan sha256 özeti de güncellenmeli. */
+}
+<script is:inline>
+  (function () {
+    var bant = document.querySelector('[data-cerez]');
+    if (!bant) return;
+    var kayit = null;
+    try {
+      kayit = JSON.parse(localStorage.getItem('2k-ahsap-cerez-tercihi') || 'null');
+    } catch (e) {}
+    if (!kayit || typeof kayit.zaman !== 'number') kayit = null;
+    var turler = [];
+    if (bant.dataset.ga) turler.push('analitik');
+    if (bant.dataset.pixel) turler.push('pazarlama');
+    var secimVar = turler.length
+      ? turler.every(function (t) {
+          return kayit && typeof kayit[t] === 'boolean';
+        })
+      : !!kayit;
+    if (secimVar) return;
+    bant.hidden = false;
+    var alan = Math.ceil(innerHeight - bant.getBoundingClientRect().top);
+    bant.hidden = true;
+    document.documentElement.style.setProperty('--cerez-alan', alan + 'px');
+  })();
+</script>
 
 <script>
   import { cerezBandi } from '../scripts/cerez';

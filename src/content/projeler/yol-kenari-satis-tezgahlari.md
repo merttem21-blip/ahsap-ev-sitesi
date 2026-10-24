@@ -12,7 +12,7 @@ etiketler:
 # Galeri bu sırayla gösterilir. Alt metinleri fotoğrafı anlatır; her biri farklı olmalı.
 fotograflar:
   - dosya: yol-kenari-satis-tezgahlari-01
-    alt: "Yol kenarı satış tezgâhları – ağaçlı yol boyunca beşli tezgâh dizisi"
+    alt: "Yol kenarı satış tezgâhları – ağaçlı yol boyunca dörtlü tezgâh dizisi"
   - dosya: yol-kenari-satis-tezgahlari-02
     alt: "Yol kenarı satış tezgâhları – kaldırım üzerinde yan açıdan sıra"
   - dosya: yol-kenari-satis-tezgahlari-07
@@ -20,7 +20,7 @@ fotograflar:
   - dosya: yol-kenari-satis-tezgahlari-05
     alt: "Yol kenarı satış tezgâhları – kapalı yan duvar ve tezgâh dizisi"
   - dosya: yol-kenari-satis-tezgahlari-06
-    alt: "Yol kenarı satış tezgâhları – arka cepheden kaldırım görünümü"
+    alt: "Yol kenarı satış tezgâhları – dizinin kapalı uç duvarı ve kaldırım boyunca uzanan bölmeler"
   - dosya: yol-kenari-satis-tezgahlari-03
     alt: "Yol kenarı satış tezgâhları – ahşap tezgâh ve aydınlatma yeri"
   - dosya: yol-kenari-satis-tezgahlari-04

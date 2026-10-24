@@ -129,7 +129,17 @@ export function cerezBandi() {
     bant.hidden = false;
   };
 
+  // İlk açılışta bandın kapladığı alt alan (üst kenarının ekranın altına uzaklığı) html'de --cerez-alan olarak tutulur;
+  // ana sayfa hero'su metnini bunun üstünde tutar (Hero.astro). İlk değeri CerezBandi.astro'daki satır içi betik yazar,
+  // burada yazı tipi yüklenince ya da genişlik değişince güncellenir. Bant kapanınca değer kalır: metin zıplamaz.
+  const alanTakibi = new ResizeObserver(() => {
+    if (bant.hidden) return;
+    const alan = Math.ceil(innerHeight - bant.getBoundingClientRect().top);
+    document.documentElement.style.setProperty('--cerez-alan', `${alan}px`);
+  });
+
   const kapat = () => {
+    alanTakibi.disconnect();
     bant.hidden = true;
     donus?.focus();
     donus = null;
@@ -171,5 +181,8 @@ export function cerezBandi() {
   }
 
   izinlileriYukle();
-  if (!secimVar()) ac(false);
+  if (!secimVar()) {
+    ac(false);
+    alanTakibi.observe(bant);
+  }
 }

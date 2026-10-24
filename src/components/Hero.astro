@@ -6,7 +6,8 @@
 // sürüm, üstünde tam boyut. Dosyalar public/images/hero/ içindedir.
 //
 // Mobilde dikey kesim kendi oranında hero'nun üstünde durur (yapı yandan kırpılmaz). Metin ilk ekranın altına,
-// mobil alt menünün üstüne yaslanır; ikon şeridi alt menünün altında, ilk ekranın dışında kalır.
+// mobil alt menünün (ilk ziyarette çerez bandının) üstüne yaslanır; ikon şeridi alt menünün altında, ilk ekranın
+// dışında kalır.
 // ≥ 641px'te fotoğraf hero'yu kaplar; dikey tablette ve uzun ekranda hero'nun boyu sınırlıdır.
 // İki düzende de fotoğrafın alt kenarı sayfa zeminine erir (--zemine-eris); sonraki bölüm aynı zeminden
 // başladığı için hero ile arasında çizgi oluşmaz.
@@ -149,10 +150,14 @@ const serit = [
     padding-bottom: var(--bosluk-5);
   }
 
+  /* Çerez bandı açıkken (ilk ziyaret) metin bloğu bandın üstüne çıkar: --cerez-alan bandın kapladığı alt alandır
+     (CerezBandi.astro), alt menünün payı zaten --alt-menu-alan'dadır. Satırın boyu değişmez, ikon şeridi yerinde kalır.
+     Metnin yükselemeyeceği kadar kısa ekranda header'ın altından başlar ve bant düğmeleri yine örtebilir. */
   .hero-metin {
     position: relative;
     align-self: end;
     max-width: 36rem;
+    margin-bottom: max(0px, calc(var(--cerez-alan, 0px) - var(--alt-menu-alan)));
   }
 
   /* Mobil karartma metin bloğuna bağlıdır: metin uzasa da fotoğraf kaysa da altında kalır.
