@@ -27,7 +27,7 @@ export function gorsel(yol: string): Promise<Gorsel> {
 }
 
 async function oku(yol: string): Promise<Gorsel> {
-  const adaylar = [];
+  const adaylar: { url: string; width: number; height: number }[] = [];
   for (const g of GENISLIKLER) {
     const url = `${yol}-${g}.webp`;
     const dosya = path.join(process.cwd(), 'public', url);
