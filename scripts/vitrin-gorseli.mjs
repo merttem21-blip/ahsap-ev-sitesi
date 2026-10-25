@@ -1,9 +1,10 @@
 // Ana sayfadaki kategori kartlarının (4:5 dikey) vitrin fotoğraflarını üretir:
 // 4:5 kadraj, ortak sıcak renk düzeltmesi, eşitlenmiş parlaklık, koyulaştırılmış gökyüzü, netlik.
-// Amaç dört kartın yan yana aynı ışıkta ve renkte görünmesidir.
+// Amaç kartların yan yana aynı ışıkta ve renkte görünmesidir.
 //
 //   node scripts/vitrin-gorseli.mjs            public/images/vitrin/ altına yazar
 //   node scripts/vitrin-gorseli.mjs --onizleme  yalnızca sistemin geçici klasörüne yan yana önizleme yazar
+//   node scripts/vitrin-gorseli.mjs --sadece=kamelya-vitrin  yalnızca adı verilen vitrinleri yazar
 //
 // Kaynak dosyalara dokunulmaz (yalnızca okunur). Çıktı: <kategori>-vitrin-{600,1000,1600}.webp;
 // kaynak kadraj dar ise büyütülmez (gorsel() gerçek genişliği okur). Ev kadrajın üst yarısında
@@ -50,6 +51,45 @@ const VITRIN = [
     // Panoramik kaynaktan lombar pencere, kapı ve teras; kaynak 720px yüksek olduğu için 576px genişlik
     kadraj: { left: 410, top: 0, width: 576, height: 720 },
   },
+  // Aşağıdaki altısının kaynağı kategorinin vitrin projesinin (site.ts → vitrin, kategoriVitrini) kapak fotoğrafıdır
+  {
+    ad: 'ucgen-ev-vitrin',
+    // Gece ışıklı üçgen ev; çatının tepesi ve ışıklı cam üçgen üst yarıda, bahçe metin karartmasının altında.
+    // Proje adı değiştiği için fotoğraflar eski klasöründe (fotograf_klasoru)
+    kaynak: 'public/images/ucgen-ev/a-frame-bungalov/a-frame-bungalov-01-1600.webp',
+    kadraj: { left: 470, top: 300, width: 720, height: 900 },
+  },
+  {
+    ad: 'kamelya-vitrin',
+    // Kapakta kamelya kadrajın altında kalıyor, üstü otel binası; aynı projenin önden çekimi kullanılır:
+    // çatı ve kemerli giriş üst yarıda, deck metin karartmasının altında
+    kaynak: 'public/images/cardak/sekizgen-otel-cardagi/sekizgen-otel-cardagi-06-1600.webp',
+    kadraj: { left: 360, top: 150, width: 840, height: 1050 },
+  },
+  {
+    ad: 'otel-bar-vitrin',
+    kaynak: p('otel-bar', 'deniz-ustu-ahsap-otel-odalari', '01'),
+    // Hasır çatılı oda sırası denize doğru uzanır; teraslar ve su alt yarıda
+    kadraj: { left: 0, top: 0, width: 960, height: 1200 },
+  },
+  {
+    ad: 'cocuk-oyun-parki-vitrin',
+    kaynak: p('cocuk-oyun-parki', 'kaydirakli-sato-oyun-evi', '01'),
+    // Panoramik kaynaktan akşam ışığında çatı pencereli ana ev; kule ve kaydırak dışarıda (576 × 720)
+    kadraj: { left: 340, top: 0, width: 576, height: 720 },
+  },
+  {
+    ad: 'ahsap-cami-vitrin',
+    kaynak: p('ahsap-cami', 'iki-katli-ahsap-cami', '01'),
+    // Minare, iki katlı revak ve yan cephe; soldaki komşu yapı dışarıda
+    kadraj: { left: 440, top: 0, width: 960, height: 1200 },
+  },
+  {
+    ad: 'ozel-tasarim-vitrin',
+    kaynak: p('ozel-tasarim', 'iskele-giris-kulubesi', '01'),
+    // Panoramik kaynaktan kulübe, bayraklar ve deniz; sağdaki yolcular ve soldaki tabelalı büfe dışarıda (576 × 720)
+    kadraj: { left: 560, top: 0, width: 576, height: 720 },
+  },
 ];
 
 // Kadrajın üst %60'ının (evin durduğu bölge) ortalama parlaklığı
@@ -89,25 +129,30 @@ async function isle(kaynak, kadraj, ayar = {}) {
 }
 
 const onizleme = process.argv.includes('--onizleme');
+// --sadece=ucgen-ev-vitrin,kamelya-vitrin: yalnızca adı verilen vitrinler yazılır (diğer dosyalara dokunulmaz)
+const sadece = process.argv.find((a) => a.startsWith('--sadece='))?.slice('--sadece='.length).split(',');
+const secilenler = sadece ? VITRIN.filter((v) => sadece.includes(v.ad)) : VITRIN;
 
 if (onizleme) {
-  // Dört kartı yan yana, kart oranında gösterir
+  // Kartları kart oranında, beşerli satırlar hâlinde yan yana gösterir
   const W = 400;
   const H = 500;
+  const SUTUN = Math.min(5, VITRIN.length);
   const parcalar = [];
   for (const [i, v] of VITRIN.entries()) {
     const img = await sharp(await isle(v.kaynak, v.kadraj, v.ayar)).resize(W, H).toBuffer();
-    parcalar.push({ input: img, left: i * (W + 16), top: 0 });
+    parcalar.push({ input: img, left: (i % SUTUN) * (W + 16), top: Math.floor(i / SUTUN) * (H + 16) });
   }
+  const satir = Math.ceil(VITRIN.length / SUTUN);
   const dosya = path.join(os.tmpdir(), 'vitrin-onizleme.jpg');
-  await sharp({ create: { width: 4 * W + 48, height: H, channels: 3, background: '#1e1e1e' } })
+  await sharp({ create: { width: SUTUN * (W + 16) - 16, height: satir * (H + 16) - 16, channels: 3, background: '#1e1e1e' } })
     .composite(parcalar)
     .jpeg({ quality: 85 })
     .toFile(dosya);
   console.log(dosya);
 } else {
   await fs.mkdir(HEDEF, { recursive: true });
-  for (const v of VITRIN) {
+  for (const v of secilenler) {
     const islenmis = await isle(v.kaynak, v.kadraj, v.ayar);
     for (const g of GENISLIKLER) {
       const dosya = path.join(HEDEF, `${v.ad}-${g}.webp`);

@@ -29,7 +29,6 @@
   --color-cizgi: rgba(235, 220, 198, 0.14); /* ince ayraç ve kart kenarı (dekoratif) */
   --color-karartma: rgba(30, 30, 30, 0.7); /* fotoğraf üstü metin: beyaz pikselde bile krem ≥ 4.5:1 */
   --color-karartma-hafif: rgba(30, 30, 30, 0.3);
-  --color-karartma-orta: rgba(30, 30, 30, 0.55); /* fotoğraflı kartın üst kenarı (numara) */
   --color-karartma-yogun: rgba(30, 30, 30, 0.9); /* fotoğraflı kartın metin bloğu; %85 opak krem bile ≥ 4.5:1 */
   --color-cizgi-ince: rgba(235, 220, 198, 0.08); /* fotoğraflı kart çerçevesi */
   --color-ahsap-isik: rgba(166, 124, 82, 0.32); /* fotoğraflı kart hover'ında alttan gelen sıcak iç ışık */

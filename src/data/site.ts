@@ -138,9 +138,9 @@ export const menu = [
 // " | 2K AHŞAP" eki kodda eklenir, toplam en fazla 60 karakter. Boşsa başlık h1'den üretilir; sayfadaki H1 değişmez.
 // vitrin: kapak fotoğrafı kategoriyi temsil eden projenin slug'ı (yoksa ilk proje).
 // teklifIpucu: teklif formunda yapı tipi seçeneğinin altındaki kısa açıklama.
-// anaSayfa: ana sayfadaki "Ürünlerimiz" kartı (yalnızca kartı olan kategorilerde). Kart fotoğrafı
-// public/images/vitrin/<slug>-vitrin-*.webp (scripts/vitrin-gorseli.mjs); alt, o fotoğrafın alt metnidir.
-// anaSayfa'sı olmayan kategoriler kartların altında link olarak listelenir.
+// anaSayfa: ana sayfadaki "Ürünlerimiz" kart şeridindeki kart. Kart fotoğrafı
+// public/images/vitrin/<slug>-vitrin-*.webp (scripts/vitrin-gorseli.mjs, kaynağı vitrin projesinin fotoğrafı);
+// alt, o fotoğrafın alt metnidir. anaSayfa'sı olmayan kategori ana sayfada gösterilmez.
 export const kategoriler = [
   {
     ad: 'Ahşap Ev',
@@ -203,6 +203,10 @@ export const kategoriler = [
     // Eski ad ("A-frame") aramalarda da kullanıldığı için yalnızca meta açıklamada bir kez parantezde geçer
     metaGiris: 'Üçgen ev (A-frame) formunda tasarlayıp ürettiğimiz ahşap yapı ve bungalov projeleri.',
     teklifIpucu: 'Üçgen formlu ev ve bungalov',
+    anaSayfa: {
+      aciklama: 'Zemine kadar inen çatısıyla doğayla iç içe, karakterli üçgen ev ve bungalovlar.',
+      alt: 'Üçgen ev bungalov – gece ışıklandırılmış cam üçgen cephe',
+    },
   },
   {
     ad: 'Kamelya',
@@ -214,6 +218,10 @@ export const kategoriler = [
     // Eski ad ("çardak") aramalarda da kullanıldığı için yalnızca meta açıklamada bir kez parantezde geçer
     metaGiris: 'Bahçeler, oteller ve tesisler için tasarlayıp ürettiğimiz ahşap kamelya (çardak) projeleri.',
     teklifIpucu: 'Bahçe, otel ve tesisler',
+    anaSayfa: {
+      aciklama: 'Bahçeler, oteller ve tesisler için gölgeli ve sıcak buluşma alanları.',
+      alt: 'Sekizgen otel kamelyası – kemerli girişli açık kamelya',
+    },
   },
   {
     ad: 'Otel-Bar',
@@ -222,6 +230,10 @@ export const kategoriler = [
     h1: 'Ahşap Bar ve Otel Yapıları',
     giris: 'Otel ve plaj işletmeleri için tasarlayıp ürettiğimiz ahşap bar ve konaklama yapıları.',
     teklifIpucu: 'Otel, plaj ve işletmeler',
+    anaSayfa: {
+      aciklama: 'Otel ve plaj işletmeleri için tasarlanan ahşap bar ve konaklama yapıları.',
+      alt: 'Deniz üstü ahşap otel odaları – su üzerindeki sıra odalar ve teraslar',
+    },
   },
   {
     ad: 'Çocuk Oyun Parkı',
@@ -231,6 +243,10 @@ export const kategoriler = [
     googleBasligi: 'Ahşap Çocuk Oyun Parkı ve Oyun Evi Modelleri',
     giris: 'Bahçeler için tasarlayıp ürettiğimiz ahşap çocuk oyun parkı ve oyun evi projeleri.',
     teklifIpucu: 'Oyun evi ve oyun parkı',
+    anaSayfa: {
+      aciklama: 'Bahçeniz için çocukların keyifle oynayacağı ahşap oyun evleri ve oyun parkları.',
+      alt: 'Kaydıraklı şato oyun evi – akşam ışıklandırmasıyla çatı pencereli ön cephe',
+    },
   },
   {
     ad: 'Ahşap Cami',
@@ -240,6 +256,10 @@ export const kategoriler = [
     googleBasligi: 'Ahşap Cami Modelleri ve Projeleri',
     giris: 'Cemaatin ihtiyaçlarına göre tasarlayıp ürettiğimiz ahşap cami projeleri.',
     teklifIpucu: 'Tek ve iki katlı, minareli',
+    anaSayfa: {
+      aciklama: 'Cemaatin ihtiyaçlarına göre tasarlanan, sıcak ve huzurlu ahşap camiler.',
+      alt: 'İki katlı ahşap cami – minare ve ahşap süslemeli giriş revakı',
+    },
   },
   {
     ad: 'Özel Tasarım',
@@ -249,6 +269,10 @@ export const kategoriler = [
     googleBasligi: 'Özel Tasarım Ahşap Yapılar: Kabin, Kulübe, Vitrin',
     giris: 'Vitrin, kulübe, kabin ve depo gibi ihtiyaca göre özel tasarım ahşap yapı projelerimiz.',
     teklifIpucu: 'Kabin, kulübe, vitrin ve diğerleri',
+    anaSayfa: {
+      aciklama: 'Vitrin, kulübe, kabin ve depo gibi ihtiyacınıza göre tasarlanan ahşap yapılar.',
+      alt: 'İskele giriş kulübesi – deniz kıyısında saçaklı ahşap kulübe',
+    },
   },
 ];
 
