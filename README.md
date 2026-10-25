@@ -7,7 +7,7 @@
 
 ## Kurulum
 
-Gerekenler: Node.js 20 (yerelde 20.18 ile çalışıyor) ve npm.
+Gerekenler: Node.js 22 LTS ve npm. Sürüm `package.json` → `engines` (`22.x`) ve `.nvmrc` ile sabittir; Vercel de bu alana göre derler.
 
 ```bash
 git clone https://github.com/merttem21-blip/ahsap-ev-sitesi.git
@@ -34,7 +34,7 @@ npm run dev       # http://localhost:4321, değişiklikler anında yansır
 | `npm run form-kontrol` | Formların onaylı sürümle aynı olduğunu denetler (bkz. `docs/guvenli-mod/README.md`) |
 | `npm run gorsel-kontrol` | Sayfaların ekran görüntüsünü onaylı referanslarla karşılaştırır (Playwright) |
 
-`@astrojs/language-server` 2.16.16'da sabittir: 2.17 ve sonrası, ES modülünü `require` edemeyen Node sürümlerinde (ör. 20.18) `astro check`'i `ERR_REQUIRE_ESM` ile durdurur. Node 20.19 / 22.12 ve üstünde sabitleme kaldırılabilir.
+`npm run check` Node 22 ister: `astro check`'in dil sunucusu (2.17+) Node 20.18'de `ERR_REQUIRE_ESM` ile durur.
 
 ## Build
 
