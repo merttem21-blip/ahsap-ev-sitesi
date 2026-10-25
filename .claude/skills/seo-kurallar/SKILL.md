@@ -281,9 +281,10 @@ Her sayfa ortak layout (`src/layouts/Layout.astro`) üzerinden `src/components/S
 | Ana sayfa | Hero fotoğrafının masaüstü kadrajı (`site.ts` → `heroGorseli`; evler kadrajda kalır): `/paylasim/ana-sayfa.jpg` |
 | Proje | Projenin kapak fotoğrafı: `/paylasim/<kategori>/<proje>.jpg` |
 | Kategori | Kategoriyi temsil eden projenin (`vitrin`) kapağı: `/paylasim/<kategori>.jpg` |
+| Projeler, Galeri, Hakkımızda | Sayfanın üstünde görünen proje fotoğrafı (`src/lib/paylasim.ts` → `GENEL_SAYFALAR`): `/paylasim/<sayfa>.jpg` |
 | Diğer genel sayfalar (SSS, İletişim, yasal sayfalar vb.) ve projesi olmayan kategori | Logolu varsayılan görsel: `/paylasim/2k-ahsap.jpg` (gece zemin, ortada koyu zemin logosu) |
 
-Fotoğraf ortadan kırpılır; çok dikey fotoğraf (en/boy < 0,7) 4:5'e kırpılıp gece zemine ortalanır. `og:image:alt` kullanılan fotoğrafın alt metnidir. Yeni proje için ek adım gerekmez.
+Fotoğraf ortadan kırpılır (yapı kadrajın altındaysa `dikkatKirp` ile en dolu bölgeden; Galeri); çok dikey fotoğraf (en/boy < 0,7) 4:5'e kırpılıp gece zemine ortalanır. `og:image:alt` kullanılan fotoğrafın alt metnidir. Yeni proje için ek adım gerekmez.
 
 Open Graph etiketleri, link WhatsApp'ta veya sosyal medyada paylaşıldığında görünen önizlemeyi belirler.
 

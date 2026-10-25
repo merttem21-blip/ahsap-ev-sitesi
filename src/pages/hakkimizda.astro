@@ -17,6 +17,7 @@ import NedenAhsap from '../components/NedenAhsap.astro';
 import Surecimiz from '../components/Surecimiz.astro';
 import { gorsel } from '../lib/gorsel';
 import { fotoYolu } from '../lib/projeler';
+import { genelSayfaPaylasimi } from '../lib/paylasim';
 
 async function projeFotosu(proje: string, dosya: string) {
   const kayit = await getEntry('projeler', proje);
@@ -28,16 +29,19 @@ async function projeFotosu(proje: string, dosya: string) {
 // Açılış iki kadrajla verilir (art direction): < 1024px'te açılış dikeydir, aynı salonun dikey fotoğrafı kullanılır;
 // yatay fotoğraf bu alana ~3,5 kat büyütülüp bulanıklaşırdı. ≥ 1024px'te yatay fotoğraf. Alt metni dikey
 // fotoğrafınkidir; iki kadrajda da görünen şeyi (kirişli tavan, salon penceresi) anlatır.
-const [acilis, acilisGenis, hikaye] = await Promise.all([
+const [acilis, acilisGenis, hikaye, paylasim] = await Promise.all([
   projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-04'),
   projeFotosu('tas-kaideli-verandali-ahsap-ev', 'tas-kaideli-verandali-ahsap-ev-07'),
   projeFotosu('kemerli-pod-bungalov', 'kemerli-pod-bungalov-02'),
+  genelSayfaPaylasimi('hakkimizda'),
 ]);
 ---
 
 <Layout
   title="Hakkımızda: Hikâyemiz, Vizyonumuz ve Misyonumuz | 2K AHŞAP"
   description="2015'ten beri ahşap ev ve yapıları tasarlıyor, üretiyor ve kuruyoruz. Hikâyemizi, vizyon ve misyonumuzu, çalışma biçimimizi ve sürecimizi tanıyın."
+  image={paylasim.yol}
+  imageAlt={paylasim.alt}
 >
   <div class="hakkimizda-akis">
     <section class="acilis" aria-labelledby="hakkimizda-baslik">

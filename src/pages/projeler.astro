@@ -7,8 +7,10 @@ import Kart from '../components/Kart.astro';
 import { kategoriler } from '../data/site';
 import { gorsel } from '../lib/gorsel';
 import { fotoYolu, kapakFotosu, kategoriVitrini } from '../lib/projeler';
+import { genelSayfaPaylasimi } from '../lib/paylasim';
 
 const tumProjeler = await getCollection('projeler');
+const paylasim = await genelSayfaPaylasimi('projeler');
 
 const kartlar = [];
 for (const kategori of kategoriler) {
@@ -28,6 +30,8 @@ for (const kategori of kategoriler) {
 <Layout
   title="Ahşap Yapı Projelerimiz ve Modellerimiz | 2K AHŞAP"
   description="Ahşap ev, bungalov, villa, tiny house, kamelya ve oyun evi projelerimizi kategorilere göre inceleyin. Size özel ahşap yapı için 2K AHŞAP'tan teklif alın."
+  image={paylasim.yol}
+  imageAlt={paylasim.alt}
 >
   <SayfaBasi
     ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Projeler' }]}

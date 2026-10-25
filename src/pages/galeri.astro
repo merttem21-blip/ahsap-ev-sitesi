@@ -11,8 +11,10 @@ import { kategoriler } from '../data/site';
 import { ikon } from '../data/ikonlar';
 import { gorsel } from '../lib/gorsel';
 import { fotoYolu, jsonLd, projeKategorisi, projeYolu } from '../lib/projeler';
+import { genelSayfaPaylasimi } from '../lib/paylasim';
 
 const projeler = await getCollection('projeler');
+const paylasim = await genelSayfaPaylasimi('galeri');
 const kategoriSirasi = new Map(kategoriler.map((k, i) => [k.slug, i]));
 
 const fotolar = (
@@ -73,6 +75,8 @@ const sizes =
 <Layout
   title="Ahşap Ev ve Yapı Fotoğrafları: Proje Galerisi | 2K AHŞAP"
   description="Ahşap ev, bungalov, villa, tiny house, kamelya ve oyun evi fotoğraflarımız tek galeride. Kategoriye göre süzün, beğendiğiniz yapı için teklif alın."
+  image={paylasim.yol}
+  imageAlt={paylasim.alt}
   whatsappMesaj="Merhaba, sitenizdeki fotoğraf galerisini inceledim. Ahşap yapı projem hakkında bilgi almak istiyorum."
 >
   <SayfaBasi

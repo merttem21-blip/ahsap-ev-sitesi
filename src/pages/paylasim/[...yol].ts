@@ -6,6 +6,8 @@ import { kategoriler } from '../../data/site';
 import { kategoriProjeleri } from '../../lib/projeler';
 import {
   anaSayfaPaylasimi,
+  genelSayfaPaylasimi,
+  genelSayfalar,
   kategoriPaylasimi,
   paylasimGorseli,
   projePaylasimi,
@@ -15,6 +17,7 @@ import {
 
 export async function getStaticPaths() {
   const liste: Paylasim[] = [varsayilanPaylasim, anaSayfaPaylasimi];
+  for (const s of genelSayfalar) liste.push(await genelSayfaPaylasimi(s));
   for (const k of kategoriler) {
     const p = await kategoriPaylasimi(k, await kategoriProjeleri(k.slug));
     if (p.kaynak) liste.push(p); // projesi olmayan kategori varsayılan görseli kullanır
