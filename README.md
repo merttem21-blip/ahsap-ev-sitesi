@@ -27,11 +27,14 @@ npm run dev       # http://localhost:4321, değişiklikler anında yansır
 |---|---|
 | `npm run images` | `ham-gorseller/` altındaki fotoğrafları 600/1000/1600 px WebP olarak `public/images/`'a yazar |
 | `npm run yeni-proje` | `images` + yeni proje klasörleri için fotoğraf listesi hazır `.md` taslağı (rehber: `docs/yeni-proje-ekleme.md`) |
+| `npm run check` | Tip denetimi (`astro check`) |
 | `npm run check:images` | Derlenmiş sitede kırık görsel arar (önce `npm run build`) |
 | `npm run check:sss` | SSS akordeonunda soru açılınca sayfanın zıplamadığını denetler (Playwright) |
 | `npm run jsonld-kontrol` | Derlenmiş sayfalardaki schema.org (JSON-LD) verisini denetler |
 | `npm run form-kontrol` | Formların onaylı sürümle aynı olduğunu denetler (bkz. `docs/guvenli-mod/README.md`) |
 | `npm run gorsel-kontrol` | Sayfaların ekran görüntüsünü onaylı referanslarla karşılaştırır (Playwright) |
+
+`@astrojs/language-server` 2.16.16'da sabittir: 2.17 ve sonrası, ES modülünü `require` edemeyen Node sürümlerinde (ör. 20.18) `astro check`'i `ERR_REQUIRE_ESM` ile durdurur. Node 20.19 / 22.12 ve üstünde sabitleme kaldırılabilir.
 
 ## Build
 

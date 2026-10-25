@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
     "images": "node scripts/optimize-images.mjs",
     "check:images": "node scripts/check-images.mjs",
     "check:sss": "node scripts/sss-kontrol.mjs",
@@ -30,10 +31,14 @@
     "simple-icons": "^16.34.0"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.4",
+    "@astrojs/language-server": "2.16.16",
+    "@types/pngjs": "6.0.5",
     "node-html-parser": "9.0.4",
     "pixelmatch": "7.2.0",
     "playwright": "1.63.0",
     "pngjs": "7.0.0",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "typescript": "5.9.3"
   }
 }

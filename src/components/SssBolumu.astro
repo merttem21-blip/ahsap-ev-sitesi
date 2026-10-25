@@ -24,7 +24,7 @@ const {
 {
   sorular.length > 0 && (
     <section class:list={['sss-bolum', { 'sss-bolum-cizgi': ustCizgi }]} aria-labelledby="sss-baslik">
-      <script type="application/ld+json" set:html={jsonLd(sssSemasi(sorular))} />
+      <script is:inline type="application/ld+json" set:html={jsonLd(sssSemasi(sorular))} />
       <div class="kap sss-ic">
         <header class="sss-ust" data-ortaya>
           <h2 id="sss-baslik">{baslik}</h2>

@@ -17,7 +17,7 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
   description="Ahşap ev ve bungalov fiyatı, ruhsat, yapım süresi, deprem dayanımı, bakım ve garanti hakkında merak edilenler. Sorunuz burada yoksa bize hemen ulaşın."
   whatsappMesaj={whatsappMesaj}
 >
-  <script type="application/ld+json" set:html={jsonLd(sssSemasi(gruplar.flatMap((g) => g.sorular)))} />
+  <script is:inline type="application/ld+json" set:html={jsonLd(sssSemasi(gruplar.flatMap((g) => g.sorular)))} />
 
   <SayfaBasi
     ogeler={[{ ad: 'Ana Sayfa', href: '/' }, { ad: 'Sıkça Sorulan Sorular' }]}

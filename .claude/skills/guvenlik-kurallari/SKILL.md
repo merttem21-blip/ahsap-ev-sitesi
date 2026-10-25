@@ -11,11 +11,11 @@ Veritabanı şifresi, API anahtarları gibi gizli bilgiler asla koda yazılmaz.
 
 ```
 ✗ YAPMAYIN:
-const apiKey = "sk_live_12345";
+const apiKey = "<gizli-anahtar>";
 
 ✓ YAPIN:
 // .env dosyasına yazın (GitHub'a gitmez)
-API_KEY=sk_live_12345
+API_KEY=<gizli-anahtar>
 // Kodda:
 const apiKey = import.meta.env.API_KEY;
 ```

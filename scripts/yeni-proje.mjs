@@ -31,7 +31,7 @@ if (yanlis.length) {
 
 await gorselleriUret();
 
-const taslak = (kategori, proje, fotolar) =>
+const taslak = (kategori, fotolar) =>
   [
     '---',
     '# Proje adı: sitede başlık olarak görünür (ör. "Kemerli Pod Bungalov").',
@@ -85,7 +85,7 @@ for (const kategori of kategoriler) {
       .sort((a, b) => a.localeCompare(b, 'tr', { numeric: true }));
     if (fotolar.length === 0) continue;
 
-    fs.writeFileSync(kayit, taslak(kategori, proje, fotolar));
+    fs.writeFileSync(kayit, taslak(kategori, fotolar));
     yeniler.push(kayit);
 
     if (fotolar.length < 4) uyarilar.push(`${proje}: ${fotolar.length} fotoğraf var, en az 4 gerekir.`);

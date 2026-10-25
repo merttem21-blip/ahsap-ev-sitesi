@@ -12,7 +12,7 @@
 // Proje veya fotoğraf kaldırılırsa derleme durur.
 import { getEntry } from 'astro:content';
 import Breadcrumb from './Breadcrumb.astro';
-import { gorsel } from '../lib/gorsel';
+import { gorsel, type Gorsel } from '../lib/gorsel';
 import { fotoYolu } from '../lib/projeler';
 
 interface Props {
@@ -42,7 +42,7 @@ const stil = [
 // genişlik ~1,25 kat daha artar (390×844'te 472px). sizes buna göre büyük kaynağı seçtirir.
 const sizes = mobil ? `(max-width: 640px) ${Math.ceil(mobil.olcek * 125)}vw, 100vw` : '100vw';
 
-let resim;
+let resim: (Gorsel & { alt: string }) | undefined;
 if (foto) {
   const kayit = await getEntry('projeler', foto.proje);
   const kayitFoto = kayit?.data.fotograflar.find((f) => f.dosya === foto.dosya);

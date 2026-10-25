@@ -24,4 +24,4 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async ({ props }) =>
-  new Response(await paylasimGorseli(props.paylasim as Paylasim), { headers: { 'Content-Type': 'image/jpeg' } });
+  new Response(new Uint8Array(await paylasimGorseli(props.paylasim as Paylasim)), { headers: { 'Content-Type': 'image/jpeg' } });
