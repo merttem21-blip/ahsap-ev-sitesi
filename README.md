@@ -34,7 +34,7 @@ npm run dev       # http://localhost:4321, değişiklikler anında yansır
 | `npm run form-kontrol` | Formların onaylı sürümle aynı olduğunu denetler (bkz. `docs/guvenli-mod/README.md`) |
 | `npm run gorsel-kontrol` | Sayfaların ekran görüntüsünü onaylı referanslarla karşılaştırır (Playwright) |
 
-`npm run check` Node 22 ister: `astro check`'in dil sunucusu (2.17+) Node 20.18'de `ERR_REQUIRE_ESM` ile durur.
+`@astrojs/language-server` 2.16.16'da sabittir: 2.17 ve sonrası Node 20.18'de `astro check`'i `ERR_REQUIRE_ESM` ile durdurur. Yerel Node 22'ye geçilince sabitleme kaldırılır (`npm uninstall @astrojs/language-server`, ardından `npm update @astrojs/language-server`).
 
 ## Build
 
