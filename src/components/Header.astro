@@ -258,6 +258,25 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
     transform: translateY(calc((var(--h) - var(--h-kucuk)) / 2));
   }
 
+  /* Kaydırılmış durumda .ust-ic ve logo linkinin kutusu header'ın görünen alt kenarının altına taşar (ana sayfada
+     17 / 50 px, diğer sayfalarda ≥ 1024px'te 12 px). Taşan boş kısım altındaki sayfanın tıklamasını yutmasın:
+     tıklamayı yalnızca görünen öğeler alır (menü, düğmeler, ölçeklenmiş logo görseli). */
+  .ust-kucuk .ust-ic {
+    pointer-events: none;
+  }
+
+  .ust-kucuk .ust-ic > * {
+    pointer-events: auto;
+  }
+
+  .ust-kucuk .ust-ic > .logo {
+    pointer-events: none;
+  }
+
+  .ust-kucuk .logo img {
+    pointer-events: auto;
+  }
+
   /* Logo ve menü düğmesi açık panelin üzerinde kalır */
   .logo,
   .menu-dugme {

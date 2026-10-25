@@ -97,6 +97,7 @@ const { sorular } = Astro.props;
     document.body.style.overflowAnchor = '';
   }
 
+  /** Dengelemeyi başlatır; döndürdüğü işlev aynı düzeltmeyi beklemeden, o anda yapar. */
   function yeriniKoru(ozet: HTMLElement) {
     const benim = {};
     aktif = benim;
@@ -106,14 +107,18 @@ const { sorular } = Astro.props;
     // Kapanma ve açılma geçişlerinin ikisi de biter (hareket azaltılmışsa geçiş yok, birkaç kare yeter)
     const bitis = performance.now() + (azHareket.matches ? 0 : SURE) + 100;
 
-    const adim = (simdi: number) => {
-      if (aktif !== benim) return;
+    const dengele = () => {
       const fark = ekranUstu(ozet) - ilk;
       if (Math.abs(fark) >= 0.5) kaydir(fark);
+    };
+    const adim = (simdi: number) => {
+      if (aktif !== benim) return;
+      dengele();
       if (simdi < bitis) requestAnimationFrame(adim);
       else dengelemeyiBitir();
     };
     requestAnimationFrame(adim);
+    return dengele;
   }
 
   for (const olay of ['wheel', 'touchstart']) {
@@ -175,8 +180,13 @@ const { sorular } = Astro.props;
       const ozet = (e.target as Element).closest('summary');
       if (!ozet || !ozetler.includes(ozet)) return;
       const soru = ozet.parentElement as HTMLDetailsElement;
-      if (!yerlesikGrup && !soru.open) digerleriniKapat(soru); // aynı karede kapanır, ayrı bir zıplama olmaz
-      yeriniKoru(ozet);
+      // Önce başlığın yeri alınır, sonra diğer cevap kapatılır. Yükseklik geçişi olmayan tarayıcıda kapanma anında
+      // uygulanır: başlığın kayması da hemen, aynı olayda dengelenir (yer kapanmadan sonra okunursa hiç dengelenmezdi).
+      const dengele = yeriniKoru(ozet);
+      if (!yerlesikGrup && !soru.open) {
+        digerleriniKapat(soru);
+        dengele();
+      }
     });
   }
 
