@@ -28,7 +28,6 @@
   --color-ahsap-acik: #bb9975; /* ahşap %70 + krem; küçük etiket ve link, ≥ 4.6:1 */
   --color-cizgi: rgba(235, 220, 198, 0.14); /* ince ayraç ve kart kenarı (dekoratif) */
   --color-karartma: rgba(30, 30, 30, 0.7); /* fotoğraf üstü metin: beyaz pikselde bile krem ≥ 4.5:1 */
-  --color-karartma-hafif: rgba(30, 30, 30, 0.3);
   --color-karartma-yogun: rgba(30, 30, 30, 0.9); /* fotoğraflı kartın metin bloğu; %85 opak krem bile ≥ 4.5:1 */
   --color-cizgi-ince: rgba(235, 220, 198, 0.08); /* fotoğraflı kart çerçevesi */
   --color-ahsap-isik: rgba(166, 124, 82, 0.32); /* fotoğraflı kart hover'ında alttan gelen sıcak iç ışık */
@@ -72,7 +71,6 @@
   --font-baslik: 'Poppins', system-ui, sans-serif;
   --font-metin: 'Inter', 'Inter Yedek', 'Inter Yedek Roboto', system-ui, sans-serif;
 
-  --text-h1: clamp(2.5rem, 7vw, 5.5rem);
   --text-h2: clamp(1.75rem, 4vw, 3rem);
   --text-h3: clamp(1.25rem, 2.5vw, 1.5rem);
   --text-giris: 1.125rem;
@@ -96,12 +94,10 @@
   --bosluk-6: 64px;
   --bosluk-7: 96px;
   --bosluk-8: 128px;
-  --bosluk-9: 160px;
 
-  /* Bölüm boşlukları: ritim için üç ayrı ölçü */
+  /* Bölüm boşlukları: ritim için iki ayrı ölçü */
   --bolum-dar: clamp(64px, 8vw, 96px);
   --bolum: clamp(80px, 10vw, 128px);
-  --bolum-genis: clamp(96px, 12vw, 160px);
 
   /* Biçim */
   --radius-kart: 16px; /* kart ve kutu; karta yaslı görsel kartın köşesine kırpılır */
@@ -121,7 +117,6 @@
   --sure: 300ms; /* header küçülmesi */
   --sure-kart: 400ms; /* fotoğraflı kart hover'ı */
   --sure-ortaya: 700ms; /* kaydırınca ortaya çıkma ve hero metni */
-  --sure-capraz: 1.5s; /* hero slaytları arasında çapraz geçiş */
   --sure-kenburns: 18s; /* tek fotoğraflı hero'da yavaş yakınlaşma */
   --gecikme-adim: 80ms; /* kartlarda kademeli gecikme */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -276,8 +271,7 @@ ul {
 }
 
 /* Buton: pill, içi boş, ince krem çerçeve, sağında ok.
-   Hover/odakta ahşap çerçeveli katman belirir ve ok kayar (yalnızca opacity ve transform).
-   Eski .dugme-birincil / .dugme-ikincil sınıfları stil taşımaz; sayfalar yenilenirken kaldırılır. */
+   Hover/odakta ahşap çerçeveli katman belirir ve ok kayar (yalnızca opacity ve transform). */
 .dugme {
   position: relative;
   display: inline-flex;
@@ -352,7 +346,6 @@ ul {
    (kartın kalkması, ok, ortalama) bozulmaz. Kendi transition'ı olan bileşenler `scale`'i ayrıca ekler. */
 :is(
     .dugme,
-    .kategori-link,
     .grup-link,
     .tum-projeler,
     .tum-sorular,
@@ -367,7 +360,6 @@ ul {
 
 :is(
     .dugme,
-    .kategori-link,
     .grup-link,
     .tum-projeler,
     .tum-sorular,

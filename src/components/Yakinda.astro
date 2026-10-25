@@ -20,7 +20,7 @@ const { baslik, metin, etiket = 'Yakında', whatsapp = whatsappLinki() } = Astro
     <p class="yakinda-metin">{metin}</p>
     <div class="yakinda-eylemler">
       <slot name="eylemler">
-        <a href={firma.telefonLink} class="dugme dugme-birincil">Bizi arayın: {firma.telefonGorunen}</a>
+        <a href={firma.telefonLink} class="dugme">Bizi arayın: {firma.telefonGorunen}</a>
         <a href={whatsapp} class="yakinda-link" target="_blank" rel="noopener noreferrer">WhatsApp'tan yazın</a>
         <a href={`mailto:${firma.eposta}`} class="yakinda-link">{firma.eposta}</a>
       </slot>

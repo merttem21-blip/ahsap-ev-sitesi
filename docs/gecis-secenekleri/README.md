@@ -1,3 +1,5 @@
+> Bu klasörün görselleri 25 Ekim 2026'da depodan kaldırıldı (yer açmak için). Son hâlleri `98d28cd` commit'inde duruyor: `git checkout 98d28cd -- docs/gecis-secenekleri/`
+
 # Ana sayfa bölüm geçişleri: tespit ve karar (12–13 Ekim 2026)
 
 Müşterinin fark ettiği iki sorun vardı. Hero'nun bitişinde sert düz çizgiler görünüyordu. Bölümler arasındaki boşluklar da düzensizdi.

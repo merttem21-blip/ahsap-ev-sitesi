@@ -1,3 +1,5 @@
+> Bu klasörün görselleri 25 Ekim 2026'da depodan kaldırıldı (yer açmak için). Son hâlleri `98d28cd` commit'inde duruyor: `git checkout 98d28cd -- docs/hakkimizda/acilis/`
+
 # Hakkımızda açılışı (15 Ekim 2026, müşteri onaylı: a)
 
 > Aynı gün yerini 3. tura bıraktı: `docs/hakkimizda/acilis-v3/` (ince bant da fotoğrafı yatayda kestiği için kaldırıldı).

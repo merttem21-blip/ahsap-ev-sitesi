@@ -1,3 +1,5 @@
+> Bu klasörün görselleri 25 Ekim 2026'da depodan kaldırıldı (yer açmak için). Son hâlleri `98d28cd` commit'inde duruyor: `git checkout 98d28cd -- docs/baslik-bandi/`
+
 # Alt sayfa başlık bandı, deneme (15 Ekim 2026, dal: deneme/baslik-bandi)
 
 Projeler, Galeri ve İletişim'in başlık bandı (breadcrumb, H1, giriş metni) iki seçenekle denendi. Renk token'ları,

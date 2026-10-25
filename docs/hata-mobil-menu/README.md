@@ -1,3 +1,5 @@
+> Bu klasörün görselleri 25 Ekim 2026'da depodan kaldırıldı (yer açmak için). Son hâlleri `98d28cd` commit'inde duruyor: `git checkout 98d28cd -- docs/hata-mobil-menu/`
+
 # Hata: mobil menü paneli kesiliyor ve kaymıyor (12 Ekim 2026)
 
 **Belirti (gerçek telefonda):** Sayfa biraz aşağı kaydırılmışken alt menüden "Menü" açılınca panelde yalnızca "Ana Sayfa" ve yarısı kesik "Projeler" görünüyordu. Diğer bağlantılar görünmüyor, panel kaymıyordu. Altta görünen telefon, WhatsApp, e-posta, adres ve harita bölümü panele ait değildi. Bunlar İletişim sayfasının kendi içeriğiydi ve kesilen panelin altından görünüyordu.

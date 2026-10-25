@@ -1,3 +1,5 @@
+> Bu klasörün görselleri 25 Ekim 2026'da depodan kaldırıldı (yer açmak için). Son hâlleri `98d28cd` commit'inde duruyor: `git checkout 98d28cd -- docs/teklif-formu/`
+
 # Teklif formu: adım göstergesi, "Diğer" yapı tipi ve proje açıklaması (13 Ekim 2026)
 
 Müşteri isteği (harita: T2-1 ve adım göstergesi), müşteri onaylı (13 Ekim 2026). Yalnızca `/teklif-al` sayfası değişti. Renk, font, kart, çizgi ve köşe dili mevcut token'lardan geliyor; yeni renk veya font eklenmedi.
