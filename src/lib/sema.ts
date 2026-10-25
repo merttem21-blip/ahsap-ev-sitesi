@@ -14,6 +14,7 @@ export const isletmeSemasi = (site: URL) => ({
   '@type': ['Organization', 'HomeAndConstructionBusiness'],
   '@id': isletmeKimligi(site),
   name: firma.marka,
+  legalName: firma.unvan, // KVKK ve Kullanım Koşulları sayfalarında görünen ünvan
   url: new URL('/', site).href,
   logo: new URL(semaLogosu, site).href,
   image: new URL(varsayilanGorsel, site).href,
