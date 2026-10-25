@@ -133,12 +133,14 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 
 ## 8. Yayın günü yapılacaklar
 
-- **Alan adını bağlama (www → 2kahsap.com).** 2kahsap.com henüz bu siteye bağlı değil; şu an hem `2kahsap.com` hem `www.2kahsap.com` başka bir sunucudan yanıt veriyor ve biri diğerine yönlenmiyor (14 Ekim 2026). Vercel → proje → Settings → Domains:
+- **Alan adını bağlama (www → 2kahsap.com).** Karar (26 Ekim 2026): bütün aşamalar bitip `main`'e birleştirildikten sonra yapılır. 2kahsap.com henüz bu siteye bağlı değil; `2kahsap.com` ve `www.2kahsap.com` GoDaddy'nin park sayfasını gösteriyor (A: 15.197.148.33, 3.33.130.190; `/` → `/lander`) ve `http` HTTPS'e yönlenmiyor (26 Ekim 2026). Vercel → proje → Settings → Domains:
   1. `2kahsap.com` eklenir ve ana adres yapılır. Canonical, sitemap, paylaşım görselleri ve form sonrası yönlendirme (`/tesekkurler`) bu adresi kullanır (`src/data/site.ts`, `siteAdresi`).
   2. `www.2kahsap.com` eklenir ve "Redirect to 2kahsap.com" (308) seçilir.
-  3. DNS'te Vercel'in gösterdiği A ve CNAME kayıtları girilir. E-posta (MX) kayıtlarına dokunulmaz; info@2kahsap.com çalışmaya devam etmeli.
-  4. Kontrol: `https://www.2kahsap.com/iletisim` 308 ile `https://2kahsap.com/iletisim`'e, `http://2kahsap.com/` HTTPS'e yönlenmeli; `/iletisim/` ve `/iletisim/index.html` `/iletisim`'e yönlenmeli (`vercel.json`: `trailingSlash: false`, `cleanUrls: true`).
-- **Google Search Console.** 2kahsap.com mülk olarak eklenir ve `https://2kahsap.com/sitemap.xml` gönderilir.
+  3. DNS'te (GoDaddy) park sayfasının iki A kaydı ve varsa yönlendirme (forwarding) kaldırılır, Vercel'in gösterdiği A ve CNAME kayıtları girilir. E-posta (MX), SPF, DMARC ve `google-site-verification` kayıtlarına dokunulmaz; info@2kahsap.com çalışmaya devam etmeli.
+  4. Alan adı ve SSL çalışınca `ahsap-ev-sitesi.vercel.app` → Edit → Redirect to `2kahsap.com`. Bu adres şu an herkese açık ve `noindex` taşımıyor (canonical 2kahsap.com'u gösteriyor). Önizlemeler Vercel girişi ister ve `X-Robots-Tag: noindex` döner; değişiklik gerekmez.
+  5. Kontrol: `https://www.2kahsap.com/iletisim` 308 ile `https://2kahsap.com/iletisim`'e, `http://2kahsap.com/` HTTPS'e yönlenmeli; `/iletisim/` ve `/iletisim/index.html` `/iletisim`'e yönlenmeli (`vercel.json`: `trailingSlash: false`, `cleanUrls: true`).
+- **Google Search Console.** "Alan adı" mülkü olarak eklenir (www, http, https birlikte), GoDaddy'ye TXT kaydıyla doğrulanır; mevcut `google-site-verification` kaydı silinmez. Sonra `https://2kahsap.com/sitemap.xml` gönderilir.
+- **Bing Webmaster.** "Google Search Console'dan içe aktar" ile eklenir (ek DNS kaydı gerekmez).
 - **Google İşletme Profili.** ✅ Tamamlandı (14 Ekim 2026). Profilin linki (`maps.google.com/?cid=…`; kısa link Android Chrome'da açılmadığı için kullanılmıyor) `src/data/site.ts` → `firma.harita` (footer ve `/iletisim` adres linkleri, JSON-LD `hasMap`); "Haritayı göster" ile açılan harita `firma.haritaYerlestirme`, konum `firma.konum` (JSON-LD `geo`). Sitedeki adres, profildeki resmi adresle birebir aynı yapıldı: Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A, 34890 Pendik/İstanbul.
 - **Form denemesi.** Yayından sonra teklif formundan bir deneme gönderilir; Teşekkürler sayfasının açıldığı ve mailin info@2kahsap.com'a geldiği kontrol edilir.
 
@@ -146,6 +148,11 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 
 - **SSS kayması.** Canlıda gerçek tıklamayla görülüyor. Şüpheliler: URL hash yazımı (`SssAkordeon.astro` → `adresiGuncelle`) ve cevabın geç dolması / yüksekliğin sonradan değişmesi. Kalıcı kontrol eklendi: `npm run check:sss` (gerçek dokunma/tıklama, Chromium ve WebKit, 375 ve 1280 px, 3 sn kare kare ölçüm). Şu anki sonuç:
   - Modern tarayıcıda /sss, / ve /bungalov'da başlık en çok 0,5 px oynuyor; ekrana çizilen karelerde de (Chromium screencast, WebKit video) başlık yerinde.
-  - `<details name>` desteği olmayan tarayıcıda (iOS 17.2 öncesi Safari; testte `¹` ile taklit edilir) başlık 105–237 px kayıyor ve WebKit'te 4 senaryo kalıyor. Olası neden: tıklama işleyicisi diğer açık cevabı kapattıktan sonra başlığın yerini ölçüyor. Düzeltme yapılmadı.
-  - Ana sayfada (≥ 1024 px, kaydırılmış) header'ın görünmeyen iç kabı (`.ust-ic`) header'ın 50 px altına taşıyor. Hemen altındaki soruya tıklanınca soru açılmıyor (testte 2 senaryo kalıyor).
+  - ✅ Çözüldü (26 Ekim 2026, 1c727aa): `<details name>` desteği olmayan tarayıcıda (iOS 17.2 öncesi Safari; testte `¹`) başlık 105–237 px kayıyordu. Tıklama işleyicisi başlığın yerini diğer cevabı kapattıktan sonra ölçüyordu; artık önce ölçüp kapatmayla aynı anda dengeliyor.
+  - ✅ Çözüldü (26 Ekim 2026, 1c727aa): kaydırılmış header'ın görünmeyen iç kabı (`.ust-ic`) ve logo linkinin kutusu header'ın altına taşıp tıklamayı yutuyordu (ana sayfada 17 / 50 px, diğer sayfalarda ≥ 1024 px'te 12 px). Taşan kısım artık tıklamayı almıyor. `check:sss` 96/96.
 - **Proje sayfası ışık kutusundaki adressiz görsel.** `Galeri.astro`'daki büyük görsel (`data-ik-gorsel`) HTML'de `src`'siz duruyor; `check:images` onu istisnayla atlıyor. `/galeri`'deki gibi (db7a2a8) görseli JS ile oluşturup istisnayı kaldırmak gerekiyor. Yapılmadı.
+
+## 10. Çalışma saatlerinin /iletisim'de gösterimi (onay bekliyor, 26 Ekim 2026)
+
+- Saatler: Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı (kullanıcı). Kaynak `src/data/site.ts` → `firma.calismaSaatleri`; JSON-LD'de `openingHours: "Mo-Sa 08:00-19:00"` olarak yayında.
+- Sayfada henüz görünmüyor. Öneri: `/iletisim`'deki "Bize ulaşın" listesine beşinci satır (saat ikonu, "Çalışma saatleri" etiketi); bağlantı olmadığı için üzerine gelince renk değiştirmez. Onay gelince eklenir; o zamana kadar şemadaki tek görünmeyen bilgi budur.

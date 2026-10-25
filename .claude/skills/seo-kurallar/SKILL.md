@@ -179,7 +179,7 @@ const isletme = {
 ```
 
 - LinkedIn hesabı şirketin değil, sahibinin kişisel profili olduğu için `founder` altında durur.
-- Çalışma saatleri ve koordinatlar (`openingHoursSpecification`, `geo`) **bilinmeden eklenmez**. Öğrenilince eklenir.
+- Çalışma saatleri ve koordinatlar firma bilgisinden gelir, uydurulmaz: `geo` (`site.ts` → `firma.konum`) ve `openingHours: "Mo-Sa 08:00-19:00"` (`firma.calismaSaatleri`, Pazar kapalı; 26 Ekim 2026). Saatlerin `/iletisim`'de gösterimi onay bekliyor; o zamana kadar şemadaki tek görünmeyen bilgi budur.
 - Ad, adres ve telefon footer'daki ve Google İşletme Profili'ndeki bilgiyle birebir aynı olmalı.
 
 ### Konum çubuğu olan her sayfada — BreadcrumbList

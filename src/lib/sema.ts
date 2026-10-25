@@ -32,6 +32,7 @@ export const isletmeSemasi = (site: URL) => ({
   },
   geo: { '@type': 'GeoCoordinates', latitude: firma.konum.enlem, longitude: firma.konum.boylam },
   hasMap: firma.harita,
+  openingHours: firma.calismaSaatleri, // sitede gösterimi onay bekliyor (docs/onay-bekleyenler.md §10)
   areaServed: { '@type': 'Country', name: 'Türkiye' },
   founder: { '@type': 'Person', name: firma.kurucu, sameAs: firma.linkedin },
   sameAs: [firma.instagram, firma.facebook],

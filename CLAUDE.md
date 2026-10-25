@@ -7,6 +7,7 @@
 - **Telefon:** 0532 250 40 77
 - **Email:** info@2kahsap.com
 - **WhatsApp:** 0532 250 40 77
+- **Çalışma saatleri:** Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı
 
 ## Sahibi
 - **Adı:** Kadir Avcı
