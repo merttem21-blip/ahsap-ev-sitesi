@@ -5,9 +5,16 @@ node_modules/
 dist/
 .astro/
 
-# Ortam değişkenleri (gizli anahtarlar)
+# Vercel CLI yerel bağlantısı
+.vercel/
+
+# Ortam değişkenleri (gizli anahtarlar); şablon depoda kalır
 .env
-.env.local
+.env.*
+!.env.example
+
+# Claude Code kişisel ayarları
+.claude/settings.local.json
 
 # İşletim sistemi dosyaları
 .DS_Store
@@ -15,6 +22,9 @@ Thumbs.db
 
 # İşlenmemiş ham görseller
 ham-gorseller/
+
+# Arşivdeki fotoğraflar diskte kalır, git'e girmez (ayrıca yedeklenir); arsiv/README.md ve arsiv/logo/ depoda
+arsiv/gorseller/
 
 __pycache__/
 
