@@ -184,7 +184,7 @@ const serit = [
   }
 
   .hero-metin :global(p) {
-    max-width: 48ch;
+    max-width: calc(48 * var(--ch-inter));
     margin: clamp(var(--bosluk-1), calc(var(--ekran) / 10 - 48px), var(--bosluk-3)) 0
       clamp(var(--bosluk-2), calc(var(--ekran) / 10 - 40px), var(--bosluk-4));
     color: var(--color-krem);

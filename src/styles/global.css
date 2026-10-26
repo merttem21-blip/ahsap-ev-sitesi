@@ -66,8 +66,9 @@
   --color-cizgi-menu: rgba(235, 220, 198, 0.12);
   --color-yuzey-aktif: rgba(235, 220, 198, 0.1);
 
-  /* Yazı. 'Inter Yedek' ve 'Inter Yedek Roboto' yalnızca Inter yüklenene kadar kullanılır; ölçüleri Inter'e
-     eşitlenmiştir, böylece ch birimi (--olcu-metin) font gelmeden de doğru hesaplanır (src/styles/fontlar.css). */
+  /* Yazı. 'Inter Yedek' ve 'Inter Yedek Roboto' yalnızca Inter yüklenene kadar kullanılır; ortalama harf genişliği
+     ve satır yüksekliği Inter'e eşitlenmiştir: Inter geç gelince satırlar aynı yerden kırılır, sayfa kaymaz
+     (src/styles/fontlar.css). */
   --font-baslik: 'Poppins', system-ui, sans-serif;
   --font-metin: 'Inter', 'Inter Yedek', 'Inter Yedek Roboto', system-ui, sans-serif;
 
@@ -83,7 +84,13 @@
   --satir-govde: 1.7;
   --aralik-baslik: -0.02em;
   --aralik-etiket: 0.14em;
-  --olcu-metin: 65ch;
+  /* Metin sütunu ölçüsü, karakter sayısıyla: ch birimi yerine Inter 400'ün ve Poppins 600'ün "0" genişliği (font
+     tablosundan; em, kullanıldığı öğenin font boyutuna göre çözülür). ch, Inter yüklenmeden hesaplanırsa yedek fontun
+     "0"'ını alır ve Chromium bunu font gelince her zaman güncellemez; em fonttan bağımsızdır. Yüklenmiş Inter'le
+     sonuç ch ile aynıdır (Chromium ve WebKit'te 0,01 px içinde ölçüldü, 26 Ekim 2026). */
+  --ch-inter: 0.630859375em; /* 1292 / 2048 */
+  --ch-poppins: 0.646em; /* 646 / 1000 */
+  --olcu-metin: calc(65 * var(--ch-inter));
 
   /* Boşluk: 8px tabanlı ölçek */
   --bosluk-1: 8px;

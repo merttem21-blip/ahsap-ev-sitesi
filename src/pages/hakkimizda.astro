@@ -243,7 +243,7 @@ const [acilis, acilisGenis, hikaye, paylasim] = await Promise.all([
   }
 
   .giris {
-    max-width: 60ch;
+    max-width: calc(60 * var(--ch-inter));
     margin: 0;
     color: var(--color-krem);
     font-size: var(--text-giris);
@@ -284,7 +284,7 @@ const [acilis, acilisGenis, hikaye, paylasim] = await Promise.all([
     margin: var(--bosluk-2) 0 0;
   }
 
-  /* İlk paragraf giriş boyutunda; satırlar en fazla 65ch (--olcu-metin) */
+  /* İlk paragraf giriş boyutunda; satırlar en fazla 65 karakter (--olcu-metin) */
   .hikaye-metin h2 + p {
     margin-top: var(--bosluk-3);
     font-size: var(--text-giris);
@@ -316,7 +316,7 @@ const [acilis, acilisGenis, hikaye, paylasim] = await Promise.all([
   }
 
   /* Vizyonumuz / Misyonumuz: gece zemin; kart yok, iki açık panel. Her panelin üstünde ince ahşap çizgi.
-     Okunurluk öncelikli: gövde giriş boyutunda (18px), ≥ 1280px'te 20px; satır aralığı 1.8; sütun en fazla 60ch.
+     Okunurluk öncelikli: gövde giriş boyutunda (18px), ≥ 1280px'te 20px; satır aralığı 1.8; sütun en fazla 60 karakter.
      Mobilde alt alta, ≥ 1024px'te yan yana (aralarında 96px, ≥ 1280px'te 128px). */
   .degerler {
     padding-block: var(--bolum-ritim);
@@ -338,7 +338,7 @@ const [acilis, acilisGenis, hikaye, paylasim] = await Promise.all([
   }
 
   .deger p {
-    max-width: 60ch;
+    max-width: calc(60 * var(--ch-inter));
     margin: var(--bosluk-4) 0 0;
     font-size: var(--text-giris);
     line-height: 1.8;
@@ -380,7 +380,7 @@ const [acilis, acilisGenis, hikaye, paylasim] = await Promise.all([
       padding-block: var(--bosluk-3) var(--bosluk-5);
     }
 
-    /* İki eşit sütun: metin sütunu 65ch'ye yakın kalır, fotoğraf sütunu çok incelmez */
+    /* İki eşit sütun: metin sütunu 65 karaktere yakın kalır, fotoğraf sütunu çok incelmez */
     .hikaye-izgara {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--bosluk-6);

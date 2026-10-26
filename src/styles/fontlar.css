@@ -19,17 +19,22 @@
         pyftsubset <ad>-latin-ext.woff2 --unicodes="U+011E-011F,U+0130,U+015E-015F" --layout-features='*'
           --flavor=woff2 --output-file=<ad>-turkce.woff2
 
-   2. Inter yüklenene kadar kullanılan yedek font (--font-metin, global.css). Metin sütunları ch birimiyle sınırlıdır
-      (--olcu-metin: 65ch). 1ch, fontun "0" karakterinin genişliğidir; stil Inter gelmeden hesaplanırsa yedek fontun
-      ölçüsüyle belirlenir ve Chromium bu değeri Inter yüklendikten sonra her zaman güncellemez: sütun dar kalır
-      (docs/guvenli-mod/README.md, Bilinen sınırlar). Yedek font, size-adjust ile "0" genişliği Inter'inkiyle aynı olacak
-      şekilde ölçeklenir; satır yüksekliği ölçüleri de Inter'e eşitlenir. Böylece 1ch, Inter gelmeden önce de sonra da
-      aynıdır. Inter yüklendikten sonra görünüm değişmez; yedek font yalnızca yükleme anında kullanılır.
-      Ölçüler (birim/2048): Inter "0" 400 → 1292, 500 → 1322, 600 → 1351; yükseklik 1984, derinlik 494, satır arası 0.
-      Arial "0" her ağırlıkta 1139. Liberation Sans (Linux) ve Arimo (ChromeOS) Arial ile aynı ölçülerdedir.
-      Roboto (Android) "0" 400 → 1151, 500 → 1164, 700 → 1175.
-      size-adjust = Inter "0" / yedek "0"; ascent-override = 1984 / 2048 / size-adjust; descent-override = 494 / 2048 / size-adjust.
-      Doğrulama (fontlar engellenerek ve geciktirilerek): docs/guvenli-mod/README.md, Bilinen sınırlar. */
+   2. Inter yüklenene kadar kullanılan yedek font (--font-metin, global.css). Inter ilk boyamadan sonra gelirse sayfa
+      önce yedek fontla dizilir; yedek font Inter'den geniş ya da darsa satırlar başka yerden kırılır, altındaki her şey
+      kayar (CLS). Bu yüzden yedek font size-adjust ile, sitenin metnindeki ortalama harf genişliği Inter'inkiyle aynı
+      olacak şekilde ölçeklenir; satır yüksekliği ölçüleri de Inter'e eşitlenir. Inter yüklendikten sonra görünüm
+      değişmez; yedek font yalnızca yükleme anında kullanılır.
+      Önceki ayar (14 Ekim 2026) "0" genişliğini eşitliyordu, çünkü sütunlar ch birimiyle sınırlıydı. O ayarda yedek font
+      Türkçe metinde %7–9 geniş kalıyordu: proje sayfalarında breadcrumb iki satıra kırılıp galeri 24 px kayıyordu
+      (CLS 0,11–0,17). Sütunlar artık ch ile değil, Inter'in "0" genişliğine eşit bir em değeriyle sınırlı (--ch-inter,
+      global.css); ölçü fonta bağlı olmadığı için yedek font ortalama genişliğe göre ayarlanabilir.
+      Hesap (26 Ekim 2026, font tablolarından; tarayıcı ölçümü kullanılmaz): dist/ altındaki 49 sayfanın görünen metni
+      (146 771 karakter), harf sıklığıyla ağırlıklı ortalama ilerleme genişliği. Arial'ın 400 ve 500 yüzü Arial, 600 yüzü
+      Arial Bold; Roboto'nun 600 yüzü Roboto Bold (fontsource 5.3 tabloları). Liberation Sans (Linux) ve Arimo (ChromeOS)
+      Arial ile aynı ölçülerdedir. Metin çok değişirse oran yeniden hesaplanabilir; küçük değişiklikler sonucu etkilemez.
+      size-adjust = Inter ortalaması / yedek ortalaması; ascent-override = 1984 / 2048 / size-adjust;
+      descent-override = 494 / 2048 / size-adjust (Inter yükseklik 1984, derinlik 494, satır arası 0; birim/2048).
+      Doğrulama (Inter geciktirilerek, tüm sayfalarda): docs/guvenli-mod/README.md, Bilinen sınırlar. */
 
 /* cyrillic-ext */
 @font-face {
@@ -323,9 +328,9 @@
   font-style: normal;
   font-weight: 400;
   src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'), local('Arimo'), local('Arimo-Regular');
-  size-adjust: 113.4328%;
-  ascent-override: 85.403%;
-  descent-override: 21.2646%;
+  size-adjust: 105.7156%;
+  ascent-override: 91.6374%;
+  descent-override: 22.817%;
   line-gap-override: 0%;
 }
 @font-face {
@@ -333,9 +338,9 @@
   font-style: normal;
   font-weight: 500;
   src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'), local('Arimo'), local('Arimo-Regular');
-  size-adjust: 116.0667%;
-  ascent-override: 83.4649%;
-  descent-override: 20.7821%;
+  size-adjust: 106.9833%;
+  ascent-override: 90.5515%;
+  descent-override: 22.5466%;
   line-gap-override: 0%;
 }
 @font-face {
@@ -343,9 +348,9 @@
   font-style: normal;
   font-weight: 600;
   src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold'), local('Arimo Bold'), local('Arimo-Bold');
-  size-adjust: 118.6128%;
-  ascent-override: 81.6733%;
-  descent-override: 20.336%;
+  size-adjust: 101.1153%;
+  ascent-override: 95.8065%;
+  descent-override: 23.855%;
   line-gap-override: 0%;
 }
 
@@ -355,9 +360,9 @@
   font-style: normal;
   font-weight: 400;
   src: local('Roboto'), local('Roboto-Regular');
-  size-adjust: 112.2502%;
-  ascent-override: 86.3027%;
-  descent-override: 21.4887%;
+  size-adjust: 106.9472%;
+  ascent-override: 90.5821%;
+  descent-override: 22.5542%;
   line-gap-override: 0%;
 }
 @font-face {
@@ -365,9 +370,9 @@
   font-style: normal;
   font-weight: 500;
   src: local('Roboto Medium'), local('Roboto-Medium');
-  size-adjust: 113.5739%;
-  ascent-override: 85.2969%;
-  descent-override: 21.2382%;
+  size-adjust: 106.9525%;
+  ascent-override: 90.5776%;
+  descent-override: 22.5531%;
   line-gap-override: 0%;
 }
 @font-face {
@@ -375,8 +380,8 @@
   font-style: normal;
   font-weight: 600;
   src: local('Roboto Bold'), local('Roboto-Bold');
-  size-adjust: 114.9787%;
-  ascent-override: 84.2547%;
-  descent-override: 20.9787%;
+  size-adjust: 107.1419%;
+  ascent-override: 90.4175%;
+  descent-override: 22.5132%;
   line-gap-override: 0%;
 }

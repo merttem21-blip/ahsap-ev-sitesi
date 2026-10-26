@@ -59,7 +59,7 @@ const guncellemeMetni = new Date(`${yasalGuncelleme}T00:00:00Z`).toLocaleDateStr
 
   /* Okunur metin sütunu; slot içeriği sayfadan geldiği için :global ile biçimlenir */
   .yasal-metin {
-    max-width: 72ch;
+    max-width: calc(72 * var(--ch-inter));
   }
 
   .yasal-metin :global(h2) {

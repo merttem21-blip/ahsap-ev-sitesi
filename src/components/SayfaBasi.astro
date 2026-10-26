@@ -106,7 +106,7 @@ const giris = Astro.slots.has('default')
   }
 
   .sb h1 {
-    max-width: 16ch;
+    max-width: calc(16 * var(--ch-poppins));
     text-wrap: balance;
   }
 
@@ -278,7 +278,7 @@ const giris = Astro.slots.has('default')
     }
 
     .sb-sade .sb-metin {
-      max-width: 44ch;
+      max-width: calc(44 * var(--ch-inter));
     }
   }
 </style>

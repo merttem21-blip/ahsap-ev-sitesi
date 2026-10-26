@@ -158,7 +158,7 @@ const gruplar = sssGruplari.map((g) => ({ ...g, sorular: grubunSorulari(g.id) })
   }
 
   .sss-kutu p {
-    max-width: 52ch;
+    max-width: calc(52 * var(--ch-inter));
     margin: var(--bosluk-2) 0 0;
   }
 

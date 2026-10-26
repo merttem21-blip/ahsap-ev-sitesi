@@ -53,7 +53,7 @@ const { baslik, metin, etiket = 'Yakında', whatsapp = whatsappLinki() } = Astro
   }
 
   .yakinda-metin {
-    max-width: 60ch;
+    max-width: calc(60 * var(--ch-inter));
     margin: 16px 0 32px;
   }
 
