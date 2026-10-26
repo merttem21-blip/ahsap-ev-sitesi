@@ -74,6 +74,17 @@ const kanallar = [
             </li>
           ))
         }
+        <li>
+          <div class="kanal">
+            <span class="kanal-ikon" aria-hidden="true">
+              <svg class="ikon" viewBox="0 0 24 24" set:html={ikon.saat} />
+            </span>
+            <span class="kanal-metin">
+              <span class="etiket">Çalışma saatleri</span>
+              <span class="kanal-deger">{firma.calismaSaatleri.metin}</span>
+            </span>
+          </div>
+        </li>
       </ul>
 
       <div class="harita" data-harita data-kaynak={firma.haritaYerlestirme}>
@@ -273,7 +284,8 @@ const kanallar = [
     text-underline-offset: 4px;
   }
 
-  .kanal:hover .kanal-deger {
+  /* Yalnızca bağlantı satırları; çalışma saatleri satırı üzerine gelince değişmez */
+  a.kanal:hover .kanal-deger {
     color: var(--color-ahsap-acik);
     text-decoration-color: currentColor;
   }

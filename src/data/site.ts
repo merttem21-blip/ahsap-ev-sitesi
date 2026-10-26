@@ -85,9 +85,8 @@ export const firma = {
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.799859476108!2d29.256386499999998!3d40.876266199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cadd121ba2fb5f%3A0x7456a9048d36212a!2zMmthaMWfYXA!5e0!3m2!1str!2str!4v1791987225622!5m2!1str!2str',
   // İşletme profilindeki konum (schema.org geo)
   konum: { enlem: 40.8762662, boylam: 29.2563865 },
-  // Çalışma saatleri (schema.org openingHours biçimi): Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı.
-  // Sitede henüz görünmüyor; /iletisim'de gösterimi onay bekliyor (docs/onay-bekleyenler.md §10).
-  calismaSaatleri: 'Mo-Sa 08:00-19:00',
+  // Çalışma saatleri: metin /iletisim'de görünür, sema schema.org openingHours biçimidir (Pazar kapalı).
+  calismaSaatleri: { metin: 'Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı', sema: 'Mo-Sa 08:00-19:00' },
   vergiDairesi: 'Sarıgazi Vergi Dairesi',
   mersis: '',
   kep: '',

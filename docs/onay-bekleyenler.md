@@ -152,7 +152,7 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
   - ✅ Çözüldü (26 Ekim 2026, 1c727aa): kaydırılmış header'ın görünmeyen iç kabı (`.ust-ic`) ve logo linkinin kutusu header'ın altına taşıp tıklamayı yutuyordu (ana sayfada 17 / 50 px, diğer sayfalarda ≥ 1024 px'te 12 px). Taşan kısım artık tıklamayı almıyor. `check:sss` 96/96.
 - **Proje sayfası ışık kutusundaki adressiz görsel.** `Galeri.astro`'daki büyük görsel (`data-ik-gorsel`) HTML'de `src`'siz duruyor; `check:images` onu istisnayla atlıyor. `/galeri`'deki gibi (db7a2a8) görseli JS ile oluşturup istisnayı kaldırmak gerekiyor. Yapılmadı.
 
-## 10. Çalışma saatlerinin /iletisim'de gösterimi (onay bekliyor, 26 Ekim 2026)
+## 10. Çalışma saatlerinin /iletisim'de gösterimi (onaylandı ve uygulandı, 26 Ekim 2026)
 
-- Saatler: Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı (kullanıcı). Kaynak `src/data/site.ts` → `firma.calismaSaatleri`; JSON-LD'de `openingHours: "Mo-Sa 08:00-19:00"` olarak yayında.
-- Sayfada henüz görünmüyor. Öneri: `/iletisim`'deki "Bize ulaşın" listesine beşinci satır (saat ikonu, "Çalışma saatleri" etiketi); bağlantı olmadığı için üzerine gelince renk değiştirmez. Onay gelince eklenir; o zamana kadar şemadaki tek görünmeyen bilgi budur.
+- Saatler: Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı (kullanıcı). Kaynak `src/data/site.ts` → `firma.calismaSaatleri` (`metin` sayfada, `sema` JSON-LD'de `openingHours: "Mo-Sa 08:00-19:00"`).
+- `/iletisim`'deki "Bize ulaşın" listesinde beşinci satır: saat ikonu, "Çalışma saatleri" etiketi. Bağlantı olmadığı için üzerine gelince renk değiştirmez (`a.kanal:hover`). 1280 px'te form kartı sol sütunla aynı boyda durduğu için 27 px uzadı (onaylandı). İ'nin 3 referansı yenilendi (`docs/guvenli-mod/README.md`, Referans geçmişi).
