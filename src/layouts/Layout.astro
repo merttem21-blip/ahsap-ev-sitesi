@@ -57,12 +57,13 @@ const site = Astro.site ?? new URL(siteAdresi);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Fontlar sitenin kendi dosyalarıdır (src/styles/fontlar.css). Gövde metninin fontu ilk boyamadan önce
-         gelsin diye önceden yüklenir; Türkçe metnin büyük kısmı ve "0" (ch birimi) bu dosyadadır. Başlık fontu
-         (Poppins 600; ğ, ş, İ latin-ext'te) da önceden yüklenir: geç gelirse alttan yaslı hero başlığı satır
+         gelsin diye önceden yüklenir; Türkçe metnin büyük kısmı ve "0" (ch birimi) latin dosyasında, ğ, ş, İ Türkçe
+         alt kümededir. Başlık fontu (Poppins 600) da önceden yüklenir: geç gelirse alttan yaslı hero başlığı satır
          değiştirip kayıyordu (CLS). -->
     <link rel="preload" href="/fonts/inter-v20-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-v20-turkce.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-v24-600-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/poppins-v24-600-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins-v24-600-turkce.woff2" as="font" type="font/woff2" crossorigin />
 
     <script is:inline type="application/ld+json" set:html={jsonLd(isletmeSemasi(site))} />
     {sema && <script is:inline type="application/ld+json" set:html={jsonLd(sema)} />}

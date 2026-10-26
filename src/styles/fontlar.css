@@ -4,10 +4,20 @@
 
    1. Inter (400, 500, 600) ve Poppins (600, 700): Google Fonts'un verdiği dosyaların bayt bayt aynısı ve aynı @font-face
       kuralları (Inter v20, Poppins v24; 14 Ekim 2026'da fonts.googleapis.com/css2?…&display=swap yanıtından alındı).
-      Yalnızca adresler yereldir. Inter değişken fonttur: bir alt kümenin üç ağırlığı aynı dosyayı kullanır.
-      Tarayıcı yalnızca sayfadaki karakterlerin düştüğü alt kümeleri indirir (unicode-range); Türkçe metin için latin ve
-      latin-ext. Dosya adındaki sürüm (v20, v24) değişmeden dosya değiştirilmez: /fonts/ uzun süre önbellekte tutulur
-      (vercel.json). Inter latin ilk boyamadan önce lazım olduğu için Layout.astro'da önceden yüklenir (preload).
+      Adresler yereldir; tek fark latin-ext'ten ayrılan Türkçe harflerdir (aşağıda). Inter değişken fonttur: bir alt
+      kümenin üç ağırlığı aynı dosyayı kullanır. Tarayıcı yalnızca sayfadaki karakterlerin düştüğü alt kümeleri indirir
+      (unicode-range); Türkçe metin için latin ve Türkçe alt küme. Dosya adındaki sürüm (v20, v24) değişmeden dosya
+      değiştirilmez: /fonts/ uzun süre önbellekte tutulur (vercel.json). İlk boyamadan önce lazım olan Inter latin,
+      Inter Türkçe ve Poppins 600 dosyaları Layout.astro'da önceden yüklenir (preload).
+
+      Türkçe alt küme (26 Ekim 2026): sitenin metninde latin alt kümesinin dışında kalan harfler yalnızca Ğ ğ İ Ş ş
+      (U+011E-011F, U+0130, U+015E-015F). Bunlar için her sayfada latin-ext iniyordu (Inter 83 KB, Poppins 5 KB). Beş
+      harf ayrı dosyalara alındı (*-turkce.woff2: Inter 3 KB, Poppins 1 KB) ve latin-ext kurallarının unicode-range'inden
+      çıkarıldı; aralıklar çakışmadığı için kuralların sırası önemsizdir. Çizimler, genişlikler ve Inter'in ağırlık
+      değişimleri kaynak dosyadakiyle aynıdır. latin-ext artık yalnızca başka bir latin-ext harfi (ör. ā, ł) sayfaya
+      girerse iner. Üretim (fontTools 4.67), her latin-ext dosyası için:
+        pyftsubset <ad>-latin-ext.woff2 --unicodes="U+011E-011F,U+0130,U+015E-015F" --layout-features='*'
+          --flavor=woff2 --output-file=<ad>-turkce.woff2
 
    2. Inter yüklenene kadar kullanılan yedek font (--font-metin, global.css). Metin sütunları ch birimiyle sınırlıdır
       (--olcu-metin: 65ch). 1ch, fontun "0" karakterinin genişliğidir; stil Inter gelmeden hesaplanırsa yedek fontun
@@ -73,7 +83,7 @@
   font-weight: 400;
   font-display: swap;
   src: url(/fonts/inter-v20-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-011D, U+0120-012F, U+0131-015D, U+0160-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
@@ -136,7 +146,7 @@
   font-weight: 500;
   font-display: swap;
   src: url(/fonts/inter-v20-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-011D, U+0120-012F, U+0131-015D, U+0160-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
@@ -199,7 +209,7 @@
   font-weight: 600;
   font-display: swap;
   src: url(/fonts/inter-v20-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-011D, U+0120-012F, U+0131-015D, U+0160-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
@@ -226,7 +236,7 @@
   font-weight: 600;
   font-display: swap;
   src: url(/fonts/poppins-v24-600-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-011D, U+0120-012F, U+0131-015D, U+0160-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
@@ -253,7 +263,7 @@
   font-weight: 700;
   font-display: swap;
   src: url(/fonts/poppins-v24-700-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-011D, U+0120-012F, U+0131-015D, U+0160-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
@@ -263,6 +273,48 @@
   font-display: swap;
   src: url(/fonts/poppins-v24-700-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Türkçe harfler (Ğ ğ İ Ş ş): latin-ext'ten ayrılmış alt küme (yukarıdaki açıklama) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/inter-v20-turkce.woff2) format('woff2');
+  unicode-range: U+011E-011F, U+0130, U+015E-015F;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/inter-v20-turkce.woff2) format('woff2');
+  unicode-range: U+011E-011F, U+0130, U+015E-015F;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/inter-v20-turkce.woff2) format('woff2');
+  unicode-range: U+011E-011F, U+0130, U+015E-015F;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/poppins-v24-600-turkce.woff2) format('woff2');
+  unicode-range: U+011E-011F, U+0130, U+015E-015F;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/poppins-v24-700-turkce.woff2) format('woff2');
+  unicode-range: U+011E-011F, U+0130, U+015E-015F;
 }
 
 /* Yedek: Arial (Windows, macOS, iOS), Liberation Sans (Linux), Arimo (ChromeOS) */
