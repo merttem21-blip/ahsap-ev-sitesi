@@ -89,9 +89,6 @@ export const firma = {
   // Sitede henüz görünmüyor; /iletisim'de gösterimi onay bekliyor (docs/onay-bekleyenler.md §10).
   calismaSaatleri: 'Mo-Sa 08:00-19:00',
   vergiDairesi: 'Sarıgazi Vergi Dairesi',
-  // Yalnızca kayıt için: hiçbir sayfada, meta veride veya JSON-LD'de yayınlanmaz (11 hane, T.C. kimlik no
-  // olabilir). Yayınlanıp yayınlanmayacağı muhasebeciye sorulacak: docs/onay-bekleyenler.md
-  vergiNo: '41998593334',
   mersis: '',
   kep: '',
   instagram: 'https://www.instagram.com/2kahsap/',

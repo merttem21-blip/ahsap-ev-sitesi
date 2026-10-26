@@ -45,7 +45,7 @@ Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yap
 
 ## 2. Uygulandı, teyit edilmeli
 
-- **Vergi numarası.** Vergi no (11 hane, T.C. kimlik no olabilir) bilinçli olarak gizlendi; yayınlanması gerekip gerekmediği muhasebeciye sorulacak. Numara `src/data/site.ts` içinde `firma.vergiNo` alanında duruyor. Hiçbir sayfada, meta veride veya JSON-LD'de kullanılmıyor. KVKK sayfasında yalnızca vergi dairesi görünüyor.
+- **Vergi numarası.** Vergi no (11 hane, T.C. kimlik no olabilir) bilinçli olarak gizlendi; yayınlanması gerekip gerekmediği muhasebeciye sorulacak. Numara depoda tutulmuyor (26 Ekim 2026'da `src/data/site.ts`'ten çıkarıldı); yayınlanacaksa muhasebeciden teyitli hâli alınır. Hiçbir sayfada, meta veride veya JSON-LD'de kullanılmıyor. KVKK sayfasında yalnızca vergi dairesi görünüyor.
 - **Ticari unvan.** Şahıs işletmesinde ticaret unvanı işletme sahibinin adı ve soyadını içerir (TTK md. 40). "Azra Ahşap Ev" bir işletme adı olabilir. Vergi levhasındaki unvanla birebir aynı olmalı.
 - **Marka yazımı.** Prompt'ta "2K Ahşap" yazıyordu. Sitenin her yerinde "2K AHŞAP" kullanıldığı için yasal metinlerde de bu yazım kullanıldı: "Azra Ahşap Ev (2K AHŞAP)". Değiştirmek için `firma.marka` yeterli. Bu durumda header, footer ve schema.org'daki ad da değişir. **Kapandı (14 Ekim 2026):** "2K AHŞAP" yazımı kalır.
 
