@@ -2,7 +2,7 @@
 // Metin kuralı (CLAUDE.md): kesin süre, fiyat, garanti, sertifika veya proje sayısı yazılmaz;
 // "projeye göre değişir, teklifte netleştirilir" gibi güvenli ifadeler kullanılır.
 //
-// kategoriler: sorunun gösterileceği kategori sayfaları (site.ts'deki slug'lar); her kategoride 3–4 soru.
+// kategoriler: sorunun gösterileceği kategori sayfaları (site.ts'deki slug'lar); her kategoride 3–5 soru.
 // anaSayfa: ana sayfadaki en kritik 6 soru.
 
 export const sssGruplari = [
@@ -38,6 +38,22 @@ export const sorular: Soru[] = [
     grup: 'fiyat-ve-odeme',
     kategoriler: ['ahsap-ev', 'villa', 'ahsap-cami', 'ozel-tasarim'],
     anaSayfa: true,
+  },
+  {
+    id: 'bungalov-fiyatlari-neye-gore-belirlenir',
+    soru: 'Bungalov fiyatları neye göre belirlenir?',
+    cevap:
+      'Fiyat; bungalovun alanına, planına, asma kat ve veranda gibi eklerine, ahşap türüne, yalıtım ve kaplama tercihlerine göre değişir. Arazinin konumu ve kurulum koşulları da maliyeti etkiler. Bu yüzden sabit bir fiyat yerine, projenize özel teklifte tüm kalemleri açıkça netleştiriyoruz.',
+    grup: 'fiyat-ve-odeme',
+    kategoriler: ['bungalov'],
+  },
+  {
+    id: 'tiny-house-fiyatlari-neye-gore-belirlenir',
+    soru: 'Tiny house fiyatları neye göre belirlenir?',
+    cevap:
+      "Fiyat; tiny house'un ölçülerine, iç yerleşimine, ahşap türüne, yalıtım ve donanım tercihlerine göre değişir. Teslim yeri ve kurulum koşulları da maliyeti etkiler. Sabit bir fiyat yerine, projenize özel teklifte tüm kalemleri açıkça netleştiriyoruz.",
+    grup: 'fiyat-ve-odeme',
+    kategoriler: ['tiny-house'],
   },
   {
     id: 'ahsap-ev-icin-nasil-teklif-alabilirim',
