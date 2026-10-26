@@ -156,3 +156,23 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 
 - Saatler: Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı (kullanıcı). Kaynak `src/data/site.ts` → `firma.calismaSaatleri` (`metin` sayfada, `sema` JSON-LD'de `openingHours: "Mo-Sa 08:00-19:00"`).
 - `/iletisim`'deki "Bize ulaşın" listesinde beşinci satır: saat ikonu, "Çalışma saatleri" etiketi. Bağlantı olmadığı için üzerine gelince renk değiştirmez (`a.kanal:hover`). 1280 px'te form kartı sol sütunla aynı boyda durduğu için 27 px uzadı (onaylandı). İ'nin 3 referansı yenilendi (`docs/guvenli-mod/README.md`, Referans geçmişi).
+
+## 11. SEO aşaması (kapandı, 26 Ekim 2026)
+
+**Denetim** (derlenmiş site, 49 sayfa): title 27–60 karakter, description 132–157 karakter, ikisinde de tekrar yok; her sayfada tek H1; canonical mutlak ve sayfanın kendisini gösteriyor; `og:image` 49/49, hepsi 1200×630; `lang="tr"` 49/49. Alt metin 833 görselin hepsinde dolu, Türkçe ve anlamlı. JSON-LD: firma şeması 49, Breadcrumb 46, proje CreativeWork + ImageObject 26/26, FAQPage 12. Kaynakta ve derlemede `vercel.app` geçmiyor; ad, adres ve telefon tek biçimde.
+
+**Yapılanlar** (her biri `form-kontrol` ve `gorsel-kontrol`'den geçti):
+
+- Projeler, Galeri ve Hakkımızda'nın paylaşım görseli logo yerine sayfanın kendi fotoğrafı (a580894).
+- Firma şemasına `legalName: "Azra Ahşap Ev"` (afee57c). Ünvanın vergi levhasıyla teyidi §2'de açık.
+- Çalışma saatleri: şemada `openingHours` (c0873ac), `/iletisim`'de "Çalışma saatleri" satırı (446eab0, §10).
+- Bungalov ve tiny house için rakam vermeyen fiyat soruları (e0c6323). Fiyat sorusu bulunduğu her sayfada ilk sırada.
+- Vergi numarası depodan çıkarıldı (10f3679); git geçmişinde duruyor, geçmiş yeniden yazılmadı.
+- Karar: "prefabrik" ifadesi sitenin hiçbir yerinde kullanılmaz.
+- Değişmeyenler: başlıklar, H1'ler ve sayfa metinleri (anahtar kelimeleri zaten doğal biçimde taşıyor); şehir adlarıyla çoğaltılmış sayfa yok.
+
+**Kalanlar:**
+
+- Yayın günü (§8): alan adı bağlantısı `main`'e birleştirildikten sonra; `ahsap-ev-sitesi.vercel.app` → 2kahsap.com yönlendirmesi; Search Console alan adı mülkü (TXT) ve sitemap; Bing'e içe aktarma.
+- Google İşletme Profili: web sitesi alanı `https://2kahsap.com` olmalı; profildeki ad, adres, telefon ve saatler sitedekiyle karşılaştırılmalı (2K AHŞAP · Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A, 34890 Pendik/İstanbul · 0532 250 40 77 · Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı).
+- Yayından birkaç hafta sonra: anahtar kelime listesi Search Console verisine göre gözden geçirilir (`seo-kurallar` §1); arama hacmi uydurulmaz.
