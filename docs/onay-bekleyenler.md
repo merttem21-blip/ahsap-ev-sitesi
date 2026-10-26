@@ -130,6 +130,7 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 - **Öneri:** `astro.config.mjs` içinde `build: { inlineStylesheets: 'always' }`. CSS, `<link>` yerine aynı sırayla `<style>` olarak sayfaya gömülür. Görünüm değişmemeli; her sayfanın HTML'i yaklaşık 7–9 KB (sıkıştırılmış) büyür, CSS sayfalar arasında önbellekten gelmez.
 - **Kazanç beklentisi:** Mobilde ilk açılışta bir istek turu (Lighthouse benzetiminde yaklaşık 150–450 ms FCP/LCP).
 - **Yapılmadı:** kullanıcı kararıyla bu turda denenmedi. Yapılırsa önce/sonra Lighthouse, form-kontrol ve gorsel-kontrol (fark %0 beklenir) birlikte çalıştırılır.
+- **Bırakıldı (26 Ekim 2026, kullanıcı kararı):** Türkçe font alt kümesinden sonra Lighthouse'un tahmini kazancı 100–590 ms'den 0–150 ms'ye indi (§12).
 
 ## 8. Yayın günü yapılacaklar
 
@@ -176,3 +177,19 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 - Yayın günü (§8): alan adı bağlantısı `main`'e birleştirildikten sonra; `ahsap-ev-sitesi.vercel.app` → 2kahsap.com yönlendirmesi; Search Console alan adı mülkü (TXT) ve sitemap; Bing'e içe aktarma.
 - Google İşletme Profili: web sitesi alanı `https://2kahsap.com` olmalı; profildeki ad, adres, telefon ve saatler sitedekiyle karşılaştırılmalı (2K AHŞAP · Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A, 34890 Pendik/İstanbul · 0532 250 40 77 · Pazartesi–Cumartesi 08:00–19:00, Pazar kapalı).
 - Yayından birkaç hafta sonra: anahtar kelime listesi Search Console verisine göre gözden geçirilir (`seo-kurallar` §1); arama hacmi uydurulmaz.
+
+## 12. Performans aşaması (kapandı, 26 Ekim 2026)
+
+**Yapılanlar** (ikisi de `form-kontrol` ve `gorsel-kontrol` 48/48'den geçti):
+
+- Türkçe font alt kümesi (23cb3f6): Ğ ğ İ Ş ş latin-ext'ten ayrı küçük dosyalarda; her sayfada font 143 → 59 KB. Lighthouse mobil LCP: `/` 3,33 → 2,77 sn, `/bungalov` 3,50 → 2,97, `/galeri` 5,16 → 3,14, `/iletisim` 3,38 → 2,94.
+- Geç font kayması (ef2aa00): sütunlar `ch` yerine eşdeğer `em` ile (`--ch-inter`, `--ch-poppins`), yedek font ortalama harf genişliğine göre ölçekli. Proje sayfası ve `/iletisim`'de CLS 0,14 / 0,13 → 0. Inter geciktirilince 0,02'yi aşan sayfa 412 px'te 9 → 1, 375 px'te 11 → 0 (kalan: `/ahsap-ev/tas-kaideli-verandali-ahsap-ev` 412 px, breadcrumb 1–2 px taşıyor).
+- Denetlendi, sorun yok: LCP görselleri hiçbir sayfada lazy değil; GA ve Meta Pixel hiçbir sayfada yüklenmiyor, çerez bandı metni gerçekle tutarlı; `/_astro` ve `/fonts` bir yıl önbellekte (immutable).
+
+**Kararlar:** CSS gömme (§7) bırakıldı; Lenis'i yalnızca masaüstünde yükleme atlandı.
+
+**Yayından sonra:**
+
+- Galeri küçük resimleri için 300 px boyutu: proje sayfası başına ~470 KB az (26 projede 15,1 → 4,2 MB). Yalnızca küçük resimlerin srcset'ine eklenir; `gorsel.ts`'de `src` genişliğe göre seçilmeli, `optimize-images` yalnızca eksik çıktıyı üretmeli, mevcut fotoğraflar `-1600`'den türetilir (`ham-gorseller/` bu bilgisayarda yok). Proje detayı (D) referansları yenilenir.
+- Kartlar için 800 px ara boyutu: 341 px'lik kart bugün 1000 px'lik dosya alıyor, kart başına ~%30 az.
+- `/images`, `/logo`, `/paylasim` için orta süreli önbellek (ör. 7 gün; şu an her sayfa geçişinde görsel başına bir 304 isteği). Aynı adla değiştirilen görsel bu süre kadar eski görünebilir; `immutable` kullanılmaz.
