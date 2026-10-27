@@ -375,4 +375,19 @@ const sosyal = [
       grid-template-columns: minmax(0, 1fr);
     }
   }
+
+  /* 768–1439px: sayfa sonunda yüzen WhatsApp butonu (sağdan 16px, 56px; WhatsAppButton.astro) son yasal linki
+     örtüyordu. Şeridin sağında butonun kapladığı yer ve 8px ara bırakılır; kabın kenar boşluğu düşülür.
+     Kap en fazla 1280px olduğu için daha genişte buton şeridin dışında kalır (kaydırma çubuğu payıyla 1439px). */
+  @media (min-width: 768px) and (max-width: 1439px) {
+    .alt-serit {
+      padding-right: calc(16px + 56px + var(--bosluk-1) - var(--bosluk-3));
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .alt-serit {
+      padding-right: calc(16px + 56px + var(--bosluk-1) - var(--bosluk-4));
+    }
+  }
 </style>
