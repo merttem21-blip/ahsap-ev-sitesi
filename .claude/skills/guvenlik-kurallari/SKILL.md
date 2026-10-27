@@ -77,6 +77,11 @@ açıldığında, geri tuşunda ve yenilemede her zaman boş gelir.
 - `X-Frame-Options: DENY`
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+- `Strict-Transport-Security: max-age=63072000`
+- `Content-Security-Policy` (zorunlu mod). Satır içi betiklere yalnızca sha256 özetiyle izin verilir; özet tutmazsa
+  derleme hata verir (`astro.config.mjs`, `csp-kontrol`). Yeni bir dış hizmet (analitik, harita, form) eklenince
+  alan adı ilgili yönergeye eklenir, yoksa canlıda sessizce engellenir. Vercel Toolbar (vercel.live) bilerek
+  eklenmez; önizlemede çalışmaması kabul edildi.
 
 ## 8. Dış Bağlantılar
 

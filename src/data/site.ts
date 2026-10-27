@@ -13,7 +13,8 @@ export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 // yalnızca ziyaretçi o türe izin verince yüklenir (src/scripts/cerez.ts). Kimlik girmeden önce:
 // - /cerez-politikasi ve /gizlilik, aracı, amacını ve bıraktığı çerezleri anlatacak şekilde güncellenmeli.
 // - vercel.json'daki Content-Security-Policy aracın alan adlarını içermeli (Google Analytics: googletagmanager.com,
-//   google-analytics.com; Meta Pixel: connect.facebook.net, facebook.com). CSP şimdilik yalnızca rapor modundadır.
+//   google-analytics.com; Meta Pixel: connect.facebook.net, facebook.com). CSP zorunlu moddadır: listede olmayan
+//   araç sessizce engellenir.
 export const izleme = {
   googleAnalytics: '', // analitik çerezler: GA4 ölçüm kimliği, ör. 'G-XXXXXXXXXX'
   metaPixel: '', // pazarlama çerezleri: Meta Pixel kimliği (yalnızca rakam)

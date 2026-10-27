@@ -1,4 +1,5 @@
 // Astro yapılandırması. Kurallar: .claude/skills/seo-kurallar §8
+import { createHash } from 'node:crypto';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -52,8 +53,55 @@ const siteHaritasi = {
   },
 };
 
+// vercel.json'daki Content-Security-Policy (zorunlu mod) satır içi betiklere yalnızca sha256 özetiyle izin verir.
+// Derleme sonunda dist/'teki her satır içi betiğin özeti script-src'de aranır; eksikse derleme hata verir, çünkü
+// betik canlıda sessizce engellenirdi. Betik değişince yeni özet vercel.json'a yazılır, eskisi silinir. Veri
+// blokları (application/json, application/ld+json) çalıştırılmadığı için sayılmaz. Hiçbir sayfada kullanılmayan
+// özet yalnızca uyarı verir.
+const CALISAN_BETIK = ['', 'module', 'text/javascript', 'application/javascript'];
+
+const cspKontrol = {
+  name: 'csp-kontrol',
+  hooks: {
+    'astro:build:done': async ({ dir, logger }) => {
+      const vercel = JSON.parse(await readFile(new URL('./vercel.json', import.meta.url), 'utf8'));
+      const csp = vercel.headers.flatMap((k) => k.headers).find((b) => b.key === 'Content-Security-Policy')?.value;
+      if (!csp) throw new Error('vercel.json: Content-Security-Policy başlığı bulunamadı');
+      const scriptSrc = csp.split(';').map((y) => y.trim()).find((y) => y.startsWith('script-src ')) ?? '';
+      const izinli = new Set((scriptSrc.match(/'sha256-[^']+'/g) ?? []).map((o) => o.slice(1, -1)));
+
+      const kok = fileURLToPath(dir);
+      const eksik = new Map(); // özet → sayfalar
+      const kullanilan = new Set();
+      let betikSayisi = 0;
+      for (const dosya of await htmlDosyalari(kok)) {
+        const html = await readFile(dosya, 'utf8');
+        for (const [, nitelikler, icerik] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+          if (/\ssrc\s*=/i.test(nitelikler)) continue;
+          const tur = (nitelikler.match(/\stype\s*=\s*["']?([^"'\s>]+)/i)?.[1] ?? '').toLowerCase();
+          if (!CALISAN_BETIK.includes(tur)) continue;
+          betikSayisi++;
+          const ozet = `sha256-${createHash('sha256').update(icerik, 'utf8').digest('base64')}`;
+          if (izinli.has(ozet)) kullanilan.add(ozet);
+          else eksik.set(ozet, [...(eksik.get(ozet) ?? []), path.relative(kok, dosya).split(path.sep).join('/')]);
+        }
+      }
+
+      for (const ozet of izinli) if (!kullanilan.has(ozet)) logger.warn(`CSP'de kullanılmayan özet: '${ozet}'`);
+      if (eksik.size) {
+        const liste = [...eksik].map(([o, s]) => `  '${o}' ← ${s.slice(0, 3).join(', ')}${s.length > 3 ? ` (+${s.length - 3})` : ''}`);
+        throw new Error(
+          `Satır içi betiğin özeti vercel.json'daki CSP script-src'de yok; canlıda engellenir:\n${liste.join('\n')}\n` +
+            'Yeni özeti script-src\'ye ekleyin, değişen betiğin eski özetini silin.'
+        );
+      }
+      logger.info(`CSP: ${betikSayisi} satır içi betik, ${kullanilan.size} özetin hepsi vercel.json'da`);
+    },
+  },
+};
+
 export default defineConfig({
   site: siteAdresi,
   trailingSlash: 'never',
-  integrations: [siteHaritasi],
+  integrations: [siteHaritasi, cspKontrol],
 });
