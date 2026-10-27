@@ -49,7 +49,7 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
         {
           menu.map((m) => (
             <li>
-              <a href={m.href} aria-current={aktifMi(m.href) ? 'page' : undefined}>
+              <a href={m.href} class="dokunma-genislik" aria-current={aktifMi(m.href) ? 'page' : undefined}>
                 <span>{m.ad}</span>
               </a>
             </li>
