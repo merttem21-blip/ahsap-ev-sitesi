@@ -318,7 +318,7 @@ Sitede değişiklik yapılmadı. Tarama derlenmiş sitede (49 sayfa), Playwright
 **Erişilebilirlik:**
 
 - **axe, 375 ve 1280 px:** ciddi ve kritik bulgu yok (49/49 sayfa). Başka düzeyde de ihlal yok; sayfa başına 40–46 kural geçiyor.
-- **Fotoğraf üzerindeki metin:** axe bu metinlerin kontrastını ölçemiyor. 579 öğe piksel ölçümüyle kontrol edildi. Tek bulgu: ana sayfada 1024 px ve üstünde, şeffaf header'daki "SSS" ve "İletişim" yazıları hero fotoğrafının açık göğü üzerinde kalıyor. Krem renkli 14 px yazının kontrastı medyan 4,3–4,5:1, eşik 4,5:1. 1280 px'te "Hakkımızda" da 4,6:1 ile sınırda. Diğer sayfalarda header koyu zemin üzerinde. Çözüm görünümü değiştirir; onay bekliyor.
+- **Fotoğraf üzerindeki metin:** axe bu metinlerin kontrastını ölçemiyor. 579 öğe piksel ölçümüyle kontrol edildi. Tek bulgu: ana sayfada 1024 px ve üstünde, şeffaf header'daki "SSS" ve "İletişim" yazıları hero fotoğrafının açık göğü üzerinde kalıyor. Krem renkli 14 px yazının kontrastı medyan 4,3–4,5:1, eşik 4,5:1. 1280 px'te "Hakkımızda" da 4,6:1 ile sınırda. Diğer sayfalarda header koyu zemin üzerinde. Neden yazı rengiydi: pasif linkler `--color-metin`, %70 karartma yalnızca krem için ≥ 4,5:1 verir. ✅ Uygulandı (28 Ekim 2026, A seçeneği): fotoğraf üstündeyken pasif linkler krem, en düşük oran 5,8:1; kaydırınca renk her sayfadaki gibi.
 - **Klavye, 37/37:**
   - Menü: 375 px'te alt menü, 768 px'te header düğmesi, 1280 px'te satır içi menü.
   - SSS: Enter ve Boşluk soruyu açar; aynı anda tek soru açık kalır.

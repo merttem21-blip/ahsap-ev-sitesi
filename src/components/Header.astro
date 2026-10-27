@@ -521,6 +521,12 @@ const aktifMi = (href: string) => menuAktifMi(yol, href);
       white-space: nowrap;
     }
 
+    /* Ana sayfa, header fotoğrafın üstündeyken: pasif linkler de krem. %70 karartma beyaz pikselde bile
+       yalnızca krem için ≥ 4.5:1 verir (--color-metin 4.0–4.4'te kalıyordu). Kaydırınca zemin opak, renk her sayfadaki gibi. */
+    .ust-seffaf:not(.ust-kucuk) .menu a:not(.dugme) {
+      color: var(--color-krem);
+    }
+
     /* Büyük harf aralığı son harften sonra da boşluk bırakır; çizgi metinle aynı yerde biter */
     .menu a span::after {
       inset: auto var(--aralik-etiket) -6px 0;
