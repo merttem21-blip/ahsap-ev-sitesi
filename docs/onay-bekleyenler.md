@@ -247,7 +247,7 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 
 **Kalanlar:** HSTS `includeSubDomains`, alan adı ve e-posta alt alan adları netleşince değerlendirilir; `preload` önerilmez (geri alması zor).
 
-### Yasal metin önerileri (1, 2, 5 ve 7 uygulandı, 28 Ekim 2026; 6 görsel onay bekliyor; 3 ve 4 hukukçudan sonra)
+### Yasal metin önerileri (1, 2, 5, 6 ve 7 uygulandı, 28 Ekim 2026; 3 ve 4 hukukçudan sonra)
 
 Uygulanınca `yasalGuncelleme` (`src/data/site.ts`) o günün tarihiyle güncellenir. Tarih bütün yasal sayfalarda (`/kvkk` dahil, Y referansı) göründüğü için 1, 2, 5 ve 7 için öneri 6 ile birlikte güncellenir.
 
@@ -291,7 +291,7 @@ Not: "en geç 7 gün sonra silinir" tek başına yazılmadı. Kod taslağı 7 g�
 
 > Formlara yazdığınız bilgiler "2k-ahsap-taslak-teklif" ve "2k-ahsap-taslak-iletisim" adlı kayıtlarla tarayıcınızda tutulur; ne zaman silindikleri 2. bölümde anlatılır. Bu kayıtlar çerez değildir ve siz formu göndermedikçe bize veya üçüncü kişilere iletilmez.
 
-**Öneri 6. Çerez bandı** (`src/components/CerezBandi.astro`, bilgilendirme metni). Neden: tarayıcıda son form gönderiminin zamanı da tutuluyor. Görünür değişiklik: metin uzar, dar ekranda bant bir satır uzayabilir; uygulanırsa çerez bandı (Ç) referansları ve ana sayfa hero'su kontrol edilir.
+**Öneri 6. Çerez bandı** (`src/components/CerezBandi.astro`, bilgilendirme metni). ✅ Uygulandı (28 Ekim 2026); bant 5 satır kaldı, boyu aynı. "Son güncelleme" 28 Ekim 2026 oldu. Neden: tarayıcıda son form gönderiminin zamanı da tutuluyor. Görünür değişiklik: metin uzar, dar ekranda bant bir satır uzayabilir; uygulanırsa çerez bandı (Ç) referansları ve ana sayfa hero'su kontrol edilir.
 
 Şu an:
 

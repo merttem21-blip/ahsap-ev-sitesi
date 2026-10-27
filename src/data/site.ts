@@ -108,7 +108,7 @@ export const whatsappLinki = (mesaj = varsayilanWhatsappMesaji) =>
   `${firma.whatsapp}?text=${encodeURIComponent(mesaj)}`;
 
 // Yasal sayfaların "Son güncelleme" tarihi (YYYY-AA-GG); metin değiştikçe güncellenir.
-export const yasalGuncelleme = '2026-10-20';
+export const yasalGuncelleme = '2026-10-28';
 
 // Footer alt şeridi ve yasal sayfalar
 export const yasalSayfalar = [
