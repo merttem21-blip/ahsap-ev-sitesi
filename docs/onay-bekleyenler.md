@@ -15,6 +15,8 @@ Bu dosyadaki açık soruların özeti. Ayrıntı, her maddenin sonundaki bölüm
 - **Saklama süresi:** Form verisi ne kadar tutulmalı, sitede süre yazılmalı mı? (`guvenlik-kurallari` "en fazla 1 yıl" diyor; CLAUDE.md kesin süre yazılmasını yasaklıyor.) → §1, saklama ve imha satırı
 - **KVKK kutusu metni:** Kutu rıza istemiyor, yalnızca aydınlatma metninin okunduğunu belirtiyor. Talebi yanıtlamak için veri işlemenin dayanağı açık rıza değil, KVKK md. 5/2-c (sözleşmenin kurulması) olarak kuruldu. Bu gerekçe doğru mu? → §3
 - **Form taslağı:** Tarayıcıda saklanması için çerez politikası ve gizlilik metnine eklenen cümle yeterli mi? Onay istenmemesi doğru mu? → §5
+- **Web3Forms sunucu konumu ve yurt dışına aktarım:** Form bilgileri (ad, telefon, e-posta, talep bilgileri) Web3Forms'un sunucularından geçerek e-postaya iletiliyor. Sunucuların hangi ülkede olduğu ve verinin orada saklanıp saklanmadığı Web3Forms'tan yazılı olarak öğrenilmeli. Yurt dışındaysa KVKK md. 9 dayanağı nedir? Metin bugün yalnızca "sunucuları yurt dışında bulunabilir" diyor. → §13
+- **IP adresi ve Google Haritalar:** Form gönderilirken Web3Forms, harita yüklenince Google ziyaretçinin IP adresini görüyor. KVKK metnine yazılmalı mı? Metin önerisi hazır. → §13, öneri 3 ve 4
 
 **Muhasebeci**
 
@@ -143,7 +145,27 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 - **Google Search Console.** "Alan adı" mülkü olarak eklenir (www, http, https birlikte), GoDaddy'ye TXT kaydıyla doğrulanır; mevcut `google-site-verification` kaydı silinmez. Sonra `https://2kahsap.com/sitemap.xml` gönderilir.
 - **Bing Webmaster.** "Google Search Console'dan içe aktar" ile eklenir (ek DNS kaydı gerekmez).
 - **Google İşletme Profili.** ✅ Tamamlandı (14 Ekim 2026). Profilin linki (`maps.google.com/?cid=…`; kısa link Android Chrome'da açılmadığı için kullanılmıyor) `src/data/site.ts` → `firma.harita` (footer ve `/iletisim` adres linkleri, JSON-LD `hasMap`); "Haritayı göster" ile açılan harita `firma.haritaYerlestirme`, konum `firma.konum` (JSON-LD `geo`). Sitedeki adres, profildeki resmi adresle birebir aynı yapıldı: Kaynarca Akdeniz Cd, İpek Yolu Sokağı No:4/A, 34890 Pendik/İstanbul.
-- **Form denemesi.** Yayından sonra teklif formundan bir deneme gönderilir; Teşekkürler sayfasının açıldığı ve mailin info@2kahsap.com'a geldiği kontrol edilir.
+- **Form denemesi (gerçek gönderim).** Alan adı bağlanıp `main`'e birleştirildikten sonra, telefonda ve bilgisayarda yapılır; her mesaja "TEST" yazılır.
+
+  Önce:
+  1. Web3Forms panelinde anahtarın (`7b3c…`, `src/data/site.ts`) bağlı olduğu e-posta: **info@2kahsap.com** olmalı.
+  2. Panelde aylık gönderim sınırı ve spam filtresi. Alan adı kısıtlaması varsa yalnızca alan adı bağlandıktan sonra açılır; önce açılırsa `vercel.app`'teki formlar çalışmaz.
+  3. `https://2kahsap.com/tesekkurler` 200 dönüyor (JS kapalı gönderim buraya döner).
+  4. Web3Forms'tan gelen mail info@ kutusunda spam'e düşmüyor.
+
+  Gönderim:
+  5. `/iletisim` boş gönderilir: her alanın altında hata, odak ilk hatalı alanda. Yanlış telefon ve e-posta biçiminde uyarı çıkar.
+  6. `/iletisim` doldurulup gönderilir: `/tesekkurler` açılır, mail gelir. Mailde konu, gönderen adı "2K AHŞAP Web Sitesi", ğ/ş/İ harfleri, KVKK onayı ve zamanı, gönderildiği sayfa var.
+  7. Mailde "Yanıtla": alıcı müşterinin e-postası (replyto). E-posta yazılmadan gönderilen formda da mail gelir.
+  8. Bir proje sayfasında "Teklif Al" → `/teklif-al?proje=…`, bütün adımlar doldurulur: mailde proje, yapı tipi, bütçe, il/ilçe, arsa durumu var.
+  9. Hemen ikinci gönderim: "30 saniye bekleyin" uyarısı, ikinci mail gelmez.
+  10. Uçak modunda gönderim: bilgiler WhatsApp mesajı olarak hazırlanır (gönderilmeden kapatılır), alanlar formda kalır.
+  11. Form yarım doldurulup sayfadan çıkılır, geri dönülür: alanlar dolu. Başarılı gönderimden sonra boş.
+  12. KVKK linki `/kvkk`'yi yeni sekmede açar; geri tuşuyla dönünce kutu boş.
+  13. Tarayıcıda JS kapatılıp gönderilir: Web3Forms üzerinden `https://2kahsap.com/tesekkurler` açılır, mail gelir.
+  14. Konsolda `document.querySelector('[name=botcheck]').checked = true` yazılıp gönderilir: `/tesekkurler` açılır, mail gelmez.
+  15. `/iletisim`, `/teklif-al`, `/tesekkurler`'de konsolda CSP hatası yok; "Haritayı yükle" haritayı açar.
+  16. Test mailleri silinir (KVKK).
 
 ## 9. Yarım kalan işler (21 Ekim 2026)
 
@@ -193,3 +215,84 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 - Galeri küçük resimleri için 300 px boyutu: proje sayfası başına ~470 KB az (26 projede 15,1 → 4,2 MB). Yalnızca küçük resimlerin srcset'ine eklenir; `gorsel.ts`'de `src` genişliğe göre seçilmeli, `optimize-images` yalnızca eksik çıktıyı üretmeli, mevcut fotoğraflar `-1600`'den türetilir (`ham-gorseller/` bu bilgisayarda yok). Proje detayı (D) referansları yenilenir.
 - Kartlar için 800 px ara boyutu: 341 px'lik kart bugün 1000 px'lik dosya alıyor, kart başına ~%30 az.
 - `/images`, `/logo`, `/paylasim` için orta süreli önbellek (ör. 7 gün; şu an her sayfa geçişinde görsel başına bir 304 isteği). Aynı adla değiştirilen görsel bu süre kadar eski görünebilir; `immutable` kullanılmaz.
+
+## 13. Formlar, güvenlik ve KVKK aşaması (27 Ekim 2026)
+
+**Yapılanlar:**
+
+- CSP zorunlu modda: `vercel.json`'da başlık `Content-Security-Policy-Report-Only` → `Content-Security-Policy`, değer aynı. Önce yerelde zorunlu modla denendi: Chromium'da 50 sayfa, WebKit'te 8 sayfa; harita, iletişim formu (JS açık ve kapalı), galeri ve proje ışık kutusu, SSS → 0 ihlal.
+- Derleme kontrolü (`astro.config.mjs`, `csp-kontrol`): `dist/`'teki her satır içi betiğin sha256 özeti `script-src`'de yoksa derleme hata verir (Vercel'de de). Kullanılmayan özet uyarı verir. Bugün 2 özet: `CerezBandi.astro`, `galeri.astro`.
+
+**Kararlar:**
+
+- `vercel.live` CSP'ye eklenmez; önizlemede Vercel Toolbar'ın çalışmaması kabul.
+- Form taslağının silinme kodu değişmez; metin öneri 2'ye göre düzeltilecek.
+- CSP ihlal raporu toplanmıyor (`report-uri` yok); toplamak yeni bir servis gerektirir.
+
+**Denetim, değişiklik gerekmedi:** HSTS, `nosniff`, `Referrer-Policy`, `X-Frame-Options: DENY`, `Permissions-Policy` yerinde. Formlarda doğrulama, honeypot (`botcheck`), 30 sn bekleme, başarı (`/tesekkurler`) ve hata (WhatsApp'a aktarım) durumları, KVKK kutusu yerinde. Bilinen sınırlar: sunucu tarafında alan doğrulaması yok (Web3Forms yapmıyor), captcha yok; herkese açık anahtarla doğrudan gönderime karşı tek savunma Web3Forms'un spam filtresi.
+
+**Kalanlar:** HSTS `includeSubDomains`, alan adı ve e-posta alt alan adları netleşince değerlendirilir; `preload` önerilmez (geri alması zor).
+
+### Yasal metin önerileri (onay bekliyor, sayfalara uygulanmadı)
+
+Uygulanınca `yasalGuncelleme` (`src/data/site.ts`) o günün tarihiyle güncellenir.
+
+**Öneri 1. Gizlilik §3, Üçüncü Taraf Hizmetler** (`src/pages/gizlilik.astro`). Neden: form bilgileri Web3Forms'a gidiyor; KVKK metninde yazıyor, Gizlilik'te hiç geçmiyor. "Vercel" maddesinden sonra yeni madde:
+
+> **Web3Forms:** Teklif ve iletişim formlarına yazdığınız bilgiler, form hizmeti sağlayıcısı Web3Forms aracılığıyla e-posta adresimize iletilir. Formu gönderdiğinizde tarayıcınız Web3Forms'a bağlanır.
+
+**Öneri 2. Gizlilik §4 ve Çerez Politikası §2, form taslağı** (`gizlilik.astro`, `cerez-politikasi.astro`; iki sayfada aynı cümle). Neden: metin "formu gönderdiğinizde silinir" diyor; kod taslağı yalnızca e-postayla başarılı gönderimde siliyor, WhatsApp ile gönderimde 7 gün tutuyor.
+
+Şu an:
+
+> Teklif ve iletişim formlarına yazdığınız bilgiler, sayfadan ayrılsanız da kaybolmaması için yalnızca kendi tarayıcınızda saklanır; formu gönderdiğinizde, gönderilmezse de 7 gün sonra siteyi ilk ziyaretinizde silinir.
+
+Öneri:
+
+> Teklif ve iletişim formlarına yazdığınız bilgiler, sayfadan ayrılsanız da kaybolmaması için yalnızca kendi tarayıcınızda saklanır. Bu taslak, formu e-postayla başarıyla gönderdiğinizde silinir; aksi hâlde (örneğin bilgileri WhatsApp ile gönderdiğinizde) son değişikliğinizden 7 gün sonra, siteyi ilk açtığınızda kendiliğinden silinir.
+
+Not: "en geç 7 gün sonra silinir" tek başına yazılmadı. Kod taslağı 7 gün sonra kullanmaz ve siteyi ilk açışta siler (`src/scripts/taslak.ts`); site hiç açılmazsa kayıt tarayıcıda kalır.
+
+**Öneri 3. KVKK §5, Kişisel Verilerin Aktarılması** (`src/pages/kvkk.astro`). Neden: harita yüklenince tarayıcı Google'a bağlanıyor; Gizlilik ve Çerez metninde yazıyor, KVKK'da yok. Hukukçu onayı gerekir. Hizmet sağlayıcılar maddesinin sonu:
+
+Şu an:
+
+> … e-posta hizmet sağlayıcımıza ve WhatsApp üzerinden yazmanız hâlinde mesajlaşma altyapısını sağlayan WhatsApp/Meta'ya.
+
+Öneri:
+
+> … e-posta hizmet sağlayıcımıza, WhatsApp üzerinden yazmanız hâlinde mesajlaşma altyapısını sağlayan WhatsApp/Meta'ya ve iletişim sayfasındaki haritayı yüklemeniz hâlinde, tarayıcınızın doğrudan bağlandığı Google'a.
+
+**Öneri 4. KVKK §2, İşlem güvenliği** (`kvkk.astro`). Neden: metin IP adresini yalnızca barındırma sağlayıcısına bağlıyor; form gönderiminde Web3Forms, harita yüklenince Google da görüyor. Hukukçu onayı gerekir.
+
+Şu an:
+
+> **İşlem güvenliği:** siteye erişim sırasında barındırma hizmeti sağlayıcısının tuttuğu IP adresi, tarayıcı bilgisi ve erişim kayıtları.
+
+Öneri:
+
+> **İşlem güvenliği:** siteye erişim sırasında barındırma hizmeti sağlayıcısının tuttuğu IP adresi, tarayıcı bilgisi ve erişim kayıtları; formu gönderdiğinizde form hizmeti sağlayıcısının, haritayı yüklediğinizde Google'ın gördüğü IP adresi ve tarayıcı bilgisi.
+
+**Öneri 5. Çerez Politikası §3, Tarayıcı Kayıtları** (`cerez-politikasi.astro`). Neden: bölüm kayıtları adıyla sayıyor (`2k-ahsap-cerez-tercihi`, `2k-ahsap-son-gonderim`), taslak kayıtları adıyla geçmiyor. "Son gönderim" paragrafından sonra yeni paragraf:
+
+> Formlara yazdığınız bilgiler "2k-ahsap-taslak-teklif" ve "2k-ahsap-taslak-iletisim" adlı kayıtlarla tarayıcınızda tutulur; ne zaman silindikleri 2. bölümde anlatılır. Bu kayıtlar çerez değildir ve siz formu göndermedikçe bize veya üçüncü kişilere iletilmez.
+
+**Öneri 6. Çerez bandı** (`src/components/CerezBandi.astro`, bilgilendirme metni). Neden: tarayıcıda son form gönderiminin zamanı da tutuluyor. Görünür değişiklik: metin uzar, dar ekranda bant bir satır uzayabilir; uygulanırsa çerez bandı (Ç) referansları ve ana sayfa hero'su kontrol edilir.
+
+Şu an:
+
+> Yalnızca sitenin çalışması için gereken bilgiler (bu bildirimi kapattığınız ve form taslaklarınız) tarayıcınızda tutulur.
+
+Öneri:
+
+> Yalnızca sitenin çalışması için gereken bilgiler (bu bildirimi kapattığınız, form taslaklarınız ve son form gönderiminizin zamanı) tarayıcınızda tutulur.
+
+**Öneri 7. Kullanım Koşulları §1** (`src/pages/kullanim-kosullari.astro`). Neden: sitede süre bilgisi yok (CLAUDE.md Metin Kuralı).
+
+Şu an:
+
+> Sitedeki proje fotoğrafları, ölçüler, malzeme ve süre bilgileri tanıtım ve bilgilendirme amaçlıdır.
+
+Öneri:
+
+> Sitedeki proje fotoğrafları, ölçü ve malzeme bilgileri tanıtım ve bilgilendirme amaçlıdır.
