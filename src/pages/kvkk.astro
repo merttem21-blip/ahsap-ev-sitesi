@@ -29,11 +29,11 @@ import { firma, yasalAd } from '../data/site';
     </div>
     <div>
       <dt>Telefon</dt>
-      <dd><a href={firma.telefonLink}>{firma.telefonGorunen}</a></dd>
+      <dd><a href={firma.telefonLink} class="dokunma-alani">{firma.telefonGorunen}</a></dd>
     </div>
     <div>
       <dt>KVKK başvuruları için e-posta</dt>
-      <dd><a href={`mailto:${firma.kvkkEposta}`}>{firma.kvkkEposta}</a></dd>
+      <dd><a href={`mailto:${firma.kvkkEposta}`} class="dokunma-alani">{firma.kvkkEposta}</a></dd>
     </div>
     {
       firma.kep && (

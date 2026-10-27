@@ -101,7 +101,7 @@ const kanallar = [
         />
         <svg class="ikon harita-isaret" viewBox="0 0 24 24" aria-hidden="true" set:html={ikon.konum} />
         <p class="harita-kaynak">
-          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.openstreetmap.org/copyright" class="dokunma-alani" target="_blank" rel="noopener noreferrer"
             >© OpenStreetMap katkıda bulunanlar<span class="gizli"> (yeni sekmede açılır)</span></a
           >
         </p>
@@ -341,6 +341,12 @@ const kanallar = [
     background: var(--color-karartma-yogun);
     color: var(--color-metin-soluk);
     text-decoration: none;
+  }
+
+  /* Dokunma alanı haritanın üst kenarında kırpılmasın diye yalnızca aşağı doğru genişler */
+  .harita-kaynak a::after {
+    top: 0;
+    transform: translateX(-50%);
   }
 
   .harita-kaynak a:is(:hover, :focus-visible) {

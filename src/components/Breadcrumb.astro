@@ -26,7 +26,7 @@ const sema = {
   <ol>
     {
       ogeler.map((o) => (
-        <li>{o.href ? <a href={o.href}>{o.ad}</a> : <span aria-current="page">{o.ad}</span>}</li>
+        <li>{o.href ? <a href={o.href} class="dokunma-genislik">{o.ad}</a> : <span aria-current="page">{o.ad}</span>}</li>
       ))
     }
   </ol>

@@ -69,7 +69,7 @@ const sosyal = [
           {
             kurumsal.map((m) => (
               <li>
-                <a href={m.href}>{m.ad}</a>
+                <a href={m.href} class="dokunma-genislik">{m.ad}</a>
               </li>
             ))
           }
@@ -82,7 +82,7 @@ const sosyal = [
           {
             kategoriler.map((k) => (
               <li>
-                <a href={`/${k.slug}`}>{k.ad}</a>
+                <a href={`/${k.slug}`} class="dokunma-genislik">{k.ad}</a>
               </li>
             ))
           }

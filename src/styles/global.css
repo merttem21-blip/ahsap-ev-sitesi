@@ -229,6 +229,37 @@ ul {
   white-space: nowrap;
 }
 
+/* Görünmez dokunma alanı (WCAG 2.5.5), iki biçim. İkisinde de öğenin kutusu, odak halkası ve hover çizgisi aynı
+   kalır; yalnızca genişleyen alanın başka bir hedefe değmediği yerde kullanılır.
+   .dokunma-alani: tıklama alanı öğenin ortasından en az 44 × 44 px'e genişler. Katman öğenin içeriğinin altında
+   durur, içindeki link (ör. KVKK kutusundaki) tıklamayı kendisi alır. Öğe konumlandırılır: sayfada yapışkan bir
+   panelden sonra gelirse Chromium onu ayrı katmana alıp yazısını farklı yumuşatabilir (/teklif-al'in footer'ı).
+   .dokunma-genislik: yüksekliği zaten 44 px olan inline-flex linkler için. Konumlandırmaz; alan metnin sonundan
+   sola doğru 44 px'e açılır (son flex öğesi olduğu için linkin taban çizgisi değişmez). */
+.dokunma-alani {
+  position: relative;
+  isolation: isolate;
+}
+
+.dokunma-alani::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
+
+.dokunma-genislik::after {
+  content: '';
+  flex: none;
+  align-self: stretch;
+  width: 44px;
+  margin-left: -44px;
+}
+
 .atla {
   position: absolute;
   left: var(--bosluk-2);
