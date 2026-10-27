@@ -17,6 +17,8 @@ Bu dosyadaki açık soruların özeti. Ayrıntı, her maddenin sonundaki bölüm
 - **Form taslağı:** Tarayıcıda saklanması için çerez politikası ve gizlilik metnine eklenen cümle yeterli mi? Onay istenmemesi doğru mu? → §5
 - **Web3Forms sunucu konumu ve yurt dışına aktarım:** Form bilgileri (ad, telefon, e-posta, talep bilgileri) Web3Forms'un sunucularından geçerek e-postaya iletiliyor. Sunucuların hangi ülkede olduğu ve verinin orada saklanıp saklanmadığı Web3Forms'tan yazılı olarak öğrenilmeli. Yurt dışındaysa KVKK md. 9 dayanağı nedir? Metin bugün yalnızca "sunucuları yurt dışında bulunabilir" diyor. → §13
 - **IP adresi ve Google Haritalar:** Form gönderilirken Web3Forms, harita yüklenince Google ziyaretçinin IP adresini görüyor. KVKK metnine yazılmalı mı? Metin önerisi hazır. → §13, öneri 3 ve 4
+- **"Açık rızanız (md. 5/1)":** `/kvkk`, hukuki sebepler listesinin son maddesi: "Bu sebeplerin bulunmadığı işlemler için açık rızanız (md. 5/1)." Site hiçbir işlemi açık rızaya dayandırmıyor (form md. 5/2-c, KVKK kutusu yalnızca aydınlatma teyidi). Bu madde kalmalı mı, kalacaksa nasıl yazılmalı? → §14, ifade taraması
+- **"Kabul etmiş sayılırsınız":** `/kullanim-kosullari` giriş paragrafı: "Siteyi kullanarak bu koşulları kabul etmiş sayılırsınız." Bu ifade uygun mu (KVK Kurulu 2026/347 ilke kararı aydınlatma metniyle ilgili; kullanım koşulları için ayrıca değerlendirilmeli)? → §14, ifade taraması
 
 **Muhasebeci**
 
@@ -330,7 +332,11 @@ Sitede değişiklik yapılmadı. Tarama derlenmiş sitede (49 sayfa), Playwright
   - KVKK onay kutusu (`/iletisim`, `/teklif-al` 3. adım): yaklaşık 24 px yükseklikte.
   - `/kvkk`'deki telefon ve e-posta linkleri 20–21 px, `/iletisim`'deki harita atıf linki 24 px yükseklikte.
   - `/villa/genis-verandali-ahsap-villa`'daki breadcrumb "Villa" linki 27 px genişlikte.
-  - Hepsi WCAG 2.2 AA'nın 24 px sınırını karşılıyor, 44 px'in altında. Tıklama alanı görünüm değişmeden büyütülebilir; onay bekliyor.
+  - Hepsi WCAG 2.2 AA'nın 24 px sınırını karşılıyor, 44 px'in altında.
+  - ✅ Düzeltildi (28 Ekim 2026), görünüm değişmeden: footer, breadcrumb, `/kvkk` linkleri, harita atfı (214707e); KVKK kutusu (7694b59); 1024 px ve üstünde header "SSS" linki (34 px, eee0f7c). İki yardımcı sınıf `global.css`'te: `dokunma-genislik` (konumsuz, inline-flex linkler) ve `dokunma-alani` (ortadan genişleyen katman). Doğrulama: 49 sayfa, 375 ve 1280 px, 44 px altında hedef yok, genişleyen alan komşu hedefe taşmıyor.
+  - Açık: 768–1365 px'te sayfanın sonunda yüzen WhatsApp düğmesi footer'daki "Çerez Politikası" yazısının son 40–48 px'ini örtüyor (1366 px ve üstünde örtüşme yok). Görsel kusur; görünüm değişmeden düzeltilemiyor, karar bekliyor.
+- **İfade taraması (28 Ekim 2026):** "onaylıyorum" ve "kabul ediyorum" sitede geçmiyor. "Açık rıza" iki yerde: `/kvkk` hukuki sebepler listesi ("açık rızanız (md. 5/1)") ve `/cerez-politikasi` §6 ("çerezler yerleştirilmeden önce açık rızanızı alırız"). Benzeri: `/kullanim-kosullari` "kabul etmiş sayılırsınız". Metinler değişmedi; iki ifade hukukçu listesinde.
+- **Ünvan:** tek kaynak `src/data/site.ts` → `firma.unvan`. Görünen metinde `/kvkk` (giriş cümlesi, "Ticari unvan" satırı) ve `/kullanim-kosullari` (giriş, fikri mülkiyet), ikişer kez; JSON-LD `legalName` 49 sayfada. Yeni ünvan gelince tek satır değişir; `yasalGuncelleme` ve Y referansı güncellenir.
 
 **Yayın öncesi kontroller (tek tur, gelistirme-2026 = acfb34f):**
 
