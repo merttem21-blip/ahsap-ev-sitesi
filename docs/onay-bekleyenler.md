@@ -245,15 +245,15 @@ Lighthouse'un kalan en büyük önerisi, sayfa çizilmeden önce beklenen CSS do
 
 **Kalanlar:** HSTS `includeSubDomains`, alan adı ve e-posta alt alan adları netleşince değerlendirilir; `preload` önerilmez (geri alması zor).
 
-### Yasal metin önerileri (onay bekliyor, sayfalara uygulanmadı)
+### Yasal metin önerileri (1, 2, 5 ve 7 uygulandı, 28 Ekim 2026; 6 görsel onay bekliyor; 3 ve 4 hukukçudan sonra)
 
-Uygulanınca `yasalGuncelleme` (`src/data/site.ts`) o günün tarihiyle güncellenir.
+Uygulanınca `yasalGuncelleme` (`src/data/site.ts`) o günün tarihiyle güncellenir. Tarih bütün yasal sayfalarda (`/kvkk` dahil, Y referansı) göründüğü için 1, 2, 5 ve 7 için öneri 6 ile birlikte güncellenir.
 
-**Öneri 1. Gizlilik §3, Üçüncü Taraf Hizmetler** (`src/pages/gizlilik.astro`). Neden: form bilgileri Web3Forms'a gidiyor; KVKK metninde yazıyor, Gizlilik'te hiç geçmiyor. "Vercel" maddesinden sonra yeni madde:
+**Öneri 1. Gizlilik §3, Üçüncü Taraf Hizmetler** (`src/pages/gizlilik.astro`). ✅ Uygulandı (28 Ekim 2026). Neden: form bilgileri Web3Forms'a gidiyor; KVKK metninde yazıyor, Gizlilik'te hiç geçmiyor. "Vercel" maddesinden sonra yeni madde:
 
 > **Web3Forms:** Teklif ve iletişim formlarına yazdığınız bilgiler, form hizmeti sağlayıcısı Web3Forms aracılığıyla e-posta adresimize iletilir. Formu gönderdiğinizde tarayıcınız Web3Forms'a bağlanır.
 
-**Öneri 2. Gizlilik §4 ve Çerez Politikası §2, form taslağı** (`gizlilik.astro`, `cerez-politikasi.astro`; iki sayfada aynı cümle). Neden: metin "formu gönderdiğinizde silinir" diyor; kod taslağı yalnızca e-postayla başarılı gönderimde siliyor, WhatsApp ile gönderimde 7 gün tutuyor.
+**Öneri 2. Gizlilik §4 ve Çerez Politikası §2, form taslağı** (`gizlilik.astro`, `cerez-politikasi.astro`; iki sayfada aynı cümle). ✅ Uygulandı (28 Ekim 2026). Neden: metin "formu gönderdiğinizde silinir" diyor; kod taslağı yalnızca e-postayla başarılı gönderimde siliyor, WhatsApp ile gönderimde 7 gün tutuyor.
 
 Şu an:
 
@@ -265,7 +265,7 @@ Uygulanınca `yasalGuncelleme` (`src/data/site.ts`) o günün tarihiyle güncell
 
 Not: "en geç 7 gün sonra silinir" tek başına yazılmadı. Kod taslağı 7 gün sonra kullanmaz ve siteyi ilk açışta siler (`src/scripts/taslak.ts`); site hiç açılmazsa kayıt tarayıcıda kalır.
 
-**Öneri 3. KVKK §5, Kişisel Verilerin Aktarılması** (`src/pages/kvkk.astro`). Neden: harita yüklenince tarayıcı Google'a bağlanıyor; Gizlilik ve Çerez metninde yazıyor, KVKK'da yok. Hukukçu onayı gerekir. Hizmet sağlayıcılar maddesinin sonu:
+**Öneri 3. KVKK §5, Kişisel Verilerin Aktarılması** (`src/pages/kvkk.astro`). Hukukçudan sonra. Neden: harita yüklenince tarayıcı Google'a bağlanıyor; Gizlilik ve Çerez metninde yazıyor, KVKK'da yok. Hukukçu onayı gerekir. Hizmet sağlayıcılar maddesinin sonu:
 
 Şu an:
 
@@ -275,7 +275,7 @@ Not: "en geç 7 gün sonra silinir" tek başına yazılmadı. Kod taslağı 7 g�
 
 > … e-posta hizmet sağlayıcımıza, WhatsApp üzerinden yazmanız hâlinde mesajlaşma altyapısını sağlayan WhatsApp/Meta'ya ve iletişim sayfasındaki haritayı yüklemeniz hâlinde, tarayıcınızın doğrudan bağlandığı Google'a.
 
-**Öneri 4. KVKK §2, İşlem güvenliği** (`kvkk.astro`). Neden: metin IP adresini yalnızca barındırma sağlayıcısına bağlıyor; form gönderiminde Web3Forms, harita yüklenince Google da görüyor. Hukukçu onayı gerekir.
+**Öneri 4. KVKK §2, İşlem güvenliği** (`kvkk.astro`). Hukukçudan sonra. Neden: metin IP adresini yalnızca barındırma sağlayıcısına bağlıyor; form gönderiminde Web3Forms, harita yüklenince Google da görüyor. Hukukçu onayı gerekir.
 
 Şu an:
 
@@ -285,7 +285,7 @@ Not: "en geç 7 gün sonra silinir" tek başına yazılmadı. Kod taslağı 7 g�
 
 > **İşlem güvenliği:** siteye erişim sırasında barındırma hizmeti sağlayıcısının tuttuğu IP adresi, tarayıcı bilgisi ve erişim kayıtları; formu gönderdiğinizde form hizmeti sağlayıcısının, haritayı yüklediğinizde Google'ın gördüğü IP adresi ve tarayıcı bilgisi.
 
-**Öneri 5. Çerez Politikası §3, Tarayıcı Kayıtları** (`cerez-politikasi.astro`). Neden: bölüm kayıtları adıyla sayıyor (`2k-ahsap-cerez-tercihi`, `2k-ahsap-son-gonderim`), taslak kayıtları adıyla geçmiyor. "Son gönderim" paragrafından sonra yeni paragraf:
+**Öneri 5. Çerez Politikası §3, Tarayıcı Kayıtları** (`cerez-politikasi.astro`). ✅ Uygulandı (28 Ekim 2026). Neden: bölüm kayıtları adıyla sayıyor (`2k-ahsap-cerez-tercihi`, `2k-ahsap-son-gonderim`), taslak kayıtları adıyla geçmiyor. "Son gönderim" paragrafından sonra yeni paragraf:
 
 > Formlara yazdığınız bilgiler "2k-ahsap-taslak-teklif" ve "2k-ahsap-taslak-iletisim" adlı kayıtlarla tarayıcınızda tutulur; ne zaman silindikleri 2. bölümde anlatılır. Bu kayıtlar çerez değildir ve siz formu göndermedikçe bize veya üçüncü kişilere iletilmez.
 
@@ -299,7 +299,7 @@ Not: "en geç 7 gün sonra silinir" tek başına yazılmadı. Kod taslağı 7 g�
 
 > Yalnızca sitenin çalışması için gereken bilgiler (bu bildirimi kapattığınız, form taslaklarınız ve son form gönderiminizin zamanı) tarayıcınızda tutulur.
 
-**Öneri 7. Kullanım Koşulları §1** (`src/pages/kullanim-kosullari.astro`). Neden: sitede süre bilgisi yok (CLAUDE.md Metin Kuralı).
+**Öneri 7. Kullanım Koşulları §1** (`src/pages/kullanim-kosullari.astro`). ✅ Uygulandı (28 Ekim 2026). Neden: sitede süre bilgisi yok (CLAUDE.md Metin Kuralı).
 
 Şu an:
 
