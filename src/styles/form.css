@@ -69,6 +69,8 @@
   background: currentColor;
   -webkit-mask: var(--ikon-uyari) center / contain no-repeat;
   mask: var(--ikon-uyari) center / contain no-repeat;
+  /* Süs ikonu; mask onu ayrı katmana alır. Tıklamayı geçirir: KVKK kutusunun genişleyen dokunma alanını örtmez. */
+  pointer-events: none;
 }
 
 /* Metin girdisi, seçim listesi, metin alanı. 16px yazı: iOS odakta yakınlaştırmaz */

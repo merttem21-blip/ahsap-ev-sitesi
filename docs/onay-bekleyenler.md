@@ -51,7 +51,7 @@ Bu yer tutucuların karşılığı yoktu. Sitede artık görünmüyorlar; ne yap
 - **Ticari unvan.** Şahıs işletmesinde ticaret unvanı işletme sahibinin adı ve soyadını içerir (TTK md. 40). "Azra Ahşap Ev" bir işletme adı olabilir. Vergi levhasındaki unvanla birebir aynı olmalı.
 - **Marka yazımı.** Prompt'ta "2K Ahşap" yazıyordu. Sitenin her yerinde "2K AHŞAP" kullanıldığı için yasal metinlerde de bu yazım kullanıldı: "Azra Ahşap Ev (2K AHŞAP)". Değiştirmek için `firma.marka` yeterli. Bu durumda header, footer ve schema.org'daki ad da değişir. **Kapandı (14 Ekim 2026):** "2K AHŞAP" yazımı kalır.
 
-## 3. KVKK onay kutusu metni (onaylandı ve uygulandı, 12 Ekim 2026)
+## 3. KVKK onay kutusu metni (onaylandı ve uygulandı, 12 Ekim 2026; güncellendi 28 Ekim 2026)
 
 Teklif formu (`/teklif-al`, 3. adım) ve iletişim formu (`/iletisim`) aynı bileşeni kullanır: `src/components/form/KvkkOnay.astro`.
 
@@ -78,6 +78,18 @@ Teklif formu (`/teklif-al`, 3. adım) ve iletişim formu (`/iletisim`) aynı bil
 | `.claude/skills/guvenlik-kurallari/SKILL.md` §4, örnek onay metni | Kişisel verilerimin, KVKK Aydınlatma Metni kapsamında … işlenmesini kabul ediyorum. | Yeni metin ve kısa gerekçesi. |
 
 E-postadaki alan adı ("KVKK onayı") ve gönderim akışı değişmedi; yalnızca değerler değişti. Form envanteri etkilenmedi.
+
+**Güncelleme (onaylandı ve uygulandı, 28 Ekim 2026):** KVK Kurulu'nun 2026/347 sayılı ilke kararına göre aydınlatma metni "onaylıyorum / kabul ediyorum" ifadesiyle onaya bağlanmaz, "okudum ve anladım" kullanılır.
+
+| Yer | Önceki | Şimdi |
+|---|---|---|
+| Kutu metni (`KvkkOnay.astro`) | KVKK Aydınlatma Metni'ni okudum. | KVKK Aydınlatma Metni'ni okudum ve anladım. |
+| Hata mesajı (`form.ts`) | … okuduğunuzu işaretleyin. | … okuyup anladığınızı işaretleyin. |
+| WhatsApp mesajının son satırı | KVKK Aydınlatma Metni'ni okudum (tarih). | KVKK Aydınlatma Metni'ni okudum ve anladım (tarih). |
+| E-posta alanı | "KVKK onayı": Evet. KVKK Aydınlatma Metni'ni okuduğunu işaretledi. | "Aydınlatma teyidi": Evet. KVKK Aydınlatma Metni'ni okuyup anladığını işaretledi. |
+| E-posta alanı | "KVKK onay zamanı" | "Aydınlatma teyidi zamanı" |
+
+Kutu yine boş gelir ve zorunludur; link, `name="kvkk"`, `value="Evet"` ve gönderim akışı aynı. Form envanteri değişmedi. Tıklama alanı görünmez katmanla en az 44 px (`dokunma-alani`); hata satırının uyarı ikonu bu alanı örtmesin diye tıklamayı geçirir. İ ve T3 referansları yenilendi (6 çekim; 375 px'te metin iki satıra iner, sayfa 22 px uzar). `/kvkk` §4'teki "Aydınlatma metnini okuduğunuzu işaretlediğiniz bilgisi…" cümlesi değişmedi.
 
 **Hukukçu kontrolü (yayından önce):** md. 5/2-c gerekçesi bir hukukçu tarafından teyit edilmedi (bkz. "Hukukçuya sorulacaklar").
 

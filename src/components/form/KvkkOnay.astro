@@ -1,12 +1,13 @@
 ---
-// Zorunlu KVKK kutusu (guvenlik-kurallari §4): rıza değil, aydınlatma metninin okunduğunu belirtir.
+// Zorunlu KVKK kutusu (guvenlik-kurallari §4): rıza değil, aydınlatma metninin okunup anlaşıldığını belirtir.
+// "Onaylıyorum / kabul ediyorum" kullanılmaz (KVK Kurulu 2026/347 sayılı ilke kararı).
 // İşaretlendiği zaman kaydedilir ve talep bilgileriyle birlikte gönderilir (src/scripts/form.ts).
 // Kutu her zaman boş gelir: autocomplete="off" tarayıcının geri tuşu ve yenilemede eski işareti geri
 // yüklemesini engeller; sayfa geri-ileri önbelleğinden dönerse form.ts kutuyu boşaltır.
 ---
 
 <div class="alan onay" data-alan="kvkk">
-  <label class="onay-kutu" for="alan-kvkk">
+  <label class="onay-kutu dokunma-alani" for="alan-kvkk">
     <input
       type="checkbox"
       id="alan-kvkk"
@@ -19,7 +20,7 @@
     <span>
       KVKK <a href="/kvkk" target="_blank" rel="noopener noreferrer"
         >Aydınlatma Metni<span class="gizli"> (yeni sekmede açılır)</span></a
-      >'ni okudum.
+      >'ni okudum ve anladım.
     </span>
   </label>
   <p class="alan-hata" id="hata-kvkk" data-hata></p>

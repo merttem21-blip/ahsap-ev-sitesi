@@ -48,13 +48,16 @@ Kullanıcı dosya yükleyebiliyorsa:
 İletişim formunda toplanan veriler: ad soyad, e-posta, telefon, mesaj.
 
 Kurallar:
-1. **Açık onay:** Gönder butonundan önce işaretlenmesi zorunlu KVKK onay kutusu olmalı ve Aydınlatma Metni sayfasına link vermeli.
+1. **Aydınlatma teyidi:** Gönder butonundan önce işaretlenmesi zorunlu KVKK kutusu olmalı ve Aydınlatma Metni sayfasına link vermeli.
 2. **Saklama:** Veriler en fazla 1 yıl tutulur.
 3. **Paylaşmama:** Veriler üçüncü kişilerle paylaşılmaz (form servisi hariç, bu Aydınlatma Metni'nde belirtilir).
 4. **Silme hakkı:** Kullanıcı verilerinin silinmesini talep edebilir.
 
-Onay kutusu metni (sitede kullanılan, onaylı):
-"KVKK Aydınlatma Metni'ni okudum." ("Aydınlatma Metni" /kvkk sayfasına yeni sekmede açılan link)
+Kutu metni (sitede kullanılan, onaylı, 28 Ekim 2026):
+"KVKK Aydınlatma Metni'ni okudum ve anladım." ("Aydınlatma Metni" /kvkk sayfasına yeni sekmede açılan link)
+Aydınlatma metni "onaylıyorum / kabul ediyorum" ifadesiyle onaya bağlanmaz, "okudum ve anladım" kullanılır
+(KVK Kurulu 2026/347 sayılı ilke kararı). E-postada alanlar "Aydınlatma teyidi" ve "Aydınlatma teyidi zamanı".
+Kutunun tıklama alanı görünmez katmanla en az 44 px (`dokunma-alani`, global.css).
 
 Kutu açık rıza istemez; aydınlatma metninin okunduğunu belirtir. Talebin yanıtlanması için veri işleme
 açık rızaya değil KVKK md. 5/2-c'ye dayanır ve açık rıza bir hizmetin ön şartı yapılmaz. Kutu sayfa
