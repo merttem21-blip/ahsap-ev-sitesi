@@ -296,3 +296,81 @@ Not: "en geç 7 gün sonra silinir" tek başına yazılmadı. Kod taslağı 7 g�
 Öneri:
 
 > Sitedeki proje fotoğrafları, ölçü ve malzeme bilgileri tanıtım ve bilgilendirme amaçlıdır.
+
+## 14. Erişilebilirlik ve yayın hazırlığı (Aşama 6, 27 Ekim 2026)
+
+Sitede değişiklik yapılmadı. Tarama derlenmiş sitede (49 sayfa), Playwright Chromium ve axe-core 4.10.3 ile yapıldı; betikler depoya eklenmedi.
+
+**Erişilebilirlik:**
+
+- **axe, 375 ve 1280 px:** ciddi ve kritik bulgu yok (49/49 sayfa). Başka düzeyde de ihlal yok; sayfa başına 40–46 kural geçiyor.
+- **Fotoğraf üzerindeki metin:** axe bu metinlerin kontrastını ölçemiyor. 579 öğe piksel ölçümüyle kontrol edildi. Tek bulgu: ana sayfada 1024 px ve üstünde, şeffaf header'daki "SSS" ve "İletişim" yazıları hero fotoğrafının açık göğü üzerinde kalıyor. Krem renkli 14 px yazının kontrastı medyan 4,3–4,5:1, eşik 4,5:1. 1280 px'te "Hakkımızda" da 4,6:1 ile sınırda. Diğer sayfalarda header koyu zemin üzerinde. Çözüm görünümü değiştirir; onay bekliyor.
+- **Klavye, 37/37:**
+  - Menü: 375 px'te alt menü, 768 px'te header düğmesi, 1280 px'te satır içi menü.
+  - SSS: Enter ve Boşluk soruyu açar; aynı anda tek soru açık kalır.
+  - Galeri ve proje ışık kutusu: Enter açar, odak kutunun içine geçer, oklar fotoğraf değiştirir, Tab kutunun dışına çıkmaz. Esc kapatır ve odak açan öğeye döner.
+  - İki form: boş gönderimde odak ilk hatalı alana gider. Form yalnızca klavyeyle doldurulup gönderilebiliyor. Testte dış istekler engellendiği için WhatsApp yedeği devreye girdi.
+  - Çerez bandı: 3. Tab durağında, Enter ile kapanıyor.
+- **Odak görünürlüğü:** 7 sayfada, 375 ve 1280 px'te bütün Tab durakları denendi (750 durak). Odak her durakta görünüyor; header'ın veya alt menünün altında kalan durak yok.
+- **360 px:** 49 sayfada yatay kaydırma yok, ekran dışına taşan öğe yok.
+- **Dokunma alanı (375 px, hedef 44 px, cümle içindeki metin linkleri hariç):**
+  - Footer'daki kısa linkler (49 sayfa): "Galeri" 40 px, "SSS" 28 px, "Villa" 29 px genişlikte. Yükseklikleri 44 px.
+  - KVKK onay kutusu (`/iletisim`, `/teklif-al` 3. adım): yaklaşık 24 px yükseklikte.
+  - `/kvkk`'deki telefon ve e-posta linkleri 20–21 px, `/iletisim`'deki harita atıf linki 24 px yükseklikte.
+  - `/villa/genis-verandali-ahsap-villa`'daki breadcrumb "Villa" linki 27 px genişlikte.
+  - Hepsi WCAG 2.2 AA'nın 24 px sınırını karşılıyor, 44 px'in altında. Tıklama alanı görünüm değişmeden büyütülebilir; onay bekliyor.
+
+**Yayın öncesi kontroller (tek tur, gelistirme-2026 = acfb34f):**
+
+| Kontrol | Sonuç |
+| --- | --- |
+| `check` | 0 hata, 0 uyarı, 0 ipucu (70 dosya) |
+| `build` | 49 sayfa; sitemap 47 adres; csp-kontrol: 50 satır içi betik, 2 özet `vercel.json`'da |
+| `check:images` | 4149 başvuru, 929 dosya, kırık görsel yok |
+| `jsonld-kontrol` | 49 sayfa geçerli, görünen içerikle aynı |
+| `form-kontrol` | 2 form, 30 alan envanterle aynı |
+| `gorsel-kontrol` | 48/48 referansla aynı |
+| `check:sss` | 96/96 senaryo (Chromium ve WebKit, 375 ve 1280 px) |
+
+**Birleştirme planı:**
+
+- **Fark:** `main` (f562a68) gelistirme-2026'nın atası. gelistirme-2026'da 23 commit önde, `main`'de ayrı commit yok. Birleştirme ileri sarmadır (fast-forward), çakışma olmaz.
+- **Üretimi etkileyen değişiklikler:**
+  - CSP zorunlu moda geçiyor; ilk kez üretimde zorunlu olacak.
+  - Vercel derlemesi `engines` ayarı nedeniyle Node 22'ye geçiyor.
+  - Türkçe font alt kümesi, header tıklama düzeltmesi, 404'te Teklif Al düğmesi, SEO şeması ve iletişim sayfasında çalışma saatleri.
+  - Önizleme dağıtımı (7367860887) aynı ayarlarla derlendi ve CSP kontrolünden geçti. Ortam değişkeni kullanılmıyor.
+- **Uyarı, bu bilgisayardaki çalışma kopyası:** f8fa96f, `arsiv/gorseller/` klasöründeki 148 dosyayı git takibinden çıkardı. Dosyalar diskte duruyor. Bu klasörde `git switch main` ve ardından `git merge` yapılırsa, ileri sarma bu 148 dosyayı **diskten siler**. Bu yüzden birleştirme `main`'e geçmeden, doğrudan push ile yapılır.
+- **Yöntem:** önerilen yöntem yerelden ileri sarma push'udur. Böylece önizlemede denenen SHA, üretime çıkan SHA ile aynı olur. Kayıt için GitHub'da PR açılabilir, ama GitHub'daki "Merge" düğmesi kullanılmaz: "Create a merge commit" yeni bir SHA üretir, "Rebase" ve "Squash" commit'leri yeniden yazar. Push yapılınca GitHub, açık PR'ı kendiliğinden "merged" olarak işaretler.
+  1. `git fetch origin`; `git status` temiz olmalı.
+  2. `git merge-base --is-ancestor origin/main gelistirme-2026 && echo tamam`: ileri sarma mümkün mü?
+  3. Geri dönüş etiketi: `git tag uretim-oncesi-2026 origin/main && git push origin uretim-oncesi-2026`.
+  4. `git push origin gelistirme-2026:main`. İleri sarma değilse GitHub reddeder; `--force` kullanılmaz.
+  5. `git fetch origin main:main`: yerel `main` dal adını, dala geçmeden günceller.
+- **Üretim dağıtımının doğrulanması:**
+  1. Vercel → Deployments: yeni SHA'nın "Production" dağıtımı "Ready" olmalı. Komut satırından: `gh api "repos/{owner}/{repo}/deployments?sha=<sha>&environment=Production"`, ardından `…/deployments/<id>/statuses` → `success`.
+  2. `curl -sI https://ahsap-ev-sitesi.vercel.app/` yanıtında `content-security-policy` başlığı olmalı (`-report-only` değil).
+  3. `/`, `/iletisim`, `/galeri` ve bir proje sayfasının HTML'i yerel `dist/` ile bayt bayt aynı olmalı: `curl -s <adres> | cmp - dist/…/index.html`.
+  4. Tarayıcıda `/`, `/iletisim` ("Haritayı yükle"), `/galeri` (ışık kutusu), `/sss`, `/teklif-al`, `/404` açılır. Konsolda CSP hatası olmamalı.
+  5. `/cardak` → 301 → `/kamelya`; `/a-frame` → `/ucgen-ev` (iki adım).
+  6. İsteğe bağlı: `npm run check:sss -- --adres=https://ahsap-ev-sitesi.vercel.app`.
+- **Geri alma:**
+  1. Önce Vercel'de geri dönülür; git'e dokunulmaz. Vercel → Deployments → f562a68'in üretim dağıtımı (7307983020) → ⋯ → Instant Rollback. Birkaç saniye sürer. Hobby planında yalnızca bir önceki üretim dağıtımına dönülebilir.
+  2. Rollback'ten sonra Vercel, yeni push'ları üretime kendiliğinden almaz. Düzeltme gelistirme-2026'da yapılıp yine `git push origin gelistirme-2026:main` ile gönderilir. Ardından Vercel'de yeni dağıtım "Promote to Production" ile ya da "Undo Rollback" ile üretime alınır.
+  3. `main`'i zorla geri almak (`--force`) önerilmez. Aynı SHA'ya Vercel ikinci dağıtım açmayabilir; üretimi geri almanın yolu Instant Rollback'tir.
+
+**Yayın günü sırası:** hafta içi, mesai saatinde başlanır. Ayrıntılar §8'de.
+
+| # | Adım | Süre | Geri dönüş |
+| --- | --- | --- | --- |
+| 1 | Birleştirme: yukarıdaki 5 adım | 5 dk + Vercel derlemesi ~2 dk | Vercel Instant Rollback (f562a68) |
+| 2 | Üretim kontrolü (`ahsap-ev-sitesi.vercel.app`): yukarıdaki 6 madde | 15–20 dk | Vercel Instant Rollback |
+| 3 | DNS. Önce GoDaddy DNS kayıtlarının ekran görüntüsü alınır. Vercel → Domains'e `2kahsap.com` (ana adres) ve `www.2kahsap.com` (Redirect to 2kahsap.com, 308) eklenir. GoDaddy'de park sayfasının iki A kaydı (15.197.148.33, 3.33.130.190) ve varsa yönlendirme kaldırılır. Vercel'in gösterdiği A kaydı ve www CNAME'i girilir; www şu an `2kahsap.com`'a CNAME. MX (5 kayıt), SPF, `_dmarc` ve `google-site-verification` kayıtlarına dokunulmaz. | Giriş 10 dk; yayılma genellikle 10–30 dk (A kayıtlarının TTL'i 600 sn) | Eski A kayıtları ekran görüntüsünden geri girilir (~10 dk). Site bu sırada `vercel.app`'te açık kalır, e-posta etkilenmez. |
+| 4 | SSL: DNS doğrulanınca Vercel sertifikayı kendiliğinden alır; CAA kaydı olmadığı için engel yok. Kontrol: Domains'te "Valid Configuration", `curl -sI https://2kahsap.com/` → 200. | 5–30 dk | Sertifika gelmezse DNS kayıtları Vercel'in gösterdiğiyle karşılaştırılır. Gerekirse 3. adımdaki geri dönüş uygulanır. |
+| 5 | Yönlendirmeler: `ahsap-ev-sitesi.vercel.app` → Edit → Redirect to `2kahsap.com`. Kontrol: `https://www.2kahsap.com/iletisim` → 308 → `https://2kahsap.com/iletisim`; `http://2kahsap.com/` → HTTPS; `/iletisim/` ve `/iletisim/index.html` → `/iletisim`; `/cardak` → `/kamelya`. | 10–15 dk | Domains'te yönlendirme kaldırılır (anında). |
+| 6 | Form testi: §8'deki 16 adım, telefonda ve bilgisayarda; her mesaja "TEST" yazılır. Web3Forms'ta alan adı kısıtlaması ancak bu adımdan sonra açılır. | 30–45 dk | Web3Forms çalışmazsa form ziyaretçiyi zaten WhatsApp'a yönlendirir. Panelde anahtar ve e-posta kontrol edilir; kısıtlama açıldıysa kapatılır. |
+| 7 | Search Console: "Alan adı" mülkü, GoDaddy'ye yeni TXT kaydıyla doğrulanır (mevcut `google-site-verification` silinmez). `https://2kahsap.com/sitemap.xml` gönderilir, `/` için URL denetimi yapılır. Ardından Bing'e Search Console'dan içe aktarılır. Google İşletme Profili'nde web sitesi alanı `https://2kahsap.com` yapılır. | 15–20 dk; doğrulama dakikalar–birkaç saat | Geri alınacak bir şey yok; TXT kaydı zararsızdır. |
+
+Toplam aktif süre yaklaşık 2–2,5 saat; DNS için 1 saat pay bırakılır.
+
+Not: Site 2kahsap.com'da HTTPS ile açılınca HSTS başlığı (2 yıl) tarayıcılara gider. O andan sonra DNS'i park sayfasına geri almak, siteyi ziyaret etmiş kişilerde sertifika hatası verebilir. İlk birkaç saatten sonra sorun çıkarsa DNS'e değil, Vercel'deki önceki dağıtıma dönülür.
