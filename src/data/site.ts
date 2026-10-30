@@ -15,7 +15,7 @@ export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 // - vercel.json'daki Content-Security-Policy aracın alan adlarını içermeli (Google Analytics: googletagmanager.com,
 //   google-analytics.com; Meta Pixel: connect.facebook.net, facebook.com). CSP şimdilik yalnızca rapor modundadır.
 export const izleme = {
-  googleAnalytics: '', // analitik çerezler: GA4 ölçüm kimliği, ör. 'G-XXXXXXXXXX'
+  googleAnalytics: 'G-EY24MZYBJH', // analitik çerezler: GA4 ölçüm kimliği, ör. 'G-XXXXXXXXXX'
   metaPixel: '', // pazarlama çerezleri: Meta Pixel kimliği (yalnızca rakam)
 };
 
@@ -108,7 +108,7 @@ export const whatsappLinki = (mesaj = varsayilanWhatsappMesaji) =>
   `${firma.whatsapp}?text=${encodeURIComponent(mesaj)}`;
 
 // Yasal sayfaların "Son güncelleme" tarihi (YYYY-AA-GG); metin değiştikçe güncellenir.
-export const yasalGuncelleme = '2026-10-20';
+export const yasalGuncelleme = '2026-10-30';
 
 // Footer alt şeridi ve yasal sayfalar
 export const yasalSayfalar = [
