@@ -93,6 +93,55 @@ const YUKLE: Record<Tur, (kimlik: string) => void> = {
   },
 };
 
+// Dönüşüm ölçümü: WhatsApp ve telefon tıklamaları ile form gönderimi. Olaylar yalnızca ilgili araç izinle
+// yüklenmişse gider (gtag/fbq yoksa hiçbir şey yapılmaz). Adlar Google Analytics'te "temel etkinlik" olarak işaretlenir.
+// - whatsapp_click / Meta "Contact": wa.me veya api.whatsapp.com linkine tıklama; konum: yuzen, alt-menu, footer, sayfa
+// - telefon_click / Meta "Contact": tel: linkine tıklama
+// - generate_lead / Meta "Lead": form gönderildikten sonra açılan /tesekkurler (site içinden gelindiyse)
+function olay(gaAdi: string, meta: 'Contact' | 'Lead', ayrinti: Record<string, string>) {
+  pencere.gtag?.('event', gaAdi, ayrinti);
+  pencere.fbq?.('track', meta, { content_name: ayrinti.kanal ?? gaAdi });
+}
+
+function linkKonumu(link: Element) {
+  if (link.closest('.whatsapp')) return 'yuzen';
+  if (link.closest('.alt-menu')) return 'alt-menu';
+  if (link.closest('footer')) return 'footer';
+  return 'sayfa';
+}
+
+let olcumBagli = false;
+function olcumuBagla() {
+  if (olcumBagli) return;
+  olcumBagli = true;
+
+  document.addEventListener(
+    'click',
+    (e) => {
+      const link = (e.target as Element | null)?.closest?.('a[href]');
+      if (!link) return;
+      const href = link.getAttribute('href') ?? '';
+      const ayrinti = { konum: linkKonumu(link), sayfa: location.pathname };
+      if (/^https?:\/\/(wa\.me|api\.whatsapp\.com)\//i.test(href)) olay('whatsapp_click', 'Contact', { ...ayrinti, kanal: 'WhatsApp' });
+      else if (href.startsWith('tel:')) olay('telefon_click', 'Contact', { ...ayrinti, kanal: 'Telefon' });
+    },
+    { capture: true }
+  );
+
+  // Form başarıyla gönderilince form.ts /tesekkurler'e yönlendirir; adres doğrudan açıldıysa sayılmaz
+  if (location.pathname.replace(/\/$/, '') === '/tesekkurler') {
+    let gelinen: URL | null = null;
+    try {
+      gelinen = document.referrer ? new URL(document.referrer) : null;
+    } catch {
+      /* geçersiz referrer */
+    }
+    if (gelinen?.origin === location.origin) {
+      olay('generate_lead', 'Lead', { kanal: 'Form', form_sayfasi: gelinen.pathname });
+    }
+  }
+}
+
 export function cerezBandi() {
   const bant = document.querySelector<HTMLElement>('[data-cerez]');
   if (!bant) return;
@@ -115,6 +164,7 @@ export function cerezBandi() {
       yuklenen.add(t);
       YUKLE[t](kimlikler[t]!);
     }
+    if (yuklenen.size) olcumuBagla();
   };
 
   const ayarlariGoster = (acik: boolean) => {

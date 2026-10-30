@@ -2,7 +2,13 @@
 // KVKK aydınlatma metni (6698 sayılı Kanun md. 10). Firma bilgileri src/data/site.ts'ten gelir; eksik
 // bilgiler docs/onay-bekleyenler.md'de. Metin yayından önce bir hukukçuya kontrol ettirilmelidir.
 import YasalLayout from '../layouts/YasalLayout.astro';
-import { firma, yasalAd } from '../data/site';
+import { firma, izleme, yasalAd } from '../data/site';
+
+// Kimliği girilmiş ölçüm araçları (src/data/site.ts → izleme); yalnızca çerez izniyle çalışır
+const olcumAraclari = [
+  izleme.googleAnalytics && 'Google Analytics (Google LLC)',
+  izleme.metaPixel && 'Meta Pixel (Meta Platforms)',
+].filter(Boolean) as string[];
 ---
 
 <YasalLayout
@@ -74,6 +80,15 @@ import { firma, yasalAd } from '../data/site';
       <strong>İşlem güvenliği:</strong> siteye erişim sırasında barındırma hizmeti sağlayıcısının
       tuttuğu IP adresi, tarayıcı bilgisi ve erişim kayıtları.
     </li>
+    {
+      olcumAraclari.length > 0 && (
+        <li>
+          <strong>Pazarlama ve kullanım verileri (yalnızca çerez izninizle):</strong> çerez kimlikleri, görüntülenen
+          sayfalar, siteye gelinen kaynak, cihaz ve tarayıcı bilgisi, WhatsApp ve telefon bağlantılarına tıklama ile
+          form gönderme bilgisi.
+        </li>
+      )
+    }
   </ul>
 
   <h2>3. Kişisel Verilerin İşlenme Amaçları</h2>
@@ -82,7 +97,8 @@ import { firma, yasalAd } from '../data/site';
     <li>Keşif, tasarım, teklif, sözleşme, üretim, nakliye, kurulum ve teslim süreçlerini yürütmek,</li>
     <li>Satış sonrası destek taleplerinizi karşılamak,</li>
     <li>Fatura, muhasebe ve vergi mevzuatından doğan yükümlülükleri yerine getirmek,</li>
-    <li>Web sitesinin ve bilgi sistemlerinin güvenliğini sağlamak.</li>
+    <li>Web sitesinin ve bilgi sistemlerinin güvenliğini sağlamak,</li>
+    {olcumAraclari.length > 0 && <li>Çerez izninizle, sitenin kullanımını ölçmek ve reklamlarımızın etkisini değerlendirmek.</li>}
   </ul>
 
   <h2>4. Toplama Yöntemi ve Hukuki Sebepler</h2>
@@ -122,7 +138,9 @@ import { firma, yasalAd } from '../data/site';
     <li>
       Web sitemizin barındırma hizmetini sağlayan Vercel Inc.'e, form bilgilerini e-posta adresimize
       ileten Web3Forms'a, e-posta hizmet sağlayıcımıza
-      ve WhatsApp üzerinden yazmanız hâlinde mesajlaşma altyapısını sağlayan WhatsApp/Meta'ya. Bu hizmet sağlayıcıların sunucuları
+      ve WhatsApp üzerinden yazmanız hâlinde mesajlaşma altyapısını sağlayan WhatsApp/Meta'ya{
+        olcumAraclari.length > 0 && `; çerez izninizle ${olcumAraclari.join(' ve ')} hizmetlerine`
+      }. Bu hizmet sağlayıcıların sunucuları
       yurt dışında bulunabilir; yurt dışına aktarım KVKK'nın 9. maddesindeki şartlara uygun olarak
       yapılır.
     </li>

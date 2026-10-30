@@ -2,7 +2,7 @@
 // Gizlilik politikası. Firma bilgileri src/data/site.ts'ten gelir; metin yayından önce bir hukukçuya
 // kontrol ettirilmelidir.
 import YasalLayout from '../layouts/YasalLayout.astro';
-import { firma } from '../data/site';
+import { cerezOnayiGerekli, firma, izleme } from '../data/site';
 ---
 
 <YasalLayout
@@ -33,7 +33,10 @@ import { firma } from '../data/site';
   <p>
     Paylaştığınız bilgileri yalnızca taleplerinizi yanıtlamak, teklif hazırlamak, projenizi yürütmek
     ve yasal yükümlülüklerimizi yerine getirmek için kullanırız. Bilgilerinizi satmaz, kiralamaz ve
-    reklam amacıyla üçüncü kişilerle paylaşmayız.
+    reklam amacıyla üçüncü kişilerle paylaşmayız.{
+      izleme.metaPixel &&
+        ' Yalnızca pazarlama çerezlerine izin verirseniz, sitemizde hangi sayfaları gezdiğiniz ve bizimle iletişime geçtiğiniz bilgisi reklamlarımızı ölçmek için Meta Pixel aracılığıyla Meta\'ya iletilir; form ve mesaj içerikleriniz iletilmez.'
+    }
   </p>
 
   <h2>3. Üçüncü Taraf Hizmetler</h2>
@@ -44,6 +47,22 @@ import { firma } from '../data/site';
       bastığınızda Google'dan yüklenir; bu sırada tarayıcınız Google'a bağlanır ve Google çerez
       kullanabilir.
     </li>
+    {
+      izleme.googleAnalytics && (
+        <li>
+          <strong>Google Analytics:</strong> Yalnızca analitik çerezlere izin verirseniz yüklenir; sitenin kaç kişi
+          tarafından ve nasıl kullanıldığını toplu istatistik olarak ölçer.
+        </li>
+      )
+    }
+    {
+      izleme.metaPixel && (
+        <li>
+          <strong>Meta Pixel:</strong> Yalnızca pazarlama çerezlerine izin verirseniz yüklenir; Facebook ve
+          Instagram reklamlarımızın etkisini ölçer.
+        </li>
+      )
+    }
     <li>
       <strong>Dış bağlantılar:</strong> WhatsApp, Google Haritalar, Instagram, Facebook ve LinkedIn
       bağlantılarına tıkladığınızda ilgili hizmetin kendi gizlilik politikası geçerli olur.
@@ -52,7 +71,11 @@ import { firma } from '../data/site';
 
   <h2>4. Çerezler</h2>
   <p>
-    Sitemiz reklam, analitik veya takip çerezi kullanmaz. Teklif ve iletişim formlarına yazdığınız
+    {
+      cerezOnayiGerekli
+        ? 'Sitemiz analitik ve pazarlama çerezlerini yalnızca çerez panelinde izin vermeniz hâlinde kullanır; izninizi sayfanın en altındaki "Çerez Tercihleri" bağlantısından istediğiniz zaman değiştirebilirsiniz.'
+        : 'Sitemiz reklam, analitik veya takip çerezi kullanmaz.'
+    } Teklif ve iletişim formlarına yazdığınız
     bilgiler, sayfadan ayrılsanız da kaybolmaması için yalnızca kendi tarayıcınızda saklanır; formu
     gönderdiğinizde, gönderilmezse de 7 gün sonra siteyi ilk ziyaretinizde silinir. Bu bilgiler siz
     formu göndermedikçe bize veya üçüncü kişilere iletilmez. Formu gönderdiğinizde, yanlışlıkla
