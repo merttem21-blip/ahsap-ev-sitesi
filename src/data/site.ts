@@ -16,7 +16,7 @@ export const web3formsAnahtari = '7b3caa3b-25bf-4df9-9829-471af2739c78';
 //   google-analytics.com; Meta Pixel: connect.facebook.net, facebook.com). CSP şimdilik yalnızca rapor modundadır.
 export const izleme = {
   googleAnalytics: 'G-EY24MZYBJH', // analitik çerezler: GA4 ölçüm kimliği, ör. 'G-XXXXXXXXXX'
-  metaPixel: '', // pazarlama çerezleri: Meta Pixel kimliği (yalnızca rakam)
+  metaPixel: '1095351139965922', // pazarlama çerezleri: Meta Pixel kimliği (yalnızca rakam)
 };
 
 /** En az bir araç tanımlıysa çerez bandı onay panelidir (Kabul Et / Reddet); değilse bilgilendirme bandıdır. */
